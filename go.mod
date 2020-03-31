@@ -37,11 +37,10 @@ require (
 	github.com/jarcoal/httpmock v0.0.0-20161210151336-4442edb3db31
 	github.com/jmoiron/sqlx v1.2.0
 	github.com/k0kubun/colorstring v0.0.0-20150214042306-9440f1994b88 // indirect
+	github.com/kevinburke/go-bindata v3.18.0+incompatible
 	github.com/klauspost/compress v0.0.0-20161106143436-e3b7981a12dd // indirect
 	github.com/klauspost/cpuid v0.0.0-20160302075316-09cded8978dc // indirect
 	github.com/klauspost/crc32 v0.0.0-20161016154125-cb6bfca970f6 // indirect
-	github.com/kr/pretty v0.0.0-20150520163514-e6ac2fc51e89 // indirect
-	github.com/kr/text v0.0.0-20150520163712-e373e137fafd // indirect
 	github.com/lann/builder v0.0.0-20140829050551-c603884a2c1f // indirect
 	github.com/lib/pq v1.2.0
 	github.com/magiconair/properties v1.5.4 // indirect
@@ -87,11 +86,11 @@ require (
 	github.com/ziutek/mymysql v1.5.4 // indirect
 	golang.org/x/crypto v0.0.0-20191112222119-e1110fd1c708
 	golang.org/x/net v0.0.0-20190827160401-ba9fcec4b297 // indirect
-	golang.org/x/tools v0.0.0-20190624180213-70d37148ca0c // indirect
+	golang.org/x/tools v0.0.0-20191130070609-6e064ea0cf2d
 	google.golang.org/api v0.3.1
 	google.golang.org/appengine v1.6.1 // indirect
-	gopkg.in/check.v1 v1.0.0-20180628173108-788fd7840127 // indirect
 	gopkg.in/gavv/httpexpect.v1 v1.0.0-20170111145843-40724cf1e4a0
 	gopkg.in/gorp.v1 v1.7.1 // indirect
 	gopkg.in/tylerb/graceful.v1 v1.2.13
+	honnef.co/go/tools v0.0.1-2020.1.3
 )

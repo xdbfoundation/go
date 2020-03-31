@@ -8,7 +8,7 @@ import (
 	migrate "github.com/rubenv/sql-migrate"
 )
 
-//go:generate go-bindata -nometadata -pkg schema -o bindata.go migrations/
+//go:generate go run github.com/kevinburke/go-bindata/go-bindata -nometadata -pkg schema -o bindata.go migrations/
 
 // MigrateDir represents a direction in which to perform schema migrations.
 type MigrateDir string
