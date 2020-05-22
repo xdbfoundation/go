@@ -641,13 +641,14 @@ func TestRetrievePartialMarkets(t *testing.T) {
 	assert.Equal(t, 0.70, btceth2Mkt.LowestAskReverse)
 
 	// Now let's use the same data, but aggregating by asset pair
-	partialAggMkts, err := session.RetrievePartialAggMarkets(nil, 12)
+	partialAggMkts, err := session.RetrievePartialAggMarkets(nil, nil, 12)
 	require.NoError(t, err)
 	assert.Equal(t, 1, len(partialAggMkts))
 
 	partialAggMkt := partialAggMkts[0]
 
-	assert.Equal(t, "BTC_ETH", partialAggMkt.TradePairName)
+	btcEthStr := "BTC_ETH"
+	assert.Equal(t, btcEthStr, partialAggMkt.TradePairName)
 	assert.Equal(t, 174.0, partialAggMkt.BaseVolume)
 	assert.Equal(t, 86.0, partialAggMkt.CounterVolume)
 	assert.Equal(t, int32(3), partialAggMkt.TradeCount)
@@ -665,9 +666,8 @@ func TestRetrievePartialMarkets(t *testing.T) {
 	assert.True(t, priceDiff < 0.0000000000001)
 
 	// Validate the pair name parsing:
-	pairName := new(string)
-	*pairName = "BTC_ETH"
-	partialAggMkts, err = session.RetrievePartialAggMarkets(pairName, 12)
+	pairNames := []*string{&btcEthStr}
+	partialAggMkts, err = session.RetrievePartialAggMarkets(nil, &pairNames, 12)
 	require.NoError(t, err)
 	assert.Equal(t, 1, len(partialAggMkts))
 	assert.Equal(t, int32(3), partialAggMkts[0].TradeCount)
@@ -685,6 +685,68 @@ func TestRetrievePartialMarkets(t *testing.T) {
 	assert.Equal(t, 32, partialAggMkt.NumAsksReverse)
 	assert.Equal(t, 281.0, partialAggMkt.AskVolumeReverse)
 	assert.Equal(t, 0.2, partialAggMkt.LowestAskReverse)
+
+	// Add an XLM asset.
+	err = session.InsertOrUpdateAsset(&Asset{
+		Code:          "XLM",
+		IssuerAccount: issuer1PK,
+		IssuerID:      issuer1.ID,
+		IsValid:       true,
+	}, []string{"code", "issuer_id"})
+	require.NoError(t, err)
+	var xlmAsset Asset
+	err = session.GetRaw(&xlmAsset, `
+		SELECT *
+		FROM assets
+		WHERE code = ?
+		AND issuer_account = ?`,
+		"XLM",
+		issuer1PK,
+	)
+	require.NoError(t, err)
+
+	// Add XLM/BTC trades.
+	trades = []Trade{
+		Trade{
+			HorizonID:       "hrzid5",
+			BaseAssetID:     xlmAsset.ID,
+			BaseAmount:      10.0,
+			CounterAssetID:  btcAsset.ID,
+			CounterAmount:   10.0,
+			Price:           0.5, // close price & lowest price
+			LedgerCloseTime: tenMinutesAgo,
+		},
+		Trade{
+			HorizonID:       "hrzid6",
+			BaseAssetID:     xlmAsset.ID,
+			BaseAmount:      10.0,
+			CounterAssetID:  btcAsset.ID,
+			CounterAmount:   10.0,
+			Price:           1.0, // open price & highest price
+			LedgerCloseTime: now,
+		},
+	}
+	err = session.BulkInsertTrades(trades)
+	require.NoError(t, err)
+
+	// Validate that both markets are parsed.
+	btcXlmStr := "BTC_XLM"
+	pairNames = []*string{&btcEthStr, &btcXlmStr}
+	partialAggMkts, err = session.RetrievePartialAggMarkets(nil, &pairNames, 12)
+	require.NoError(t, err)
+	assert.Equal(t, 2, len(partialAggMkts))
+	assert.Equal(t, int32(3), partialAggMkts[0].TradeCount)
+	assert.Equal(t, int32(2), partialAggMkts[1].TradeCount)
+
+	// Validate that passing a code works.
+	btcStr := "BTC"
+	partialAggMkts, err = session.RetrievePartialAggMarkets(&btcStr, nil, 12)
+	require.NoError(t, err)
+	assert.Equal(t, 2, len(partialAggMkts))
+
+	// Make sure there's an error with a non-nil code and non-nil pair names.
+	partialAggMkts, err = session.RetrievePartialAggMarkets(&btcStr, &pairNames, 12)
+	require.Error(t, err)
 }
 
 func Test24hStatsFallback(t *testing.T) {
@@ -895,7 +957,7 @@ func TestPreferAnchorAssetCode(t *testing.T) {
 		require.Equal(t, "XLM_EUR", mkt.TradePair)
 	}
 
-	partialAggMkts, err := session.RetrievePartialAggMarkets(nil, 168)
+	partialAggMkts, err := session.RetrievePartialAggMarkets(nil, nil, 168)
 	require.NoError(t, err)
 	assert.Equal(t, 1, len(partialAggMkts))
 	for _, aggMkt := range partialAggMkts {
