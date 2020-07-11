@@ -1,12 +1,64 @@
 package crypto
 
 import (
+	"strings"
 	"testing"
 
+	"github.com/aws/aws-sdk-go/aws"
+	"github.com/aws/aws-sdk-go/aws/session"
+	"github.com/aws/aws-sdk-go/service/kms"
 	"github.com/google/tink/go/hybrid"
+	"github.com/google/tink/go/integration/awskms"
+	"github.com/google/tink/go/keyset"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
+
+func TestNewSecureEncrypterDecrypter_localKMS(t *testing.T) {
+	// Connect to KMS running locally.
+	// This test requires running local-kms on port 8080.
+	awsEndpoint := "http://localhost:8080"
+	awsSession := session.Must(session.NewSession())
+	awsKMS := kms.New(awsSession, aws.NewConfig().WithEndpoint(awsEndpoint).WithRegion("eu-west-2"))
+	awsKeyARN := "arn:aws:kms:eu-west-2:111122223333:key/bfb5861b-796a-448d-98da-fa35d091e0f7"
+
+	// Setup Tink KMS client.
+	keyURI := "aws-kms://" + awsKeyARN
+	client, err := awskms.NewClientWithKMS(keyURI, awsKMS)
+	require.NoError(t, err)
+
+	// Create Tink keyset.
+	khPriv, err := keyset.NewHandle(hybrid.ECIESHKDFAES128GCMKeyTemplate())
+	require.NoError(t, err)
+
+	// Encrypt the keyset.
+	aead, err := client.GetAEAD(keyURI)
+	require.NoError(t, err)
+	keysetEncrypted := strings.Builder{}
+	err = khPriv.Write(keyset.NewJSONWriter(&keysetEncrypted), aead)
+	require.NoError(t, err)
+	t.Log("Keyset encrypted:", keysetEncrypted.String())
+
+	// Create secure encrypter and decrypter using keyset encrypted by AWS KMS.
+	enc, dec, err := newSecureEncrypterDecrypter(client, keyURI, keysetEncrypted.String())
+	require.NoError(t, err)
+	assert.NotNil(t, enc)
+	assert.NotNil(t, dec)
+
+	// Encrypt and decrypt some text and check that it comes back the same.
+	pt := []byte("abcdefghijklmnopqrstuvwxyz")
+	t.Log("Plaintext:", pt)
+
+	ct, err := enc.Encrypt(pt, nil)
+	require.NoError(t, err)
+	t.Log("Ciphertext:", ct)
+	assert.NotEqual(t, pt, ct)
+
+	pt2, err := dec.Decrypt(ct, nil)
+	require.NoError(t, err)
+	t.Log("Plaintext rounttrip:", pt2)
+	assert.Equal(t, pt, pt2)
+}
 
 func TestNewSecureEncrypterDecrypter(t *testing.T) {
 	ksPriv := generateKeysetEncrypted(t, hybrid.ECIESHKDFAES128GCMKeyTemplate())
