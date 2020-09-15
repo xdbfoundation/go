@@ -122,14 +122,6 @@ type Account struct {
 	Address string `db:"address"`
 }
 
-// AccountsQ is a helper struct to aid in configuring queries that loads
-// slices of account structs.
-type AccountsQ struct {
-	Err    error
-	parent *Q
-	sql    sq.SelectBuilder
-}
-
 // AccountEntry is a row of data from the `account` table
 type AccountEntry struct {
 	AccountID            string `db:"account_id"`
@@ -184,6 +176,7 @@ type IngestionQ interface {
 	UpdateExpIngestVersion(int) error
 	GetExpStateInvalid() (bool, error)
 	GetLatestLedger() (uint32, error)
+	GetOfferCompactionSequence() (uint32, error)
 	TruncateExpingestStateTables() error
 	DeleteRangeAll(start, end int64) error
 }
@@ -249,15 +242,6 @@ type Asset struct {
 	Type   string `db:"asset_type"`
 	Code   string `db:"asset_code"`
 	Issuer string `db:"asset_issuer"`
-}
-
-// AssetStat is a row in the asset_stats table representing the stats per Asset
-type AssetStat struct {
-	ID          int64  `db:"id"`
-	Amount      string `db:"amount"`
-	NumAccounts int32  `db:"num_accounts"`
-	Flags       int8   `db:"flags"`
-	Toml        string `db:"toml"`
 }
 
 // ExpAssetStat is a row in the exp_asset_stats table representing the stats per Asset
@@ -370,12 +354,6 @@ type FeeStats struct {
 	MaxFeeP99      null.Int `db:"max_fee_p99"`
 }
 
-// KeyValueStoreRow represents a row in key value store.
-type KeyValueStoreRow struct {
-	Key   string `db:"key"`
-	Value string `db:"value"`
-}
-
 // LatestLedger represents a response from the raw LatestLedgerBaseFeeAndSequence
 // query.
 type LatestLedger struct {
@@ -394,6 +372,7 @@ type Ledger struct {
 	SuccessfulTransactionCount *int32      `db:"successful_transaction_count"`
 	FailedTransactionCount     *int32      `db:"failed_transaction_count"`
 	OperationCount             int32       `db:"operation_count"`
+	TxSetOperationCount        *int32      `db:"tx_set_operation_count"`
 	ClosedAt                   time.Time   `db:"closed_at"`
 	CreatedAt                  time.Time   `db:"created_at"`
 	UpdatedAt                  time.Time   `db:"updated_at"`
@@ -460,6 +439,7 @@ type Offer struct {
 	Priced             int32     `db:"priced"`
 	Price              float64   `db:"price"`
 	Flags              uint32    `db:"flags"`
+	Deleted            bool      `db:"deleted"`
 	LastModifiedLedger uint32    `db:"last_modified_ledger"`
 }
 
@@ -511,17 +491,6 @@ type OffersQuery struct {
 	Buying    *xdr.Asset
 }
 
-// QOffers defines offer related queries.
-type QOffers interface {
-	GetAllOffers() ([]Offer, error)
-	GetOffersByIDs(ids []int64) ([]Offer, error)
-	CountOffers() (int, error)
-	NewOffersBatchInsertBuilder(maxBatchSize int) OffersBatchInsertBuilder
-	InsertOffer(offer xdr.OfferEntry, lastModifiedLedger xdr.Uint32) (int64, error)
-	UpdateOffer(offer xdr.OfferEntry, lastModifiedLedger xdr.Uint32) (int64, error)
-	RemoveOffer(offerID xdr.Int64) (int64, error)
-}
-
 // TotalOrderID represents the ID portion of rows that are identified by the
 // "TotalOrderID".  See total_order_id.go in the `db` package for details.
 type TotalOrderID struct {
@@ -555,39 +524,25 @@ type Trade struct {
 // TradesQ is a helper struct to aid in configuring queries that loads
 // slices of trade structs.
 type TradesQ struct {
-	Err    error
-	parent *Q
-	sql    sq.SelectBuilder
+	Err        error
+	parent     *Q
+	sql        sq.SelectBuilder
+	pageCalled bool
+
+	// For queries for account and offer we construct UNION query. The alternative
+	// is to use (base = X OR counter = X) query but it's costly.
+	forAccountID int64
+	forOfferID   int64
+
+	// rawSQL will be executed if present (instead of sql - sq.SelectBuilder).
+	rawSQL  string
+	rawArgs []interface{}
 }
 
 // Transaction is a row of data from the `history_transactions` table
 type Transaction struct {
-	TotalOrderID
-	TransactionHash      string      `db:"transaction_hash"`
-	LedgerSequence       int32       `db:"ledger_sequence"`
-	LedgerCloseTime      time.Time   `db:"ledger_close_time"`
-	ApplicationOrder     int32       `db:"application_order"`
-	Account              string      `db:"account"`
-	AccountSequence      string      `db:"account_sequence"`
-	MaxFee               int64       `db:"max_fee"`
-	FeeCharged           int64       `db:"fee_charged"`
-	OperationCount       int32       `db:"operation_count"`
-	TxEnvelope           string      `db:"tx_envelope"`
-	TxResult             string      `db:"tx_result"`
-	TxMeta               string      `db:"tx_meta"`
-	TxFeeMeta            string      `db:"tx_fee_meta"`
-	SignatureString      string      `db:"signatures"`
-	MemoType             string      `db:"memo_type"`
-	Memo                 null.String `db:"memo"`
-	ValidAfter           null.Int    `db:"valid_after"`
-	ValidBefore          null.Int    `db:"valid_before"`
-	CreatedAt            time.Time   `db:"created_at"`
-	UpdatedAt            time.Time   `db:"updated_at"`
-	Successful           bool        `db:"successful"`
-	FeeAccount           null.String `db:"fee_account"`
-	InnerTransactionHash null.String `db:"inner_transaction_hash"`
-	NewMaxFee            null.Int    `db:"new_max_fee"`
-	InnerSignatureString null.String `db:"inner_signatures"`
+	LedgerCloseTime time.Time `db:"ledger_close_time"`
+	TransactionWithoutLedger
 }
 
 // TransactionsQ is a helper struct to aid in configuring queries that loads
@@ -704,17 +659,6 @@ func (q *Q) LatestLedgerBaseFeeAndSequence(dest interface{}) error {
 		FROM history_ledgers
 		WHERE sequence = (SELECT COALESCE(MAX(sequence), 0) FROM history_ledgers)
 	`)
-}
-
-// OldestOutdatedLedgers populates a slice of ints with the first million
-// outdated ledgers, based upon the provided `currentVersion` number
-func (q *Q) OldestOutdatedLedgers(dest interface{}, currentVersion int) error {
-	return q.SelectRaw(dest, `
-		SELECT sequence
-		FROM history_ledgers
-		WHERE importer_version < $1
-		ORDER BY sequence ASC
-		LIMIT 1000000`, currentVersion)
 }
 
 // CloneIngestionQ clones underlying db.Session and returns IngestionQ

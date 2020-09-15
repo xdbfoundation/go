@@ -1,3 +1,4 @@
+//lint:file-ignore U1001 Ignore all unused code, staticcheck doesn't understand testify/suite
 package expingest
 
 import (
@@ -9,7 +10,6 @@ import (
 	"github.com/stellar/go/exp/ingest/adapters"
 	"github.com/stellar/go/exp/ingest/io"
 	"github.com/stellar/go/exp/ingest/ledgerbackend"
-	"github.com/stellar/go/exp/orderbook"
 	"github.com/stellar/go/services/horizon/internal/test"
 	"github.com/stellar/go/xdr"
 	"github.com/stretchr/testify/suite"
@@ -61,7 +61,7 @@ type DBTestSuite struct {
 	sequence       uint32
 	ledgerBackend  *ledgerbackend.MockDatabaseBackend
 	historyAdapter *adapters.MockHistoryArchiveAdapter
-	system         *System
+	system         *system
 	tt             *test.T
 }
 
@@ -78,17 +78,14 @@ func (s *DBTestSuite) SetupTest() {
 	s.ledgerBackend = &ledgerbackend.MockDatabaseBackend{}
 	s.historyAdapter = &adapters.MockHistoryArchiveAdapter{}
 	var err error
-	s.system, err = NewSystem(Config{
+	sIface, err := NewSystem(Config{
 		CoreSession:              s.tt.CoreSession(),
 		HistorySession:           s.tt.HorizonSession(),
 		HistoryArchiveURL:        "http://ignore.test",
-		OrderBookGraph:           orderbook.NewOrderBookGraph(),
-		MaxStreamRetries:         3,
 		DisableStateVerification: false,
-		IngestFailedTransactions: true,
-		IngestInMemoryOnly:       false,
 	})
 	s.Assert().NoError(err)
+	s.system = sIface.(*system)
 
 	s.sequence = uint32(28660351)
 	s.setupMocksForBuildState()
@@ -102,7 +99,7 @@ func (s *DBTestSuite) SetupTest() {
 func (s *DBTestSuite) mockChangeReader() {
 	changeReader, err := loadChanges(s.sampleFile)
 	s.Assert().NoError(err)
-	s.historyAdapter.On("GetState", s.system.ctx, s.sequence, 3).
+	s.historyAdapter.On("GetState", s.system.ctx, s.sequence).
 		Return(io.ChangeReader(changeReader), nil).Once()
 }
 func (s *DBTestSuite) setupMocksForBuildState() {
@@ -112,13 +109,17 @@ func (s *DBTestSuite) setupMocksForBuildState() {
 	s.mockChangeReader()
 	s.historyAdapter.On("BucketListHash", s.sequence).
 		Return(checkpointHash, nil).Once()
+
+	s.ledgerBackend.On("IsPrepared", ledgerbackend.UnboundedRange(s.sequence)).Return(true, nil).Once()
 	s.ledgerBackend.On("GetLedger", s.sequence).
 		Return(
 			true,
-			ledgerbackend.LedgerCloseMeta{
-				LedgerHeader: xdr.LedgerHeaderHistoryEntry{
-					Header: xdr.LedgerHeader{
-						BucketListHash: checkpointHash,
+			xdr.LedgerCloseMeta{
+				V0: &xdr.LedgerCloseMetaV0{
+					LedgerHeader: xdr.LedgerHeaderHistoryEntry{
+						Header: xdr.LedgerHeader{
+							BucketListHash: checkpointHash,
+						},
 					},
 				},
 			},
@@ -145,7 +146,7 @@ func (s *DBTestSuite) TestBuildState() {
 	s.Assert().Equal(s.sequence, resume.latestSuccessfullyProcessedLedger)
 
 	s.mockChangeReader()
-	s.Assert().NoError(s.system.verifyState(s.system.graph.OffersMap(), false))
+	s.Assert().NoError(s.system.verifyState(false))
 }
 
 func (s *DBTestSuite) TestVersionMismatchTriggersRebuild() {

@@ -1,15 +1,19 @@
+//lint:file-ignore U1001 Ignore all unused code, staticcheck doesn't understand testify/suite
 package txsub
 
 import (
 	"context"
+	"database/sql"
 	"errors"
-	"fmt"
 	"testing"
 	"time"
 
 	"github.com/guregu/null"
+	"github.com/prometheus/client_golang/prometheus"
+	dto "github.com/prometheus/client_model/go"
 
 	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/mock"
 	"github.com/stretchr/testify/suite"
 
 	"github.com/stellar/go/services/horizon/internal/db2/history"
@@ -22,8 +26,7 @@ type SystemTestSuite struct {
 	suite.Suite
 	ctx           context.Context
 	submitter     *MockSubmitter
-	results       *MockResultProvider
-	sequences     *MockSequenceProvider
+	db            *mockDBQ
 	system        *System
 	noResults     Result
 	successTx     Result
@@ -35,18 +38,15 @@ type SystemTestSuite struct {
 func (suite *SystemTestSuite) SetupTest() {
 	suite.ctx = test.Context()
 	suite.submitter = &MockSubmitter{}
-	suite.results = &MockResultProvider{
-		Results:            []Result{},
-		ResultForInnerHash: map[string]Result{},
-	}
-	suite.sequences = &MockSequenceProvider{}
+	suite.db = &mockDBQ{}
 
 	suite.system = &System{
 		Pending:         NewDefaultSubmissionList(),
 		Submitter:       suite.submitter,
-		Results:         suite.results,
-		Sequences:       suite.sequences,
 		SubmissionQueue: sequence.NewManager(),
+		DB: func(ctx context.Context) HorizonDB {
+			return suite.db
+		},
 	}
 
 	suite.unmuxedSource = xdr.MustAddress("GBRPYHIL2CI3FNQ4BXLFMNDLFJUNPU2HY3ZMFSHONUCEOASW7QC7OX2H")
@@ -85,14 +85,26 @@ func (suite *SystemTestSuite) SetupTest() {
 		},
 	}
 
+	result := xdr.TransactionResult{
+		FeeCharged: 123,
+		Result: xdr.TransactionResultResult{
+			Code:    xdr.TransactionResultCodeTxSuccess,
+			Results: &[]xdr.OperationResult{},
+		},
+	}
+	resultXDR, err := xdr.MarshalBase64(result)
+	suite.Assert().NoError(err)
+
 	suite.noResults = Result{Err: ErrNoResults}
 	envelopeBase64, _ := xdr.MarshalBase64(tx)
 	suite.successTx = Result{
 		Transaction: history.Transaction{
-			TransactionHash: "2374e99349b9ef7dba9a5db3339b78fda8f34777b1af33ba468ad5c0df946d4d",
-			LedgerSequence:  2,
-			TxEnvelope:      envelopeBase64,
-			TxResult:        "I3Tpk0m57326ml2zM5t4/ajzR3exrzO6RorVwN+UbU0AAAAAAAAAZAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAA==",
+			TransactionWithoutLedger: history.TransactionWithoutLedger{
+				TransactionHash: "2374e99349b9ef7dba9a5db3339b78fda8f34777b1af33ba468ad5c0df946d4d",
+				LedgerSequence:  2,
+				TxEnvelope:      envelopeBase64,
+				TxResult:        resultXDR,
+			},
 		},
 	}
 	assert.NoError(suite.T(), xdr.SafeUnmarshalBase64(suite.successTx.Transaction.TxEnvelope, &suite.successXDR))
@@ -100,15 +112,27 @@ func (suite *SystemTestSuite) SetupTest() {
 	suite.badSeq = SubmissionResult{
 		Err: ErrBadSequence,
 	}
+}
 
-	suite.sequences.On("GetSequenceNumbers", []string{suite.unmuxedSource.Address()}).
-		Return(map[string]uint64{suite.unmuxedSource.Address(): 0}, nil).
-		Once()
+func (suite *SystemTestSuite) TearDownTest() {
+	t := suite.T()
+	suite.db.AssertExpectations(t)
 }
 
 // Returns the result provided by the ResultProvider.
 func (suite *SystemTestSuite) TestSubmit_Basic() {
-	suite.results.Results = []Result{suite.successTx}
+	suite.db.On("BeginTx", &sql.TxOptions{
+		Isolation: sql.LevelRepeatableRead,
+		ReadOnly:  true,
+	}).Return(nil).Once()
+	suite.db.On("Rollback").Return(nil).Once()
+	suite.db.On("TransactionByHash", mock.Anything, suite.successTx.Transaction.TransactionHash).
+		Run(func(args mock.Arguments) {
+			ptr := args.Get(0).(*history.Transaction)
+			*ptr = suite.successTx.Transaction
+		}).
+		Return(nil).Once()
+
 	r := <-suite.system.Submit(
 		suite.ctx,
 		suite.successTx.Transaction.TxEnvelope,
@@ -121,8 +145,29 @@ func (suite *SystemTestSuite) TestSubmit_Basic() {
 	assert.False(suite.T(), suite.submitter.WasSubmittedTo)
 }
 
+func getMetricValue(metric prometheus.Metric) *dto.Metric {
+	value := &dto.Metric{}
+	err := metric.Write(value)
+	if err != nil {
+		panic(err)
+	}
+	return value
+}
+
 // Returns the error from submission if no result is found by hash and the suite.submitter returns an error.
 func (suite *SystemTestSuite) TestSubmit_NotFoundError() {
+	suite.db.On("BeginTx", &sql.TxOptions{
+		Isolation: sql.LevelRepeatableRead,
+		ReadOnly:  true,
+	}).Return(nil).Once()
+	suite.db.On("Rollback").Return(nil).Once()
+	suite.db.On("TransactionByHash", mock.Anything, suite.successTx.Transaction.TransactionHash).
+		Return(sql.ErrNoRows).Once()
+	suite.db.On("NoRows", sql.ErrNoRows).Return(true).Once()
+	suite.db.On("GetSequenceNumbers", []string{suite.unmuxedSource.Address()}).
+		Return(map[string]uint64{suite.unmuxedSource.Address(): 0}, nil).
+		Once()
+
 	suite.submitter.R.Err = errors.New("busted for some reason")
 	r := <-suite.system.Submit(
 		suite.ctx,
@@ -133,15 +178,34 @@ func (suite *SystemTestSuite) TestSubmit_NotFoundError() {
 
 	assert.NotNil(suite.T(), r.Err)
 	assert.True(suite.T(), suite.submitter.WasSubmittedTo)
-	assert.Equal(suite.T(), int64(0), suite.system.Metrics.SuccessfulSubmissionsMeter.Count())
-	assert.Equal(suite.T(), int64(1), suite.system.Metrics.FailedSubmissionsMeter.Count())
-	assert.Equal(suite.T(), int64(1), suite.system.Metrics.SubmissionTimer.Count())
+	assert.Equal(suite.T(), float64(0), getMetricValue(suite.system.Metrics.SuccessfulSubmissionsCounter).GetCounter().GetValue())
+	assert.Equal(suite.T(), float64(1), getMetricValue(suite.system.Metrics.FailedSubmissionsCounter).GetCounter().GetValue())
+	assert.Equal(suite.T(), uint64(1), getMetricValue(suite.system.Metrics.SubmissionDuration).GetSummary().GetSampleCount())
 }
 
 // If the error is bad_seq and the result at the transaction's sequence number is for the same hash, return result.
 func (suite *SystemTestSuite) TestSubmit_BadSeq() {
 	suite.submitter.R = suite.badSeq
-	suite.results.Results = []Result{suite.noResults, suite.successTx}
+	suite.db.On("BeginTx", &sql.TxOptions{
+		Isolation: sql.LevelRepeatableRead,
+		ReadOnly:  true,
+	}).Return(nil).Once()
+	suite.db.On("Rollback").Return(nil).Once()
+	suite.db.On("TransactionByHash", mock.Anything, suite.successTx.Transaction.TransactionHash).
+		Return(sql.ErrNoRows).Once()
+	suite.db.On("NoRows", sql.ErrNoRows).Return(true).Once()
+	suite.db.On("GetSequenceNumbers", []string{suite.unmuxedSource.Address()}).
+		Return(map[string]uint64{suite.unmuxedSource.Address(): 0}, nil).
+		Once()
+	suite.db.On("GetSequenceNumbers", []string{suite.unmuxedSource.Address()}).
+		Return(map[string]uint64{suite.unmuxedSource.Address(): 1}, nil).
+		Once()
+	suite.db.On("TransactionByHash", mock.Anything, suite.successTx.Transaction.TransactionHash).
+		Run(func(args mock.Arguments) {
+			ptr := args.Get(0).(*history.Transaction)
+			*ptr = suite.successTx.Transaction
+		}).
+		Return(nil).Once()
 
 	r := <-suite.system.Submit(
 		suite.ctx,
@@ -158,7 +222,25 @@ func (suite *SystemTestSuite) TestSubmit_BadSeq() {
 // If error is bad_seq and no result is found, return error.
 func (suite *SystemTestSuite) TestSubmit_BadSeqNotFound() {
 	suite.submitter.R = suite.badSeq
-	suite.submitter.R = suite.badSeq
+	suite.db.On("BeginTx", &sql.TxOptions{
+		Isolation: sql.LevelRepeatableRead,
+		ReadOnly:  true,
+	}).Return(nil).Once()
+	suite.db.On("Rollback").Return(nil).Once()
+	suite.db.On("TransactionByHash", mock.Anything, suite.successTx.Transaction.TransactionHash).
+		Return(sql.ErrNoRows).Twice()
+	suite.db.On("NoRows", sql.ErrNoRows).Return(true).Twice()
+	suite.db.On("GetSequenceNumbers", []string{suite.unmuxedSource.Address()}).
+		Return(map[string]uint64{suite.unmuxedSource.Address(): 0}, nil).
+		Times(3)
+	suite.db.On("GetSequenceNumbers", []string{suite.unmuxedSource.Address()}).
+		Return(map[string]uint64{suite.unmuxedSource.Address(): 1}, nil).
+		Once()
+
+	// set poll interval to 1ms so we don't need to wait 3 seconds for the test to complete
+	suite.system.Init()
+	suite.system.accountSeqPollInterval = time.Millisecond
+
 	r := <-suite.system.Submit(
 		suite.ctx,
 		suite.successTx.Transaction.TxEnvelope,
@@ -172,6 +254,18 @@ func (suite *SystemTestSuite) TestSubmit_BadSeqNotFound() {
 
 // If no result found and no error submitting, add to open transaction list.
 func (suite *SystemTestSuite) TestSubmit_OpenTransactionList() {
+	suite.db.On("BeginTx", &sql.TxOptions{
+		Isolation: sql.LevelRepeatableRead,
+		ReadOnly:  true,
+	}).Return(nil).Once()
+	suite.db.On("Rollback").Return(nil).Once()
+	suite.db.On("TransactionByHash", mock.Anything, suite.successTx.Transaction.TransactionHash).
+		Return(sql.ErrNoRows).Once()
+	suite.db.On("NoRows", sql.ErrNoRows).Return(true).Once()
+	suite.db.On("GetSequenceNumbers", []string{suite.unmuxedSource.Address()}).
+		Return(map[string]uint64{suite.unmuxedSource.Address(): 0}, nil).
+		Once()
+
 	suite.system.Submit(
 		suite.ctx,
 		suite.successTx.Transaction.TxEnvelope,
@@ -181,13 +275,19 @@ func (suite *SystemTestSuite) TestSubmit_OpenTransactionList() {
 	pending := suite.system.Pending.Pending(suite.ctx)
 	assert.Equal(suite.T(), 1, len(pending))
 	assert.Equal(suite.T(), suite.successTx.Transaction.TransactionHash, pending[0])
-	assert.Equal(suite.T(), int64(1), suite.system.Metrics.SuccessfulSubmissionsMeter.Count())
-	assert.Equal(suite.T(), int64(0), suite.system.Metrics.FailedSubmissionsMeter.Count())
-	assert.Equal(suite.T(), int64(1), suite.system.Metrics.SubmissionTimer.Count())
+	assert.Equal(suite.T(), float64(1), getMetricValue(suite.system.Metrics.SuccessfulSubmissionsCounter).GetCounter().GetValue())
+	assert.Equal(suite.T(), float64(0), getMetricValue(suite.system.Metrics.FailedSubmissionsCounter).GetCounter().GetValue())
+	assert.Equal(suite.T(), uint64(1), getMetricValue(suite.system.Metrics.SubmissionDuration).GetSummary().GetSampleCount())
 }
 
 // Tick should be a no-op if there are no open submissions.
 func (suite *SystemTestSuite) TestTick_Noop() {
+	suite.db.On("BeginTx", &sql.TxOptions{
+		Isolation: sql.LevelRepeatableRead,
+		ReadOnly:  true,
+	}).Return(nil).Once()
+	suite.db.On("Rollback").Return(nil).Once()
+
 	suite.system.Tick(suite.ctx)
 }
 
@@ -197,51 +297,56 @@ func (suite *SystemTestSuite) TestTick_Noop() {
 // `sys.Sequences.Get(addys)` is delayed by 1 second. It allows to simulate two
 // calls to `Tick()` executed at the same time.
 func (suite *SystemTestSuite) TestTick_Deadlock() {
-	secondDone := make(chan bool, 1)
-	testDone := make(chan bool)
-
-	go func() {
-		select {
-		case <-secondDone:
-			// OK!
-		case <-time.After(5 * time.Second):
-			assert.Fail(suite.T(), "Timeout, likely a deadlock in Tick()")
-		}
-
-		testDone <- true
-	}()
+	suite.db.On("BeginTx", &sql.TxOptions{
+		Isolation: sql.LevelRepeatableRead,
+		ReadOnly:  true,
+	}).Return(nil).Once()
+	suite.db.On("Rollback").Return(nil).Once()
 
 	// Start first Tick
 	suite.system.SubmissionQueue.Push("address", 0)
-	// Configure suite.sequences to return after 1 second in a first call
-	suite.sequences.On("GetSequenceNumbers", []string{"address"}).After(time.Second).Return(map[string]uint64{}, nil)
+	suite.db.On("GetSequenceNumbers", []string{"address"}).
+		Return(map[string]uint64{}, nil).
+		Run(func(args mock.Arguments) {
+			// Start second tick
+			suite.system.Tick(suite.ctx)
+		}).
+		Once()
 
-	go func() {
-		fmt.Println("Starting first Tick()")
-		suite.system.Tick(suite.ctx)
-		fmt.Println("Finished first Tick()")
-	}()
-
-	go func() {
-		// Start second Tick - should be deadlocked if mutex is not Unlock()'ed.
-		fmt.Println("Starting second Tick()")
-		suite.system.Tick(suite.ctx)
-		fmt.Println("Finished second Tick()")
-		secondDone <- true
-	}()
-
-	<-testDone
+	suite.system.Tick(suite.ctx)
 }
 
 // Test that Tick finishes any available transactions,
 func (suite *SystemTestSuite) TestTick_FinishesTransactions() {
 	l := make(chan Result, 1)
 	suite.system.Pending.Add(suite.ctx, suite.successTx.Transaction.TransactionHash, l)
+
+	suite.db.On("BeginTx", &sql.TxOptions{
+		Isolation: sql.LevelRepeatableRead,
+		ReadOnly:  true,
+	}).Return(nil).Once()
+	suite.db.On("Rollback").Return(nil).Once()
+	suite.db.On("TransactionByHash", mock.Anything, suite.successTx.Transaction.TransactionHash).
+		Return(sql.ErrNoRows).Once()
+	suite.db.On("NoRows", sql.ErrNoRows).Return(true).Once()
+
 	suite.system.Tick(suite.ctx)
+
 	assert.Equal(suite.T(), 0, len(l))
 	assert.Equal(suite.T(), 1, len(suite.system.Pending.Pending(suite.ctx)))
 
-	suite.results.Results = []Result{suite.successTx}
+	suite.db.On("BeginTx", &sql.TxOptions{
+		Isolation: sql.LevelRepeatableRead,
+		ReadOnly:  true,
+	}).Return(nil).Once()
+	suite.db.On("Rollback").Return(nil).Once()
+	suite.db.On("TransactionByHash", mock.Anything, suite.successTx.Transaction.TransactionHash).
+		Run(func(args mock.Arguments) {
+			ptr := args.Get(0).(*history.Transaction)
+			*ptr = suite.successTx.Transaction
+		}).
+		Return(nil).Once()
+
 	suite.system.Tick(suite.ctx)
 
 	assert.Equal(suite.T(), 1, len(l))
@@ -256,27 +361,46 @@ func (suite *SystemTestSuite) TestTickFinishFeeBumpTransaction() {
 
 	feeBumpTx := Result{
 		Transaction: history.Transaction{
-			Account:              "GABQGAYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB2MX",
-			TransactionHash:      "3dfef7d7226995b504f2827cc63d45ad41e9687bb0a8abcf08ba755fedca0352",
-			LedgerSequence:       123,
-			TxEnvelope:           "AAAABQAAAAACAgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMIAAAAAgAAAAADAwMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGMAAAAAAAAAYQAAAAEAAAAAAAAAAgAAAAAAAAAEAAAAAAAAAAEAAAAAAAAACwAAAAAAAABiAAAAAAAAAAECAgICAAAAAxQUFAAAAAAAAAAAAQMDAwMAAAADHh4eAA==",
-			TxResult:             "AAAAAAAAAHsAAAAB6Yhpu6i84IwQt4QGICEn84iMJUVM03sCYAhiRSdR9SYAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAsAAAAAAAAAAAAAAAA=",
-			TxMeta:               "AAAAAQAAAAAAAAAA",
-			InnerTransactionHash: null.StringFrom("e98869bba8bce08c10b78406202127f3888c25454cd37b02600862452751f526"),
+			TransactionWithoutLedger: history.TransactionWithoutLedger{
+				Account:              "GABQGAYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB2MX",
+				TransactionHash:      "3dfef7d7226995b504f2827cc63d45ad41e9687bb0a8abcf08ba755fedca0352",
+				LedgerSequence:       123,
+				TxEnvelope:           "AAAABQAAAAACAgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMIAAAAAgAAAAADAwMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGMAAAAAAAAAYQAAAAEAAAAAAAAAAgAAAAAAAAAEAAAAAAAAAAEAAAAAAAAACwAAAAAAAABiAAAAAAAAAAECAgICAAAAAxQUFAAAAAAAAAAAAQMDAwMAAAADHh4eAA==",
+				TxResult:             "AAAAAAAAAHsAAAAB6Yhpu6i84IwQt4QGICEn84iMJUVM03sCYAhiRSdR9SYAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAsAAAAAAAAAAAAAAAA=",
+				TxMeta:               "AAAAAQAAAAAAAAAA",
+				InnerTransactionHash: null.StringFrom("e98869bba8bce08c10b78406202127f3888c25454cd37b02600862452751f526"),
+			},
 		},
 	}
 
-	suite.sequences = &MockSequenceProvider{}
-	suite.sequences.On("GetSequenceNumbers", []string{"GABQGAYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB2MX"}).
+	suite.db.On("BeginTx", &sql.TxOptions{
+		Isolation: sql.LevelRepeatableRead,
+		ReadOnly:  true,
+	}).Return(nil).Once()
+	suite.db.On("Rollback").Return(nil).Once()
+	suite.db.On("TransactionByHash", mock.Anything, innerHash).
+		Return(sql.ErrNoRows).Once()
+	suite.db.On("NoRows", sql.ErrNoRows).Return(true).Once()
+	suite.db.On("GetSequenceNumbers", []string{"GABQGAYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB2MX"}).
 		Return(map[string]uint64{"GABQGAYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB2MX": 96}, nil).
 		Once()
-	suite.system.Sequences = suite.sequences
 
 	l := suite.system.Submit(suite.ctx, innerTxEnvelope, parsedInnerTx, innerHash)
 	assert.Equal(suite.T(), 0, len(l))
 	assert.Equal(suite.T(), 1, len(suite.system.Pending.Pending(suite.ctx)))
 
-	suite.results.ResultForInnerHash[innerHash] = feeBumpTx
+	suite.db.On("BeginTx", &sql.TxOptions{
+		Isolation: sql.LevelRepeatableRead,
+		ReadOnly:  true,
+	}).Return(nil).Once()
+	suite.db.On("Rollback").Return(nil).Once()
+	suite.db.On("TransactionByHash", mock.Anything, innerHash).
+		Run(func(args mock.Arguments) {
+			ptr := args.Get(0).(*history.Transaction)
+			*ptr = feeBumpTx.Transaction
+		}).
+		Return(nil).Once()
+
 	suite.system.Tick(suite.ctx)
 
 	assert.Equal(suite.T(), 1, len(l))
@@ -292,6 +416,16 @@ func (suite *SystemTestSuite) TestTick_RemovesStaleSubmissions() {
 	suite.system.SubmissionTimeout = 100 * time.Millisecond
 	suite.system.Pending.Add(suite.ctx, suite.successTx.Transaction.TransactionHash, l)
 	<-time.After(101 * time.Millisecond)
+
+	suite.db.On("BeginTx", &sql.TxOptions{
+		Isolation: sql.LevelRepeatableRead,
+		ReadOnly:  true,
+	}).Return(nil).Once()
+	suite.db.On("Rollback").Return(nil).Once()
+	suite.db.On("TransactionByHash", mock.Anything, suite.successTx.Transaction.TransactionHash).
+		Return(sql.ErrNoRows).Once()
+	suite.db.On("NoRows", sql.ErrNoRows).Return(true).Once()
+
 	suite.system.Tick(suite.ctx)
 
 	assert.Equal(suite.T(), 0, len(suite.system.Pending.Pending(suite.ctx)))

@@ -4,14 +4,15 @@ import (
 	"context"
 	"encoding/base64"
 	"fmt"
-	"github.com/stellar/go/xdr"
-	"strings"
 	"time"
 
 	"github.com/guregu/null"
+
+	horizonContext "github.com/stellar/go/services/horizon/internal/context"
+	"github.com/stellar/go/xdr"
+
 	protocol "github.com/stellar/go/protocols/horizon"
 	"github.com/stellar/go/services/horizon/internal/db2/history"
-	"github.com/stellar/go/services/horizon/internal/httpx"
 	"github.com/stellar/go/support/render/hal"
 )
 
@@ -47,9 +48,11 @@ func PopulateTransaction(
 			dest.MemoBytes = memoBytes
 		}
 	}
-	dest.Signatures = strings.Split(row.SignatureString, ",")
-	dest.ValidBefore = timeString(dest, row.ValidBefore)
-	dest.ValidAfter = timeString(dest, row.ValidAfter)
+	dest.Signatures = row.Signatures
+	if !row.TimeBounds.Null {
+		dest.ValidBefore = timeString(dest, row.TimeBounds.Upper)
+		dest.ValidAfter = timeString(dest, row.TimeBounds.Lower)
+	}
 
 	if row.InnerTransactionHash.Valid {
 		dest.FeeAccount = row.FeeAccount.String
@@ -61,7 +64,7 @@ func PopulateTransaction(
 		dest.InnerTransaction = &protocol.InnerTransaction{
 			Hash:       row.InnerTransactionHash.String,
 			MaxFee:     row.MaxFee,
-			Signatures: strings.Split(row.InnerSignatureString.String, ","),
+			Signatures: row.InnerSignatures,
 		}
 		if transactionHash != row.TransactionHash {
 			dest.Signatures = dest.InnerTransaction.Signatures
@@ -71,7 +74,7 @@ func PopulateTransaction(
 		dest.MaxFee = row.MaxFee
 	}
 
-	lb := hal.LinkBuilder{Base: httpx.BaseURL(ctx)}
+	lb := hal.LinkBuilder{Base: horizonContext.BaseURL(ctx)}
 	dest.Links.Account = lb.Link("/accounts", dest.Account)
 	dest.Links.Ledger = lb.Link("/ledgers", fmt.Sprintf("%d", dest.Ledger))
 	dest.Links.Operations = lb.PagedLink("/transactions", dest.ID, "operations")

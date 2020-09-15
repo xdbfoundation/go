@@ -1,13 +1,119 @@
 # Changelog
 
 All notable changes to this project will be documented in this
-file. This project adheres to [Semantic Versioning](http://semver.org/).
+file. This project adheres to [Semantic Versioning](http://semver.org/).x
 
-## Unreleased
+## v1.8.1
+
+* Fixed a bug in a code ingesting fee bump transactions.
+
+## v1.8.0
+
+### Changes
+
+* Added new and changed existing metrics:
+  * `horizon_build_info` - contains build information in labels (`version` - Horizon version, `goversion` - Go runtime version),
+  * `horizon_ingest_enable` - equals `1` if ingestion system is running, `0` otherwise,
+  * `horizon_ingest_state_invalid` - equals `1` if state is invalid, `0` otherwise,
+  * `horizon_db_max_open_connections` - determines the maximum possible opened DB connections,
+  * `horizon_db_wait_duration_seconds_total` - changed the values to be in seconds instead of nanoseconds.
+* Fixed a data race when shutting down the HTTP server. ([#2958](https://github.com/stellar/go/pull/2958)).
+* Fixed emitting incorrect errors related to OrderBook Stream when shutting down the app. ([#2964](https://github.com/stellar/go/pull/2964))
+
+### Experimental
+
+The previous implementation of Captive Stellar-Core streams meta stream using a filesystem pipe. This implies that both Horizon and Stellar-Core had to be deployed to the same server. One of the disadvantages of such requirement is a need for detailed per-process monitoring to be able to connect potential issues (like memory leaks) to the specific service.
+
+To solve this it's now possible to start a [`captivecore`](https://github.com/stellar/go/tree/master/exp/services/captivecore) on another machine and configure Horizon to use it in ingestion. This requires two config options set:
+* `ENABLE_CAPTIVE_CORE_INGESTION=true`,
+* `REMOTE_CAPTIVE_CORE_URL` - pointing to `captivecore` server.
+
+## v1.7.1
+
+This patch release fixes a regression introduced in 1.7.0, breaking the
+ `/offers` endpoint. Thus, we recommend upgrading as soon as possible.
+ 
+### Changes
+* Fix path parameter mismatch in `/offers` endpoint
+  [#2927](https://github.com/stellar/go/pull/2927).
+
+## v1.7.0
+
+### DB schema migration (expected migration time: < 10 mins)
+  * Add new multicolumn index to improve the `/trades`'s
+    endpoint performance [#2869](https://github.com/stellar/go/pull/2869).
+  * Add constraints on database columns which cannot hold
+    negative values [#2827](https://github.com/stellar/go/pull/2827).
+
+### Changes
+* Update Go toolchain to 1.14.6 in order to fix [golang/go#34775](https://github.com/golang/go/issues/34775),
+  which caused some database queries to be executed instead of rolled back.
+* Fix panic on missing command line arguments [#2872](https://github.com/stellar/go/pull/2872)
+* Fix race condition where submitting a transaction to Horizon can result in a bad sequence error even though Stellar Core accepted the transaction. [#2877](https://github.com/stellar/go/pull/2877)
+* Add new DB metrics ([#2844](https://github.com/stellar/go/pull/2844)):
+  * `db_in_use_connections` - number of opened DB connections in use (not idle),
+  * `db_wait_count` - number of connections waited for,
+  * `db_wait_duration` - total time blocked waiting for a new connection.
+
+## v1.6.0
+
+* Add `--parallel-workers` and `--parallel-job-size` to `horizon db reingest range`. `--parallel-workers` will parallelize reingestion using the supplied number of workers. ([#2724](https://github.com/stellar/go/pull/2724))
+* Remove Stellar Core's database dependency for non-ingesting instances of Horizon.  ([#2759](https://github.com/stellar/go/pull/2759))
+  Horizon doesn't require access to a Stellar Core database if it is only serving HTTP request, this allows the separation of front-end and ingesting instances. 
+  The following config parameters were removed:
+  - `core-db-max-open-connections`
+  - `core-db-max-idle-connections`
+* HAL response population is implemented using Go `strings` package instead of `regexp`, improving its performance. ([#2806](https://github.com/stellar/go/pull/2806))
+* Fix a bug in `POST /transactions` that could cause `tx_bad_seq` errors instead of processing a valid transaction. ([#2805](https://github.com/stellar/go/pull/2805))
+* The `--connection-timeout` param is ignored in `POST /transactions`. The requests sent to that endpoint will always timeout after 30 seconds. ([#2818](https://github.com/stellar/go/pull/2818))
+
+### Experimental
+
+* Add experimental support for live ingestion using a Stellar Core subprocess instead of a persistent Stellar Core database.
+
+  Stellar-core now contains an experimental feature which allows replaying ledger's metadata in-memory. This feature starts paving the way to remove the dependency between Stellar Core's database and Horizon. Requires [Stellar Core v13.2.0](https://github.com/stellar/stellar-core/releases/tag/v13.2.0).
+
+  To try out this new experimental feature, you need to specify the following parameters when starting ingesting Horizon instance:
+
+  - `--enable-captive-core-ingestion` or `ENABLE_CAPTIVE_CORE_INGESTION=true`.
+  - `--stellar-core-binary-path` or `STELLAR_CORE_BINARY_PATH`.
+
+## v1.5.0
+
+### Changes
+
+* Remove `--ingest-failed-transactions` flag. From now on Horizon will always ingest failed transactions. WARNING: If your application is using Horizon DB directly (not recommended!) remember that now it will also contain failed txs. ([#2702](https://github.com/stellar/go/pull/2702)).
+* Add transaction set operation count to `history_ledger`([#2690](https://github.com/stellar/go/pull/2690)).
+Extend ingestion to store the total number of operations in the transaction set and expose it in the ledger resource via `tx_set_operation_count`. This feature allows you to assess the used capacity of a transaction set.
+* Fix `/metrics` end-point ([#2717](https://github.com/stellar/go/pull/2717)).
+* Gracefully handle incorrect assets in the query parameters of GET `/offers` ([#2634](https://github.com/stellar/go/pull/2634)).
+* Fix logging message in OrderBookStream ([#2699](https://github.com/stellar/go/pull/2699)).
+* Fix data race in root endpoint ([#2745](https://github.com/stellar/go/pull/2745)).
+
+### Experimental
+
+* Add experimental support for database reingestion using a Stellar Core subprocess instead of a persistent Stellar Core database ([#2695](https://github.com/stellar/go/pull/2695)).
+
+  [Stellar Core v12.3.0](https://github.com/stellar/stellar-core/releases/tag/v12.3.0) added an experimental feature which allows replaying ledger's metadata in-memory. This feature speeds up reingestion and starts paving the way to remove the dependency between Stellar Core's database and Horizon.
+
+  For now, this is only supported while running `horizon db reingest`. To try out this new experimental feature, you need to specify the following parameters:
+
+  - `--enable-captive-core-ingestion` or `ENABLE_CAPTIVE_CORE_INGESTION=true`.
+  - `--stellar-core-binary-path` or `STELLAR_CORE_BINARY_PATH`.
+
+### SDK Maintainers: action needed
+
+- Add the new field `tx_set_operation_count` to the `ledger` resource ([#2690](https://github.com/stellar/go/pull/2690)). This field can be a `number` or `null`.
+
+## v1.4.0
 
 * Drop support for MuxedAccounts strkeys (spec'ed in [SEP23](https://github.com/stellar/stellar-protocol/blob/master/ecosystem/sep-0023.md)).
   SEP23 is still a draft and we don't want to encourage storing strkeys which may not be definite.
 * Replace `SequenceProvider` implementation with one which queries the Horizon DB for sequence numbers instead of the Stellar Core DB.
+* Use the Horizon DB instead of Horizon's in memory order book graph to query orderbook details for the /order_book endpoint.
+* Remove JSON variant of `GET /metrics`, both in the server and client code. It's using Prometheus format by default now.
+* Decreased a memory usage of initial state ingestion stage and state verifier ([#2618](https://github.com/stellar/go/pull/2618)).
+* Remove `--exp-ingest-in-memory-only` Horizon flag. The in memory order book graph which powers the path finding endpoints is now updated using the Horizon DB instead of directly via ingestion ([#2630](https://github.com/stellar/go/pull/2630)).
 
 ## v1.3.0
 
@@ -56,8 +162,8 @@ The changes are required by [CAP-15](https://github.com/stellar/stellar-protocol
 
 * Added support for [CAP-27](https://github.com/stellar/stellar-protocol/blob/master/core/cap-0027.md) and [SEP-23](https://github.com/stellar/stellar-protocol/blob/master/ecosystem/sep-0023.md) [#2491](https://github.com/stellar/go/pull/2491).
 * The XDR definition of a transaction memo is a string.
-However, XDR strings are actually binary blobs with no enforced encoding. 
-It is possible to set the memo in a transaction envelope to a binary sequence which is not valid ASCII or unicode. 
+However, XDR strings are actually binary blobs with no enforced encoding.
+It is possible to set the memo in a transaction envelope to a binary sequence which is not valid ASCII or unicode.
 Previously, if you wanted to recover the original binary sequence for a transaction memo, you would have to decode the transaction's envelope.
 In this release, we have added a `memo_bytes` field to the Horizon transaction response for transactions with `memo_type` equal `text`.
 `memo_bytes` stores the base 64 encoding of the memo bytes set in the transaction envelope [#2485](https://github.com/stellar/go/pull/2485).
@@ -141,7 +247,7 @@ To execute the migration run `horizon db migrate up` using the Horizon v1.1.0 bi
       "trustor": "GA332TXN6BX2DYKGYB7FW5BWV2JLQKERNX4T7EUJT4MHWOW2TSGC2SPM",
       "asset_type": "credit_alphanum4",
       "asset_code": "USD"
-    }    
+    }
     </pre>
 * It is no longer possible to use Redis as a mechanism for rate-limiting requests ([#2409](https://github.com/stellar/go/pull/2409)).
 

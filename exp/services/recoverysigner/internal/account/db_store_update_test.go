@@ -113,7 +113,7 @@ func TestUpdate(t *testing.T) {
 			Value      string `db:"value"`
 		}
 		rows := []row{}
-		err = session.Select(&rows, `SELECT account_id, identity_id, id, type_, value FROM auth_methods`)
+		err = session.Select(&rows, `SELECT account_id, identity_id, id, type_, value FROM auth_methods ORDER BY id`)
 		require.NoError(t, err)
 		wantRows := []row{
 			{
@@ -196,7 +196,7 @@ func TestUpdate_removeIdentities(t *testing.T) {
 			Role      string `db:"role"`
 		}
 		rows := []row{}
-		err = session.Select(&rows, `SELECT account_id, id, role FROM identities`)
+		err = session.Select(&rows, `SELECT account_id, id, role FROM identities ORDER BY id`)
 		require.NoError(t, err)
 		assert.Equal(t, []row{}, rows)
 	}
@@ -209,7 +209,7 @@ func TestUpdate_removeIdentities(t *testing.T) {
 			Value      string `db:"value"`
 		}
 		rows := []row{}
-		err = session.Select(&rows, `SELECT account_id, identity_id, id, type_, value FROM auth_methods`)
+		err = session.Select(&rows, `SELECT account_id, identity_id, id, type_, value FROM auth_methods ORDER BY id`)
 		require.NoError(t, err)
 		assert.Equal(t, []row{}, rows)
 	}
@@ -297,4 +297,24 @@ func TestUpdate_notFound(t *testing.T) {
 
 	err := store.Update(a)
 	assert.Equal(t, ErrNotFound, err)
+}
+
+func TestUpdate_notFound_properlyClosesDBConnections(t *testing.T) {
+	db := dbtest.Open(t)
+	session := db.Open()
+	session.SetMaxIdleConns(1)
+	session.SetMaxOpenConns(1)
+
+	store := DBStore{
+		DB: session,
+	}
+
+	a := Account{
+		Address: "GCLLT3VG4F6EZAHZEBKWBWV5JGVPCVIKUCGTY3QEOAIZU5IJGMWCT2TT",
+	}
+
+	for range [5]int{} {
+		err := store.Update(a)
+		assert.Equal(t, ErrNotFound, err)
+	}
 }

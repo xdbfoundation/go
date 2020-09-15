@@ -8,18 +8,17 @@ import (
 	"sync"
 	"time"
 
-	"github.com/rcrowley/go-metrics"
+	"github.com/prometheus/client_golang/prometheus"
+
 	"github.com/stellar/go/clients/stellarcore"
 	"github.com/stellar/go/exp/ingest/adapters"
 	ingesterrors "github.com/stellar/go/exp/ingest/errors"
 	"github.com/stellar/go/exp/ingest/ledgerbackend"
-	"github.com/stellar/go/exp/orderbook"
+	"github.com/stellar/go/historyarchive"
 	"github.com/stellar/go/services/horizon/internal/db2/history"
 	"github.com/stellar/go/support/db"
 	"github.com/stellar/go/support/errors"
-	"github.com/stellar/go/support/historyarchive"
 	logpkg "github.com/stellar/go/support/log"
-	"github.com/stellar/go/xdr"
 )
 
 const (
@@ -44,8 +43,11 @@ const (
 	//      everything else).
 	CurrentVersion = 10
 
-	// MaxDBConnections is the size of the postgres connection pool dedicated to Horizon ingestion
-	MaxDBConnections = 2
+	// MaxDBConnections is the size of the postgres connection pool dedicated to Horizon ingestion:
+	//  * Ledger ingestion,
+	//  * State verifications,
+	//  * Metrics updates.
+	MaxDBConnections = 3
 
 	defaultCoreCursorName           = "HORIZON"
 	stateVerificationErrorThreshold = 3
@@ -54,23 +56,20 @@ const (
 var log = logpkg.DefaultLogger.WithField("service", "expingest")
 
 type Config struct {
-	CoreSession       *db.Session
-	StellarCoreURL    string
-	StellarCoreCursor string
-	NetworkPassphrase string
+	CoreSession           *db.Session
+	StellarCoreURL        string
+	StellarCoreCursor     string
+	StellarCoreBinaryPath string
+	StellarCoreConfigPath string
+	RemoteCaptiveCoreURL  string
+	NetworkPassphrase     string
 
 	HistorySession           *db.Session
 	HistoryArchiveURL        string
 	DisableStateVerification bool
 
-	// MaxStreamRetries determines how many times the reader will retry when encountering
-	// errors while streaming xdr bucket entries from the history archive.
-	// Set MaxStreamRetries to 0 if there should be no retry attempts
-	MaxStreamRetries int
-
-	OrderBookGraph           *orderbook.OrderBookGraph
-	IngestInMemoryOnly       bool
-	IngestFailedTransactions bool
+	MaxReingestRetries          int
+	ReingestRetryBackoffSeconds int
 }
 
 const (
@@ -85,31 +84,36 @@ type stellarCoreClient interface {
 	SetCursor(ctx context.Context, id string, cursor int32) error
 }
 
-type System struct {
-	Metrics struct {
-		// LedgerIngestionTimer exposes timing metrics about the rate and
-		// duration of ledger ingestion (including updating DB and graph).
-		LedgerIngestionTimer metrics.Timer
+type Metrics struct {
+	// LedgerIngestionDuration exposes timing metrics about the rate and
+	// duration of ledger ingestion (including updating DB and graph).
+	LedgerIngestionDuration prometheus.Summary
 
-		// LedgerInMemoryIngestionTimer exposes timing metrics about the rate and
-		// duration of ingestion into in-memory graph only.
-		LedgerInMemoryIngestionTimer metrics.Timer
+	// StateVerifyDuration exposes timing metrics about the rate and
+	// duration of state verification.
+	StateVerifyDuration prometheus.Summary
 
-		// StateVerifyTimer exposes timing metrics about the rate and
-		// duration of state verification.
-		StateVerifyTimer metrics.Timer
+	// StateInvalidGauge exposes state invalid metric. 1 if state is invalid,
+	// 0 otherwise.
+	StateInvalidGauge prometheus.GaugeFunc
+}
 
-		// LocalLatestLedgerGauge exposes the local (order book graph)
-		// latest processed ledger
-		LocalLatestLedgerGauge metrics.Gauge
-	}
+type System interface {
+	Run()
+	Metrics() Metrics
+	StressTest(numTransactions, changesPerTransaction int) error
+	VerifyRange(fromLedger, toLedger uint32, verifyState bool) error
+	ReingestRange(fromLedger, toLedger uint32, force bool) error
+	Shutdown()
+}
 
-	ctx    context.Context
-	cancel context.CancelFunc
+type system struct {
+	metrics Metrics
+	ctx     context.Context
+	cancel  context.CancelFunc
 
 	config Config
 
-	graph    orderbook.OBGraph
 	historyQ history.IngestionQ
 	runner   ProcessorRunnerInterface
 
@@ -118,8 +122,9 @@ type System struct {
 
 	stellarCoreClient stellarCoreClient
 
-	maxStreamRetries int
-	wg               sync.WaitGroup
+	maxReingestRetries          int
+	reingestRetryBackoffSeconds int
+	wg                          sync.WaitGroup
 
 	// stateVerificationRunning is true when verification routine is currently
 	// running.
@@ -130,7 +135,7 @@ type System struct {
 	disableStateVerification bool
 }
 
-func NewSystem(config Config) (*System, error) {
+func NewSystem(config Config) (System, error) {
 	ctx, cancel := context.WithCancel(context.Background())
 
 	archive, err := historyarchive.Connect(
@@ -144,13 +149,33 @@ func NewSystem(config Config) (*System, error) {
 		return nil, errors.Wrap(err, "error creating history archive")
 	}
 
-	coreSession := config.CoreSession.Clone()
-	coreSession.Ctx = ctx
-
-	ledgerBackend, err := ledgerbackend.NewDatabaseBackendFromSession(coreSession)
-	if err != nil {
-		cancel()
-		return nil, errors.Wrap(err, "error creating ledger backend")
+	var ledgerBackend ledgerbackend.LedgerBackend
+	if len(config.RemoteCaptiveCoreURL) > 0 {
+		ledgerBackend, err = ledgerbackend.NewRemoteCaptive(config.RemoteCaptiveCoreURL)
+		if err != nil {
+			cancel()
+			return nil, errors.Wrap(err, "error creating captive core backend")
+		}
+	}
+	if len(config.StellarCoreBinaryPath) > 0 {
+		ledgerBackend, err = ledgerbackend.NewCaptive(
+			config.StellarCoreBinaryPath,
+			config.StellarCoreConfigPath,
+			config.NetworkPassphrase,
+			[]string{config.HistoryArchiveURL},
+		)
+		if err != nil {
+			cancel()
+			return nil, errors.Wrap(err, "error creating captive core backend")
+		}
+	} else {
+		coreSession := config.CoreSession.Clone()
+		coreSession.Ctx = ctx
+		ledgerBackend, err = ledgerbackend.NewDatabaseBackendFromSession(coreSession, config.NetworkPassphrase)
+		if err != nil {
+			cancel()
+			return nil, errors.Wrap(err, "error creating ledger backend")
+		}
 	}
 
 	historyQ := &history.Q{config.HistorySession.Clone()}
@@ -158,23 +183,22 @@ func NewSystem(config Config) (*System, error) {
 
 	historyAdapter := adapters.MakeHistoryArchiveAdapter(archive)
 
-	system := &System{
-		ctx:                      ctx,
-		cancel:                   cancel,
-		historyAdapter:           historyAdapter,
-		ledgerBackend:            ledgerBackend,
-		config:                   config,
-		historyQ:                 historyQ,
-		graph:                    config.OrderBookGraph,
-		disableStateVerification: config.DisableStateVerification,
-		maxStreamRetries:         config.MaxStreamRetries,
+	system := &system{
+		cancel:                      cancel,
+		config:                      config,
+		ctx:                         ctx,
+		disableStateVerification:    config.DisableStateVerification,
+		historyAdapter:              historyAdapter,
+		historyQ:                    historyQ,
+		ledgerBackend:               ledgerBackend,
+		maxReingestRetries:          config.MaxReingestRetries,
+		reingestRetryBackoffSeconds: config.ReingestRetryBackoffSeconds,
 		stellarCoreClient: &stellarcore.Client{
 			URL: config.StellarCoreURL,
 		},
 		runner: &ProcessorRunner{
 			ctx:            ctx,
 			config:         config,
-			graph:          config.OrderBookGraph,
 			historyQ:       historyQ,
 			historyAdapter: historyAdapter,
 			ledgerBackend:  ledgerBackend,
@@ -185,11 +209,39 @@ func NewSystem(config Config) (*System, error) {
 	return system, nil
 }
 
-func (s *System) initMetrics() {
-	s.Metrics.LedgerIngestionTimer = metrics.NewTimer()
-	s.Metrics.LedgerInMemoryIngestionTimer = metrics.NewTimer()
-	s.Metrics.StateVerifyTimer = metrics.NewTimer()
-	s.Metrics.LocalLatestLedgerGauge = metrics.NewGauge()
+func (s *system) initMetrics() {
+	s.metrics.LedgerIngestionDuration = prometheus.NewSummary(prometheus.SummaryOpts{
+		Namespace: "horizon", Subsystem: "ingest", Name: "ledger_ingestion_duration_seconds",
+		Help: "ledger ingestion durations, sliding window = 10m",
+	})
+
+	s.metrics.StateVerifyDuration = prometheus.NewSummary(prometheus.SummaryOpts{
+		Namespace: "horizon", Subsystem: "ingest", Name: "state_verify_duration_seconds",
+		Help: "state verification durations, sliding window = 10m",
+	})
+
+	s.metrics.StateInvalidGauge = prometheus.NewGaugeFunc(
+		prometheus.GaugeOpts{
+			Namespace: "horizon", Subsystem: "ingest", Name: "state_invalid",
+			Help: "equals 1 if state invalid, 0 otherwise",
+		},
+		func() float64 {
+			invalid, err := s.historyQ.CloneIngestionQ().GetExpStateInvalid()
+			if err != nil {
+				log.WithError(err).Error("Error in initMetrics/GetExpStateInvalid")
+				return 0
+			}
+			invalidFloat := float64(0)
+			if invalid {
+				invalidFloat = 1
+			}
+			return invalidFloat
+		},
+	)
+}
+
+func (s *system) Metrics() Metrics {
+	return s.metrics
 }
 
 // Run starts ingestion system. Ingestion system supports distributed ingestion
@@ -221,11 +273,11 @@ func (s *System) initMetrics() {
 //     a database.
 //   * If instances is a NOT leader, it runs ledger pipeline without updating a
 //     a database so order book graph is updated but database is not overwritten.
-func (s *System) Run() {
+func (s *system) Run() {
 	s.runStateMachine(startState{})
 }
 
-func (s *System) StressTest(numTransactions, changesPerTransaction int) error {
+func (s *system) StressTest(numTransactions, changesPerTransaction int) error {
 	if numTransactions <= 0 {
 		return errors.New("transactions must be positive")
 	}
@@ -243,7 +295,7 @@ func (s *System) StressTest(numTransactions, changesPerTransaction int) error {
 
 // VerifyRange runs the ingestion pipeline on the range of ledgers. When
 // verifyState is true it verifies the state when ingestion is complete.
-func (s *System) VerifyRange(fromLedger, toLedger uint32, verifyState bool) error {
+func (s *system) VerifyRange(fromLedger, toLedger uint32, verifyState bool) error {
 	return s.runStateMachine(verifyRangeState{
 		fromLedger:  fromLedger,
 		toLedger:    toLedger,
@@ -253,15 +305,24 @@ func (s *System) VerifyRange(fromLedger, toLedger uint32, verifyState bool) erro
 
 // ReingestRange runs the ingestion pipeline on the range of ledgers ingesting
 // history data only.
-func (s *System) ReingestRange(fromLedger, toLedger uint32, force bool) error {
-	return s.runStateMachine(reingestHistoryRangeState{
-		fromLedger: fromLedger,
-		toLedger:   toLedger,
-		force:      force,
-	})
+func (s *system) ReingestRange(fromLedger, toLedger uint32, force bool) error {
+	run := func() error {
+		return s.runStateMachine(reingestHistoryRangeState{
+			fromLedger: fromLedger,
+			toLedger:   toLedger,
+			force:      force,
+		})
+	}
+	err := run()
+	for retry := 0; err != nil && retry < s.maxReingestRetries; retry++ {
+		log.Warnf("reingest range [%d, %d] failed (%s), retrying", fromLedger, toLedger, err.Error())
+		time.Sleep(time.Second * time.Duration(s.reingestRetryBackoffSeconds))
+		err = run()
+	}
+	return err
 }
 
-func (s *System) runStateMachine(cur stateMachineNode) error {
+func (s *system) runStateMachine(cur stateMachineNode) error {
 	defer func() {
 		s.wg.Wait()
 	}()
@@ -314,56 +375,7 @@ func (s *System) runStateMachine(cur stateMachineNode) error {
 	}
 }
 
-func (s *System) graphApply(sequence uint32) error {
-	if err := s.graph.Apply(sequence); err != nil {
-		return err
-	}
-	s.Metrics.LocalLatestLedgerGauge.Update(int64(sequence))
-	return nil
-}
-
-func (s *System) loadOffersIntoMemory(sequence uint32) error {
-	defer s.graph.Discard()
-
-	s.graph.Clear()
-
-	log.Info("Loading offers from a database into memory store...")
-	start := time.Now()
-
-	offers, err := s.historyQ.GetAllOffers()
-	if err != nil {
-		return errors.Wrap(err, "GetAllOffers error")
-	}
-
-	for _, offer := range offers {
-		sellerID := xdr.MustAddress(offer.SellerID)
-		s.graph.AddOffer(xdr.OfferEntry{
-			SellerId: sellerID,
-			OfferId:  offer.OfferID,
-			Selling:  offer.SellingAsset,
-			Buying:   offer.BuyingAsset,
-			Amount:   offer.Amount,
-			Price: xdr.Price{
-				N: xdr.Int32(offer.Pricen),
-				D: xdr.Int32(offer.Priced),
-			},
-			Flags: xdr.Uint32(offer.Flags),
-		})
-	}
-
-	if err := s.graphApply(sequence); err != nil {
-		return errors.Wrap(err, "Error running graph.Apply")
-	}
-
-	log.WithField(
-		"duration",
-		time.Since(start).Seconds(),
-	).Info("Finished loading offers from a database into memory store")
-
-	return nil
-}
-
-func (s *System) maybeVerifyState(lastIngestedLedger uint32) {
+func (s *system) maybeVerifyState(lastIngestedLedger uint32) {
 	stateInvalid, err := s.historyQ.GetExpStateInvalid()
 	if err != nil && !isCancelledError(err) {
 		log.WithField("err", err).Error("Error getting state invalid value")
@@ -374,10 +386,10 @@ func (s *System) maybeVerifyState(lastIngestedLedger uint32) {
 		!s.disableStateVerification && // state verification is not disabled...
 		historyarchive.IsCheckpoint(lastIngestedLedger) { // it's a checkpoint ledger.
 		s.wg.Add(1)
-		go func(graphOffersMap map[xdr.Int64]xdr.OfferEntry) {
+		go func() {
 			defer s.wg.Done()
 
-			err := s.verifyState(graphOffersMap, true)
+			err := s.verifyState(true)
 			if err != nil {
 				if isCancelledError(err) {
 					return
@@ -397,24 +409,24 @@ func (s *System) maybeVerifyState(lastIngestedLedger uint32) {
 			} else {
 				s.resetStateVerificationErrors()
 			}
-		}(s.graph.OffersMap())
+		}()
 	}
 }
 
-func (s *System) incrementStateVerificationErrors() int {
+func (s *system) incrementStateVerificationErrors() int {
 	s.stateVerificationMutex.Lock()
 	defer s.stateVerificationMutex.Unlock()
 	s.stateVerificationErrors++
 	return s.stateVerificationErrors
 }
 
-func (s *System) resetStateVerificationErrors() {
+func (s *system) resetStateVerificationErrors() {
 	s.stateVerificationMutex.Lock()
 	defer s.stateVerificationMutex.Unlock()
 	s.stateVerificationErrors = 0
 }
 
-func (s *System) updateCursor(ledgerSequence uint32) error {
+func (s *system) updateCursor(ledgerSequence uint32) error {
 	if s.stellarCoreClient == nil {
 		return nil
 	}
@@ -434,7 +446,7 @@ func (s *System) updateCursor(ledgerSequence uint32) error {
 	return nil
 }
 
-func (s *System) Shutdown() {
+func (s *system) Shutdown() {
 	log.Info("Shutting down ingestion system...")
 	s.stateVerificationMutex.Lock()
 	defer s.stateVerificationMutex.Unlock()

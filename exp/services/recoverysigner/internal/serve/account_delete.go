@@ -12,9 +12,9 @@ import (
 )
 
 type accountDeleteHandler struct {
-	Logger         *supportlog.Entry
-	SigningAddress *keypair.FromAddress
-	AccountStore   account.Store
+	Logger           *supportlog.Entry
+	SigningAddresses []*keypair.FromAddress
+	AccountStore     account.Store
 }
 
 type accountDeleteRequest struct {
@@ -55,10 +55,11 @@ func (h accountDeleteHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) 
 
 	resp := accountResponse{
 		Address: acc.Address,
-		Signer:  h.SigningAddress.Address(),
-		Signers: []accountResponseSigner{
-			{Key: h.SigningAddress.Address()},
-		},
+	}
+	for _, signingAddress := range h.SigningAddresses {
+		resp.Signers = append(resp.Signers, accountResponseSigner{
+			Key: signingAddress.Address(),
+		})
 	}
 
 	// Authorized if authenticated as the account.

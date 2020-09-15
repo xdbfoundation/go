@@ -20,6 +20,12 @@ import (
 	"github.com/stellar/throttled"
 )
 
+const (
+	maxDBPingAttempts        = 30
+	stellarCoreDBURLFlagName = "stellar-core-db-url"
+	stellarCoreURLFlagName   = "stellar-core-url"
+)
+
 var (
 	config horizon.Config
 
@@ -32,8 +38,6 @@ var (
 		},
 	}
 )
-
-const maxDBPingAttempts = 30
 
 // validateBothOrNeither ensures that both options are provided, if either is provided.
 func validateBothOrNeither(option1, option2 string) {
@@ -109,18 +113,48 @@ var dbURLConfigOption = &support.ConfigOption{
 var configOpts = support.ConfigOptions{
 	dbURLConfigOption,
 	&support.ConfigOption{
-		Name:      "stellar-core-db-url",
+		Name:        "stellar-core-binary-path",
+		OptType:     types.String,
+		FlagDefault: "",
+		Required:    false,
+		Usage:       "path to stellar core binary",
+		ConfigKey:   &config.StellarCoreBinaryPath,
+	},
+	&support.ConfigOption{
+		Name:        "remote-captive-core-url",
+		OptType:     types.String,
+		FlagDefault: "",
+		Required:    false,
+		Usage:       "url to access the remote captive core server",
+		ConfigKey:   &config.RemoteCaptiveCoreURL,
+	},
+	&support.ConfigOption{
+		Name:        "stellar-core-config-path",
+		OptType:     types.String,
+		FlagDefault: "",
+		Required:    false,
+		Usage:       "path to stellar core config file",
+		ConfigKey:   &config.StellarCoreConfigPath,
+	},
+	&support.ConfigOption{
+		Name:        "enable-captive-core-ingestion",
+		OptType:     types.Bool,
+		FlagDefault: false,
+		Required:    false,
+		Usage:       "[experimental flag!] causes Horizon to ingest from a Stellar Core subprocess instead of a persistent Stellar Core database",
+		ConfigKey:   &config.EnableCaptiveCoreIngestion,
+	},
+	&support.ConfigOption{
+		Name:      stellarCoreDBURLFlagName,
 		EnvVar:    "STELLAR_CORE_DATABASE_URL",
 		ConfigKey: &config.StellarCoreDatabaseURL,
 		OptType:   types.String,
-		Required:  true,
 		Usage:     "stellar-core postgres database to connect with",
 	},
 	&support.ConfigOption{
-		Name:      "stellar-core-url",
+		Name:      stellarCoreURLFlagName,
 		ConfigKey: &config.StellarCoreURL,
 		OptType:   types.String,
-		Required:  true,
 		Usage:     "stellar-core to connect with (for http commands)",
 	},
 	&support.ConfigOption{
@@ -156,7 +190,7 @@ var configOpts = support.ConfigOptions{
 		ConfigKey:   &config.MaxDBConnections,
 		OptType:     types.Int,
 		FlagDefault: 0,
-		Usage:       "when set has a priority over horizon-db-max-open-connections, horizon-db-max-idle-connections, core-db-max-open-connections, core-db-max-idle-connections. max horizon database open connections. may need to be increased when responses are slow but DB CPU is normal",
+		Usage:       "when set has a priority over horizon-db-max-open-connections, horizon-db-max-idle-connections. max horizon database open connections may need to be increased when responses are slow but DB CPU is normal",
 	},
 	&support.ConfigOption{
 		Name:        "horizon-db-max-open-connections",
@@ -173,20 +207,6 @@ var configOpts = support.ConfigOptions{
 		Usage:       "max horizon database idle connections. may need to be set to the same value as horizon-db-max-open-connections when responses are slow and DB CPU is normal, because it may indicate that a lot of time is spent closing/opening idle connections. This can happen in case of high variance in number of requests. must be equal or lower than max open connections",
 	},
 	&support.ConfigOption{
-		Name:        "core-db-max-open-connections",
-		ConfigKey:   &config.CoreDBMaxOpenConnections,
-		OptType:     types.Int,
-		FlagDefault: 20,
-		Usage:       "max core database open connections. may need to be increased when responses are slow but DB CPU is normal",
-	},
-	&support.ConfigOption{
-		Name:        "core-db-max-idle-connections",
-		ConfigKey:   &config.CoreDBMaxIdleConnections,
-		OptType:     types.Int,
-		FlagDefault: 20,
-		Usage:       "max core database idle connections. may need to be set to the same value as core-db-max-open-connections when responses are slow and DB CPU is normal, because it may indicate that a lot of time is spent closing/opening idle connections. This can happen in case of high variance in number of requests. must be equal or lower than max open connections",
-	},
-	&support.ConfigOption{
 		Name:           "sse-update-frequency",
 		ConfigKey:      &config.SSEUpdateFrequency,
 		OptType:        types.Int,
@@ -200,7 +220,7 @@ var configOpts = support.ConfigOptions{
 		OptType:        types.Int,
 		FlagDefault:    55,
 		CustomSetValue: support.SetDuration,
-		Usage:          "defines the timeout of connection after which 504 response will be sent or stream will be closed, if Horizon is behind a load balancer with idle connection timeout, this should be set to a few seconds less that idle timeout",
+		Usage:          "defines the timeout of connection after which 504 response will be sent or stream will be closed, if Horizon is behind a load balancer with idle connection timeout, this should be set to a few seconds less that idle timeout, does not apply to POST /transactions",
 	},
 	&support.ConfigOption{
 		Name:        "per-hour-rate-limit",
@@ -312,20 +332,6 @@ var configOpts = support.ConfigOptions{
 		Usage:       "causes this horizon process to ingest data from stellar-core into horizon's db",
 	},
 	&support.ConfigOption{
-		Name:        "exp-ingest-in-memory-only",
-		ConfigKey:   &config.IngestInMemoryOnly,
-		OptType:     types.Bool,
-		FlagDefault: false,
-		Usage:       "[experimental flag!] causes this horizon process to ingest data from stellar-core into memory structures only, ignored when --ingest not set",
-	},
-	&support.ConfigOption{
-		Name:        "ingest-failed-transactions",
-		ConfigKey:   &config.IngestFailedTransactions,
-		OptType:     types.Bool,
-		FlagDefault: false,
-		Usage:       "causes this horizon process to ingest failed transactions data",
-	},
-	&support.ConfigOption{
 		Name:        "cursor-name",
 		EnvVar:      "CURSOR_NAME",
 		ConfigKey:   &config.CursorName,
@@ -380,7 +386,20 @@ func init() {
 
 func initApp() *horizon.App {
 	initRootConfig()
-	return horizon.NewApp(config)
+	// Validate app-specific arguments
+	if config.StellarCoreURL == "" {
+		log.Fatalf("flag --%s cannot be empty", stellarCoreURLFlagName)
+	}
+	if config.Ingest {
+		if config.StellarCoreDatabaseURL == "" {
+			log.Fatalf("flag --%s cannot be empty", stellarCoreDBURLFlagName)
+		}
+	}
+	app, err := horizon.NewApp(config)
+	if err != nil {
+		log.Fatalf("cannot initialize app: %s", err)
+	}
+	return app
 }
 
 func initRootConfig() {
@@ -404,6 +423,21 @@ func initRootConfig() {
 		stdLog.Fatalf("--history-archive-urls must be set when --ingest is set")
 	}
 
+	if config.EnableCaptiveCoreIngestion {
+		binaryPath := viper.GetString("stellar-core-binary-path")
+		remoteURL := viper.GetString("remote-captive-core-url")
+		if binaryPath == "" && remoteURL == "" {
+			stdLog.Fatalf("Invalid config: captive core requires that either --stellar-core-binary-path or --remote-captive-core-url is set")
+		}
+		if binaryPath != "" && remoteURL != "" {
+			stdLog.Fatalf("Invalid config: --stellar-core-binary-path and --remote-captive-core-url cannot both be set.")
+		}
+	}
+	if config.Ingest {
+		// When running live ingestion a config file is required too
+		validateBothOrNeither("stellar-core-binary-path", "stellar-core-config-path")
+	}
+
 	// Configure log file
 	if config.LogFile != "" {
 		logFile, err := os.OpenFile(config.LogFile, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
@@ -422,8 +456,6 @@ func initRootConfig() {
 	if config.MaxDBConnections != 0 {
 		config.HorizonDBMaxOpenConnections = config.MaxDBConnections
 		config.HorizonDBMaxIdleConnections = config.MaxDBConnections
-		config.CoreDBMaxOpenConnections = config.MaxDBConnections
-		config.CoreDBMaxIdleConnections = config.MaxDBConnections
 	}
 }
 

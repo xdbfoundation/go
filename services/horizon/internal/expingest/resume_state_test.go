@@ -1,3 +1,4 @@
+//lint:file-ignore U1001 Ignore all unused code, staticcheck doesn't understand testify/suite
 package expingest
 
 import (
@@ -8,6 +9,7 @@ import (
 	"github.com/stellar/go/exp/ingest/io"
 	"github.com/stellar/go/exp/ingest/ledgerbackend"
 	"github.com/stellar/go/support/errors"
+	"github.com/stellar/go/xdr"
 	"github.com/stretchr/testify/mock"
 	"github.com/stretchr/testify/suite"
 )
@@ -18,35 +20,31 @@ func TestResumeTestTestSuite(t *testing.T) {
 
 type ResumeTestTestSuite struct {
 	suite.Suite
-	graph             *mockOrderBookGraph
-	ledgeBackend      *ledgerbackend.MockDatabaseBackend
+	ledgerBackend     *ledgerbackend.MockDatabaseBackend
 	historyQ          *mockDBQ
 	historyAdapter    *adapters.MockHistoryArchiveAdapter
 	runner            *mockProcessorsRunner
 	stellarCoreClient *mockStellarCoreClient
-	system            *System
+	system            *system
 }
 
 func (s *ResumeTestTestSuite) SetupTest() {
-	s.graph = &mockOrderBookGraph{}
-	s.ledgeBackend = &ledgerbackend.MockDatabaseBackend{}
+	s.ledgerBackend = &ledgerbackend.MockDatabaseBackend{}
 	s.historyQ = &mockDBQ{}
 	s.historyAdapter = &adapters.MockHistoryArchiveAdapter{}
 	s.runner = &mockProcessorsRunner{}
 	s.stellarCoreClient = &mockStellarCoreClient{}
-	s.system = &System{
+	s.system = &system{
 		ctx:               context.Background(),
 		historyQ:          s.historyQ,
 		historyAdapter:    s.historyAdapter,
 		runner:            s.runner,
-		ledgerBackend:     s.ledgeBackend,
-		graph:             s.graph,
+		ledgerBackend:     s.ledgerBackend,
 		stellarCoreClient: s.stellarCoreClient,
 	}
 	s.system.initMetrics()
 
 	s.historyQ.On("Rollback").Return(nil).Once()
-	s.graph.On("Discard").Once()
 }
 
 func (s *ResumeTestTestSuite) TearDownTest() {
@@ -54,17 +52,13 @@ func (s *ResumeTestTestSuite) TearDownTest() {
 	s.historyQ.AssertExpectations(t)
 	s.runner.AssertExpectations(t)
 	s.historyAdapter.AssertExpectations(t)
-	s.ledgeBackend.AssertExpectations(t)
+	s.ledgerBackend.AssertExpectations(t)
 	s.stellarCoreClient.AssertExpectations(t)
-	s.graph.AssertExpectations(t)
 }
 
 func (s *ResumeTestTestSuite) TestInvalidParam() {
 	// Recreate mock in this single test to remove Rollback assertion.
 	*s.historyQ = mockDBQ{}
-
-	// Recreate orderbook graph to remove Discard assertion
-	*s.graph = mockOrderBookGraph{}
 
 	next, err := resumeState{latestSuccessfullyProcessedLedger: 0}.run(s.system)
 	s.Assert().Error(err)
@@ -79,9 +73,6 @@ func (s *ResumeTestTestSuite) TestBeginReturnsError() {
 	// Recreate mock in this single test to remove Rollback assertion.
 	*s.historyQ = mockDBQ{}
 	s.historyQ.On("Begin").Return(errors.New("my error")).Once()
-
-	// Recreate orderbook graph to remove Discard assertion
-	*s.graph = mockOrderBookGraph{}
 
 	next, err := resumeState{latestSuccessfullyProcessedLedger: 100}.run(s.system)
 	s.Assert().Error(err)
@@ -213,111 +204,127 @@ func (s *ResumeTestTestSuite) TestLatestHistoryLedgerGreaterThanIngestLedger() {
 	)
 }
 
-func (s *ResumeTestTestSuite) TestIngestOrderbookOnly() {
-	s.historyQ.On("Begin").Return(nil).Once()
-	s.historyQ.On("GetLastLedgerExpIngest").Return(uint32(110), nil).Once()
-	s.historyQ.On("GetExpIngestVersion").Return(CurrentVersion, nil).Once()
-	s.historyQ.On("GetLatestLedger").Return(uint32(0), nil)
-
-	s.ledgeBackend.On("GetLatestLedgerSequence").Return(uint32(111), nil).Once()
-
-	// Rollback to release the lock as we're not updating DB
-	s.historyQ.On("Rollback").Return(nil).Once()
-	s.runner.On("RunOrderBookProcessorOnLedger", uint32(101)).Return(io.StatsChangeProcessorResults{}, nil).Once()
-	s.graph.On("Apply", uint32(101)).Return(nil).Once()
-
-	next, err := resumeState{latestSuccessfullyProcessedLedger: 100}.run(s.system)
-	s.Assert().NoError(err)
-	s.Assert().Equal(
-		transition{
-			node:          resumeState{latestSuccessfullyProcessedLedger: 101},
-			sleepDuration: 0,
-		},
-		next,
-	)
-}
-
-// TestIngestOrderbookOnlyWhenLastLedgerExpEqualsCurrent is very similar to the test above
-// but it checks the `ingestLedger <= lastIngestedLedger` that, if incorrect, could lead
-// to a nasty off-by-one error.
-func (s *ResumeTestTestSuite) TestIngestOrderbookOnlyWhenLastLedgerExpEqualsCurrent() {
+func (s *ResumeTestTestSuite) TestRangeNotPreparedFailPrepare() {
 	s.historyQ.On("Begin").Return(nil).Once()
 	s.historyQ.On("GetLastLedgerExpIngest").Return(uint32(101), nil).Once()
 	s.historyQ.On("GetExpIngestVersion").Return(CurrentVersion, nil).Once()
 	s.historyQ.On("GetLatestLedger").Return(uint32(101), nil)
 
-	s.ledgeBackend.On("GetLatestLedgerSequence").Return(uint32(111), nil).Once()
-
-	// Rollback to release the lock as we're not updating DB
+	s.ledgerBackend.On("IsPrepared", ledgerbackend.UnboundedRange(102)).Return(false, nil).Once()
+	s.ledgerBackend.On("PrepareRange", ledgerbackend.UnboundedRange(102)).Return(errors.New("my error")).Once()
+	// Rollback twice (first one mocked in SetupTest) because we want to release
+	// a distributed ingestion lock.
 	s.historyQ.On("Rollback").Return(nil).Once()
-	s.runner.On("RunOrderBookProcessorOnLedger", uint32(101)).Return(io.StatsChangeProcessorResults{}, nil).Once()
-	s.graph.On("Apply", uint32(101)).Return(nil).Once()
 
 	next, err := resumeState{latestSuccessfullyProcessedLedger: 100}.run(s.system)
-	s.Assert().NoError(err)
+	s.Assert().Error(err)
+	s.Assert().EqualError(err, "error preparing range: my error")
 	s.Assert().Equal(
-		transition{
-			node:          resumeState{latestSuccessfullyProcessedLedger: 101},
-			sleepDuration: 0,
-		},
+		transition{node: startState{}, sleepDuration: defaultSleep},
 		next,
 	)
 }
 
-// TestNewLedgerButInMemoryOnly tests a scenario when there's a new ledger to
-// ingest into a DB but the instances is ingesting into memory only. In such
-// case it should wait for another instance to ingest into a DB.
-func (s *ResumeTestTestSuite) TestNewLedgerButInMemoryOnly() {
-	s.system.config.IngestInMemoryOnly = true
-	defer func() {
-		s.system.config.IngestInMemoryOnly = false
-	}()
-
+func (s *ResumeTestTestSuite) TestRangeNotPreparedSuccessPrepare() {
 	s.historyQ.On("Begin").Return(nil).Once()
-	s.historyQ.On("GetLastLedgerExpIngest").Return(uint32(100), nil).Once()
+	s.historyQ.On("GetLastLedgerExpIngest").Return(uint32(101), nil).Once()
 	s.historyQ.On("GetExpIngestVersion").Return(CurrentVersion, nil).Once()
-	s.historyQ.On("GetLatestLedger").Return(uint32(0), nil)
+	s.historyQ.On("GetLatestLedger").Return(uint32(101), nil)
 
-	s.ledgeBackend.On("GetLatestLedgerSequence").Return(uint32(111), nil).Once()
+	s.ledgerBackend.On("IsPrepared", ledgerbackend.UnboundedRange(102)).Return(false, nil).Once()
+	s.ledgerBackend.On("PrepareRange", ledgerbackend.UnboundedRange(102)).Return(nil).Once()
+	// Rollback twice (first one mocked in SetupTest) because we want to release
+	// a distributed ingestion lock.
+	s.historyQ.On("Rollback").Return(nil).Once()
+
+	next, err := resumeState{latestSuccessfullyProcessedLedger: 100}.run(s.system)
+	s.Assert().NoError(err)
+	s.Assert().Equal(
+		transition{node: startState{}, sleepDuration: defaultSleep},
+		next,
+	)
+}
+
+func (s *ResumeTestTestSuite) TestFastForwardCaptiveCore() {
+	s.historyQ.On("Begin").Return(nil).Once()
+	s.historyQ.On("GetLastLedgerExpIngest").Return(uint32(101), nil).Once()
+	s.historyQ.On("GetExpIngestVersion").Return(CurrentVersion, nil).Once()
+	s.historyQ.On("GetLatestLedger").Return(uint32(101), nil)
+
+	s.ledgerBackend.On("IsPrepared", ledgerbackend.UnboundedRange(102)).Return(true, nil).Once()
+	s.ledgerBackend.On("GetLatestLedgerSequence").Return(uint32(99), nil).Once()
+	// GetLedger will fast-forward to the latest sequence in a backend
+	s.ledgerBackend.On("GetLedger", uint32(99)).Return(true, xdr.LedgerCloseMeta{}, nil).Once()
 
 	next, err := resumeState{latestSuccessfullyProcessedLedger: 100}.run(s.system)
 	s.Assert().NoError(err)
 	s.Assert().Equal(
 		transition{
-			node:          resumeState{latestSuccessfullyProcessedLedger: 100},
+			node:          resumeState{latestSuccessfullyProcessedLedger: 99},
 			sleepDuration: defaultSleep,
 		},
 		next,
 	)
 }
 
-func (s *ResumeTestTestSuite) TestIngestAllMasterNode() {
+func (s *ResumeTestTestSuite) mockSuccessfulIngestion() {
 	s.historyQ.On("Begin").Return(nil).Once()
-	s.historyQ.On("GetLastLedgerExpIngest").Return(uint32(100), nil).Once()
+	s.historyQ.On("GetLastLedgerExpIngest").Return(uint32(101), nil).Once()
 	s.historyQ.On("GetExpIngestVersion").Return(CurrentVersion, nil).Once()
-	s.historyQ.On("GetLatestLedger").Return(uint32(0), nil)
+	s.historyQ.On("GetLatestLedger").Return(uint32(101), nil)
 
-	s.ledgeBackend.On("GetLatestLedgerSequence").Return(uint32(111), nil).Once()
+	s.ledgerBackend.On("IsPrepared", ledgerbackend.UnboundedRange(102)).Return(true, nil).Once()
+	s.ledgerBackend.On("GetLatestLedgerSequence").Return(uint32(111), nil).Once()
 
-	s.runner.On("RunAllProcessorsOnLedger", uint32(101)).Return(io.StatsChangeProcessorResults{}, io.StatsLedgerTransactionProcessorResults{}, nil).Once()
-	s.historyQ.On("UpdateLastLedgerExpIngest", uint32(101)).Return(nil).Once()
+	s.runner.On("RunAllProcessorsOnLedger", uint32(102)).Return(io.StatsChangeProcessorResults{}, io.StatsLedgerTransactionProcessorResults{}, nil).Once()
+	s.historyQ.On("UpdateLastLedgerExpIngest", uint32(102)).Return(nil).Once()
 	s.historyQ.On("Commit").Return(nil).Once()
-	s.graph.On("Apply", uint32(101)).Return(nil).Once()
 
 	s.stellarCoreClient.On(
 		"SetCursor",
 		mock.AnythingOfType("*context.timerCtx"),
 		defaultCoreCursorName,
-		int32(101),
+		int32(102),
 	).Return(nil).Once()
 
 	s.historyQ.On("GetExpStateInvalid").Return(false, nil).Once()
+}
+func (s *ResumeTestTestSuite) TestBumpIngestLedger() {
+	s.mockSuccessfulIngestion()
+
+	next, err := resumeState{latestSuccessfullyProcessedLedger: 99}.run(s.system)
+	s.Assert().NoError(err)
+	s.Assert().Equal(
+		transition{
+			node:          resumeState{latestSuccessfullyProcessedLedger: 102},
+			sleepDuration: 0,
+		},
+		next,
+	)
+}
+
+func (s *ResumeTestTestSuite) TestBumpIngestLedgerWhenIngestLedgerEqualsLastLedgerExpIngest() {
+	s.mockSuccessfulIngestion()
 
 	next, err := resumeState{latestSuccessfullyProcessedLedger: 100}.run(s.system)
 	s.Assert().NoError(err)
 	s.Assert().Equal(
 		transition{
-			node:          resumeState{latestSuccessfullyProcessedLedger: 101},
+			node:          resumeState{latestSuccessfullyProcessedLedger: 102},
+			sleepDuration: 0,
+		},
+		next,
+	)
+}
+
+func (s *ResumeTestTestSuite) TestIngestAllMasterNode() {
+	s.mockSuccessfulIngestion()
+
+	next, err := resumeState{latestSuccessfullyProcessedLedger: 101}.run(s.system)
+	s.Assert().NoError(err)
+	s.Assert().Equal(
+		transition{
+			node:          resumeState{latestSuccessfullyProcessedLedger: 102},
 			sleepDuration: 0,
 		},
 		next,
@@ -330,12 +337,12 @@ func (s *ResumeTestTestSuite) TestErrorSettingCursorIgnored() {
 	s.historyQ.On("GetExpIngestVersion").Return(CurrentVersion, nil).Once()
 	s.historyQ.On("GetLatestLedger").Return(uint32(0), nil)
 
-	s.ledgeBackend.On("GetLatestLedgerSequence").Return(uint32(111), nil).Once()
+	s.ledgerBackend.On("IsPrepared", ledgerbackend.UnboundedRange(101)).Return(true, nil).Once()
+	s.ledgerBackend.On("GetLatestLedgerSequence").Return(uint32(111), nil).Once()
 
 	s.runner.On("RunAllProcessorsOnLedger", uint32(101)).Return(io.StatsChangeProcessorResults{}, io.StatsLedgerTransactionProcessorResults{}, nil).Once()
 	s.historyQ.On("UpdateLastLedgerExpIngest", uint32(101)).Return(nil).Once()
 	s.historyQ.On("Commit").Return(nil).Once()
-	s.graph.On("Apply", uint32(101)).Return(nil).Once()
 
 	s.stellarCoreClient.On(
 		"SetCursor",
@@ -363,7 +370,10 @@ func (s *ResumeTestTestSuite) TestNoNewLedgers() {
 	s.historyQ.On("GetExpIngestVersion").Return(CurrentVersion, nil).Once()
 	s.historyQ.On("GetLatestLedger").Return(uint32(0), nil)
 
-	s.ledgeBackend.On("GetLatestLedgerSequence").Return(uint32(100), nil).Once()
+	s.ledgerBackend.On("IsPrepared", ledgerbackend.UnboundedRange(101)).Return(true, nil).Once()
+	s.ledgerBackend.On("GetLatestLedgerSequence").Return(uint32(100), nil).Once()
+	// Fast forward the backend
+	s.ledgerBackend.On("GetLedger", uint32(100)).Return(true, xdr.LedgerCloseMeta{}, nil).Once()
 
 	next, err := resumeState{latestSuccessfullyProcessedLedger: 100}.run(s.system)
 	s.Assert().NoError(err)
@@ -371,6 +381,30 @@ func (s *ResumeTestTestSuite) TestNoNewLedgers() {
 		transition{
 			// Check the same ledger later
 			node: resumeState{latestSuccessfullyProcessedLedger: 100},
+			// Sleep because we learned the ledger is not there yet.
+			sleepDuration: defaultSleep,
+		},
+		next,
+	)
+}
+
+func (s *ResumeTestTestSuite) TestFarBehind() {
+	s.historyQ.On("Begin").Return(nil).Once()
+	s.historyQ.On("GetLastLedgerExpIngest").Return(uint32(200), nil).Once()
+	s.historyQ.On("GetExpIngestVersion").Return(CurrentVersion, nil).Once()
+	s.historyQ.On("GetLatestLedger").Return(uint32(0), nil)
+
+	s.ledgerBackend.On("IsPrepared", ledgerbackend.UnboundedRange(201)).Return(true, nil).Once()
+	s.ledgerBackend.On("GetLatestLedgerSequence").Return(uint32(102), nil).Once()
+	// Fast forward the backend
+	s.ledgerBackend.On("GetLedger", uint32(102)).Return(true, xdr.LedgerCloseMeta{}, nil).Once()
+
+	next, err := resumeState{latestSuccessfullyProcessedLedger: 200}.run(s.system)
+	s.Assert().NoError(err)
+	s.Assert().Equal(
+		transition{
+			// Check the same ledger later
+			node: resumeState{latestSuccessfullyProcessedLedger: 102},
 			// Sleep because we learned the ledger is not there yet.
 			sleepDuration: defaultSleep,
 		},

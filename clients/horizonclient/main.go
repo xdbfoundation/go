@@ -160,7 +160,6 @@ type ClientInterface interface {
 	Assets(request AssetRequest) (hProtocol.AssetsPage, error)
 	Ledgers(request LedgerRequest) (hProtocol.LedgersPage, error)
 	LedgerDetail(sequence uint32) (hProtocol.Ledger, error)
-	Metrics() (hProtocol.Metrics, error)
 	FeeStats() (hProtocol.FeeStats, error)
 	Offers(request OfferRequest) (hProtocol.OffersPage, error)
 	OfferDetails(offerID string) (offer hProtocol.Offer, err error)
@@ -188,6 +187,7 @@ type ClientInterface interface {
 	StreamLedgers(ctx context.Context, request LedgerRequest, handler LedgerHandler) error
 	StreamOrderBooks(ctx context.Context, request OrderBookRequest, handler OrderBookHandler) error
 	Root() (hProtocol.Root, error)
+	NextAccountsPage(hProtocol.AccountsPage) (hProtocol.AccountsPage, error)
 	NextAssetsPage(hProtocol.AssetsPage) (hProtocol.AssetsPage, error)
 	PrevAssetsPage(hProtocol.AssetsPage) (hProtocol.AssetsPage, error)
 	NextLedgersPage(hProtocol.LedgersPage) (hProtocol.LedgersPage, error)
@@ -280,10 +280,6 @@ type LedgerRequest struct {
 	Cursor      string
 	Limit       uint
 	forSequence uint32
-}
-
-type metricsRequest struct {
-	endpoint string
 }
 
 type feeStatsRequest struct {

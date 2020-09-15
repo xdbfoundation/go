@@ -5,11 +5,12 @@ import (
 	"encoding/json"
 	"testing"
 
+	"github.com/stretchr/testify/assert"
+
 	"github.com/stellar/go/services/horizon/internal/db2/history"
 	"github.com/stellar/go/services/horizon/internal/expingest"
 	"github.com/stellar/go/services/horizon/internal/test"
 	"github.com/stellar/go/xdr"
-	"github.com/stretchr/testify/assert"
 )
 
 var (
@@ -42,7 +43,7 @@ func TestDataActions_Show(t *testing.T) {
 		Header: xdr.LedgerHeader{
 			LedgerSeq: 100,
 		},
-	}, 0, 0, 0, 0)
+	}, 0, 0, 0, 0, 0)
 	ht.Assert.NoError(err)
 
 	rows, err := q.InsertAccountData(data1, 1234)
@@ -95,4 +96,11 @@ func TestDataActions_Show(t *testing.T) {
 
 	w = ht.Get(prefix+"/data/missing", test.RequestHelperRaw)
 	ht.Assert.Equal(404, w.Code)
+
+	// Too long
+	w = ht.Get(prefix+"/data/01234567890123456789012345678901234567890123456789012345678901234567890123456789", test.RequestHelperRaw)
+	if ht.Assert.Equal(400, w.Code) {
+		ht.Assert.Contains(w.Body.String(), "does not validate as length(1|64)")
+	}
+
 }

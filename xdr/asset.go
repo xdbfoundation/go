@@ -37,17 +37,56 @@ func MustNewNativeAsset() Asset {
 
 // MustNewCreditAsset returns a new general asset, panicking if it can't.
 func MustNewCreditAsset(code string, issuer string) Asset {
-	a := Asset{}
-	accountID := AccountId{}
-	err := accountID.SetAddress(issuer)
-	if err != nil {
-		panic(err)
-	}
-	err = a.SetCredit(code, accountID)
+	a, err := NewCreditAsset(code, issuer)
 	if err != nil {
 		panic(err)
 	}
 	return a
+}
+
+// NewAllowTrustAsset returns a new allow trust asset, panicking if it can't.
+func NewAllowTrustAsset(code string) (AllowTrustOpAsset, error) {
+	a := AllowTrustOpAsset{}
+	length := len(code)
+	switch {
+	case length >= 1 && length <= 4:
+		var newCode AssetCode4
+		copy(newCode[:], []byte(code)[:length])
+		a.Type = AssetTypeAssetTypeCreditAlphanum4
+		a.AssetCode4 = &newCode
+	case length >= 5 && length <= 12:
+		var newCode AssetCode12
+		copy(newCode[:], []byte(code)[:length])
+		a.Type = AssetTypeAssetTypeCreditAlphanum12
+		a.AssetCode12 = &newCode
+	default:
+		return a, errors.New("Asset code length is invalid")
+	}
+
+	return a, nil
+}
+
+// MustNewAllowTrustAsset returns a new allow trust asset, panicking if it can't.
+func MustNewAllowTrustAsset(code string) AllowTrustOpAsset {
+	a, err := NewAllowTrustAsset(code)
+	if err != nil {
+		panic(err)
+	}
+
+	return a
+}
+
+// NewCreditAsset returns a new general asset, returning an error if it can't.
+func NewCreditAsset(code string, issuer string) (Asset, error) {
+	a := Asset{}
+	accountID := AccountId{}
+	if err := accountID.SetAddress(issuer); err != nil {
+		return Asset{}, err
+	}
+	if err := a.SetCredit(code, accountID); err != nil {
+		return Asset{}, err
+	}
+	return a, nil
 }
 
 // BuildAsset creates a new asset from a given `assetType`, `code`, and `issuer`.

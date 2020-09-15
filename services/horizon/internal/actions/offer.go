@@ -5,33 +5,36 @@ import (
 	"net/http"
 
 	"github.com/stellar/go/protocols/horizon"
+	horizonContext "github.com/stellar/go/services/horizon/internal/context"
 	"github.com/stellar/go/services/horizon/internal/db2/history"
 	"github.com/stellar/go/services/horizon/internal/resourceadapter"
 	"github.com/stellar/go/support/errors"
 	"github.com/stellar/go/support/render/hal"
 )
 
-// GetOfferByID is the action handler for the /offers/{id} endpoint
-type GetOfferByID struct {
+// AccountOffersQuery query struct for offers end-point
+type OfferByIDQuery struct {
+	OfferID uint64 `schema:"offer_id" valid:"-"`
 }
 
+// GetOfferByID is the action handler for the /offers/{id} endpoint
+type GetOfferByID struct{}
+
 // GetResource returns an offer by id.
-func (handler GetOfferByID) GetResource(
-	w HeaderWriter,
-	r *http.Request,
-) (hal.Pageable, error) {
+func (handler GetOfferByID) GetResource(w HeaderWriter, r *http.Request) (interface{}, error) {
 	ctx := r.Context()
-	offerID, err := GetInt64(r, "id")
+
+	qp := OfferByIDQuery{}
+	if err := getParams(&qp, r); err != nil {
+		return nil, err
+	}
+
+	historyQ, err := horizonContext.HistoryQFromRequest(r)
 	if err != nil {
 		return nil, err
 	}
 
-	historyQ, err := HistoryQFromRequest(r)
-	if err != nil {
-		return nil, err
-	}
-
-	record, err := historyQ.GetOfferByID(offerID)
+	record, err := historyQ.GetOfferByID(int64(qp.OfferID))
 	if err != nil {
 		return nil, err
 	}
@@ -80,7 +83,7 @@ func (handler GetOffersHandler) GetResourcePage(
 ) ([]hal.Pageable, error) {
 	ctx := r.Context()
 	qp := OffersQuery{}
-	err := GetParams(&qp, r)
+	err := getParams(&qp, r)
 	if err != nil {
 		return nil, err
 	}
@@ -90,14 +93,23 @@ func (handler GetOffersHandler) GetResourcePage(
 		return nil, err
 	}
 
+	selling, err := qp.Selling()
+	if err != nil {
+		return nil, err
+	}
+	buying, err := qp.Buying()
+	if err != nil {
+		return nil, err
+	}
+
 	query := history.OffersQuery{
 		PageQuery: pq,
 		SellerID:  qp.Seller,
-		Selling:   qp.Selling(),
-		Buying:    qp.Buying(),
+		Selling:   selling,
+		Buying:    buying,
 	}
 
-	historyQ, err := HistoryQFromRequest(r)
+	historyQ, err := horizonContext.HistoryQFromRequest(r)
 	if err != nil {
 		return nil, err
 	}
@@ -127,8 +139,7 @@ func (handler GetAccountOffersHandler) parseOffersQuery(r *http.Request) (histor
 	}
 
 	qp := AccountOffersQuery{}
-	err = GetParams(&qp, r)
-	if err != nil {
+	if err = getParams(&qp, r); err != nil {
 		return history.OffersQuery{}, err
 	}
 
@@ -151,7 +162,7 @@ func (handler GetAccountOffersHandler) GetResourcePage(
 		return nil, err
 	}
 
-	historyQ, err := HistoryQFromRequest(r)
+	historyQ, err := horizonContext.HistoryQFromRequest(r)
 	if err != nil {
 		return nil, err
 	}

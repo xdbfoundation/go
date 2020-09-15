@@ -3,17 +3,16 @@ package horizon
 import (
 	"context"
 	"net/http"
+	"runtime"
 
 	"github.com/getsentry/raven-go"
-	"github.com/rcrowley/go-metrics"
-
+	"github.com/prometheus/client_golang/prometheus"
 	"github.com/stellar/go/exp/orderbook"
-	"github.com/stellar/go/services/horizon/internal/db2/core"
 	"github.com/stellar/go/services/horizon/internal/db2/history"
 	"github.com/stellar/go/services/horizon/internal/expingest"
+	"github.com/stellar/go/services/horizon/internal/ledger"
 	"github.com/stellar/go/services/horizon/internal/simplepath"
 	"github.com/stellar/go/services/horizon/internal/txsub"
-	results "github.com/stellar/go/services/horizon/internal/txsub/results/db"
 	"github.com/stellar/go/services/horizon/internal/txsub/sequence"
 	"github.com/stellar/go/support/db"
 	"github.com/stellar/go/support/log"
@@ -33,7 +32,7 @@ func mustNewDBSession(databaseURL string, maxIdle, maxOpen int) *db.Session {
 func mustInitHorizonDB(app *App) {
 	maxIdle := app.config.HorizonDBMaxIdleConnections
 	maxOpen := app.config.HorizonDBMaxOpenConnections
-	if app.config.Ingest || app.config.IngestInMemoryOnly {
+	if app.config.Ingest {
 		maxIdle -= expingest.MaxDBConnections
 		maxOpen -= expingest.MaxDBConnections
 		if maxIdle <= 0 {
@@ -51,28 +50,7 @@ func mustInitHorizonDB(app *App) {
 	)}
 }
 
-func mustInitCoreDB(app *App) {
-	maxIdle := app.config.CoreDBMaxIdleConnections
-	maxOpen := app.config.CoreDBMaxOpenConnections
-	if app.config.Ingest || app.config.IngestInMemoryOnly {
-		maxIdle -= expingest.MaxDBConnections
-		maxOpen -= expingest.MaxDBConnections
-		if maxIdle <= 0 {
-			log.Fatalf("max idle connections to stellar-core db must be greater than %d", expingest.MaxDBConnections)
-		}
-		if maxOpen <= 0 {
-			log.Fatalf("max open connections to stellar-core db must be greater than %d", expingest.MaxDBConnections)
-		}
-	}
-
-	app.coreQ = &core.Q{mustNewDBSession(
-		app.config.StellarCoreDatabaseURL,
-		maxIdle,
-		maxOpen,
-	)}
-}
-
-func initExpIngester(app *App, orderBookGraph *orderbook.OrderBookGraph) {
+func initExpIngester(app *App) {
 	var err error
 	app.expingester, err = expingest.NewSystem(expingest.Config{
 		CoreSession: mustNewDBSession(
@@ -88,18 +66,24 @@ func initExpIngester(app *App, orderBookGraph *orderbook.OrderBookGraph) {
 		HistoryArchiveURL:        app.config.HistoryArchiveURLs[0],
 		StellarCoreURL:           app.config.StellarCoreURL,
 		StellarCoreCursor:        app.config.CursorName,
-		OrderBookGraph:           orderBookGraph,
-		MaxStreamRetries:         3,
+		StellarCoreBinaryPath:    app.config.StellarCoreBinaryPath,
+		StellarCoreConfigPath:    app.config.StellarCoreConfigPath,
+		RemoteCaptiveCoreURL:     app.config.RemoteCaptiveCoreURL,
 		DisableStateVerification: app.config.IngestDisableStateVerification,
-		IngestFailedTransactions: app.config.IngestFailedTransactions,
-		IngestInMemoryOnly:       app.config.IngestInMemoryOnly,
 	})
+
 	if err != nil {
 		log.Fatal(err)
 	}
 }
 
-func initPathFinder(app *App, orderBookGraph *orderbook.OrderBookGraph) {
+func initPathFinder(app *App) {
+	orderBookGraph := orderbook.NewOrderBookGraph()
+	app.orderBookStream = expingest.NewOrderBookStream(
+		&history.Q{app.HorizonSession(app.ctx)},
+		orderBookGraph,
+	)
+
 	app.paths = simplepath.NewInMemoryFinder(orderBookGraph)
 }
 
@@ -137,18 +121,98 @@ func initLogglyLog(app *App) {
 }
 
 func initDbMetrics(app *App) {
-	app.historyLatestLedgerGauge = metrics.NewGauge()
-	app.historyElderLedgerGauge = metrics.NewGauge()
-	app.coreLatestLedgerGauge = metrics.NewGauge()
-	app.horizonConnGauge = metrics.NewGauge()
-	app.coreConnGauge = metrics.NewGauge()
-	app.goroutineGauge = metrics.NewGauge()
-	app.metrics.Register("history.latest_ledger", app.historyLatestLedgerGauge)
-	app.metrics.Register("history.elder_ledger", app.historyElderLedgerGauge)
-	app.metrics.Register("stellar_core.latest_ledger", app.coreLatestLedgerGauge)
-	app.metrics.Register("history.open_connections", app.horizonConnGauge)
-	app.metrics.Register("stellar_core.open_connections", app.coreConnGauge)
-	app.metrics.Register("goroutines", app.goroutineGauge)
+	app.buildInfoGauge = prometheus.NewGaugeVec(
+		prometheus.GaugeOpts{Namespace: "horizon", Subsystem: "build", Name: "info"},
+		[]string{"version", "goversion"},
+	)
+	app.prometheusRegistry.MustRegister(app.buildInfoGauge)
+	app.buildInfoGauge.With(prometheus.Labels{
+		"version":   app.horizonVersion,
+		"goversion": runtime.Version(),
+	}).Inc()
+
+	app.ingestingGauge = prometheus.NewGauge(
+		prometheus.GaugeOpts{Namespace: "horizon", Subsystem: "ingest", Name: "enabled"},
+	)
+	app.prometheusRegistry.MustRegister(app.ingestingGauge)
+
+	app.historyLatestLedgerCounter = prometheus.NewCounterFunc(
+		prometheus.CounterOpts{Namespace: "horizon", Subsystem: "history", Name: "latest_ledger"},
+		func() float64 {
+			ls := ledger.CurrentState()
+			return float64(ls.HistoryLatest)
+		},
+	)
+	app.prometheusRegistry.MustRegister(app.historyLatestLedgerCounter)
+
+	app.historyElderLedgerCounter = prometheus.NewCounterFunc(
+		prometheus.CounterOpts{Namespace: "horizon", Subsystem: "history", Name: "elder_ledger"},
+		func() float64 {
+			ls := ledger.CurrentState()
+			return float64(ls.HistoryElder)
+		},
+	)
+	app.prometheusRegistry.MustRegister(app.historyElderLedgerCounter)
+
+	app.coreLatestLedgerCounter = prometheus.NewCounterFunc(
+		prometheus.CounterOpts{Namespace: "horizon", Subsystem: "stellar_core", Name: "latest_ledger"},
+		func() float64 {
+			ls := ledger.CurrentState()
+			return float64(ls.CoreLatest)
+		},
+	)
+	app.prometheusRegistry.MustRegister(app.coreLatestLedgerCounter)
+
+	app.dbMaxOpenConnectionsGauge = prometheus.NewGaugeFunc(
+		prometheus.GaugeOpts{Namespace: "horizon", Subsystem: "db", Name: "max_open_connections"},
+		func() float64 {
+			// Right now MaxOpenConnections in Horizon is static however it's possible that
+			// it will change one day. In such case, using GaugeFunc is very cheap and will
+			// prevent issues with this metric in the future.
+			return float64(app.historyQ.Session.DB.Stats().MaxOpenConnections)
+		},
+	)
+	app.prometheusRegistry.MustRegister(app.dbMaxOpenConnectionsGauge)
+
+	app.dbOpenConnectionsGauge = prometheus.NewGaugeFunc(
+		prometheus.GaugeOpts{Namespace: "horizon", Subsystem: "db", Name: "open_connections"},
+		func() float64 {
+			return float64(app.historyQ.Session.DB.Stats().OpenConnections)
+		},
+	)
+	app.prometheusRegistry.MustRegister(app.dbOpenConnectionsGauge)
+
+	app.dbInUseConnectionsGauge = prometheus.NewGaugeFunc(
+		prometheus.GaugeOpts{Namespace: "horizon", Subsystem: "db", Name: "in_use_connections"},
+		func() float64 {
+			return float64(app.historyQ.Session.DB.Stats().InUse)
+		},
+	)
+	app.prometheusRegistry.MustRegister(app.dbInUseConnectionsGauge)
+
+	app.dbWaitCountCounter = prometheus.NewCounterFunc(
+		prometheus.CounterOpts{
+			Namespace: "horizon", Subsystem: "db", Name: "wait_count_total",
+			Help: "total number of number of connections waited for",
+		},
+		func() float64 {
+			return float64(app.historyQ.Session.DB.Stats().WaitCount)
+		},
+	)
+	app.prometheusRegistry.MustRegister(app.dbWaitCountCounter)
+
+	app.dbWaitDurationCounter = prometheus.NewCounterFunc(
+		prometheus.CounterOpts{
+			Namespace: "horizon", Subsystem: "db", Name: "wait_duration_seconds_total",
+			Help: "total time blocked waiting for a new connection",
+		},
+		func() float64 {
+			return app.historyQ.Session.DB.Stats().WaitDuration.Seconds()
+		},
+	)
+	app.prometheusRegistry.MustRegister(app.dbWaitDurationCounter)
+
+	app.prometheusRegistry.MustRegister(app.orderBookStream.LatestLedgerGauge)
 }
 
 // initIngestMetrics registers the metrics for the ingestion into the provided
@@ -157,74 +221,36 @@ func initIngestMetrics(app *App) {
 	if app.expingester == nil {
 		return
 	}
-	app.metrics.Register("ingest.ledger_ingestion", app.expingester.Metrics.LedgerIngestionTimer)
-	app.metrics.Register("ingest.ledger_in_memory_ingestion", app.expingester.Metrics.LedgerInMemoryIngestionTimer)
-	app.metrics.Register("ingest.state_verify", app.expingester.Metrics.StateVerifyTimer)
-	app.metrics.Register("ingest.local_latest_ledger", app.expingester.Metrics.LocalLatestLedgerGauge)
+
+	app.ingestingGauge.Inc()
+	app.prometheusRegistry.MustRegister(app.expingester.Metrics().LedgerIngestionDuration)
+	app.prometheusRegistry.MustRegister(app.expingester.Metrics().StateVerifyDuration)
+	app.prometheusRegistry.MustRegister(app.expingester.Metrics().StateInvalidGauge)
 }
 
 func initTxSubMetrics(app *App) {
 	app.submitter.Init()
-	app.metrics.Register("txsub.buffered", app.submitter.Metrics.BufferedSubmissionsGauge)
-	app.metrics.Register("txsub.open", app.submitter.Metrics.OpenSubmissionsGauge)
-	app.metrics.Register("txsub.succeeded", app.submitter.Metrics.SuccessfulSubmissionsMeter)
-	app.metrics.Register("txsub.failed", app.submitter.Metrics.FailedSubmissionsMeter)
-	app.metrics.Register("txsub.v0", app.submitter.Metrics.V0TransactionsMeter)
-	app.metrics.Register("txsub.v1", app.submitter.Metrics.V1TransactionsMeter)
-	app.metrics.Register("txsub.feebump", app.submitter.Metrics.FeeBumpTransactionsMeter)
-	app.metrics.Register("txsub.total", app.submitter.Metrics.SubmissionTimer)
+	app.prometheusRegistry.MustRegister(app.submitter.Metrics.SubmissionDuration)
+	app.prometheusRegistry.MustRegister(app.submitter.Metrics.BufferedSubmissionsGauge)
+	app.prometheusRegistry.MustRegister(app.submitter.Metrics.OpenSubmissionsGauge)
+	app.prometheusRegistry.MustRegister(app.submitter.Metrics.FailedSubmissionsCounter)
+	app.prometheusRegistry.MustRegister(app.submitter.Metrics.SuccessfulSubmissionsCounter)
+	app.prometheusRegistry.MustRegister(app.submitter.Metrics.V0TransactionsCounter)
+	app.prometheusRegistry.MustRegister(app.submitter.Metrics.V1TransactionsCounter)
+	app.prometheusRegistry.MustRegister(app.submitter.Metrics.FeeBumpTransactionsCounter)
 }
 
-// initWebMetrics registers the metrics for the web server into the provided
-// app's metrics registry.
 func initWebMetrics(app *App) {
-	app.metrics.Register("requests.total", app.web.requestTimer)
-	app.metrics.Register("requests.succeeded", app.web.successMeter)
-	app.metrics.Register("requests.failed", app.web.failureMeter)
+	app.prometheusRegistry.MustRegister(app.webServer.Metrics.RequestDurationSummary)
 }
 
 func initSubmissionSystem(app *App) {
-	// Due to a delay between Stellar-Core closing a ledger and Horizon
-	// ingesting it, it's possible that results of transaction submitted to
-	// Stellar-Core via Horizon may not be immediately visible. This is
-	// happening because `txsub` package checks two sources when checking a
-	// transaction result: Stellar-Core and Horizon DB.
-	//
-	// The extreme case is https://github.com/stellar/go/issues/2272 where
-	// results of transaction creating an account are not visible: requesting
-	// account details in Horizon returns `404 Not Found`:
-	//
-	// ```
-	// 	 Horizon DB                  Core DB                  User
-	// 		 |                          |                      |
-	// 		 |                          |                      |
-	// 		 |                          | <------- Submit create_account op
-	// 		 |                          |                      |
-	// 		 |                  Insert transaction             |
-	// 		 |                          |                      |
-	// 		 |                     Tx found -----------------> |
-	// 		 |                          |                      |
-	// 		 |                          |                      |
-	// 		 | <--------------------------------------- Get account info
-	// 		 |                          |                      |
-	// 		 |                          |                      |
-	//         Account NOT found ------------------------------------> |
-	// 		 |                          |                      |
-	//         Insert account                   |                      |
-	// ```
-	//
-	// To fix this skip checking Stellar-Core DB for transaction results if
-	// Horizon is ingesting failed transactions.
-
 	app.submitter = &txsub.System{
 		Pending:         txsub.NewDefaultSubmissionList(),
 		Submitter:       txsub.NewDefaultSubmitter(http.DefaultClient, app.config.StellarCoreURL),
 		SubmissionQueue: sequence.NewManager(),
-		Results: &results.DB{
-			Core:           &core.Q{Session: app.CoreSession(context.Background())},
-			History:        &history.Q{Session: app.HorizonSession(context.Background())},
-			SkipCoreChecks: app.config.IngestFailedTransactions,
+		DB: func(ctx context.Context) txsub.HorizonDB {
+			return &history.Q{Session: app.HorizonSession(ctx)}
 		},
-		Sequences: &history.Q{Session: app.HorizonSession(context.Background())},
 	}
 }

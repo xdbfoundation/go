@@ -57,12 +57,6 @@ func (m *MockClient) LedgerDetail(sequence uint32) (hProtocol.Ledger, error) {
 	return a.Get(0).(hProtocol.Ledger), a.Error(1)
 }
 
-// Metrics is a mocking method
-func (m *MockClient) Metrics() (hProtocol.Metrics, error) {
-	a := m.Called()
-	return a.Get(0).(hProtocol.Metrics), a.Error(1)
-}
-
 // FeeStats is a mocking method
 func (m *MockClient) FeeStats() (hProtocol.FeeStats, error) {
 	a := m.Called()
@@ -215,6 +209,12 @@ func (m *MockClient) StreamOrderBooks(ctx context.Context, request OrderBookRequ
 func (m *MockClient) Root() (hProtocol.Root, error) {
 	a := m.Called()
 	return a.Get(0).(hProtocol.Root), a.Error(1)
+}
+
+// NextAccountsPage is a mocking method
+func (m *MockClient) NextAccountsPage(page hProtocol.AccountsPage) (hProtocol.AccountsPage, error) {
+	a := m.Called(page)
+	return a.Get(0).(hProtocol.AccountsPage), a.Error(1)
 }
 
 // NextAssetsPage is a mocking method

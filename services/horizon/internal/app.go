@@ -3,20 +3,21 @@ package horizon
 import (
 	"context"
 	"database/sql"
-	"fmt"
 	"net/http"
 	"os"
-	"runtime"
+	"os/signal"
 	"sync"
+	"syscall"
 	"time"
 
-	metrics "github.com/rcrowley/go-metrics"
+	"github.com/prometheus/client_golang/prometheus"
+
 	"github.com/stellar/go/clients/stellarcore"
-	"github.com/stellar/go/exp/orderbook"
-	horizonContext "github.com/stellar/go/services/horizon/internal/context"
-	"github.com/stellar/go/services/horizon/internal/db2/core"
+	proto "github.com/stellar/go/protocols/stellarcore"
+	"github.com/stellar/go/services/horizon/internal/actions"
 	"github.com/stellar/go/services/horizon/internal/db2/history"
 	"github.com/stellar/go/services/horizon/internal/expingest"
+	"github.com/stellar/go/services/horizon/internal/httpx"
 	"github.com/stellar/go/services/horizon/internal/ledger"
 	"github.com/stellar/go/services/horizon/internal/logmetrics"
 	"github.com/stellar/go/services/horizon/internal/operationfeestats"
@@ -27,91 +28,89 @@ import (
 	"github.com/stellar/go/support/db"
 	"github.com/stellar/go/support/errors"
 	"github.com/stellar/go/support/log"
-	"github.com/stellar/throttled"
-	graceful "gopkg.in/tylerb/graceful.v1"
 )
+
+type coreSettingsStore struct {
+	sync.RWMutex
+	actions.CoreSettings
+}
+
+func (c *coreSettingsStore) set(resp *proto.InfoResponse) {
+	c.Lock()
+	defer c.Unlock()
+	c.CoreVersion = resp.Info.Build
+	c.CurrentProtocolVersion = int32(resp.Info.Ledger.Version)
+	c.CoreSupportedProtocolVersion = int32(resp.Info.ProtocolVersion)
+}
+
+func (c *coreSettingsStore) get() actions.CoreSettings {
+	c.RLock()
+	defer c.RUnlock()
+	return c.CoreSettings
+}
 
 // App represents the root of the state of a horizon instance.
 type App struct {
-	config                       Config
-	web                          *web
-	historyQ                     *history.Q
-	coreQ                        *core.Q
-	ctx                          context.Context
-	cancel                       func()
-	coreVersion                  string
-	horizonVersion               string
-	currentProtocolVersion       int32
-	coreSupportedProtocolVersion int32
-	submitter                    *txsub.System
-	paths                        paths.Finder
-	expingester                  *expingest.System
-	reaper                       *reap.System
-	ticks                        *time.Ticker
+	done            chan struct{}
+	config          Config
+	webServer       *httpx.Server
+	historyQ        *history.Q
+	ctx             context.Context
+	cancel          func()
+	horizonVersion  string
+	coreSettings    coreSettingsStore
+	orderBookStream *expingest.OrderBookStream
+	submitter       *txsub.System
+	paths           paths.Finder
+	expingester     expingest.System
+	reaper          *reap.System
+	ticks           *time.Ticker
 
 	// metrics
-	metrics                  metrics.Registry
-	historyLatestLedgerGauge metrics.Gauge
-	historyElderLedgerGauge  metrics.Gauge
-	horizonConnGauge         metrics.Gauge
-	coreLatestLedgerGauge    metrics.Gauge
-	coreConnGauge            metrics.Gauge
-	goroutineGauge           metrics.Gauge
+	prometheusRegistry         *prometheus.Registry
+	buildInfoGauge             *prometheus.GaugeVec
+	ingestingGauge             prometheus.Gauge
+	historyLatestLedgerCounter prometheus.CounterFunc
+	historyElderLedgerCounter  prometheus.CounterFunc
+	dbMaxOpenConnectionsGauge  prometheus.GaugeFunc
+	dbOpenConnectionsGauge     prometheus.GaugeFunc
+	dbInUseConnectionsGauge    prometheus.GaugeFunc
+	dbWaitCountCounter         prometheus.CounterFunc
+	dbWaitDurationCounter      prometheus.CounterFunc
+	coreLatestLedgerCounter    prometheus.CounterFunc
+}
+
+func (a *App) GetCoreSettings() actions.CoreSettings {
+	return a.coreSettings.get()
 }
 
 // NewApp constructs an new App instance from the provided config.
-func NewApp(config Config) *App {
+func NewApp(config Config) (*App, error) {
 	a := &App{
 		config:         config,
 		horizonVersion: app.Version(),
 		ticks:          time.NewTicker(1 * time.Second),
+		done:           make(chan struct{}),
 	}
 
-	a.init()
-	return a
+	if err := a.init(); err != nil {
+		return nil, err
+	}
+	return a, nil
 }
 
 // Serve starts the horizon web server, binding it to a socket, setting up
 // the shutdown signals.
 func (a *App) Serve() {
-	addr := fmt.Sprintf(":%d", a.config.Port)
 
-	srv := &graceful.Server{
-		Timeout: 10 * time.Second,
-
-		Server: &http.Server{
-			Addr:        addr,
-			Handler:     a.web.router,
-			ReadTimeout: 5 * time.Second,
-		},
-
-		ShutdownInitiated: func() {
-			log.Info("received signal, gracefully stopping")
-			a.Close()
-		},
-	}
-
-	log.Infof("Starting horizon on %s (ingest: %v)", addr, a.config.Ingest)
+	log.Infof("Starting horizon on :%d (ingest: %v)", a.config.Port, a.config.Ingest)
 
 	if a.config.AdminPort != 0 {
-		go func() {
-			adminAddr := fmt.Sprintf(":%d", a.config.AdminPort)
-			log.Infof("Starting internal server on %s", adminAddr)
-
-			internalSrv := &http.Server{
-				Addr:        adminAddr,
-				Handler:     a.web.internalRouter,
-				ReadTimeout: 5 * time.Second,
-			}
-
-			err := internalSrv.ListenAndServe()
-			if err != nil {
-				log.Warn(errors.Wrap(err, "error in internalSrv.ListenAndServe()"))
-			}
-		}()
+		log.Infof("Starting internal server on :%d", a.config.AdminPort)
 	}
 
 	go a.run()
+	go a.orderBookStream.Run(a.ctx)
 
 	// WaitGroup for all go routines. Makes sure that DB is closed when
 	// all services gracefully shutdown.
@@ -125,14 +124,17 @@ func (a *App) Serve() {
 		}()
 	}
 
-	var err error
-	if a.config.TLSCert != "" {
-		err = srv.ListenAndServeTLS(a.config.TLSCert, a.config.TLSKey)
-	} else {
-		err = srv.ListenAndServe()
-	}
+	// configure shutdown signal handler
+	done := make(chan os.Signal, 1)
+	signal.Notify(done, os.Interrupt, syscall.SIGINT, syscall.SIGTERM)
+	go func() {
+		<-done
+		a.Close()
+	}()
+	go a.waitForDone()
 
-	if err != nil {
+	err := a.webServer.Serve()
+	if err != nil && err != http.ErrServerClosed {
 		log.Fatal(err)
 	}
 
@@ -144,6 +146,14 @@ func (a *App) Serve() {
 
 // Close cancels the app. It does not close DB connections - use App.CloseDB().
 func (a *App) Close() {
+	close(a.done)
+}
+
+func (a *App) waitForDone() {
+	<-a.done
+	webShutdownCtx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	defer cancel()
+	a.webServer.Shutdown(webShutdownCtx)
 	a.cancel()
 	if a.expingester != nil {
 		a.expingester.Shutdown()
@@ -156,7 +166,6 @@ func (a *App) Close() {
 // closed" errors.
 func (a *App) CloseDB() {
 	a.historyQ.Session.DB.Close()
-	a.coreQ.Session.DB.Close()
 }
 
 // HistoryQ returns a helper object for performing sql queries against the
@@ -171,33 +180,6 @@ func (a *App) HorizonSession(ctx context.Context) *db.Session {
 	return &db.Session{DB: a.historyQ.Session.DB, Ctx: ctx}
 }
 
-// CoreSession returns a new session that loads data from the stellar core
-// database. The returned session is bound to `ctx`.
-func (a *App) CoreSession(ctx context.Context) *db.Session {
-	return &db.Session{DB: a.coreQ.Session.DB, Ctx: ctx}
-}
-
-// CoreQ returns a helper object for performing sql queries aginst the
-// stellar core database.
-func (a *App) CoreQ() *core.Q {
-	return a.coreQ
-}
-
-// IsHistoryStale returns true if the latest history ledger is more than
-// `StaleThreshold` ledgers behind the latest core ledger
-func (a *App) IsHistoryStale() bool {
-	return isHistoryStale(a.config.StaleThreshold)
-}
-
-func isHistoryStale(staleThreshold uint) bool {
-	if staleThreshold == 0 {
-		return false
-	}
-
-	ls := ledger.CurrentState()
-	return (ls.CoreLatest - ls.HistoryLatest) > int32(staleThreshold)
-}
-
 // UpdateLedgerState triggers a refresh of several metrics gauges, such as open
 // db connections and ledger state
 func (a *App) UpdateLedgerState() {
@@ -207,11 +189,17 @@ func (a *App) UpdateLedgerState() {
 		log.WithStack(err).WithField("err", err.Error()).Error(msg)
 	}
 
-	err := a.CoreQ().LatestLedger(&next.CoreLatest)
+	coreClient := &stellarcore.Client{
+		HTTP: http.DefaultClient,
+		URL:  a.config.StellarCoreURL,
+	}
+
+	coreInfo, err := coreClient.Info(a.ctx)
 	if err != nil {
-		logErr(err, "failed to load the latest known ledger state from core DB")
+		logErr(err, "failed to load the stellar-core info")
 		return
 	}
+	next.CoreLatest = int32(coreInfo.Info.Ledger.Num)
 
 	err = a.HistoryQ().LatestLedger(&next.HistoryLatest)
 	if err != nil {
@@ -354,8 +342,8 @@ func (a *App) UpdateFeeStatsState() {
 	operationfeestats.SetState(next)
 }
 
-// UpdateStellarCoreInfo updates the value of coreVersion,
-// currentProtocolVersion, and coreSupportedProtocolVersion from the Stellar
+// UpdateStellarCoreInfo updates the value of CoreVersion,
+// CurrentProtocolVersion, and CoreSupportedProtocolVersion from the Stellar
 // core API.
 func (a *App) UpdateStellarCoreInfo() {
 	if a.config.StellarCoreURL == "" {
@@ -383,22 +371,7 @@ func (a *App) UpdateStellarCoreInfo() {
 		os.Exit(1)
 	}
 
-	a.coreVersion = resp.Info.Build
-	a.currentProtocolVersion = int32(resp.Info.Ledger.Version)
-	a.coreSupportedProtocolVersion = int32(resp.Info.ProtocolVersion)
-}
-
-// UpdateMetrics triggers a refresh of several metrics gauges, such as open
-// db connections and ledger state
-func (a *App) UpdateMetrics() {
-	a.goroutineGauge.Update(int64(runtime.NumGoroutine()))
-	ls := ledger.CurrentState()
-	a.historyLatestLedgerGauge.Update(int64(ls.HistoryLatest))
-	a.historyElderLedgerGauge.Update(int64(ls.HistoryElder))
-	a.coreLatestLedgerGauge.Update(int64(ls.CoreLatest))
-
-	a.horizonConnGauge.Update(int64(a.historyQ.Session.DB.Stats().OpenConnections))
-	a.coreConnGauge.Update(int64(a.coreQ.Session.DB.Stats().OpenConnections))
+	a.coreSettings.set(resp)
 }
 
 // DeleteUnretainedHistory forwards to the app's reaper.  See
@@ -424,14 +397,12 @@ func (a *App) Tick() {
 	go func() { a.submitter.Tick(a.ctx); wg.Done() }()
 	wg.Wait()
 
-	// finally, update metrics
-	a.UpdateMetrics()
 	log.Debug("finished ticking app")
 }
 
 // Init initializes app, using the config to populate db connections and
 // whatnot.
-func (a *App) init() {
+func (a *App) init() error {
 	// app-context
 	a.ctx, a.cancel = context.WithCancel(context.Background())
 
@@ -450,16 +421,12 @@ func (a *App) init() {
 
 	// horizon-db and core-db
 	mustInitHorizonDB(a)
-	mustInitCoreDB(a)
 
-	var orderBookGraph *orderbook.OrderBookGraph
 	if a.config.Ingest {
-		orderBookGraph = orderbook.NewOrderBookGraph()
 		// expingester
-		initExpIngester(a, orderBookGraph)
-		// path-finder
-		initPathFinder(a, orderBookGraph)
+		initExpIngester(a)
 	}
+	initPathFinder(a)
 
 	// txsub
 	initSubmissionSystem(a)
@@ -467,24 +434,10 @@ func (a *App) init() {
 	// reaper
 	a.reaper = reap.New(a.config.HistoryRetentionCount, a.HorizonSession(context.Background()))
 
-	// web.init
-	a.web = mustInitWeb(a.ctx, a.historyQ, a.coreQ, a.config.SSEUpdateFrequency, a.config.StaleThreshold, a.config.IngestFailedTransactions)
-
-	// web.rate-limiter
-	a.web.rateLimiter = maybeInitWebRateLimiter(a.config.RateQuota)
-
-	// web.middleware
-	// Note that we passed in `a` here for putting the whole App in the context.
-	// This parameter will be removed soon.
-	a.web.mustInstallMiddlewares(a, a.config.ConnectionTimeout)
-
-	// web.actions
-	a.web.mustInstallActions(a.config, a.paths, orderBookGraph, a.historyQ.Session)
-
 	// metrics and log.metrics
-	a.metrics = metrics.NewRegistry()
-	for level, meter := range *logmetrics.DefaultMetrics {
-		a.metrics.Register(fmt.Sprintf("logging.%s", level), meter)
+	a.prometheusRegistry = prometheus.NewRegistry()
+	for _, meter := range *logmetrics.DefaultMetrics {
+		a.prometheusRegistry.MustRegister(meter)
 	}
 
 	// db-metrics
@@ -493,11 +446,45 @@ func (a *App) init() {
 	// ingest.metrics
 	initIngestMetrics(a)
 
+	// txsub.metrics
+	initTxSubMetrics(a)
+
+	routerConfig := httpx.RouterConfig{
+		DBSession:          a.historyQ.Session,
+		TxSubmitter:        a.submitter,
+		RateQuota:          a.config.RateQuota,
+		SSEUpdateFrequency: a.config.SSEUpdateFrequency,
+		StaleThreshold:     a.config.StaleThreshold,
+		ConnectionTimeout:  a.config.ConnectionTimeout,
+		NetworkPassphrase:  a.config.NetworkPassphrase,
+		MaxPathLength:      a.config.MaxPathLength,
+		PathFinder:         a.paths,
+		PrometheusRegistry: a.prometheusRegistry,
+		CoreGetter:         a,
+		HorizonVersion:     a.horizonVersion,
+		FriendbotURL:       a.config.FriendbotURL,
+	}
+
+	var err error
+	config := httpx.ServerConfig{
+		Port:      uint16(a.config.Port),
+		AdminPort: uint16(a.config.AdminPort),
+	}
+	if a.config.TLSCert != "" && a.config.TLSKey != "" {
+		config.TLSConfig = &httpx.TLSConfig{
+			CertPath: a.config.TLSCert,
+			KeyPath:  a.config.TLSKey,
+		}
+	}
+	a.webServer, err = httpx.NewServer(config, routerConfig)
+	if err != nil {
+		return err
+	}
+
 	// web.metrics
 	initWebMetrics(a)
 
-	// txsub.metrics
-	initTxSubMetrics(a)
+	return nil
 }
 
 // run is the function that runs in the background that triggers Tick each
@@ -512,25 +499,4 @@ func (a *App) run() {
 			return
 		}
 	}
-}
-
-// withAppContext create a context on from the App type.
-func withAppContext(ctx context.Context, a *App) context.Context {
-	return context.WithValue(ctx, &horizonContext.AppContextKey, a)
-}
-
-// GetRateLimiter returns the HTTPRateLimiter of the App.
-func (a *App) GetRateLimiter() *throttled.HTTPRateLimiter {
-	return a.web.rateLimiter
-}
-
-// AppFromContext returns the set app, if one has been set, from the
-// provided context returns nil if no app has been set.
-func AppFromContext(ctx context.Context) *App {
-	if ctx == nil {
-		return nil
-	}
-
-	val, _ := ctx.Value(&horizonContext.AppContextKey).(*App)
-	return val
 }

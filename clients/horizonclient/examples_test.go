@@ -125,15 +125,31 @@ func ExampleClient_LedgerDetail() {
 
 }
 
-func ExampleClient_Metrics() {
+func ExampleClient_NextAccountsPage() {
 	client := horizonclient.DefaultPublicNetClient
-	// horizon metrics
-	metrics, err := client.Metrics()
+	// accounts with signer
+	accountsRequest := horizonclient.AccountsRequest{Signer: "GCLWGQPMKXQSPF776IU33AH4PZNOOWNAWGGKVTBQMIC5IMKUNP3E6NVU",
+		Limit: 20}
+	accounts, err := client.Accounts(accountsRequest)
 	if err != nil {
 		fmt.Println(err)
 		return
 	}
-	fmt.Print(metrics)
+	fmt.Println("Page 1:")
+	for _, a := range accounts.Embedded.Records {
+		fmt.Println(a.ID)
+	}
+
+	// next page
+	accounts2, err := client.NextAccountsPage(accounts)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	fmt.Println("Page 2:")
+	for _, a := range accounts2.Embedded.Records {
+		fmt.Println(a.ID)
+	}
 }
 
 func ExampleClient_NextAssetsPage() {

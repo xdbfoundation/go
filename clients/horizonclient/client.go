@@ -364,14 +364,6 @@ func (c *Client) LedgerDetail(sequence uint32) (ledger hProtocol.Ledger, err err
 	return
 }
 
-// Metrics returns monitoring information about a horizon server
-// See https://www.stellar.org/developers/horizon/reference/endpoints/metrics.html
-func (c *Client) Metrics() (metrics hProtocol.Metrics, err error) {
-	request := metricsRequest{endpoint: "metrics"}
-	err = c.sendRequest(request, &metrics)
-	return
-}
-
 // FeeStats returns information about fees in the last 5 ledgers.
 // See https://www.stellar.org/developers/horizon/reference/endpoints/fee-stats.html
 func (c *Client) FeeStats() (feestats hProtocol.FeeStats, err error) {
@@ -687,6 +679,12 @@ func (c *Client) Root() (root hProtocol.Root, err error) {
 // Version returns the current version.
 func (c *Client) Version() string {
 	return version
+}
+
+// NextAccountsPage returns the next page of accounts.
+func (c *Client) NextAccountsPage(page hProtocol.AccountsPage) (accounts hProtocol.AccountsPage, err error) {
+	err = c.sendRequestURL(page.Links.Next.Href, "get", &accounts)
+	return
 }
 
 // NextAssetsPage returns the next page of assets.

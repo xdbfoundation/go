@@ -2,6 +2,7 @@
 title: All Ledgers
 clientData:
   laboratoryUrl: https://www.stellar.org/laboratory/#explorer?resource=ledgers&endpoint=all
+replacement: https://developers.stellar.org/api/resources/ledgers/
 ---
 
 This endpoint represents all [ledgers](../resources/ledger.md).
@@ -102,6 +103,7 @@ This endpoint responds with a list of ledgers.  See [ledger resource](../resourc
         "successful_transaction_count": 0,
         "failed_transaction_count": 0,
         "operation_count": 0,
+        "tx_set_operation_count": 0,
         "closed_at": "1970-01-01T00:00:00Z",
         "total_coins": "100000000000.0000000",
         "fee_pool": "0.0000000",

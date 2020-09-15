@@ -1,6 +1,8 @@
+//lint:file-ignore U1001 Ignore all unused code, staticcheck doesn't understand testify/suite
 package expingest
 
 import (
+	"context"
 	"database/sql"
 	"io"
 	"testing"
@@ -22,28 +24,25 @@ func TestVerifyRangeStateTestSuite(t *testing.T) {
 
 type VerifyRangeStateTestSuite struct {
 	suite.Suite
-	graph          *mockOrderBookGraph
 	historyQ       *mockDBQ
 	historyAdapter *adapters.MockHistoryArchiveAdapter
 	runner         *mockProcessorsRunner
-	system         *System
+	system         *system
 }
 
 func (s *VerifyRangeStateTestSuite) SetupTest() {
-	s.graph = &mockOrderBookGraph{}
 	s.historyQ = &mockDBQ{}
 	s.historyAdapter = &adapters.MockHistoryArchiveAdapter{}
 	s.runner = &mockProcessorsRunner{}
-	s.system = &System{
+	s.system = &system{
+		ctx:            context.Background(),
 		historyQ:       s.historyQ,
 		historyAdapter: s.historyAdapter,
 		runner:         s.runner,
-		graph:          s.graph,
 	}
 	s.system.initMetrics()
 
 	s.historyQ.On("Rollback").Return(nil).Once()
-	s.graph.On("Discard").Once()
 }
 
 func (s *VerifyRangeStateTestSuite) TearDownTest() {
@@ -51,13 +50,11 @@ func (s *VerifyRangeStateTestSuite) TearDownTest() {
 	s.historyQ.AssertExpectations(t)
 	s.historyAdapter.AssertExpectations(t)
 	s.runner.AssertExpectations(t)
-	s.graph.AssertExpectations(t)
 }
 
 func (s *VerifyRangeStateTestSuite) TestInvalidRange() {
 	// Recreate mock in this single test to remove Rollback assertion.
 	*s.historyQ = mockDBQ{}
-	*s.graph = mockOrderBookGraph{}
 
 	next, err := verifyRangeState{fromLedger: 0, toLedger: 0}.run(s.system)
 	s.Assert().Error(err)
@@ -95,7 +92,6 @@ func (s *VerifyRangeStateTestSuite) TestInvalidRange() {
 func (s *VerifyRangeStateTestSuite) TestBeginReturnsError() {
 	// Recreate mock in this single test to remove Rollback assertion.
 	*s.historyQ = mockDBQ{}
-	*s.graph = mockOrderBookGraph{}
 	s.historyQ.On("Begin").Return(errors.New("my error")).Once()
 
 	next, err := verifyRangeState{fromLedger: 100, toLedger: 200}.run(s.system)
@@ -154,7 +150,6 @@ func (s *VerifyRangeStateTestSuite) TestSuccess() {
 	s.runner.On("RunHistoryArchiveIngestion", uint32(100)).Return(ingestio.StatsChangeProcessorResults{}, nil).Once()
 	s.historyQ.On("UpdateLastLedgerExpIngest", uint32(100)).Return(nil).Once()
 	s.historyQ.On("Commit").Return(nil).Once()
-	s.graph.On("Apply", uint32(100)).Return(nil).Once()
 
 	for i := uint32(101); i <= 200; i++ {
 		s.historyQ.On("Begin").Return(nil).Once()
@@ -162,7 +157,6 @@ func (s *VerifyRangeStateTestSuite) TestSuccess() {
 			ingestio.StatsLedgerTransactionProcessorResults{}, nil).Once()
 		s.historyQ.On("UpdateLastLedgerExpIngest", i).Return(nil).Once()
 		s.historyQ.On("Commit").Return(nil).Once()
-		s.graph.On("Apply", i).Return(nil).Once()
 	}
 
 	next, err := verifyRangeState{fromLedger: 100, toLedger: 200}.run(s.system)
@@ -179,7 +173,6 @@ func (s *VerifyRangeStateTestSuite) TestSuccessWithVerify() {
 	s.runner.On("RunHistoryArchiveIngestion", uint32(100)).Return(ingestio.StatsChangeProcessorResults{}, nil).Once()
 	s.historyQ.On("UpdateLastLedgerExpIngest", uint32(100)).Return(nil).Once()
 	s.historyQ.On("Commit").Return(nil).Once()
-	s.graph.On("Apply", uint32(100)).Return(nil).Once()
 
 	for i := uint32(101); i <= 110; i++ {
 		s.historyQ.On("Begin").Return(nil).Once()
@@ -187,12 +180,7 @@ func (s *VerifyRangeStateTestSuite) TestSuccessWithVerify() {
 			ingestio.StatsLedgerTransactionProcessorResults{}, nil).Once()
 		s.historyQ.On("UpdateLastLedgerExpIngest", i).Return(nil).Once()
 		s.historyQ.On("Commit").Return(nil).Once()
-		s.graph.On("Apply", i).Return(nil).Once()
 	}
-
-	s.graph.On("OffersMap").Return(map[xdr.Int64]xdr.OfferEntry{
-		eurOffer.OfferId: eurOffer,
-	}).Once()
 
 	clonedQ := &mockDBQ{}
 	s.historyQ.On("CloneIngestionQ").Return(clonedQ).Once()
@@ -237,7 +225,7 @@ func (s *VerifyRangeStateTestSuite) TestSuccessWithVerify() {
 	mockChangeReader.On("Read").Return(offerChange, nil).Once()
 	mockChangeReader.On("Read").Return(ingestio.Change{}, io.EOF).Once()
 	mockChangeReader.On("Read").Return(ingestio.Change{}, io.EOF).Once()
-	s.historyAdapter.On("GetState", nil, uint32(63), 0).Return(mockChangeReader, nil).Once()
+	s.historyAdapter.On("GetState", mock.AnythingOfType("*context.emptyCtx"), uint32(63)).Return(mockChangeReader, nil).Once()
 	mockAccount := history.AccountEntry{
 		AccountID:          mockAccountID,
 		Balance:            600,

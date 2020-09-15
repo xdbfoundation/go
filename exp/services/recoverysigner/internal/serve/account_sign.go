@@ -14,7 +14,7 @@ import (
 
 type accountSignHandler struct {
 	Logger            *supportlog.Entry
-	SigningKey        *keypair.Full
+	SigningKeys       []*keypair.Full
 	NetworkPassphrase string
 	AccountStore      account.Store
 }
@@ -26,7 +26,6 @@ type accountSignRequest struct {
 }
 
 type accountSignResponse struct {
-	Signer            string `json:"signer"`
 	Signature         string `json:"signature"`
 	NetworkPassphrase string `json:"network_passphrase"`
 }
@@ -44,7 +43,7 @@ func (h accountSignHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	// Decode request.
 	req := accountSignRequest{}
 	err := httpdecode.Decode(r, &req)
-	if err != nil || req.Address == nil {
+	if err != nil || req.Address == nil || req.SigningAddress == nil {
 		badRequest.Render(w)
 		return
 	}
@@ -57,7 +56,14 @@ func (h accountSignHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 	l.Info("Request to sign transaction.")
 
-	if req.SigningAddress != nil && req.SigningAddress.Address() != h.SigningKey.Address() {
+	var signingKey *keypair.Full
+	for _, sk := range h.SigningKeys {
+		if req.SigningAddress.Address() == sk.Address() {
+			signingKey = sk
+			break
+		}
+	}
+	if signingKey == nil {
 		l.Info("Signing key not found.")
 		notFound.Render(w)
 		return
@@ -149,7 +155,7 @@ func (h accountSignHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		serverError.Render(w)
 		return
 	}
-	sig, err := h.SigningKey.SignBase64(hash[:])
+	sig, err := signingKey.SignBase64(hash[:])
 	if err != nil {
 		l.Error("Error signing transaction:", err)
 		serverError.Render(w)
@@ -159,7 +165,6 @@ func (h accountSignHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	l.Info("Transaction signed.")
 
 	resp := accountSignResponse{
-		Signer:            h.SigningKey.Address(),
 		Signature:         sig,
 		NetworkPassphrase: h.NetworkPassphrase,
 	}

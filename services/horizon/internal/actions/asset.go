@@ -6,6 +6,7 @@ import (
 	"strings"
 
 	"github.com/stellar/go/protocols/horizon"
+	"github.com/stellar/go/services/horizon/internal/context"
 	"github.com/stellar/go/services/horizon/internal/db2"
 	"github.com/stellar/go/services/horizon/internal/db2/history"
 	"github.com/stellar/go/services/horizon/internal/resourceadapter"
@@ -112,12 +113,12 @@ func (handler AssetStatsHandler) GetResourcePage(
 ) ([]hal.Pageable, error) {
 	ctx := r.Context()
 
-	code, err := GetString(r, "asset_code")
+	code, err := getString(r, "asset_code")
 	if err != nil {
 		return nil, err
 	}
 
-	issuer, err := GetString(r, "asset_issuer")
+	issuer, err := getString(r, "asset_issuer")
 	if err != nil {
 		return nil, err
 	}
@@ -131,7 +132,7 @@ func (handler AssetStatsHandler) GetResourcePage(
 		return nil, err
 	}
 
-	historyQ, err := HistoryQFromRequest(r)
+	historyQ, err := context.HistoryQFromRequest(r)
 	if err != nil {
 		return nil, err
 	}

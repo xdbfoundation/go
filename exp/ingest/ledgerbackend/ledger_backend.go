@@ -1,12 +1,93 @@
 package ledgerbackend
 
-import "github.com/stellar/go/xdr"
+import (
+	"encoding/json"
+	"fmt"
+
+	"github.com/stellar/go/xdr"
+)
+
+const ledgersPerCheckpoint = 64
+
+// Range represents a range of ledger sequence numbers.
+type Range struct {
+	from    uint32
+	to      uint32
+	bounded bool
+}
+
+type jsonRange struct {
+	From    uint32 `json:"from"`
+	To      uint32 `json:"to"`
+	Bounded bool   `json:"bounded"`
+}
+
+func (r *Range) UnmarshalJSON(b []byte) error {
+	var s jsonRange
+	if err := json.Unmarshal(b, &s); err != nil {
+		return err
+	}
+
+	r.from = s.From
+	r.to = s.To
+	r.bounded = s.Bounded
+
+	return nil
+}
+
+func (r Range) MarshalJSON() ([]byte, error) {
+	return json.Marshal(jsonRange{
+		From:    r.from,
+		To:      r.to,
+		Bounded: r.bounded,
+	})
+}
+
+func (r Range) String() string {
+	if r.bounded {
+		return fmt.Sprintf("[%d,%d]", r.from, r.to)
+	}
+	return fmt.Sprintf("[%d,latest)", r.from)
+}
+
+func (r Range) Contains(other Range) bool {
+	if r.bounded && !other.bounded {
+		return false
+	}
+	if r.bounded && other.bounded {
+		return r.from <= other.from && r.to >= other.to
+	}
+	return r.from <= other.from
+}
+
+// SingleLedgerRange constructs a bounded range containing a single ledger.
+func SingleLedgerRange(ledger uint32) Range {
+	return Range{from: ledger, to: ledger, bounded: true}
+}
+
+// BoundedRange constructs a bounded range of ledgers with a fixed starting ledger and ending ledger.
+func BoundedRange(from uint32, to uint32) Range {
+	return Range{from: from, to: to, bounded: true}
+}
+
+// BoundedRange constructs a unbounded range of ledgers with a fixed starting ledger.
+func UnboundedRange(from uint32) Range {
+	return Range{from: from, bounded: false}
+}
 
 // LedgerBackend represents the interface to a ledger data store.
 type LedgerBackend interface {
+	// GetLatestLedgerSequence returns the sequence of the latest ledger available
+	// in the backend.
 	GetLatestLedgerSequence() (sequence uint32, err error)
 	// The first returned value is false when the ledger does not exist in a backend.
-	GetLedger(sequence uint32) (bool, LedgerCloseMeta, error)
+	GetLedger(sequence uint32) (bool, xdr.LedgerCloseMeta, error)
+	// PrepareRange prepares the given range (including from and to) to be loaded.
+	// Some backends (like captive stellar-core) need to initalize data to be
+	// able to stream ledgers.
+	PrepareRange(ledgerRange Range) error
+	// IsPrepared returns true if a given ledgerRange is prepared.
+	IsPrepared(ledgerRange Range) (bool, error)
 	Close() error
 }
 
@@ -16,16 +97,6 @@ type session interface {
 	GetRaw(dest interface{}, query string, args ...interface{}) error
 	SelectRaw(dest interface{}, query string, args ...interface{}) error
 	Close() error
-}
-
-// LedgerCloseMeta is the information needed to reconstruct the history of transactions in a given ledger.
-type LedgerCloseMeta struct {
-	LedgerHeader          xdr.LedgerHeaderHistoryEntry
-	TransactionEnvelope   []xdr.TransactionEnvelope
-	TransactionResult     []xdr.TransactionResultPair
-	TransactionMeta       []xdr.TransactionMeta
-	TransactionFeeChanges []xdr.LedgerEntryChanges
-	UpgradesMeta          []xdr.LedgerEntryChanges
 }
 
 // ledgerHeaderHistory is a helper struct used to unmarshall header fields from a stellar-core DB.

@@ -8,7 +8,6 @@ import (
 	"github.com/stellar/go/exp/ingest/adapters"
 	"github.com/stellar/go/exp/ingest/io"
 	"github.com/stellar/go/exp/ingest/ledgerbackend"
-	"github.com/stellar/go/exp/orderbook"
 	"github.com/stellar/go/services/horizon/internal/db2/history"
 	"github.com/stellar/go/services/horizon/internal/expingest/processors"
 	"github.com/stellar/go/support/errors"
@@ -53,7 +52,6 @@ type ProcessorRunnerInterface interface {
 	DisableMemoryStatsLogging()
 	RunHistoryArchiveIngestion(checkpointLedger uint32) (io.StatsChangeProcessorResults, error)
 	RunTransactionProcessorsOnLedger(sequence uint32) (io.StatsLedgerTransactionProcessorResults, error)
-	RunOrderBookProcessorOnLedger(sequence uint32) (io.StatsChangeProcessorResults, error)
 	RunAllProcessorsOnLedger(sequence uint32) (
 		io.StatsChangeProcessorResults,
 		io.StatsLedgerTransactionProcessorResults,
@@ -67,7 +65,6 @@ type ProcessorRunner struct {
 	config Config
 
 	ctx            context.Context
-	graph          orderbook.OBGraph
 	historyQ       history.IngestionQ
 	historyAdapter adapters.HistoryArchiveAdapterInterface
 	ledgerBackend  ledgerbackend.LedgerBackend
@@ -90,7 +87,11 @@ func (s *ProcessorRunner) DisableMemoryStatsLogging() {
 	s.logMemoryStats = false
 }
 
-func (s *ProcessorRunner) buildChangeProcessor(changeStats *io.StatsChangeProcessor, source ingestionSource) horizonChangeProcessor {
+func (s *ProcessorRunner) buildChangeProcessor(
+	changeStats *io.StatsChangeProcessor,
+	source ingestionSource,
+	sequence uint32,
+) horizonChangeProcessor {
 	statsChangeProcessor := &statsChangeProcessor{
 		StatsChangeProcessor: changeStats,
 	}
@@ -98,25 +99,13 @@ func (s *ProcessorRunner) buildChangeProcessor(changeStats *io.StatsChangeProces
 	useLedgerCache := source == ledgerSource
 	return groupChangeProcessors{
 		statsChangeProcessor,
-		processors.NewOrderbookProcessor(s.graph),
 		processors.NewAccountDataProcessor(s.historyQ),
 		processors.NewAccountsProcessor(s.historyQ),
-		processors.NewOffersProcessor(s.historyQ),
+		processors.NewOffersProcessor(s.historyQ, sequence),
 		processors.NewAssetStatsProcessor(s.historyQ, useLedgerCache),
 		processors.NewSignersProcessor(s.historyQ, useLedgerCache),
 		processors.NewTrustLinesProcessor(s.historyQ),
 	}
-}
-
-type skipFailedTransactions struct {
-	horizonTransactionProcessor
-}
-
-func (p skipFailedTransactions) ProcessTransaction(tx io.LedgerTransaction) error {
-	if !tx.Result.Successful() {
-		return nil
-	}
-	return p.horizonTransactionProcessor.ProcessTransaction(tx)
 }
 
 func (s *ProcessorRunner) buildTransactionProcessor(
@@ -128,7 +117,7 @@ func (s *ProcessorRunner) buildTransactionProcessor(
 	}
 
 	sequence := uint32(ledger.Header.LedgerSeq)
-	group := groupTransactionProcessors{
+	return groupTransactionProcessors{
 		statsLedgerTransactionProcessor,
 		processors.NewEffectProcessor(s.historyQ, sequence),
 		processors.NewLedgerProcessor(s.historyQ, ledger, CurrentVersion),
@@ -137,12 +126,6 @@ func (s *ProcessorRunner) buildTransactionProcessor(
 		processors.NewParticipantsProcessor(s.historyQ, sequence),
 		processors.NewTransactionProcessor(s.historyQ, sequence),
 	}
-
-	if s.config.IngestFailedTransactions {
-		return group
-	}
-
-	return skipFailedTransactions{group}
 }
 
 // validateBucketList validates if the bucket list hash in history archive
@@ -158,20 +141,19 @@ func (s *ProcessorRunner) validateBucketList(ledgerSequence uint32) error {
 		return errors.Wrap(err, "Error getting bucket list hash")
 	}
 
-	ledgerReader, err := io.NewDBLedgerReader(s.ctx, ledgerSequence, s.ledgerBackend)
+	exists, ledgerCloseMeta, err := s.ledgerBackend.GetLedger(ledgerSequence)
 	if err != nil {
-		if err == io.ErrNotFound {
-			return fmt.Errorf(
-				"cannot validate bucket hash list. Checkpoint ledger (%d) must exist in Stellar-Core database.",
-				ledgerSequence,
-			)
-		} else {
-			return errors.Wrap(err, "Error getting ledger")
-		}
+		return errors.Wrap(err, "Error getting ledger")
 	}
 
-	ledgerHeader := ledgerReader.GetHeader()
-	ledgerBucketHashList := ledgerHeader.Header.BucketListHash
+	if !exists {
+		return fmt.Errorf(
+			"cannot validate bucket hash list. Checkpoint ledger (%d) must exist in Stellar-Core database.",
+			ledgerSequence,
+		)
+	}
+
+	ledgerBucketHashList := ledgerCloseMeta.V0.LedgerHeader.Header.BucketListHash
 
 	if !bytes.Equal(historyBucketListHash[:], ledgerBucketHashList[:]) {
 		return fmt.Errorf(
@@ -186,7 +168,7 @@ func (s *ProcessorRunner) validateBucketList(ledgerSequence uint32) error {
 
 func (s *ProcessorRunner) RunHistoryArchiveIngestion(checkpointLedger uint32) (io.StatsChangeProcessorResults, error) {
 	changeStats := io.StatsChangeProcessor{}
-	changeProcessor := s.buildChangeProcessor(&changeStats, historyArchiveSource)
+	changeProcessor := s.buildChangeProcessor(&changeStats, historyArchiveSource, checkpointLedger)
 
 	var changeReader io.ChangeReader
 	var err error
@@ -200,11 +182,7 @@ func (s *ProcessorRunner) RunHistoryArchiveIngestion(checkpointLedger uint32) (i
 			return changeStats.GetResults(), errors.Wrap(err, "Error validating bucket list from HAS")
 		}
 
-		changeReader, err = s.historyAdapter.GetState(
-			s.ctx,
-			checkpointLedger,
-			s.config.MaxStreamRetries,
-		)
+		changeReader, err = s.historyAdapter.GetState(s.ctx, checkpointLedger)
 		if err != nil {
 			return changeStats.GetResults(), errors.Wrap(err, "Error creating HAS reader")
 		}
@@ -238,7 +216,7 @@ func (s *ProcessorRunner) runChangeProcessorOnLedger(
 ) error {
 	var changeReader io.ChangeReader
 	var err error
-	changeReader, err = io.NewLedgerChangeReader(s.ctx, ledger, s.ledgerBackend)
+	changeReader, err = io.NewLedgerChangeReader(s.ledgerBackend, s.config.NetworkPassphrase, ledger)
 	if err != nil {
 		return errors.Wrap(err, "Error creating ledger change reader")
 	}
@@ -264,13 +242,13 @@ func (s *ProcessorRunner) runChangeProcessorOnLedger(
 func (s *ProcessorRunner) RunTransactionProcessorsOnLedger(ledger uint32) (io.StatsLedgerTransactionProcessorResults, error) {
 	ledgerTransactionStats := io.StatsLedgerTransactionProcessor{}
 
-	ledgerReader, err := io.NewDBLedgerReader(s.ctx, ledger, s.ledgerBackend)
+	transactionReader, err := io.NewLedgerTransactionReader(s.ledgerBackend, s.config.NetworkPassphrase, ledger)
 	if err != nil {
 		return ledgerTransactionStats.GetResults(), errors.Wrap(err, "Error creating ledger reader")
 	}
 
-	txProcessor := s.buildTransactionProcessor(&ledgerTransactionStats, ledgerReader.GetHeader())
-	err = io.StreamLedgerTransactions(txProcessor, ledgerReader)
+	txProcessor := s.buildTransactionProcessor(&ledgerTransactionStats, transactionReader.GetHeader())
+	err = io.StreamLedgerTransactions(txProcessor, transactionReader)
 	if err != nil {
 		return ledgerTransactionStats.GetResults(), errors.Wrap(err, "Error streaming changes from ledger")
 	}
@@ -283,41 +261,22 @@ func (s *ProcessorRunner) RunTransactionProcessorsOnLedger(ledger uint32) (io.St
 	return ledgerTransactionStats.GetResults(), nil
 }
 
-func (s *ProcessorRunner) RunAllProcessorsOnLedger(ledger uint32) (io.StatsChangeProcessorResults, io.StatsLedgerTransactionProcessorResults, error) {
+func (s *ProcessorRunner) RunAllProcessorsOnLedger(sequence uint32) (io.StatsChangeProcessorResults, io.StatsLedgerTransactionProcessorResults, error) {
 	changeStats := io.StatsChangeProcessor{}
 	var statsLedgerTransactionProcessorResults io.StatsLedgerTransactionProcessorResults
 
 	err := s.runChangeProcessorOnLedger(
-		s.buildChangeProcessor(&changeStats, ledgerSource), ledger,
+		s.buildChangeProcessor(&changeStats, ledgerSource, sequence),
+		sequence,
 	)
 	if err != nil {
 		return changeStats.GetResults(), statsLedgerTransactionProcessorResults, err
 	}
 
-	statsLedgerTransactionProcessorResults, err = s.RunTransactionProcessorsOnLedger(ledger)
+	statsLedgerTransactionProcessorResults, err = s.RunTransactionProcessorsOnLedger(sequence)
 	if err != nil {
 		return changeStats.GetResults(), statsLedgerTransactionProcessorResults, err
 	}
 
 	return changeStats.GetResults(), statsLedgerTransactionProcessorResults, nil
-}
-
-func (s *ProcessorRunner) RunOrderBookProcessorOnLedger(ledger uint32) (io.StatsChangeProcessorResults, error) {
-	changeStats := io.StatsChangeProcessor{}
-
-	statsChangeProcessor := &statsChangeProcessor{
-		StatsChangeProcessor: &changeStats,
-	}
-
-	groupProcessor := groupChangeProcessors{
-		statsChangeProcessor,
-		processors.NewOrderbookProcessor(s.graph),
-	}
-
-	err := s.runChangeProcessorOnLedger(groupProcessor, ledger)
-	if err != nil {
-		return changeStats.GetResults(), err
-	}
-
-	return changeStats.GetResults(), nil
 }
