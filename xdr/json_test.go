@@ -57,3 +57,34 @@ func TestClaimPredicateJSON(t *testing.T) {
 
 	assert.Equal(t, serializedBase64, parsedBase64)
 }
+
+func TestClaimPredicateYearOutsideRangeJSON(t *testing.T) {
+	absBefore := Int64(900000000000)
+
+	source := ClaimPredicate{
+		Type:      ClaimPredicateTypeClaimPredicateBeforeAbsoluteTime,
+		AbsBefore: &absBefore,
+	}
+
+	serialized, err := json.Marshal(source)
+	assert.NoError(t, err)
+	assert.JSONEq(
+		t,
+		`{"abs_before":"9999-12-31T23:59:59Z"}`,
+		string(serialized),
+	)
+
+	var parsed ClaimPredicate
+	assert.NoError(t, json.Unmarshal(serialized, &parsed))
+
+	// Round-trip won't work because we're modifying date.
+
+	// var serializedBase64, parsedBase64 string
+	// serializedBase64, err = MarshalBase64(source)
+	// assert.NoError(t, err)
+
+	// parsedBase64, err = MarshalBase64(parsed)
+	// assert.NoError(t, err)
+
+	// assert.Equal(t, serializedBase64, parsedBase64)
+}

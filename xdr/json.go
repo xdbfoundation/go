@@ -99,7 +99,11 @@ func (c ClaimPredicate) toJSON() (claimPredicateJSON, error) {
 		*payload.Not, err = c.MustNotPredicate().toJSON()
 	case ClaimPredicateTypeClaimPredicateBeforeAbsoluteTime:
 		payload.AbsBefore = new(time.Time)
-		*payload.AbsBefore = time.Unix(int64(c.MustAbsBefore()), 0).UTC()
+		absBeforeTime := time.Unix(int64(c.MustAbsBefore()), 0)
+		if absBeforeTime.Year() > 9999 {
+			absBeforeTime = time.Date(9999, time.December, 31, 23, 59, 59, 0, time.UTC)
+		}
+		*payload.AbsBefore = absBeforeTime.UTC()
 	case ClaimPredicateTypeClaimPredicateBeforeRelativeTime:
 		payload.RelBefore = new(int64)
 		*payload.RelBefore = int64(c.MustRelBefore())

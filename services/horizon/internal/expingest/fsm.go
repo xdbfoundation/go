@@ -483,7 +483,7 @@ func (r resumeState) run(s *system) (transition, error) {
 		}).
 		Info("Processed ledger")
 
-	s.maybeVerifyState(ingestLedger)
+	// s.maybeVerifyState(ingestLedger)
 
 	return resumeImmediately(ingestLedger), nil
 }
