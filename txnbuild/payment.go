@@ -60,8 +60,7 @@ func (p *Payment) FromXDR(xdrOp xdr.Operation) error {
 	}
 
 	p.SourceAccount = accountFromXDR(xdrOp.SourceAccount)
-	destAID := result.Destination.ToAccountId()
-	p.Destination = destAID.Address()
+	p.Destination = result.Destination.Address()
 	p.Amount = amount.String(result.Amount)
 
 	asset, err := assetFromXDR(result.Asset)

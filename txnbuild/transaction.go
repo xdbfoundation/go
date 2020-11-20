@@ -599,7 +599,7 @@ func transactionFromParsedXDR(xdrEnv xdr.TransactionEnvelope) (*GenericTransacti
 		return newTx, nil
 	}
 
-	sourceAccount := xdrEnv.SourceAccount().ToAccountId()
+	sourceAccount := xdrEnv.SourceAccount()
 
 	totalFee := int64(xdrEnv.Fee())
 	baseFee := totalFee
