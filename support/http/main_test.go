@@ -27,4 +27,5 @@ func TestRun_setup(t *testing.T) {
 	assert.Equal(t, time.Duration(0), srv.WriteTimeout)
 	assert.Equal(t, time.Duration(0), srv.IdleTimeout)
 	assert.Equal(t, defaultListenAddr, srv.Server.Addr)
+	assert.Equal(t, time.Duration(0), srv.TCPKeepAlive)
 }
