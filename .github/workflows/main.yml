@@ -24,10 +24,20 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
+
+      - name: Install deps
+        run: sudo apt update && sudo apt install -y unzip curl wget
+
       - name: Install Go
         uses: actions/setup-go@v2
         with:
           go-version: 1.14.x
+
+      - name: Install AWS CLI
+        run: |
+          curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+          unzip awscliv2.zip
+          sudo ./aws/install
 
       - name: Build the app    
         run: |
@@ -38,11 +48,9 @@ jobs:
           sudo cp -Rf ./* /go/src/github.com/digitalbits/go/
           sudo go install github.com/digitalbits/go/services/...
 
-      - name: S3 Sync
-        uses: ItsKarma/aws-cli@v1.70.0
-        with:
-          args: aws s3 sync --delete /go/bin/ s3://digitalbits-bin/services/
+      - name: Release
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_KEY }}
-          AWS_DEFAULT_REGION: eu-central-1  
+          AWS_DEFAULT_REGION: eu-central-1
+        run: aws s3 sync /go/bin/ s3://digitalbits-bin/services/
