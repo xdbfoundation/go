@@ -47,7 +47,7 @@ jobs:
 
           sudo cp -Rf ./* /go/src/github.com/digitalbits/go/
           sudo go install github.com/digitalbits/go/services/...
-          find / -name="frontier"
+          find / -name "frontier"
       - name: Release
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY }}
