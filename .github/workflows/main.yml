@@ -47,10 +47,9 @@ jobs:
 
           sudo cp -Rf ./* /go/src/github.com/digitalbits/go/
           sudo go install github.com/digitalbits/go/services/...
-          find / -name "frontier"
       - name: Release
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_KEY }}
           AWS_DEFAULT_REGION: eu-central-1
-        run: aws s3 sync $GOROOT/bin/ s3://digitalbits-bin/services/
+        run: aws s3 sync /home/runner/go/bin/ s3://digitalbits-bin/services/
