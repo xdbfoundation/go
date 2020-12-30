@@ -51,7 +51,6 @@ jobs:
 
           sudo cp -Rf ./* /go/src/github.com/digitalbits/go
           sudo go install github.com/digitalbits/go/services/...
-          which frontier
 
       - name: Release
         run: |
