@@ -49,6 +49,7 @@ jobs:
 
           sudo cp -Rf ./* $GOPATH/
           sudo go install github.com/digitalbits/go/services/...
+          which frontier
 
       - name: Release
         run: |
