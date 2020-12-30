@@ -2,12 +2,12 @@
 package txnbuild
 
 import (
-	"github.com/stellar/go/support/errors"
-	"github.com/stellar/go/xdr"
+	"github.com/digitalbits/go/support/errors"
+	"github.com/digitalbits/go/xdr"
 )
 
-// ClaimClaimableBalance represents the Stellar claim claimable balance operation. See
-// https://www.stellar.org/developers/guides/concepts/list-of-operations.html
+// ClaimClaimableBalance represents the DigitalBits claim claimable balance operation. See
+// https://www.digitalbits.org/developers/guides/concepts/list-of-operations.html
 type ClaimClaimableBalance struct {
 	BalanceID     string
 	SourceAccount Account

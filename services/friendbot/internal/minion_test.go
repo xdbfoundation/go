@@ -4,23 +4,23 @@ import (
 	"sync"
 	"testing"
 
-	"github.com/stellar/go/clients/horizonclient"
-	"github.com/stellar/go/keypair"
-	hProtocol "github.com/stellar/go/protocols/horizon"
-	"github.com/stellar/go/support/errors"
-	"github.com/stellar/go/txnbuild"
+	"github.com/digitalbits/go/clients/frontierclient"
+	"github.com/digitalbits/go/keypair"
+	hProtocol "github.com/digitalbits/go/protocols/frontier"
+	"github.com/digitalbits/go/support/errors"
+	"github.com/digitalbits/go/txnbuild"
 	"github.com/stretchr/testify/assert"
 )
 
-// This test aims to reproduce the issue found on https://github.com/stellar/go/issues/2271
+// This test aims to reproduce the issue found on https://github.com/digitalbits/go/issues/2271
 // in which Minion.Run() will try to send multiple messages to a channel that gets closed
 // immediately after receiving one message.
 func TestMinion_NoChannelErrors(t *testing.T) {
-	mockSubmitTransaction := func(minion *Minion, hclient *horizonclient.Client, tx string) (txn *hProtocol.Transaction, err error) {
+	mockSubmitTransaction := func(minion *Minion, hclient *frontierclient.Client, tx string) (txn *hProtocol.Transaction, err error) {
 		return txn, nil
 	}
 
-	mockCheckSequenceRefresh := func(minion *Minion, hclient *horizonclient.Client) (err error) {
+	mockCheckSequenceRefresh := func(minion *Minion, hclient *frontierclient.Client) (err error) {
 		return errors.New("could not refresh sequence")
 	}
 
@@ -78,14 +78,14 @@ func TestMinion_CorrectNumberOfTxSubmissions(t *testing.T) {
 		mux          sync.Mutex
 	)
 
-	mockSubmitTransaction := func(minion *Minion, hclient *horizonclient.Client, tx string) (txn *hProtocol.Transaction, err error) {
+	mockSubmitTransaction := func(minion *Minion, hclient *frontierclient.Client, tx string) (txn *hProtocol.Transaction, err error) {
 		mux.Lock()
 		numTxSubmits++
 		mux.Unlock()
 		return txn, nil
 	}
 
-	mockCheckSequenceRefresh := func(minion *Minion, hclient *horizonclient.Client) (err error) {
+	mockCheckSequenceRefresh := func(minion *Minion, hclient *frontierclient.Client) (err error) {
 		return nil
 	}
 

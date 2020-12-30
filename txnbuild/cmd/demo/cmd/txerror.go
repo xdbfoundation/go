@@ -6,19 +6,19 @@ import (
 	log "github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
 
-	"github.com/stellar/go/clients/horizonclient"
-	demo "github.com/stellar/go/txnbuild/cmd/demo/operations"
+	"github.com/digitalbits/go/clients/frontierclient"
+	demo "github.com/digitalbits/go/txnbuild/cmd/demo/operations"
 )
 
 // txerrorCmd represents the txerror command
 var txerrorCmd = &cobra.Command{
 	Use:   "txerror",
 	Short: "Submit a purposefully invalid transaction",
-	Long:  `This command submits an invalid transaction, in order to demonstrate a Horizon error return.`,
+	Long:  `This command submits an invalid transaction, in order to demonstrate a Frontier error return.`,
 	Run: func(cmd *cobra.Command, args []string) {
 		log.Info("Demonstrating a bad transaction response...")
 		keys := demo.InitKeys(4)
-		client := horizonclient.DefaultTestNetClient
+		client := frontierclient.DefaultTestNetClient
 
 		demo.TXError(client, keys)
 		fmt.Println("Transaction complete.")

@@ -4,10 +4,10 @@ import (
 	"encoding/hex"
 	"io"
 
-	"github.com/stellar/go/ingest/ledgerbackend"
-	"github.com/stellar/go/network"
-	"github.com/stellar/go/support/errors"
-	"github.com/stellar/go/xdr"
+	"github.com/digitalbits/go/ingest/ledgerbackend"
+	"github.com/digitalbits/go/network"
+	"github.com/digitalbits/go/support/errors"
+	"github.com/digitalbits/go/xdr"
 )
 
 // LedgerTransactionReader reads transactions for a given ledger sequence from a backend.
@@ -88,7 +88,7 @@ func (reader *LedgerTransactionReader) storeTransactions(lcm xdr.LedgerCloseMeta
 			len(lcm.V0.TxProcessing[i].FeeProcessing) > 0 {
 			return errors.New(
 				"TransactionMeta.V=2 is required in protocol version older than version 10. " +
-					"Please process ledgers again using the latest stellar-core version.",
+					"Please process ledgers again using the latest digitalbits-core version.",
 			)
 		}
 

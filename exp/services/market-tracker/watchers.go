@@ -41,7 +41,7 @@ func createSpread(labels prometheus.Labels) Spread {
 
 func createSpreadGauge(depthShort, depthLong string, labels prometheus.Labels) prometheus.Gauge {
 	return promauto.NewGauge(prometheus.GaugeOpts{
-		Name:        fmt.Sprintf("stellar_market_tracker_spread%s", depthShort),
+		Name:        fmt.Sprintf("digitalbits_market_tracker_spread%s", depthShort),
 		ConstLabels: labels,
 		Help:        fmt.Sprintf("Percentage market spread %s", depthLong),
 	})
@@ -50,32 +50,32 @@ func createSpreadGauge(depthShort, depthLong string, labels prometheus.Labels) p
 func createVolume(labels prometheus.Labels) Volume {
 	return Volume{
 		BaseVolumeBaseAsset: promauto.NewGauge(prometheus.GaugeOpts{
-			Name:        "stellar_market_tracker_volume_base_base",
+			Name:        "digitalbits_market_tracker_volume_base_base",
 			ConstLabels: labels,
 			Help:        "Base asset trading volume, in base asset, over last 1d",
 		}),
 		BaseVolumeUsd: promauto.NewGauge(prometheus.GaugeOpts{
-			Name:        "stellar_market_tracker_volume_base_usd",
+			Name:        "digitalbits_market_tracker_volume_base_usd",
 			ConstLabels: labels,
 			Help:        "Base asset trading volume, in USD, over last 1d",
 		}),
 		CounterVolumeBaseAsset: promauto.NewGauge(prometheus.GaugeOpts{
-			Name:        "stellar_market_tracker_volume_counter_base",
+			Name:        "digitalbits_market_tracker_volume_counter_base",
 			ConstLabels: labels,
 			Help:        "Counter asset trading volume, in base asset, over last 1d",
 		}),
 		CounterVolumeUsd: promauto.NewGauge(prometheus.GaugeOpts{
-			Name:        "stellar_market_tracker_volume_counter_usd",
+			Name:        "digitalbits_market_tracker_volume_counter_usd",
 			ConstLabels: labels,
 			Help:        "Counter asset trading volume, in USD, over last 1d",
 		}),
 		TradeCount: promauto.NewGauge(prometheus.GaugeOpts{
-			Name:        "stellar_market_tracker_tradecount",
+			Name:        "digitalbits_market_tracker_tradecount",
 			ConstLabels: labels,
 			Help:        "Number of trades over last 1d",
 		}),
 		TradeAvgAmt: promauto.NewGauge(prometheus.GaugeOpts{
-			Name:        "stellar_market_tracker_tradeavg",
+			Name:        "digitalbits_market_tracker_tradeavg",
 			ConstLabels: labels,
 			Help:        "Average trade amount over last 1d",
 		}),
@@ -95,7 +95,7 @@ func createSlippage(labels prometheus.Labels) Slippage {
 
 func createSlippageGauge(orderType, depth string, labels prometheus.Labels) prometheus.Gauge {
 	return promauto.NewGauge(prometheus.GaugeOpts{
-		Name:        fmt.Sprintf("stellar_market_tracker_%s_slippage_%s", orderType, depth),
+		Name:        fmt.Sprintf("digitalbits_market_tracker_%s_slippage_%s", orderType, depth),
 		ConstLabels: labels,
 		Help:        fmt.Sprintf("Slippage of %s at depth %s", orderType, depth),
 	})
@@ -104,32 +104,32 @@ func createSlippageGauge(orderType, depth string, labels prometheus.Labels) prom
 func createOrderbook(labels prometheus.Labels) Orderbook {
 	return Orderbook{
 		NumBids: promauto.NewGauge(prometheus.GaugeOpts{
-			Name:        "stellar_market_tracker_numbids",
+			Name:        "digitalbits_market_tracker_numbids",
 			ConstLabels: labels,
 			Help:        "Number of bids in the orderbook",
 		}),
 		NumAsks: promauto.NewGauge(prometheus.GaugeOpts{
-			Name:        "stellar_market_tracker_numasks",
+			Name:        "digitalbits_market_tracker_numasks",
 			ConstLabels: labels,
 			Help:        "Number of asks in the orderbook",
 		}),
 		BidBaseVolume: promauto.NewGauge(prometheus.GaugeOpts{
-			Name:        "stellar_market_tracker_bidbasevol",
+			Name:        "digitalbits_market_tracker_bidbasevol",
 			ConstLabels: labels,
 			Help:        "Volume of bids in the orderbook in base currency",
 		}),
 		BidUsdVolume: promauto.NewGauge(prometheus.GaugeOpts{
-			Name:        "stellar_market_tracker_bidusdvol",
+			Name:        "digitalbits_market_tracker_bidusdvol",
 			ConstLabels: labels,
 			Help:        "Volume of bids in the orderbook in USD",
 		}),
 		AskBaseVolume: promauto.NewGauge(prometheus.GaugeOpts{
-			Name:        "stellar_market_tracker_askbasevol",
+			Name:        "digitalbits_market_tracker_askbasevol",
 			ConstLabels: labels,
 			Help:        "Volume of asks in the orderbook in base",
 		}),
 		AskUsdVolume: promauto.NewGauge(prometheus.GaugeOpts{
-			Name:        "stellar_market_tracker_askusdvol",
+			Name:        "digitalbits_market_tracker_askusdvol",
 			ConstLabels: labels,
 			Help:        "Volume of asks in the orderbook in USD",
 		}),
@@ -139,17 +139,17 @@ func createOrderbook(labels prometheus.Labels) Orderbook {
 func createFairValue(labels prometheus.Labels) FairValue {
 	return FairValue{
 		Percent: promauto.NewGauge(prometheus.GaugeOpts{
-			Name:        "stellar_market_tracker_fmp",
+			Name:        "digitalbits_market_tracker_fmp",
 			ConstLabels: labels,
 			Help:        "Pct difference of DEX value from fair market value",
 		}),
 		RefPrice: promauto.NewGauge(prometheus.GaugeOpts{
-			Name:        "stellar_market_tracker_refprice",
+			Name:        "digitalbits_market_tracker_refprice",
 			ConstLabels: labels,
 			Help:        "Reference price of real asset (in USD)",
 		}),
 		DexPrice: promauto.NewGauge(prometheus.GaugeOpts{
-			Name:        "stellar_market_tracker_price",
+			Name:        "digitalbits_market_tracker_price",
 			ConstLabels: labels,
 			Help:        "Mid-market price on the DEX in USD",
 		}),

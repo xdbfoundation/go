@@ -1,13 +1,13 @@
 package txnbuild
 
 import (
-	"github.com/stellar/go/amount"
-	"github.com/stellar/go/support/errors"
-	"github.com/stellar/go/xdr"
+	"github.com/digitalbits/go/amount"
+	"github.com/digitalbits/go/support/errors"
+	"github.com/digitalbits/go/xdr"
 )
 
-// Payment represents the Stellar payment operation. See
-// https://www.stellar.org/developers/guides/concepts/list-of-operations.html
+// Payment represents the DigitalBits payment operation. See
+// https://www.digitalbits.org/developers/guides/concepts/list-of-operations.html
 type Payment struct {
 	Destination   string
 	Amount        string
@@ -81,7 +81,7 @@ func (p *Payment) Validate() error {
 		return NewValidationError("Destination", err.Error())
 	}
 
-	err = validateStellarAsset(p.Asset)
+	err = validateDigitalBitsAsset(p.Asset)
 	if err != nil {
 		return NewValidationError("Asset", err.Error())
 	}

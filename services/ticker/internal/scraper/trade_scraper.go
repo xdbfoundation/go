@@ -3,10 +3,10 @@ package scraper
 import (
 	"time"
 
-	"github.com/stellar/go/services/ticker/internal/utils"
+	"github.com/digitalbits/go/services/ticker/internal/utils"
 
-	horizonclient "github.com/stellar/go/clients/horizonclient"
-	hProtocol "github.com/stellar/go/protocols/horizon"
+	frontierclient "github.com/digitalbits/go/clients/frontierclient"
+	hProtocol "github.com/digitalbits/go/protocols/frontier"
 )
 
 // checkRecords check if a list of records contains entries older than minTime. If it does,
@@ -26,10 +26,10 @@ func (c *ScraperConfig) checkRecords(trades []hProtocol.Trade, minTime time.Time
 	return
 }
 
-// retrieveTrades retrieves trades from the Horizon API for the last timeDelta period.
+// retrieveTrades retrieves trades from the Frontier API for the last timeDelta period.
 // If limit = 0, will fetch all trades within that period.
 func (c *ScraperConfig) retrieveTrades(since time.Time, limit int) (trades []hProtocol.Trade, err error) {
-	r := horizonclient.TradeRequest{Limit: 200, Order: horizonclient.OrderDesc}
+	r := frontierclient.TradeRequest{Limit: 200, Order: frontierclient.OrderDesc}
 
 	tradesPage, err := c.Client.Trades(r)
 	if err != nil {
@@ -66,7 +66,7 @@ func (c *ScraperConfig) retrieveTrades(since time.Time, limit int) (trades []hPr
 		err = utils.Retry(5, 5*time.Second, c.Logger, func() error {
 			tradesPage, err = c.Client.Trades(r)
 			if err != nil {
-				c.Logger.Infoln("Horizon rate limit reached!")
+				c.Logger.Infoln("Frontier rate limit reached!")
 			}
 			return err
 		})
@@ -78,14 +78,14 @@ func (c *ScraperConfig) retrieveTrades(since time.Time, limit int) (trades []hPr
 	return
 }
 
-// streamTrades streams trades directly from horizon and calls the handler function
+// streamTrades streams trades directly from frontier and calls the handler function
 // whenever a new trade appears.
-func (c *ScraperConfig) streamTrades(h horizonclient.TradeHandler, cursor string) error {
+func (c *ScraperConfig) streamTrades(h frontierclient.TradeHandler, cursor string) error {
 	if cursor == "" {
 		cursor = "now"
 	}
 
-	r := horizonclient.TradeRequest{
+	r := frontierclient.TradeRequest{
 		Limit:  200,
 		Cursor: cursor,
 	}

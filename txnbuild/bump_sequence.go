@@ -1,12 +1,12 @@
 package txnbuild
 
 import (
-	"github.com/stellar/go/support/errors"
-	"github.com/stellar/go/xdr"
+	"github.com/digitalbits/go/support/errors"
+	"github.com/digitalbits/go/xdr"
 )
 
-// BumpSequence represents the Stellar bump sequence operation. See
-// https://www.stellar.org/developers/guides/concepts/list-of-operations.html
+// BumpSequence represents the DigitalBits bump sequence operation. See
+// https://www.digitalbits.org/developers/guides/concepts/list-of-operations.html
 type BumpSequence struct {
 	BumpTo        int64
 	SourceAccount Account

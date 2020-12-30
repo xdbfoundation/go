@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/stellar/go/keypair"
-	"github.com/stellar/go/support/errors"
-	"github.com/stellar/go/xdr"
+	"github.com/digitalbits/go/keypair"
+	"github.com/digitalbits/go/support/errors"
+	"github.com/digitalbits/go/xdr"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
@@ -117,53 +117,53 @@ func convertToV0(tx *Transaction) {
 	tx.envelope.Type = xdr.EnvelopeTypeEnvelopeTypeTxV0
 }
 
-func TestValidateStellarPublicKey(t *testing.T) {
+func TestValidateDigitalBitsPublicKey(t *testing.T) {
 	validKey := "GDWZCOEQRODFCH6ISYQPWY67L3ULLWS5ISXYYL5GH43W7YFMTLB65PYM"
-	err := validateStellarPublicKey(validKey)
+	err := validateDigitalBitsPublicKey(validKey)
 	assert.NoError(t, err, "public key should be valid")
 
 	invalidKey := "GDWZCOEQRODFCH6ISYQPWY67L3ULLWS5ISXYYL5GH43W7Y"
-	err = validateStellarPublicKey(invalidKey)
-	expectedErrMsg := "GDWZCOEQRODFCH6ISYQPWY67L3ULLWS5ISXYYL5GH43W7Y is not a valid stellar public key"
+	err = validateDigitalBitsPublicKey(invalidKey)
+	expectedErrMsg := "GDWZCOEQRODFCH6ISYQPWY67L3ULLWS5ISXYYL5GH43W7Y is not a valid digitalbits public key"
 	require.EqualError(t, err, expectedErrMsg, "public key should be invalid")
 
 	invalidKey = ""
-	err = validateStellarPublicKey(invalidKey)
+	err = validateDigitalBitsPublicKey(invalidKey)
 	expectedErrMsg = "public key is undefined"
 	require.EqualError(t, err, expectedErrMsg, "public key should be invalid")
 
 	invalidKey = "SBCVMMCBEDB64TVJZFYJOJAERZC4YVVUOE6SYR2Y76CBTENGUSGWRRVO"
-	err = validateStellarPublicKey(invalidKey)
-	expectedErrMsg = "SBCVMMCBEDB64TVJZFYJOJAERZC4YVVUOE6SYR2Y76CBTENGUSGWRRVO is not a valid stellar public key"
+	err = validateDigitalBitsPublicKey(invalidKey)
+	expectedErrMsg = "SBCVMMCBEDB64TVJZFYJOJAERZC4YVVUOE6SYR2Y76CBTENGUSGWRRVO is not a valid digitalbits public key"
 	require.EqualError(t, err, expectedErrMsg, "public key should be invalid")
 }
 
-func TestValidateStellarAssetWithValidAsset(t *testing.T) {
+func TestValidateDigitalBitsAssetWithValidAsset(t *testing.T) {
 	nativeAsset := NativeAsset{}
-	err := validateStellarAsset(nativeAsset)
+	err := validateDigitalBitsAsset(nativeAsset)
 	assert.NoError(t, err)
 
 	kp0 := newKeypair0()
 	creditAsset := CreditAsset{"XYZ", kp0.Address()}
-	err = validateStellarAsset(creditAsset)
+	err = validateDigitalBitsAsset(creditAsset)
 	assert.NoError(t, err)
 }
 
-func TestValidateStellarAssetWithInValidAsset(t *testing.T) {
-	err := validateStellarAsset(nil)
+func TestValidateDigitalBitsAssetWithInValidAsset(t *testing.T) {
+	err := validateDigitalBitsAsset(nil)
 	assert.Error(t, err)
 	expectedErrMsg := "asset is undefined"
 	require.EqualError(t, err, expectedErrMsg, "An asset is required")
 
 	kp0 := newKeypair0()
 	creditAssetNoCode := CreditAsset{Code: "", Issuer: kp0.Address()}
-	err = validateStellarAsset(creditAssetNoCode)
+	err = validateDigitalBitsAsset(creditAssetNoCode)
 	assert.Error(t, err)
 	expectedErrMsg = "asset code length must be between 1 and 12 characters"
 	require.EqualError(t, err, expectedErrMsg, "An asset code is required")
 
 	creditAssetNoIssuer := CreditAsset{Code: "ABC", Issuer: ""}
-	err = validateStellarAsset(creditAssetNoIssuer)
+	err = validateDigitalBitsAsset(creditAssetNoIssuer)
 	assert.Error(t, err)
 	expectedErrMsg = "asset issuer: public key is undefined"
 	require.EqualError(t, err, expectedErrMsg, "An asset issuer is required")
@@ -187,22 +187,22 @@ func TestValidateAmountInvalidValue(t *testing.T) {
 	err := validateAmount(int64(-10))
 	assert.Error(t, err)
 	expectedErrMsg := "amount can not be negative"
-	require.EqualError(t, err, expectedErrMsg, "should be a valid stellar amount")
+	require.EqualError(t, err, expectedErrMsg, "should be a valid digitalbits amount")
 
 	err = validateAmount("-10")
 	assert.Error(t, err)
 	expectedErrMsg = "amount can not be negative"
-	require.EqualError(t, err, expectedErrMsg, "should be a valid stellar amount")
+	require.EqualError(t, err, expectedErrMsg, "should be a valid digitalbits amount")
 
 	err = validateAmount(10)
 	assert.Error(t, err)
 	expectedErrMsg = "could not parse expected numeric value 10"
-	require.EqualError(t, err, expectedErrMsg, "should be a valid stellar amount")
+	require.EqualError(t, err, expectedErrMsg, "should be a valid digitalbits amount")
 
 	err = validateAmount("abc")
 	assert.Error(t, err)
 	expectedErrMsg = "invalid amount format: abc"
-	require.EqualError(t, err, expectedErrMsg, "should be a valid stellar amount")
+	require.EqualError(t, err, expectedErrMsg, "should be a valid digitalbits amount")
 }
 
 func TestValidateAllowTrustAsset(t *testing.T) {

@@ -3,13 +3,13 @@ package serve
 import (
 	"net/http"
 
-	"github.com/stellar/go/exp/services/recoverysigner/internal/account"
-	"github.com/stellar/go/exp/services/recoverysigner/internal/serve/auth"
-	"github.com/stellar/go/keypair"
-	"github.com/stellar/go/support/http/httpdecode"
-	supportlog "github.com/stellar/go/support/log"
-	"github.com/stellar/go/support/render/httpjson"
-	"github.com/stellar/go/txnbuild"
+	"github.com/digitalbits/go/exp/services/recoverysigner/internal/account"
+	"github.com/digitalbits/go/exp/services/recoverysigner/internal/serve/auth"
+	"github.com/digitalbits/go/keypair"
+	"github.com/digitalbits/go/support/http/httpdecode"
+	supportlog "github.com/digitalbits/go/support/log"
+	"github.com/digitalbits/go/support/render/httpjson"
+	"github.com/digitalbits/go/txnbuild"
 )
 
 type accountSignHandler struct {

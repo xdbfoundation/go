@@ -3,13 +3,13 @@ package txnbuild
 import (
 	"math"
 
-	"github.com/stellar/go/amount"
-	"github.com/stellar/go/support/errors"
-	"github.com/stellar/go/xdr"
+	"github.com/digitalbits/go/amount"
+	"github.com/digitalbits/go/support/errors"
+	"github.com/digitalbits/go/xdr"
 )
 
-// ChangeTrust represents the Stellar change trust operation. See
-// https://www.stellar.org/developers/guides/concepts/list-of-operations.html.
+// ChangeTrust represents the DigitalBits change trust operation. See
+// https://www.digitalbits.org/developers/guides/concepts/list-of-operations.html.
 // If Limit is omitted, it defaults to txnbuild.MaxTrustlineLimit.
 type ChangeTrust struct {
 	Line          Asset

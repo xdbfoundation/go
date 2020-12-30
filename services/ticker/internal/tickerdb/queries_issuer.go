@@ -3,7 +3,7 @@ package tickerdb
 import (
 	"strings"
 
-	"github.com/stellar/go/services/ticker/internal/utils"
+	"github.com/digitalbits/go/services/ticker/internal/utils"
 )
 
 // InsertOrUpdateIssuer inserts an Issuer on the database (if new),

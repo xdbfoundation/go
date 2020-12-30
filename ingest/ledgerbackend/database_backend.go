@@ -4,10 +4,10 @@ import (
 	"database/sql"
 	"sort"
 
-	"github.com/stellar/go/network"
-	"github.com/stellar/go/support/db"
-	"github.com/stellar/go/support/errors"
-	"github.com/stellar/go/xdr"
+	"github.com/digitalbits/go/network"
+	"github.com/digitalbits/go/support/db"
+	"github.com/digitalbits/go/support/errors"
+	"github.com/digitalbits/go/xdr"
 )
 
 const (
@@ -212,7 +212,7 @@ func (dbb *DatabaseBackend) GetLedger(sequence uint32) (bool, xdr.LedgerCloseMet
 // CreateSession returns a new db.Session that connects to the given DB settings.
 func createSession(dataSourceName string) (*db.Session, error) {
 	if dataSourceName == "" {
-		return nil, errors.New("missing DatabaseBackend.DataSourceName (e.g. \"postgres://stellar:postgres@localhost:8002/core\")")
+		return nil, errors.New("missing DatabaseBackend.DataSourceName (e.g. \"postgres://digitalbits:postgres@localhost:8002/core\")")
 	}
 
 	return db.Open(dbDriver, dataSourceName)

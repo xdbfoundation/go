@@ -7,15 +7,15 @@ import (
 	"net/url"
 	"strings"
 
-	"github.com/stellar/go/address"
-	proto "github.com/stellar/go/protocols/federation"
-	"github.com/stellar/go/support/errors"
+	"github.com/digitalbits/go/address"
+	proto "github.com/digitalbits/go/protocols/federation"
+	"github.com/digitalbits/go/support/errors"
 )
 
-// LookupByAddress performs a federated lookup following to the stellar
+// LookupByAddress performs a federated lookup following to the digitalbits
 // federation protocol using the "name" type request.  The provided address is
 // used to resolve what server the request should be made against.  NOTE: the
-// "name" type is a legacy holdover from the legacy stellar network's federation
+// "name" type is a legacy holdover from the legacy digitalbits network's federation
 // protocol. It is unfortunate.
 func (c *Client) LookupByAddress(addy string) (*proto.NameResponse, error) {
 	_, domain, err := address.Split(addy)
@@ -46,12 +46,12 @@ func (c *Client) LookupByAddress(addy string) (*proto.NameResponse, error) {
 	return &resp, nil
 }
 
-// LookupByAccountID performs a federated lookup following to the stellar
+// LookupByAccountID performs a federated lookup following to the digitalbits
 // federation protocol using the "id" type request.  The provided strkey-encoded
 // account id is used to resolve what server the request should be made against.
 func (c *Client) LookupByAccountID(aid string) (*proto.IDResponse, error) {
 
-	domain, err := c.Horizon.HomeDomainForAccount(aid)
+	domain, err := c.Frontier.HomeDomainForAccount(aid)
 	if err != nil {
 		return nil, errors.Wrap(err, "get homedomain failed")
 	}
@@ -79,7 +79,7 @@ func (c *Client) LookupByAccountID(aid string) (*proto.IDResponse, error) {
 	return &resp, nil
 }
 
-// ForwardRequest performs a federated lookup following to the stellar
+// ForwardRequest performs a federated lookup following to the digitalbits
 // federation protocol using the "forward" type request.
 func (c *Client) ForwardRequest(domain string, fields url.Values) (*proto.NameResponse, error) {
 	fserv, err := c.getFederationServer(domain)
@@ -104,13 +104,13 @@ func (c *Client) ForwardRequest(domain string, fields url.Values) (*proto.NameRe
 }
 
 func (c *Client) getFederationServer(domain string) (string, error) {
-	stoml, err := c.StellarTOML.GetStellarToml(domain)
+	stoml, err := c.DigitalBitsTOML.GetDigitalBitsToml(domain)
 	if err != nil {
-		return "", errors.Wrap(err, "get stellar.toml failed")
+		return "", errors.Wrap(err, "get digitalbits.toml failed")
 	}
 
 	if stoml.FederationServer == "" {
-		return "", errors.New("stellar.toml is missing federation server info")
+		return "", errors.New("digitalbits.toml is missing federation server info")
 	}
 
 	if !c.AllowHTTP && !strings.HasPrefix(stoml.FederationServer, "https://") {

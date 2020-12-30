@@ -11,7 +11,7 @@ do
   sort -S 500M -o ${i}_sorted.csv ${i}.csv
 done
 
-echo "Sorting stellar-core output files..."
+echo "Sorting digitalbits-core output files..."
 for i in "${ENTRIES[@]}"
 do
   if test -f "${i}_core_sorted.csv"; then

@@ -37,6 +37,6 @@ bumps.  A breaking change will get clearly notified in this log.
 
 ## [v0.2.0] - 2016-08-17
 
-Initial release after import from https://github.com/stellar/federation
+Initial release after import from https://github.com/digitalbits/federation
 
-[Unreleased]: https://github.com/stellar/go/compare/federation-v0.2.0...master
+[Unreleased]: https://github.com/digitalbits/go/compare/federation-v0.2.0...master

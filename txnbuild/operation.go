@@ -1,10 +1,10 @@
 package txnbuild
 
 import (
-	"github.com/stellar/go/xdr"
+	"github.com/digitalbits/go/xdr"
 )
 
-// Operation represents the operation types of the Stellar network.
+// Operation represents the operation types of the DigitalBits network.
 type Operation interface {
 	BuildXDR() (xdr.Operation, error)
 	FromXDR(xdrOp xdr.Operation) error

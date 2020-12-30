@@ -1,19 +1,19 @@
 package txnbuild
 
 import (
-	"github.com/stellar/go/amount"
-	"github.com/stellar/go/support/errors"
-	"github.com/stellar/go/xdr"
+	"github.com/digitalbits/go/amount"
+	"github.com/digitalbits/go/support/errors"
+	"github.com/digitalbits/go/xdr"
 )
 
-// PathPayment represents the Stellar path_payment operation. This operation was removed
-// in Stellar Protocol 12 and replaced by PathPaymentStrictReceive.
+// PathPayment represents the DigitalBits path_payment operation. This operation was removed
+// in DigitalBits Protocol 12 and replaced by PathPaymentStrictReceive.
 // Deprecated: This operation was renamed to PathPaymentStrictReceive,
 // which functions identically.
 type PathPayment = PathPaymentStrictReceive
 
-// PathPaymentStrictReceive represents the Stellar path_payment_strict_receive operation. See
-// https://www.stellar.org/developers/guides/concepts/list-of-operations.html
+// PathPaymentStrictReceive represents the DigitalBits path_payment_strict_receive operation. See
+// https://www.digitalbits.org/developers/guides/concepts/list-of-operations.html
 type PathPaymentStrictReceive struct {
 	SendAsset     Asset
 	SendMax       string
@@ -137,12 +137,12 @@ func (pp *PathPaymentStrictReceive) Validate() error {
 		return NewValidationError("Destination", err.Error())
 	}
 
-	err = validateStellarAsset(pp.SendAsset)
+	err = validateDigitalBitsAsset(pp.SendAsset)
 	if err != nil {
 		return NewValidationError("SendAsset", err.Error())
 	}
 
-	err = validateStellarAsset(pp.DestAsset)
+	err = validateDigitalBitsAsset(pp.DestAsset)
 	if err != nil {
 		return NewValidationError("DestAsset", err.Error())
 	}

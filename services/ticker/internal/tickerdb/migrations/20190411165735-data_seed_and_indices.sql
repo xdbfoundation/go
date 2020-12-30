@@ -14,15 +14,15 @@ INSERT INTO public.issuers (
     org_twitter
 ) VALUES (
     'native',
-    'Stellar Development Foundation',
-    'http://stellar.org',
+    'DigitalBits Development Foundation',
+    'http://digitalbits.org',
     '',
     '',
     '',
     '',
     '',
     '',
-    'https://twitter.com/stellarorg'
+    'https://twitter.com/digitalbitsorg'
 );
 
 INSERT INTO public.assets (
@@ -69,7 +69,7 @@ INSERT INTO public.assets (
     now(),
     now(),
     7,
-    'Stellar Lumens',
+    'DigitalBits Lumens',
     '',
     '',
     FALSE,
@@ -81,7 +81,7 @@ INSERT INTO public.assets (
     '',
     '',
     '',
-    (SELECT id FROM public.issuers WHERE public_key = 'native' AND org_twitter = 'https://twitter.com/stellarorg'),
+    (SELECT id FROM public.issuers WHERE public_key = 'native' AND org_twitter = 'https://twitter.com/digitalbitsorg'),
     'native'
 );
 

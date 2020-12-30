@@ -9,11 +9,11 @@ import (
 	"testing"
 
 	"github.com/go-chi/chi"
-	"github.com/stellar/go/exp/services/recoverysigner/internal/account"
-	"github.com/stellar/go/exp/services/recoverysigner/internal/db/dbtest"
-	"github.com/stellar/go/exp/services/recoverysigner/internal/serve/auth"
-	"github.com/stellar/go/keypair"
-	supportlog "github.com/stellar/go/support/log"
+	"github.com/digitalbits/go/exp/services/recoverysigner/internal/account"
+	"github.com/digitalbits/go/exp/services/recoverysigner/internal/db/dbtest"
+	"github.com/digitalbits/go/exp/services/recoverysigner/internal/serve/auth"
+	"github.com/digitalbits/go/keypair"
+	supportlog "github.com/digitalbits/go/support/log"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
@@ -53,7 +53,7 @@ func TestAccountPut_authenticatedNotAuthorized(t *testing.T) {
 		{
 			"role": "owner",
 			"auth_methods": [
-				{ "type": "stellar_address", "value": "GBF3XFXGBGNQDN3HOSZ7NVRF6TJ2JOD5U6ELIWJOOEI6T5WKMQT2YSXQ" },
+				{ "type": "digitalbits_address", "value": "GBF3XFXGBGNQDN3HOSZ7NVRF6TJ2JOD5U6ELIWJOOEI6T5WKMQT2YSXQ" },
 				{ "type": "phone_number", "value": "+10000000000" },
 				{ "type": "email", "value": "user1@example.com" }
 			]
@@ -117,7 +117,7 @@ func TestAccountPut_notAuthenticated(t *testing.T) {
 		{
 			"role": "owner",
 			"auth_methods": [
-				{ "type": "stellar_address", "value": "GBF3XFXGBGNQDN3HOSZ7NVRF6TJ2JOD5U6ELIWJOOEI6T5WKMQT2YSXQ" },
+				{ "type": "digitalbits_address", "value": "GBF3XFXGBGNQDN3HOSZ7NVRF6TJ2JOD5U6ELIWJOOEI6T5WKMQT2YSXQ" },
 				{ "type": "phone_number", "value": "+10000000000" },
 				{ "type": "email", "value": "user1@example.com" }
 			]
@@ -181,7 +181,7 @@ func TestAccountPut_authenticatedByAccountAddress(t *testing.T) {
 		{
 			"role": "owner",
 			"auth_methods": [
-				{ "type": "stellar_address", "value": "GBF3XFXGBGNQDN3HOSZ7NVRF6TJ2JOD5U6ELIWJOOEI6T5WKMQT2YSXQ" },
+				{ "type": "digitalbits_address", "value": "GBF3XFXGBGNQDN3HOSZ7NVRF6TJ2JOD5U6ELIWJOOEI6T5WKMQT2YSXQ" },
 				{ "type": "phone_number", "value": "+10000000000" },
 				{ "type": "email", "value": "user1@example.com" }
 			]
@@ -277,7 +277,7 @@ func TestAccountPut_authenticatedByIdentityAddress(t *testing.T) {
 		{
 			"role": "owner",
 			"auth_methods": [
-				{ "type": "stellar_address", "value": "GBF3XFXGBGNQDN3HOSZ7NVRF6TJ2JOD5U6ELIWJOOEI6T5WKMQT2YSXQ" },
+				{ "type": "digitalbits_address", "value": "GBF3XFXGBGNQDN3HOSZ7NVRF6TJ2JOD5U6ELIWJOOEI6T5WKMQT2YSXQ" },
 				{ "type": "phone_number", "value": "+10000000000" },
 				{ "type": "email", "value": "user1@example.com" }
 			]
@@ -373,7 +373,7 @@ func TestAccountPut_authenticatedByPhoneNumber(t *testing.T) {
 		{
 			"role": "owner",
 			"auth_methods": [
-				{ "type": "stellar_address", "value": "GBF3XFXGBGNQDN3HOSZ7NVRF6TJ2JOD5U6ELIWJOOEI6T5WKMQT2YSXQ" },
+				{ "type": "digitalbits_address", "value": "GBF3XFXGBGNQDN3HOSZ7NVRF6TJ2JOD5U6ELIWJOOEI6T5WKMQT2YSXQ" },
 				{ "type": "phone_number", "value": "+10000000000" },
 				{ "type": "email", "value": "user1@example.com" }
 			]
@@ -469,7 +469,7 @@ func TestAccountPut_authenticatedByEmail(t *testing.T) {
 		{
 			"role": "owner",
 			"auth_methods": [
-				{ "type": "stellar_address", "value": "GBF3XFXGBGNQDN3HOSZ7NVRF6TJ2JOD5U6ELIWJOOEI6T5WKMQT2YSXQ" },
+				{ "type": "digitalbits_address", "value": "GBF3XFXGBGNQDN3HOSZ7NVRF6TJ2JOD5U6ELIWJOOEI6T5WKMQT2YSXQ" },
 				{ "type": "phone_number", "value": "+10000000000" },
 				{ "type": "email", "value": "user1@example.com" }
 			]

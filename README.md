@@ -1,26 +1,26 @@
 <div align="center">
-<a href="https://stellar.org"><img alt="Stellar" src="https://github.com/stellar/.github/raw/master/stellar-logo.png" width="558" /></a>
+<a href="https://digitalbits.org"><img alt="DigitalBits" src="https://github.com/digitalbits/.github/raw/master/digitalbits-logo.png" width="558" /></a>
 <br/>
 <strong>Creating equitable access to the global financial system</strong>
-<h1>Stellar Go Monorepo</h1>
+<h1>DigitalBits Go Monorepo</h1>
 </div>
 <p align="center">
-<a href="https://circleci.com/gh/stellar/go"><img alt="Build Status" src="https://circleci.com/gh/stellar/go.svg?style=shield" /></a>
-<a href="https://godoc.org/github.com/stellar/go"><img alt="GoDoc" src="https://godoc.org/github.com/stellar/go?status.svg" /></a>
-<a href="https://goreportcard.com/report/github.com/stellar/go"><img alt="Go Report Card" src="https://goreportcard.com/badge/github.com/stellar/go" /></a>
+<a href="https://circleci.com/gh/digitalbits/go"><img alt="Build Status" src="https://circleci.com/gh/digitalbits/go.svg?style=shield" /></a>
+<a href="https://godoc.org/github.com/digitalbits/go"><img alt="GoDoc" src="https://godoc.org/github.com/digitalbits/go?status.svg" /></a>
+<a href="https://goreportcard.com/report/github.com/digitalbits/go"><img alt="Go Report Card" src="https://goreportcard.com/badge/github.com/digitalbits/go" /></a>
 </p>
 
-This repo is the home for all of the public Go code produced by the [Stellar Development Foundation].
+This repo is the home for all of the public Go code produced by the [DigitalBits Development Foundation].
 
-This repo contains various tools and services that you can use and deploy, as well as the SDK you can use to develop applications that integrate with the Stellar network.
+This repo contains various tools and services that you can use and deploy, as well as the SDK you can use to develop applications that integrate with the DigitalBits network.
 
 ## Package Index
 
-* [Horizon Server](services/horizon): Full-featured API server for Stellar network
-* [Go Horizon SDK - horizonclient](clients/horizonclient): Client for Horizon server (queries and transaction submission)
-* [Go Horizon SDK - txnbuild](txnbuild): Construct Stellar transactions and operations
-* [Ticker](services/ticker): An API server that provides statistics about assets and markets on the Stellar network
-* [Keystore](services/keystore): An API server that is used to store and manage encrypted keys for Stellar client applications
+* [Frontier Server](services/frontier): Full-featured API server for DigitalBits network
+* [Go Frontier SDK - frontierclient](clients/frontierclient): Client for Frontier server (queries and transaction submission)
+* [Go Frontier SDK - txnbuild](txnbuild): Construct DigitalBits transactions and operations
+* [Ticker](services/ticker): An API server that provides statistics about assets and markets on the DigitalBits network
+* [Keystore](services/keystore): An API server that is used to store and manage encrypted keys for DigitalBits client applications
 * Servers for Anchors & Financial Institutions
   * [Compliance Server](services/compliance): Allows financial institutions to exchange KYC information
   * [Federation Server](services/federation): Allows organizations to provide addresses for users (`jane*examplebank.com`)
@@ -37,10 +37,10 @@ You can choose to checkout this repository into a [GOPATH](https://github.com/go
 
 In addition to the other top-level packages, there are a few special directories that contain specific types of packages:
 
-* **clients** contains packages that provide client packages to the various Stellar services.
+* **clients** contains packages that provide client packages to the various DigitalBits services.
 * **exp** contains experimental packages.  Use at your own risk.
-* **handlers** contains packages that provide pluggable implementors of `http.Handler` that make it easier to incorporate portions of the Stellar protocol into your own http server. 
-* **support** contains packages that are not intended for consumption outside of Stellar's other packages.  Packages that provide common infrastructure for use in our services and tools should go here, such as `db` or `log`. 
+* **handlers** contains packages that provide pluggable implementors of `http.Handler` that make it easier to incorporate portions of the DigitalBits protocol into your own http server. 
+* **support** contains packages that are not intended for consumption outside of DigitalBits's other packages.  Packages that provide common infrastructure for use in our services and tools should go here, such as `db` or `log`. 
 * **support/scripts** contains single-file go programs and bash scripts used to support the development of this repo. 
 * **services** contains packages that compile to applications that are long-running processes (such as API servers).
 * **tools** contains packages that compile to command line applications.
@@ -49,7 +49,7 @@ Each of these directories have their own README file that explain further the na
 
 ### Other packages
 
-In addition to the packages described above, this repository contains various packages related to working with the Stellar network from a go program.  It's recommended that you use [godoc](https://godoc.org/github.com/stellar/go#pkg-subdirectories) to browse the documentation for each.
+In addition to the packages described above, this repository contains various packages related to working with the DigitalBits network from a go program.  It's recommended that you use [godoc](https://godoc.org/github.com/digitalbits/go#pkg-subdirectories) to browse the documentation for each.
 
 
 ## Package source layout
@@ -81,4 +81,4 @@ Contributions are welcome! See [CONTRIBUTING.md](CONTRIBUTING.md) for more detai
 
 See [DEVELOPING.md](DEVELOPING.md) for helpful instructions for getting started developing code in this repository.
 
-[Stellar Development Foundation]: https://stellar.org
+[DigitalBits Development Foundation]: https://digitalbits.org

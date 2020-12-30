@@ -10,7 +10,7 @@ import (
 	"testing"
 
 	ge "github.com/go-errors/errors"
-	"github.com/stellar/go/support/test"
+	"github.com/digitalbits/go/support/test"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -39,8 +39,8 @@ func TestRender(t *testing.T) {
 			201,
 		}, {
 			"renders the extras correctly",
-			P{Extras: map[string]interface{}{"hello": "stellar"}},
-			[]string{"hello", "stellar"},
+			P{Extras: map[string]interface{}{"hello": "digitalbits"}},
+			[]string{"hello", "digitalbits"},
 			0,
 		},
 	}
@@ -97,7 +97,7 @@ func TestServerErrorConversion(t *testing.T) {
 	}
 }
 
-// TestInflate test errors that come inflated from horizon
+// TestInflate test errors that come inflated from frontier
 func TestInflate(t *testing.T) {
 	testCase := struct {
 		name string
@@ -105,8 +105,8 @@ func TestInflate(t *testing.T) {
 		want string
 	}{
 		"renders the type correctly",
-		P{Type: "https://stellar.org/horizon-errors/not_found"},
-		"https://stellar.org/horizon-errors/not_found",
+		P{Type: "https://digitalbits.org/frontier-errors/not_found"},
+		"https://digitalbits.org/frontier-errors/not_found",
 	}
 
 	t.Run(testCase.name, func(t *testing.T) {

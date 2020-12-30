@@ -8,9 +8,9 @@ import (
 	"time"
 
 	migrate "github.com/rubenv/sql-migrate"
-	"github.com/stellar/go/services/ticker/internal/tickerdb"
-	"github.com/stellar/go/services/ticker/internal/tickerdb/tickerdbtest"
-	"github.com/stellar/go/support/db/dbtest"
+	"github.com/digitalbits/go/services/ticker/internal/tickerdb"
+	"github.com/digitalbits/go/services/ticker/internal/tickerdb/tickerdbtest"
+	"github.com/digitalbits/go/support/db/dbtest"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
@@ -110,7 +110,7 @@ func TestRetrieveMarketData(t *testing.T) {
 	// Now let's create the trades:
 	trades := []tickerdb.Trade{
 		tickerdb.Trade{ // XLM_BTC trade
-			HorizonID:       "hrzid1",
+			FrontierID:       "hrzid1",
 			BaseAssetID:     xlmAsset.ID,
 			BaseAmount:      100.0,
 			CounterAssetID:  btcAsset.ID,
@@ -119,7 +119,7 @@ func TestRetrieveMarketData(t *testing.T) {
 			LedgerCloseTime: now,
 		},
 		tickerdb.Trade{ // XLM_ETH trade
-			HorizonID:       "hrzid3",
+			FrontierID:       "hrzid3",
 			BaseAssetID:     xlmAsset.ID,
 			BaseAmount:      24.0,
 			CounterAssetID:  ethAsset.ID,
@@ -128,7 +128,7 @@ func TestRetrieveMarketData(t *testing.T) {
 			LedgerCloseTime: oneHourAgo,
 		},
 		tickerdb.Trade{ // XLM_ETH trade
-			HorizonID:       "hrzid2",
+			FrontierID:       "hrzid2",
 			BaseAssetID:     xlmAsset.ID,
 			BaseAmount:      50.0,
 			CounterAssetID:  ethAsset.ID,
@@ -137,7 +137,7 @@ func TestRetrieveMarketData(t *testing.T) {
 			LedgerCloseTime: now,
 		},
 		tickerdb.Trade{ // XLM_BTC trade
-			HorizonID:       "hrzid4",
+			FrontierID:       "hrzid4",
 			BaseAssetID:     xlmAsset.ID,
 			BaseAmount:      50.0,
 			CounterAssetID:  btcAsset.ID,
@@ -146,7 +146,7 @@ func TestRetrieveMarketData(t *testing.T) {
 			LedgerCloseTime: threeDaysAgo,
 		},
 		tickerdb.Trade{ // XLM_ETH trade
-			HorizonID:       "hrzid5",
+			FrontierID:       "hrzid5",
 			BaseAssetID:     xlmAsset.ID,
 			BaseAmount:      24.0,
 			CounterAssetID:  ethAsset.ID,
@@ -523,7 +523,7 @@ func Test24hStatsFallback(t *testing.T) {
 	// Now let's create the trades:
 	trades := []tickerdb.Trade{
 		tickerdb.Trade{
-			HorizonID:       "hrzid1",
+			FrontierID:       "hrzid1",
 			BaseAssetID:     xlmAsset.ID,
 			BaseAmount:      1.0,
 			CounterAssetID:  btcAsset.ID,
@@ -532,7 +532,7 @@ func Test24hStatsFallback(t *testing.T) {
 			LedgerCloseTime: twoDaysAgo,
 		},
 		tickerdb.Trade{ // BTC_ETH trade (ETH is from issuer 2)
-			HorizonID:       "hrzid2",
+			FrontierID:       "hrzid2",
 			BaseAssetID:     xlmAsset.ID,
 			BaseAmount:      1.0,
 			CounterAssetID:  btcAsset.ID,
@@ -630,7 +630,7 @@ func TestPreferAnchorAssetCode(t *testing.T) {
 	// Now let's create the trades:
 	trades := []tickerdb.Trade{
 		tickerdb.Trade{
-			HorizonID:       "hrzid1",
+			FrontierID:       "hrzid1",
 			BaseAssetID:     xlmAsset.ID,
 			BaseAmount:      1.0,
 			CounterAssetID:  btcAsset.ID,
@@ -639,7 +639,7 @@ func TestPreferAnchorAssetCode(t *testing.T) {
 			LedgerCloseTime: twoDaysAgo,
 		},
 		tickerdb.Trade{ // BTC_ETH trade (ETH is from issuer 2)
-			HorizonID:       "hrzid2",
+			FrontierID:       "hrzid2",
 			BaseAssetID:     xlmAsset.ID,
 			BaseAmount:      1.0,
 			CounterAssetID:  btcAsset.ID,

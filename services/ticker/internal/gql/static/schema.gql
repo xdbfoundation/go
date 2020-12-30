@@ -3,10 +3,10 @@ schema {
 }
 
 type Query {
-	# retrieve all validated assets on the Stellar network.
+	# retrieve all validated assets on the DigitalBits network.
 	assets: [Asset!]!
 
-	# retrieve all validated issuers on the Stellar network.
+	# retrieve all validated issuers on the DigitalBits network.
 	issuers: [Issuer!]!
 
 	# retrieve trade stats from the last <numHoursAgo> hours

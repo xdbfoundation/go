@@ -1,9 +1,9 @@
 package txnbuild
 
 import (
-	"github.com/stellar/go/amount"
-	"github.com/stellar/go/support/errors"
-	"github.com/stellar/go/xdr"
+	"github.com/digitalbits/go/amount"
+	"github.com/digitalbits/go/support/errors"
+	"github.com/digitalbits/go/xdr"
 )
 
 //CreateOfferOp returns a ManageSellOffer operation to create a new offer, by
@@ -50,9 +50,9 @@ func UpdateOfferOp(selling, buying Asset, amount, price string, offerID int64, s
 // setting the Amount to "0". The sourceAccount is optional, and if not provided,
 // will be that of the surrounding transaction.
 func DeleteOfferOp(offerID int64, sourceAccount ...Account) (ManageSellOffer, error) {
-	// It turns out Stellar core doesn't care about any of these fields except the amount.
-	// However, Horizon will reject ManageSellOffer if it is missing fields.
-	// Horizon will also reject if Buying == Selling.
+	// It turns out DigitalBits core doesn't care about any of these fields except the amount.
+	// However, Frontier will reject ManageSellOffer if it is missing fields.
+	// Frontier will also reject if Buying == Selling.
 	// Therefore unfortunately we have to make up some dummy values here.
 	if len(sourceAccount) > 1 {
 		return ManageSellOffer{}, errors.New("offer can't have multiple source accounts")
@@ -70,8 +70,8 @@ func DeleteOfferOp(offerID int64, sourceAccount ...Account) (ManageSellOffer, er
 	return offer, nil
 }
 
-// ManageSellOffer represents the Stellar manage offer operation. See
-// https://www.stellar.org/developers/guides/concepts/list-of-operations.html
+// ManageSellOffer represents the DigitalBits manage offer operation. See
+// https://www.digitalbits.org/developers/guides/concepts/list-of-operations.html
 type ManageSellOffer struct {
 	Selling       Asset
 	Buying        Asset

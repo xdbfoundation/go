@@ -9,8 +9,8 @@ import (
 
 	_ "github.com/lib/pq"
 	migrate "github.com/rubenv/sql-migrate"
-	"github.com/stellar/go/services/ticker/internal/tickerdb"
-	"github.com/stellar/go/support/db/dbtest"
+	"github.com/digitalbits/go/services/ticker/internal/tickerdb"
+	"github.com/digitalbits/go/support/db/dbtest"
 	"github.com/stretchr/testify/require"
 )
 
@@ -83,13 +83,13 @@ func TestBulkInsertTrades(t *testing.T) {
 	// Now let's create the trades:
 	trades := []tickerdb.Trade{
 		tickerdb.Trade{
-			HorizonID:       "hrzid1",
+			FrontierID:       "hrzid1",
 			BaseAssetID:     asset1.ID,
 			CounterAssetID:  asset2.ID,
 			LedgerCloseTime: time.Now(),
 		},
 		tickerdb.Trade{
-			HorizonID:       "hrzid2",
+			FrontierID:       "hrzid2",
 			BaseAssetID:     asset2.ID,
 			CounterAssetID:  asset1.ID,
 			LedgerCloseTime: time.Now(),
@@ -196,19 +196,19 @@ func TestGetLastTrade(t *testing.T) {
 	// Now let's create the trades:
 	trades := []tickerdb.Trade{
 		tickerdb.Trade{
-			HorizonID:       "hrzid2",
+			FrontierID:       "hrzid2",
 			BaseAssetID:     asset2.ID,
 			CounterAssetID:  asset1.ID,
 			LedgerCloseTime: oneYearBefore,
 		},
 		tickerdb.Trade{
-			HorizonID:       "hrzid1",
+			FrontierID:       "hrzid1",
 			BaseAssetID:     asset1.ID,
 			CounterAssetID:  asset2.ID,
 			LedgerCloseTime: now,
 		},
 		tickerdb.Trade{
-			HorizonID:       "hrzid2",
+			FrontierID:       "hrzid2",
 			BaseAssetID:     asset2.ID,
 			CounterAssetID:  asset1.ID,
 			LedgerCloseTime: oneYearBefore,
@@ -299,25 +299,25 @@ func TestDeleteOldTrades(t *testing.T) {
 	// Now let's create the trades:
 	trades := []tickerdb.Trade{
 		tickerdb.Trade{
-			HorizonID:       "hrzid1",
+			FrontierID:       "hrzid1",
 			BaseAssetID:     asset1.ID,
 			CounterAssetID:  asset2.ID,
 			LedgerCloseTime: now,
 		},
 		tickerdb.Trade{
-			HorizonID:       "hrzid2",
+			FrontierID:       "hrzid2",
 			BaseAssetID:     asset2.ID,
 			CounterAssetID:  asset1.ID,
 			LedgerCloseTime: oneDayAgo,
 		},
 		tickerdb.Trade{
-			HorizonID:       "hrzid3",
+			FrontierID:       "hrzid3",
 			BaseAssetID:     asset2.ID,
 			CounterAssetID:  asset1.ID,
 			LedgerCloseTime: oneMonthAgo,
 		},
 		tickerdb.Trade{
-			HorizonID:       "hrzid4",
+			FrontierID:       "hrzid4",
 			BaseAssetID:     asset2.ID,
 			CounterAssetID:  asset1.ID,
 			LedgerCloseTime: oneYearAgo,
@@ -338,17 +338,17 @@ func TestDeleteOldTrades(t *testing.T) {
 
 	// Make sure we're actually deleting the entries we wanted:
 	for i, trade := range dbTrades {
-		if trade.HorizonID == "hrzid1" {
+		if trade.FrontierID == "hrzid1" {
 			trade1 = dbTrades[i]
 		}
 
-		if trade.HorizonID == "hrzid2" {
+		if trade.FrontierID == "hrzid2" {
 			trade2 = dbTrades[i]
 		}
 	}
 
-	assert.NotEqual(t, trade1.HorizonID, "")
-	assert.NotEqual(t, trade2.HorizonID, "")
+	assert.NotEqual(t, trade1.FrontierID, "")
+	assert.NotEqual(t, trade2.FrontierID, "")
 	assert.WithinDuration(t, now.Local(), trade1.LedgerCloseTime.Local(), 10*time.Millisecond)
 	assert.WithinDuration(t, oneDayAgo.Local(), trade2.LedgerCloseTime.Local(), 10*time.Millisecond)
 }

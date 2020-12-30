@@ -12,8 +12,8 @@ import (
 	"sync"
 	"time"
 
-	"github.com/stellar/go/support/errors"
-	"github.com/stellar/go/xdr"
+	"github.com/digitalbits/go/support/errors"
+	"github.com/digitalbits/go/xdr"
 )
 
 // PrepareRangeResponse describes the status of the pending PrepareRange operation.
@@ -61,8 +61,8 @@ func (r Base64Ledger) MarshalJSON() ([]byte, error) {
 	return json.Marshal(base64)
 }
 
-// RemoteCaptiveStellarCore is an http client for interacting with a remote captive core server.
-type RemoteCaptiveStellarCore struct {
+// RemoteCaptiveDigitalBitsCore is an http client for interacting with a remote captive core server.
+type RemoteCaptiveDigitalBitsCore struct {
 	url                      *url.URL
 	client                   *http.Client
 	lock                     *sync.Mutex
@@ -70,27 +70,27 @@ type RemoteCaptiveStellarCore struct {
 	prepareRangePollInterval time.Duration
 }
 
-// RemoteCaptiveOption values can be passed into NewRemoteCaptive to customize a RemoteCaptiveStellarCore instance.
-type RemoteCaptiveOption func(c *RemoteCaptiveStellarCore)
+// RemoteCaptiveOption values can be passed into NewRemoteCaptive to customize a RemoteCaptiveDigitalBitsCore instance.
+type RemoteCaptiveOption func(c *RemoteCaptiveDigitalBitsCore)
 
 // PrepareRangePollInterval configures how often the captive core server will be polled when blocking
 // on the PrepareRange operation.
 func PrepareRangePollInterval(d time.Duration) RemoteCaptiveOption {
-	return func(c *RemoteCaptiveStellarCore) {
+	return func(c *RemoteCaptiveDigitalBitsCore) {
 		c.prepareRangePollInterval = d
 	}
 }
 
-// NewRemoteCaptive returns a new RemoteCaptiveStellarCore instance.
+// NewRemoteCaptive returns a new RemoteCaptiveDigitalBitsCore instance.
 //
 // Only the captiveCoreURL parameter is required.
-func NewRemoteCaptive(captiveCoreURL string, options ...RemoteCaptiveOption) (RemoteCaptiveStellarCore, error) {
+func NewRemoteCaptive(captiveCoreURL string, options ...RemoteCaptiveOption) (RemoteCaptiveDigitalBitsCore, error) {
 	u, err := url.Parse(captiveCoreURL)
 	if err != nil {
-		return RemoteCaptiveStellarCore{}, errors.Wrap(err, "unparseable url")
+		return RemoteCaptiveDigitalBitsCore{}, errors.Wrap(err, "unparseable url")
 	}
 
-	client := RemoteCaptiveStellarCore{
+	client := RemoteCaptiveDigitalBitsCore{
 		prepareRangePollInterval: time.Second,
 		url:                      u,
 		client:                   &http.Client{Timeout: 5 * time.Second},
@@ -127,7 +127,7 @@ func decodeResponse(response *http.Response, payload interface{}) error {
 // Note that for UnboundedRange the returned sequence number is not necessarily
 // the latest sequence closed by the network. It's always the last value available
 // in the backend.
-func (c RemoteCaptiveStellarCore) GetLatestLedgerSequence() (sequence uint32, err error) {
+func (c RemoteCaptiveDigitalBitsCore) GetLatestLedgerSequence() (sequence uint32, err error) {
 	u := *c.url
 	u.Path = path.Join(u.Path, "latest-sequence")
 
@@ -145,7 +145,7 @@ func (c RemoteCaptiveStellarCore) GetLatestLedgerSequence() (sequence uint32, er
 }
 
 // Close cancels any pending PrepareRange requests.
-func (c RemoteCaptiveStellarCore) Close() error {
+func (c RemoteCaptiveDigitalBitsCore) Close() error {
 	c.lock.Lock()
 	defer c.lock.Unlock()
 	if c.cancel != nil {
@@ -154,7 +154,7 @@ func (c RemoteCaptiveStellarCore) Close() error {
 	return nil
 }
 
-func (c RemoteCaptiveStellarCore) createContext() context.Context {
+func (c RemoteCaptiveDigitalBitsCore) createContext() context.Context {
 	c.lock.Lock()
 	defer c.lock.Unlock()
 
@@ -168,15 +168,15 @@ func (c RemoteCaptiveStellarCore) createContext() context.Context {
 }
 
 // PrepareRange prepares the given range (including from and to) to be loaded.
-// Captive stellar-core backend needs to initalize Stellar-Core state to be
+// Captive digitalbits-core backend needs to initalize DigitalBits-Core state to be
 // able to stream ledgers.
-// Stellar-Core mode depends on the provided ledgerRange:
-//   * For BoundedRange it will start Stellar-Core in catchup mode.
+// DigitalBits-Core mode depends on the provided ledgerRange:
+//   * For BoundedRange it will start DigitalBits-Core in catchup mode.
 //   * For UnboundedRange it will first catchup to starting ledger and then run
-//     it normally (including connecting to the Stellar network).
+//     it normally (including connecting to the DigitalBits network).
 // Please note that using a BoundedRange, currently, requires a full-trust on
-// history archive. This issue is being fixed in Stellar-Core.
-func (c RemoteCaptiveStellarCore) PrepareRange(ledgerRange Range) error {
+// history archive. This issue is being fixed in DigitalBits-Core.
+func (c RemoteCaptiveDigitalBitsCore) PrepareRange(ledgerRange Range) error {
 	ctx := c.createContext()
 	u := *c.url
 	u.Path = path.Join(u.Path, "prepare-range")
@@ -219,7 +219,7 @@ func (c RemoteCaptiveStellarCore) PrepareRange(ledgerRange Range) error {
 }
 
 // IsPrepared returns true if a given ledgerRange is prepared.
-func (c RemoteCaptiveStellarCore) IsPrepared(ledgerRange Range) (bool, error) {
+func (c RemoteCaptiveDigitalBitsCore) IsPrepared(ledgerRange Range) (bool, error) {
 	u := *c.url
 	u.Path = path.Join(u.Path, "prepare-range")
 	rangeBytes, err := json.Marshal(ledgerRange)
@@ -245,10 +245,10 @@ func (c RemoteCaptiveStellarCore) IsPrepared(ledgerRange Range) (bool, error) {
 // GetLedger returns true when ledger is found and it's LedgerCloseMeta.
 // Call PrepareRange first to instruct the backend which ledgers to fetch.
 //
-// CaptiveStellarCore requires PrepareRange call first to initialize Stellar-Core.
+// CaptiveDigitalBitsCore requires PrepareRange call first to initialize DigitalBits-Core.
 // Requesting a ledger on non-prepared backend will return an error.
 //
-// Because data is streamed from Stellar-Core ledger after ledger user should
+// Because data is streamed from DigitalBits-Core ledger after ledger user should
 // request sequences in a non-decreasing order. If the requested sequence number
 // is less than the last requested sequence number, an error will be returned.
 //
@@ -259,7 +259,7 @@ func (c RemoteCaptiveStellarCore) IsPrepared(ledgerRange Range) (bool, error) {
 //   * UnboundedRange makes GetLedger non-blocking. The method will return with
 //     the first argument equal false.
 // This is done to provide maximum performance when streaming old ledgers.
-func (c RemoteCaptiveStellarCore) GetLedger(sequence uint32) (bool, xdr.LedgerCloseMeta, error) {
+func (c RemoteCaptiveDigitalBitsCore) GetLedger(sequence uint32) (bool, xdr.LedgerCloseMeta, error) {
 	u := *c.url
 	u.Path = path.Join(u.Path, "ledger", strconv.FormatUint(uint64(sequence), 10))
 

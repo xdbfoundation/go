@@ -5,9 +5,9 @@ import (
 
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
-	dbpkg "github.com/stellar/go/exp/services/recoverysigner/internal/db"
-	"github.com/stellar/go/exp/services/recoverysigner/internal/db/dbtest"
-	"github.com/stellar/go/support/log"
+	dbpkg "github.com/digitalbits/go/exp/services/recoverysigner/internal/db"
+	"github.com/digitalbits/go/exp/services/recoverysigner/internal/db/dbtest"
+	"github.com/digitalbits/go/support/log"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )

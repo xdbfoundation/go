@@ -3,10 +3,10 @@ package txnbuild
 import (
 	"crypto/sha256"
 	"encoding/base64"
-	"github.com/stellar/go/network"
+	"github.com/digitalbits/go/network"
 	"testing"
 
-	"github.com/stellar/go/xdr"
+	"github.com/digitalbits/go/xdr"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -239,7 +239,7 @@ func TestFeeBumpSignWithKeyString(t *testing.T) {
 
 func TestFeeBumpSignHashX(t *testing.T) {
 	// 256 bit preimage
-	preimage := "this is a preimage for hashx transactions on the stellar network"
+	preimage := "this is a preimage for hashx transactions on the digitalbits network"
 	preimageHash := sha256.Sum256([]byte(preimage))
 
 	kp0, kp1 := newKeypair0(), newKeypair1()

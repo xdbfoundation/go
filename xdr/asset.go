@@ -6,7 +6,7 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/stellar/go/strkey"
+	"github.com/digitalbits/go/strkey"
 )
 
 // This file contains helpers for working with xdr.Asset structs
@@ -127,7 +127,7 @@ var ValidAssetCode = regexp.MustCompile("^[[:alnum:]]{1,12}$")
 // BuildAssets parses a list of assets from a given string.
 // The string is expected to be a comma separated list of assets
 // encoded in the format (Code:Issuer or "native") defined by SEP-0011
-// https://github.com/stellar/stellar-protocol/pull/313
+// https://github.com/digitalbits/digitalbits-protocol/pull/313
 // If the string is empty, BuildAssets will return an empty list of assets
 func BuildAssets(s string) ([]Asset, error) {
 	var assets []Asset
@@ -139,7 +139,7 @@ func BuildAssets(s string) ([]Asset, error) {
 	for _, assetString := range assetStrings {
 		var asset Asset
 
-		// Technically https://github.com/stellar/stellar-protocol/blob/master/ecosystem/sep-0011.md allows
+		// Technically https://github.com/digitalbits/digitalbits-protocol/blob/master/ecosystem/sep-0011.md allows
 		// any string up to 12 characters not containing an unescaped colon to represent XLM
 		// however, this function only accepts the string "native" to represent XLM
 		if strings.ToLower(assetString) == "native" {

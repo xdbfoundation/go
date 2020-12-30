@@ -3,7 +3,7 @@ package io
 import (
 	"io"
 
-	"github.com/stellar/go/support/errors"
+	"github.com/digitalbits/go/support/errors"
 )
 
 type ChangeProcessor interface {

@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 set -e
 
-useradd --uid 10011001 --home-dir /home/stellar --no-log-init stellar \
-    && mkdir -p /home/stellar \
-    && chown -R stellar:stellar /home/stellar
+useradd --uid 10011001 --home-dir /home/digitalbits --no-log-init digitalbits \
+    && mkdir -p /home/digitalbits \
+    && chown -R digitalbits:digitalbits /home/digitalbits
 
-mkdir -p /opt/stellar/bin
-mkdir -p /opt/stellar/www
-chown -R stellar:stellar /opt/stellar/www
-mkdir -p /opt/stellar/postgresql/data
+mkdir -p /opt/digitalbits/bin
+mkdir -p /opt/digitalbits/www
+chown -R digitalbits:digitalbits /opt/digitalbits/www
+mkdir -p /opt/digitalbits/postgresql/data

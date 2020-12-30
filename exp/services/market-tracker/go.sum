@@ -151,11 +151,8 @@ github.com/spf13/cobra v0.0.0-20160830174925-9c28e4bbd74e/go.mod h1:1l0Ry5zgKvJa
 github.com/spf13/jwalterweatherman v0.0.0-20141219030609-3d60171a6431/go.mod h1:cQK4TGJAtQXfYWX+Ddv3mKDzgVb68N+wFjFa4jdeBTo=
 github.com/spf13/pflag v0.0.0-20161005214240-4bd69631f475/go.mod h1:DYY7MBk1bdzusC3SYhjObp+wFpr4gzcvqqNjLnInEg4=
 github.com/spf13/viper v0.0.0-20150621231900-db7ff930a189/go.mod h1:A8kyI5cUJhb8N+3pkfONlcEcZbueH6nhAm0Fq7SrnBM=
-github.com/stellar/go v0.0.0-20200210221749-6c651ebf3c29 h1:xLWgRNEypjdMtV+/VHC5n+67fgwfMomrbK5iCaLmhFQ=
-github.com/stellar/go v0.0.0-20200210221749-6c651ebf3c29/go.mod h1:/aqu78pdkDF8+7BLAr8eU/qIcrCoxqIlIzsT0dQRdvw=
-github.com/stellar/go-xdr v0.0.0-20180917104419-0bc96f33a18e h1:n/hfey8pO+RYMoGXyvyzuw5pdO8IFDoyAL/g5OiCesY=
-github.com/stellar/go-xdr v0.0.0-20180917104419-0bc96f33a18e/go.mod h1:gpOLVzy6TVYTQ3LvHSN9RJC700FkhFCpSE82u37aNRM=
-github.com/stellar/throttled v2.2.3-0.20190823235211-89d75816f59d+incompatible/go.mod h1:7CJ23pXirXBJq45DqvO6clzTEGM/l1SfKrgrzLry8b4=
+github.com/digitalbits/go v0.0.0-20200210221749-6c651ebf3c29 h1:xLWgRNEypjdMtV+/VHC5n+67fgwfMomrbK5iCaLmhFQ=
+github.com/digitalbits/go v0.0.0-20200210221749-6c651ebf3c29/go.mod h1:/aqu78pdkDF8+7BLAr8eU/qIcrCoxqIlIzsT0dQRdvw=
 github.com/stretchr/objx v0.1.0/go.mod h1:HFkY916IF+rwdDfMAkV7OtwuqBVzrE8GR6GFx+wExME=
 github.com/stretchr/objx v0.1.1 h1:2vfRuCMp5sSVIDSqO8oNnWJq7mPa6KVP3iPIwFBuy8A=
 github.com/stretchr/objx v0.1.1/go.mod h1:HFkY916IF+rwdDfMAkV7OtwuqBVzrE8GR6GFx+wExME=

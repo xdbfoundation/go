@@ -9,38 +9,38 @@ import (
 	"github.com/pkg/errors"
 	"github.com/sirupsen/logrus"
 
-	"github.com/stellar/go/historyarchive"
-	"github.com/stellar/go/support/log"
-	"github.com/stellar/go/xdr"
+	"github.com/digitalbits/go/historyarchive"
+	"github.com/digitalbits/go/support/log"
+	"github.com/digitalbits/go/xdr"
 )
 
-// Ensure CaptiveStellarCore implements LedgerBackend
-var _ LedgerBackend = (*CaptiveStellarCore)(nil)
+// Ensure CaptiveDigitalBitsCore implements LedgerBackend
+var _ LedgerBackend = (*CaptiveDigitalBitsCore)(nil)
 
-func (c *CaptiveStellarCore) roundDownToFirstReplayAfterCheckpointStart(ledger uint32) uint32 {
+func (c *CaptiveDigitalBitsCore) roundDownToFirstReplayAfterCheckpointStart(ledger uint32) uint32 {
 	r := c.checkpointManager.GetCheckpointRange(ledger)
 	if r.Low <= 1 {
-		// Stellar-Core doesn't stream ledger 1
+		// DigitalBits-Core doesn't stream ledger 1
 		return 2
 	}
 	// All other checkpoints start at the next multiple of 64
 	return r.Low
 }
 
-// CaptiveStellarCore is a ledger backend that starts internal Stellar-Core
+// CaptiveDigitalBitsCore is a ledger backend that starts internal DigitalBits-Core
 // subprocess responsible for streaming ledger data. It provides better decoupling
 // than DatabaseBackend but requires some extra init time.
 //
 // It operates in two modes:
-//   * When a BoundedRange is prepared it starts Stellar-Core in catchup mode that
-//     replays ledgers in memory. This is very fast but requires Stellar-Core to
+//   * When a BoundedRange is prepared it starts DigitalBits-Core in catchup mode that
+//     replays ledgers in memory. This is very fast but requires DigitalBits-Core to
 //     keep ledger state in RAM. It requires around 3GB of RAM as of August 2020.
-//   * When a UnboundedRange is prepared it runs Stellar-Core catchup mode to
+//   * When a UnboundedRange is prepared it runs DigitalBits-Core catchup mode to
 //     sync with the first ledger and then runs it in a normal mode. This
 //     requires the configAppendPath to be provided because a quorum set needs to
 //     be selected.
 //
-// When running CaptiveStellarCore will create a temporary folder to store
+// When running CaptiveDigitalBitsCore will create a temporary folder to store
 // bucket files and other temporary files. The folder is removed when Close is
 // called.
 //
@@ -48,46 +48,46 @@ func (c *CaptiveStellarCore) roundDownToFirstReplayAfterCheckpointStart(ledger u
 // temporary folder.
 //
 // Currently BoundedRange requires a full-trust on history archive. This issue is
-// being fixed in Stellar-Core.
+// being fixed in DigitalBits-Core.
 //
 // While using BoundedRanges is straightforward there are a few gotchas connected
 // to UnboundedRanges:
 //   * PrepareRange takes more time because all ledger entries must be stored on
 //     disk instead of RAM.
 //   * If GetLedger is not called frequently (every 5 sec. on average) the
-//     Stellar-Core process can go out of sync with the network. This happens
-//     because there is no buffering of communication pipe and CaptiveStellarCore
-//     has a very small internal buffer and Stellar-Core will not close the new
+//     DigitalBits-Core process can go out of sync with the network. This happens
+//     because there is no buffering of communication pipe and CaptiveDigitalBitsCore
+//     has a very small internal buffer and DigitalBits-Core will not close the new
 //     ledger if it's not read.
 //
-// Except for the Close function, CaptiveStellarCore is not thread-safe and should
+// Except for the Close function, CaptiveDigitalBitsCore is not thread-safe and should
 // not be accessed by multiple go routines. Close is thread-safe and can be called
 // from another go routine. Once Close is called it will interrupt and cancel any
 // pending operations.
 //
-// Requires Stellar-Core v13.2.0+.
-type CaptiveStellarCore struct {
+// Requires DigitalBits-Core v13.2.0+.
+type CaptiveDigitalBitsCore struct {
 	archive           historyarchive.ArchiveInterface
 	checkpointManager historyarchive.CheckpointManager
 	ledgerHashStore   TrustedLedgerHashStore
 
-	// cancel is the CancelFunc for context which controls the lifetime of a CaptiveStellarCore instance.
-	// Once it is invoked CaptiveStellarCore will not be able to stream ledgers from Stellar Core or
-	// spawn new instances of Stellar Core.
+	// cancel is the CancelFunc for context which controls the lifetime of a CaptiveDigitalBitsCore instance.
+	// Once it is invoked CaptiveDigitalBitsCore will not be able to stream ledgers from DigitalBits Core or
+	// spawn new instances of DigitalBits Core.
 	cancel context.CancelFunc
 
-	stellarCoreRunner stellarCoreRunnerInterface
-	// stellarCoreLock protects access to stellarCoreRunner. When the read lock
-	// is acquired stellarCoreRunner can be accessed. When the write lock is acquired
-	// stellarCoreRunner can be updated.
-	stellarCoreLock sync.RWMutex
+	digitalbitsCoreRunner digitalbitsCoreRunnerInterface
+	// digitalbitsCoreLock protects access to digitalbitsCoreRunner. When the read lock
+	// is acquired digitalbitsCoreRunner can be accessed. When the write lock is acquired
+	// digitalbitsCoreRunner can be updated.
+	digitalbitsCoreLock sync.RWMutex
 
 	// For testing
-	stellarCoreRunnerFactory func(mode stellarCoreRunnerMode) (stellarCoreRunnerInterface, error)
+	digitalbitsCoreRunnerFactory func(mode digitalbitsCoreRunnerMode) (digitalbitsCoreRunnerInterface, error)
 
 	// Defines if the blocking mode (off by default) is on or off. In blocking mode,
 	// calling GetLedger blocks until the requested ledger is available. This is useful
-	// for scenarios when Horizon consumes ledgers faster than Stellar-Core produces them
+	// for scenarios when Frontier consumes ledgers faster than DigitalBits-Core produces them
 	// and using `time.Sleep` when ledger is not available can actually slow entire
 	// ingestion process.
 	blocking bool
@@ -100,14 +100,14 @@ type CaptiveStellarCore struct {
 	previousLedgerHash *string
 }
 
-// CaptiveCoreConfig contains all the parameters required to create a CaptiveStellarCore instance
+// CaptiveCoreConfig contains all the parameters required to create a CaptiveDigitalBitsCore instance
 type CaptiveCoreConfig struct {
-	// BinaryPath is the file path to the Stellar Core binary
+	// BinaryPath is the file path to the DigitalBits Core binary
 	BinaryPath string
-	// ConfigAppendPath is the file path to additional configuration for the Stellar Core configuration file used
+	// ConfigAppendPath is the file path to additional configuration for the DigitalBits Core configuration file used
 	// by captive core. This field is only required when ingesting in online mode (e.g. UnboundedRange).
 	ConfigAppendPath string
-	// NetworkPassphrase is the Stellar network passphrase used by captive core when connecting to the Stellar network
+	// NetworkPassphrase is the DigitalBits network passphrase used by captive core when connecting to the DigitalBits network
 	NetworkPassphrase string
 	// HistoryArchiveURLs are a list of history archive urls
 	HistoryArchiveURLs []string
@@ -121,17 +121,17 @@ type CaptiveCoreConfig struct {
 	LedgerHashStore TrustedLedgerHashStore
 	// HTTPPort is the TCP port to listen for requests (defaults to 0, which disables the HTTP server)
 	HTTPPort uint
-	// Log is an (optional) custom logger which will capture any output from the Stellar Core process.
+	// Log is an (optional) custom logger which will capture any output from the DigitalBits Core process.
 	// If Log is omitted then all output will be printed to stdout.
 	Log *log.Entry
-	// Context is the (optional) context which controls the lifetime of a CaptiveStellarCore instance. Once the context is done
-	// the CaptiveStellarCore instance will not be able to stream ledgers from Stellar Core or spawn new
-	// instances of Stellar Core. If Context is omitted CaptiveStellarCore will default to using context.Background.
+	// Context is the (optional) context which controls the lifetime of a CaptiveDigitalBitsCore instance. Once the context is done
+	// the CaptiveDigitalBitsCore instance will not be able to stream ledgers from DigitalBits Core or spawn new
+	// instances of DigitalBits Core. If Context is omitted CaptiveDigitalBitsCore will default to using context.Background.
 	Context context.Context
 }
 
-// NewCaptive returns a new CaptiveStellarCore instance.
-func NewCaptive(config CaptiveCoreConfig) (*CaptiveStellarCore, error) {
+// NewCaptive returns a new CaptiveDigitalBitsCore instance.
+func NewCaptive(config CaptiveCoreConfig) (*CaptiveDigitalBitsCore, error) {
 	// Here we set defaults in the config. Because config is not a pointer this code should
 	// not mutate the original CaptiveCoreConfig instance which was passed into NewCaptive()
 	if config.Log == nil {
@@ -159,20 +159,20 @@ func NewCaptive(config CaptiveCoreConfig) (*CaptiveStellarCore, error) {
 		return nil, errors.Wrap(err, "error connecting to history archive")
 	}
 
-	c := &CaptiveStellarCore{
+	c := &CaptiveDigitalBitsCore{
 		archive:           archive,
 		ledgerHashStore:   config.LedgerHashStore,
 		cancel:            cancel,
 		checkpointManager: historyarchive.NewCheckpointManager(config.CheckpointFrequency),
 	}
 
-	c.stellarCoreRunnerFactory = func(mode stellarCoreRunnerMode) (stellarCoreRunnerInterface, error) {
-		return newStellarCoreRunner(config, mode)
+	c.digitalbitsCoreRunnerFactory = func(mode digitalbitsCoreRunnerMode) (digitalbitsCoreRunnerInterface, error) {
+		return newDigitalBitsCoreRunner(config, mode)
 	}
 	return c, nil
 }
 
-func (c *CaptiveStellarCore) getLatestCheckpointSequence() (uint32, error) {
+func (c *CaptiveDigitalBitsCore) getLatestCheckpointSequence() (uint32, error) {
 	has, err := c.archive.GetRootHAS()
 	if err != nil {
 		return 0, errors.Wrap(err, "error getting root HAS")
@@ -181,7 +181,7 @@ func (c *CaptiveStellarCore) getLatestCheckpointSequence() (uint32, error) {
 	return has.CurrentLedger, nil
 }
 
-func (c *CaptiveStellarCore) openOfflineReplaySubprocess(from, to uint32) error {
+func (c *CaptiveDigitalBitsCore) openOfflineReplaySubprocess(from, to uint32) error {
 	latestCheckpointSequence, err := c.getLatestCheckpointSequence()
 	if err != nil {
 		return errors.Wrap(err, "error getting latest checkpoint sequence")
@@ -199,18 +199,18 @@ func (c *CaptiveStellarCore) openOfflineReplaySubprocess(from, to uint32) error 
 		to = latestCheckpointSequence
 	}
 
-	var runner stellarCoreRunnerInterface
-	if runner, err = c.stellarCoreRunnerFactory(stellarCoreRunnerModeOffline); err != nil {
-		return errors.Wrap(err, "error creating stellar-core runner")
+	var runner digitalbitsCoreRunnerInterface
+	if runner, err = c.digitalbitsCoreRunnerFactory(digitalbitsCoreRunnerModeOffline); err != nil {
+		return errors.Wrap(err, "error creating digitalbits-core runner")
 	} else {
-		// only assign c.stellarCoreRunner if runner is not nil to avoid nil interface check
+		// only assign c.digitalbitsCoreRunner if runner is not nil to avoid nil interface check
 		// see https://golang.org/doc/faq#nil_error
-		c.stellarCoreRunner = runner
+		c.digitalbitsCoreRunner = runner
 	}
 
-	err = c.stellarCoreRunner.catchup(from, to)
+	err = c.digitalbitsCoreRunner.catchup(from, to)
 	if err != nil {
-		return errors.Wrap(err, "error running stellar-core")
+		return errors.Wrap(err, "error running digitalbits-core")
 	}
 
 	// The next ledger should be the first ledger of the checkpoint containing
@@ -223,7 +223,7 @@ func (c *CaptiveStellarCore) openOfflineReplaySubprocess(from, to uint32) error 
 	return nil
 }
 
-func (c *CaptiveStellarCore) openOnlineReplaySubprocess(from uint32) error {
+func (c *CaptiveDigitalBitsCore) openOnlineReplaySubprocess(from uint32) error {
 	latestCheckpointSequence, err := c.getLatestCheckpointSequence()
 	if err != nil {
 		return errors.Wrap(err, "error getting latest checkpoint sequence")
@@ -232,7 +232,7 @@ func (c *CaptiveStellarCore) openOnlineReplaySubprocess(from uint32) error {
 	// We don't allow starting the online mode starting with more than two
 	// checkpoints from now. Such requests are likely buggy.
 	// We should allow only one checkpoint here but sometimes there are up to a
-	// minute delays when updating root HAS by stellar-core.
+	// minute delays when updating root HAS by digitalbits-core.
 	twoCheckPointsLength := (c.checkpointManager.GetCheckpoint(0) + 1) * 2
 	maxLedger := latestCheckpointSequence + twoCheckPointsLength
 	if from > maxLedger {
@@ -242,13 +242,13 @@ func (c *CaptiveStellarCore) openOnlineReplaySubprocess(from uint32) error {
 		)
 	}
 
-	var runner stellarCoreRunnerInterface
-	if runner, err = c.stellarCoreRunnerFactory(stellarCoreRunnerModeOnline); err != nil {
-		return errors.Wrap(err, "error creating stellar-core runner")
+	var runner digitalbitsCoreRunnerInterface
+	if runner, err = c.digitalbitsCoreRunnerFactory(digitalbitsCoreRunnerModeOnline); err != nil {
+		return errors.Wrap(err, "error creating digitalbits-core runner")
 	} else {
-		// only assign c.stellarCoreRunner if runner is not nil to avoid nil interface check
+		// only assign c.digitalbitsCoreRunner if runner is not nil to avoid nil interface check
 		// see https://golang.org/doc/faq#nil_error
-		c.stellarCoreRunner = runner
+		c.digitalbitsCoreRunner = runner
 	}
 
 	runFrom, ledgerHash, nextLedger, err := c.runFromParams(from)
@@ -256,9 +256,9 @@ func (c *CaptiveStellarCore) openOnlineReplaySubprocess(from uint32) error {
 		return errors.Wrap(err, "error calculating ledger and hash for stelar-core run")
 	}
 
-	err = c.stellarCoreRunner.runFrom(runFrom, ledgerHash)
+	err = c.digitalbitsCoreRunner.runFrom(runFrom, ledgerHash)
 	if err != nil {
-		return errors.Wrap(err, "error running stellar-core")
+		return errors.Wrap(err, "error running digitalbits-core")
 	}
 
 	c.nextLedger = nextLedger
@@ -281,10 +281,10 @@ func (c *CaptiveStellarCore) openOnlineReplaySubprocess(from uint32) error {
 	return nil
 }
 
-// runFromParams receives a ledger sequence and calculates the required values to call stellar-core run with --start-ledger and --start-hash
-func (c *CaptiveStellarCore) runFromParams(from uint32) (runFrom uint32, ledgerHash string, nextLedger uint32, err error) {
+// runFromParams receives a ledger sequence and calculates the required values to call digitalbits-core run with --start-ledger and --start-hash
+func (c *CaptiveDigitalBitsCore) runFromParams(from uint32) (runFrom uint32, ledgerHash string, nextLedger uint32, err error) {
 	if from == 1 {
-		// Trying to start-from 1 results in an error from Stellar-Core:
+		// Trying to start-from 1 results in an error from DigitalBits-Core:
 		// Target ledger 1 is not newer than last closed ledger 1 - nothing to do
 		// TODO maybe we can fix it by generating 1st ledger meta
 		// like GenesisLedgerStateReader?
@@ -299,8 +299,8 @@ func (c *CaptiveStellarCore) runFromParams(from uint32) (runFrom uint32, ledgerH
 		nextLedger = 2
 		// The line below is to support a special case for streaming ledger 2
 		// that works for all other ledgers <= 63 (fast-forward).
-		// We can't set from=2 because Stellar-Core will not allow starting from 1.
-		// To solve this we start from 3 and exploit the fast that Stellar-Core
+		// We can't set from=2 because DigitalBits-Core will not allow starting from 1.
+		// To solve this we start from 3 and exploit the fast that DigitalBits-Core
 		// will stream data from 2 for the first checkpoint.
 		from = 3
 	} else {
@@ -312,7 +312,7 @@ func (c *CaptiveStellarCore) runFromParams(from uint32) (runFrom uint32, ledgerH
 		// Streaming will start from the previous checkpoint + 1
 		nextLedger = from - 63
 		if nextLedger < 2 {
-			// Stellar-Core always streams from ledger 2 at min.
+			// DigitalBits-Core always streams from ledger 2 at min.
 			nextLedger = 2
 		}
 	}
@@ -339,16 +339,16 @@ func (c *CaptiveStellarCore) runFromParams(from uint32) (runFrom uint32, ledgerH
 	return
 }
 
-func (c *CaptiveStellarCore) startPreparingRange(ledgerRange Range) (bool, error) {
-	c.stellarCoreLock.Lock()
-	defer c.stellarCoreLock.Unlock()
+func (c *CaptiveDigitalBitsCore) startPreparingRange(ledgerRange Range) (bool, error) {
+	c.digitalbitsCoreLock.Lock()
+	defer c.digitalbitsCoreLock.Unlock()
 
 	if c.isPrepared(ledgerRange) {
 		return true, nil
 	}
 
-	if c.stellarCoreRunner != nil {
-		if err := c.stellarCoreRunner.close(); err != nil {
+	if c.digitalbitsCoreRunner != nil {
+		if err := c.digitalbitsCoreRunner.close(); err != nil {
 			return false, errors.Wrap(err, "error closing existing session")
 		}
 	}
@@ -367,15 +367,15 @@ func (c *CaptiveStellarCore) startPreparingRange(ledgerRange Range) (bool, error
 }
 
 // PrepareRange prepares the given range (including from and to) to be loaded.
-// Captive stellar-core backend needs to initalize Stellar-Core state to be
+// Captive digitalbits-core backend needs to initalize DigitalBits-Core state to be
 // able to stream ledgers.
-// Stellar-Core mode depends on the provided ledgerRange:
-//   * For BoundedRange it will start Stellar-Core in catchup mode.
+// DigitalBits-Core mode depends on the provided ledgerRange:
+//   * For BoundedRange it will start DigitalBits-Core in catchup mode.
 //   * For UnboundedRange it will first catchup to starting ledger and then run
-//     it normally (including connecting to the Stellar network).
+//     it normally (including connecting to the DigitalBits network).
 // Please note that using a BoundedRange, currently, requires a full-trust on
-// history archive. This issue is being fixed in Stellar-Core.
-func (c *CaptiveStellarCore) PrepareRange(ledgerRange Range) error {
+// history archive. This issue is being fixed in DigitalBits-Core.
+func (c *CaptiveDigitalBitsCore) PrepareRange(ledgerRange Range) error {
 	if alreadyPrepared, err := c.startPreparingRange(ledgerRange); err != nil {
 		return errors.Wrap(err, "error starting prepare range")
 	} else if alreadyPrepared {
@@ -395,14 +395,14 @@ func (c *CaptiveStellarCore) PrepareRange(ledgerRange Range) error {
 }
 
 // IsPrepared returns true if a given ledgerRange is prepared.
-func (c *CaptiveStellarCore) IsPrepared(ledgerRange Range) (bool, error) {
-	c.stellarCoreLock.RLock()
-	defer c.stellarCoreLock.RUnlock()
+func (c *CaptiveDigitalBitsCore) IsPrepared(ledgerRange Range) (bool, error) {
+	c.digitalbitsCoreLock.RLock()
+	defer c.digitalbitsCoreLock.RUnlock()
 
 	return c.isPrepared(ledgerRange), nil
 }
 
-func (c *CaptiveStellarCore) isPrepared(ledgerRange Range) bool {
+func (c *CaptiveDigitalBitsCore) isPrepared(ledgerRange Range) bool {
 	if c.isClosed() {
 		return false
 	}
@@ -439,10 +439,10 @@ func (c *CaptiveStellarCore) isPrepared(ledgerRange Range) bool {
 // GetLedger returns true when ledger is found and it's LedgerCloseMeta.
 // Call PrepareRange first to instruct the backend which ledgers to fetch.
 //
-// CaptiveStellarCore requires PrepareRange call first to initialize Stellar-Core.
+// CaptiveDigitalBitsCore requires PrepareRange call first to initialize DigitalBits-Core.
 // Requesting a ledger on non-prepared backend will return an error.
 //
-// Because data is streamed from Stellar-Core ledger after ledger user should
+// Because data is streamed from DigitalBits-Core ledger after ledger user should
 // request sequences in a non-decreasing order. If the requested sequence number
 // is less than the last requested sequence number, an error will be returned.
 //
@@ -453,9 +453,9 @@ func (c *CaptiveStellarCore) isPrepared(ledgerRange Range) bool {
 //   * UnboundedRange makes GetLedger non-blocking. The method will return with
 //     the first argument equal false.
 // This is done to provide maximum performance when streaming old ledgers.
-func (c *CaptiveStellarCore) GetLedger(sequence uint32) (bool, xdr.LedgerCloseMeta, error) {
-	c.stellarCoreLock.RLock()
-	defer c.stellarCoreLock.RUnlock()
+func (c *CaptiveDigitalBitsCore) GetLedger(sequence uint32) (bool, xdr.LedgerCloseMeta, error) {
+	c.digitalbitsCoreLock.RLock()
+	defer c.digitalbitsCoreLock.RUnlock()
 
 	if c.isClosed() {
 		return false, xdr.LedgerCloseMeta{}, errors.New("session is closed, call PrepareRange first")
@@ -486,11 +486,11 @@ func (c *CaptiveStellarCore) GetLedger(sequence uint32) (bool, xdr.LedgerCloseMe
 	// Now loop along the range until we find the ledger we want.
 	var errOut error
 	for {
-		if !c.blocking && len(c.stellarCoreRunner.getMetaPipe()) == 0 {
+		if !c.blocking && len(c.digitalbitsCoreRunner.getMetaPipe()) == 0 {
 			return false, xdr.LedgerCloseMeta{}, nil
 		}
 
-		result, ok := <-c.stellarCoreRunner.getMetaPipe()
+		result, ok := <-c.digitalbitsCoreRunner.getMetaPipe()
 		if errOut = c.checkMetaPipeResult(result, ok); errOut != nil {
 			break
 		}
@@ -531,26 +531,26 @@ func (c *CaptiveStellarCore) GetLedger(sequence uint32) (bool, xdr.LedgerCloseMe
 	// All paths above that break out of the loop (instead of return)
 	// set errOut to non-nil: there was an error and we should close and
 	// reset state before retuning an error to our caller.
-	c.stellarCoreRunner.close()
+	c.digitalbitsCoreRunner.close()
 	return false, xdr.LedgerCloseMeta{}, errOut
 }
 
-func (c *CaptiveStellarCore) checkMetaPipeResult(result metaResult, ok bool) error {
+func (c *CaptiveDigitalBitsCore) checkMetaPipeResult(result metaResult, ok bool) error {
 	// There are 3 types of errors we check for:
 	// 1. User initiated shutdown by canceling the parent context or calling Close().
-	// 2. The stellar core process exited unexpectedly.
+	// 2. The digitalbits core process exited unexpectedly.
 	// 3. Some error was encountered while consuming the ledgers emitted by captive core (e.g. parsing invalid xdr)
-	if err := c.stellarCoreRunner.context().Err(); err != nil {
+	if err := c.digitalbitsCoreRunner.context().Err(); err != nil {
 		// Case 1 - User initiated shutdown by canceling the parent context or calling Close()
 		return err
 	}
 	if !ok || result.err != nil {
-		if exited, err := c.stellarCoreRunner.getProcessExitError(); exited {
-			// Case 2 - The stellar core process exited unexpectedly
+		if exited, err := c.digitalbitsCoreRunner.getProcessExitError(); exited {
+			// Case 2 - The digitalbits core process exited unexpectedly
 			if err == nil {
-				return errors.Errorf("stellar core exited unexpectedly")
+				return errors.Errorf("digitalbits core exited unexpectedly")
 			} else {
-				return errors.Wrap(err, "stellar core exited unexpectedly")
+				return errors.Wrap(err, "digitalbits core exited unexpectedly")
 			}
 		} else if !ok {
 			// This case should never happen because the ledger buffer channel can only be closed
@@ -572,37 +572,37 @@ func (c *CaptiveStellarCore) checkMetaPipeResult(result metaResult, ok bool) err
 // Note that for UnboundedRange the returned sequence number is not necessarily
 // the latest sequence closed by the network. It's always the last value available
 // in the backend.
-func (c *CaptiveStellarCore) GetLatestLedgerSequence() (uint32, error) {
-	c.stellarCoreLock.RLock()
-	defer c.stellarCoreLock.RUnlock()
+func (c *CaptiveDigitalBitsCore) GetLatestLedgerSequence() (uint32, error) {
+	c.digitalbitsCoreLock.RLock()
+	defer c.digitalbitsCoreLock.RUnlock()
 
 	if c.isClosed() {
-		return 0, errors.New("stellar-core must be opened to return latest available sequence")
+		return 0, errors.New("digitalbits-core must be opened to return latest available sequence")
 	}
 
 	if c.lastLedger == nil {
-		return c.nextLedger - 1 + uint32(len(c.stellarCoreRunner.getMetaPipe())), nil
+		return c.nextLedger - 1 + uint32(len(c.digitalbitsCoreRunner.getMetaPipe())), nil
 	}
 	return *c.lastLedger, nil
 }
 
-func (c *CaptiveStellarCore) isClosed() bool {
-	return c.nextLedger == 0 || c.stellarCoreRunner == nil || c.stellarCoreRunner.context().Err() != nil
+func (c *CaptiveDigitalBitsCore) isClosed() bool {
+	return c.nextLedger == 0 || c.digitalbitsCoreRunner == nil || c.digitalbitsCoreRunner.context().Err() != nil
 }
 
-// Close closes existing Stellar-Core process, streaming sessions and removes all
-// temporary files. Note, once a CaptiveStellarCore instance is closed it can can no longer be used and
+// Close closes existing DigitalBits-Core process, streaming sessions and removes all
+// temporary files. Note, once a CaptiveDigitalBitsCore instance is closed it can can no longer be used and
 // all subsequent calls to PrepareRange(), GetLedger(), etc will fail.
 // Close is thread-safe and can be called from another go routine.
-func (c *CaptiveStellarCore) Close() error {
-	c.stellarCoreLock.RLock()
-	defer c.stellarCoreLock.RUnlock()
+func (c *CaptiveDigitalBitsCore) Close() error {
+	c.digitalbitsCoreLock.RLock()
+	defer c.digitalbitsCoreLock.RUnlock()
 
-	// after the CaptiveStellarCore context is canceled all subsequent calls to PrepareRange() will fail
+	// after the CaptiveDigitalBitsCore context is canceled all subsequent calls to PrepareRange() will fail
 	c.cancel()
 
-	if c.stellarCoreRunner != nil {
-		return c.stellarCoreRunner.close()
+	if c.digitalbitsCoreRunner != nil {
+		return c.digitalbitsCoreRunner.close()
 	}
 	return nil
 }

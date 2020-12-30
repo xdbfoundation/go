@@ -6,9 +6,9 @@ import (
 	"time"
 
 	"github.com/pkg/errors"
-	horizonclient "github.com/stellar/go/clients/horizonclient"
-	hProtocol "github.com/stellar/go/protocols/horizon"
-	"github.com/stellar/go/services/ticker/internal/utils"
+	frontierclient "github.com/digitalbits/go/clients/frontierclient"
+	hProtocol "github.com/digitalbits/go/protocols/frontier"
+	"github.com/digitalbits/go/services/ticker/internal/utils"
 )
 
 // fetchOrderbook fetches the orderbook stats for the base and counter assets provided in the parameters
@@ -33,7 +33,7 @@ func (c *ScraperConfig) fetchOrderbook(bType, bCode, bIssuer, cType, cCode, cIss
 	err = utils.Retry(5, 5*time.Second, c.Logger, func() error {
 		summary, err = c.Client.OrderBook(r)
 		if err != nil {
-			c.Logger.Infoln("Horizon rate limit reached!")
+			c.Logger.Infoln("Frontier rate limit reached!")
 		}
 		return err
 	})
@@ -81,9 +81,9 @@ func calcOrderbookStats(obStats *OrderbookStats, summary hProtocol.OrderBookSumm
 			return errors.Wrap(err, "invalid ask amount")
 		}
 
-		// On Horizon, Ask prices are in units of counter, but
+		// On Frontier, Ask prices are in units of counter, but
 		// amount is in units of base. Therefore, real amount = amount * price
-		// See: https://github.com/stellar/go/issues/612
+		// See: https://github.com/digitalbits/go/issues/612
 		obStats.AskVolume += pricef * amountf
 		if pricef < obStats.LowestAsk {
 			obStats.LowestAsk = pricef
@@ -104,29 +104,29 @@ func calcOrderbookStats(obStats *OrderbookStats, summary hProtocol.OrderBookSumm
 	return nil
 }
 
-// createOrderbookRequest generates a horizonclient.OrderBookRequest based on the base
+// createOrderbookRequest generates a frontierclient.OrderBookRequest based on the base
 // and counter asset parameters provided
-func createOrderbookRequest(bType, bCode, bIssuer, cType, cCode, cIssuer string) horizonclient.OrderBookRequest {
-	r := horizonclient.OrderBookRequest{
-		SellingAssetType: horizonclient.AssetType(bType),
-		BuyingAssetType:  horizonclient.AssetType(cType),
+func createOrderbookRequest(bType, bCode, bIssuer, cType, cCode, cIssuer string) frontierclient.OrderBookRequest {
+	r := frontierclient.OrderBookRequest{
+		SellingAssetType: frontierclient.AssetType(bType),
+		BuyingAssetType:  frontierclient.AssetType(cType),
 		// NOTE (Alex C, 2019-05-02):
-		// Orderbook requests are currently not paginated on Horizon.
+		// Orderbook requests are currently not paginated on Frontier.
 		// This limit has been added to ensure we capture at least 200
 		// orderbook entries once pagination is added.
 		Limit: 200,
 	}
 
-	// The Horizon API requires *AssetCode and *AssetIssuer fields to be empty
+	// The Frontier API requires *AssetCode and *AssetIssuer fields to be empty
 	// when an Asset is native. As we store "XLM" as the asset code for native,
 	// we should only add Code and Issuer info in case we're dealing with
 	// non-native assets.
-	// See: https://www.stellar.org/developers/horizon/reference/endpoints/orderbook-details.html
-	if bType != string(horizonclient.AssetTypeNative) {
+	// See: https://www.digitalbits.org/developers/frontier/reference/endpoints/orderbook-details.html
+	if bType != string(frontierclient.AssetTypeNative) {
 		r.SellingAssetCode = bCode
 		r.SellingAssetIssuer = bIssuer
 	}
-	if cType != string(horizonclient.AssetTypeNative) {
+	if cType != string(frontierclient.AssetTypeNative) {
 		r.BuyingAssetCode = cCode
 		r.BuyingAssetIssuer = cIssuer
 	}

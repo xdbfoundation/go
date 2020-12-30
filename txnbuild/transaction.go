@@ -1,11 +1,11 @@
 /*
-Package txnbuild implements transactions and operations on the Stellar network.
-This library provides an interface to the Stellar transaction model. It supports the building of Go applications on
-top of the Stellar network (https://www.stellar.org/). Transactions constructed by this library may be submitted
-to any Horizon instance for processing onto the ledger, using any Stellar SDK client. The recommended client for Go
-programmers is horizonclient (https://github.com/stellar/go/tree/master/clients/horizonclient). Together, these two
-libraries provide a complete Stellar SDK.
-For more information and further examples, see https://www.stellar.org/developers/go/reference/index.html.
+Package txnbuild implements transactions and operations on the DigitalBits network.
+This library provides an interface to the DigitalBits transaction model. It supports the building of Go applications on
+top of the DigitalBits network (https://www.digitalbits.org/). Transactions constructed by this library may be submitted
+to any Frontier instance for processing onto the ledger, using any DigitalBits SDK client. The recommended client for Go
+programmers is frontierclient (https://github.com/digitalbits/go/tree/master/clients/frontierclient). Together, these two
+libraries provide a complete DigitalBits SDK.
+For more information and further examples, see https://www.digitalbits.org/developers/go/reference/index.html.
 */
 package txnbuild
 
@@ -21,18 +21,18 @@ import (
 	"strings"
 	"time"
 
-	"github.com/stellar/go/keypair"
-	"github.com/stellar/go/network"
-	"github.com/stellar/go/strkey"
-	"github.com/stellar/go/support/errors"
-	"github.com/stellar/go/xdr"
+	"github.com/digitalbits/go/keypair"
+	"github.com/digitalbits/go/network"
+	"github.com/digitalbits/go/strkey"
+	"github.com/digitalbits/go/support/errors"
+	"github.com/digitalbits/go/xdr"
 )
 
-// MinBaseFee is the minimum transaction fee for the Stellar network.
+// MinBaseFee is the minimum transaction fee for the DigitalBits network.
 const MinBaseFee = 100
 
-// Account represents the aspects of a Stellar account necessary to construct transactions. See
-// https://www.stellar.org/developers/guides/concepts/accounts.html
+// Account represents the aspects of a DigitalBits account necessary to construct transactions. See
+// https://www.digitalbits.org/developers/guides/concepts/accounts.html
 type Account interface {
 	GetAccountID() string
 	IncrementSequenceNumber() (int64, error)
@@ -116,11 +116,11 @@ func stringsToKP(keys ...string) ([]*keypair.Full, error) {
 	for _, k := range keys {
 		kp, err := keypair.Parse(k)
 		if err != nil {
-			return nil, errors.Wrapf(err, "provided string %s is not a valid Stellar key", k)
+			return nil, errors.Wrapf(err, "provided string %s is not a valid DigitalBits key", k)
 		}
 		kpf, ok := kp.(*keypair.Full)
 		if !ok {
-			return nil, errors.New("provided string %s is not a valid Stellar secret key")
+			return nil, errors.New("provided string %s is not a valid DigitalBits secret key")
 		}
 		signers = append(signers, kpf)
 	}
@@ -195,8 +195,8 @@ func cloneEnvelope(e xdr.TransactionEnvelope, signatures []xdr.DecoratedSignatur
 	return clone, nil
 }
 
-// Transaction represents a Stellar transaction. See
-// https://www.stellar.org/developers/guides/concepts/transactions.html
+// Transaction represents a DigitalBits transaction. See
+// https://www.digitalbits.org/developers/guides/concepts/transactions.html
 // A Transaction may be wrapped by a FeeBumpTransaction in which case
 // the account authorizing the FeeBumpTransaction will pay for the transaction fees
 // instead of the Transaction's source account.
@@ -286,7 +286,7 @@ func (t *Transaction) SignWithKeyString(network string, keys ...string) (*Transa
 
 // SignHashX returns a new Transaction instance which extends the current instance
 // with HashX signature type.
-// See description here: https://www.stellar.org/developers/guides/concepts/multi-sig.html#hashx.
+// See description here: https://www.digitalbits.org/developers/guides/concepts/multi-sig.html#hashx.
 func (t *Transaction) SignHashX(preimage []byte) (*Transaction, error) {
 	extendedSignatures, err := concatHashX(t.signatures, preimage)
 	if err != nil {
@@ -369,8 +369,8 @@ func (t *Transaction) ClaimableBalanceID(operationIndex int) (string, error) {
 		return "", errors.Wrap(err, "failed to retrieve account sequence number")
 	}
 
-	// We mimic the relevant code from Stellar Core
-	// https://github.com/stellar/stellar-core/blob/9f3cc04e6ec02c38974c42545a86cdc79809252b/src/test/TestAccount.cpp#L285
+	// We mimic the relevant code from DigitalBits Core
+	// https://github.com/digitalbits/digitalbits-core/blob/9f3cc04e6ec02c38974c42545a86cdc79809252b/src/test/TestAccount.cpp#L285
 	operationId := xdr.OperationId{
 		Type: xdr.EnvelopeTypeEnvelopeTypeOpId,
 		Id: &xdr.OperationIdId{
@@ -472,7 +472,7 @@ func (t *FeeBumpTransaction) SignWithKeyString(network string, keys ...string) (
 
 // SignHashX returns a new FeeBumpTransaction instance which extends the current instance
 // with HashX signature type.
-// See description here: https://www.stellar.org/developers/guides/concepts/multi-sig.html#hashx.
+// See description here: https://www.digitalbits.org/developers/guides/concepts/multi-sig.html#hashx.
 func (t *FeeBumpTransaction) SignHashX(preimage []byte) (*FeeBumpTransaction, error) {
 	extendedSignatures, err := concatHashX(t.signatures, preimage)
 	if err != nil {
@@ -850,7 +850,7 @@ func NewFeeBumpTransaction(params FeeBumpTransactionParams) (*FeeBumpTransaction
 
 // BuildChallengeTx is a factory method that creates a valid SEP 10 challenge, for use in web authentication.
 // "timebound" is the time duration the transaction should be valid for, and must be greater than 1s (300s is recommended).
-// More details on SEP 10: https://github.com/stellar/stellar-protocol/blob/master/ecosystem/sep-0010.md
+// More details on SEP 10: https://github.com/digitalbits/digitalbits-protocol/blob/master/ecosystem/sep-0010.md
 func BuildChallengeTx(serverSignerSecret, clientAccountID, homeDomain, network string, timebound time.Duration) (*Transaction, error) {
 	if timebound < time.Second {
 		return nil, errors.New("provided timebound must be at least 1s (300s is recommended)")
@@ -891,7 +891,7 @@ func BuildChallengeTx(serverSignerSecret, clientAccountID, homeDomain, network s
 	maxTime := currentTime.Add(timebound)
 
 	// Create a SEP 10 compatible response. See
-	// https://github.com/stellar/stellar-protocol/blob/master/ecosystem/sep-0010.md#response
+	// https://github.com/digitalbits/digitalbits-protocol/blob/master/ecosystem/sep-0010.md#response
 	tx, err := NewTransaction(
 		TransactionParams{
 			SourceAccount:        &sa,
@@ -1198,7 +1198,7 @@ func VerifyChallengeTxSigners(challengeTx, serverAccountID, network string, home
 	return signersFound, nil
 }
 
-// verifyTxSignature checks if a transaction has been signed by the provided Stellar account.
+// verifyTxSignature checks if a transaction has been signed by the provided DigitalBits account.
 func verifyTxSignature(tx *Transaction, network string, signer string) error {
 	signersFound, err := verifyTxSignatures(tx, network, signer)
 	if len(signersFound) == 0 {

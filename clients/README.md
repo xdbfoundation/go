@@ -1,13 +1,13 @@
 # Clients package
 
-Packages here provide client libraries for accessing the ecosystem of Stellar services.
+Packages here provide client libraries for accessing the ecosystem of DigitalBits services.
 
-* `horizonclient` - programmatic client access to Horizon (use in conjunction with [txnbuild](../txnbuild))
-* `stellartoml` - parse Stellar.toml files from the internet
-* `federation` - resolve federation addresses into stellar account IDs, suitable for use within a transaction
-* `horizon` (DEPRECATED) - the original Horizon client, now superceded by `horizonclient`
+* `frontierclient` - programmatic client access to Frontier (use in conjunction with [txnbuild](../txnbuild))
+* `digitalbitstoml` - parse DigitalBits.toml files from the internet
+* `federation` - resolve federation addresses into digitalbits account IDs, suitable for use within a transaction
+* `frontier` (DEPRECATED) - the original Frontier client, now superceded by `frontierclient`
 
-See [GoDoc](https://godoc.org/github.com/stellar/go/clients) for more details.
+See [GoDoc](https://godoc.org/github.com/digitalbits/go/clients) for more details.
 
 ## For developers: Adding new client packages
 

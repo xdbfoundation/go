@@ -50,7 +50,7 @@ The pair `XLM_ZZZ` has the `XLM` as the counter currency and `ZZZ` as the base. 
 
 ### Example
 #### Endpoint
-GET `https://ticker.stellar.org/markets.json`
+GET `https://ticker.digitalbits.org/markets.json`
 #### Response (application/json)
 
 ```json
@@ -118,13 +118,13 @@ GET `https://ticker.stellar.org/markets.json`
 }
 ```
 ## Asset (Currency) Data
-Lists all the valid assets within the Stellar network. The provided fields are based on the [Currency Documentation of SEP-0001](https://github.com/stellar/stellar-protocol/blob/master/ecosystem/sep-0001.md#currency-documentation) and the [Asset fields from Horizon](https://www.stellar.org/developers/horizon/reference/resources/asset.html).
+Lists all the valid assets within the DigitalBits network. The provided fields are based on the [Currency Documentation of SEP-0001](https://github.com/digitalbits/digitalbits-protocol/blob/master/ecosystem/sep-0001.md#currency-documentation) and the [Asset fields from Frontier](https://www.digitalbits.org/developers/frontier/reference/resources/asset.html).
 ### Response Fields
 
 * `generated_at`: UNIX timestamp of when data was generated
 * `generated_at_rfc3339 `: RFC 3339 formatted string of when data was generated
 * `code`: code of the asset
-* `issuer`: token issuer Stellar public key
+* `issuer`: token issuer DigitalBits public key
 * `type`: type of the asset (e.g. `native` or `credit_alphanum4`)
 * `num_accounts`: the number of accounts that: 1) trust this asset and 2) where if the asset has the auth_required flag then the account is authorized to hold the asset.
 * `auth_required`: an anchor must approve anyone who wants to hold its asset
@@ -150,7 +150,7 @@ Lists all the valid assets within the Stellar network. The provided fields are b
 
 ### Example
 #### Endpoint
-GET `https://ticker.stellar.org/assets.json`
+GET `https://ticker.digitalbits.org/assets.json`
 
 #### Response (application/json)
 
@@ -199,7 +199,7 @@ GET `https://ticker.stellar.org/assets.json`
             "display_decimals": 2,
             "name": "Push",
             "desc": "1 PUSH token entitles you to access the push API.",
-            "conditions": "Token used to access the PUSH api to send a push request to the stellar network.",
+            "conditions": "Token used to access the PUSH api to send a push request to the digitalbits network.",
             "is_asset_anchored": false,
             "fixed_number": 0,
             "max_number": 0,
@@ -219,10 +219,10 @@ GET `https://ticker.stellar.org/assets.json`
 ## GraphQL interface
 Asset, issuer, markets and ticker data can be queried through a GraphQL interface, which is also provided by the Ticker.
 
-To explore the GraphQL queries, you can access the GraphiQL URL: https://ticker.stellar.org/graphiql
+To explore the GraphQL queries, you can access the GraphiQL URL: https://ticker.digitalbits.org/graphiql
 
 ## Orderbook
-Apart from the orderbook data provided by `markets.json`, orderbook data can be retrieved directly from Horizon. In order to retrieve `ask` and `bid` data, you have to provide the following parameters from the asset pairs:
+Apart from the orderbook data provided by `markets.json`, orderbook data can be retrieved directly from Frontier. In order to retrieve `ask` and `bid` data, you have to provide the following parameters from the asset pairs:
 
 - `selling_asset_type`: type of selling asset (e.g. `native`, `credit_alphanum4`)
 - `selling_asset_code`: code of the selling asset. Omit if `selling_asset_type` = `native`
@@ -234,11 +234,11 @@ Apart from the orderbook data provided by `markets.json`, orderbook data can be 
 The `type`, `code` and `issuer` parameters for any given asset can be found in the Ticker's `assets.json` endpoint described in the previous section.
 
 
-Full documentation on Horizon's Orderbook endpoint can be found [here](https://www.stellar.org/developers/horizon/reference/endpoints/orderbook-details.html).
+Full documentation on Frontier's Orderbook endpoint can be found [here](https://www.digitalbits.org/developers/frontier/reference/endpoints/orderbook-details.html).
 
 ### Example
 #### Endpoint
-GET `https://horizon.stellar.org/order_book?selling_asset_type=native&buying_asset_type=credit_alphanum4&buying_asset_code=BTC&buying_asset_issuer=GATEMHCCKCY67ZUCKTROYN24ZYT5GK4EQZ65JJLDHKHRUZI3EUEKMTCH`
+GET `https://frontier.digitalbits.org/order_book?selling_asset_type=native&buying_asset_type=credit_alphanum4&buying_asset_code=BTC&buying_asset_issuer=GATEMHCCKCY67ZUCKTROYN24ZYT5GK4EQZ65JJLDHKHRUZI3EUEKMTCH`
 
 #### Response (application/json)
 ```json

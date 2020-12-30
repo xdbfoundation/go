@@ -3,7 +3,7 @@ package io
 import (
 	"testing"
 
-	"github.com/stellar/go/xdr"
+	"github.com/digitalbits/go/xdr"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -99,7 +99,7 @@ func TestFeeMetaAndOperationsChangesSeparate(t *testing.T) {
 	assert.Equal(t, operationChanges[0].Post.Data.MustAccount().Balance, xdr.Int64(400))
 
 	// Ignore operation meta if tx result is txInternalError
-	// https://github.com/stellar/go/issues/2111
+	// https://github.com/digitalbits/go/issues/2111
 	tx.Result.Result.Result.Code = xdr.TransactionResultCodeTxInternalError
 	metaChanges, err = tx.GetChanges()
 	assert.NoError(t, err)
@@ -307,7 +307,7 @@ func TestMetaV2Order(t *testing.T) {
 	assert.Len(t, operationChanges, 1)
 
 	// Ignore operations meta and txChangesAfter if txInternalError
-	// https://github.com/stellar/go/issues/2111
+	// https://github.com/digitalbits/go/issues/2111
 	tx.Result.Result.Result.Code = xdr.TransactionResultCodeTxInternalError
 	metaChanges, err = tx.GetChanges()
 	assert.NoError(t, err)
@@ -494,7 +494,7 @@ func TestChangeAccountChangedExceptSignersNoChanges(t *testing.T) {
 					NumSubEntries: 2,
 					InflationDest: &inflationDest,
 					Flags:         4,
-					HomeDomain:    "stellar.org",
+					HomeDomain:    "digitalbits.org",
 					Thresholds:    [4]byte{1, 1, 1, 1},
 					Signers: []xdr.Signer{
 						xdr.Signer{
@@ -525,7 +525,7 @@ func TestChangeAccountChangedExceptSignersNoChanges(t *testing.T) {
 					NumSubEntries: 2,
 					InflationDest: &inflationDest,
 					Flags:         4,
-					HomeDomain:    "stellar.org",
+					HomeDomain:    "digitalbits.org",
 					Thresholds:    [4]byte{1, 1, 1, 1},
 					Signers: []xdr.Signer{
 						xdr.Signer{

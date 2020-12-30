@@ -4,15 +4,15 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/stellar/go/keypair"
-	"github.com/stellar/go/network"
-	horizonclient "github.com/stellar/go/txnbuild/examplehorizonclient"
+	"github.com/digitalbits/go/keypair"
+	"github.com/digitalbits/go/network"
+	frontierclient "github.com/digitalbits/go/txnbuild/examplefrontierclient"
 )
 
 func ExampleInflation() {
 	kp, _ := keypair.Parse("SBPQUZ6G4FZNWFHKUWC5BEYWF6R52E3SEP7R3GWYSM2XTKGF5LNTWW4R")
-	client := horizonclient.DefaultTestNetClient
-	ar := horizonclient.AccountRequest{AccountID: kp.Address()}
+	client := frontierclient.DefaultTestNetClient
+	ar := frontierclient.AccountRequest{AccountID: kp.Address()}
 	sourceAccount, err := client.AccountDetail(ar)
 	check(err)
 
@@ -41,8 +41,8 @@ func ExampleInflation() {
 
 func ExampleCreateAccount() {
 	kp, _ := keypair.Parse("SBPQUZ6G4FZNWFHKUWC5BEYWF6R52E3SEP7R3GWYSM2XTKGF5LNTWW4R")
-	client := horizonclient.DefaultTestNetClient
-	ar := horizonclient.AccountRequest{AccountID: kp.Address()}
+	client := frontierclient.DefaultTestNetClient
+	ar := frontierclient.AccountRequest{AccountID: kp.Address()}
 	sourceAccount, err := client.AccountDetail(ar)
 	check(err)
 
@@ -74,8 +74,8 @@ func ExampleCreateAccount() {
 
 func ExamplePayment() {
 	kp, _ := keypair.Parse("SBPQUZ6G4FZNWFHKUWC5BEYWF6R52E3SEP7R3GWYSM2XTKGF5LNTWW4R")
-	client := horizonclient.DefaultTestNetClient
-	ar := horizonclient.AccountRequest{AccountID: kp.Address()}
+	client := frontierclient.DefaultTestNetClient
+	ar := frontierclient.AccountRequest{AccountID: kp.Address()}
 	sourceAccount, err := client.AccountDetail(ar)
 	check(err)
 
@@ -108,8 +108,8 @@ func ExamplePayment() {
 
 func ExamplePayment_setBaseFee() {
 	kp, _ := keypair.Parse("SBPQUZ6G4FZNWFHKUWC5BEYWF6R52E3SEP7R3GWYSM2XTKGF5LNTWW4R")
-	client := horizonclient.DefaultTestNetClient
-	ar := horizonclient.AccountRequest{AccountID: kp.Address()}
+	client := frontierclient.DefaultTestNetClient
+	ar := frontierclient.AccountRequest{AccountID: kp.Address()}
 	sourceAccount, err := client.AccountDetail(ar)
 	check(err)
 
@@ -152,8 +152,8 @@ func ExamplePayment_setBaseFee() {
 
 func ExampleBumpSequence() {
 	kp, _ := keypair.Parse("SBPQUZ6G4FZNWFHKUWC5BEYWF6R52E3SEP7R3GWYSM2XTKGF5LNTWW4R")
-	client := horizonclient.DefaultTestNetClient
-	ar := horizonclient.AccountRequest{AccountID: kp.Address()}
+	client := frontierclient.DefaultTestNetClient
+	ar := frontierclient.AccountRequest{AccountID: kp.Address()}
 	sourceAccount, err := client.AccountDetail(ar)
 	check(err)
 
@@ -184,8 +184,8 @@ func ExampleBumpSequence() {
 
 func ExampleAccountMerge() {
 	kp, _ := keypair.Parse("SBPQUZ6G4FZNWFHKUWC5BEYWF6R52E3SEP7R3GWYSM2XTKGF5LNTWW4R")
-	client := horizonclient.DefaultTestNetClient
-	ar := horizonclient.AccountRequest{AccountID: kp.Address()}
+	client := frontierclient.DefaultTestNetClient
+	ar := frontierclient.AccountRequest{AccountID: kp.Address()}
 	sourceAccount, err := client.AccountDetail(ar)
 	check(err)
 
@@ -216,8 +216,8 @@ func ExampleAccountMerge() {
 
 func ExampleManageData() {
 	kp, _ := keypair.Parse("SBPQUZ6G4FZNWFHKUWC5BEYWF6R52E3SEP7R3GWYSM2XTKGF5LNTWW4R")
-	client := horizonclient.DefaultTestNetClient
-	ar := horizonclient.AccountRequest{AccountID: kp.Address()}
+	client := frontierclient.DefaultTestNetClient
+	ar := frontierclient.AccountRequest{AccountID: kp.Address()}
 	sourceAccount, err := client.AccountDetail(ar)
 	check(err)
 
@@ -249,8 +249,8 @@ func ExampleManageData() {
 
 func ExampleManageData_removeDataEntry() {
 	kp, _ := keypair.Parse("SBPQUZ6G4FZNWFHKUWC5BEYWF6R52E3SEP7R3GWYSM2XTKGF5LNTWW4R")
-	client := horizonclient.DefaultTestNetClient
-	ar := horizonclient.AccountRequest{AccountID: kp.Address()}
+	client := frontierclient.DefaultTestNetClient
+	ar := frontierclient.AccountRequest{AccountID: kp.Address()}
 	sourceAccount, err := client.AccountDetail(ar)
 	check(err)
 
@@ -281,8 +281,8 @@ func ExampleManageData_removeDataEntry() {
 
 func ExampleSetOptions() {
 	kp, _ := keypair.Parse("SBPQUZ6G4FZNWFHKUWC5BEYWF6R52E3SEP7R3GWYSM2XTKGF5LNTWW4R")
-	client := horizonclient.DefaultTestNetClient
-	ar := horizonclient.AccountRequest{AccountID: kp.Address()}
+	client := frontierclient.DefaultTestNetClient
+	ar := frontierclient.AccountRequest{AccountID: kp.Address()}
 	sourceAccount, err := client.AccountDetail(ar)
 	check(err)
 
@@ -321,8 +321,8 @@ func ExampleSetOptions() {
 
 func ExampleChangeTrust() {
 	kp, _ := keypair.Parse("SBPQUZ6G4FZNWFHKUWC5BEYWF6R52E3SEP7R3GWYSM2XTKGF5LNTWW4R")
-	client := horizonclient.DefaultTestNetClient
-	ar := horizonclient.AccountRequest{AccountID: kp.Address()}
+	client := frontierclient.DefaultTestNetClient
+	ar := frontierclient.AccountRequest{AccountID: kp.Address()}
 	sourceAccount, err := client.AccountDetail(ar)
 	check(err)
 
@@ -354,8 +354,8 @@ func ExampleChangeTrust() {
 
 func ExampleChangeTrust_removeTrustline() {
 	kp, _ := keypair.Parse("SBPQUZ6G4FZNWFHKUWC5BEYWF6R52E3SEP7R3GWYSM2XTKGF5LNTWW4R")
-	client := horizonclient.DefaultTestNetClient
-	ar := horizonclient.AccountRequest{AccountID: kp.Address()}
+	client := frontierclient.DefaultTestNetClient
+	ar := frontierclient.AccountRequest{AccountID: kp.Address()}
 	sourceAccount, err := client.AccountDetail(ar)
 	check(err)
 
@@ -384,8 +384,8 @@ func ExampleChangeTrust_removeTrustline() {
 
 func ExampleAllowTrust() {
 	kp, _ := keypair.Parse("SBPQUZ6G4FZNWFHKUWC5BEYWF6R52E3SEP7R3GWYSM2XTKGF5LNTWW4R")
-	client := horizonclient.DefaultTestNetClient
-	ar := horizonclient.AccountRequest{AccountID: kp.Address()}
+	client := frontierclient.DefaultTestNetClient
+	ar := frontierclient.AccountRequest{AccountID: kp.Address()}
 	sourceAccount, err := client.AccountDetail(ar)
 	check(err)
 
@@ -418,8 +418,8 @@ func ExampleAllowTrust() {
 
 func ExampleManageSellOffer() {
 	kp, _ := keypair.Parse("SBPQUZ6G4FZNWFHKUWC5BEYWF6R52E3SEP7R3GWYSM2XTKGF5LNTWW4R")
-	client := horizonclient.DefaultTestNetClient
-	ar := horizonclient.AccountRequest{AccountID: kp.Address()}
+	client := frontierclient.DefaultTestNetClient
+	ar := frontierclient.AccountRequest{AccountID: kp.Address()}
 	sourceAccount, err := client.AccountDetail(ar)
 	check(err)
 
@@ -453,8 +453,8 @@ func ExampleManageSellOffer() {
 
 func ExampleManageSellOffer_deleteOffer() {
 	kp, _ := keypair.Parse("SBPQUZ6G4FZNWFHKUWC5BEYWF6R52E3SEP7R3GWYSM2XTKGF5LNTWW4R")
-	client := horizonclient.DefaultTestNetClient
-	ar := horizonclient.AccountRequest{AccountID: kp.Address()}
+	client := frontierclient.DefaultTestNetClient
+	ar := frontierclient.AccountRequest{AccountID: kp.Address()}
 	sourceAccount, err := client.AccountDetail(ar)
 	check(err)
 
@@ -485,8 +485,8 @@ func ExampleManageSellOffer_deleteOffer() {
 
 func ExampleManageSellOffer_updateOffer() {
 	kp, _ := keypair.Parse("SBPQUZ6G4FZNWFHKUWC5BEYWF6R52E3SEP7R3GWYSM2XTKGF5LNTWW4R")
-	client := horizonclient.DefaultTestNetClient
-	ar := horizonclient.AccountRequest{AccountID: kp.Address()}
+	client := frontierclient.DefaultTestNetClient
+	ar := frontierclient.AccountRequest{AccountID: kp.Address()}
 	sourceAccount, err := client.AccountDetail(ar)
 	check(err)
 
@@ -521,8 +521,8 @@ func ExampleManageSellOffer_updateOffer() {
 
 func ExampleCreatePassiveSellOffer() {
 	kp, _ := keypair.Parse("SBPQUZ6G4FZNWFHKUWC5BEYWF6R52E3SEP7R3GWYSM2XTKGF5LNTWW4R")
-	client := horizonclient.DefaultTestNetClient
-	ar := horizonclient.AccountRequest{AccountID: kp.Address()}
+	client := frontierclient.DefaultTestNetClient
+	ar := frontierclient.AccountRequest{AccountID: kp.Address()}
 	sourceAccount, err := client.AccountDetail(ar)
 	check(err)
 
@@ -556,8 +556,8 @@ func ExampleCreatePassiveSellOffer() {
 
 func ExamplePathPayment() {
 	kp, _ := keypair.Parse("SBZVMB74Z76QZ3ZOY7UTDFYKMEGKW5XFJEB6PFKBF4UYSSWHG4EDH7PY")
-	client := horizonclient.DefaultTestNetClient
-	ar := horizonclient.AccountRequest{AccountID: kp.Address()}
+	client := frontierclient.DefaultTestNetClient
+	ar := frontierclient.AccountRequest{AccountID: kp.Address()}
 	sourceAccount, err := client.AccountDetail(ar)
 	check(err)
 
@@ -594,8 +594,8 @@ func ExamplePathPayment() {
 
 func ExamplePathPaymentStrictReceive() {
 	kp, _ := keypair.Parse("SBZVMB74Z76QZ3ZOY7UTDFYKMEGKW5XFJEB6PFKBF4UYSSWHG4EDH7PY")
-	client := horizonclient.DefaultTestNetClient
-	ar := horizonclient.AccountRequest{AccountID: kp.Address()}
+	client := frontierclient.DefaultTestNetClient
+	ar := frontierclient.AccountRequest{AccountID: kp.Address()}
 	sourceAccount, err := client.AccountDetail(ar)
 	check(err)
 
@@ -632,8 +632,8 @@ func ExamplePathPaymentStrictReceive() {
 
 func ExamplePathPaymentStrictSend() {
 	kp, _ := keypair.Parse("SBZVMB74Z76QZ3ZOY7UTDFYKMEGKW5XFJEB6PFKBF4UYSSWHG4EDH7PY")
-	client := horizonclient.DefaultTestNetClient
-	ar := horizonclient.AccountRequest{AccountID: kp.Address()}
+	client := frontierclient.DefaultTestNetClient
+	ar := frontierclient.AccountRequest{AccountID: kp.Address()}
 	sourceAccount, err := client.AccountDetail(ar)
 	check(err)
 
@@ -670,8 +670,8 @@ func ExamplePathPaymentStrictSend() {
 
 func ExampleManageBuyOffer() {
 	kp, _ := keypair.Parse("SBZVMB74Z76QZ3ZOY7UTDFYKMEGKW5XFJEB6PFKBF4UYSSWHG4EDH7PY")
-	client := horizonclient.DefaultTestNetClient
-	ar := horizonclient.AccountRequest{AccountID: kp.Address()}
+	client := frontierclient.DefaultTestNetClient
+	ar := frontierclient.AccountRequest{AccountID: kp.Address()}
 	sourceAccount, err := client.AccountDetail(ar)
 	check(err)
 
@@ -707,8 +707,8 @@ func ExampleManageBuyOffer() {
 
 func ExampleFeeBumpTransaction() {
 	kp, _ := keypair.Parse("SBPQUZ6G4FZNWFHKUWC5BEYWF6R52E3SEP7R3GWYSM2XTKGF5LNTWW4R")
-	client := horizonclient.DefaultTestNetClient
-	ar := horizonclient.AccountRequest{AccountID: kp.Address()}
+	client := frontierclient.DefaultTestNetClient
+	ar := frontierclient.AccountRequest{AccountID: kp.Address()}
 	sourceAccount, err := client.AccountDetail(ar)
 	check(err)
 

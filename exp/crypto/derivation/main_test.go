@@ -5,13 +5,13 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/stellar/go/keypair"
+	"github.com/digitalbits/go/keypair"
 	"github.com/stretchr/testify/assert"
 )
 
 func ExampleDeriveFromPath() {
 	seed, _ := hex.DecodeString("000102030405060708090a0b0c0d0e0f")
-	key, err := DeriveForPath(StellarPrimaryAccountPath, seed)
+	key, err := DeriveForPath(DigitalBitsPrimaryAccountPath, seed)
 	if err != nil {
 		panic(err)
 	}
@@ -33,7 +33,7 @@ func ExampleDeriveMultipleKeys() {
 	seed, _ := hex.DecodeString("000102030405060708090a0b0c0d0e0f")
 
 	for i := 0; i < 10; i++ {
-		path := fmt.Sprintf(StellarAccountPathFormat, i)
+		path := fmt.Sprintf(DigitalBitsAccountPathFormat, i)
 		key, err := DeriveForPath(path, seed)
 		if err != nil {
 			panic(err)
@@ -62,7 +62,7 @@ func ExampleDeriveMultipleKeys() {
 
 func ExampleDeriveMultipleKeysFaster() {
 	seed, _ := hex.DecodeString("000102030405060708090a0b0c0d0e0f")
-	mainKey, err := DeriveForPath(StellarAccountPrefix, seed)
+	mainKey, err := DeriveForPath(DigitalBitsAccountPrefix, seed)
 	if err != nil {
 		panic(err)
 	}
@@ -78,7 +78,7 @@ func ExampleDeriveMultipleKeysFaster() {
 			panic(err)
 		}
 
-		fmt.Println(fmt.Sprintf(StellarAccountPathFormat, i), kp.Seed(), kp.Address())
+		fmt.Println(fmt.Sprintf(DigitalBitsAccountPathFormat, i), kp.Seed(), kp.Address())
 	}
 
 	// Output:
@@ -98,7 +98,7 @@ func BenchmarkDerive(b *testing.B) {
 	seed, _ := hex.DecodeString("000102030405060708090a0b0c0d0e0f")
 
 	for i := 0; i < b.N; i++ {
-		_, err := DeriveForPath(StellarPrimaryAccountPath, seed)
+		_, err := DeriveForPath(DigitalBitsPrimaryAccountPath, seed)
 		if err != nil {
 			panic(err)
 		}
@@ -107,7 +107,7 @@ func BenchmarkDerive(b *testing.B) {
 
 func BenchmarkDeriveFast(b *testing.B) {
 	seed, _ := hex.DecodeString("000102030405060708090a0b0c0d0e0f")
-	mainKey, err := DeriveForPath(StellarAccountPrefix, seed)
+	mainKey, err := DeriveForPath(DigitalBitsAccountPrefix, seed)
 	if err != nil {
 		panic(err)
 	}

@@ -1,4 +1,4 @@
-// Copyright 2016 Stellar Development Foundation and contributors. Licensed
+// Copyright 2016 DigitalBits Development Foundation and contributors. Licensed
 // under the Apache License, Version 2.0. See the COPYING file at the root
 // of this distribution or at http://www.apache.org/licenses/LICENSE-2.0
 
@@ -9,8 +9,8 @@ import (
 	"encoding/hex"
 	"fmt"
 
-	"github.com/stellar/go/support/errors"
-	"github.com/stellar/go/xdr"
+	"github.com/digitalbits/go/support/errors"
+	"github.com/digitalbits/go/xdr"
 )
 
 const NumLevels = 11
@@ -19,7 +19,7 @@ type HistoryArchiveState struct {
 	Version       int    `json:"version"`
 	Server        string `json:"server"`
 	CurrentLedger uint32 `json:"currentLedger"`
-	// NetworkPassphrase was added in Stellar-Core v14.1.0. Can be missing
+	// NetworkPassphrase was added in DigitalBits-Core v14.1.0. Can be missing
 	// in HAS created by previous versions.
 	NetworkPassphrase string `json:"networkPassphrase"`
 	CurrentBuckets    [NumLevels]struct {
@@ -89,7 +89,7 @@ func (h *HistoryArchiveState) Buckets() ([]Hash, error) {
 // This can be later compared with LedgerHeader.BucketListHash of the checkpoint
 // ledger to ensure data in history archive has not been changed by a malicious
 // actor.
-// Warning: Ledger header should be fetched from a trusted (!) stellar-core
+// Warning: Ledger header should be fetched from a trusted (!) digitalbits-core
 // instead of ex. history archives!
 func (h *HistoryArchiveState) BucketListHash() (xdr.Hash, error) {
 	total := []byte{}

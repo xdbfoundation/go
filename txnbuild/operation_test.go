@@ -3,8 +3,8 @@ package txnbuild
 import (
 	"testing"
 
-	"github.com/stellar/go/amount"
-	"github.com/stellar/go/xdr"
+	"github.com/digitalbits/go/amount"
+	"github.com/digitalbits/go/xdr"
 
 	"github.com/stretchr/testify/assert"
 )
@@ -220,7 +220,7 @@ func TestSetOptionsFromXDR(t *testing.T) {
 	lt := xdr.Uint32(2)
 	mt := xdr.Uint32(4)
 	ht := xdr.Uint32(6)
-	hDomain := xdr.String32("stellar.org")
+	hDomain := xdr.String32("digitalbits.org")
 	var skey xdr.SignerKey
 	err = skey.SetAddress("GDQNY3PBOJOKYZSRMK2S7LHHGWZIUISD4QORETLMXEWXBI7KFZZMKTL3")
 	assert.NoError(t, err)
@@ -258,7 +258,7 @@ func TestSetOptionsFromXDR(t *testing.T) {
 		assert.Equal(t, Threshold(2), *so.LowThreshold, "low threshold should match")
 		assert.Equal(t, Threshold(4), *so.MediumThreshold, "medium threshold should match")
 		assert.Equal(t, Threshold(6), *so.HighThreshold, "high threshold should match")
-		assert.Equal(t, "stellar.org", *so.HomeDomain, "Home domain should match")
+		assert.Equal(t, "digitalbits.org", *so.HomeDomain, "Home domain should match")
 		assert.Equal(t, "GDQNY3PBOJOKYZSRMK2S7LHHGWZIUISD4QORETLMXEWXBI7KFZZMKTL3", so.Signer.Address, "Signer address should match")
 		assert.Equal(t, Threshold(4), so.Signer.Weight, "Signer weight should match")
 		assert.Equal(t, int(AuthRequired), int(so.SetFlags[0]), "Set AuthRequired flags should match")

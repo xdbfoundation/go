@@ -4,7 +4,7 @@ import (
 	"context"
 	"sync"
 
-	"github.com/stellar/go/support/errors"
+	"github.com/digitalbits/go/support/errors"
 )
 
 // ErrShutdown is an error send to post-processing hook when pipeline has been

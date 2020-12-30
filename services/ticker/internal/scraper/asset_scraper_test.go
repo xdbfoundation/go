@@ -4,9 +4,9 @@ import (
 	"net/url"
 	"testing"
 
-	hProtocol "github.com/stellar/go/protocols/horizon"
-	"github.com/stellar/go/support/errors"
-	"github.com/stellar/go/support/render/hal"
+	hProtocol "github.com/digitalbits/go/protocols/frontier"
+	"github.com/digitalbits/go/support/errors"
+	"github.com/digitalbits/go/support/render/hal"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -53,7 +53,7 @@ func TestShouldDiscardAsset(t *testing.T) {
 		NumAccounts: 40,
 	}
 	testAsset.Code = "SOMETHINGVALID"
-	testAsset.Links.Toml.Href = "http://www.stellar.org/.well-known/stellar.toml"
+	testAsset.Links.Toml.Href = "http://www.digitalbits.org/.well-known/digitalbits.toml"
 	assert.Equal(t, shouldDiscardAsset(testAsset, true), true)
 
 	testAsset = hProtocol.AssetStat{
@@ -69,39 +69,39 @@ func TestShouldDiscardAsset(t *testing.T) {
 		NumAccounts: 40,
 	}
 	testAsset.Code = "SOMETHINGVALID"
-	testAsset.Links.Toml.Href = "https://www.stellar.org/.well-known/stellar.toml"
+	testAsset.Links.Toml.Href = "https://www.digitalbits.org/.well-known/digitalbits.toml"
 	assert.Equal(t, shouldDiscardAsset(testAsset, true), false)
 }
 
 func TestDomainsMatch(t *testing.T) {
-	tomlURL, _ := url.Parse("https://stellar.org/stellar.toml")
-	orgURL, _ := url.Parse("https://stellar.org/")
+	tomlURL, _ := url.Parse("https://digitalbits.org/digitalbits.toml")
+	orgURL, _ := url.Parse("https://digitalbits.org/")
 	assert.True(t, domainsMatch(tomlURL, orgURL))
 
-	tomlURL, _ = url.Parse("https://assets.stellar.org/stellar.toml")
-	orgURL, _ = url.Parse("https://stellar.org/")
+	tomlURL, _ = url.Parse("https://assets.digitalbits.org/digitalbits.toml")
+	orgURL, _ = url.Parse("https://digitalbits.org/")
 	assert.False(t, domainsMatch(tomlURL, orgURL))
 
-	tomlURL, _ = url.Parse("https://stellar.org/stellar.toml")
-	orgURL, _ = url.Parse("https://home.stellar.org/")
+	tomlURL, _ = url.Parse("https://digitalbits.org/digitalbits.toml")
+	orgURL, _ = url.Parse("https://home.digitalbits.org/")
 	assert.True(t, domainsMatch(tomlURL, orgURL))
 
-	tomlURL, _ = url.Parse("https://stellar.org/stellar.toml")
-	orgURL, _ = url.Parse("https://home.stellar.com/")
+	tomlURL, _ = url.Parse("https://digitalbits.org/digitalbits.toml")
+	orgURL, _ = url.Parse("https://home.digitalbits.com/")
 	assert.False(t, domainsMatch(tomlURL, orgURL))
 
-	tomlURL, _ = url.Parse("https://stellar.org/stellar.toml")
-	orgURL, _ = url.Parse("https://stellar.com/")
+	tomlURL, _ = url.Parse("https://digitalbits.org/digitalbits.toml")
+	orgURL, _ = url.Parse("https://digitalbits.com/")
 	assert.False(t, domainsMatch(tomlURL, orgURL))
 }
 
 func TestIsDomainVerified(t *testing.T) {
-	tomlURL := "https://stellar.org/stellar.toml"
-	orgURL := "https://stellar.org/"
+	tomlURL := "https://digitalbits.org/digitalbits.toml"
+	orgURL := "https://digitalbits.org/"
 	hasCurrency := true
 	assert.True(t, isDomainVerified(orgURL, tomlURL, hasCurrency))
 
-	tomlURL = "https://stellar.org/stellar.toml"
+	tomlURL = "https://digitalbits.org/digitalbits.toml"
 	orgURL = ""
 	hasCurrency = true
 	assert.True(t, isDomainVerified(orgURL, tomlURL, hasCurrency))
@@ -111,29 +111,29 @@ func TestIsDomainVerified(t *testing.T) {
 	hasCurrency = true
 	assert.False(t, isDomainVerified(orgURL, tomlURL, hasCurrency))
 
-	tomlURL = "https://stellar.org/stellar.toml"
-	orgURL = "https://stellar.org/"
+	tomlURL = "https://digitalbits.org/digitalbits.toml"
+	orgURL = "https://digitalbits.org/"
 	hasCurrency = false
 	assert.False(t, isDomainVerified(orgURL, tomlURL, hasCurrency))
 
-	tomlURL = "http://stellar.org/stellar.toml"
-	orgURL = "https://stellar.org/"
+	tomlURL = "http://digitalbits.org/digitalbits.toml"
+	orgURL = "https://digitalbits.org/"
 	hasCurrency = true
 	assert.False(t, isDomainVerified(orgURL, tomlURL, hasCurrency))
 
-	tomlURL = "https://stellar.org/stellar.toml"
-	orgURL = "http://stellar.org/"
+	tomlURL = "https://digitalbits.org/digitalbits.toml"
+	orgURL = "http://digitalbits.org/"
 	hasCurrency = true
 	assert.False(t, isDomainVerified(orgURL, tomlURL, hasCurrency))
 
-	tomlURL = "https://stellar.org/stellar.toml"
-	orgURL = "https://stellar.com/"
+	tomlURL = "https://digitalbits.org/digitalbits.toml"
+	orgURL = "https://digitalbits.com/"
 	hasCurrency = true
 	assert.False(t, isDomainVerified(orgURL, tomlURL, hasCurrency))
 }
 
 func TestIgnoreInvalidTOMLUrls(t *testing.T) {
-	invalidURL := "https:// there is something wrong here.com/stellar.toml"
+	invalidURL := "https:// there is something wrong here.com/digitalbits.toml"
 	assetStat := hProtocol.AssetStat{}
 	assetStat.Links.Toml = hal.Link{Href: invalidURL}
 
@@ -144,6 +144,6 @@ func TestIgnoreInvalidTOMLUrls(t *testing.T) {
 		t.Fatalf("err expected to be a url.Error but was %#v", err)
 	}
 	assert.Equal(t, "parse", urlErr.Op)
-	assert.Equal(t, "https:// there is something wrong here.com/stellar.toml", urlErr.URL)
+	assert.Equal(t, "https:// there is something wrong here.com/digitalbits.toml", urlErr.URL)
 	assert.EqualError(t, urlErr.Err, `invalid character " " in host name`)
 }

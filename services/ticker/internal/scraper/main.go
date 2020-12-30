@@ -4,20 +4,20 @@ import (
 	"context"
 	"time"
 
-	horizonclient "github.com/stellar/go/clients/horizonclient"
-	hProtocol "github.com/stellar/go/protocols/horizon"
-	"github.com/stellar/go/services/ticker/internal/utils"
-	hlog "github.com/stellar/go/support/log"
+	frontierclient "github.com/digitalbits/go/clients/frontierclient"
+	hProtocol "github.com/digitalbits/go/protocols/frontier"
+	"github.com/digitalbits/go/services/ticker/internal/utils"
+	hlog "github.com/digitalbits/go/support/log"
 )
 
 type ScraperConfig struct {
-	Client *horizonclient.Client
+	Client *frontierclient.Client
 	Logger *hlog.Entry
 	Ctx    *context.Context
 }
 
 // TOMLDoc is the interface for storing TOML Issuer Documentation.
-// See: https://github.com/stellar/stellar-protocol/blob/master/ecosystem/sep-0001.md#currency-documentation
+// See: https://github.com/digitalbits/digitalbits-protocol/blob/master/ecosystem/sep-0001.md#currency-documentation
 type TOMLDoc struct {
 	OrgName    string `toml:"ORG_NAME"`
 	OrgURL     string `toml:"ORG_URL"`
@@ -25,7 +25,7 @@ type TOMLDoc struct {
 }
 
 // TOMLCurrency is the interface for storing TOML Currency Information.
-// See: https://github.com/stellar/stellar-protocol/blob/master/ecosystem/sep-0001.md#currency-documentation
+// See: https://github.com/digitalbits/digitalbits-protocol/blob/master/ecosystem/sep-0001.md#currency-documentation
 type TOMLCurrency struct {
 	Code                        string   `toml:"code"`
 	Issuer                      string   `toml:"issuer"`
@@ -46,7 +46,7 @@ type TOMLCurrency struct {
 }
 
 // TOMLIssuer is the interface for storing TOML Issuer Information.
-// See: https://github.com/stellar/stellar-protocol/blob/master/ecosystem/sep-0001.md#currency-documentation
+// See: https://github.com/digitalbits/digitalbits-protocol/blob/master/ecosystem/sep-0001.md#currency-documentation
 type TOMLIssuer struct {
 	FederationServer string         `toml:"FEDERATION_SERVER"`
 	AuthServer       string         `toml:"AUTH_SERVER"`
@@ -110,7 +110,7 @@ type OrderbookStats struct {
 	SpreadMidPoint     float64
 }
 
-// FetchAllAssets fetches assets from the Horizon public net. If limit = 0, will fetch all assets.
+// FetchAllAssets fetches assets from the Frontier public net. If limit = 0, will fetch all assets.
 func (c *ScraperConfig) FetchAllAssets(limit int, parallelism int) (assets []FinalAsset, err error) {
 	dirtyAssets, err := c.retrieveAssets(limit)
 	if err != nil {
@@ -131,7 +131,7 @@ func (c *ScraperConfig) FetchAllAssets(limit int, parallelism int) (assets []Fin
 // FetchAllTrades fetches all trades for a given period, respecting the limit. If limit = 0,
 // will fetch all trades for that given period.
 func (c *ScraperConfig) FetchAllTrades(since time.Time, limit int) (trades []hProtocol.Trade, err error) {
-	c.Logger.Info("Fetching trades from Horizon")
+	c.Logger.Info("Fetching trades from Frontier")
 
 	trades, err = c.retrieveTrades(since, limit)
 
@@ -140,9 +140,9 @@ func (c *ScraperConfig) FetchAllTrades(since time.Time, limit int) (trades []hPr
 	return
 }
 
-// StreamNewTrades streams trades directly from horizon and calls the handler function
+// StreamNewTrades streams trades directly from frontier and calls the handler function
 // whenever a new trade appears.
-func (c *ScraperConfig) StreamNewTrades(cursor string, h horizonclient.TradeHandler) error {
+func (c *ScraperConfig) StreamNewTrades(cursor string, h frontierclient.TradeHandler) error {
 	c.Logger.Info("Starting to stream trades with cursor at:", cursor)
 	return c.streamTrades(h, cursor)
 }

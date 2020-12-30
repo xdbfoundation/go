@@ -1,4 +1,4 @@
-// Package demo is an interactive demonstration of the Go SDK using the Stellar TestNet.
+// Package demo is an interactive demonstration of the Go SDK using the DigitalBits TestNet.
 package demo
 
 import (
@@ -9,15 +9,15 @@ import (
 
 	log "github.com/sirupsen/logrus"
 
-	"github.com/stellar/go/clients/horizonclient"
-	"github.com/stellar/go/network"
-	hProtocol "github.com/stellar/go/protocols/horizon"
-	"github.com/stellar/go/strkey"
-	"github.com/stellar/go/support/errors"
-	"github.com/stellar/go/txnbuild"
-	"github.com/stellar/go/xdr"
+	"github.com/digitalbits/go/clients/frontierclient"
+	"github.com/digitalbits/go/network"
+	hProtocol "github.com/digitalbits/go/protocols/frontier"
+	"github.com/digitalbits/go/strkey"
+	"github.com/digitalbits/go/support/errors"
+	"github.com/digitalbits/go/txnbuild"
+	"github.com/digitalbits/go/xdr"
 
-	"github.com/stellar/go/keypair"
+	"github.com/digitalbits/go/keypair"
 )
 
 // The account address of the TestNet "friendbot"
@@ -27,7 +27,7 @@ const friendbotAddress = "GAIH3ULLFQ4DGSECF2AR555KZ4KNDGEKN4AFI4SU2M7B43MGK3QJZN
 // For convenience, the address is also stored so you can look up accounts on the network
 const accountsFile = "demo.keys"
 
-// Account represents a Stellar account for this demo.
+// Account represents a DigitalBits account for this demo.
 type Account struct {
 	Seed     string             `json:"name"`
 	Address  string             `json:"address"`
@@ -77,7 +77,7 @@ func InitKeys(n int) []Account {
 
 // Reset is a command that removes all test accounts created by this demo. All funds are
 // transferred back to Friendbot using the account merge operation.
-func Reset(client *horizonclient.Client, keys []Account) {
+func Reset(client *frontierclient.Client, keys []Account) {
 	keys = loadAccounts(client, keys)
 	for _, k := range keys {
 		if !k.Exists {
@@ -86,13 +86,13 @@ func Reset(client *horizonclient.Client, keys []Account) {
 		}
 
 		// It exists - so we will proceed to deconstruct any existing account entries, and then merge it
-		// See https://www.stellar.org/developers/guides/concepts/ledger.html#ledger-entries
+		// See https://www.digitalbits.org/developers/guides/concepts/ledger.html#ledger-entries
 		log.Info("Found testnet account with ID:", k.HAccount.ID)
 
 		// Find any offers that need deleting...
-		offerRequest := horizonclient.OfferRequest{
+		offerRequest := frontierclient.OfferRequest{
 			ForAccount: k.Address,
-			Order:      horizonclient.OrderDesc,
+			Order:      frontierclient.OrderDesc,
 		}
 		offers, err := client.Offers(offerRequest)
 		dieIfError("error while getting offers", err)
@@ -165,7 +165,7 @@ func Reset(client *horizonclient.Client, keys []Account) {
 // Initialise is a command that funds an initial set of accounts for use with other demo operations.
 // The first account is funded from Friendbot; subseqeuent accounts are created and funded from this
 // first account.
-func Initialise(client *horizonclient.Client, keys []Account) {
+func Initialise(client *frontierclient.Client, keys []Account) {
 	// Fund the first account from friendbot
 	log.Infof("Funding account %s from friendbot...", keys[0].Address)
 	_, err := client.Fund(keys[0].Address)
@@ -184,8 +184,8 @@ func Initialise(client *horizonclient.Client, keys []Account) {
 }
 
 // TXError is a command that deliberately creates a bad transaction to trigger an error response
-// from Horizon. This code demonstrates how to retrieve and inspect the error.
-func TXError(client *horizonclient.Client, keys []Account) {
+// from Frontier. This code demonstrates how to retrieve and inspect the error.
+func TXError(client *frontierclient.Client, keys []Account) {
 	keys = loadAccounts(client, keys)
 	// Create a bump seq operation
 	// Set the seq number to -1 (invalid)
@@ -424,7 +424,7 @@ func createKeypair() Account {
 }
 
 // loadAccounts looks up each account in the provided list and stores the returned information.
-func loadAccounts(client *horizonclient.Client, accounts []Account) []Account {
+func loadAccounts(client *frontierclient.Client, accounts []Account) []Account {
 	for i, a := range accounts {
 		accounts[i].HAccount = loadAccount(client, a.Address)
 		accounts[i].Exists = true
@@ -433,23 +433,23 @@ func loadAccounts(client *horizonclient.Client, accounts []Account) []Account {
 	return accounts
 }
 
-// loadAccount is an example of how to get an account's details from Horizon.
-func loadAccount(client *horizonclient.Client, address string) *hProtocol.Account {
-	accountRequest := horizonclient.AccountRequest{AccountID: address}
-	horizonSourceAccount, err := client.AccountDetail(accountRequest)
+// loadAccount is an example of how to get an account's details from Frontier.
+func loadAccount(client *frontierclient.Client, address string) *hProtocol.Account {
+	accountRequest := frontierclient.AccountRequest{AccountID: address}
+	frontierSourceAccount, err := client.AccountDetail(accountRequest)
 	if err != nil {
 		dieIfError(fmt.Sprintf("couldn't get account detail for %s", address), err)
 	}
 
-	return &horizonSourceAccount
+	return &frontierSourceAccount
 }
 
-func submit(client *horizonclient.Client, txeBase64 string) (resp hProtocol.Transaction) {
+func submit(client *frontierclient.Client, txeBase64 string) (resp hProtocol.Transaction) {
 	resp, err := client.SubmitTransactionXDR(txeBase64)
 	if err != nil {
-		hError := err.(*horizonclient.Error)
-		err = printHorizonError(hError)
-		dieIfError("couldn't print Horizon eror", err)
+		hError := err.(*frontierclient.Error)
+		err = printFrontierError(hError)
+		dieIfError("couldn't print Frontier eror", err)
 		os.Exit(1)
 	}
 
@@ -462,8 +462,8 @@ func dieIfError(desc string, err error) {
 	}
 }
 
-// printHorizonError is an example of how to inspect the error returned from Horizon.
-func printHorizonError(hError *horizonclient.Error) error {
+// printFrontierError is an example of how to inspect the error returned from Frontier.
+func printFrontierError(hError *frontierclient.Error) error {
 	problem := hError.Problem
 	log.Println("Error type:", problem.Type)
 	log.Println("Error title:", problem.Title)

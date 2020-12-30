@@ -1,9 +1,9 @@
 GIT
-  remote: https://github.com/stellar/stellar_core_commander.git
+  remote: https://github.com/digitalbits/digitalbits_core_commander.git
   revision: 59cde2af715c9c264dacb77e608a5d61b7d41a88
   branch: master
   specs:
-    stellar_core_commander (0.0.13)
+    digitalbits_core_commander (0.0.13)
       activesupport (~> 6)
       contracts (~> 0.16)
       faraday (~> 0.9.1)
@@ -12,12 +12,12 @@ GIT
       pry (~> 0.11.3)
       sequel (~> 5.5.0)
       slop (~> 3.6.0)
-      stellar-base (>= 0.17.0)
-      stellar-sdk (>= 0.5.0)
+      digitalbits-base (>= 0.17.0)
+      digitalbits-sdk (>= 0.5.0)
       typhoeus (~> 0.8.0)
 
 GIT
-  remote: https://github.com/stellar/xdrgen.git
+  remote: https://github.com/digitalbits/xdrgen.git
   revision: d30a909ff8d782dee7eadc0b4e02a89e4195eb79
   branch: master
   specs:
@@ -91,18 +91,18 @@ GEM
       faraday (> 0.8, < 2.0)
     sequel (5.5.0)
     slop (3.6.0)
-    stellar-base (0.22.0)
+    digitalbits-base (0.22.0)
       activesupport (>= 5.0.0)
       base32
       digest-crc
       rbnacl (>= 6.0)
       xdr (~> 3.0.0)
-    stellar-sdk (0.8.0)
+    digitalbits-sdk (0.8.0)
       activesupport (>= 5.0)
       contracts (~> 0.16)
       excon (~> 0.44, >= 0.44.4)
       hyperclient (~> 0.7)
-      stellar-base (>= 0.22.0)
+      digitalbits-base (>= 0.22.0)
       toml-rb (~> 1.1, >= 1.1.1)
     thread_safe (0.3.6)
     toml-rb (1.1.2)
@@ -126,7 +126,7 @@ DEPENDENCIES
   octokit
   pry
   rake
-  stellar_core_commander!
+  digitalbits_core_commander!
   xdrgen!
 
 BUNDLED WITH

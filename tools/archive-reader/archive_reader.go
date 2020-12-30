@@ -7,8 +7,8 @@ import (
 	stdio "io"
 	"log"
 
-	"github.com/stellar/go/historyarchive"
-	"github.com/stellar/go/ingest/adapters"
+	"github.com/digitalbits/go/historyarchive"
+	"github.com/digitalbits/go/ingest/adapters"
 )
 
 func main() {
@@ -64,7 +64,7 @@ func main() {
 
 func archive() (*historyarchive.Archive, error) {
 	return historyarchive.Connect(
-		fmt.Sprintf("s3://history.stellar.org/prd/core-live/core_live_001/"),
+		fmt.Sprintf("s3://history.digitalbits.org/prd/core-live/core_live_001/"),
 		historyarchive.ConnectOptions{
 			S3Region:         "eu-west-1",
 			UnsignedRequests: true,

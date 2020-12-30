@@ -8,9 +8,9 @@ import (
 
 	"github.com/BurntSushi/toml"
 	"github.com/asaskevich/govalidator"
-	"github.com/stellar/go/amount"
-	"github.com/stellar/go/strkey"
-	"github.com/stellar/go/support/errors"
+	"github.com/digitalbits/go/amount"
+	"github.com/digitalbits/go/strkey"
+	"github.com/digitalbits/go/support/errors"
 )
 
 // TLS represents a common configuration snippet for configuring TLS in a server process
@@ -63,13 +63,13 @@ func decode(content string, dest interface{}) error {
 
 func init() {
 	govalidator.SetFieldsRequiredByDefault(true)
-	govalidator.CustomTypeTagMap.Set("stellar_accountid", govalidator.CustomTypeValidator(isStellarAccountID))
-	govalidator.CustomTypeTagMap.Set("stellar_seed", govalidator.CustomTypeValidator(isStellarSeed))
-	govalidator.CustomTypeTagMap.Set("stellar_amount", govalidator.CustomTypeValidator(isStellarAmount))
+	govalidator.CustomTypeTagMap.Set("digitalbits_accountid", govalidator.CustomTypeValidator(isDigitalBitsAccountID))
+	govalidator.CustomTypeTagMap.Set("digitalbits_seed", govalidator.CustomTypeValidator(isDigitalBitsSeed))
+	govalidator.CustomTypeTagMap.Set("digitalbits_amount", govalidator.CustomTypeValidator(isDigitalBitsAmount))
 
 }
 
-func isStellarAmount(i interface{}, context interface{}) bool {
+func isDigitalBitsAmount(i interface{}, context interface{}) bool {
 	enc, ok := i.(string)
 
 	if !ok {
@@ -81,7 +81,7 @@ func isStellarAmount(i interface{}, context interface{}) bool {
 	return err == nil
 }
 
-func isStellarAccountID(i interface{}, context interface{}) bool {
+func isDigitalBitsAccountID(i interface{}, context interface{}) bool {
 	enc, ok := i.(string)
 
 	if !ok {
@@ -93,7 +93,7 @@ func isStellarAccountID(i interface{}, context interface{}) bool {
 	return err == nil
 }
 
-func isStellarSeed(i interface{}, context interface{}) bool {
+func isDigitalBitsSeed(i interface{}, context interface{}) bool {
 	enc, ok := i.(string)
 
 	if !ok {

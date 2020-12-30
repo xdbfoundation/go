@@ -17,9 +17,9 @@ var verbose bool
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
 	Use:   "demo",
-	Short: "Exercise the Stellar Go SDK (horizonclient + txnbuild)",
-	Long: `This CLI is a working demonstration of the Stellar Go SDK. The SDK is used to interact
-with the Stellar network. It can retrieve information about the state of the network, and can
+	Short: "Exercise the DigitalBits Go SDK (frontierclient + txnbuild)",
+	Long: `This CLI is a working demonstration of the DigitalBits Go SDK. The SDK is used to interact
+with the DigitalBits network. It can retrieve information about the state of the network, and can
 submit _transactions_, made up of _operations_, to change the state of the network.
 
 Try out the different commands here to see the SDK in action, then browse the source code in

@@ -4,11 +4,11 @@ import (
 	"github.com/go-chi/chi"
 	"github.com/go-chi/chi/middleware"
 	"github.com/rs/cors"
-	"github.com/stellar/go/support/log"
+	"github.com/digitalbits/go/support/log"
 )
 
 // NewMux returns a new server mux configured with the common defaults used across all
-// stellar services.
+// digitalbits services.
 func NewMux(l *log.Entry) *chi.Mux {
 	mux := chi.NewMux()
 
@@ -21,7 +21,7 @@ func NewMux(l *log.Entry) *chi.Mux {
 }
 
 // NewAPIMux returns a new server mux configured with the common defaults used for a web API in
-// stellar.
+// digitalbits.
 func NewAPIMux(l *log.Entry) *chi.Mux {
 	mux := NewMux(l)
 

@@ -11,7 +11,7 @@ import (
 	"crypto/elliptic"
 	"crypto/rand"
 
-	"github.com/stellar/go/support/errors"
+	"github.com/digitalbits/go/support/errors"
 )
 
 // GenerateKey is a convenience function for generating an ECDSA key for use as

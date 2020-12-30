@@ -1,4 +1,4 @@
-// Package price implements functions to ease working with stellar price values.
+// Package price implements functions to ease working with digitalbits price values.
 // At present, prices are only used within the offer system, and are represented
 // by a fraction whose numberator and denominator are both 32-bit signed
 // integers.
@@ -13,7 +13,7 @@ import (
 	"regexp"
 	"strconv"
 
-	"github.com/stellar/go/xdr"
+	"github.com/digitalbits/go/xdr"
 )
 
 var (
@@ -21,7 +21,7 @@ var (
 	// a number, more or less. The details will be checked in `math/big` internally.
 	// What we want to prevent is passing very big numbers like `1e9223372036854775807`
 	// to `big.Rat.SetString` triggering long calculations.
-	// Note: {1,20} because the biggest amount you can use in Stellar is:
+	// Note: {1,20} because the biggest amount you can use in DigitalBits is:
 	// len("922337203685.4775807") = 20.
 	validAmountSimple = regexp.MustCompile("^-?[.0-9]{1,20}$")
 	// ErrDivisionByZero is returned when a price operation would result in a division by 0
@@ -132,8 +132,8 @@ func StringFromFloat64(v float64) string {
 // pathPaymentAmountSold = amount we are giving to the buyer
 // Sell units = pathPaymentAmountSold and buy units = pathPaymentAmountBought
 //
-// this is how we do floor and ceiling in stellar-core:
-// https://github.com/stellar/stellar-core/blob/9af27ef4e20b66f38ab148d52ba7904e74fe502f/src/util/types.cpp#L201
+// this is how we do floor and ceiling in digitalbits-core:
+// https://github.com/digitalbits/digitalbits-core/blob/9af27ef4e20b66f38ab148d52ba7904e74fe502f/src/util/types.cpp#L201
 func ConvertToBuyingUnits(sellingOfferAmount int64, sellingUnitsNeeded int64, pricen int64, priced int64) (int64, int64, error) {
 	var e error
 	// offerSellingBound
@@ -163,7 +163,7 @@ func ConvertToBuyingUnits(sellingOfferAmount int64, sellingUnitsNeeded int64, pr
 }
 
 // MulFractionRoundDown sets x = (x * n) / d, which is a round-down operation
-// see https://github.com/stellar/stellar-core/blob/9af27ef4e20b66f38ab148d52ba7904e74fe502f/src/util/types.cpp#L201
+// see https://github.com/digitalbits/digitalbits-core/blob/9af27ef4e20b66f38ab148d52ba7904e74fe502f/src/util/types.cpp#L201
 func MulFractionRoundDown(x int64, n int64, d int64) (int64, error) {
 	if d == 0 {
 		return 0, ErrDivisionByZero
@@ -184,7 +184,7 @@ func MulFractionRoundDown(x int64, n int64, d int64) (int64, error) {
 }
 
 // mulFractionRoundUp sets x = ((x * n) + d - 1) / d, which is a round-up operation
-// see https://github.com/stellar/stellar-core/blob/9af27ef4e20b66f38ab148d52ba7904e74fe502f/src/util/types.cpp#L201
+// see https://github.com/digitalbits/digitalbits-core/blob/9af27ef4e20b66f38ab148d52ba7904e74fe502f/src/util/types.cpp#L201
 func mulFractionRoundUp(x int64, n int64, d int64) (int64, error) {
 	if d == 0 {
 		return 0, ErrDivisionByZero

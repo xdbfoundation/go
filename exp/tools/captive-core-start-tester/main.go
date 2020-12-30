@@ -3,12 +3,12 @@ package main
 import (
 	"fmt"
 
-	"github.com/stellar/go/ingest/ledgerbackend"
+	"github.com/digitalbits/go/ingest/ledgerbackend"
 )
 
-// This little app helped testing CaptiveStellarCore.runFromParams on a living
-// Stellar-Core. Adding it to the repo because it can be useful in a future if
-// Stellar-Core behaviour changes again.
+// This little app helped testing CaptiveDigitalBitsCore.runFromParams on a living
+// DigitalBits-Core. Adding it to the repo because it can be useful in a future if
+// DigitalBits-Core behaviour changes again.
 // To make it work, run standalone network (RUN_STANDALONE=false to allow outside
 // connections) and update paths below.
 func main() {
@@ -25,8 +25,8 @@ func main() {
 func check(ledger uint32) bool {
 	c, err := ledgerbackend.NewCaptive(
 		ledgerbackend.CaptiveCoreConfig{
-			BinaryPath:         "stellar-core",
-			ConfigAppendPath:   "stellar-core-standalone2.cfg",
+			BinaryPath:         "digitalbits-core",
+			ConfigAppendPath:   "digitalbits-core-standalone2.cfg",
 			NetworkPassphrase:  "Standalone Network ; February 2017",
 			HistoryArchiveURLs: []string{"http://localhost:1570"},
 		},

@@ -3,7 +3,7 @@ package account
 import (
 	"testing"
 
-	"github.com/stellar/go/exp/services/recoverysigner/internal/db/dbtest"
+	"github.com/digitalbits/go/exp/services/recoverysigner/internal/db/dbtest"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
@@ -100,7 +100,7 @@ func TestAdd(t *testing.T) {
 				AccountID:  1,
 				IdentityID: 1,
 				ID:         1,
-				Type:       "stellar_address",
+				Type:       "digitalbits_address",
 				Value:      "GD4NGMOTV4QOXWA6PGPIGVWZYMRCJAKLQJKZIP55C5DGB3GBHHET3YC6",
 			},
 			{
@@ -121,7 +121,7 @@ func TestAdd(t *testing.T) {
 				AccountID:  1,
 				IdentityID: 2,
 				ID:         4,
-				Type:       "stellar_address",
+				Type:       "digitalbits_address",
 				Value:      "GBJCOYGKIJYX3VUEOZ6GVMFP522UO4OEBI5KB5HHWZAZ2DEJTHS6VOHP",
 			},
 			{

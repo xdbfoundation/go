@@ -3,10 +3,10 @@ package adapters
 import (
 	"context"
 
-	"github.com/stellar/go/historyarchive"
-	"github.com/stellar/go/ingest/io"
-	"github.com/stellar/go/support/errors"
-	"github.com/stellar/go/xdr"
+	"github.com/digitalbits/go/historyarchive"
+	"github.com/digitalbits/go/ingest/io"
+	"github.com/digitalbits/go/support/errors"
+	"github.com/digitalbits/go/xdr"
 )
 
 // HistoryArchiveAdapter is an adapter for the historyarchive package to read from history archives
@@ -36,7 +36,7 @@ func (haa *HistoryArchiveAdapter) GetLatestLedgerSequence() (uint32, error) {
 }
 
 // BucketListHash returns the bucket list hash to compare with hash in the
-// ledger header fetched from Stellar-Core.
+// ledger header fetched from DigitalBits-Core.
 func (haa *HistoryArchiveAdapter) BucketListHash(sequence uint32) (xdr.Hash, error) {
 	exists, err := haa.archive.CategoryCheckpointExists("history", sequence)
 	if err != nil {

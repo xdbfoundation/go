@@ -1,4 +1,4 @@
-// Package log provides the common logging facilities used by the Stellar
+// Package log provides the common logging facilities used by the DigitalBits
 // Development foundation.
 //
 // You may notice that this package does not expose the "Fatal" family of

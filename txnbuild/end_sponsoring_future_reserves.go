@@ -2,12 +2,12 @@
 package txnbuild
 
 import (
-	"github.com/stellar/go/support/errors"
-	"github.com/stellar/go/xdr"
+	"github.com/digitalbits/go/support/errors"
+	"github.com/digitalbits/go/xdr"
 )
 
-// EndSponsoringFutureReserves represents the Stellar begin sponsoring future reserves operation. See
-// https://www.stellar.org/developers/guides/concepts/list-of-operations.html
+// EndSponsoringFutureReserves represents the DigitalBits begin sponsoring future reserves operation. See
+// https://www.digitalbits.org/developers/guides/concepts/list-of-operations.html
 type EndSponsoringFutureReserves struct {
 	SourceAccount Account
 }

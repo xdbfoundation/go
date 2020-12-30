@@ -1,4 +1,4 @@
-// Copyright 2016 Stellar Development Foundation and contributors. Licensed
+// Copyright 2016 DigitalBits Development Foundation and contributors. Licensed
 // under the Apache License, Version 2.0. See the COPYING file at the root
 // of this distribution or at http://www.apache.org/licenses/LICENSE-2.0
 
@@ -19,12 +19,12 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/stellar/go/support/errors"
-	"github.com/stellar/go/xdr"
+	"github.com/digitalbits/go/support/errors"
+	"github.com/digitalbits/go/xdr"
 )
 
 const hexPrefixPat = "/[0-9a-f]{2}/[0-9a-f]{2}/[0-9a-f]{2}/"
-const rootHASPath = ".well-known/stellar-history.json"
+const rootHASPath = ".well-known/digitalbits-history.json"
 
 type CommandOptions struct {
 	Concurrency int
@@ -123,7 +123,7 @@ func (a *Archive) GetPathHAS(path string) (HistoryArchiveState, error) {
 	}
 
 	// Compare network passphrase only when non empty. The field was added in
-	// Stellar-Core 14.1.0.
+	// DigitalBits-Core 14.1.0.
 	if has.NetworkPassphrase != "" && a.networkPassphrase != "" &&
 		has.NetworkPassphrase != a.networkPassphrase {
 		return has, errors.Errorf(

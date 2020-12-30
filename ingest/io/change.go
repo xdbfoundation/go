@@ -3,8 +3,8 @@ package io
 import (
 	"bytes"
 
-	"github.com/stellar/go/support/errors"
-	"github.com/stellar/go/xdr"
+	"github.com/digitalbits/go/support/errors"
+	"github.com/digitalbits/go/xdr"
 )
 
 // Change is a developer friendly representation of LedgerEntryChanges.
@@ -29,8 +29,8 @@ type Change struct {
 // - for update, pre is previous state and post is the current state,
 // - for removed, pre is previous state and post is null.
 //
-// stellar-core source:
-// https://github.com/stellar/stellar-core/blob/e584b43/src/ledger/LedgerTxn.cpp#L582
+// digitalbits-core source:
+// https://github.com/digitalbits/digitalbits-core/blob/e584b43/src/ledger/LedgerTxn.cpp#L582
 func GetChangesFromLedgerEntryChanges(ledgerEntryChanges xdr.LedgerEntryChanges) []Change {
 	changes := []Change{}
 

@@ -3,7 +3,7 @@ package main
 import (
 	"testing"
 
-	hProtocol "github.com/stellar/go/protocols/horizon"
+	hProtocol "github.com/digitalbits/go/protocols/frontier"
 	"github.com/stretchr/testify/assert"
 )
 

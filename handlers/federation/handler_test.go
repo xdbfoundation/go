@@ -5,16 +5,16 @@ import (
 	"net/url"
 	"testing"
 
-	"github.com/stellar/go/support/db/dbtest"
-	"github.com/stellar/go/support/http/httptest"
+	"github.com/digitalbits/go/support/db/dbtest"
+	"github.com/digitalbits/go/support/http/httptest"
 )
 
 func TestHandler(t *testing.T) {
 	db := dbtest.Postgres(t).Load(`
     CREATE TABLE people (id character varying, name character varying, domain character varying);
     INSERT INTO people (id, name, domain) VALUES 
-      ('GD2GJPL3UOK5LX7TWXOACK2ZPWPFSLBNKL3GTGH6BLBNISK4BGWMFBBG', 'scott', 'stellar.org'),
-      ('GCYMGWPZ6NC2U7SO6SMXOP5ZLXOEC5SYPKITDMVEONLCHFSCCQR2J4S3', 'bartek', 'stellar.org');
+      ('GD2GJPL3UOK5LX7TWXOACK2ZPWPFSLBNKL3GTGH6BLBNISK4BGWMFBBG', 'scott', 'digitalbits.org'),
+      ('GCYMGWPZ6NC2U7SO6SMXOP5ZLXOEC5SYPKITDMVEONLCHFSCCQR2J4S3', 'bartek', 'digitalbits.org');
   `)
 	defer db.Close()
 
@@ -36,7 +36,7 @@ func TestHandler(t *testing.T) {
 	// Good name request
 	server.GET("/federation").
 		WithQuery("type", "name").
-		WithQuery("q", "scott*stellar.org").
+		WithQuery("q", "scott*digitalbits.org").
 		Expect().
 		Status(http.StatusOK).
 		JSON().Object().
@@ -46,7 +46,7 @@ func TestHandler(t *testing.T) {
 	// No record in DB
 	server.GET("/federation").
 		WithQuery("type", "name").
-		WithQuery("q", "jed*stellar.org").
+		WithQuery("q", "jed*digitalbits.org").
 		Expect().
 		Status(http.StatusNotFound).
 		JSON().Object().
@@ -56,7 +56,7 @@ func TestHandler(t *testing.T) {
 	// Invalid addresses
 	server.GET("/federation").
 		WithQuery("type", "name").
-		WithQuery("q", "scott**stellar.org").
+		WithQuery("q", "scott**digitalbits.org").
 		Expect().
 		Status(http.StatusBadRequest).
 		JSON().Object().
@@ -103,8 +103,8 @@ func TestHandler(t *testing.T) {
 		Expect().
 		Status(http.StatusOK).
 		JSON().Object().
-		ContainsKey("stellar_address").
-		ValueEqual("stellar_address", "scott*stellar.org")
+		ContainsKey("digitalbits_address").
+		ValueEqual("digitalbits_address", "scott*digitalbits.org")
 
 	// No record in DB
 	server.GET("/federation").
@@ -142,8 +142,8 @@ func TestNameHandler(t *testing.T) {
 	db := dbtest.Postgres(t).Load(`
     CREATE TABLE people (id character varying, name character varying, domain character varying);
     INSERT INTO people (id, name, domain) VALUES 
-      ('GD2GJPL3UOK5LX7TWXOACK2ZPWPFSLBNKL3GTGH6BLBNISK4BGWMFBBG', 'scott', 'stellar.org'),
-      ('GCYMGWPZ6NC2U7SO6SMXOP5ZLXOEC5SYPKITDMVEONLCHFSCCQR2J4S3', 'bartek', 'stellar.org');
+      ('GD2GJPL3UOK5LX7TWXOACK2ZPWPFSLBNKL3GTGH6BLBNISK4BGWMFBBG', 'scott', 'digitalbits.org'),
+      ('GCYMGWPZ6NC2U7SO6SMXOP5ZLXOEC5SYPKITDMVEONLCHFSCCQR2J4S3', 'bartek', 'digitalbits.org');
   `)
 	defer db.Close()
 
@@ -162,7 +162,7 @@ func TestNameHandler(t *testing.T) {
 	// Good name request
 	server.GET("/federation").
 		WithQuery("type", "name").
-		WithQuery("q", "scott*stellar.org").
+		WithQuery("q", "scott*digitalbits.org").
 		Expect().
 		Status(http.StatusOK).
 		JSON().Object().

@@ -4,17 +4,17 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/stellar/go/historyarchive"
-	"github.com/stellar/go/ingest/io"
-	"github.com/stellar/go/ingest/ledgerbackend"
-	"github.com/stellar/go/network"
-	"github.com/stellar/go/xdr"
+	"github.com/digitalbits/go/historyarchive"
+	"github.com/digitalbits/go/ingest/io"
+	"github.com/digitalbits/go/ingest/ledgerbackend"
+	"github.com/digitalbits/go/network"
+	"github.com/digitalbits/go/xdr"
 )
 
 // Example_ledgerentrieshistoryarchive demonstrates how to stream all ledger
 // entries live at specific checkpoint ledger from history archives.
 func Example_ledgerentrieshistoryarchive() {
-	archiveURL := "http://history.stellar.org/prd/core-live/core_live_001"
+	archiveURL := "http://history.digitalbits.org/prd/core-live/core_live_001"
 
 	archive, err := historyarchive.Connect(
 		archiveURL,
@@ -64,7 +64,7 @@ func Example_ledgerentrieshistoryarchive() {
 // for a specific ledger from history archives. Please note that transaction
 // meta IS NOT available in history archives.
 func Example_transactionshistoryarchive() {
-	archiveURL := "http://history.stellar.org/prd/core-live/core_live_001"
+	archiveURL := "http://history.digitalbits.org/prd/core-live/core_live_001"
 	networkPassphrase := network.PublicNetworkPassphrase
 
 	archive, err := historyarchive.Connect(
@@ -95,17 +95,17 @@ func Example_transactionshistoryarchive() {
 }
 
 // Example_changes demonstrates how to stream ledger entry changes
-// for a specific ledger using captive stellar-core. Please note that transaction
+// for a specific ledger using captive digitalbits-core. Please note that transaction
 // meta IS available when using this backend.
 func Example_changes() {
-	archiveURL := "http://history.stellar.org/prd/core-live/core_live_001"
+	archiveURL := "http://history.digitalbits.org/prd/core-live/core_live_001"
 	networkPassphrase := network.PublicNetworkPassphrase
 
-	// Requires Stellar-Core 13.2.0+
+	// Requires DigitalBits-Core 13.2.0+
 	backend, err := ledgerbackend.NewCaptive(
 		ledgerbackend.CaptiveCoreConfig{
-			BinaryPath:         "/bin/stellar-core",
-			ConfigAppendPath:   "/opt/stellar-core.cfg",
+			BinaryPath:         "/bin/digitalbits-core",
+			ConfigAppendPath:   "/opt/digitalbits-core.cfg",
 			NetworkPassphrase:  networkPassphrase,
 			HistoryArchiveURLs: []string{archiveURL},
 		},

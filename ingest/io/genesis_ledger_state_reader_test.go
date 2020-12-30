@@ -4,13 +4,13 @@ import (
 	"io"
 	"testing"
 
-	"github.com/stellar/go/xdr"
+	"github.com/digitalbits/go/xdr"
 	"github.com/stretchr/testify/assert"
 )
 
 func TestGenesisLeaderStateReader(t *testing.T) {
 	stateReader := GenesisLedgerStateReader{
-		NetworkPassphrase: "Public Global Stellar Network ; September 2015",
+		NetworkPassphrase: "Public Global DigitalBits Network ; September 2015",
 	}
 
 	ledgerEntryChange, err := stateReader.Read()

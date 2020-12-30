@@ -1,11 +1,11 @@
 package txnbuild
 
 import (
-	"github.com/stellar/go/keypair"
-	"github.com/stellar/go/xdr"
+	"github.com/digitalbits/go/keypair"
+	"github.com/digitalbits/go/xdr"
 	"testing"
 
-	"github.com/stellar/go/network"
+	"github.com/digitalbits/go/network"
 	"github.com/stretchr/testify/assert"
 )
 

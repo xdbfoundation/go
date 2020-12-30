@@ -4,29 +4,29 @@ import (
 	sq "github.com/Masterminds/squirrel"
 	"github.com/stretchr/testify/mock"
 
-	"github.com/stellar/go/support/db"
+	"github.com/digitalbits/go/support/db"
 )
 
 // TrustedLedgerHashStore is used to query ledger data from a trusted source.
-// The store should contain ledgers verified by Stellar-Core, do not use untrusted
+// The store should contain ledgers verified by DigitalBits-Core, do not use untrusted
 // source like history archives.
 type TrustedLedgerHashStore interface {
 	// GetLedgerHash returns the ledger hash for the given sequence number
 	GetLedgerHash(seq uint32) (string, bool, error)
 }
 
-// HorizonDBLedgerHashStore is a TrustedLedgerHashStore which uses horizon's db to look up ledger hashes
-type HorizonDBLedgerHashStore struct {
+// FrontierDBLedgerHashStore is a TrustedLedgerHashStore which uses frontier's db to look up ledger hashes
+type FrontierDBLedgerHashStore struct {
 	session *db.Session
 }
 
-// NewHorizonDBLedgerHashStore constructs a new TrustedLedgerHashStore backed by the horizon db
-func NewHorizonDBLedgerHashStore(session *db.Session) TrustedLedgerHashStore {
-	return HorizonDBLedgerHashStore{session: session}
+// NewFrontierDBLedgerHashStore constructs a new TrustedLedgerHashStore backed by the frontier db
+func NewFrontierDBLedgerHashStore(session *db.Session) TrustedLedgerHashStore {
+	return FrontierDBLedgerHashStore{session: session}
 }
 
 // GetLedgerHash returns the ledger hash for the given sequence number
-func (h HorizonDBLedgerHashStore) GetLedgerHash(seq uint32) (string, bool, error) {
+func (h FrontierDBLedgerHashStore) GetLedgerHash(seq uint32) (string, bool, error) {
 	sql := sq.Select("hl.ledger_hash").From("history_ledgers hl").
 		Limit(1).Where("sequence = ?", seq)
 

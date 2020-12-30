@@ -1,4 +1,4 @@
-// Package federation provides a pluggable handler that satisfies the Stellar
+// Package federation provides a pluggable handler that satisfies the DigitalBits
 // federation protocol.  Add an instance of `Handler` onto your router to allow
 // a server to satisfy the protocol.
 //
@@ -15,14 +15,14 @@ import (
 	"net/url"
 	"sync"
 
-	"github.com/stellar/go/support/db"
+	"github.com/digitalbits/go/support/db"
 )
 
 // Driver represents a data source against which federation queries can be
 // executed.
 type Driver interface {
 	// LookupRecord is called when a handler receives a so-called "name"
-	// federation request to lookup a `Record` using the provided stellar address.
+	// federation request to lookup a `Record` using the provided digitalbits address.
 	// An implementation should return a nil `*Record` value if the lookup
 	// successfully executed but no result was found.
 	LookupRecord(name string, domain string) (*Record, error)
@@ -42,7 +42,7 @@ func (response ErrorResponse) Error() string {
 }
 
 // Handler represents an http handler that can service http requests that
-// conform to the Stellar federation protocol.  This handler should be added to
+// conform to the DigitalBits federation protocol.  This handler should be added to
 // your chosen mux at the path `/federation` (and for good measure
 // `/federation/` if your middleware doesn't normalize trailing slashes).
 type Handler struct {
@@ -94,7 +94,7 @@ type ReverseSQLDriver struct {
 	// LookupReverseRecordQuery is a SQL query used for performing "reverse"
 	// federation queries.  This query should accomodate a single parameter, using
 	// "?" as the placeholder.  This provided parameter will be a strkey-encoded
-	// stellar account id to lookup, such as
+	// digitalbits account id to lookup, such as
 	// "GDOP3VI4UA5LS7AMLJI66RJUXEQ4HX46WUXTRTJGI5IKDLNWUBOW3FUK".
 	LookupReverseRecordQuery string
 }

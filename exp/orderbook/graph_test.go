@@ -6,9 +6,9 @@ import (
 	"math"
 	"testing"
 
-	"github.com/stellar/go/keypair"
-	"github.com/stellar/go/price"
-	"github.com/stellar/go/xdr"
+	"github.com/digitalbits/go/keypair"
+	"github.com/digitalbits/go/price"
+	"github.com/digitalbits/go/xdr"
 )
 
 var (

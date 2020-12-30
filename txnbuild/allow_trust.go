@@ -3,12 +3,12 @@ package txnbuild
 import (
 	"bytes"
 
-	"github.com/stellar/go/support/errors"
-	"github.com/stellar/go/xdr"
+	"github.com/digitalbits/go/support/errors"
+	"github.com/digitalbits/go/xdr"
 )
 
-// AllowTrust represents the Stellar allow trust operation. See
-// https://www.stellar.org/developers/guides/concepts/list-of-operations.html
+// AllowTrust represents the DigitalBits allow trust operation. See
+// https://www.digitalbits.org/developers/guides/concepts/list-of-operations.html
 type AllowTrust struct {
 	Trustor                        string
 	Type                           Asset
@@ -85,7 +85,7 @@ func (at *AllowTrust) FromXDR(xdrOp xdr.Operation) error {
 // Validate for AllowTrust validates the required struct fields. It returns an error if any of the fields are
 // invalid. Otherwise, it returns nil.
 func (at *AllowTrust) Validate() error {
-	err := validateStellarPublicKey(at.Trustor)
+	err := validateDigitalBitsPublicKey(at.Trustor)
 	if err != nil {
 		return NewValidationError("Trustor", err.Error())
 	}

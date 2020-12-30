@@ -7,10 +7,10 @@ import (
 	"encoding/base64"
 	stdio "io"
 
-	ingesterrors "github.com/stellar/go/ingest/errors"
-	"github.com/stellar/go/ingest/io"
-	"github.com/stellar/go/support/errors"
-	"github.com/stellar/go/xdr"
+	ingesterrors "github.com/digitalbits/go/ingest/errors"
+	"github.com/digitalbits/go/ingest/io"
+	"github.com/digitalbits/go/support/errors"
+	"github.com/digitalbits/go/xdr"
 )
 
 // TransformLedgerEntryFunction is a function that transforms ledger entry
@@ -34,7 +34,7 @@ type TransformLedgerEntryFunction func(xdr.LedgerEntry) (ignore bool, newEntry x
 //      storage).
 // Functions will return StateError type if state is found to be incorrect.
 // It's user responsibility to call `StateReader.Close()` when reading is done.
-// Check Horizon for an example how to use this tool.
+// Check Frontier for an example how to use this tool.
 type StateVerifier struct {
 	StateReader io.ChangeReader
 	// TransformFunction transforms (or ignores) ledger entries streamed from

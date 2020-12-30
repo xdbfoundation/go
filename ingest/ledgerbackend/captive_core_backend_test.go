@@ -9,45 +9,45 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
 
-	"github.com/stellar/go/historyarchive"
-	"github.com/stellar/go/network"
-	"github.com/stellar/go/support/errors"
-	"github.com/stellar/go/xdr"
+	"github.com/digitalbits/go/historyarchive"
+	"github.com/digitalbits/go/network"
+	"github.com/digitalbits/go/support/errors"
+	"github.com/digitalbits/go/xdr"
 )
 
 // TODO: test frame decoding
 // TODO: test from static base64-encoded data
 
-type stellarCoreRunnerMock struct {
+type digitalbitsCoreRunnerMock struct {
 	mock.Mock
 }
 
-func (m *stellarCoreRunnerMock) context() context.Context {
+func (m *digitalbitsCoreRunnerMock) context() context.Context {
 	a := m.Called()
 	return a.Get(0).(context.Context)
 }
 
-func (m *stellarCoreRunnerMock) catchup(from, to uint32) error {
+func (m *digitalbitsCoreRunnerMock) catchup(from, to uint32) error {
 	a := m.Called(from, to)
 	return a.Error(0)
 }
 
-func (m *stellarCoreRunnerMock) runFrom(from uint32, hash string) error {
+func (m *digitalbitsCoreRunnerMock) runFrom(from uint32, hash string) error {
 	a := m.Called(from, hash)
 	return a.Error(0)
 }
 
-func (m *stellarCoreRunnerMock) getMetaPipe() <-chan metaResult {
+func (m *digitalbitsCoreRunnerMock) getMetaPipe() <-chan metaResult {
 	a := m.Called()
 	return a.Get(0).(<-chan metaResult)
 }
 
-func (m *stellarCoreRunnerMock) getProcessExitError() (bool, error) {
+func (m *digitalbitsCoreRunnerMock) getProcessExitError() (bool, error) {
 	a := m.Called()
 	return a.Bool(0), a.Error(1)
 }
 
-func (m *stellarCoreRunnerMock) close() error {
+func (m *digitalbitsCoreRunnerMock) close() error {
 	a := m.Called()
 	return a.Error(0)
 }
@@ -131,12 +131,12 @@ type testLedgerHeader struct {
 }
 
 func TestCaptiveNew(t *testing.T) {
-	executablePath := "/etc/stellar-core"
-	configPath := "/etc/stellar-core.cfg"
+	executablePath := "/etc/digitalbits-core"
+	configPath := "/etc/digitalbits-core.cfg"
 	networkPassphrase := network.PublicNetworkPassphrase
-	historyURLs := []string{"http://history.stellar.org/prd/core-live/core_live_001"}
+	historyURLs := []string{"http://history.digitalbits.org/prd/core-live/core_live_001"}
 
-	captiveStellarCore, err := NewCaptive(
+	captiveDigitalBitsCore, err := NewCaptive(
 		CaptiveCoreConfig{
 			BinaryPath:         executablePath,
 			ConfigAppendPath:   configPath,
@@ -146,8 +146,8 @@ func TestCaptiveNew(t *testing.T) {
 	)
 
 	assert.NoError(t, err)
-	assert.Equal(t, uint32(0), captiveStellarCore.nextLedger)
-	assert.NotNil(t, captiveStellarCore.archive)
+	assert.Equal(t, uint32(0), captiveDigitalBitsCore.nextLedger)
+	assert.NotNil(t, captiveDigitalBitsCore.archive)
 }
 
 func TestCaptivePrepareRange(t *testing.T) {
@@ -162,7 +162,7 @@ func TestCaptivePrepareRange(t *testing.T) {
 		}
 	}
 
-	mockRunner := &stellarCoreRunnerMock{}
+	mockRunner := &digitalbitsCoreRunnerMock{}
 	mockRunner.On("catchup", uint32(100), uint32(200)).Return(nil).Once()
 	mockRunner.On("getMetaPipe").Return((<-chan metaResult)(metaChan))
 	mockRunner.On("context").Return(context.Background())
@@ -175,9 +175,9 @@ func TestCaptivePrepareRange(t *testing.T) {
 		}, nil)
 
 	cancelCalled := false
-	captiveBackend := CaptiveStellarCore{
+	captiveBackend := CaptiveDigitalBitsCore{
 		archive: mockArchive,
-		stellarCoreRunnerFactory: func(_ stellarCoreRunnerMode) (stellarCoreRunnerInterface, error) {
+		digitalbitsCoreRunnerFactory: func(_ digitalbitsCoreRunnerMode) (digitalbitsCoreRunnerInterface, error) {
 			return mockRunner, nil
 		},
 		checkpointManager: historyarchive.NewCheckpointManager(64),
@@ -199,7 +199,7 @@ func TestCaptivePrepareRange(t *testing.T) {
 func TestCaptivePrepareRangeCrash(t *testing.T) {
 	metaChan := make(chan metaResult)
 	close(metaChan)
-	mockRunner := &stellarCoreRunnerMock{}
+	mockRunner := &digitalbitsCoreRunnerMock{}
 	mockRunner.On("catchup", uint32(100), uint32(200)).Return(nil).Once()
 	mockRunner.On("getProcessExitError").Return(true, errors.New("exit code -1"))
 	mockRunner.On("getMetaPipe").Return((<-chan metaResult)(metaChan))
@@ -213,16 +213,16 @@ func TestCaptivePrepareRangeCrash(t *testing.T) {
 			CurrentLedger: uint32(200),
 		}, nil)
 
-	captiveBackend := CaptiveStellarCore{
+	captiveBackend := CaptiveDigitalBitsCore{
 		archive: mockArchive,
-		stellarCoreRunnerFactory: func(_ stellarCoreRunnerMode) (stellarCoreRunnerInterface, error) {
+		digitalbitsCoreRunnerFactory: func(_ digitalbitsCoreRunnerMode) (digitalbitsCoreRunnerInterface, error) {
 			return mockRunner, nil
 		},
 		checkpointManager: historyarchive.NewCheckpointManager(64),
 	}
 
 	err := captiveBackend.PrepareRange(BoundedRange(100, 200))
-	assert.EqualError(t, err, "Error fast-forwarding to 100: stellar core exited unexpectedly: exit code -1")
+	assert.EqualError(t, err, "Error fast-forwarding to 100: digitalbits core exited unexpectedly: exit code -1")
 	mockRunner.AssertExpectations(t)
 	mockArchive.AssertExpectations(t)
 }
@@ -239,7 +239,7 @@ func TestCaptivePrepareRangeTerminated(t *testing.T) {
 		}
 	}
 	close(metaChan)
-	mockRunner := &stellarCoreRunnerMock{}
+	mockRunner := &digitalbitsCoreRunnerMock{}
 	mockRunner.On("catchup", uint32(100), uint32(200)).Return(nil).Once()
 	mockRunner.On("getMetaPipe").Return((<-chan metaResult)(metaChan))
 	mockRunner.On("context").Return(context.Background())
@@ -251,9 +251,9 @@ func TestCaptivePrepareRangeTerminated(t *testing.T) {
 			CurrentLedger: uint32(200),
 		}, nil)
 
-	captiveBackend := CaptiveStellarCore{
+	captiveBackend := CaptiveDigitalBitsCore{
 		archive: mockArchive,
-		stellarCoreRunnerFactory: func(_ stellarCoreRunnerMode) (stellarCoreRunnerInterface, error) {
+		digitalbitsCoreRunnerFactory: func(_ digitalbitsCoreRunnerMode) (digitalbitsCoreRunnerInterface, error) {
 			return mockRunner, nil
 		},
 		checkpointManager: historyarchive.NewCheckpointManager(64),
@@ -266,13 +266,13 @@ func TestCaptivePrepareRangeTerminated(t *testing.T) {
 }
 
 func TestCaptivePrepareRange_ErrClosingSession(t *testing.T) {
-	mockRunner := &stellarCoreRunnerMock{}
+	mockRunner := &digitalbitsCoreRunnerMock{}
 	mockRunner.On("close").Return(fmt.Errorf("transient error"))
 	mockRunner.On("context").Return(context.Background())
 
-	captiveBackend := CaptiveStellarCore{
+	captiveBackend := CaptiveDigitalBitsCore{
 		nextLedger:        300,
-		stellarCoreRunner: mockRunner,
+		digitalbitsCoreRunner: mockRunner,
 	}
 
 	err := captiveBackend.PrepareRange(BoundedRange(100, 200))
@@ -290,7 +290,7 @@ func TestCaptivePrepareRange_ErrGettingRootHAS(t *testing.T) {
 		On("GetRootHAS").
 		Return(historyarchive.HistoryArchiveState{}, errors.New("transient error"))
 
-	captiveBackend := CaptiveStellarCore{
+	captiveBackend := CaptiveDigitalBitsCore{
 		archive: mockArchive,
 	}
 
@@ -311,7 +311,7 @@ func TestCaptivePrepareRange_FromIsAheadOfRootHAS(t *testing.T) {
 			CurrentLedger: uint32(64),
 		}, nil)
 
-	captiveBackend := CaptiveStellarCore{
+	captiveBackend := CaptiveDigitalBitsCore{
 		archive: mockArchive,
 	}
 
@@ -336,7 +336,7 @@ func TestCaptivePrepareRange_ToIsAheadOfRootHAS(t *testing.T) {
 		}
 	}
 
-	mockRunner := &stellarCoreRunnerMock{}
+	mockRunner := &digitalbitsCoreRunnerMock{}
 	mockRunner.On("catchup", uint32(100), uint32(192)).Return(nil).Once()
 	mockRunner.On("getMetaPipe").Return((<-chan metaResult)(metaChan))
 	mockRunner.On("context").Return(context.Background())
@@ -348,9 +348,9 @@ func TestCaptivePrepareRange_ToIsAheadOfRootHAS(t *testing.T) {
 			CurrentLedger: uint32(192),
 		}, nil)
 
-	captiveBackend := CaptiveStellarCore{
+	captiveBackend := CaptiveDigitalBitsCore{
 		archive: mockArchive,
-		stellarCoreRunnerFactory: func(_ stellarCoreRunnerMode) (stellarCoreRunnerInterface, error) {
+		digitalbitsCoreRunnerFactory: func(_ digitalbitsCoreRunnerMode) (digitalbitsCoreRunnerInterface, error) {
 			return mockRunner, nil
 		},
 		checkpointManager: historyarchive.NewCheckpointManager(64),
@@ -364,7 +364,7 @@ func TestCaptivePrepareRange_ToIsAheadOfRootHAS(t *testing.T) {
 }
 
 func TestCaptivePrepareRange_ErrCatchup(t *testing.T) {
-	mockRunner := &stellarCoreRunnerMock{}
+	mockRunner := &digitalbitsCoreRunnerMock{}
 	mockRunner.On("catchup", uint32(100), uint32(192)).Return(errors.New("transient error")).Once()
 	mockRunner.On("close").Return(nil).Once()
 
@@ -376,9 +376,9 @@ func TestCaptivePrepareRange_ErrCatchup(t *testing.T) {
 		}, nil)
 
 	cancelCalled := false
-	captiveBackend := CaptiveStellarCore{
+	captiveBackend := CaptiveDigitalBitsCore{
 		archive: mockArchive,
-		stellarCoreRunnerFactory: func(_ stellarCoreRunnerMode) (stellarCoreRunnerInterface, error) {
+		digitalbitsCoreRunnerFactory: func(_ digitalbitsCoreRunnerMode) (digitalbitsCoreRunnerInterface, error) {
 			return mockRunner, nil
 		},
 		cancel: context.CancelFunc(func() {
@@ -387,7 +387,7 @@ func TestCaptivePrepareRange_ErrCatchup(t *testing.T) {
 	}
 
 	err := captiveBackend.PrepareRange(BoundedRange(100, 200))
-	assert.EqualError(t, err, "error starting prepare range: opening subprocess: error running stellar-core: transient error")
+	assert.EqualError(t, err, "error starting prepare range: opening subprocess: error running digitalbits-core: transient error")
 
 	// make sure we can Close without errors
 	assert.NoError(t, captiveBackend.Close())
@@ -398,7 +398,7 @@ func TestCaptivePrepareRange_ErrCatchup(t *testing.T) {
 }
 
 func TestCaptivePrepareRangeUnboundedRange_ErrRunFrom(t *testing.T) {
-	mockRunner := &stellarCoreRunnerMock{}
+	mockRunner := &digitalbitsCoreRunnerMock{}
 	mockRunner.On("runFrom", uint32(126), "0000000000000000000000000000000000000000000000000000000000000000").Return(errors.New("transient error")).Once()
 	mockRunner.On("close").Return(nil).Once()
 
@@ -414,9 +414,9 @@ func TestCaptivePrepareRangeUnboundedRange_ErrRunFrom(t *testing.T) {
 		Return(xdr.LedgerHeaderHistoryEntry{}, nil)
 
 	cancelCalled := false
-	captiveBackend := CaptiveStellarCore{
+	captiveBackend := CaptiveDigitalBitsCore{
 		archive: mockArchive,
-		stellarCoreRunnerFactory: func(_ stellarCoreRunnerMode) (stellarCoreRunnerInterface, error) {
+		digitalbitsCoreRunnerFactory: func(_ digitalbitsCoreRunnerMode) (digitalbitsCoreRunnerInterface, error) {
 			return mockRunner, nil
 		},
 		checkpointManager: historyarchive.NewCheckpointManager(64),
@@ -426,7 +426,7 @@ func TestCaptivePrepareRangeUnboundedRange_ErrRunFrom(t *testing.T) {
 	}
 
 	err := captiveBackend.PrepareRange(UnboundedRange(128))
-	assert.EqualError(t, err, "error starting prepare range: opening subprocess: error running stellar-core: transient error")
+	assert.EqualError(t, err, "error starting prepare range: opening subprocess: error running digitalbits-core: transient error")
 
 	// make sure we can Close without errors
 	assert.NoError(t, captiveBackend.Close())
@@ -448,7 +448,7 @@ func TestCaptivePrepareRangeUnboundedRange_ReuseSession(t *testing.T) {
 		}
 	}
 
-	mockRunner := &stellarCoreRunnerMock{}
+	mockRunner := &digitalbitsCoreRunnerMock{}
 	mockRunner.On("runFrom", uint32(62), "0000000000000000000000000000000000000000000000000000000000000000").Return(nil).Once()
 	mockRunner.On("getMetaPipe").Return((<-chan metaResult)(metaChan))
 	mockRunner.On("context").Return(context.Background())
@@ -463,9 +463,9 @@ func TestCaptivePrepareRangeUnboundedRange_ReuseSession(t *testing.T) {
 		On("GetLedgerHeader", uint32(63)).
 		Return(xdr.LedgerHeaderHistoryEntry{}, nil)
 
-	captiveBackend := CaptiveStellarCore{
+	captiveBackend := CaptiveDigitalBitsCore{
 		archive: mockArchive,
-		stellarCoreRunnerFactory: func(_ stellarCoreRunnerMode) (stellarCoreRunnerInterface, error) {
+		digitalbitsCoreRunnerFactory: func(_ digitalbitsCoreRunnerMode) (digitalbitsCoreRunnerInterface, error) {
 			return mockRunner, nil
 		},
 		checkpointManager: historyarchive.NewCheckpointManager(64),
@@ -494,7 +494,7 @@ func TestGetLatestLedgerSequence(t *testing.T) {
 		}
 	}
 
-	mockRunner := &stellarCoreRunnerMock{}
+	mockRunner := &digitalbitsCoreRunnerMock{}
 	mockRunner.On("runFrom", uint32(62), "0000000000000000000000000000000000000000000000000000000000000000").Return(nil).Once()
 	mockRunner.On("getMetaPipe").Return((<-chan metaResult)(metaChan))
 	mockRunner.On("context").Return(context.Background())
@@ -510,9 +510,9 @@ func TestGetLatestLedgerSequence(t *testing.T) {
 		On("GetLedgerHeader", uint32(63)).
 		Return(xdr.LedgerHeaderHistoryEntry{}, nil)
 
-	captiveBackend := CaptiveStellarCore{
+	captiveBackend := CaptiveDigitalBitsCore{
 		archive: mockArchive,
-		stellarCoreRunnerFactory: func(_ stellarCoreRunnerMode) (stellarCoreRunnerInterface, error) {
+		digitalbitsCoreRunnerFactory: func(_ digitalbitsCoreRunnerMode) (digitalbitsCoreRunnerInterface, error) {
 			return mockRunner, nil
 		},
 		checkpointManager: historyarchive.NewCheckpointManager(64),
@@ -540,7 +540,7 @@ func TestCaptiveGetLedger(t *testing.T) {
 		}
 	}
 
-	mockRunner := &stellarCoreRunnerMock{}
+	mockRunner := &digitalbitsCoreRunnerMock{}
 	mockRunner.On("catchup", uint32(65), uint32(66)).Return(nil)
 	mockRunner.On("getMetaPipe").Return((<-chan metaResult)(metaChan))
 	mockRunner.On("context").Return(context.Background())
@@ -552,9 +552,9 @@ func TestCaptiveGetLedger(t *testing.T) {
 			CurrentLedger: uint32(200),
 		}, nil)
 
-	captiveBackend := CaptiveStellarCore{
+	captiveBackend := CaptiveDigitalBitsCore{
 		archive: mockArchive,
-		stellarCoreRunnerFactory: func(_ stellarCoreRunnerMode) (stellarCoreRunnerInterface, error) {
+		digitalbitsCoreRunnerFactory: func(_ digitalbitsCoreRunnerMode) (digitalbitsCoreRunnerInterface, error) {
 			return mockRunner, nil
 		},
 		checkpointManager: historyarchive.NewCheckpointManager(64),
@@ -609,12 +609,12 @@ func TestCaptiveGetLedger(t *testing.T) {
 	mockRunner.AssertExpectations(t)
 }
 
-func TestCaptiveStellarCore_PrepareRangeAfterClose(t *testing.T) {
-	executablePath := "/etc/stellar-core"
+func TestCaptiveDigitalBitsCore_PrepareRangeAfterClose(t *testing.T) {
+	executablePath := "/etc/digitalbits-core"
 	networkPassphrase := network.PublicNetworkPassphrase
 	historyURLs := []string{"http://localhost"}
 
-	captiveStellarCore, err := NewCaptive(
+	captiveDigitalBitsCore, err := NewCaptive(
 		CaptiveCoreConfig{
 			BinaryPath:         executablePath,
 			NetworkPassphrase:  networkPassphrase,
@@ -623,13 +623,13 @@ func TestCaptiveStellarCore_PrepareRangeAfterClose(t *testing.T) {
 	)
 	assert.NoError(t, err)
 
-	assert.NoError(t, captiveStellarCore.Close())
+	assert.NoError(t, captiveDigitalBitsCore.Close())
 
 	assert.EqualError(
 		t,
-		captiveStellarCore.PrepareRange(BoundedRange(65, 66)),
+		captiveDigitalBitsCore.PrepareRange(BoundedRange(65, 66)),
 		"error starting prepare range: opening subprocess: error getting latest checkpoint sequence: "+
-			"error getting root HAS: Get \"http://localhost/.well-known/stellar-history.json\": context canceled",
+			"error getting root HAS: Get \"http://localhost/.well-known/digitalbits-history.json\": context canceled",
 	)
 
 	// even if the request to fetch the latest checkpoint succeeds, we should fail at creating the subprocess
@@ -639,11 +639,11 @@ func TestCaptiveStellarCore_PrepareRangeAfterClose(t *testing.T) {
 		Return(historyarchive.HistoryArchiveState{
 			CurrentLedger: uint32(200),
 		}, nil)
-	captiveStellarCore.archive = mockArchive
+	captiveDigitalBitsCore.archive = mockArchive
 	assert.EqualError(
 		t,
-		captiveStellarCore.PrepareRange(BoundedRange(65, 66)),
-		"error starting prepare range: opening subprocess: error running stellar-core: context canceled",
+		captiveDigitalBitsCore.PrepareRange(BoundedRange(65, 66)),
+		"error starting prepare range: opening subprocess: error running digitalbits-core: context canceled",
 	)
 	mockArchive.AssertExpectations(t)
 }
@@ -665,7 +665,7 @@ func TestCaptiveGetLedger_NextLedgerIsDifferentToLedgerFromBuffer(t *testing.T) 
 		}
 	}
 
-	mockRunner := &stellarCoreRunnerMock{}
+	mockRunner := &digitalbitsCoreRunnerMock{}
 	mockRunner.On("catchup", uint32(65), uint32(66)).Return(nil)
 	mockRunner.On("getMetaPipe").Return((<-chan metaResult)(metaChan))
 	mockRunner.On("context").Return(context.Background())
@@ -678,9 +678,9 @@ func TestCaptiveGetLedger_NextLedgerIsDifferentToLedgerFromBuffer(t *testing.T) 
 			CurrentLedger: uint32(200),
 		}, nil)
 
-	captiveBackend := CaptiveStellarCore{
+	captiveBackend := CaptiveDigitalBitsCore{
 		archive: mockArchive,
-		stellarCoreRunnerFactory: func(_ stellarCoreRunnerMode) (stellarCoreRunnerInterface, error) {
+		digitalbitsCoreRunnerFactory: func(_ digitalbitsCoreRunnerMode) (digitalbitsCoreRunnerInterface, error) {
 			return mockRunner, nil
 		},
 		checkpointManager: historyarchive.NewCheckpointManager(64),
@@ -710,7 +710,7 @@ func TestCaptiveGetLedger_ErrReadingMetaResult(t *testing.T) {
 		err: fmt.Errorf("unmarshalling error"),
 	}
 
-	mockRunner := &stellarCoreRunnerMock{}
+	mockRunner := &digitalbitsCoreRunnerMock{}
 	mockRunner.On("catchup", uint32(65), uint32(66)).Return(nil)
 	mockRunner.On("getMetaPipe").Return((<-chan metaResult)(metaChan))
 	ctx, cancel := context.WithCancel(context.Background())
@@ -727,9 +727,9 @@ func TestCaptiveGetLedger_ErrReadingMetaResult(t *testing.T) {
 			CurrentLedger: uint32(200),
 		}, nil)
 
-	captiveBackend := CaptiveStellarCore{
+	captiveBackend := CaptiveDigitalBitsCore{
 		archive: mockArchive,
-		stellarCoreRunnerFactory: func(_ stellarCoreRunnerMode) (stellarCoreRunnerInterface, error) {
+		digitalbitsCoreRunnerFactory: func(_ digitalbitsCoreRunnerMode) (digitalbitsCoreRunnerInterface, error) {
 			return mockRunner, nil
 		},
 		checkpointManager: historyarchive.NewCheckpointManager(64),
@@ -764,7 +764,7 @@ func TestCaptiveAfterClose(t *testing.T) {
 		}
 	}
 
-	mockRunner := &stellarCoreRunnerMock{}
+	mockRunner := &digitalbitsCoreRunnerMock{}
 	ctx, cancel := context.WithCancel(context.Background())
 	mockRunner.On("catchup", uint32(65), uint32(66)).Return(nil)
 	mockRunner.On("getMetaPipe").Return((<-chan metaResult)(metaChan))
@@ -778,9 +778,9 @@ func TestCaptiveAfterClose(t *testing.T) {
 			CurrentLedger: uint32(200),
 		}, nil)
 
-	captiveBackend := CaptiveStellarCore{
+	captiveBackend := CaptiveDigitalBitsCore{
 		archive: mockArchive,
-		stellarCoreRunnerFactory: func(_ stellarCoreRunnerMode) (stellarCoreRunnerInterface, error) {
+		digitalbitsCoreRunnerFactory: func(_ digitalbitsCoreRunnerMode) (digitalbitsCoreRunnerInterface, error) {
 			return mockRunner, nil
 		},
 		checkpointManager: historyarchive.NewCheckpointManager(64),
@@ -802,7 +802,7 @@ func TestCaptiveAfterClose(t *testing.T) {
 	assert.NoError(t, err)
 
 	_, err = captiveBackend.GetLatestLedgerSequence()
-	assert.EqualError(t, err, "stellar-core must be opened to return latest available sequence")
+	assert.EqualError(t, err, "digitalbits-core must be opened to return latest available sequence")
 
 	mockArchive.AssertExpectations(t)
 	mockRunner.AssertExpectations(t)
@@ -818,7 +818,7 @@ func TestGetLedgerBoundsCheck(t *testing.T) {
 		}
 	}
 
-	mockRunner := &stellarCoreRunnerMock{}
+	mockRunner := &digitalbitsCoreRunnerMock{}
 	mockRunner.On("catchup", uint32(128), uint32(130)).Return(nil).Once()
 	mockRunner.On("getMetaPipe").Return((<-chan metaResult)(metaChan))
 	mockRunner.On("context").Return(context.Background())
@@ -830,9 +830,9 @@ func TestGetLedgerBoundsCheck(t *testing.T) {
 			CurrentLedger: uint32(200),
 		}, nil)
 
-	captiveBackend := CaptiveStellarCore{
+	captiveBackend := CaptiveDigitalBitsCore{
 		archive: mockArchive,
-		stellarCoreRunnerFactory: func(_ stellarCoreRunnerMode) (stellarCoreRunnerInterface, error) {
+		digitalbitsCoreRunnerFactory: func(_ digitalbitsCoreRunnerMode) (digitalbitsCoreRunnerInterface, error) {
 			return mockRunner, nil
 		},
 		checkpointManager: historyarchive.NewCheckpointManager(64),
@@ -871,36 +871,36 @@ func TestCaptiveGetLedgerTerminatedUnexpectedly(t *testing.T) {
 		expectedError      string
 	}{
 		{
-			"stellar core exited unexpectedly without error",
+			"digitalbits core exited unexpectedly without error",
 			context.Background(),
 			[]metaResult{{LedgerCloseMeta: &ledger64}, {err: fmt.Errorf("transient error")}},
 			true,
 			nil,
-			"stellar core exited unexpectedly",
+			"digitalbits core exited unexpectedly",
 		},
 		{
-			"stellar core exited unexpectedly with an error",
+			"digitalbits core exited unexpectedly with an error",
 			context.Background(),
 			[]metaResult{{LedgerCloseMeta: &ledger64}, {err: fmt.Errorf("transient error")}},
 			true,
 			fmt.Errorf("signal kill"),
-			"stellar core exited unexpectedly: signal kill",
+			"digitalbits core exited unexpectedly: signal kill",
 		},
 		{
-			"stellar core exited unexpectedly without error and closed channel",
+			"digitalbits core exited unexpectedly without error and closed channel",
 			context.Background(),
 			[]metaResult{{LedgerCloseMeta: &ledger64}},
 			true,
 			nil,
-			"stellar core exited unexpectedly",
+			"digitalbits core exited unexpectedly",
 		},
 		{
-			"stellar core exited unexpectedly with an error and closed channel",
+			"digitalbits core exited unexpectedly with an error and closed channel",
 			context.Background(),
 			[]metaResult{{LedgerCloseMeta: &ledger64}},
 			true,
 			fmt.Errorf("signal kill"),
-			"stellar core exited unexpectedly: signal kill",
+			"digitalbits core exited unexpectedly: signal kill",
 		},
 		{
 			"meta pipe closed unexpectedly",
@@ -919,7 +919,7 @@ func TestCaptiveGetLedgerTerminatedUnexpectedly(t *testing.T) {
 			}
 			close(metaChan)
 
-			mockRunner := &stellarCoreRunnerMock{}
+			mockRunner := &digitalbitsCoreRunnerMock{}
 			mockRunner.On("catchup", uint32(64), uint32(100)).Return(nil).Once()
 			mockRunner.On("getMetaPipe").Return((<-chan metaResult)(metaChan))
 			mockRunner.On("context").Return(context.Background())
@@ -933,9 +933,9 @@ func TestCaptiveGetLedgerTerminatedUnexpectedly(t *testing.T) {
 					CurrentLedger: uint32(200),
 				}, nil)
 
-			captiveBackend := CaptiveStellarCore{
+			captiveBackend := CaptiveDigitalBitsCore{
 				archive: mockArchive,
-				stellarCoreRunnerFactory: func(_ stellarCoreRunnerMode) (stellarCoreRunnerInterface, error) {
+				digitalbitsCoreRunnerFactory: func(_ digitalbitsCoreRunnerMode) (digitalbitsCoreRunnerInterface, error) {
 					return mockRunner, nil
 				},
 				checkpointManager: historyarchive.NewCheckpointManager(64),
@@ -980,7 +980,7 @@ func TestCaptiveUseOfLedgerHashStore(t *testing.T) {
 	mockLedgerHashStore.On("GetLedgerHash", uint32(2)).
 		Return("mnb", true, nil).Once()
 
-	captiveBackend := CaptiveStellarCore{
+	captiveBackend := CaptiveDigitalBitsCore{
 		archive:           mockArchive,
 		ledgerHashStore:   mockLedgerHashStore,
 		checkpointManager: historyarchive.NewCheckpointManager(64),
@@ -1056,7 +1056,7 @@ func TestCaptiveRunFromParams(t *testing.T) {
 					},
 				}, nil)
 
-			captiveBackend := CaptiveStellarCore{
+			captiveBackend := CaptiveDigitalBitsCore{
 				archive:           mockArchive,
 				checkpointManager: historyarchive.NewCheckpointManager(64),
 			}
@@ -1093,11 +1093,11 @@ func TestCaptiveIsPrepared(t *testing.T) {
 
 	for _, tc := range tests {
 		t.Run(fmt.Sprintf("next_%d_last_%d_cached_%d_range_%v", tc.nextLedger, tc.lastLedger, tc.cachedLedger, tc.ledgerRange), func(t *testing.T) {
-			mockRunner := &stellarCoreRunnerMock{}
+			mockRunner := &digitalbitsCoreRunnerMock{}
 			mockRunner.On("context").Return(context.Background()).Maybe()
 
-			captiveBackend := CaptiveStellarCore{
-				stellarCoreRunner: mockRunner,
+			captiveBackend := CaptiveDigitalBitsCore{
+				digitalbitsCoreRunner: mockRunner,
 				nextLedger:        tc.nextLedger,
 			}
 			if tc.lastLedger > 0 {
@@ -1147,7 +1147,7 @@ func TestCaptivePreviousLedgerCheck(t *testing.T) {
 
 	}
 
-	mockRunner := &stellarCoreRunnerMock{}
+	mockRunner := &digitalbitsCoreRunnerMock{}
 	mockRunner.On("runFrom", uint32(254), "0101010100000000000000000000000000000000000000000000000000000000").Return(nil).Once()
 	mockRunner.On("getMetaPipe").Return((<-chan metaResult)(metaChan))
 	mockRunner.On("context").Return(context.Background())
@@ -1173,9 +1173,9 @@ func TestCaptivePreviousLedgerCheck(t *testing.T) {
 	mockLedgerHashStore.On("GetLedgerHash", uint32(191)).
 		Return("0200000000000000000000000000000000000000000000000000000000000000", true, nil).Once()
 
-	captiveBackend := CaptiveStellarCore{
+	captiveBackend := CaptiveDigitalBitsCore{
 		archive: mockArchive,
-		stellarCoreRunnerFactory: func(_ stellarCoreRunnerMode) (stellarCoreRunnerInterface, error) {
+		digitalbitsCoreRunnerFactory: func(_ digitalbitsCoreRunnerMode) (digitalbitsCoreRunnerInterface, error) {
 			return mockRunner, nil
 		},
 		ledgerHashStore:   mockLedgerHashStore,

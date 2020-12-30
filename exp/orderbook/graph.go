@@ -4,8 +4,8 @@ import (
 	"sort"
 	"sync"
 
-	"github.com/stellar/go/support/errors"
-	"github.com/stellar/go/xdr"
+	"github.com/digitalbits/go/support/errors"
+	"github.com/digitalbits/go/xdr"
 )
 
 var (
@@ -44,7 +44,7 @@ type OBGraph interface {
 	Clear()
 }
 
-// OrderBookGraph is an in memory graph representation of all the offers in the stellar ledger
+// OrderBookGraph is an in memory graph representation of all the offers in the digitalbits ledger
 type OrderBookGraph struct {
 	// edgesForSellingAsset maps an asset to all offers which sell that asset
 	// note that each key in the map is obtained by calling offer.Selling.String()

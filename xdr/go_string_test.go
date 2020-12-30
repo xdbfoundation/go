@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/stellar/go/xdr"
+	"github.com/digitalbits/go/xdr"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -113,7 +113,7 @@ func TestOperationBodyGoStringerSetOptions(t *testing.T) {
 			LowThreshold:  xdr.Uint32Ptr(3),
 			MedThreshold:  xdr.Uint32Ptr(4),
 			HighThreshold: xdr.Uint32Ptr(5),
-			HomeDomain:    xdr.String32Ptr("stellar.org"),
+			HomeDomain:    xdr.String32Ptr("digitalbits.org"),
 			Signer: &xdr.Signer{
 				Key:    xdr.MustSigner("GC7ERFCD7QLDFRSEPLYB3GYSWX6GYMCHLDL45N4S5Q2N5EJDOMOJ63V4"),
 				Weight: 6,
@@ -123,7 +123,7 @@ func TestOperationBodyGoStringerSetOptions(t *testing.T) {
 
 	assert.Equal(
 		t,
-		`xdr.OperationBody{Type: xdr.OperationTypeSetOptions,SetOptionsOp: &xdr.SetOptionsOp{InflationDest: xdr.MustAddressPtr("GC7ERFCD7QLDFRSEPLYB3GYSWX6GYMCHLDL45N4S5Q2N5EJDOMOJ63V4"),ClearFlags: xdr.Uint32Ptr(0),SetFlags: xdr.Uint32Ptr(1),MasterWeight: xdr.Uint32Ptr(2),LowThreshold: xdr.Uint32Ptr(3),MedThreshold: xdr.Uint32Ptr(4),HighThreshold: xdr.Uint32Ptr(5),HomeDomain: xdr.String32Ptr("stellar.org"),Signer: &xdr.Signer{Key: xdr.MustSigner("GC7ERFCD7QLDFRSEPLYB3GYSWX6GYMCHLDL45N4S5Q2N5EJDOMOJ63V4"),Weight: 6},}}`,
+		`xdr.OperationBody{Type: xdr.OperationTypeSetOptions,SetOptionsOp: &xdr.SetOptionsOp{InflationDest: xdr.MustAddressPtr("GC7ERFCD7QLDFRSEPLYB3GYSWX6GYMCHLDL45N4S5Q2N5EJDOMOJ63V4"),ClearFlags: xdr.Uint32Ptr(0),SetFlags: xdr.Uint32Ptr(1),MasterWeight: xdr.Uint32Ptr(2),LowThreshold: xdr.Uint32Ptr(3),MedThreshold: xdr.Uint32Ptr(4),HighThreshold: xdr.Uint32Ptr(5),HomeDomain: xdr.String32Ptr("digitalbits.org"),Signer: &xdr.Signer{Key: xdr.MustSigner("GC7ERFCD7QLDFRSEPLYB3GYSWX6GYMCHLDL45N4S5Q2N5EJDOMOJ63V4"),Weight: 6},}}`,
 		fmt.Sprintf("%#v", operationBody),
 	)
 }

@@ -13,10 +13,10 @@ import (
 
 	"github.com/BurntSushi/toml"
 
-	horizonclient "github.com/stellar/go/clients/horizonclient"
-	hProtocol "github.com/stellar/go/protocols/horizon"
-	"github.com/stellar/go/services/ticker/internal/utils"
-	"github.com/stellar/go/support/errors"
+	frontierclient "github.com/digitalbits/go/clients/frontierclient"
+	hProtocol "github.com/digitalbits/go/protocols/frontier"
+	"github.com/digitalbits/go/services/ticker/internal/utils"
+	"github.com/digitalbits/go/support/errors"
 )
 
 // shouldDiscardAsset maps the criteria for discarding an asset from the asset index
@@ -28,14 +28,14 @@ func shouldDiscardAsset(asset hProtocol.AssetStat, shouldValidateTOML bool) bool
 	if f == 0.0 {
 		return true
 	}
-	// [StellarX Ticker]: assets need at least some adoption to show up
+	// [DigitalBitsX Ticker]: assets need at least some adoption to show up
 	if asset.NumAccounts < 10 {
 		return true
 	}
 	if asset.Code == "REMOVE" {
 		return true
 	}
-	// [StellarX Ticker]: assets with at least 100 accounts get a pass,
+	// [DigitalBitsX Ticker]: assets with at least 100 accounts get a pass,
 	// even with toml issues
 	if asset.NumAccounts >= 100 {
 		return false
@@ -45,7 +45,7 @@ func shouldDiscardAsset(asset hProtocol.AssetStat, shouldValidateTOML bool) bool
 		if asset.Links.Toml.Href == "" {
 			return true
 		}
-		// [StellarX Ticker]: TOML files should be hosted on HTTPS
+		// [DigitalBitsX Ticker]: TOML files should be hosted on HTTPS
 		if !strings.HasPrefix(asset.Links.Toml.Href, "https://") {
 			return true
 		}
@@ -80,7 +80,7 @@ func fetchTOMLData(asset hProtocol.AssetStat) (data string, err error) {
 		return
 	}
 
-	req.Header.Set("User-Agent", "Stellar Ticker v1.0")
+	req.Header.Set("User-Agent", "DigitalBits Ticker v1.0")
 	resp, err := client.Do(req)
 	if err != nil {
 		return
@@ -144,7 +144,7 @@ func isDomainVerified(orgURL string, tomlURL string, hasCurrency bool) bool {
 	return true
 }
 
-// makeTomlAsset aggregates Horizon Data with TOML Data
+// makeTomlAsset aggregates Frontier Data with TOML Data
 func makeFinalAsset(
 	asset hProtocol.AssetStat,
 	issuer TOMLIssuer,
@@ -237,7 +237,7 @@ func processAsset(asset hProtocol.AssetStat, shouldValidateTOML bool) (FinalAsse
 // The TOML validation is performed in parallel to improve performance.
 func (c *ScraperConfig) parallelProcessAssets(assets []hProtocol.AssetStat, parallelism int) (cleanAssets []FinalAsset, numTrash int) {
 	queue := make(chan FinalAsset, parallelism)
-	shouldValidateTOML := c.Client != horizonclient.DefaultTestNetClient // TOMLs shouldn't be validated on TestNet
+	shouldValidateTOML := c.Client != frontierclient.DefaultTestNetClient // TOMLs shouldn't be validated on TestNet
 
 	var mutex = &sync.Mutex{}
 	var wg sync.WaitGroup
@@ -301,22 +301,22 @@ func (c *ScraperConfig) parallelProcessAssets(assets []hProtocol.AssetStat, para
 	return
 }
 
-// retrieveAssets retrieves existing assets from the Horizon API. If limit=0, will fetch all assets.
+// retrieveAssets retrieves existing assets from the Frontier API. If limit=0, will fetch all assets.
 func (c *ScraperConfig) retrieveAssets(limit int) (assets []hProtocol.AssetStat, err error) {
-	r := horizonclient.AssetRequest{Limit: 200}
+	r := frontierclient.AssetRequest{Limit: 200}
 
 	assetsPage, err := c.Client.Assets(r)
 	if err != nil {
 		return
 	}
 
-	c.Logger.Infoln("Fetching assets from Horizon")
+	c.Logger.Infoln("Fetching assets from Frontier")
 
 	for assetsPage.Links.Next.Href != assetsPage.Links.Self.Href {
 		err = utils.Retry(5, 5*time.Second, c.Logger, func() error {
 			assetsPage, err = c.Client.Assets(r)
 			if err != nil {
-				c.Logger.Infoln("Horizon rate limit reached!")
+				c.Logger.Infoln("Frontier rate limit reached!")
 			}
 			return err
 		})
@@ -341,7 +341,7 @@ func (c *ScraperConfig) retrieveAssets(limit int) (assets []hProtocol.AssetStat,
 		}
 		c.Logger.Debugln("Cursor currently at:", n)
 
-		r = horizonclient.AssetRequest{Limit: 200, Cursor: n}
+		r = frontierclient.AssetRequest{Limit: 200, Cursor: n}
 	}
 
 	c.Logger.Infof("Fetched: %d assets\n", len(assets))

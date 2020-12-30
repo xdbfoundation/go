@@ -7,7 +7,7 @@ import (
 	"time"
 
 	"github.com/prometheus/client_golang/prometheus"
-	hProtocol "github.com/stellar/go/protocols/horizon"
+	hProtocol "github.com/digitalbits/go/protocols/frontier"
 )
 
 // Volume stores volume of a various base pair in both XLM and USD.
@@ -56,7 +56,7 @@ func initVolumes(cfg Config, c trackerClient, watchedTPs []prometheusWatchedTP) 
 	end := time.Now()
 	start := end.Add(time.Duration(-24 * time.Hour))
 	res := 15 * 60                                     // resolution length, in seconds
-	cRes := time.Duration(res*1000) * time.Millisecond // horizon request must be in milliseconds
+	cRes := time.Duration(res*1000) * time.Millisecond // frontier request must be in milliseconds
 
 	for i, wtp := range watchedTPs {
 		// TODO: Calculate volume for assets with non-native counter.
@@ -98,7 +98,7 @@ func initVolumes(cfg Config, c trackerClient, watchedTPs []prometheusWatchedTP) 
 func updateVolume(cfg Config, c trackerClient, watchedTPsPtr *[]prometheusWatchedTP, volumeHistMap map[string][]volumeHist) {
 	req := mustCreateXlmPriceRequest()
 	historyUnit := time.Duration(15 * 60 * time.Second) // length of each individual unit of volume history
-	cRes := time.Duration(60*1000) * time.Millisecond   // horizon client requests have a 1 minute resolution, in milliseconds
+	cRes := time.Duration(60*1000) * time.Millisecond   // frontier client requests have a 1 minute resolution, in milliseconds
 	day := time.Duration(24 * 60 * 60 * time.Second)    // number of seconds in a day
 	watchedTPs := *watchedTPsPtr
 	forLoopDuration := time.Duration(0)
@@ -205,7 +205,7 @@ func getAggRecords(taps []hProtocol.TradeAggregationsPage) (records []hProtocol.
 
 func constructVolumeHistory(tas []hProtocol.TradeAggregation, xlmPrices []xlmPrice, assetPrice float64, start, end time.Time, res int) ([]volumeHist, error) {
 	if len(xlmPrices) < 2 {
-		return []volumeHist{}, fmt.Errorf("mis-formed xlm price history from stellar expert")
+		return []volumeHist{}, fmt.Errorf("mis-formed xlm price history from digitalbits expert")
 	}
 
 	volumeHistory := []volumeHist{}
@@ -226,7 +226,7 @@ func constructVolumeHistory(tas []hProtocol.TradeAggregation, xlmPrices []xlmPri
 		// find total volume of records in this interval
 		// TODO: This loop does not correctly include records before the start
 		// time. however, that should not happen, given that we define start before
-		// calling the horizon client.
+		// calling the frontier client.
 		currBaseVolume := 0.0
 		currCounterVolume := 0.0
 		currTradeCount := 0.0

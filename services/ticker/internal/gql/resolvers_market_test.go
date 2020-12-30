@@ -6,7 +6,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/stellar/go/services/ticker/internal/tickerdb"
+	"github.com/digitalbits/go/services/ticker/internal/tickerdb"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )

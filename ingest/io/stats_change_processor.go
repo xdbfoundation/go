@@ -1,7 +1,7 @@
 package io
 
 import (
-	"github.com/stellar/go/xdr"
+	"github.com/digitalbits/go/xdr"
 )
 
 // StatsChangeProcessor is a state processors that counts number of changes types

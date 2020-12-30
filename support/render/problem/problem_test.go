@@ -10,8 +10,8 @@ import (
 	"testing"
 
 	ge "github.com/go-errors/errors"
-	"github.com/stellar/go/support/log"
-	"github.com/stellar/go/support/test"
+	"github.com/digitalbits/go/support/log"
+	"github.com/digitalbits/go/support/test"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -42,8 +42,8 @@ func TestProblemRender(t *testing.T) {
 			201,
 		}, {
 			"renders the extras correctly",
-			P{Extras: map[string]interface{}{"hello": "stellar"}},
-			[]string{"hello", "stellar"},
+			P{Extras: map[string]interface{}{"hello": "digitalbits"}},
+			[]string{"hello", "digitalbits"},
 			0,
 		},
 	}
@@ -102,7 +102,7 @@ func TestProblemServerErrorConversion(t *testing.T) {
 	}
 }
 
-// TestProblemInflate test errors that come inflated from horizon
+// TestProblemInflate test errors that come inflated from frontier
 func TestProblemInflate(t *testing.T) {
 	problem := New("", log.DefaultLogger, LogNoErrors)
 
@@ -112,8 +112,8 @@ func TestProblemInflate(t *testing.T) {
 		want string
 	}{
 		"renders the type correctly",
-		P{Type: "https://stellar.org/horizon-errors/not_found"},
-		"https://stellar.org/horizon-errors/not_found",
+		P{Type: "https://digitalbits.org/frontier-errors/not_found"},
+		"https://digitalbits.org/frontier-errors/not_found",
 	}
 
 	t.Run(testCase.name, func(t *testing.T) {

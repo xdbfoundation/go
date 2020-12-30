@@ -10,11 +10,11 @@ import (
 	"testing"
 
 	"github.com/go-chi/chi"
-	"github.com/stellar/go/exp/services/recoverysigner/internal/account"
-	"github.com/stellar/go/exp/services/recoverysigner/internal/db/dbtest"
-	"github.com/stellar/go/exp/services/recoverysigner/internal/serve/auth"
-	"github.com/stellar/go/keypair"
-	supportlog "github.com/stellar/go/support/log"
+	"github.com/digitalbits/go/exp/services/recoverysigner/internal/account"
+	"github.com/digitalbits/go/exp/services/recoverysigner/internal/db/dbtest"
+	"github.com/digitalbits/go/exp/services/recoverysigner/internal/serve/auth"
+	"github.com/digitalbits/go/keypair"
+	supportlog "github.com/digitalbits/go/support/log"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
@@ -37,7 +37,7 @@ func TestAccountPost_newWithRoleOwnerContentTypeJSON(t *testing.T) {
 		{
 			"role": "owner",
 			"auth_methods": [
-				{ "type": "stellar_address", "value": "GBF3XFXGBGNQDN3HOSZ7NVRF6TJ2JOD5U6ELIWJOOEI6T5WKMQT2YSXQ" },
+				{ "type": "digitalbits_address", "value": "GBF3XFXGBGNQDN3HOSZ7NVRF6TJ2JOD5U6ELIWJOOEI6T5WKMQT2YSXQ" },
 				{ "type": "phone_number", "value": "+10000000000" },
 				{ "type": "email", "value": "user1@example.com" }
 			]
@@ -110,7 +110,7 @@ func TestAccountPost_newWithRoleOwnerContentTypeForm(t *testing.T) {
 	ctx = auth.NewContext(ctx, auth.Auth{Address: "GDIXCQJ2W2N6TAS6AYW4LW2EBV7XNRUCLNHQB37FARDEWBQXRWP47Q6N"})
 	reqValues := url.Values{}
 	reqValues.Set("identities.0.role", "owner")
-	reqValues.Set("identities.0.auth_methods.0.type", "stellar_address")
+	reqValues.Set("identities.0.auth_methods.0.type", "digitalbits_address")
 	reqValues.Set("identities.0.auth_methods.0.value", "GBF3XFXGBGNQDN3HOSZ7NVRF6TJ2JOD5U6ELIWJOOEI6T5WKMQT2YSXQ")
 	reqValues.Set("identities.0.auth_methods.1.type", "phone_number")
 	reqValues.Set("identities.0.auth_methods.1.value", "+10000000000")
@@ -188,7 +188,7 @@ func TestAccountPost_newWithRolesSenderReceiverContentTypeJSON(t *testing.T) {
 		{
 			"role": "sender",
 			"auth_methods": [
-				{ "type": "stellar_address", "value": "GBF3XFXGBGNQDN3HOSZ7NVRF6TJ2JOD5U6ELIWJOOEI6T5WKMQT2YSXQ" },
+				{ "type": "digitalbits_address", "value": "GBF3XFXGBGNQDN3HOSZ7NVRF6TJ2JOD5U6ELIWJOOEI6T5WKMQT2YSXQ" },
 				{ "type": "phone_number", "value": "+10000000000" },
 				{ "type": "email", "value": "user1@example.com" }
 			]
@@ -196,7 +196,7 @@ func TestAccountPost_newWithRolesSenderReceiverContentTypeJSON(t *testing.T) {
 		{
 			"role": "receiver",
 			"auth_methods": [
-				{ "type": "stellar_address", "value": "GB5VOTKJ3IPGIYQBJ6GVJMUVEAIYGXZUJE4WYLPBJSHOTKLZTETBYOBI" },
+				{ "type": "digitalbits_address", "value": "GB5VOTKJ3IPGIYQBJ6GVJMUVEAIYGXZUJE4WYLPBJSHOTKLZTETBYOBI" },
 				{ "type": "phone_number", "value": "+20000000000" },
 				{ "type": "email", "value": "user2@example.com" }
 			]
@@ -278,14 +278,14 @@ func TestAccountPost_newWithRolesSenderReceiverContentTypeForm(t *testing.T) {
 	ctx = auth.NewContext(ctx, auth.Auth{Address: "GDIXCQJ2W2N6TAS6AYW4LW2EBV7XNRUCLNHQB37FARDEWBQXRWP47Q6N"})
 	reqValues := url.Values{}
 	reqValues.Set("identities.0.role", "sender")
-	reqValues.Set("identities.0.auth_methods.0.type", "stellar_address")
+	reqValues.Set("identities.0.auth_methods.0.type", "digitalbits_address")
 	reqValues.Set("identities.0.auth_methods.0.value", "GBF3XFXGBGNQDN3HOSZ7NVRF6TJ2JOD5U6ELIWJOOEI6T5WKMQT2YSXQ")
 	reqValues.Set("identities.0.auth_methods.1.type", "phone_number")
 	reqValues.Set("identities.0.auth_methods.1.value", "+10000000000")
 	reqValues.Set("identities.0.auth_methods.2.type", "email")
 	reqValues.Set("identities.0.auth_methods.2.value", "user1@example.com")
 	reqValues.Set("identities.1.role", "receiver")
-	reqValues.Set("identities.1.auth_methods.0.type", "stellar_address")
+	reqValues.Set("identities.1.auth_methods.0.type", "digitalbits_address")
 	reqValues.Set("identities.1.auth_methods.0.value", "GB5VOTKJ3IPGIYQBJ6GVJMUVEAIYGXZUJE4WYLPBJSHOTKLZTETBYOBI")
 	reqValues.Set("identities.1.auth_methods.1.type", "phone_number")
 	reqValues.Set("identities.1.auth_methods.1.value", "+20000000000")
@@ -504,7 +504,7 @@ func TestAccountPost_roleNotProvided(t *testing.T) {
 	"identities": [
 		{
 			"auth_methods": [
-				{ "type": "stellar_address", "value": "GBF3XFXGBGNQDN3HOSZ7NVRF6TJ2JOD5U6ELIWJOOEI6T5WKMQT2YSXQ" },
+				{ "type": "digitalbits_address", "value": "GBF3XFXGBGNQDN3HOSZ7NVRF6TJ2JOD5U6ELIWJOOEI6T5WKMQT2YSXQ" },
 				{ "type": "phone_number", "value": "+10000000000" },
 				{ "type": "email", "value": "user1@example.com" }
 			]
@@ -600,7 +600,7 @@ func TestAccountPost_authMethodTypeUnrecognized(t *testing.T) {
 		{
 			"role": "owner",
 			"auth_methods": [
-				{ "type": "stellar_address", "value": "GBF3XFXGBGNQDN3HOSZ7NVRF6TJ2JOD5U6ELIWJOOEI6T5WKMQT2YSXQ" },
+				{ "type": "digitalbits_address", "value": "GBF3XFXGBGNQDN3HOSZ7NVRF6TJ2JOD5U6ELIWJOOEI6T5WKMQT2YSXQ" },
 				{ "type": "phone_number", "value": "+10000000000" },
 				{ "type": "wormhole_technology", "value": "galaxy5.earth3.asdfuaiosufd" },
 				{ "type": "email", "value": "user1@example.com" }

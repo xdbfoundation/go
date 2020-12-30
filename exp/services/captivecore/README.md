@@ -1,21 +1,21 @@
 # captivecore
 
-The Captive Stellar-Core Server allows you to run a dedicated Stellar-Core instance
-for the purpose of ingestion. The server must be bundled with a Stellar Core binary.
+The Captive DigitalBits-Core Server allows you to run a dedicated DigitalBits-Core instance
+for the purpose of ingestion. The server must be bundled with a DigitalBits Core binary.
 
-If you run Horizon with Captive Stellar-Core ingestion enabled Horizon will spawn a Stellar-Core
-subprocess. Horizon's ingestion system will then stream ledgers from the subprocess via
-a filesystem pipe. The disadvantage of running both Horizon and the Stellar-Core subprocess
+If you run Frontier with Captive DigitalBits-Core ingestion enabled Frontier will spawn a DigitalBits-Core
+subprocess. Frontier's ingestion system will then stream ledgers from the subprocess via
+a filesystem pipe. The disadvantage of running both Frontier and the DigitalBits-Core subprocess
 on the same machine is it requires detailed per-process monitoring to be able to attribute
 potential issues (like memory leaks) to a specific service.
 
-Now you can run Horizon and pair it with a remote Captive Stellar-Core instance. The
-Captive Stellar-Core Server can run on a separate machine from Horizon. The server
-will manage Stellar-Core as a subprocess and provide an HTTP API which Horizon
+Now you can run Frontier and pair it with a remote Captive DigitalBits-Core instance. The
+Captive DigitalBits-Core Server can run on a separate machine from Frontier. The server
+will manage DigitalBits-Core as a subprocess and provide an HTTP API which Frontier
 can use remotely to stream ledgers for the purpose of ingestion.
 
-Note that, currently, a single Captive Stellar-Core Server cannot be shared by
-multiple Horizon instances.
+Note that, currently, a single Captive DigitalBits-Core Server cannot be shared by
+multiple Frontier instances.
 
 ## API
 
@@ -81,17 +81,17 @@ Response:
 
 ```
 $ captivecore --help
-Run the Captive Stellar-Core Server
+Run the Captive DigitalBits-Core Server
 
 Usage:
   captivecore [flags]
 
 Flags:
-      --db-url                             Horizon Postgres URL (optional) used to lookup the ledger hash for sequence numbers
-      --stellar-core-binary-path           Path to stellar core binary
-      --stellar-core-config-path           Path to stellar core config file
-      --history-archive-urls               Comma-separated list of stellar history archives to connect with
+      --db-url                             Frontier Postgres URL (optional) used to lookup the ledger hash for sequence numbers
+      --digitalbits-core-binary-path           Path to digitalbits core binary
+      --digitalbits-core-config-path           Path to digitalbits core config file
+      --history-archive-urls               Comma-separated list of digitalbits history archives to connect with
       --log-level                          Minimum log severity (debug, info, warn, error) to log (default info)
-      --network-passphrase string          Network passphrase of the Stellar network transactions should be signed for (NETWORK_PASSPHRASE) (default "Test SDF Network ; September 2015")
+      --network-passphrase string          Network passphrase of the DigitalBits network transactions should be signed for (NETWORK_PASSPHRASE) (default "Test SDF Network ; September 2015")
       --port int                           Port to listen and serve on (PORT) (default 8000)
 ```

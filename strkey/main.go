@@ -5,8 +5,8 @@ import (
 	"encoding/base32"
 	"encoding/binary"
 
-	"github.com/stellar/go/crc16"
-	"github.com/stellar/go/support/errors"
+	"github.com/digitalbits/go/crc16"
+	"github.com/digitalbits/go/support/errors"
 )
 
 // ErrInvalidVersionByte is returned when the version byte from a provided
@@ -18,17 +18,17 @@ var ErrInvalidVersionByte = errors.New("invalid version byte")
 type VersionByte byte
 
 const (
-	//VersionByteAccountID is the version byte used for encoded stellar addresses
+	//VersionByteAccountID is the version byte used for encoded digitalbits addresses
 	VersionByteAccountID VersionByte = 6 << 3 // Base32-encodes to 'G...'
 
-	//VersionByteSeed is the version byte used for encoded stellar seed
+	//VersionByteSeed is the version byte used for encoded digitalbits seed
 	VersionByteSeed = 18 << 3 // Base32-encodes to 'S...'
 
-	//VersionByteHashTx is the version byte used for encoded stellar hashTx
+	//VersionByteHashTx is the version byte used for encoded digitalbits hashTx
 	//signer keys.
 	VersionByteHashTx = 19 << 3 // Base32-encodes to 'T...'
 
-	//VersionByteHashX is the version byte used for encoded stellar hashX
+	//VersionByteHashX is the version byte used for encoded digitalbits hashX
 	//signer keys.
 	VersionByteHashX = 23 << 3 // Base32-encodes to 'X...'
 )
@@ -216,7 +216,7 @@ func decodeString(src string) ([]byte, error) {
 	return srcBytes[:n], nil
 }
 
-// IsValidEd25519PublicKey validates a stellar public key
+// IsValidEd25519PublicKey validates a digitalbits public key
 func IsValidEd25519PublicKey(i interface{}) bool {
 	enc, ok := i.(string)
 
@@ -229,7 +229,7 @@ func IsValidEd25519PublicKey(i interface{}) bool {
 	return err == nil
 }
 
-// IsValidEd25519SecretSeed validates a stellar secret key
+// IsValidEd25519SecretSeed validates a digitalbits secret key
 func IsValidEd25519SecretSeed(i interface{}) bool {
 	enc, ok := i.(string)
 

@@ -15,7 +15,7 @@ import (
 	"gopkg.in/matryer/try.v1"
 )
 
-const stelExURL = "https://api.stellar.expert/explorer/public/xlm-price"
+const stelExURL = "https://api.digitalbits.expert/explorer/public/xlm-price"
 
 const ratesURL = "https://openexchangerates.org/api/latest.json"
 
@@ -54,8 +54,8 @@ func createXlmPriceRequest() (*http.Request, error) {
 	}
 
 	// TODO: Eliminate dependency on dotenv before monorepo conversion.
-	authKey := os.Getenv("STELLAR_EXPERT_AUTH_KEY")
-	authVal := os.Getenv("STELLAR_EXPERT_AUTH_VAL")
+	authKey := os.Getenv("DIGITALBITS_EXPERT_AUTH_KEY")
+	authVal := os.Getenv("DIGITALBITS_EXPERT_AUTH_VAL")
 	req.Header.Add(authKey, authVal)
 
 	return req, nil
@@ -64,17 +64,17 @@ func createXlmPriceRequest() (*http.Request, error) {
 func getLatestXlmPrice(req *http.Request) (float64, error) {
 	body, err := getPriceResponse(req)
 	if err != nil {
-		return 0.0, fmt.Errorf("got error from stellar expert price api: %s", err)
+		return 0.0, fmt.Errorf("got error from digitalbits expert price api: %s", err)
 	}
-	return parseStellarExpertLatestPrice(body)
+	return parseDigitalBitsExpertLatestPrice(body)
 }
 
 func getXlmPriceHistory(req *http.Request) ([]xlmPrice, error) {
 	body, err := getPriceResponse(req)
 	if err != nil {
-		return []xlmPrice{}, fmt.Errorf("got error from stellar expert price api: %s", err)
+		return []xlmPrice{}, fmt.Errorf("got error from digitalbits expert price api: %s", err)
 	}
-	return parseStellarExpertPriceHistory(body)
+	return parseDigitalBitsExpertPriceHistory(body)
 }
 
 func getPriceResponse(req *http.Request) (string, error) {
@@ -112,12 +112,12 @@ func getPriceResponse(req *http.Request) (string, error) {
 	return body, nil
 }
 
-func parseStellarExpertPriceHistory(body string) ([]xlmPrice, error) {
-	// The Stellar Expert response has expected format: [[timestamp1,price1], [timestamp2,price2], ...]
+func parseDigitalBitsExpertPriceHistory(body string) ([]xlmPrice, error) {
+	// The DigitalBits Expert response has expected format: [[timestamp1,price1], [timestamp2,price2], ...]
 	// with the most recent timestamp and price first. We split that array to get strings of only "timestamp,price".
 	// We then split each of those strings and define a struct containing the timestamp and price.
 	if len(body) < 5 {
-		return []xlmPrice{}, fmt.Errorf("got ill-formed response body from stellar expert")
+		return []xlmPrice{}, fmt.Errorf("got ill-formed response body from digitalbits expert")
 	}
 
 	body = body[2 : len(body)-2]
@@ -127,7 +127,7 @@ func parseStellarExpertPriceHistory(body string) ([]xlmPrice, error) {
 	for _, timePriceStr := range timePriceStrs {
 		timePrice := strings.Split(timePriceStr, ",")
 		if len(timePrice) != 2 {
-			return []xlmPrice{}, fmt.Errorf("got ill-formed time/price from stellar expert")
+			return []xlmPrice{}, fmt.Errorf("got ill-formed time/price from digitalbits expert")
 		}
 
 		ts, err := strconv.ParseInt(timePrice[0], 10, 64)
@@ -149,20 +149,20 @@ func parseStellarExpertPriceHistory(body string) ([]xlmPrice, error) {
 	return xlmPrices, nil
 }
 
-func parseStellarExpertLatestPrice(body string) (float64, error) {
-	// The Stellar Expert response has expected format: [[timestamp1,price1], [timestamp2,price2], ...]
+func parseDigitalBitsExpertLatestPrice(body string) (float64, error) {
+	// The DigitalBits Expert response has expected format: [[timestamp1,price1], [timestamp2,price2], ...]
 	// with the most recent timestamp and price first.
 	// We then split the remainder by ",".
 	// The first element will be the most recent timestamp, and the second will be the latest price.
 	// We format and return the most recent price.
 	lists := strings.Split(body, ",")
 	if len(lists) < 2 {
-		return 0.0, fmt.Errorf("mis-formed response from stellar expert")
+		return 0.0, fmt.Errorf("mis-formed response from digitalbits expert")
 	}
 
 	rawPriceStr := lists[1]
 	if len(rawPriceStr) < 2 {
-		return 0.0, fmt.Errorf("mis-formed price from stellar expert")
+		return 0.0, fmt.Errorf("mis-formed price from digitalbits expert")
 	}
 
 	priceStr := rawPriceStr[:len(rawPriceStr)-1]

@@ -12,10 +12,10 @@ import (
 	"time"
 
 	"github.com/rs/cors"
-	"github.com/stellar/go/support/errors"
-	"github.com/stellar/go/support/log"
-	"github.com/stellar/go/support/render/httpjson"
-	"github.com/stellar/go/support/render/problem"
+	"github.com/digitalbits/go/support/errors"
+	"github.com/digitalbits/go/support/log"
+	"github.com/digitalbits/go/support/render/httpjson"
+	"github.com/digitalbits/go/support/render/problem"
 )
 
 func init() {

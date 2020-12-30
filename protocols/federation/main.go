@@ -16,7 +16,7 @@ type NameResponse struct {
 // IDResponse represents the result of a federation request
 // for `id` request.
 type IDResponse struct {
-	Address string `json:"stellar_address"`
+	Address string `json:"digitalbits_address"`
 }
 
 // Memo value can be either integer or string in JSON. This struct

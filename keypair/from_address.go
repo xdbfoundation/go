@@ -3,8 +3,8 @@ package keypair
 import (
 	"encoding"
 
-	"github.com/stellar/go/strkey"
-	"github.com/stellar/go/xdr"
+	"github.com/digitalbits/go/strkey"
+	"github.com/digitalbits/go/xdr"
 
 	"golang.org/x/crypto/ed25519"
 )
@@ -12,7 +12,7 @@ import (
 // FromAddress represents a keypair to which only the address is know.  This KP
 // can verify signatures, but cannot sign them.
 //
-// NOTE: ensure the address provided is a valid strkey encoded stellar address.
+// NOTE: ensure the address provided is a valid strkey encoded digitalbits address.
 // Some operations will panic otherwise. It's recommended that you create these
 // structs through the Parse() method.
 type FromAddress struct {

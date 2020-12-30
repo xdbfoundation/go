@@ -7,10 +7,10 @@ import (
 	"io/ioutil"
 	"os"
 
-	hClient "github.com/stellar/go/clients/horizonclient"
+	hClient "github.com/digitalbits/go/clients/frontierclient"
 )
 
-// Asset represents an asset on the Stellar network
+// Asset represents an asset on the DigitalBits network
 type Asset struct {
 	ProtocolAssetType hClient.AssetType
 	AssetType         string `json:"type"`

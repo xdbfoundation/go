@@ -4,9 +4,9 @@ import (
 	"net/http"
 	"net/url"
 
-	hc "github.com/stellar/go/clients/horizonclient"
-	"github.com/stellar/go/clients/stellartoml"
-	proto "github.com/stellar/go/protocols/federation"
+	hc "github.com/digitalbits/go/clients/frontierclient"
+	"github.com/digitalbits/go/clients/digitalbitstoml"
+	proto "github.com/digitalbits/go/protocols/federation"
 )
 
 // FederationResponseMaxSize is the maximum size of response from a federation server
@@ -15,23 +15,23 @@ const FederationResponseMaxSize = 100 * 1024
 // DefaultTestNetClient is a default federation client for testnet
 var DefaultTestNetClient = &Client{
 	HTTP:        http.DefaultClient,
-	Horizon:     hc.DefaultTestNetClient,
-	StellarTOML: stellartoml.DefaultClient,
+	Frontier:     hc.DefaultTestNetClient,
+	DigitalBitsTOML: digitalbitstoml.DefaultClient,
 }
 
 // DefaultPublicNetClient is a default federation client for pubnet
 var DefaultPublicNetClient = &Client{
 	HTTP:        http.DefaultClient,
-	Horizon:     hc.DefaultPublicNetClient,
-	StellarTOML: stellartoml.DefaultClient,
+	Frontier:     hc.DefaultPublicNetClient,
+	DigitalBitsTOML: digitalbitstoml.DefaultClient,
 }
 
 // Client represents a client that is capable of resolving a federation request
 // using the internet.
 type Client struct {
-	StellarTOML StellarTOML
+	DigitalBitsTOML DigitalBitsTOML
 	HTTP        HTTP
-	Horizon     Horizon
+	Frontier     Frontier
 	AllowHTTP   bool
 }
 
@@ -41,9 +41,9 @@ type ClientInterface interface {
 	ForwardRequest(domain string, fields url.Values) (*proto.NameResponse, error)
 }
 
-// Horizon represents a horizon client that can be consulted for data when
+// Frontier represents a frontier client that can be consulted for data when
 // needed as part of the federation protocol
-type Horizon interface {
+type Frontier interface {
 	HomeDomainForAccount(aid string) (string, error)
 }
 
@@ -53,14 +53,14 @@ type HTTP interface {
 	Get(url string) (*http.Response, error)
 }
 
-// StellarTOML represents a client that can resolve a given domain name to
-// stellar.toml file.  The response is used to find the federation server that a
+// DigitalBitsTOML represents a client that can resolve a given domain name to
+// digitalbits.toml file.  The response is used to find the federation server that a
 // query should be made against.
-type StellarTOML interface {
-	GetStellarToml(domain string) (*stellartoml.Response, error)
+type DigitalBitsTOML interface {
+	GetDigitalBitsToml(domain string) (*digitalbitstoml.Response, error)
 }
 
 // confirm interface conformity
-var _ StellarTOML = stellartoml.DefaultClient
+var _ DigitalBitsTOML = digitalbitstoml.DefaultClient
 var _ HTTP = http.DefaultClient
 var _ ClientInterface = &Client{}

@@ -1,6 +1,6 @@
 package main
 
-// This is a build script that Travis uses to build Stellar release packages.
+// This is a build script that Travis uses to build DigitalBits release packages.
 
 import (
 	"flag"
@@ -14,8 +14,8 @@ import (
 
 	"time"
 
-	"github.com/stellar/go/support/errors"
-	"github.com/stellar/go/support/log"
+	"github.com/digitalbits/go/support/errors"
+	"github.com/digitalbits/go/support/log"
 )
 
 var extractBinName = regexp.MustCompile(`^(?P<bin>[a-z0-9-]+)-(?P<tag>.+)$`)
@@ -85,8 +85,8 @@ func binNamesForDir(dir string) []string {
 func build(pkg, dest, version, buildOS, buildArch string) {
 	buildTime := time.Now().Format(time.RFC3339)
 
-	timeFlag := fmt.Sprintf("-X github.com/stellar/go/support/app.buildTime=%s", buildTime)
-	versionFlag := fmt.Sprintf("-X github.com/stellar/go/support/app.version=%s", version)
+	timeFlag := fmt.Sprintf("-X github.com/digitalbits/go/support/app.buildTime=%s", buildTime)
+	versionFlag := fmt.Sprintf("-X github.com/digitalbits/go/support/app.version=%s", version)
 
 	if buildOS == "windows" {
 		dest = dest + ".exe"
@@ -204,7 +204,7 @@ func buildSnapshots() {
 // extractFromTag extracts the name of the binary that should be packaged in the
 // course of execution this script as well as the version it should be packaged
 // as, based on the name of the tag in the CIRCLE_TAG environment variable.
-// Tags must be of the form `NAME-vSEMVER`, such as `horizon-v1.0.0` to be
+// Tags must be of the form `NAME-vSEMVER`, such as `frontier-v1.0.0` to be
 // matched by this function.
 //
 // In the event that the CIRCLE_TAG is missing or the match fails, an empty
@@ -330,7 +330,7 @@ func repoName() string {
 	if os.Getenv("REPO") != "" {
 		return os.Getenv("REPO")
 	}
-	return "github.com/stellar/go"
+	return "github.com/digitalbits/go"
 
 }
 

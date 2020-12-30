@@ -13,14 +13,14 @@ import (
 	"time"
 
 	"github.com/dgrijalva/jwt-go"
-	"github.com/stellar/go/clients/horizonclient"
-	"github.com/stellar/go/exp/support/jwtkey"
-	"github.com/stellar/go/keypair"
-	"github.com/stellar/go/network"
-	"github.com/stellar/go/protocols/horizon"
-	supportlog "github.com/stellar/go/support/log"
-	"github.com/stellar/go/support/render/problem"
-	"github.com/stellar/go/txnbuild"
+	"github.com/digitalbits/go/clients/frontierclient"
+	"github.com/digitalbits/go/exp/support/jwtkey"
+	"github.com/digitalbits/go/keypair"
+	"github.com/digitalbits/go/network"
+	"github.com/digitalbits/go/protocols/frontier"
+	supportlog "github.com/digitalbits/go/support/log"
+	"github.com/digitalbits/go/support/render/problem"
+	"github.com/digitalbits/go/txnbuild"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"gopkg.in/square/go-jose.v2"
@@ -57,17 +57,17 @@ func TestToken_formInputSuccess(t *testing.T) {
 	require.NoError(t, err)
 	t.Logf("Signed: %s", txSigned)
 
-	horizonClient := &horizonclient.MockClient{}
-	horizonClient.
-		On("AccountDetail", horizonclient.AccountRequest{AccountID: account.Address()}).
+	frontierClient := &frontierclient.MockClient{}
+	frontierClient.
+		On("AccountDetail", frontierclient.AccountRequest{AccountID: account.Address()}).
 		Return(
-			horizon.Account{
-				Thresholds: horizon.AccountThresholds{
+			frontier.Account{
+				Thresholds: frontier.AccountThresholds{
 					LowThreshold:  1,
 					MedThreshold:  10,
 					HighThreshold: 100,
 				},
-				Signers: []horizon.Signer{
+				Signers: []frontier.Signer{
 					{
 						Key:    account.Address(),
 						Weight: 100,
@@ -78,7 +78,7 @@ func TestToken_formInputSuccess(t *testing.T) {
 
 	h := tokenHandler{
 		Logger:            supportlog.DefaultLogger,
-		HorizonClient:     horizonClient,
+		FrontierClient:     frontierClient,
 		NetworkPassphrase: network.TestNetworkPassphrase,
 		SigningAddresses:  []*keypair.FromAddress{serverKey.FromAddress()},
 		JWK:               jwk,
@@ -157,17 +157,17 @@ func TestToken_jsonInputSuccess(t *testing.T) {
 	require.NoError(t, err)
 	t.Logf("Signed: %s", txSigned)
 
-	horizonClient := &horizonclient.MockClient{}
-	horizonClient.
-		On("AccountDetail", horizonclient.AccountRequest{AccountID: account.Address()}).
+	frontierClient := &frontierclient.MockClient{}
+	frontierClient.
+		On("AccountDetail", frontierclient.AccountRequest{AccountID: account.Address()}).
 		Return(
-			horizon.Account{
-				Thresholds: horizon.AccountThresholds{
+			frontier.Account{
+				Thresholds: frontier.AccountThresholds{
 					LowThreshold:  1,
 					MedThreshold:  10,
 					HighThreshold: 100,
 				},
-				Signers: []horizon.Signer{
+				Signers: []frontier.Signer{
 					{
 						Key:    account.Address(),
 						Weight: 100,
@@ -178,7 +178,7 @@ func TestToken_jsonInputSuccess(t *testing.T) {
 
 	h := tokenHandler{
 		Logger:            supportlog.DefaultLogger,
-		HorizonClient:     horizonClient,
+		FrontierClient:     frontierClient,
 		NetworkPassphrase: network.TestNetworkPassphrase,
 		SigningAddresses:  []*keypair.FromAddress{serverKey.FromAddress()},
 		JWK:               jwk,
@@ -256,17 +256,17 @@ func TestToken_jsonInputValidRotatingServerSigners(t *testing.T) {
 	accountSigner2 := keypair.MustRandom()
 	t.Logf("Client account signer 2: %s", accountSigner2.Address())
 
-	horizonClient := &horizonclient.MockClient{}
-	horizonClient.
-		On("AccountDetail", horizonclient.AccountRequest{AccountID: account.Address()}).
+	frontierClient := &frontierclient.MockClient{}
+	frontierClient.
+		On("AccountDetail", frontierclient.AccountRequest{AccountID: account.Address()}).
 		Return(
-			horizon.Account{
-				Thresholds: horizon.AccountThresholds{
+			frontier.Account{
+				Thresholds: frontier.AccountThresholds{
 					LowThreshold:  1,
 					MedThreshold:  10,
 					HighThreshold: 100,
 				},
-				Signers: []horizon.Signer{
+				Signers: []frontier.Signer{
 					{
 						Key:    accountSigner1.Address(),
 						Weight: 40,
@@ -282,7 +282,7 @@ func TestToken_jsonInputValidRotatingServerSigners(t *testing.T) {
 	homeDomain := "example.com"
 	h := tokenHandler{
 		Logger:            supportlog.DefaultLogger,
-		HorizonClient:     horizonClient,
+		FrontierClient:     frontierClient,
 		NetworkPassphrase: network.TestNetworkPassphrase,
 		SigningAddresses:  serverKeyAddresses,
 		JWK:               jwk,
@@ -399,17 +399,17 @@ func TestToken_jsonInputValidMultipleSigners(t *testing.T) {
 	require.NoError(t, err)
 	t.Logf("Signed: %s", txSigned)
 
-	horizonClient := &horizonclient.MockClient{}
-	horizonClient.
-		On("AccountDetail", horizonclient.AccountRequest{AccountID: account.Address()}).
+	frontierClient := &frontierclient.MockClient{}
+	frontierClient.
+		On("AccountDetail", frontierclient.AccountRequest{AccountID: account.Address()}).
 		Return(
-			horizon.Account{
-				Thresholds: horizon.AccountThresholds{
+			frontier.Account{
+				Thresholds: frontier.AccountThresholds{
 					LowThreshold:  1,
 					MedThreshold:  10,
 					HighThreshold: 100,
 				},
-				Signers: []horizon.Signer{
+				Signers: []frontier.Signer{
 					{
 						Key:    accountSigner1.Address(),
 						Weight: 40,
@@ -424,7 +424,7 @@ func TestToken_jsonInputValidMultipleSigners(t *testing.T) {
 
 	h := tokenHandler{
 		Logger:            supportlog.DefaultLogger,
-		HorizonClient:     horizonClient,
+		FrontierClient:     frontierClient,
 		NetworkPassphrase: network.TestNetworkPassphrase,
 		SigningAddresses:  []*keypair.FromAddress{serverKey.FromAddress()},
 		JWK:               jwk,
@@ -507,17 +507,17 @@ func TestToken_jsonInputNotEnoughWeight(t *testing.T) {
 	require.NoError(t, err)
 	t.Logf("Signed: %s", txSigned)
 
-	horizonClient := &horizonclient.MockClient{}
-	horizonClient.
-		On("AccountDetail", horizonclient.AccountRequest{AccountID: account.Address()}).
+	frontierClient := &frontierclient.MockClient{}
+	frontierClient.
+		On("AccountDetail", frontierclient.AccountRequest{AccountID: account.Address()}).
 		Return(
-			horizon.Account{
-				Thresholds: horizon.AccountThresholds{
+			frontier.Account{
+				Thresholds: frontier.AccountThresholds{
 					LowThreshold:  1,
 					MedThreshold:  10,
 					HighThreshold: 100,
 				},
-				Signers: []horizon.Signer{
+				Signers: []frontier.Signer{
 					{
 						Key:    account.Address(),
 						Weight: 10,
@@ -528,7 +528,7 @@ func TestToken_jsonInputNotEnoughWeight(t *testing.T) {
 
 	h := tokenHandler{
 		Logger:            supportlog.DefaultLogger,
-		HorizonClient:     horizonClient,
+		FrontierClient:     frontierClient,
 		NetworkPassphrase: network.TestNetworkPassphrase,
 		SigningAddresses:  []*keypair.FromAddress{serverKey.FromAddress()},
 		JWK:               jwk,
@@ -590,17 +590,17 @@ func TestToken_jsonInputUnrecognizedSigner(t *testing.T) {
 	require.NoError(t, err)
 	t.Logf("Signed: %s", txSigned)
 
-	horizonClient := &horizonclient.MockClient{}
-	horizonClient.
-		On("AccountDetail", horizonclient.AccountRequest{AccountID: account.Address()}).
+	frontierClient := &frontierclient.MockClient{}
+	frontierClient.
+		On("AccountDetail", frontierclient.AccountRequest{AccountID: account.Address()}).
 		Return(
-			horizon.Account{
-				Thresholds: horizon.AccountThresholds{
+			frontier.Account{
+				Thresholds: frontier.AccountThresholds{
 					LowThreshold:  1,
 					MedThreshold:  10,
 					HighThreshold: 100,
 				},
-				Signers: []horizon.Signer{
+				Signers: []frontier.Signer{
 					{
 						Key:    keypair.MustRandom().Address(),
 						Weight: 100,
@@ -611,7 +611,7 @@ func TestToken_jsonInputUnrecognizedSigner(t *testing.T) {
 
 	h := tokenHandler{
 		Logger:            supportlog.DefaultLogger,
-		HorizonClient:     horizonClient,
+		FrontierClient:     frontierClient,
 		NetworkPassphrase: network.TestNetworkPassphrase,
 		SigningAddresses:  []*keypair.FromAddress{serverKey.FromAddress()},
 		JWK:               jwk,
@@ -673,14 +673,14 @@ func TestToken_jsonInputAccountNotExistSuccess(t *testing.T) {
 	require.NoError(t, err)
 	t.Logf("Signed: %s", txSigned)
 
-	horizonClient := &horizonclient.MockClient{}
-	horizonClient.
-		On("AccountDetail", horizonclient.AccountRequest{AccountID: account.Address()}).
+	frontierClient := &frontierclient.MockClient{}
+	frontierClient.
+		On("AccountDetail", frontierclient.AccountRequest{AccountID: account.Address()}).
 		Return(
-			horizon.Account{},
-			&horizonclient.Error{
+			frontier.Account{},
+			&frontierclient.Error{
 				Problem: problem.P{
-					Type:   "https://stellar.org/horizon-errors/not_found",
+					Type:   "https://digitalbits.org/frontier-errors/not_found",
 					Title:  "Resource Missing",
 					Status: 404,
 				},
@@ -689,7 +689,7 @@ func TestToken_jsonInputAccountNotExistSuccess(t *testing.T) {
 
 	h := tokenHandler{
 		Logger:                      supportlog.DefaultLogger,
-		HorizonClient:               horizonClient,
+		FrontierClient:               frontierClient,
 		NetworkPassphrase:           network.TestNetworkPassphrase,
 		SigningAddresses:            []*keypair.FromAddress{serverKey.FromAddress()},
 		JWK:                         jwk,
@@ -777,14 +777,14 @@ func TestToken_jsonInputAccountNotExistFail(t *testing.T) {
 	require.NoError(t, err)
 	t.Logf("Signed: %s", txSigned)
 
-	horizonClient := &horizonclient.MockClient{}
-	horizonClient.
-		On("AccountDetail", horizonclient.AccountRequest{AccountID: account.Address()}).
+	frontierClient := &frontierclient.MockClient{}
+	frontierClient.
+		On("AccountDetail", frontierclient.AccountRequest{AccountID: account.Address()}).
 		Return(
-			horizon.Account{},
-			&horizonclient.Error{
+			frontier.Account{},
+			&frontierclient.Error{
 				Problem: problem.P{
-					Type:   "https://stellar.org/horizon-errors/not_found",
+					Type:   "https://digitalbits.org/frontier-errors/not_found",
 					Title:  "Resource Missing",
 					Status: 404,
 				},
@@ -793,7 +793,7 @@ func TestToken_jsonInputAccountNotExistFail(t *testing.T) {
 
 	h := tokenHandler{
 		Logger:                      supportlog.DefaultLogger,
-		HorizonClient:               horizonClient,
+		FrontierClient:               frontierClient,
 		NetworkPassphrase:           network.TestNetworkPassphrase,
 		SigningAddresses:            []*keypair.FromAddress{serverKey.FromAddress()},
 		JWK:                         jwk,
@@ -856,14 +856,14 @@ func TestToken_jsonInputAccountNotExistNotAllowed(t *testing.T) {
 	require.NoError(t, err)
 	t.Logf("Signed: %s", txSigned)
 
-	horizonClient := &horizonclient.MockClient{}
-	horizonClient.
-		On("AccountDetail", horizonclient.AccountRequest{AccountID: account.Address()}).
+	frontierClient := &frontierclient.MockClient{}
+	frontierClient.
+		On("AccountDetail", frontierclient.AccountRequest{AccountID: account.Address()}).
 		Return(
-			horizon.Account{},
-			&horizonclient.Error{
+			frontier.Account{},
+			&frontierclient.Error{
 				Problem: problem.P{
-					Type:   "https://stellar.org/horizon-errors/not_found",
+					Type:   "https://digitalbits.org/frontier-errors/not_found",
 					Title:  "Resource Missing",
 					Status: 404,
 				},
@@ -872,7 +872,7 @@ func TestToken_jsonInputAccountNotExistNotAllowed(t *testing.T) {
 
 	h := tokenHandler{
 		Logger:                      supportlog.DefaultLogger,
-		HorizonClient:               horizonClient,
+		FrontierClient:               frontierClient,
 		NetworkPassphrase:           network.TestNetworkPassphrase,
 		SigningAddresses:            []*keypair.FromAddress{serverKey.FromAddress()},
 		JWK:                         jwk,
@@ -937,14 +937,14 @@ func TestToken_jsonInputUnrecognizedServerSigner(t *testing.T) {
 	require.NoError(t, err)
 	t.Logf("Signed: %s", txSigned)
 
-	horizonClient := &horizonclient.MockClient{}
-	horizonClient.
-		On("AccountDetail", horizonclient.AccountRequest{AccountID: account.Address()}).
+	frontierClient := &frontierclient.MockClient{}
+	frontierClient.
+		On("AccountDetail", frontierclient.AccountRequest{AccountID: account.Address()}).
 		Return(
-			horizon.Account{},
-			&horizonclient.Error{
+			frontier.Account{},
+			&frontierclient.Error{
 				Problem: problem.P{
-					Type:   "https://stellar.org/horizon-errors/not_found",
+					Type:   "https://digitalbits.org/frontier-errors/not_found",
 					Title:  "Resource Missing",
 					Status: 404,
 				},
@@ -953,7 +953,7 @@ func TestToken_jsonInputUnrecognizedServerSigner(t *testing.T) {
 
 	h := tokenHandler{
 		Logger:                      supportlog.DefaultLogger,
-		HorizonClient:               horizonClient,
+		FrontierClient:               frontierClient,
 		NetworkPassphrase:           network.TestNetworkPassphrase,
 		SigningAddresses:            []*keypair.FromAddress{serverKey2.FromAddress()},
 		JWK:                         jwk,

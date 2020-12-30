@@ -4,10 +4,10 @@ import (
 	"go/types"
 
 	"github.com/spf13/cobra"
-	"github.com/stellar/go/exp/services/recoverysigner/internal/serve"
-	"github.com/stellar/go/network"
-	"github.com/stellar/go/support/config"
-	supportlog "github.com/stellar/go/support/log"
+	"github.com/digitalbits/go/exp/services/recoverysigner/internal/serve"
+	"github.com/digitalbits/go/network"
+	"github.com/digitalbits/go/support/config"
+	supportlog "github.com/digitalbits/go/support/log"
 )
 
 type ServeCommand struct {
@@ -45,7 +45,7 @@ func (c *ServeCommand) Command() *cobra.Command {
 		},
 		{
 			Name:        "network-passphrase",
-			Usage:       "Network passphrase of the Stellar network transactions should be signed for",
+			Usage:       "Network passphrase of the DigitalBits network transactions should be signed for",
 			OptType:     types.String,
 			ConfigKey:   &opts.NetworkPassphrase,
 			FlagDefault: network.TestNetworkPassphrase,
@@ -53,7 +53,7 @@ func (c *ServeCommand) Command() *cobra.Command {
 		},
 		{
 			Name:      "signing-key",
-			Usage:     "Stellar signing key(s) used for signing transactions comma separated (first key is preferred signer) (will be deprecated with per-account keys in the future)",
+			Usage:     "DigitalBits signing key(s) used for signing transactions comma separated (first key is preferred signer) (will be deprecated with per-account keys in the future)",
 			OptType:   types.String,
 			ConfigKey: &opts.SigningKeys,
 			Required:  true,
@@ -97,7 +97,7 @@ func (c *ServeCommand) Command() *cobra.Command {
 		},
 		{
 			Name:      "allowed-source-accounts",
-			Usage:     "Stellar account(s) allowed as source accounts in transactions signed for all users in addition to the registered account comma separated (important: these accounts must never be registered accounts and must never have the signer configured that is a signing key used by this server)",
+			Usage:     "DigitalBits account(s) allowed as source accounts in transactions signed for all users in addition to the registered account comma separated (important: these accounts must never be registered accounts and must never have the signer configured that is a signing key used by this server)",
 			OptType:   types.String,
 			ConfigKey: &opts.AllowedSourceAccounts,
 			Required:  false,

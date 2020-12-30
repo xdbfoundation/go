@@ -12,13 +12,13 @@
 // Xor constant to output CRC : 0000
 // Output for "123456789"     : 31C3
 //
-// ported from the c++ code in the stellar-core codebase
-// (https://github.com/stellar/stellar-core).  The code is licensed
+// ported from the c++ code in the digitalbits-core codebase
+// (https://github.com/digitalbits/digitalbits-core).  The code is licensed
 // as:
 /*
  * Copyright 2001-2010 Georges Menie (www.menie.org)
  * Copyright 2010-2012 Salvatore Sanfilippo (adapted to Redis coding style)
- * Copyright 2015 Stellar Development Foundation (ported to go)
+ * Copyright 2015 DigitalBits Development Foundation (ported to go)
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without

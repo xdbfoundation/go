@@ -17,7 +17,7 @@ func (t AuthMethodType) Valid() bool {
 }
 
 const (
-	AuthMethodTypeAddress     AuthMethodType = "stellar_address"
+	AuthMethodTypeAddress     AuthMethodType = "digitalbits_address"
 	AuthMethodTypePhoneNumber AuthMethodType = "phone_number"
 	AuthMethodTypeEmail       AuthMethodType = "email"
 )

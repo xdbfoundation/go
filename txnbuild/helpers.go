@@ -3,41 +3,41 @@ package txnbuild
 import (
 	"fmt"
 
-	"github.com/stellar/go/amount"
-	"github.com/stellar/go/strkey"
-	"github.com/stellar/go/support/errors"
-	"github.com/stellar/go/xdr"
+	"github.com/digitalbits/go/amount"
+	"github.com/digitalbits/go/strkey"
+	"github.com/digitalbits/go/support/errors"
+	"github.com/digitalbits/go/xdr"
 )
 
-// validateStellarPublicKey returns an error if a public key is invalid. Otherwise, it returns nil.
+// validateDigitalBitsPublicKey returns an error if a public key is invalid. Otherwise, it returns nil.
 // It is a wrapper around the IsValidEd25519PublicKey method of the strkey package.
-func validateStellarPublicKey(publicKey string) error {
+func validateDigitalBitsPublicKey(publicKey string) error {
 	if publicKey == "" {
 		return errors.New("public key is undefined")
 	}
 
 	if !strkey.IsValidEd25519PublicKey(publicKey) {
-		return errors.Errorf("%s is not a valid stellar public key", publicKey)
+		return errors.Errorf("%s is not a valid digitalbits public key", publicKey)
 	}
 	return nil
 }
 
-// validateStellarSignerKey returns an error if a signerkey is invalid. Otherwise, it returns nil.
-func validateStellarSignerKey(signerKey string) error {
+// validateDigitalBitsSignerKey returns an error if a signerkey is invalid. Otherwise, it returns nil.
+func validateDigitalBitsSignerKey(signerKey string) error {
 	if signerKey == "" {
 		return errors.New("signer key is undefined")
 	}
 
 	var xdrKey xdr.SignerKey
 	if err := xdrKey.SetAddress(signerKey); err != nil {
-		return errors.Errorf("%s is not a valid stellar signer key", signerKey)
+		return errors.Errorf("%s is not a valid digitalbits signer key", signerKey)
 	}
 	return nil
 }
 
-// validateStellarAsset checks if the asset supplied is a valid stellar Asset. It returns an error if the asset is
+// validateDigitalBitsAsset checks if the asset supplied is a valid digitalbits Asset. It returns an error if the asset is
 // nil, has an invalid asset code or issuer.
-func validateStellarAsset(asset Asset) error {
+func validateDigitalBitsAsset(asset Asset) error {
 	if asset == nil {
 		return errors.New("asset is undefined")
 	}
@@ -51,7 +51,7 @@ func validateStellarAsset(asset Asset) error {
 		return err
 	}
 
-	err = validateStellarPublicKey(asset.GetIssuer())
+	err = validateDigitalBitsPublicKey(asset.GetIssuer())
 	if err != nil {
 		return errors.Errorf("asset issuer: %s", err.Error())
 	}
@@ -59,26 +59,26 @@ func validateStellarAsset(asset Asset) error {
 	return nil
 }
 
-// validateAmount checks if the provided value is a valid stellar amount, it returns an error if not.
+// validateAmount checks if the provided value is a valid digitalbits amount, it returns an error if not.
 // This is used to validate price and amount fields in structs.
 func validateAmount(n interface{}) error {
-	var stellarAmount int64
+	var digitalbitsAmount int64
 	// type switch can be extended to handle other types. Currently, the types for number values in the txnbuild
 	// package are string or int64.
 	switch value := n.(type) {
 	case int64:
-		stellarAmount = value
+		digitalbitsAmount = value
 	case string:
 		v, err := amount.ParseInt64(value)
 		if err != nil {
 			return err
 		}
-		stellarAmount = v
+		digitalbitsAmount = v
 	default:
 		return errors.Errorf("could not parse expected numeric value %v", n)
 	}
 
-	if stellarAmount < 0 {
+	if digitalbitsAmount < 0 {
 		return errors.New("amount can not be negative")
 	}
 	return nil
@@ -88,7 +88,7 @@ func validateAmount(n interface{}) error {
 // It returns an error if the asset is invalid.
 // The asset must be non native (XLM) with a valid asset code.
 func validateAllowTrustAsset(asset Asset) error {
-	// Note: we are not using validateStellarAsset() function for AllowTrust operations because it requires the
+	// Note: we are not using validateDigitalBitsAsset() function for AllowTrust operations because it requires the
 	//  following :
 	// - asset is non-native
 	// - asset code is valid
@@ -112,7 +112,7 @@ func validateAllowTrustAsset(asset Asset) error {
 // It returns an error if the asset is invalid.
 // The asset must be non native (XLM) with a valid asset code and issuer.
 func validateChangeTrustAsset(asset Asset) error {
-	// Note: we are not using validateStellarAsset() function for ChangeTrust operations because it requires the
+	// Note: we are not using validateDigitalBitsAsset() function for ChangeTrust operations because it requires the
 	//  following :
 	// - asset is non-native
 	// - asset code is valid
@@ -122,7 +122,7 @@ func validateChangeTrustAsset(asset Asset) error {
 		return err
 	}
 
-	err = validateStellarPublicKey(asset.GetIssuer())
+	err = validateDigitalBitsPublicKey(asset.GetIssuer())
 	if err != nil {
 		return errors.Errorf("asset issuer: %s", err.Error())
 	}
@@ -131,17 +131,17 @@ func validateChangeTrustAsset(asset Asset) error {
 }
 
 // validatePassiveOffer checks if the fields of a CreatePassiveOffer struct are valid.
-// It checks that the buying and selling assets are valid stellar assets, and that amount and price are valid.
+// It checks that the buying and selling assets are valid digitalbits assets, and that amount and price are valid.
 // It returns an error if any field is invalid.
 func validatePassiveOffer(buying, selling Asset, offerAmount, price string) error {
 	// Note: see discussion on how this can be improved:
-	// https://github.com/stellar/go/pull/1707#discussion_r321508440
-	err := validateStellarAsset(buying)
+	// https://github.com/digitalbits/go/pull/1707#discussion_r321508440
+	err := validateDigitalBitsAsset(buying)
 	if err != nil {
 		return NewValidationError("Buying", err.Error())
 	}
 
-	err = validateStellarAsset(selling)
+	err = validateDigitalBitsAsset(selling)
 	if err != nil {
 		return NewValidationError("Selling", err.Error())
 	}
@@ -160,7 +160,7 @@ func validatePassiveOffer(buying, selling Asset, offerAmount, price string) erro
 }
 
 // validateOffer checks if the fields of ManageBuyOffer or ManageSellOffer struct are valid.
-// It checks that the buying and selling assets are valid stellar assets, and that amount, price and offerID
+// It checks that the buying and selling assets are valid digitalbits assets, and that amount, price and offerID
 // are valid. It returns an error if any field is invalid.
 func validateOffer(buying, selling Asset, offerAmount, price string, offerID int64) error {
 	err := validatePassiveOffer(buying, selling, offerAmount, price)
@@ -195,7 +195,7 @@ func NewValidationError(field, message string) *ValidationError {
 }
 
 // ParseAssetString parses an asset string in canonical form (SEP-11) into an Asset structure.
-// https://github.com/stellar/stellar-protocol/blob/master/ecosystem/sep-0011.md#asset
+// https://github.com/digitalbits/digitalbits-protocol/blob/master/ecosystem/sep-0011.md#asset
 func ParseAssetString(canonical string) (Asset, error) {
 	assets, err := xdr.BuildAssets(canonical)
 	if err != nil {

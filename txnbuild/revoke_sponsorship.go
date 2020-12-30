@@ -5,7 +5,7 @@ import (
 
 	"github.com/pkg/errors"
 
-	"github.com/stellar/go/xdr"
+	"github.com/digitalbits/go/xdr"
 )
 
 type RevokeSponsorshipType int
@@ -228,30 +228,30 @@ func (r *RevokeSponsorship) Validate() error {
 		if r.Account == nil {
 			return errors.New("Account can't be nil")
 		}
-		return validateStellarPublicKey(*r.Account)
+		return validateDigitalBitsPublicKey(*r.Account)
 	case RevokeSponsorshipTypeTrustLine:
 		if r.TrustLine == nil {
 			return errors.New("Trustline can't be nil")
 		}
-		if err := validateStellarPublicKey(r.TrustLine.Account); err != nil {
+		if err := validateDigitalBitsPublicKey(r.TrustLine.Account); err != nil {
 			return errors.Wrap(err, "invalid Account address")
 		}
-		if err := validateStellarAsset(r.TrustLine.Asset); err != nil {
+		if err := validateDigitalBitsAsset(r.TrustLine.Asset); err != nil {
 			return errors.Wrap(err, "invalid TrustLine asset")
 		}
 	case RevokeSponsorshipTypeOffer:
 		if r.Offer == nil {
 			return errors.New("Offer can't be nil")
 		}
-		if err := validateStellarPublicKey(r.Offer.SellerAccountAddress); err != nil {
+		if err := validateDigitalBitsPublicKey(r.Offer.SellerAccountAddress); err != nil {
 			return errors.Wrap(err, "invalid Seller account address")
 		}
-		return validateStellarPublicKey(r.Offer.SellerAccountAddress)
+		return validateDigitalBitsPublicKey(r.Offer.SellerAccountAddress)
 	case RevokeSponsorshipTypeData:
 		if r.Data == nil {
 			return errors.New("Data can't be nil")
 		}
-		if err := validateStellarPublicKey(r.Data.Account); err != nil {
+		if err := validateDigitalBitsPublicKey(r.Data.Account); err != nil {
 			return errors.Wrap(err, "invalid Account address")
 		}
 	case RevokeSponsorshipTypeClaimableBalance:
@@ -266,10 +266,10 @@ func (r *RevokeSponsorship) Validate() error {
 		if r.Signer == nil {
 			return errors.New("Signer can't be nil")
 		}
-		if err := validateStellarPublicKey(r.Signer.AccountID); err != nil {
+		if err := validateDigitalBitsPublicKey(r.Signer.AccountID); err != nil {
 			return errors.New("invalid Account address")
 		}
-		if err := validateStellarSignerKey(r.Signer.SignerAddress); err != nil {
+		if err := validateDigitalBitsSignerKey(r.Signer.SignerAddress); err != nil {
 			return errors.New("invalid Signer account address")
 		}
 	default:

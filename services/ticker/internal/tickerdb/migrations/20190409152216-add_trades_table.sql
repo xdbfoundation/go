@@ -2,7 +2,7 @@
 -- +migrate Up
 CREATE TABLE trades (
     id serial NOT NULL PRIMARY KEY,
-    horizon_id text NOT NULL UNIQUE,
+    frontier_id text NOT NULL UNIQUE,
 
     ledger_close_time timestamptz NOT NULL,
     offer_id text NOT NULL,

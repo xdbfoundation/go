@@ -11,11 +11,11 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/stellar/go/historyarchive"
-	"github.com/stellar/go/ingest/io"
-	"github.com/stellar/go/support/errors"
-	"github.com/stellar/go/support/log"
-	"github.com/stellar/go/xdr"
+	"github.com/digitalbits/go/historyarchive"
+	"github.com/digitalbits/go/ingest/io"
+	"github.com/digitalbits/go/support/errors"
+	"github.com/digitalbits/go/support/log"
+	"github.com/digitalbits/go/xdr"
 )
 
 // csvMap maintains a mapping from ledger entry type to csv file
@@ -222,7 +222,7 @@ func (processor csvProcessor) ProcessChange(change io.Change) error {
 }
 
 func main() {
-	testnet := flag.Bool("testnet", false, "connect to the Stellar test network")
+	testnet := flag.Bool("testnet", false, "connect to the DigitalBits test network")
 	flag.Parse()
 
 	archive, err := archive(*testnet)
@@ -300,13 +300,13 @@ func main() {
 func archive(testnet bool) (*historyarchive.Archive, error) {
 	if testnet {
 		return historyarchive.Connect(
-			"https://history.stellar.org/prd/core-testnet/core_testnet_001",
+			"https://history.digitalbits.org/prd/core-testnet/core_testnet_001",
 			historyarchive.ConnectOptions{},
 		)
 	}
 
 	return historyarchive.Connect(
-		fmt.Sprintf("https://history.stellar.org/prd/core-live/core_live_001/"),
+		fmt.Sprintf("https://history.digitalbits.org/prd/core-live/core_live_001/"),
 		historyarchive.ConnectOptions{},
 	)
 }

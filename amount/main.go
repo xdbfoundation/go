@@ -1,12 +1,12 @@
 // Package amount provides utilities for converting numbers to/from
-// the format used internally to stellar-core.
+// the format used internally to digitalbits-core.
 //
-// stellar-core represents asset "amounts" as 64-bit integers, but to enable
-// fractional units of an asset, horizon, the client-libraries and other built
-// on top of stellar-core use a convention, encoding amounts as a string of
+// digitalbits-core represents asset "amounts" as 64-bit integers, but to enable
+// fractional units of an asset, frontier, the client-libraries and other built
+// on top of digitalbits-core use a convention, encoding amounts as a string of
 // decimal digits with up to seven digits of precision in the fractional
-// portion. For example, an amount shown as "101.001" in horizon would be
-// represented in stellar-core as 1010010000.
+// portion. For example, an amount shown as "101.001" in frontier would be
+// represented in digitalbits-core as 1010010000.
 package amount
 
 import (
@@ -15,11 +15,11 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/stellar/go/support/errors"
-	"github.com/stellar/go/xdr"
+	"github.com/digitalbits/go/support/errors"
+	"github.com/digitalbits/go/xdr"
 )
 
-// One is the value of one whole unit of currency. Stellar uses 7 fixed digits
+// One is the value of one whole unit of currency. DigitalBits uses 7 fixed digits
 // for fractional values, thus One is 10 million (10^7).
 const (
 	One = 10000000
@@ -31,7 +31,7 @@ var (
 	// a number, more or less. The details will be checked in `math/big` internally.
 	// What we want to prevent is passing very big numbers like `1e9223372036854775807`
 	// to `big.Rat.SetString` triggering long calculations.
-	// Note: {1,20} because the biggest amount you can use in Stellar is:
+	// Note: {1,20} because the biggest amount you can use in DigitalBits is:
 	// len("922337203685.4775807") = 20.
 	validAmountSimple          = regexp.MustCompile("^-?[.0-9]{1,20}$")
 	negativePositiveNumberOnly = regexp.MustCompile("^-?[0-9]+$")
@@ -46,7 +46,7 @@ func MustParse(v string) xdr.Int64 {
 	return ret
 }
 
-// Parse parses the provided as a stellar "amount", i.e. a 64-bit signed integer
+// Parse parses the provided as a digitalbits "amount", i.e. a 64-bit signed integer
 // that represents a decimal number with 7 digits of significance in the
 // fractional portion of the number, and returns a xdr.Int64.
 func Parse(v string) (xdr.Int64, error) {
@@ -57,7 +57,7 @@ func Parse(v string) (xdr.Int64, error) {
 	return xdr.Int64(i), nil
 }
 
-// ParseInt64 parses the provided as a stellar "amount", i.e. a 64-bit signed
+// ParseInt64 parses the provided as a digitalbits "amount", i.e. a 64-bit signed
 // integer that represents a decimal number with 7 digits of significance in
 // the fractional portion of the number.
 func ParseInt64(v string) (int64, error) {
@@ -82,7 +82,7 @@ func ParseInt64(v string) (int64, error) {
 	return i, nil
 }
 
-// IntStringToAmount converts string integer value and converts it to stellar
+// IntStringToAmount converts string integer value and converts it to digitalbits
 // "amount". In other words, it divides the given string integer value by 10^7
 // and returns the string representation of that number.
 // It is safe to use with values exceeding int64 limits.

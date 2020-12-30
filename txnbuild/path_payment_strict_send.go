@@ -1,13 +1,13 @@
 package txnbuild
 
 import (
-	"github.com/stellar/go/amount"
-	"github.com/stellar/go/support/errors"
-	"github.com/stellar/go/xdr"
+	"github.com/digitalbits/go/amount"
+	"github.com/digitalbits/go/support/errors"
+	"github.com/digitalbits/go/xdr"
 )
 
-// PathPaymentStrictSend represents the Stellar path_payment_strict_send operation. See
-// https://www.stellar.org/developers/guides/concepts/list-of-operations.html
+// PathPaymentStrictSend represents the DigitalBits path_payment_strict_send operation. See
+// https://www.digitalbits.org/developers/guides/concepts/list-of-operations.html
 type PathPaymentStrictSend struct {
 	SendAsset     Asset
 	SendAmount    string
@@ -131,12 +131,12 @@ func (pp *PathPaymentStrictSend) Validate() error {
 		return NewValidationError("Destination", err.Error())
 	}
 
-	err = validateStellarAsset(pp.SendAsset)
+	err = validateDigitalBitsAsset(pp.SendAsset)
 	if err != nil {
 		return NewValidationError("SendAsset", err.Error())
 	}
 
-	err = validateStellarAsset(pp.DestAsset)
+	err = validateDigitalBitsAsset(pp.DestAsset)
 	if err != nil {
 		return NewValidationError("DestAsset", err.Error())
 	}

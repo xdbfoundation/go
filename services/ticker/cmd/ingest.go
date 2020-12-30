@@ -5,8 +5,8 @@ import (
 
 	"github.com/lib/pq"
 	"github.com/spf13/cobra"
-	ticker "github.com/stellar/go/services/ticker/internal"
-	"github.com/stellar/go/services/ticker/internal/tickerdb"
+	ticker "github.com/digitalbits/go/services/ticker/internal"
+	"github.com/digitalbits/go/services/ticker/internal/tickerdb"
 )
 
 var ShouldStream bool
@@ -22,7 +22,7 @@ func init() {
 		&ShouldStream,
 		"stream",
 		false,
-		"Continuously stream new trades from the Horizon Stream API as a daemon",
+		"Continuously stream new trades from the Frontier Stream API as a daemon",
 	)
 
 	cmdIngestTrades.Flags().IntVar(
@@ -40,7 +40,7 @@ var cmdIngest = &cobra.Command{
 
 var cmdIngestAssets = &cobra.Command{
 	Use:   "assets",
-	Short: "Refreshes the asset database with new data retrieved from Horizon.",
+	Short: "Refreshes the asset database with new data retrieved from Frontier.",
 	Run: func(cmd *cobra.Command, args []string) {
 		Logger.Info("Refreshing the asset database")
 		dbInfo, err := pq.ParseURL(DatabaseURL)
@@ -63,7 +63,7 @@ var cmdIngestAssets = &cobra.Command{
 
 var cmdIngestTrades = &cobra.Command{
 	Use:   "trades",
-	Short: "Fills the trade database with data retrieved form Horizon.",
+	Short: "Fills the trade database with data retrieved form Frontier.",
 	Run: func(cmd *cobra.Command, args []string) {
 		dbInfo, err := pq.ParseURL(DatabaseURL)
 		if err != nil {
@@ -100,7 +100,7 @@ var cmdIngestTrades = &cobra.Command{
 
 var cmdIngestOrderbooks = &cobra.Command{
 	Use:   "orderbooks",
-	Short: "Refreshes the orderbook stats database with new data retrieved from Horizon.",
+	Short: "Refreshes the orderbook stats database with new data retrieved from Frontier.",
 	Run: func(cmd *cobra.Command, args []string) {
 		Logger.Info("Refreshing the asset database")
 		dbInfo, err := pq.ParseURL(DatabaseURL)

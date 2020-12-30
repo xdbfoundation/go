@@ -1,13 +1,13 @@
 package txnbuild
 
 import (
-	"github.com/stellar/go/amount"
-	"github.com/stellar/go/support/errors"
-	"github.com/stellar/go/xdr"
+	"github.com/digitalbits/go/amount"
+	"github.com/digitalbits/go/support/errors"
+	"github.com/digitalbits/go/xdr"
 )
 
-// ManageBuyOffer represents the Stellar manage buy offer operation. See
-// https://www.stellar.org/developers/guides/concepts/list-of-operations.html
+// ManageBuyOffer represents the DigitalBits manage buy offer operation. See
+// https://www.digitalbits.org/developers/guides/concepts/list-of-operations.html
 type ManageBuyOffer struct {
 	Selling       Asset
 	Buying        Asset

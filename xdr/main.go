@@ -1,5 +1,5 @@
 // Package xdr contains the generated code for parsing the xdr structures used
-// for stellar.
+// for digitalbits.
 package xdr
 
 import (
@@ -12,7 +12,7 @@ import (
 	"strings"
 
 	xdr "github.com/stellar/go-xdr/xdr3"
-	"github.com/stellar/go/support/errors"
+	"github.com/digitalbits/go/support/errors"
 )
 
 // Keyer represents a type that can be converted into a LedgerKey

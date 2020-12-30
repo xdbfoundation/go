@@ -7,8 +7,8 @@ import (
 
 	"github.com/pkg/errors"
 
-	"github.com/stellar/go/support/log"
-	"github.com/stellar/go/xdr"
+	"github.com/digitalbits/go/support/log"
+	"github.com/digitalbits/go/xdr"
 )
 
 const (
@@ -47,9 +47,9 @@ type metaResult struct {
 //
 // It solves the following issues:
 //
-//   * Decouples buffering from stellarCoreRunner so it can focus on running core.
+//   * Decouples buffering from digitalbitsCoreRunner so it can focus on running core.
 //   * Decouples unmarshalling and buffering of LedgerCloseMeta's from CaptiveCore.
-//   * By adding buffering it allows unmarshaling the ledgers available in Stellar-Core
+//   * By adding buffering it allows unmarshaling the ledgers available in DigitalBits-Core
 //     while previous ledger are being processed.
 //   * Limits memory usage in case of large ledgers are closed by the network.
 //
@@ -68,7 +68,7 @@ type bufferedLedgerMetaReader struct {
 }
 
 // newBufferedLedgerMetaReader creates a new meta reader that will shutdown
-// when stellar-core terminates.
+// when digitalbits-core terminates.
 func newBufferedLedgerMetaReader(reader io.Reader) *bufferedLedgerMetaReader {
 	return &bufferedLedgerMetaReader{
 		c: make(chan metaResult, ledgerReadAheadBufferSize),

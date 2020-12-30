@@ -1,7 +1,7 @@
 package keypairgentest
 
 import (
-	"github.com/stellar/go/keypair"
+	"github.com/digitalbits/go/keypair"
 )
 
 // SliceSource is a keypairgen.Generator source that has the values returned

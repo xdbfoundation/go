@@ -3,7 +3,7 @@ package io
 import (
 	"io"
 
-	"github.com/stellar/go/ingest/ledgerbackend"
+	"github.com/digitalbits/go/ingest/ledgerbackend"
 )
 
 // ChangeReader provides convenient, streaming access to a sequence of Changes.
@@ -29,7 +29,7 @@ const (
 	upgradeChangesState
 )
 
-// LedgerChangeReader is a ChangeReader which returns Changes from Stellar Core
+// LedgerChangeReader is a ChangeReader which returns Changes from DigitalBits Core
 // for a single ledger
 type LedgerChangeReader struct {
 	*LedgerTransactionReader

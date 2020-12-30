@@ -9,20 +9,20 @@ import (
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 
-	"github.com/stellar/go/exp/services/captivecore/internal"
-	"github.com/stellar/go/ingest/ledgerbackend"
-	"github.com/stellar/go/network"
-	"github.com/stellar/go/support/config"
-	"github.com/stellar/go/support/db"
-	supporthttp "github.com/stellar/go/support/http"
-	supportlog "github.com/stellar/go/support/log"
+	"github.com/digitalbits/go/exp/services/captivecore/internal"
+	"github.com/digitalbits/go/ingest/ledgerbackend"
+	"github.com/digitalbits/go/network"
+	"github.com/digitalbits/go/support/config"
+	"github.com/digitalbits/go/support/db"
+	supporthttp "github.com/digitalbits/go/support/http"
+	supportlog "github.com/digitalbits/go/support/log"
 )
 
 func main() {
 	var port int
 	var networkPassphrase, binaryPath, configAppendPath, dbURL string
 	var historyArchiveURLs []string
-	var stellarCoreHTTPPort uint
+	var digitalbitsCoreHTTPPort uint
 	var checkpointFrequency uint32
 	var logLevel logrus.Level
 	logger := supportlog.New()
@@ -38,18 +38,18 @@ func main() {
 		},
 		{
 			Name:        "network-passphrase",
-			Usage:       "Network passphrase of the Stellar network transactions should be signed for",
+			Usage:       "Network passphrase of the DigitalBits network transactions should be signed for",
 			OptType:     types.String,
 			ConfigKey:   &networkPassphrase,
 			FlagDefault: network.TestNetworkPassphrase,
 			Required:    true,
 		},
 		&config.ConfigOption{
-			Name:        "stellar-core-binary-path",
+			Name:        "digitalbits-core-binary-path",
 			OptType:     types.String,
 			FlagDefault: "",
 			Required:    true,
-			Usage:       "path to stellar core binary",
+			Usage:       "path to digitalbits core binary",
 			ConfigKey:   &binaryPath,
 		},
 		&config.ConfigOption{
@@ -57,7 +57,7 @@ func main() {
 			OptType:     types.String,
 			FlagDefault: "",
 			Required:    false,
-			Usage:       "path to additional configuration for the Stellar Core configuration file used by captive core. It must, at least, include enough details to define a quorum set",
+			Usage:       "path to additional configuration for the DigitalBits Core configuration file used by captive core. It must, at least, include enough details to define a quorum set",
 			ConfigKey:   &configAppendPath,
 		},
 		&config.ConfigOption{
@@ -72,7 +72,7 @@ func main() {
 
 				*(co.ConfigKey.(*[]string)) = urlStrings
 			},
-			Usage: "comma-separated list of stellar history archives to connect with",
+			Usage: "comma-separated list of digitalbits history archives to connect with",
 		},
 		&config.ConfigOption{
 			Name:        "log-level",
@@ -94,11 +94,11 @@ func main() {
 			ConfigKey: &dbURL,
 			OptType:   types.String,
 			Required:  false,
-			Usage:     "horizon postgres database to connect with",
+			Usage:     "frontier postgres database to connect with",
 		},
 		&config.ConfigOption{
-			Name:        "stellar-captive-core-http-port",
-			ConfigKey:   &stellarCoreHTTPPort,
+			Name:        "digitalbits-captive-core-http-port",
+			ConfigKey:   &digitalbitsCoreHTTPPort,
 			OptType:     types.Uint,
 			FlagDefault: uint(11626),
 			Required:    false,
@@ -127,8 +127,8 @@ func main() {
 				NetworkPassphrase:   networkPassphrase,
 				HistoryArchiveURLs:  historyArchiveURLs,
 				CheckpointFrequency: checkpointFrequency,
-				HTTPPort:            stellarCoreHTTPPort,
-				Log:                 logger.WithField("subservice", "stellar-core"),
+				HTTPPort:            digitalbitsCoreHTTPPort,
+				Log:                 logger.WithField("subservice", "digitalbits-core"),
 			}
 
 			var dbConn *db.Session
@@ -138,7 +138,7 @@ func main() {
 				if err != nil {
 					logger.WithError(err).Fatal("Could not create db connection instance")
 				}
-				captiveConfig.LedgerHashStore = ledgerbackend.NewHorizonDBLedgerHashStore(dbConn)
+				captiveConfig.LedgerHashStore = ledgerbackend.NewFrontierDBLedgerHashStore(dbConn)
 			}
 
 			core, err := ledgerbackend.NewCaptive(captiveConfig)

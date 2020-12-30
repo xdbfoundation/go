@@ -2,15 +2,15 @@
 set -e
 
 
-export STELLAR_HOME="/opt/stellar"
-export STELLAR_BIN="$STELLAR_HOME/bin"
-export CONF_HOME="$STELLAR_HOME/conf"
-export WWW_HOME="$STELLAR_HOME/www"
+export DIGITALBITS_HOME="/opt/digitalbits"
+export DIGITALBITS_BIN="$DIGITALBITS_HOME/bin"
+export CONF_HOME="$DIGITALBITS_HOME/conf"
+export WWW_HOME="$DIGITALBITS_HOME/www"
 
-export PGHOME="$STELLAR_HOME/postgresql"
+export PGHOME="$DIGITALBITS_HOME/postgresql"
 export PGBIN="/usr/lib/postgresql/9.5/bin"
 export PGDATA="$PGHOME/data"
-export PGUSER="stellar"
+export PGUSER="digitalbits"
 export PGDB="ticker"
 export PGURL="postgres://127.0.0.1:5432/$PGDB"
 
@@ -41,7 +41,7 @@ function migrate_db() {
 	echo ""
 	echo "Upgrading database to latest version"
 	echo ""
-	sudo -E -u stellar $STELLAR_BIN/ticker migrate
+	sudo -E -u digitalbits $DIGITALBITS_BIN/ticker migrate
 }
 
 
@@ -53,7 +53,7 @@ function populate_assets() {
 	echo ""
 	echo "Populating initial asset database"
 	echo ""
-	sudo -E -u stellar $STELLAR_BIN/ticker ingest assets
+	sudo -E -u digitalbits $DIGITALBITS_BIN/ticker ingest assets
 	touch $PGHOME/.assets-populated
 }
 
@@ -66,7 +66,7 @@ function populate_trades() {
 	echo ""
 	echo "Populating initial trade database"
 	echo ""
-	sudo -E -u stellar $STELLAR_BIN/ticker ingest trades
+	sudo -E -u digitalbits $DIGITALBITS_BIN/ticker ingest trades
 	touch $PGHOME/.trades-populated
 }
 
@@ -79,32 +79,32 @@ function populate_orderbooks() {
 	echo ""
 	echo "Populating initial orderbook database"
 	echo ""
-	sudo -E -u stellar $STELLAR_BIN/ticker ingest orderbooks
+	sudo -E -u digitalbits $DIGITALBITS_BIN/ticker ingest orderbooks
 	touch $PGHOME/.orderbooks-populated
 }
 
 
 function generate_assets_file() {
-	if [ -f $STELLAR_HOME/www/assets.json ]; then
+	if [ -f $DIGITALBITS_HOME/www/assets.json ]; then
 		echo "ticker: assets.json already pre-populated"
 		return 0
 	fi
 	echo ""
 	echo "Creating assets.json file"
 	echo ""
-	sudo -E -u stellar $STELLAR_BIN/ticker generate asset-data -o $WWW_HOME/assets.json
+	sudo -E -u digitalbits $DIGITALBITS_BIN/ticker generate asset-data -o $WWW_HOME/assets.json
 }
 
 
 function generate_markets_file() {
-	if [ -f $STELLAR_HOME/www/markets.json ]; then
+	if [ -f $DIGITALBITS_HOME/www/markets.json ]; then
 		echo "ticker: markets.json already pre-populated"
 		return 0
 	fi
 	echo ""
 	echo "Creating markets.json file"
 	echo ""
-	sudo -E -u stellar $STELLAR_BIN/ticker generate market-data -o $WWW_HOME/markets.json
+	sudo -E -u digitalbits $DIGITALBITS_BIN/ticker generate market-data -o $WWW_HOME/markets.json
 }
 
 
@@ -137,16 +137,16 @@ function run_silent() {
 
 
 function set_db_url() {
-	PGPASS="stellar"
-	export DB_URL="postgres://stellar:${PGPASS}@127.0.0.1:5432/ticker"
+	PGPASS="digitalbits"
+	export DB_URL="postgres://digitalbits:${PGPASS}@127.0.0.1:5432/ticker"
 	echo "Setting db url: $DB_URL"
 	echo DB_URL="${DB_URL}" >> /etc/environment
 }
 
 function copy_pgpass() {
-	cp $PGHOME/.pgpass /home/stellar
-	chmod 0600 /home/stellar/.pgpass
-	chown stellar:stellar /home/stellar/.pgpass
+	cp $PGHOME/.pgpass /home/digitalbits
+	chmod 0600 /home/digitalbits/.pgpass
+	chown digitalbits:digitalbits /home/digitalbits/.pgpass
 }
 
 
@@ -173,7 +173,7 @@ function init_db() {
 
 	start_postgres
 	run_silent "create-ticker-db" sudo -u postgres createdb $PGDB
-	run_silent "stellar-postgres-user" sudo -u postgres psql <<-SQL
+	run_silent "digitalbits-postgres-user" sudo -u postgres psql <<-SQL
 		CREATE USER $PGUSER WITH PASSWORD '$PGPASS';
 		GRANT ALL PRIVILEGES ON DATABASE $PGDB to $PGUSER;
 	SQL

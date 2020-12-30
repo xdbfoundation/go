@@ -3,7 +3,7 @@
 This is an incomplete and work-in-progress implementation of the [SEP-30]
 Recovery Signer protocol v0.7.0.
 
-A Recovery Signer is a server that can help a user regain control of a Stellar
+A Recovery Signer is a server that can help a user regain control of a DigitalBits
 account if they have lost their secret key. A user registers their account with
 a Recovery Signer by adding it as a signer, and informs the Recovery Signer
 that any user proving access to a phone number or email address can have
@@ -48,11 +48,11 @@ Flags:
       --db-url string                Database URL (DB_URL) (default "postgres://localhost:5432/?sslmode=disable")
       --firebase-project-id string   Firebase project ID to use for validating Firebase JWTs (FIREBASE_PROJECT_ID)
       --metrics-namespace string     Namespace to use for metric names prefixed to metrics reported (METRICS_NAMESPACE) (default "recoverysigner")
-      --network-passphrase string    Network passphrase of the Stellar network transactions should be signed for (NETWORK_PASSPHRASE) (default "Test SDF Network ; September 2015")
+      --network-passphrase string    Network passphrase of the DigitalBits network transactions should be signed for (NETWORK_PASSPHRASE) (default "Test SDF Network ; September 2015")
       --port int                     Port to listen and serve on (PORT) (default 8000)
       --sep10-jwks string            JSON Web Key Set (JWKS) containing one or more keys used to validate SEP-10 JWTs (if the key is an asymmetric key that has separate public and private key, the JWK need only contain the public key) (if multiple keys are provided they will all attempt verification the key ID will be ignored although logged) (SEP10_JWKS)
       --sep10-jwt-issuer string      JWT issuer to verify if in the SEP-10 JWT iss field (not checked if empty) (SEP10_JWT_ISSUER)
-      --signing-key string           Stellar signing key(s) used for signing transactions comma separated (first key is preferred signer) (will be deprecated with per-account keys in the future) (SIGNING_KEY)
+      --signing-key string           DigitalBits signing key(s) used for signing transactions comma separated (first key is preferred signer) (will be deprecated with per-account keys in the future) (SIGNING_KEY)
 ```
 
 ## Usage: db
@@ -74,5 +74,5 @@ Flags:
 Use "recoverysigner db [command] --help" for more information about a command.
 ```
 
-[SEP-30]: https://github.com/stellar/stellar-protocol/blob/3e05bb668f94793545588106af74699b8d6b02d6/ecosystem/sep-0030.md
+[SEP-30]: https://github.com/digitalbits/digitalbits-protocol/blob/3e05bb668f94793545588106af74699b8d6b02d6/ecosystem/sep-0030.md
 [README-Firebase.md]: README-Firebase.md

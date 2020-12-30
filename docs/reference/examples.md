@@ -16,10 +16,10 @@ package main
 import (
 	"log"
 
-	"github.com/stellar/go/clients/horizonclient"
-	"github.com/stellar/go/keypair"
-	"github.com/stellar/go/network"
-	"github.com/stellar/go/txnbuild"
+	"github.com/digitalbits/go/clients/frontierclient"
+	"github.com/digitalbits/go/keypair"
+	"github.com/digitalbits/go/network"
+	"github.com/digitalbits/go/txnbuild"
 )
 
 func main() {
@@ -32,11 +32,11 @@ func main() {
 	log.Println("Address 0:", pair.Address())
 
 	// Create and fund the address on TestNet, using friendbot
-	client := horizonclient.DefaultTestNetClient
+	client := frontierclient.DefaultTestNetClient
 	client.Fund(pair.Address())
 
 	// Get information about the account we just created
-	accountRequest := horizonclient.AccountRequest{AccountID: pair.Address()}
+	accountRequest := frontierclient.AccountRequest{AccountID: pair.Address()}
 	hAccount0, err := client.AccountDetail(accountRequest)
 	if err != nil {
 		log.Fatal(err)
@@ -74,7 +74,7 @@ func main() {
 	// Submit the transaction
 	resp, err := client.SubmitTransactionXDR(txeBase64)
 	if err != nil {
-		hError := err.(*horizonclient.Error)
+		hError := err.(*frontierclient.Error)
 		log.Fatal("Error submitting transaction:", hError.Problem)
 	}
 

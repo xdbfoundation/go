@@ -3,13 +3,13 @@ package serve
 import (
 	"net/http"
 
-	"github.com/stellar/go/exp/services/recoverysigner/internal/account"
-	"github.com/stellar/go/exp/services/recoverysigner/internal/serve/auth"
-	"github.com/stellar/go/keypair"
-	"github.com/stellar/go/support/errors"
-	"github.com/stellar/go/support/http/httpdecode"
-	supportlog "github.com/stellar/go/support/log"
-	"github.com/stellar/go/support/render/httpjson"
+	"github.com/digitalbits/go/exp/services/recoverysigner/internal/account"
+	"github.com/digitalbits/go/exp/services/recoverysigner/internal/serve/auth"
+	"github.com/digitalbits/go/keypair"
+	"github.com/digitalbits/go/support/errors"
+	"github.com/digitalbits/go/support/http/httpdecode"
+	supportlog "github.com/digitalbits/go/support/log"
+	"github.com/digitalbits/go/support/render/httpjson"
 )
 
 type accountPostHandler struct {
@@ -66,7 +66,7 @@ func (am accountPostRequestIdentityAuthMethod) Validate() error {
 	if !account.AuthMethodType(am.Type).Valid() {
 		return errors.Errorf("auth method type %q unrecognized", am.Type)
 	}
-	// TODO: Validate auth method values: Stellar address, phone number and email.
+	// TODO: Validate auth method values: DigitalBits address, phone number and email.
 	return nil
 }
 

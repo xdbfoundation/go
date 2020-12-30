@@ -1,0 +1,50 @@
+# This is a basic workflow to help you get started with Actions
+
+name: CI
+
+# Controls when the action will run. 
+on:
+  # Triggers the workflow on push or pull request events but only for the master branch
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-16.04
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+
+      - name: Install Golang
+        run: |
+          wget https://dl.google.com/go/go1.15.2.linux-amd64.tar.gz 
+          sudo tar -xvf go1.15.3.linux-amd64.tar.gz   
+          sudo mv go /usr/local  
+
+      - name: Build the app    
+        run: |
+          mkdir -p /go/src/github.com/digitalbits/go
+
+          export GOPATH=/go
+          export GO111MODULE=on
+
+          cp -Rf ./* $GOPATH/
+          go install github.com/digitalbits/go/services/...
+
+      - name: Release
+        uses: fnkr/github-action-ghr@v1
+        if: startsWith(github.ref, 'refs/tags/')
+        env:
+          GHR_COMPRESS: xz
+          GHR_PATH: /go/bin
+          GITHUB_TOKEN: 3715ced5d52a443edadef0309eb646d136c55685

@@ -3,9 +3,9 @@ package io
 import (
 	"sync"
 
-	ingesterrors "github.com/stellar/go/ingest/errors"
-	"github.com/stellar/go/support/errors"
-	"github.com/stellar/go/xdr"
+	ingesterrors "github.com/digitalbits/go/ingest/errors"
+	"github.com/digitalbits/go/support/errors"
+	"github.com/digitalbits/go/xdr"
 )
 
 // LedgerEntryChangeCache is a cache of ledger entry changes that squashes all

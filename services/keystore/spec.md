@@ -3,8 +3,8 @@
 ### Problem
 
 We need a keystore service that supports non-custodial applications.
-It will make the process of stellarizing any applications easier as
-they don't have to implement the logic to create a stellar account
+It will make the process of digitalbitsizing any applications easier as
+they don't have to implement the logic to create a digitalbits account
 and handle the encrypted private key themselves.
 
 It is also intended to be the service that wallet SDK talks to.
@@ -88,7 +88,7 @@ interface EncryptedKeyData {
 Clients will encrypt each `RawKeyData` they want to store on the keystore with
 a salt based on the encrypter they use. Clients should assign the resulting
 base64-encoded string to the field `encryptedBlob` in the `EncryptedKeyData`.
-Please refer to this [encrypt function](https://github.com/stellar/js-stellar-wallets/blob/4a667171df4b22ba9cd15576d022f3e88f3951ff/src/helpers/ScryptEncryption.ts#L71-L108) in our wallet sdk for more details.
+Please refer to this [encrypt function](https://github.com/digitalbits/js-digitalbits-wallets/blob/4a667171df4b22ba9cd15576d022f3e88f3951ff/src/helpers/ScryptEncryption.ts#L71-L108) in our wallet sdk for more details.
 
 ### Encrypted Keys
 

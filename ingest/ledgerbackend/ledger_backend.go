@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"github.com/stellar/go/xdr"
+	"github.com/digitalbits/go/xdr"
 )
 
 // Range represents a range of ledger sequence numbers.
@@ -81,7 +81,7 @@ type LedgerBackend interface {
 	// The first returned value is false when the ledger does not exist in a backend.
 	GetLedger(sequence uint32) (bool, xdr.LedgerCloseMeta, error)
 	// PrepareRange prepares the given range (including from and to) to be loaded.
-	// Some backends (like captive stellar-core) need to initalize data to be
+	// Some backends (like captive digitalbits-core) need to initalize data to be
 	// able to stream ledgers. Blocks until the first ledger is available.
 	PrepareRange(ledgerRange Range) error
 	// IsPrepared returns true if a given ledgerRange is prepared.
@@ -97,13 +97,13 @@ type session interface {
 	Close() error
 }
 
-// ledgerHeaderHistory is a helper struct used to unmarshall header fields from a stellar-core DB.
+// ledgerHeaderHistory is a helper struct used to unmarshall header fields from a digitalbits-core DB.
 type ledgerHeaderHistory struct {
 	Hash   xdr.Hash         `db:"ledgerhash"`
 	Header xdr.LedgerHeader `db:"data"`
 }
 
-// ledgerHeader holds a row of data from the stellar-core `ledgerheaders` table.
+// ledgerHeader holds a row of data from the digitalbits-core `ledgerheaders` table.
 type ledgerHeader struct {
 	LedgerHash     string           `db:"ledgerhash"`
 	PrevHash       string           `db:"prevhash"`
@@ -113,7 +113,7 @@ type ledgerHeader struct {
 	Data           xdr.LedgerHeader `db:"data"`
 }
 
-// txHistory holds a row of data from the stellar-core `txhistory` table.
+// txHistory holds a row of data from the digitalbits-core `txhistory` table.
 type txHistory struct {
 	TXID      string                    `db:"txid"`
 	LedgerSeq uint32                    `db:"ledgerseq"`
@@ -123,7 +123,7 @@ type txHistory struct {
 	TXMeta    xdr.TransactionMeta       `db:"txmeta"`
 }
 
-// txFeeHistory holds a row of data from the stellar-core `txfeehistory` table.
+// txFeeHistory holds a row of data from the digitalbits-core `txfeehistory` table.
 type txFeeHistory struct {
 	TXID      string                 `db:"txid"`
 	LedgerSeq uint32                 `db:"ledgerseq"`
@@ -131,14 +131,14 @@ type txFeeHistory struct {
 	TXChanges xdr.LedgerEntryChanges `db:"txchanges"`
 }
 
-// scpHistory holds a row of data from the stellar-core `scphistory` table.
+// scpHistory holds a row of data from the digitalbits-core `scphistory` table.
 // type scpHistory struct {
 // 	NodeID    string `db:"nodeid"`
 // 	LedgerSeq uint32 `db:"ledgerseq"`
 // 	Envelope  string `db:"envelope"`
 // }
 
-// upgradeHistory holds a row of data from the stellar-core `upgradehistory` table.
+// upgradeHistory holds a row of data from the digitalbits-core `upgradehistory` table.
 type upgradeHistory struct {
 	LedgerSeq    uint32                 `db:"ledgerseq"`
 	UpgradeIndex uint32                 `db:"upgradeindex"`

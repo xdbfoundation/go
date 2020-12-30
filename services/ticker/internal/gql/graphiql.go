@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/stellar/go/services/ticker/internal/gql/static"
+	"github.com/digitalbits/go/services/ticker/internal/gql/static"
 )
 
 // GraphiQL is an in-browser IDE for exploring GraphiQL APIs.

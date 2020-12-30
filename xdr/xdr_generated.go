@@ -2,12 +2,12 @@
 //lint:file-ignore U1000 fmtTest is not needed anywhere, should be removed in xdrgen.
 // Package xdr is generated from:
 //
-//  Stellar-SCP.x
-//  Stellar-ledger-entries.x
-//  Stellar-ledger.x
-//  Stellar-overlay.x
-//  Stellar-transaction.x
-//  Stellar-types.x
+//  DigitalBits-SCP.x
+//  DigitalBits-ledger-entries.x
+//  DigitalBits-ledger.x
+//  DigitalBits-overlay.x
+//  DigitalBits-transaction.x
+//  DigitalBits-types.x
 //
 // DO NOT EDIT or your changes may be overwritten
 package xdr
@@ -4144,55 +4144,55 @@ var (
 	_ encoding.BinaryUnmarshaler = (*UpgradeType)(nil)
 )
 
-// StellarValueType is an XDR Enum defines as:
+// DigitalBitsValueType is an XDR Enum defines as:
 //
-//   enum StellarValueType
+//   enum DigitalBitsValueType
 //    {
-//        STELLAR_VALUE_BASIC = 0,
-//        STELLAR_VALUE_SIGNED = 1
+//        DIGITALBITS_VALUE_BASIC = 0,
+//        DIGITALBITS_VALUE_SIGNED = 1
 //    };
 //
-type StellarValueType int32
+type DigitalBitsValueType int32
 
 const (
-	StellarValueTypeStellarValueBasic  StellarValueType = 0
-	StellarValueTypeStellarValueSigned StellarValueType = 1
+	DigitalBitsValueTypeDigitalBitsValueBasic  DigitalBitsValueType = 0
+	DigitalBitsValueTypeDigitalBitsValueSigned DigitalBitsValueType = 1
 )
 
-var stellarValueTypeMap = map[int32]string{
-	0: "StellarValueTypeStellarValueBasic",
-	1: "StellarValueTypeStellarValueSigned",
+var digitalbitsValueTypeMap = map[int32]string{
+	0: "DigitalBitsValueTypeDigitalBitsValueBasic",
+	1: "DigitalBitsValueTypeDigitalBitsValueSigned",
 }
 
 // ValidEnum validates a proposed value for this enum.  Implements
-// the Enum interface for StellarValueType
-func (e StellarValueType) ValidEnum(v int32) bool {
-	_, ok := stellarValueTypeMap[v]
+// the Enum interface for DigitalBitsValueType
+func (e DigitalBitsValueType) ValidEnum(v int32) bool {
+	_, ok := digitalbitsValueTypeMap[v]
 	return ok
 }
 
 // String returns the name of `e`
-func (e StellarValueType) String() string {
-	name, _ := stellarValueTypeMap[int32(e)]
+func (e DigitalBitsValueType) String() string {
+	name, _ := digitalbitsValueTypeMap[int32(e)]
 	return name
 }
 
 // MarshalBinary implements encoding.BinaryMarshaler.
-func (s StellarValueType) MarshalBinary() ([]byte, error) {
+func (s DigitalBitsValueType) MarshalBinary() ([]byte, error) {
 	b := new(bytes.Buffer)
 	_, err := Marshal(b, s)
 	return b.Bytes(), err
 }
 
 // UnmarshalBinary implements encoding.BinaryUnmarshaler.
-func (s *StellarValueType) UnmarshalBinary(inp []byte) error {
+func (s *DigitalBitsValueType) UnmarshalBinary(inp []byte) error {
 	_, err := Unmarshal(bytes.NewReader(inp), s)
 	return err
 }
 
 var (
-	_ encoding.BinaryMarshaler   = (*StellarValueType)(nil)
-	_ encoding.BinaryUnmarshaler = (*StellarValueType)(nil)
+	_ encoding.BinaryMarshaler   = (*DigitalBitsValueType)(nil)
+	_ encoding.BinaryUnmarshaler = (*DigitalBitsValueType)(nil)
 )
 
 // LedgerCloseValueSignature is an XDR Struct defines as:
@@ -4226,46 +4226,46 @@ var (
 	_ encoding.BinaryUnmarshaler = (*LedgerCloseValueSignature)(nil)
 )
 
-// StellarValueExt is an XDR NestedUnion defines as:
+// DigitalBitsValueExt is an XDR NestedUnion defines as:
 //
-//   union switch (StellarValueType v)
+//   union switch (DigitalBitsValueType v)
 //        {
-//        case STELLAR_VALUE_BASIC:
+//        case DIGITALBITS_VALUE_BASIC:
 //            void;
-//        case STELLAR_VALUE_SIGNED:
+//        case DIGITALBITS_VALUE_SIGNED:
 //            LedgerCloseValueSignature lcValueSignature;
 //        }
 //
-type StellarValueExt struct {
-	V                StellarValueType
+type DigitalBitsValueExt struct {
+	V                DigitalBitsValueType
 	LcValueSignature *LedgerCloseValueSignature
 }
 
 // SwitchFieldName returns the field name in which this union's
 // discriminant is stored
-func (u StellarValueExt) SwitchFieldName() string {
+func (u DigitalBitsValueExt) SwitchFieldName() string {
 	return "V"
 }
 
 // ArmForSwitch returns which field name should be used for storing
-// the value for an instance of StellarValueExt
-func (u StellarValueExt) ArmForSwitch(sw int32) (string, bool) {
-	switch StellarValueType(sw) {
-	case StellarValueTypeStellarValueBasic:
+// the value for an instance of DigitalBitsValueExt
+func (u DigitalBitsValueExt) ArmForSwitch(sw int32) (string, bool) {
+	switch DigitalBitsValueType(sw) {
+	case DigitalBitsValueTypeDigitalBitsValueBasic:
 		return "", true
-	case StellarValueTypeStellarValueSigned:
+	case DigitalBitsValueTypeDigitalBitsValueSigned:
 		return "LcValueSignature", true
 	}
 	return "-", false
 }
 
-// NewStellarValueExt creates a new  StellarValueExt.
-func NewStellarValueExt(v StellarValueType, value interface{}) (result StellarValueExt, err error) {
+// NewDigitalBitsValueExt creates a new  DigitalBitsValueExt.
+func NewDigitalBitsValueExt(v DigitalBitsValueType, value interface{}) (result DigitalBitsValueExt, err error) {
 	result.V = v
-	switch StellarValueType(v) {
-	case StellarValueTypeStellarValueBasic:
+	switch DigitalBitsValueType(v) {
+	case DigitalBitsValueTypeDigitalBitsValueBasic:
 		// void
-	case StellarValueTypeStellarValueSigned:
+	case DigitalBitsValueTypeDigitalBitsValueSigned:
 		tv, ok := value.(LedgerCloseValueSignature)
 		if !ok {
 			err = fmt.Errorf("invalid value, must be LedgerCloseValueSignature")
@@ -4278,7 +4278,7 @@ func NewStellarValueExt(v StellarValueType, value interface{}) (result StellarVa
 
 // MustLcValueSignature retrieves the LcValueSignature value from the union,
 // panicing if the value is not set.
-func (u StellarValueExt) MustLcValueSignature() LedgerCloseValueSignature {
+func (u DigitalBitsValueExt) MustLcValueSignature() LedgerCloseValueSignature {
 	val, ok := u.GetLcValueSignature()
 
 	if !ok {
@@ -4290,7 +4290,7 @@ func (u StellarValueExt) MustLcValueSignature() LedgerCloseValueSignature {
 
 // GetLcValueSignature retrieves the LcValueSignature value from the union,
 // returning ok if the union's switch indicated the value is valid.
-func (u StellarValueExt) GetLcValueSignature() (result LedgerCloseValueSignature, ok bool) {
+func (u DigitalBitsValueExt) GetLcValueSignature() (result LedgerCloseValueSignature, ok bool) {
 	armName, _ := u.ArmForSwitch(int32(u.V))
 
 	if armName == "LcValueSignature" {
@@ -4302,26 +4302,26 @@ func (u StellarValueExt) GetLcValueSignature() (result LedgerCloseValueSignature
 }
 
 // MarshalBinary implements encoding.BinaryMarshaler.
-func (s StellarValueExt) MarshalBinary() ([]byte, error) {
+func (s DigitalBitsValueExt) MarshalBinary() ([]byte, error) {
 	b := new(bytes.Buffer)
 	_, err := Marshal(b, s)
 	return b.Bytes(), err
 }
 
 // UnmarshalBinary implements encoding.BinaryUnmarshaler.
-func (s *StellarValueExt) UnmarshalBinary(inp []byte) error {
+func (s *DigitalBitsValueExt) UnmarshalBinary(inp []byte) error {
 	_, err := Unmarshal(bytes.NewReader(inp), s)
 	return err
 }
 
 var (
-	_ encoding.BinaryMarshaler   = (*StellarValueExt)(nil)
-	_ encoding.BinaryUnmarshaler = (*StellarValueExt)(nil)
+	_ encoding.BinaryMarshaler   = (*DigitalBitsValueExt)(nil)
+	_ encoding.BinaryUnmarshaler = (*DigitalBitsValueExt)(nil)
 )
 
-// StellarValue is an XDR Struct defines as:
+// DigitalBitsValue is an XDR Struct defines as:
 //
-//   struct StellarValue
+//   struct DigitalBitsValue
 //    {
 //        Hash txSetHash;      // transaction set to apply to previous ledger
 //        TimePoint closeTime; // network close time
@@ -4334,39 +4334,39 @@ var (
 //        UpgradeType upgrades<6>;
 //
 //        // reserved for future use
-//        union switch (StellarValueType v)
+//        union switch (DigitalBitsValueType v)
 //        {
-//        case STELLAR_VALUE_BASIC:
+//        case DIGITALBITS_VALUE_BASIC:
 //            void;
-//        case STELLAR_VALUE_SIGNED:
+//        case DIGITALBITS_VALUE_SIGNED:
 //            LedgerCloseValueSignature lcValueSignature;
 //        }
 //        ext;
 //    };
 //
-type StellarValue struct {
+type DigitalBitsValue struct {
 	TxSetHash Hash
 	CloseTime TimePoint
 	Upgrades  []UpgradeType `xdrmaxsize:"6"`
-	Ext       StellarValueExt
+	Ext       DigitalBitsValueExt
 }
 
 // MarshalBinary implements encoding.BinaryMarshaler.
-func (s StellarValue) MarshalBinary() ([]byte, error) {
+func (s DigitalBitsValue) MarshalBinary() ([]byte, error) {
 	b := new(bytes.Buffer)
 	_, err := Marshal(b, s)
 	return b.Bytes(), err
 }
 
 // UnmarshalBinary implements encoding.BinaryUnmarshaler.
-func (s *StellarValue) UnmarshalBinary(inp []byte) error {
+func (s *DigitalBitsValue) UnmarshalBinary(inp []byte) error {
 	_, err := Unmarshal(bytes.NewReader(inp), s)
 	return err
 }
 
 var (
-	_ encoding.BinaryMarshaler   = (*StellarValue)(nil)
-	_ encoding.BinaryUnmarshaler = (*StellarValue)(nil)
+	_ encoding.BinaryMarshaler   = (*DigitalBitsValue)(nil)
+	_ encoding.BinaryUnmarshaler = (*DigitalBitsValue)(nil)
 )
 
 // LedgerHeaderExt is an XDR NestedUnion defines as:
@@ -4431,7 +4431,7 @@ var (
 //    {
 //        uint32 ledgerVersion;    // the protocol version of the ledger
 //        Hash previousLedgerHash; // hash of the previous ledger header
-//        StellarValue scpValue;   // what consensus agreed to
+//        DigitalBitsValue scpValue;   // what consensus agreed to
 //        Hash txSetResultHash;    // the TransactionResultSet that led to this ledger
 //        Hash bucketListHash;     // hash of the ledger state
 //
@@ -4468,7 +4468,7 @@ var (
 type LedgerHeader struct {
 	LedgerVersion      Uint32
 	PreviousLedgerHash Hash
-	ScpValue           StellarValue
+	ScpValue           DigitalBitsValue
 	TxSetResultHash    Hash
 	BucketListHash     Hash
 	LedgerSeq          Uint32
@@ -7310,9 +7310,9 @@ var (
 	_ encoding.BinaryUnmarshaler = (*SurveyResponseBody)(nil)
 )
 
-// StellarMessage is an XDR Union defines as:
+// DigitalBitsMessage is an XDR Union defines as:
 //
-//   union StellarMessage switch (MessageType type)
+//   union DigitalBitsMessage switch (MessageType type)
 //    {
 //    case ERROR_MSG:
 //        Error error;
@@ -7352,7 +7352,7 @@ var (
 //        uint32 getSCPLedgerSeq; // ledger seq requested ; if 0, requests the latest
 //    };
 //
-type StellarMessage struct {
+type DigitalBitsMessage struct {
 	Type                        MessageType
 	Error                       *Error
 	Hello                       *Hello
@@ -7372,13 +7372,13 @@ type StellarMessage struct {
 
 // SwitchFieldName returns the field name in which this union's
 // discriminant is stored
-func (u StellarMessage) SwitchFieldName() string {
+func (u DigitalBitsMessage) SwitchFieldName() string {
 	return "Type"
 }
 
 // ArmForSwitch returns which field name should be used for storing
-// the value for an instance of StellarMessage
-func (u StellarMessage) ArmForSwitch(sw int32) (string, bool) {
+// the value for an instance of DigitalBitsMessage
+func (u DigitalBitsMessage) ArmForSwitch(sw int32) (string, bool) {
 	switch MessageType(sw) {
 	case MessageTypeErrorMsg:
 		return "Error", true
@@ -7414,8 +7414,8 @@ func (u StellarMessage) ArmForSwitch(sw int32) (string, bool) {
 	return "-", false
 }
 
-// NewStellarMessage creates a new  StellarMessage.
-func NewStellarMessage(aType MessageType, value interface{}) (result StellarMessage, err error) {
+// NewDigitalBitsMessage creates a new  DigitalBitsMessage.
+func NewDigitalBitsMessage(aType MessageType, value interface{}) (result DigitalBitsMessage, err error) {
 	result.Type = aType
 	switch MessageType(aType) {
 	case MessageTypeErrorMsg:
@@ -7524,7 +7524,7 @@ func NewStellarMessage(aType MessageType, value interface{}) (result StellarMess
 
 // MustError retrieves the Error value from the union,
 // panicing if the value is not set.
-func (u StellarMessage) MustError() Error {
+func (u DigitalBitsMessage) MustError() Error {
 	val, ok := u.GetError()
 
 	if !ok {
@@ -7536,7 +7536,7 @@ func (u StellarMessage) MustError() Error {
 
 // GetError retrieves the Error value from the union,
 // returning ok if the union's switch indicated the value is valid.
-func (u StellarMessage) GetError() (result Error, ok bool) {
+func (u DigitalBitsMessage) GetError() (result Error, ok bool) {
 	armName, _ := u.ArmForSwitch(int32(u.Type))
 
 	if armName == "Error" {
@@ -7549,7 +7549,7 @@ func (u StellarMessage) GetError() (result Error, ok bool) {
 
 // MustHello retrieves the Hello value from the union,
 // panicing if the value is not set.
-func (u StellarMessage) MustHello() Hello {
+func (u DigitalBitsMessage) MustHello() Hello {
 	val, ok := u.GetHello()
 
 	if !ok {
@@ -7561,7 +7561,7 @@ func (u StellarMessage) MustHello() Hello {
 
 // GetHello retrieves the Hello value from the union,
 // returning ok if the union's switch indicated the value is valid.
-func (u StellarMessage) GetHello() (result Hello, ok bool) {
+func (u DigitalBitsMessage) GetHello() (result Hello, ok bool) {
 	armName, _ := u.ArmForSwitch(int32(u.Type))
 
 	if armName == "Hello" {
@@ -7574,7 +7574,7 @@ func (u StellarMessage) GetHello() (result Hello, ok bool) {
 
 // MustAuth retrieves the Auth value from the union,
 // panicing if the value is not set.
-func (u StellarMessage) MustAuth() Auth {
+func (u DigitalBitsMessage) MustAuth() Auth {
 	val, ok := u.GetAuth()
 
 	if !ok {
@@ -7586,7 +7586,7 @@ func (u StellarMessage) MustAuth() Auth {
 
 // GetAuth retrieves the Auth value from the union,
 // returning ok if the union's switch indicated the value is valid.
-func (u StellarMessage) GetAuth() (result Auth, ok bool) {
+func (u DigitalBitsMessage) GetAuth() (result Auth, ok bool) {
 	armName, _ := u.ArmForSwitch(int32(u.Type))
 
 	if armName == "Auth" {
@@ -7599,7 +7599,7 @@ func (u StellarMessage) GetAuth() (result Auth, ok bool) {
 
 // MustDontHave retrieves the DontHave value from the union,
 // panicing if the value is not set.
-func (u StellarMessage) MustDontHave() DontHave {
+func (u DigitalBitsMessage) MustDontHave() DontHave {
 	val, ok := u.GetDontHave()
 
 	if !ok {
@@ -7611,7 +7611,7 @@ func (u StellarMessage) MustDontHave() DontHave {
 
 // GetDontHave retrieves the DontHave value from the union,
 // returning ok if the union's switch indicated the value is valid.
-func (u StellarMessage) GetDontHave() (result DontHave, ok bool) {
+func (u DigitalBitsMessage) GetDontHave() (result DontHave, ok bool) {
 	armName, _ := u.ArmForSwitch(int32(u.Type))
 
 	if armName == "DontHave" {
@@ -7624,7 +7624,7 @@ func (u StellarMessage) GetDontHave() (result DontHave, ok bool) {
 
 // MustPeers retrieves the Peers value from the union,
 // panicing if the value is not set.
-func (u StellarMessage) MustPeers() []PeerAddress {
+func (u DigitalBitsMessage) MustPeers() []PeerAddress {
 	val, ok := u.GetPeers()
 
 	if !ok {
@@ -7636,7 +7636,7 @@ func (u StellarMessage) MustPeers() []PeerAddress {
 
 // GetPeers retrieves the Peers value from the union,
 // returning ok if the union's switch indicated the value is valid.
-func (u StellarMessage) GetPeers() (result []PeerAddress, ok bool) {
+func (u DigitalBitsMessage) GetPeers() (result []PeerAddress, ok bool) {
 	armName, _ := u.ArmForSwitch(int32(u.Type))
 
 	if armName == "Peers" {
@@ -7649,7 +7649,7 @@ func (u StellarMessage) GetPeers() (result []PeerAddress, ok bool) {
 
 // MustTxSetHash retrieves the TxSetHash value from the union,
 // panicing if the value is not set.
-func (u StellarMessage) MustTxSetHash() Uint256 {
+func (u DigitalBitsMessage) MustTxSetHash() Uint256 {
 	val, ok := u.GetTxSetHash()
 
 	if !ok {
@@ -7661,7 +7661,7 @@ func (u StellarMessage) MustTxSetHash() Uint256 {
 
 // GetTxSetHash retrieves the TxSetHash value from the union,
 // returning ok if the union's switch indicated the value is valid.
-func (u StellarMessage) GetTxSetHash() (result Uint256, ok bool) {
+func (u DigitalBitsMessage) GetTxSetHash() (result Uint256, ok bool) {
 	armName, _ := u.ArmForSwitch(int32(u.Type))
 
 	if armName == "TxSetHash" {
@@ -7674,7 +7674,7 @@ func (u StellarMessage) GetTxSetHash() (result Uint256, ok bool) {
 
 // MustTxSet retrieves the TxSet value from the union,
 // panicing if the value is not set.
-func (u StellarMessage) MustTxSet() TransactionSet {
+func (u DigitalBitsMessage) MustTxSet() TransactionSet {
 	val, ok := u.GetTxSet()
 
 	if !ok {
@@ -7686,7 +7686,7 @@ func (u StellarMessage) MustTxSet() TransactionSet {
 
 // GetTxSet retrieves the TxSet value from the union,
 // returning ok if the union's switch indicated the value is valid.
-func (u StellarMessage) GetTxSet() (result TransactionSet, ok bool) {
+func (u DigitalBitsMessage) GetTxSet() (result TransactionSet, ok bool) {
 	armName, _ := u.ArmForSwitch(int32(u.Type))
 
 	if armName == "TxSet" {
@@ -7699,7 +7699,7 @@ func (u StellarMessage) GetTxSet() (result TransactionSet, ok bool) {
 
 // MustTransaction retrieves the Transaction value from the union,
 // panicing if the value is not set.
-func (u StellarMessage) MustTransaction() TransactionEnvelope {
+func (u DigitalBitsMessage) MustTransaction() TransactionEnvelope {
 	val, ok := u.GetTransaction()
 
 	if !ok {
@@ -7711,7 +7711,7 @@ func (u StellarMessage) MustTransaction() TransactionEnvelope {
 
 // GetTransaction retrieves the Transaction value from the union,
 // returning ok if the union's switch indicated the value is valid.
-func (u StellarMessage) GetTransaction() (result TransactionEnvelope, ok bool) {
+func (u DigitalBitsMessage) GetTransaction() (result TransactionEnvelope, ok bool) {
 	armName, _ := u.ArmForSwitch(int32(u.Type))
 
 	if armName == "Transaction" {
@@ -7724,7 +7724,7 @@ func (u StellarMessage) GetTransaction() (result TransactionEnvelope, ok bool) {
 
 // MustSignedSurveyRequestMessage retrieves the SignedSurveyRequestMessage value from the union,
 // panicing if the value is not set.
-func (u StellarMessage) MustSignedSurveyRequestMessage() SignedSurveyRequestMessage {
+func (u DigitalBitsMessage) MustSignedSurveyRequestMessage() SignedSurveyRequestMessage {
 	val, ok := u.GetSignedSurveyRequestMessage()
 
 	if !ok {
@@ -7736,7 +7736,7 @@ func (u StellarMessage) MustSignedSurveyRequestMessage() SignedSurveyRequestMess
 
 // GetSignedSurveyRequestMessage retrieves the SignedSurveyRequestMessage value from the union,
 // returning ok if the union's switch indicated the value is valid.
-func (u StellarMessage) GetSignedSurveyRequestMessage() (result SignedSurveyRequestMessage, ok bool) {
+func (u DigitalBitsMessage) GetSignedSurveyRequestMessage() (result SignedSurveyRequestMessage, ok bool) {
 	armName, _ := u.ArmForSwitch(int32(u.Type))
 
 	if armName == "SignedSurveyRequestMessage" {
@@ -7749,7 +7749,7 @@ func (u StellarMessage) GetSignedSurveyRequestMessage() (result SignedSurveyRequ
 
 // MustSignedSurveyResponseMessage retrieves the SignedSurveyResponseMessage value from the union,
 // panicing if the value is not set.
-func (u StellarMessage) MustSignedSurveyResponseMessage() SignedSurveyResponseMessage {
+func (u DigitalBitsMessage) MustSignedSurveyResponseMessage() SignedSurveyResponseMessage {
 	val, ok := u.GetSignedSurveyResponseMessage()
 
 	if !ok {
@@ -7761,7 +7761,7 @@ func (u StellarMessage) MustSignedSurveyResponseMessage() SignedSurveyResponseMe
 
 // GetSignedSurveyResponseMessage retrieves the SignedSurveyResponseMessage value from the union,
 // returning ok if the union's switch indicated the value is valid.
-func (u StellarMessage) GetSignedSurveyResponseMessage() (result SignedSurveyResponseMessage, ok bool) {
+func (u DigitalBitsMessage) GetSignedSurveyResponseMessage() (result SignedSurveyResponseMessage, ok bool) {
 	armName, _ := u.ArmForSwitch(int32(u.Type))
 
 	if armName == "SignedSurveyResponseMessage" {
@@ -7774,7 +7774,7 @@ func (u StellarMessage) GetSignedSurveyResponseMessage() (result SignedSurveyRes
 
 // MustQSetHash retrieves the QSetHash value from the union,
 // panicing if the value is not set.
-func (u StellarMessage) MustQSetHash() Uint256 {
+func (u DigitalBitsMessage) MustQSetHash() Uint256 {
 	val, ok := u.GetQSetHash()
 
 	if !ok {
@@ -7786,7 +7786,7 @@ func (u StellarMessage) MustQSetHash() Uint256 {
 
 // GetQSetHash retrieves the QSetHash value from the union,
 // returning ok if the union's switch indicated the value is valid.
-func (u StellarMessage) GetQSetHash() (result Uint256, ok bool) {
+func (u DigitalBitsMessage) GetQSetHash() (result Uint256, ok bool) {
 	armName, _ := u.ArmForSwitch(int32(u.Type))
 
 	if armName == "QSetHash" {
@@ -7799,7 +7799,7 @@ func (u StellarMessage) GetQSetHash() (result Uint256, ok bool) {
 
 // MustQSet retrieves the QSet value from the union,
 // panicing if the value is not set.
-func (u StellarMessage) MustQSet() ScpQuorumSet {
+func (u DigitalBitsMessage) MustQSet() ScpQuorumSet {
 	val, ok := u.GetQSet()
 
 	if !ok {
@@ -7811,7 +7811,7 @@ func (u StellarMessage) MustQSet() ScpQuorumSet {
 
 // GetQSet retrieves the QSet value from the union,
 // returning ok if the union's switch indicated the value is valid.
-func (u StellarMessage) GetQSet() (result ScpQuorumSet, ok bool) {
+func (u DigitalBitsMessage) GetQSet() (result ScpQuorumSet, ok bool) {
 	armName, _ := u.ArmForSwitch(int32(u.Type))
 
 	if armName == "QSet" {
@@ -7824,7 +7824,7 @@ func (u StellarMessage) GetQSet() (result ScpQuorumSet, ok bool) {
 
 // MustEnvelope retrieves the Envelope value from the union,
 // panicing if the value is not set.
-func (u StellarMessage) MustEnvelope() ScpEnvelope {
+func (u DigitalBitsMessage) MustEnvelope() ScpEnvelope {
 	val, ok := u.GetEnvelope()
 
 	if !ok {
@@ -7836,7 +7836,7 @@ func (u StellarMessage) MustEnvelope() ScpEnvelope {
 
 // GetEnvelope retrieves the Envelope value from the union,
 // returning ok if the union's switch indicated the value is valid.
-func (u StellarMessage) GetEnvelope() (result ScpEnvelope, ok bool) {
+func (u DigitalBitsMessage) GetEnvelope() (result ScpEnvelope, ok bool) {
 	armName, _ := u.ArmForSwitch(int32(u.Type))
 
 	if armName == "Envelope" {
@@ -7849,7 +7849,7 @@ func (u StellarMessage) GetEnvelope() (result ScpEnvelope, ok bool) {
 
 // MustGetScpLedgerSeq retrieves the GetScpLedgerSeq value from the union,
 // panicing if the value is not set.
-func (u StellarMessage) MustGetScpLedgerSeq() Uint32 {
+func (u DigitalBitsMessage) MustGetScpLedgerSeq() Uint32 {
 	val, ok := u.GetGetScpLedgerSeq()
 
 	if !ok {
@@ -7861,7 +7861,7 @@ func (u StellarMessage) MustGetScpLedgerSeq() Uint32 {
 
 // GetGetScpLedgerSeq retrieves the GetScpLedgerSeq value from the union,
 // returning ok if the union's switch indicated the value is valid.
-func (u StellarMessage) GetGetScpLedgerSeq() (result Uint32, ok bool) {
+func (u DigitalBitsMessage) GetGetScpLedgerSeq() (result Uint32, ok bool) {
 	armName, _ := u.ArmForSwitch(int32(u.Type))
 
 	if armName == "GetScpLedgerSeq" {
@@ -7873,21 +7873,21 @@ func (u StellarMessage) GetGetScpLedgerSeq() (result Uint32, ok bool) {
 }
 
 // MarshalBinary implements encoding.BinaryMarshaler.
-func (s StellarMessage) MarshalBinary() ([]byte, error) {
+func (s DigitalBitsMessage) MarshalBinary() ([]byte, error) {
 	b := new(bytes.Buffer)
 	_, err := Marshal(b, s)
 	return b.Bytes(), err
 }
 
 // UnmarshalBinary implements encoding.BinaryUnmarshaler.
-func (s *StellarMessage) UnmarshalBinary(inp []byte) error {
+func (s *DigitalBitsMessage) UnmarshalBinary(inp []byte) error {
 	_, err := Unmarshal(bytes.NewReader(inp), s)
 	return err
 }
 
 var (
-	_ encoding.BinaryMarshaler   = (*StellarMessage)(nil)
-	_ encoding.BinaryUnmarshaler = (*StellarMessage)(nil)
+	_ encoding.BinaryMarshaler   = (*DigitalBitsMessage)(nil)
+	_ encoding.BinaryUnmarshaler = (*DigitalBitsMessage)(nil)
 )
 
 // AuthenticatedMessageV0 is an XDR NestedStruct defines as:
@@ -7895,13 +7895,13 @@ var (
 //   struct
 //        {
 //            uint64 sequence;
-//            StellarMessage message;
+//            DigitalBitsMessage message;
 //            HmacSha256Mac mac;
 //        }
 //
 type AuthenticatedMessageV0 struct {
 	Sequence Uint64
-	Message  StellarMessage
+	Message  DigitalBitsMessage
 	Mac      HmacSha256Mac
 }
 
@@ -7931,7 +7931,7 @@ var (
 //        struct
 //        {
 //            uint64 sequence;
-//            StellarMessage message;
+//            DigitalBitsMessage message;
 //            HmacSha256Mac mac;
 //        } v0;
 //    };

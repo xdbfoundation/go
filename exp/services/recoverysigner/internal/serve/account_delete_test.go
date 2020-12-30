@@ -8,11 +8,11 @@ import (
 	"testing"
 
 	"github.com/go-chi/chi"
-	"github.com/stellar/go/exp/services/recoverysigner/internal/account"
-	"github.com/stellar/go/exp/services/recoverysigner/internal/db/dbtest"
-	"github.com/stellar/go/exp/services/recoverysigner/internal/serve/auth"
-	"github.com/stellar/go/keypair"
-	supportlog "github.com/stellar/go/support/log"
+	"github.com/digitalbits/go/exp/services/recoverysigner/internal/account"
+	"github.com/digitalbits/go/exp/services/recoverysigner/internal/db/dbtest"
+	"github.com/digitalbits/go/exp/services/recoverysigner/internal/serve/auth"
+	"github.com/digitalbits/go/keypair"
+	supportlog "github.com/digitalbits/go/support/log"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )

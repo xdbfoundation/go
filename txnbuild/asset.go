@@ -3,22 +3,22 @@ package txnbuild
 import (
 	"bytes"
 
-	"github.com/stellar/go/support/errors"
-	"github.com/stellar/go/xdr"
+	"github.com/digitalbits/go/support/errors"
+	"github.com/digitalbits/go/xdr"
 )
 
-// AssetType represents the type of a Stellar asset.
+// AssetType represents the type of a DigitalBits asset.
 type AssetType xdr.AssetType
 
 // AssetTypeNative, AssetTypeCreditAlphanum4, AssetTypeCreditAlphanum12 enumerate the different
-// types of asset on the Stellar network.
+// types of asset on the DigitalBits network.
 const (
 	AssetTypeNative           AssetType = AssetType(xdr.AssetTypeAssetTypeNative)
 	AssetTypeCreditAlphanum4  AssetType = AssetType(xdr.AssetTypeAssetTypeCreditAlphanum4)
 	AssetTypeCreditAlphanum12 AssetType = AssetType(xdr.AssetTypeAssetTypeCreditAlphanum12)
 )
 
-// Asset represents a Stellar asset.
+// Asset represents a DigitalBits asset.
 type Asset interface {
 	GetType() (AssetType, error)
 	IsNative() bool
@@ -54,7 +54,7 @@ func (na NativeAsset) ToXDR() (xdr.Asset, error) {
 	return xdrAsset, nil
 }
 
-// CreditAsset represents non-XLM assets on the Stellar network.
+// CreditAsset represents non-XLM assets on the DigitalBits network.
 type CreditAsset struct {
 	Code   string
 	Issuer string

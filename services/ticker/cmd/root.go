@@ -6,21 +6,21 @@ import (
 
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
-	horizonclient "github.com/stellar/go/clients/horizonclient"
-	hlog "github.com/stellar/go/support/log"
+	frontierclient "github.com/digitalbits/go/clients/frontierclient"
+	hlog "github.com/digitalbits/go/support/log"
 )
 
 var DatabaseURL string
-var Client *horizonclient.Client
+var Client *frontierclient.Client
 var UseTestNet bool
 var Logger = hlog.New()
 
-var defaultDatabaseURL = getEnv("DB_URL", "postgres://localhost:5432/stellarticker01?sslmode=disable")
+var defaultDatabaseURL = getEnv("DB_URL", "postgres://localhost:5432/digitalbitsticker01?sslmode=disable")
 
 var rootCmd = &cobra.Command{
 	Use:   "ticker",
-	Short: "Stellar Development Foundation Ticker.",
-	Long:  `A tool to provide Stellar Asset and Market data.`,
+	Short: "DigitalBits Development Foundation Ticker.",
+	Long:  `A tool to provide DigitalBits Asset and Market data.`,
 }
 
 func getEnv(key, fallback string) string {
@@ -44,7 +44,7 @@ func init() {
 		&UseTestNet,
 		"testnet",
 		false,
-		"use the Stellar Test Network, instead of the Stellar Public Network",
+		"use the DigitalBits Test Network, instead of the DigitalBits Public Network",
 	)
 
 	Logger.SetLevel(logrus.DebugLevel)
@@ -52,11 +52,11 @@ func init() {
 
 func initConfig() {
 	if UseTestNet {
-		Logger.Debug("Using Stellar Default Test Network")
-		Client = horizonclient.DefaultTestNetClient
+		Logger.Debug("Using DigitalBits Default Test Network")
+		Client = frontierclient.DefaultTestNetClient
 	} else {
-		Logger.Debug("Using Stellar Default Public Network")
-		Client = horizonclient.DefaultPublicNetClient
+		Logger.Debug("Using DigitalBits Default Public Network")
+		Client = frontierclient.DefaultPublicNetClient
 	}
 }
 

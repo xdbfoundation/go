@@ -6,7 +6,7 @@ import (
 	stdio "io"
 	"testing"
 
-	"github.com/stellar/go/historyarchive"
+	"github.com/digitalbits/go/historyarchive"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -36,7 +36,7 @@ func TestGetState_Read(t *testing.T) {
 
 func getTestArchive() (*historyarchive.Archive, error) {
 	return historyarchive.Connect(
-		fmt.Sprintf("s3://history.stellar.org/prd/core-live/core_live_001/"),
+		fmt.Sprintf("s3://history.digitalbits.org/prd/core-live/core_live_001/"),
 		historyarchive.ConnectOptions{
 			S3Region:            "eu-west-1",
 			UnsignedRequests:    true,

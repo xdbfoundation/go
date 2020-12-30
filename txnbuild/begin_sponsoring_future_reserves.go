@@ -2,12 +2,12 @@
 package txnbuild
 
 import (
-	"github.com/stellar/go/support/errors"
-	"github.com/stellar/go/xdr"
+	"github.com/digitalbits/go/support/errors"
+	"github.com/digitalbits/go/xdr"
 )
 
-// BeginSponsoringFutureReserves represents the Stellar begin sponsoring future reserves operation. See
-// https://www.stellar.org/developers/guides/concepts/list-of-operations.html
+// BeginSponsoringFutureReserves represents the DigitalBits begin sponsoring future reserves operation. See
+// https://www.digitalbits.org/developers/guides/concepts/list-of-operations.html
 type BeginSponsoringFutureReserves struct {
 	SponsoredID   string
 	SourceAccount Account
@@ -45,7 +45,7 @@ func (bs *BeginSponsoringFutureReserves) FromXDR(xdrOp xdr.Operation) error {
 // Validate for BeginSponsoringFutureReserves validates the required struct fields. It returns an error if any of the fields are
 // invalid. Otherwise, it returns nil.
 func (bs *BeginSponsoringFutureReserves) Validate() error {
-	err := validateStellarPublicKey(bs.SponsoredID)
+	err := validateDigitalBitsPublicKey(bs.SponsoredID)
 	if err != nil {
 		return NewValidationError("SponsoredID", err.Error())
 	}

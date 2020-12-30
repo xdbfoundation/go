@@ -10,7 +10,7 @@ import (
 // URIs simpler.
 const StandardPagingOptions = "{?cursor,limit,order}"
 
-// LinkBuilder is a helper for constructing URLs in horizon.
+// LinkBuilder is a helper for constructing URLs in frontier.
 type LinkBuilder struct {
 	Base *url.URL
 }

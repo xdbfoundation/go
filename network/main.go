@@ -1,4 +1,4 @@
-// Package network contains functions that deal with stellar network passphrases
+// Package network contains functions that deal with digitalbits network passphrases
 // and IDs.
 package network
 
@@ -7,14 +7,14 @@ import (
 
 	"strings"
 
-	"github.com/stellar/go/hash"
-	"github.com/stellar/go/support/errors"
-	"github.com/stellar/go/xdr"
+	"github.com/digitalbits/go/hash"
+	"github.com/digitalbits/go/support/errors"
+	"github.com/digitalbits/go/xdr"
 )
 
 const (
-	// PublicNetworkPassphrase is the pass phrase used for every transaction intended for the public stellar network
-	PublicNetworkPassphrase = "Public Global Stellar Network ; September 2015"
+	// PublicNetworkPassphrase is the pass phrase used for every transaction intended for the public digitalbits network
+	PublicNetworkPassphrase = "Public Global DigitalBits Network ; September 2015"
 	// TestNetworkPassphrase is the pass phrase used for every transaction intended for the SDF-run test network
 	TestNetworkPassphrase = "Test SDF Network ; September 2015"
 )
@@ -28,8 +28,8 @@ func ID(passphrase string) [32]byte {
 
 // HashTransactionInEnvelope derives the network specific hash for the transaction
 // contained in the provided envelope using the network identified by the supplied passphrase.
-// The resulting hash is the value that can be signed by stellar secret key to
-// authorize the transaction identified by the hash to stellar validators.
+// The resulting hash is the value that can be signed by digitalbits secret key to
+// authorize the transaction identified by the hash to digitalbits validators.
 func HashTransactionInEnvelope(envelope xdr.TransactionEnvelope, passphrase string) ([32]byte, error) {
 	var hash [32]byte
 	var err error
@@ -48,8 +48,8 @@ func HashTransactionInEnvelope(envelope xdr.TransactionEnvelope, passphrase stri
 
 // HashTransaction derives the network specific hash for the provided
 // transaction using the network identified by the supplied passphrase.  The
-// resulting hash is the value that can be signed by stellar secret key to
-// authorize the transaction identified by the hash to stellar validators.
+// resulting hash is the value that can be signed by digitalbits secret key to
+// authorize the transaction identified by the hash to digitalbits validators.
 func HashTransaction(tx xdr.Transaction, passphrase string) ([32]byte, error) {
 	taggedTx := xdr.TransactionSignaturePayloadTaggedTransaction{
 		Type: xdr.EnvelopeTypeEnvelopeTypeTx,
@@ -60,8 +60,8 @@ func HashTransaction(tx xdr.Transaction, passphrase string) ([32]byte, error) {
 
 // HashFeeBumpTransaction derives the network specific hash for the provided
 // fee bump transaction using the network identified by the supplied passphrase.  The
-// resulting hash is the value that can be signed by stellar secret key to
-// authorize the transaction identified by the hash to stellar validators.
+// resulting hash is the value that can be signed by digitalbits secret key to
+// authorize the transaction identified by the hash to digitalbits validators.
 func HashFeeBumpTransaction(tx xdr.FeeBumpTransaction, passphrase string) ([32]byte, error) {
 	taggedTx := xdr.TransactionSignaturePayloadTaggedTransaction{
 		Type:    xdr.EnvelopeTypeEnvelopeTypeTxFeeBump,
@@ -72,8 +72,8 @@ func HashFeeBumpTransaction(tx xdr.FeeBumpTransaction, passphrase string) ([32]b
 
 // HashTransactionV0 derives the network specific hash for the provided
 // legacy transaction using the network identified by the supplied passphrase.  The
-// resulting hash is the value that can be signed by stellar secret key to
-// authorize the transaction identified by the hash to stellar validators.
+// resulting hash is the value that can be signed by digitalbits secret key to
+// authorize the transaction identified by the hash to digitalbits validators.
 func HashTransactionV0(tx xdr.TransactionV0, passphrase string) ([32]byte, error) {
 	sa, err := xdr.NewMuxedAccount(xdr.CryptoKeyTypeKeyTypeEd25519, tx.SourceAccountEd25519)
 	if err != nil {

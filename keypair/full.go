@@ -4,8 +4,8 @@ import (
 	"bytes"
 	"encoding/base64"
 
-	"github.com/stellar/go/strkey"
-	"github.com/stellar/go/xdr"
+	"github.com/digitalbits/go/strkey"
+	"github.com/digitalbits/go/xdr"
 
 	"golang.org/x/crypto/ed25519"
 )

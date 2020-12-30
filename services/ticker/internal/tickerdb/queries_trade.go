@@ -7,7 +7,7 @@ import (
 )
 
 // BulkInsertTrades inserts a slice of trades in the database. Trades
-// that are already in the database (i.e. horizon_id already exists)
+// that are already in the database (i.e. frontier_id already exists)
 // are ignored.
 func (s *TickerSession) BulkInsertTrades(trades []Trade) (err error) {
 	if len(trades) <= 50 {
@@ -81,7 +81,7 @@ func performInsertTrades(s *TickerSession, trades []Trade) (err error) {
 
 	qs := "INSERT INTO trades (" + dbFieldsString + ")"
 	qs += " VALUES " + placeholders
-	qs += " ON CONFLICT ON CONSTRAINT trades_horizon_id_key DO NOTHING;"
+	qs += " ON CONFLICT ON CONSTRAINT trades_frontier_id_key DO NOTHING;"
 
 	_, err = s.ExecRaw(qs, dbValues...)
 	return

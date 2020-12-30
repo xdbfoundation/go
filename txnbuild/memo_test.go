@@ -3,7 +3,7 @@ package txnbuild
 import (
 	"testing"
 
-	"github.com/stellar/go/xdr"
+	"github.com/digitalbits/go/xdr"
 
 	"github.com/stretchr/testify/assert"
 )

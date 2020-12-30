@@ -1,12 +1,12 @@
 package txnbuild
 
 import (
-	"github.com/stellar/go/support/errors"
-	"github.com/stellar/go/xdr"
+	"github.com/digitalbits/go/support/errors"
+	"github.com/digitalbits/go/xdr"
 )
 
-// Inflation represents the Stellar inflation operation. See
-// https://www.stellar.org/developers/guides/concepts/list-of-operations.html
+// Inflation represents the DigitalBits inflation operation. See
+// https://www.digitalbits.org/developers/guides/concepts/list-of-operations.html
 type Inflation struct {
 	SourceAccount Account
 }

@@ -3,7 +3,7 @@ package io
 import (
 	"testing"
 
-	"github.com/stellar/go/xdr"
+	"github.com/digitalbits/go/xdr"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/suite"
 )
