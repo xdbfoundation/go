@@ -33,13 +33,13 @@ jobs:
 
       - name: Build the app    
         run: |
-          mkdir -p /go/src/github.com/digitalbits/go
+          sudo mkdir -p /go/src/github.com/digitalbits/go
 
           export GOPATH=/go
           export GO111MODULE=on
 
-          cp -Rf ./* $GOPATH/
-          go install github.com/digitalbits/go/services/...
+          sudo cp -Rf ./* $GOPATH/
+          sudo go install github.com/digitalbits/go/services/...
 
       - name: Release
         uses: fnkr/github-action-ghr@v1
