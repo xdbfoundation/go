@@ -24,10 +24,7 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-
-      - name: Install deps
-        run: sudo apt update && sudo apt install -y unzip curl wget
-
+      - uses: chrislennon/action-aws-cli@v1.1
       - name: Install Go
         uses: actions/setup-go@v2
         with:
@@ -43,7 +40,6 @@ jobs:
           sudo go install github.com/digitalbits/go/services/...
 
       - name: Release
-        uses: chrislennon/action-aws-cli@v1.1
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_KEY }}
