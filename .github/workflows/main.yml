@@ -28,34 +28,24 @@ jobs:
       - name: Install deps
         run: sudo apt update && sudo apt install -y unzip curl wget
 
-      - name: Install Golang
-        run: |
-          wget https://dl.google.com/go/go1.15.2.linux-amd64.tar.gz 
-          sudo tar -xvf go1.15.2.linux-amd64.tar.gz   
-          sudo rm -f go1.15.2.linux-amd64.tar.gz 
-          sudo mv go /
-
-      - name: Install AWS CLI
-        run: |
-          curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-          unzip awscliv2.zip
-          sudo ./aws/install
+      - name: Install Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: 1.14.x
 
       - name: Build the app    
         run: |
           sudo mkdir -p /go/src/github.com/digitalbits/go
 
-          export GOPATH=/go
           export GO111MODULE=on
-          export PATH="/go/bin:/usr/local/go/bin:$PATH"
 
-          sudo cp -Rf ./* /go/src/github.com/digitalbits/go
+          sudo cp -Rf ./* /go/src/github.com/digitalbits/go/
           sudo go install github.com/digitalbits/go/services/...
 
       - name: Release
-        run: |
-          export AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY }}
-          export AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_KEY }}
-          export AWS_DEFAULT_REGION=eu-central-1
-
-          aws s3 sync /go/bin/ s3://digitalbits-bin/services/
+        uses: chrislennon/action-aws-cli@v1.1
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_KEY }}
+          AWS_DEFAULT_REGION: eu-central-1
+        run: aws s3 sync /go/bin/ s3://digitalbits-bin/services/
