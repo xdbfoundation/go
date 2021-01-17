@@ -72,7 +72,7 @@ is funded it does not truly exist!
 ## Funding your account
 
 The DigitalBits test network provides the Friendbot, a tool that developers
-can use to get testnet lumens for testing purposes. To fund your account, simply
+can use to get testnet digitalbits for testing purposes. To fund your account, simply
 execute the following curl command:
 
 ```bash
@@ -207,7 +207,7 @@ After running this script you should see a signed transaction blob. To submit th
 Now to send a transaction just use frontier:
 
 ```bash
-curl -H "Content-Type: application/json" -X POST -d '{"tx":"AAAAAH6Sq76F4cHVMWvGG4AtNtFVIvayUxSgR401rPY9ej3TAAAD6AACiK0AAAABAAAAAAAAAAAAAAABAAAAAAAAAAEAAAAAKc1j3y10+nI+sxuXlmFz71JS35mp/RcPCP45Gw0obdAAAAAAAAAAAAExLQAAAAAAAAAAAT16PdMAAABAsJTBC5N5B9Q/9+ZKS7qkMd/wZHWlP6uCCFLzeD+JWT60/VgGFCpzQhZmMg2k4Vg+AwKJTwko3d7Jt3Y6WhjLCg=="}' "https://frontier-testnet.digitalbits.org/transactions"
+curl -H "Content-Type: application/json" -X POST -d '{"tx":"AAAAAH6Sq76F4cHVMWvGG4AtNtFVIvayUxSgR401rPY9ej3TAAAD6AACiK0AAAABAAAAAAAAAAAAAAABAAAAAAAAAAEAAAAAKc1j3y10+nI+sxuXdbFz71JS35mp/RcPCP45Gw0obdAAAAAAAAAAAAExLQAAAAAAAAAAAT16PdMAAABAsJTBC5N5B9Q/9+ZKS7qkMd/wZHWlP6uCCFLzeD+JWT60/VgGFCpzQhZmMg2k4Vg+AwKJTwko3d7Jt3Y6WhjLCg=="}' "https://frontier-testnet.digitalbits.org/transactions"
 ```
 
 You should see a new payment in a window running `stream_payments.js` script.

@@ -74,14 +74,14 @@ func TestAddNativeData(t *testing.T) {
 	}
 
 	addNativeData(&trade1)
-	assert.Equal(t, "XLM", trade1.BaseAssetCode)
+	assert.Equal(t, "XDB", trade1.BaseAssetCode)
 	assert.Equal(t, "native", trade1.BaseAssetIssuer)
 
 	trade2 := hProtocol.Trade{
 		CounterAssetType: "native",
 	}
 	addNativeData(&trade2)
-	assert.Equal(t, "XLM", trade2.CounterAssetCode)
+	assert.Equal(t, "XDB", trade2.CounterAssetCode)
 	assert.Equal(t, "native", trade2.CounterAssetIssuer)
 }
 

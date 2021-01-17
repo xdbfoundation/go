@@ -51,7 +51,7 @@ create_account :bartek, :master, 100
 # Close ledger
 close_ledger
 
-# Send 5 XLM from `scott` to `bartek`
+# Send 5 XDB from `scott` to `bartek`
 payment :scott, :bartek,  [:native, 5]
 ```
 

@@ -64,7 +64,7 @@ A page provides a couple of links to ease in iteration.
         "sender": "GCEZWKCA5VLDNRLN3RPRJMRZOX3Z6G5CHCGSNFHEYVXM3XOJMDS674JZ",
         "receiver": "GCXKG6RN4ONIEPCMNFB732A436Z5PNDSRLGWK7GBLCMQLIFO4S7EYWVU",
         "asset": {
-          "code": "XLM"
+          "code": "XDB"
         },
         "amount": 1000000000,
         "amount_f": 100.00

@@ -21,8 +21,8 @@ To learn more about the concept of ledgers in the DigitalBits network, take a lo
 | operation_count              | number | The number of operations applied in this ledger.                                                                             |
 | tx_set_operation_count       | number | The number of operations in this ledger. This number includes operations from failed and successful transactions.            |
 | closed_at                    | string | An [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) formatted string of when this ledger was closed.                       |
-| total_coins                  | string | The total number of lumens in circulation.                                                                                   |
-| fee_pool                     | string | The sum of all transaction fees *(in lumens)* since the last inflation operation. They are redistributed during [inflation]. |
+| total_coins                  | string | The total number of digitalbits in circulation.                                                                                   |
+| fee_pool                     | string | The sum of all transaction fees *(in digitalbits)* since the last inflation operation. They are redistributed during [inflation]. |
 | base_fee                     | number | The [fee] the network charges per operation in a transaction.                                                                |
 | base_reserve                 | string | The [reserve][fee] the network uses when calculating an account's minimum balance.                                           |
 | max_tx_set_size              | number | The maximum number of transactions validators have agreed to process in a given ledger.                                      |

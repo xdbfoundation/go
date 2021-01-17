@@ -9,7 +9,7 @@ import (
 
 var mainCmd = &cobra.Command{
 	Use:   "digitalbits-hd-wallet",
-	Short: "Simple HD wallet for DigitalBits Lumens. THIS PROGRAM IS STILL EXPERIMENTAL. USE AT YOUR OWN RISK.",
+	Short: "Simple HD wallet for DigitalBits DigitalBits. THIS PROGRAM IS STILL EXPERIMENTAL. USE AT YOUR OWN RISK.",
 }
 
 func init() {

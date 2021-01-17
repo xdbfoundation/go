@@ -7,7 +7,7 @@ Assets from different issuers but with the same code are aggregated, so trades b
 - `native` and `BTC:GDT3ZKQZXXHDPJUKNHUMANMNIT4JWSUYXUGN7EQZDVXBO7NPNFVFPBAK`
 - `native` and `BTC:GATEMHCCKCY67ZUCKTROYN24ZYT5GK4EQZ65JJLDHKHRUZI3EUEKMTCH`
 
-are aggregated in the `XLM_BTC` pair.
+are aggregated in the `XDB_BTC` pair.
 
 ### Trade Pairs
 
@@ -15,7 +15,7 @@ Trade pairs are ordered `<Counter>_<Base>`.
 
 Example:
 
-The pair `XLM_ZZZ` has the `XLM` as the counter currency and `ZZZ` as the base. For that pair if the API returns a `close` value of `2`, then the last trade for the pair was `2 XLM` exchanged for `1 ZZZ`.
+The pair `XDB_ZZZ` has the `XDB` as the counter currency and `ZZZ` as the base. For that pair if the API returns a `close` value of `2`, then the last trade for the pair was `2 XDB` exchanged for `1 ZZZ`.
 
 ### Response Fields
 

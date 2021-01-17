@@ -22,7 +22,7 @@ type Query {
 
 	# retrieve aggregated trade stats for the last <numHoursAgo>
 	# hours. optionally provide a list of pairNames (e.g.
-	# ["XLM_BTC", "XLM_USD"]) or a single currency (e.g. "XLM")
+	# ["XDB_BTC", "XDB_USD"]) or a single currency (e.g. "XDB")
 	# for filtering results.
 	ticker(
 		code: String

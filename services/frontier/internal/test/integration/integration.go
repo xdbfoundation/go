@@ -410,7 +410,7 @@ func (i *Test) CreateAccounts(count int, initialBalance string) ([]*keypair.Full
 	}
 
 	for _, keys := range pairs {
-		i.t.Logf("Funded %s (%s) with %s XLM.\n",
+		i.t.Logf("Funded %s (%s) with %s XDB.\n",
 			keys.Seed(), keys.Address(), initialBalance)
 	}
 

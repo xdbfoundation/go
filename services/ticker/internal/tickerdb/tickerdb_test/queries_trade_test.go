@@ -49,7 +49,7 @@ func TestBulkInsertTrades(t *testing.T) {
 
 	// Adding a seed asset to be used later:
 	err = session.InsertOrUpdateAsset(&tickerdb.Asset{
-		Code:     "XLM",
+		Code:     "XDB",
 		IssuerID: issuer.ID,
 	}, []string{"code", "issuer_id"})
 	require.NoError(t, err)
@@ -159,7 +159,7 @@ func TestGetLastTrade(t *testing.T) {
 
 	// Adding a seed asset to be used later:
 	err = session.InsertOrUpdateAsset(&tickerdb.Asset{
-		Code:     "XLM",
+		Code:     "XDB",
 		IssuerID: issuer.ID,
 	}, []string{"code", "issuer_id"})
 	require.NoError(t, err)
@@ -259,7 +259,7 @@ func TestDeleteOldTrades(t *testing.T) {
 
 	// Adding a seed asset to be used later:
 	err = session.InsertOrUpdateAsset(&tickerdb.Asset{
-		Code:     "XLM",
+		Code:     "XDB",
 		IssuerID: issuer.ID,
 	}, []string{"code", "issuer_id"})
 	require.NoError(t, err)

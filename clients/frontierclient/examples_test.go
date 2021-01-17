@@ -516,7 +516,7 @@ func ExampleClient_Operations() {
 
 func ExampleClient_OrderBook() {
 	client := frontierclient.DefaultPublicNetClient
-	// orderbook for an asset pair, e.g XLM/NGN
+	// orderbook for an asset pair, e.g XDB/NGN
 	obRequest := frontierclient.OrderBookRequest{
 		BuyingAssetType:    frontierclient.AssetTypeNative,
 		SellingAssetCode:   "USD",
@@ -533,7 +533,7 @@ func ExampleClient_OrderBook() {
 
 func ExampleClient_Paths() {
 	client := frontierclient.DefaultPublicNetClient
-	// Find paths for XLM->NGN
+	// Find paths for XDB->NGN
 	pr := frontierclient.PathsRequest{
 		DestinationAccount:     "GCLWGQPMKXQSPF776IU33AH4PZNOOWNAWGGKVTBQMIC5IMKUNP3E6NVU",
 		DestinationAmount:      "100",

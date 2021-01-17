@@ -29,13 +29,13 @@ var hHighOrder = hProtocol.PriceLevel{
 var hOrders = []hProtocol.PriceLevel{hLowOrder, hHighOrder}
 
 var lowUsdOrder = usdOrder{
-	xlmAmount: 50.0,
+	xdbAmount: 50.0,
 	usdAmount: 5.0,
 	usdPrice:  20.0,
 }
 
 var highUsdOrder = usdOrder{
-	xlmAmount: 100.0,
+	xdbAmount: 100.0,
 	usdAmount: 10.0,
 	usdPrice:  25.0,
 }
@@ -83,7 +83,7 @@ func TestCalcSpread(t *testing.T) {
 func TestCalcSpreadPctAtDepth(t *testing.T) {
 	bids := []usdOrder{
 		usdOrder{
-			xlmAmount: 100.0,
+			xdbAmount: 100.0,
 			usdAmount: 10.0,
 			usdPrice:  10.0,
 		},
@@ -135,17 +135,17 @@ func TestCalcBestOrderAtDepth(t *testing.T) {
 func TestCalcSlippageAtDepth(t *testing.T) {
 	bids := []usdOrder{
 		usdOrder{
-			xlmAmount: 1.,
+			xdbAmount: 1.,
 			usdAmount: 30.,
 			usdPrice:  30.,
 		},
 		usdOrder{
-			xlmAmount: 1.,
+			xdbAmount: 1.,
 			usdAmount: 25.,
 			usdPrice:  25.,
 		},
 		usdOrder{
-			xlmAmount: 1.,
+			xdbAmount: 1.,
 			usdAmount: 50.,
 			usdPrice:  20.,
 		},
@@ -153,17 +153,17 @@ func TestCalcSlippageAtDepth(t *testing.T) {
 
 	asks := []usdOrder{
 		usdOrder{
-			xlmAmount: 5.,
+			xdbAmount: 5.,
 			usdAmount: 100.,
 			usdPrice:  20.,
 		},
 		usdOrder{
-			xlmAmount: 4.,
+			xdbAmount: 4.,
 			usdAmount: 100.,
 			usdPrice:  25.,
 		},
 		usdOrder{
-			xlmAmount: 4.,
+			xdbAmount: 4.,
 			usdAmount: 120.,
 			usdPrice:  30.,
 		},
@@ -210,17 +210,17 @@ func TestCalcAvgPriceAtDepth(t *testing.T) {
 func TestCalcFairValuePct(t *testing.T) {
 	bids := []usdOrder{
 		usdOrder{
-			xlmAmount: 1.,
+			xdbAmount: 1.,
 			usdAmount: 30.,
 			usdPrice:  30.,
 		},
 		usdOrder{
-			xlmAmount: 1.,
+			xdbAmount: 1.,
 			usdAmount: 25.,
 			usdPrice:  25.,
 		},
 		usdOrder{
-			xlmAmount: 1.,
+			xdbAmount: 1.,
 			usdAmount: 50.,
 			usdPrice:  20.,
 		},
@@ -228,17 +228,17 @@ func TestCalcFairValuePct(t *testing.T) {
 
 	asks := []usdOrder{
 		usdOrder{
-			xlmAmount: 5.,
+			xdbAmount: 5.,
 			usdAmount: 100.,
 			usdPrice:  20.,
 		},
 		usdOrder{
-			xlmAmount: 4.,
+			xdbAmount: 4.,
 			usdAmount: 100.,
 			usdPrice:  25.,
 		},
 		usdOrder{
-			xlmAmount: 4.,
+			xdbAmount: 4.,
 			usdAmount: 120.,
 			usdPrice:  30.,
 		},

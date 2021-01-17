@@ -32,7 +32,7 @@ func TestInsertOrUpdateOrderbokStats(t *testing.T) {
 	publicKey := "GCF3TQXKZJNFJK7HCMNE2O2CUNKCJH2Y2ROISTBPLC7C5EIA5NNG2XZB"
 	issuerAccount := "AM2FQXKZJNFJK7HCMNE2O2CUNKCJH2Y2ROISTBPLC7C5EIA5NNG2XZB"
 	name := "FOO BAR"
-	code := "XLM"
+	code := "XDB"
 
 	// Adding a seed issuer to be used later:
 	issuer := tickerdb.Issuer{

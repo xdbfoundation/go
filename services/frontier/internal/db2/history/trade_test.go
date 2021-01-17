@@ -42,7 +42,7 @@ func TestTradeQueries(t *testing.T) {
 	tt.Require.NoError(err)
 
 	// test for asset pairs
-	lumen, err := q.GetAssetID(xdr.MustNewNativeAsset())
+	digitalbit, err := q.GetAssetID(xdr.MustNewNativeAsset())
 	tt.Require.NoError(err)
 	assetUSD, err := q.GetAssetID(xdr.MustNewCreditAsset("USD", "GB2QIYT2IAUFMRXKLSLLPRECC6OCOGJMADSPTRK7TGNT2SFR2YGWDARD"))
 	tt.Require.NoError(err)
@@ -56,7 +56,7 @@ func TestTradeQueries(t *testing.T) {
 	assetUSD, err = q.GetAssetID(xdr.MustNewCreditAsset("USD", "GAXMF43TGZHW3QN3REOUA2U5PW5BTARXGGYJ3JIFHW3YT6QRKRL3CPPU"))
 	tt.Require.NoError(err)
 
-	err = q.TradesForAssetPair(lumen, assetUSD).Page(db2.MustPageQuery("", false, "asc", 100)).Select(&trades)
+	err = q.TradesForAssetPair(digitalbit, assetUSD).Page(db2.MustPageQuery("", false, "asc", 100)).Select(&trades)
 	tt.Require.NoError(err)
 	tt.Assert.Len(trades, 1)
 
@@ -65,7 +65,7 @@ func TestTradeQueries(t *testing.T) {
 	tt.Assert.Equal(true, trades[0].BaseIsSeller)
 
 	// reverse assets
-	err = q.TradesForAssetPair(assetUSD, lumen).Page(db2.MustPageQuery("", false, "asc", 100)).Select(&trades)
+	err = q.TradesForAssetPair(assetUSD, digitalbit).Page(db2.MustPageQuery("", false, "asc", 100)).Select(&trades)
 	tt.Require.NoError(err)
 	tt.Assert.Len(trades, 1)
 

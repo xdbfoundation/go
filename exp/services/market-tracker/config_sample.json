@@ -9,7 +9,7 @@
                 "currency": "USD"
             },
             "sellingAsset": {
-                "code": "XLM",
+                "code": "XDB",
                 "issuerAddress": "native",
                 "type": "AssetTypeNative"
             }

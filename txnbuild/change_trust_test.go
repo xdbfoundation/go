@@ -50,7 +50,7 @@ func TestChangeTrustValidateInvalidAsset(t *testing.T) {
 		},
 	)
 	if assert.Error(t, err) {
-		expected := "validation failed for *txnbuild.ChangeTrust operation: Field: Line, Error: native (XLM) asset type is not allowed"
+		expected := "validation failed for *txnbuild.ChangeTrust operation: Field: Line, Error: native (XDB) asset type is not allowed"
 		assert.Contains(t, err.Error(), expected)
 	}
 }

@@ -109,7 +109,7 @@ Added new client methods and effects supporting [Protocol 14](https://github.com
 
 ```go
 	client := frontierclient.DefaultPublicNetClient
-	// Find paths for XLM->NGN
+	// Find paths for XDB->NGN
 	pr := frontierclient.PathsRequest{
 		DestinationAccount:     "GCLWGQPMKXQSPF776IU33AH4PZNOOWNAWGGKVTBQMIC5IMKUNP3E6NVU",
 		DestinationAmount:      "100",

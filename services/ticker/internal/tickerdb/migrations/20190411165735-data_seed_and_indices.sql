@@ -55,7 +55,7 @@ INSERT INTO public.assets (
     issuer_id,
     issuer_account
 ) VALUES (
-    'XLM',
+    'XDB',
     'native',
     0,
     FALSE,
@@ -69,7 +69,7 @@ INSERT INTO public.assets (
     now(),
     now(),
     7,
-    'DigitalBits Lumens',
+    'DigitalBits DigitalBits',
     '',
     '',
     FALSE,

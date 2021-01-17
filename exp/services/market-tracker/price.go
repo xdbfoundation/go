@@ -15,7 +15,7 @@ import (
 	"gopkg.in/matryer/try.v1"
 )
 
-const stelExURL = "https://api.digitalbits.expert/explorer/public/xlm-price"
+const stelExURL = "https://api.digitalbits.expert/explorer/public/xdb-price"
 
 const ratesURL = "https://openexchangerates.org/api/latest.json"
 
@@ -24,12 +24,12 @@ type cachedPrice struct {
 	updated time.Time
 }
 
-func mustCreateXlmPriceRequest() *http.Request {
+func mustCreateXdbPriceRequest() *http.Request {
 	numAttempts := 10
 	var req *http.Request
 	err := try.Do(func(attempt int) (bool, error) {
 		var err error
-		req, err = createXlmPriceRequest()
+		req, err = createXdbPriceRequest()
 		if err != nil {
 			time.Sleep(time.Duration(attempt) * time.Second)
 		}
@@ -42,7 +42,7 @@ func mustCreateXlmPriceRequest() *http.Request {
 	return req
 }
 
-func createXlmPriceRequest() (*http.Request, error) {
+func createXdbPriceRequest() (*http.Request, error) {
 	err := godotenv.Load()
 	if err != nil {
 		return nil, err
@@ -61,7 +61,7 @@ func createXlmPriceRequest() (*http.Request, error) {
 	return req, nil
 }
 
-func getLatestXlmPrice(req *http.Request) (float64, error) {
+func getLatestXdbPrice(req *http.Request) (float64, error) {
 	body, err := getPriceResponse(req)
 	if err != nil {
 		return 0.0, fmt.Errorf("got error from digitalbits expert price api: %s", err)
@@ -69,10 +69,10 @@ func getLatestXlmPrice(req *http.Request) (float64, error) {
 	return parseDigitalBitsExpertLatestPrice(body)
 }
 
-func getXlmPriceHistory(req *http.Request) ([]xlmPrice, error) {
+func getXdbPriceHistory(req *http.Request) ([]xdbPrice, error) {
 	body, err := getPriceResponse(req)
 	if err != nil {
-		return []xlmPrice{}, fmt.Errorf("got error from digitalbits expert price api: %s", err)
+		return []xdbPrice{}, fmt.Errorf("got error from digitalbits expert price api: %s", err)
 	}
 	return parseDigitalBitsExpertPriceHistory(body)
 }
@@ -112,41 +112,41 @@ func getPriceResponse(req *http.Request) (string, error) {
 	return body, nil
 }
 
-func parseDigitalBitsExpertPriceHistory(body string) ([]xlmPrice, error) {
+func parseDigitalBitsExpertPriceHistory(body string) ([]xdbPrice, error) {
 	// The DigitalBits Expert response has expected format: [[timestamp1,price1], [timestamp2,price2], ...]
 	// with the most recent timestamp and price first. We split that array to get strings of only "timestamp,price".
 	// We then split each of those strings and define a struct containing the timestamp and price.
 	if len(body) < 5 {
-		return []xlmPrice{}, fmt.Errorf("got ill-formed response body from digitalbits expert")
+		return []xdbPrice{}, fmt.Errorf("got ill-formed response body from digitalbits expert")
 	}
 
 	body = body[2 : len(body)-2]
 	timePriceStrs := strings.Split(body, "],[")
 
-	var xlmPrices []xlmPrice
+	var xdbPrices []xdbPrice
 	for _, timePriceStr := range timePriceStrs {
 		timePrice := strings.Split(timePriceStr, ",")
 		if len(timePrice) != 2 {
-			return []xlmPrice{}, fmt.Errorf("got ill-formed time/price from digitalbits expert")
+			return []xdbPrice{}, fmt.Errorf("got ill-formed time/price from digitalbits expert")
 		}
 
 		ts, err := strconv.ParseInt(timePrice[0], 10, 64)
 		if err != nil {
-			return []xlmPrice{}, err
+			return []xdbPrice{}, err
 		}
 
 		p, err := strconv.ParseFloat(timePrice[1], 64)
 		if err != nil {
-			return []xlmPrice{}, err
+			return []xdbPrice{}, err
 		}
 
-		newXlmPrice := xlmPrice{
+		newXdbPrice := xdbPrice{
 			timestamp: ts,
 			price:     p,
 		}
-		xlmPrices = append(xlmPrices, newXlmPrice)
+		xdbPrices = append(xdbPrices, newXdbPrice)
 	}
-	return xlmPrices, nil
+	return xdbPrices, nil
 }
 
 func parseDigitalBitsExpertLatestPrice(body string) (float64, error) {

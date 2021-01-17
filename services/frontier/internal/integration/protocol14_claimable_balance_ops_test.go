@@ -102,7 +102,7 @@ func TestClaimableBalanceCreationOperationsAndEffects(t *testing.T) {
 		}
 
 		// this operation will fail because the claimable balance is trying to
-		// reserve 100 XLM but the account only has 50.
+		// reserve 100 XDB but the account only has 50.
 		_, err := itest.SubmitOperations(accounts[0], keys[0], &op)
 		tt.Error(err)
 

@@ -1297,7 +1297,7 @@ func TestOrderBookRequest(t *testing.T) {
 
 	orderBookRequest := OrderBookRequest{BuyingAssetType: AssetTypeNative, SellingAssetCode: "USD", SellingAssetType: AssetType4, SellingAssetIssuer: "GBVOL67TMUQBGL4TZYNMY3ZQ5WGQYFPFD5VJRWXR72VA33VFNL225PL5"}
 
-	// orderbook for XLM/USD
+	// orderbook for XDB/USD
 	hmock.On(
 		"GET",
 		"https://localhost/order_book?buying_asset_type=native&selling_asset_code=USD&selling_asset_issuer=GBVOL67TMUQBGL4TZYNMY3ZQ5WGQYFPFD5VJRWXR72VA33VFNL225PL5&selling_asset_type=credit_alphanum4",

@@ -213,7 +213,7 @@ func TestValidateAllowTrustAsset(t *testing.T) {
 
 	err = validateAllowTrustAsset(NativeAsset{})
 	assert.Error(t, err)
-	expectedErrMsg = "native (XLM) asset type is not allowed"
+	expectedErrMsg = "native (XDB) asset type is not allowed"
 	require.EqualError(t, err, expectedErrMsg, "An asset is required")
 
 	// allow trust asset does not require asset issuer
@@ -230,7 +230,7 @@ func TestValidateChangeTrustAsset(t *testing.T) {
 
 	err = validateChangeTrustAsset(NativeAsset{})
 	assert.Error(t, err)
-	expectedErrMsg = "native (XLM) asset type is not allowed"
+	expectedErrMsg = "native (XDB) asset type is not allowed"
 	require.EqualError(t, err, expectedErrMsg, "A custom asset is required")
 
 	kp0 := newKeypair0()

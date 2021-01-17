@@ -27,7 +27,7 @@ type Asset interface {
 	ToXDR() (xdr.Asset, error)
 }
 
-// NativeAsset represents the native XLM asset.
+// NativeAsset represents the native XDB asset.
 type NativeAsset struct{}
 
 // GetType for NativeAsset returns the enum type of the asset.
@@ -35,13 +35,13 @@ func (na NativeAsset) GetType() (AssetType, error) {
 	return AssetTypeNative, nil
 }
 
-// IsNative for NativeAsset returns true (this is an XLM asset).
+// IsNative for NativeAsset returns true (this is an XDB asset).
 func (na NativeAsset) IsNative() bool { return true }
 
-// GetCode for NativeAsset returns an empty string (XLM doesn't have a code).
+// GetCode for NativeAsset returns an empty string (XDB doesn't have a code).
 func (na NativeAsset) GetCode() string { return "" }
 
-// GetIssuer for NativeAsset returns an empty string (XLM doesn't have an issuer).
+// GetIssuer for NativeAsset returns an empty string (XDB doesn't have an issuer).
 func (na NativeAsset) GetIssuer() string { return "" }
 
 // ToXDR for NativeAsset produces a corresponding XDR asset.
@@ -54,7 +54,7 @@ func (na NativeAsset) ToXDR() (xdr.Asset, error) {
 	return xdrAsset, nil
 }
 
-// CreditAsset represents non-XLM assets on the DigitalBits network.
+// CreditAsset represents non-XDB assets on the DigitalBits network.
 type CreditAsset struct {
 	Code   string
 	Issuer string
@@ -72,7 +72,7 @@ func (ca CreditAsset) GetType() (AssetType, error) {
 	}
 }
 
-// IsNative for CreditAsset returns false (this is not an XLM asset).
+// IsNative for CreditAsset returns false (this is not an XDB asset).
 func (ca CreditAsset) IsNative() bool { return false }
 
 // GetCode for CreditAsset returns the asset code.

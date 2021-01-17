@@ -677,7 +677,7 @@ Heads up! Unless the issuing account has `AUTH_REVOCABLE_FLAG` set than the "aut
 <a id="account-merge"></a>
 ### Account Merge
 
-Removes the account and transfers all remaining XLM to the destination account.
+Removes the account and transfers all remaining XDB to the destination account.
 
 #### Attributes
 

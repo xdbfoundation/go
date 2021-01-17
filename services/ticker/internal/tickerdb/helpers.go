@@ -130,18 +130,18 @@ func generateWhereClauseWithOrs(optVarLists [][]optionalVar) (clause string, arg
 	return
 }
 
-// getBaseAndCounterCodes takes an asset pair name string (e.g: XLM_BTC)
-// and returns the parsed asset codes (e.g.: XLM, BTC). It also reverses
+// getBaseAndCounterCodes takes an asset pair name string (e.g: XDB_BTC)
+// and returns the parsed asset codes (e.g.: XDB, BTC). It also reverses
 // the assets, according to the following rules:
-// 1. XLM is always the base asset
-// 2. If XLM is not in the pair, the assets should be ordered alphabetically
+// 1. XDB is always the base asset
+// 2. If XDB is not in the pair, the assets should be ordered alphabetically
 func getBaseAndCounterCodes(pairName string) (string, string, error) {
 	assets := strings.Split(pairName, "_")
 	if len(assets) != 2 {
 		return "", "", errors.New("invalid asset pair name")
 	}
 
-	if (assets[1] == "XLM") || (assets[0] != "XLM" && assets[0] > assets[1]) {
+	if (assets[1] == "XDB") || (assets[0] != "XDB" && assets[0] > assets[1]) {
 		return assets[1], assets[0], nil
 	}
 
@@ -150,8 +150,8 @@ func getBaseAndCounterCodes(pairName string) (string, string, error) {
 
 // normalizeBaseAndCounter takes the user-provided base and counter asset
 // and issuer, and orders them according to the following rules:
-// 1. XLM is always the base asset
-// 2. If XLM is not in the pair, the assets should be ordered alphabetically
+// 1. XDB is always the base asset
+// 2. If XDB is not in the pair, the assets should be ordered alphabetically
 func orderBaseAndCounter(
 	baseCode *string,
 	baseIssuer *string,
@@ -162,7 +162,7 @@ func orderBaseAndCounter(
 		return baseCode, baseIssuer, counterCode, counterIssuer
 	}
 
-	if (*counterCode == "XLM") || (*baseCode != "XLM" && *baseCode > *counterCode) {
+	if (*counterCode == "XDB") || (*baseCode != "XDB" && *baseCode > *counterCode) {
 		return counterCode, counterIssuer, baseCode, baseIssuer
 	}
 

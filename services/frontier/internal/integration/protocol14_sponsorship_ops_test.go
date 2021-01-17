@@ -673,7 +673,7 @@ func TestSponsorships(t *testing.T) {
 		itest.LogFailedTx(txResp, err)
 
 		// Establish a baseline for the master account
-		masterBalance := getAccountXLM(itest, sponsorPair)
+		masterBalance := getAccountXDB(itest, sponsorPair)
 
 		// Check the global /claimable_balances list for success.
 		balances, err := client.ClaimableBalances(sdk.ClaimableBalanceRequest{})
@@ -691,8 +691,8 @@ func TestSponsorships(t *testing.T) {
 			&txnbuild.ClaimClaimableBalance{BalanceID: claims[0].BalanceID})
 		itest.LogFailedTx(txResp, err)
 
-		tt.Lessf(getAccountXLM(itest, sponsoreePair), float64(25), "sponsoree balance didn't decrease")
-		tt.Greaterf(getAccountXLM(itest, sponsorPair), masterBalance, "master balance didn't increase")
+		tt.Lessf(getAccountXDB(itest, sponsoreePair), float64(25), "sponsoree balance didn't decrease")
+		tt.Greaterf(getAccountXDB(itest, sponsorPair), masterBalance, "master balance didn't increase")
 
 		// Check that operations populate.
 		expectedOperations := map[string]bool{
@@ -765,8 +765,8 @@ func findOperationByID(needle string, haystack []operations.Operation) func() bo
 	}
 }
 
-// Retrieves the XLM balance for an account.
-func getAccountXLM(i *integration.Test, account *keypair.Full) float64 {
+// Retrieves the XDB balance for an account.
+func getAccountXDB(i *integration.Test, account *keypair.Full) float64 {
 	details := i.MustGetAccount(account)
 	balance, err := strconv.ParseFloat(details.Balances[0].Balance, 64)
 	if err != nil {

@@ -294,7 +294,7 @@ func ExampleSetOptions() {
 		LowThreshold:         NewThreshold(1),
 		MediumThreshold:      NewThreshold(2),
 		HighThreshold:        NewThreshold(2),
-		HomeDomain:           NewHomeDomain("LovelyLumensLookLuminous.com"),
+		HomeDomain:           NewHomeDomain("LovelyDigitalBitsLookLuminous.com"),
 		Signer:               &Signer{Address: "GCCOBXW2XQNUSL467IEILE6MMCNRR66SSVL4YQADUNYYNUVREF3FIV2Z", Weight: Threshold(4)},
 	}
 

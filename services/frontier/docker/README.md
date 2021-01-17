@@ -81,7 +81,7 @@ By default, the Docker Compose file configures DigitalBits Core to connect to th
 DigitalBits public network, run `docker-compose -f docker-compose.yml -f docker-compose.pubnet.yml up -d --build`. 
 
 To run the containers on a private stand-alone network, run `docker-compose -f docker-compose.yml -f docker-compose.standalone.yml up -d --build`.
-When you run DigitalBits Core on a private stand-alone network, an account will be created which will hold 100 billion Lumens.
+When you run DigitalBits Core on a private stand-alone network, an account will be created which will hold 100 billion DigitalBits.
 The seed for the account will be emitted in the DigitalBits Core logs:
 
 ```

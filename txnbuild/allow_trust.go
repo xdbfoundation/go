@@ -29,7 +29,7 @@ func (at *AllowTrust) BuildXDR() (xdr.Operation, error) {
 
 	// Validate this is an issued asset
 	if at.Type.IsNative() {
-		return xdr.Operation{}, errors.New("trustline doesn't exist for a native (XLM) asset")
+		return xdr.Operation{}, errors.New("trustline doesn't exist for a native (XDB) asset")
 	}
 
 	// AllowTrust has a special asset type - map to it

@@ -59,7 +59,7 @@ const (
 	AssetType4 AssetType = "credit_alphanum4"
 	// AssetType12 represents an asset type that is 12 characters long
 	AssetType12 AssetType = "credit_alphanum12"
-	// AssetTypeNative represents the asset type for DigitalBits Lumens (XLM)
+	// AssetTypeNative represents the asset type for DigitalBits DigitalBits (XDB)
 	AssetTypeNative AssetType = "native"
 	// accountRequiresMemo is the base64 encoding of "1".
 	// SEP 29 uses this value to define transaction memo requirements for incoming payments.
@@ -211,7 +211,7 @@ type ClientInterface interface {
 
 // DefaultTestNetClient is a default client to connect to test network.
 var DefaultTestNetClient = &Client{
-	FrontierURL:     "https://frontier-testnet.digitalbits.org/",
+	FrontierURL:     "https://frontier.testnet.digitalbits.io/",
 	HTTP:           http.DefaultClient,
 	frontierTimeout: FrontierTimeout,
 	isTestNet:      true,
@@ -219,7 +219,7 @@ var DefaultTestNetClient = &Client{
 
 // DefaultPublicNetClient is a default client to connect to public network.
 var DefaultPublicNetClient = &Client{
-	FrontierURL:     "https://frontier.digitalbits.org/",
+	FrontierURL:     "https://frontier.livenet.digitalbits.io/",
 	HTTP:           http.DefaultClient,
 	frontierTimeout: FrontierTimeout,
 }

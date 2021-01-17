@@ -104,14 +104,14 @@ func TestGenerateWhereClause(t *testing.T) {
 }
 
 func TestGetBaseAndCounterCodes(t *testing.T) {
-	a1, a2, err := getBaseAndCounterCodes("XLM_BTC")
+	a1, a2, err := getBaseAndCounterCodes("XDB_BTC")
 	require.NoError(t, err)
-	assert.Equal(t, "XLM", a1)
+	assert.Equal(t, "XDB", a1)
 	assert.Equal(t, "BTC", a2)
 
-	a3, a4, err := getBaseAndCounterCodes("BTC_XLM")
+	a3, a4, err := getBaseAndCounterCodes("BTC_XDB")
 	require.NoError(t, err)
-	assert.Equal(t, "XLM", a3)
+	assert.Equal(t, "XDB", a3)
 	assert.Equal(t, "BTC", a4)
 
 	a5, a6, err := getBaseAndCounterCodes("BTC_ETH")

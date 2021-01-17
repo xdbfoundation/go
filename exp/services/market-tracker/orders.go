@@ -19,18 +19,18 @@ type Orderbook struct {
 	AskUsdVolume  prometheus.Gauge
 }
 
-// usdOrder holds the USD representation of an XLM-based order on the DEX.
+// usdOrder holds the USD representation of an XDB-based order on the DEX.
 // This contains the amount of the asset in the order; its price in USD; and that amount in USD.
 type usdOrder struct {
-	xlmAmount  float64
+	xdbAmount  float64
 	usdPrice   float64
 	usdAmount  float64
 	baseAmount float64
 }
 
 // convertBids converts a list of bids into dollar and base asset amounts and sorts them in decreasing price order.
-func convertBids(bids []hProtocol.PriceLevel, xlmUsdPrice, baseUsdPrice float64) ([]usdOrder, error) {
-	convertedBids, err := convertOrders(bids, xlmUsdPrice, baseUsdPrice)
+func convertBids(bids []hProtocol.PriceLevel, xdbUsdPrice, baseUsdPrice float64) ([]usdOrder, error) {
+	convertedBids, err := convertOrders(bids, xdbUsdPrice, baseUsdPrice)
 	if err != nil {
 		return []usdOrder{}, err
 	}
@@ -43,8 +43,8 @@ func convertBids(bids []hProtocol.PriceLevel, xlmUsdPrice, baseUsdPrice float64)
 	return convertedBids, nil
 }
 
-func convertAsks(asks []hProtocol.PriceLevel, xlmUsdPrice, baseUsdPrice float64) ([]usdOrder, error) {
-	convertedAsks, err := convertOrders(asks, xlmUsdPrice, baseUsdPrice)
+func convertAsks(asks []hProtocol.PriceLevel, xdbUsdPrice, baseUsdPrice float64) ([]usdOrder, error) {
+	convertedAsks, err := convertOrders(asks, xdbUsdPrice, baseUsdPrice)
 	if err != nil {
 		return []usdOrder{}, err
 	}
@@ -56,19 +56,19 @@ func convertAsks(asks []hProtocol.PriceLevel, xlmUsdPrice, baseUsdPrice float64)
 	return convertedAsks, nil
 }
 
-func convertOrders(orders []hProtocol.PriceLevel, xlmUsdPrice, baseUsdPrice float64) ([]usdOrder, error) {
+func convertOrders(orders []hProtocol.PriceLevel, xdbUsdPrice, baseUsdPrice float64) ([]usdOrder, error) {
 	convertedOrders := []usdOrder{}
 	for _, order := range orders {
-		xlmAmt, err := strconv.ParseFloat(order.Amount, 64)
+		xdbAmt, err := strconv.ParseFloat(order.Amount, 64)
 		if err != nil {
 			return []usdOrder{}, err
 		}
 
-		usdAmt := xlmAmt * xlmUsdPrice
-		usdPrice := float64(order.PriceR.N) / float64(order.PriceR.D) * xlmUsdPrice
+		usdAmt := xdbAmt * xdbUsdPrice
+		usdPrice := float64(order.PriceR.N) / float64(order.PriceR.D) * xdbUsdPrice
 		baseAmt := usdAmt * baseUsdPrice
 		cOrder := usdOrder{
-			xlmAmount:  xlmAmt,
+			xdbAmount:  xdbAmt,
 			usdPrice:   usdPrice,
 			usdAmount:  usdAmt,
 			baseAmount: baseAmt,

@@ -7,7 +7,7 @@ This is experimental software. Use at your own risk.
 ## Usage
 
 ```
-Simple HD wallet for DigitalBits Lumens. THIS PROGRAM IS STILL EXPERIMENTAL. USE AT YOUR OWN RISK.
+Simple HD wallet for DigitalBits DigitalBits. THIS PROGRAM IS STILL EXPERIMENTAL. USE AT YOUR OWN RISK.
 
 Usage:
   digitalbits-hd-wallet [command]

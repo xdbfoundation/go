@@ -32,7 +32,7 @@ func RemoveTrustlineOp(issuedAsset Asset) ChangeTrust {
 // BuildXDR for ChangeTrust returns a fully configured XDR Operation.
 func (ct *ChangeTrust) BuildXDR() (xdr.Operation, error) {
 	if ct.Line.IsNative() {
-		return xdr.Operation{}, errors.New("trustline cannot be extended to a native (XLM) asset")
+		return xdr.Operation{}, errors.New("trustline cannot be extended to a native (XDB) asset")
 	}
 	xdrLine, err := ct.Line.ToXDR()
 	if err != nil {

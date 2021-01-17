@@ -140,8 +140,8 @@ func BuildAssets(s string) ([]Asset, error) {
 		var asset Asset
 
 		// Technically https://github.com/digitalbits/digitalbits-protocol/blob/master/ecosystem/sep-0011.md allows
-		// any string up to 12 characters not containing an unescaped colon to represent XLM
-		// however, this function only accepts the string "native" to represent XLM
+		// any string up to 12 characters not containing an unescaped colon to represent XDB
+		// however, this function only accepts the string "native" to represent XDB
 		if strings.ToLower(assetString) == "native" {
 			if err := asset.SetNative(); err != nil {
 				return nil, err

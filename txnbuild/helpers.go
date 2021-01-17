@@ -86,7 +86,7 @@ func validateAmount(n interface{}) error {
 
 // validateAllowTrustAsset checks if the provided asset is valid for use in AllowTrust operation.
 // It returns an error if the asset is invalid.
-// The asset must be non native (XLM) with a valid asset code.
+// The asset must be non native (XDB) with a valid asset code.
 func validateAllowTrustAsset(asset Asset) error {
 	// Note: we are not using validateDigitalBitsAsset() function for AllowTrust operations because it requires the
 	//  following :
@@ -98,7 +98,7 @@ func validateAllowTrustAsset(asset Asset) error {
 	}
 
 	if asset.IsNative() {
-		return errors.New("native (XLM) asset type is not allowed")
+		return errors.New("native (XDB) asset type is not allowed")
 	}
 
 	_, err := asset.GetType()
@@ -110,7 +110,7 @@ func validateAllowTrustAsset(asset Asset) error {
 
 // validateChangeTrustAsset checks if the provided asset is valid for use in ChangeTrust operation.
 // It returns an error if the asset is invalid.
-// The asset must be non native (XLM) with a valid asset code and issuer.
+// The asset must be non native (XDB) with a valid asset code and issuer.
 func validateChangeTrustAsset(asset Asset) error {
 	// Note: we are not using validateDigitalBitsAsset() function for ChangeTrust operations because it requires the
 	//  following :

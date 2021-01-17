@@ -421,7 +421,7 @@ func TestSetOptionsHomeDomain(t *testing.T) {
 	sourceAccount := NewSimpleAccount(kp0.Address(), int64(40385577484325))
 
 	setOptions := SetOptions{
-		HomeDomain: NewHomeDomain("LovelyLumensLookLuminous.com"),
+		HomeDomain: NewHomeDomain("LovelyDigitalBitsLookLuminous.com"),
 	}
 
 	received, err := newSignedTransaction(
@@ -446,7 +446,7 @@ func TestSetOptionsHomeDomainTooLong(t *testing.T) {
 	sourceAccount := NewSimpleAccount(kp0.Address(), int64(40385577484323))
 
 	setOptions := SetOptions{
-		HomeDomain: NewHomeDomain("LovelyLumensLookLuminousLately.com"),
+		HomeDomain: NewHomeDomain("LovelyDigitalBitsLookLuminousLately.com"),
 	}
 
 	_, err := NewTransaction(
@@ -560,7 +560,7 @@ func TestChangeTrustNativeAssetNotAllowed(t *testing.T) {
 		},
 	)
 
-	expectedErrMsg := "validation failed for *txnbuild.ChangeTrust operation: Field: Line, Error: native (XLM) asset type is not allowed"
+	expectedErrMsg := "validation failed for *txnbuild.ChangeTrust operation: Field: Line, Error: native (XDB) asset type is not allowed"
 	require.EqualError(t, err, expectedErrMsg, "No trustlines for native assets")
 }
 

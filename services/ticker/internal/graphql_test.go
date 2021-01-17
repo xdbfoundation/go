@@ -150,7 +150,7 @@ func TestTicker_btc(t *testing.T) {
 	"data":{
 		"ticker": [
 			{"tradePair": "BTC_ETH"},
-			{"tradePair": "BTC_XLM"}
+			{"tradePair": "BTC_XDB"}
 		]
 	}
 }`
