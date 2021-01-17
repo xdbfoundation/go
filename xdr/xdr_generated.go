@@ -18,7 +18,7 @@ import (
 	"fmt"
 	"io"
 
-	xdr "github.com/digitalbits/go/libs/go-xdr/xdr3"
+	xdr "github.com/stellar/go-xdr/xdr3"
 )
 
 // Unmarshal reads an xdr element from `r` into `v`.
@@ -4438,7 +4438,7 @@ var (
 //        uint32 ledgerSeq; // sequence number of this ledger
 //
 //        int64 totalCoins; // total number of stroops in existence.
-//                          // 10,000,000 stroops in 1 XDB
+//                          // 10,000,000 stroops in 1 XLM
 //
 //        int64 feePool;       // fees burned since last inflation run
 //        uint32 inflationSeq; // inflation sequence number
