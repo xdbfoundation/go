@@ -1,5 +1,5 @@
 <div align="center">
-<a href="https://digitalbits.org"><img alt="DigitalBits" src="https://github.com/digitalbits/.github/raw/master/digitalbits-logo.png" width="558" /></a>
+<a href="https://digitalbits.io"><img alt="DigitalBits" src="https://github.com/digitalbits/.github/raw/master/digitalbits-logo.png" width="558" /></a>
 <br/>
 <strong>Creating equitable access to the global financial system</strong>
 <h1>DigitalBits Go Monorepo</h1>
@@ -10,7 +10,7 @@
 <a href="https://goreportcard.com/report/github.com/digitalbits/go"><img alt="Go Report Card" src="https://goreportcard.com/badge/github.com/digitalbits/go" /></a>
 </p>
 
-This repo is the home for all of the public Go code produced by the [DigitalBits Development Foundation].
+This repo is the home for all of the public Go code produced by the [DigitalBits Project with support from the XDB Foundation].
 
 This repo contains various tools and services that you can use and deploy, as well as the SDK you can use to develop applications that integrate with the DigitalBits network.
 
