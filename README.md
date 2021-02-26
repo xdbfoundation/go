@@ -1,5 +1,5 @@
 <div align="center">
-<a href="https://digitalbits.org"><img alt="DigitalBits" src="https://github.com/digitalbits/.github/raw/master/digitalbits-logo.png" width="558" /></a>
+<a href="https://digitalbits.io"><img alt="DigitalBits" src="https://github.com/digitalbits/.github/raw/master/digitalbits-logo.png" width="558" /></a>
 <br/>
 <strong>Creating equitable access to the global financial system</strong>
 <h1>DigitalBits Go Monorepo</h1>
