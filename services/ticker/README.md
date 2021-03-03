@@ -7,7 +7,7 @@ check an architecture overview [here](docs/Architecture.md)). In order to get up
 follow these steps:
 
 1. Install [Docker](https://hub.docker.com/editions/community/docker-ce-desktop-mac)
-2. Clone the [monorepo](https://github.com/digitalbits/go)
+2. Clone the [monorepo](https://github.com/xdbfoundation/go)
 3. Build the Ticker's docker image. At the repo's root, run `$ docker build -t ticker -f services/ticker/docker/Dockerfile-dev .`
 4. Run the Ticker: `$ docker run --rm -it -p "8000:8000" ticker` (you'll be asked to enter a
    PostgreSQL password)
