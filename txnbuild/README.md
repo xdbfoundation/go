@@ -67,8 +67,8 @@ This project is maintained by the XDB Foundation.
 ## Getting Started
 This library is aimed at developers building Go applications on top of the [DigitalBits network](https://www.digitalbits.io/). Transactions constructed by this library may be submitted to any Frontier instance for processing onto the ledger, using any DigitalBits SDK client. The recommended client for Go programmers is [frontierclient](https://github.com/xdbfoundation/go/tree/master/clients/frontierclient). Together, these two libraries provide a complete DigitalBits SDK.
 
-* The [txnbuild API reference](https://godoc.org/github.com/digitalbits/go/txnbuild).
-* The [frontierclient API reference](https://godoc.org/github.com/digitalbits/go/clients/frontierclient).
+* The [txnbuild API reference](https://developer.digitalbits.io/reference/).
+* The [frontierclient API reference](https://developer.digitalbits.io/reference/).
 
 An easy-to-follow demonstration that exercises this SDK on the TestNet with actual accounts is also included! See the [Demo](#demo) section below.
 
