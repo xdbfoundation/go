@@ -1,6 +1,6 @@
 ## Architecture
 
-The proposed solution consists of a set of tasks (which run according to a time schedule) and some services (which run continuously, as daemons) that are put together in order to provide a ticker (via https://ticker.digitalbits.org) that is highly available and provide data as fresh as possible.
+The proposed solution consists of a set of tasks (which run according to a time schedule) and some services (which run continuously, as daemons) that are put together in order to provide a ticker that is highly available and provide data as fresh as possible.
 
 The setup and tools used are focused on creating an environment that is easy to replicate and doesn't depend on AWS specific services, so that DigitalBits users / developers can easily deploy a ticker of their own if they want. All code created should be open-sourced.
 
