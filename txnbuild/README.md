@@ -1,6 +1,6 @@
 # txnbuild
 
-`txnbuild` is a [DigitalBits SDK](https://www.digitalbits.io/developers/reference/), implemented in [Go](https://golang.org/). It provides a reference implementation of the complete [set of operations](https://developer.digitalbits.io/guides/concepts/list-of-operations.html) that compose [transactions](https://www.digitalbits.io/developers/guides/concepts/transactions.html) for the DigitalBits distributed ledger.
+`txnbuild` is a [DigitalBits SDK](https://developer.digitalbits.io/reference/), implemented in [Go](https://golang.org/). It provides a reference implementation of the complete [set of operations](https://developer.digitalbits.io/guides/concepts/list-of-operations.html) that compose [transactions](https://www.digitalbits.io/developers/guides/concepts/transactions.html) for the DigitalBits distributed ledger.
 
 This project is maintained by the XDB Foundation.
 
