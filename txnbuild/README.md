@@ -90,9 +90,9 @@ To see the SDK in action, build and run the demo:
 
 
 ## Contributing
-Please read [Code of Conduct](https://github.com/digitalbits/.github/blob/master/CODE_OF_CONDUCT.md) to understand this project's communication rules.
+Please read [Code of Conduct](https://digitalbits.io/community-guidelines/) to understand this project's communication rules.
 
-To submit improvements and fixes to this library, please see [CONTRIBUTING](../CONTRIBUTING.md).
+To submit improvements and fixes to this library, please see [CONTRIBUTING](https://github.com/xdbfoundation/docs/blob/master/CONTRIBUTING.md).
 
 ## License
-This project is licensed under the Apache License - see the [LICENSE](../../LICENSE-APACHE.txt) file for details.
+This project is licensed under the Apache License - see the [LICENSE](https://www.apache.org/licenses/LICENSE-2.0) file for details.
