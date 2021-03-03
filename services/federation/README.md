@@ -1,7 +1,7 @@
 # federation server
 
 
-Go implementation of [Federation](https://developer.digitalbits.io/guides/anchor/3-federation-server.html) protocol server. This federation server is designed to be dropped in to your existing infrastructure. It can be configured to pull the data it needs out of your existing DB.
+Go implementation of [Federation](https://developer.digitalbits.io/guides/anchor/3-federation-server.html) protocol server. This federation server is designed to be dropped into your existing infrastructure. It can be configured to pull the data it needs out of your existing Database.
 
 ## Downloading the server
 
