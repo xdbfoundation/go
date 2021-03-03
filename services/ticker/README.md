@@ -32,5 +32,5 @@ you want to do this, replace step `4` with the following steps:
 ## Using the CLI
 You can also test the Ticker locally, without the Docker setup. For that, you'll need a PostgreSQL
 instance running. In order to build the Ticker project, follow these steps:
-1. See the details in [README.md](../../../../README.md#dependencies) for installing dependencies.
+1. See the details in [README.md](https://github.com/xdbfoundation/go/blob/master/README.md) for installing dependencies.
 2. Run `$ go run main.go --help` to see the list of available commands.
