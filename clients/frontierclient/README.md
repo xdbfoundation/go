@@ -3,7 +3,7 @@
 
 `frontierclient` is a [DigitalBits Go SDK](https://github.com/xdbfoundation/docs/tree/master/reference) package that provides client access to a frontier server. It supports all endpoints exposed by the [frontier API](https://github.com/xdbfoundation/go/tree/master/services/frontier).
 
-This project is maintained by the DigitalBits Development Foundation.
+This project is maintained by the XDB Foundation.
 
 ## Getting Started
 This library is aimed at developers building Go applications that interact with the [DigitalBits network](https://www.digitalbits.io/). It allows users to query the network and submit transactions to the network. The recommended transaction builder for Go programmers is [txnbuild](https://github.com/xdbfoundation/go/tree/master/txnbuild). Together, these two libraries provide a complete DigitalBits SDK.
