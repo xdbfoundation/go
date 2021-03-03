@@ -1,8 +1,8 @@
 # txnbuild
 
-`txnbuild` is a [DigitalBits SDK](https://www.digitalbits.io/developers/reference/), implemented in [Go](https://golang.org/). It provides a reference implementation of the complete [set of operations](https://www.digitalbits.io/developers/guides/concepts/list-of-operations.html) that compose [transactions](https://www.digitalbits.io/developers/guides/concepts/transactions.html) for the DigitalBits distributed ledger.
+`txnbuild` is a [DigitalBits SDK](https://www.digitalbits.io/developers/reference/), implemented in [Go](https://golang.org/). It provides a reference implementation of the complete [set of operations](https://developer.digitalbits.io/guides/concepts/list-of-operations.html) that compose [transactions](https://www.digitalbits.io/developers/guides/concepts/transactions.html) for the DigitalBits distributed ledger.
 
-This project is maintained by the DigitalBits Development Foundation.
+This project is maintained by the XDB Foundation.
 
 ```golang
     import (
@@ -65,7 +65,7 @@ This project is maintained by the DigitalBits Development Foundation.
 ```
 
 ## Getting Started
-This library is aimed at developers building Go applications on top of the [DigitalBits network](https://www.digitalbits.org/). Transactions constructed by this library may be submitted to any Frontier instance for processing onto the ledger, using any DigitalBits SDK client. The recommended client for Go programmers is [frontierclient](https://github.com/digitalbits/go/tree/master/clients/frontierclient). Together, these two libraries provide a complete DigitalBits SDK.
+This library is aimed at developers building Go applications on top of the [DigitalBits network](https://www.digitalbits.io/). Transactions constructed by this library may be submitted to any Frontier instance for processing onto the ledger, using any DigitalBits SDK client. The recommended client for Go programmers is [frontierclient](https://github.com/xdbfoundation/go/tree/master/clients/frontierclient). Together, these two libraries provide a complete DigitalBits SDK.
 
 * The [txnbuild API reference](https://godoc.org/github.com/digitalbits/go/txnbuild).
 * The [frontierclient API reference](https://godoc.org/github.com/digitalbits/go/clients/frontierclient).
