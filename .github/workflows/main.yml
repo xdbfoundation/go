@@ -1,6 +1,5 @@
 # This is a basic workflow to help you get started with Actions
-
-name: CI
+name: Release Binaries and Packages
 
 # Controls when the action will run. 
 on:
@@ -9,47 +8,205 @@ on:
     branches: [ master ]
   pull_request:
     branches: [ master ]
-
+  # release:
+  #   types: [created]
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
-  build:
+  tagbump:
+    runs-on: ubuntu-16.04
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: '0'   # This workflow contains a single job called "build"
+      - name: Github Tag Bump
+        id: bump_version
+        uses: anothrNick/github-tag-action@1.34.0
+        env:
+          DEFAULT_BUMP: "patch"
+          RELEASE_BRANCHES: master
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          WITH_V: false
+      - uses: ncipollo/release-action@v1
+        with:
+          tag: ${{ steps.bump_version.outputs.tag }}
+          bodyFile: "README.md"
+          token: ${{ secrets.GITHUB_TOKEN }}   
+  osbuild:
+    needs: tagbump
     # The type of runner that the job will run on
     runs-on: ubuntu-16.04
-
+    strategy:
+      matrix:
+        # build and publish in parallel: linux/386, linux/amd64, windows/386, windows/amd64, darwin/amd64 
+        goos: [linux, windows, darwin]
+        goarch: ["386", amd64]
+        service: ["federation", "friendbot", "frontier", "keystored", "loadtest"]
+        exclude:  
+          - goarch: "386"
+            goos: darwin 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
+        with:
+          fetch-depth: '0' 
+      
+      - name: Get Latest Tag
+        id: previoustag
+        uses: WyriHaximus/github-action-get-previous-tag@v1
 
       - name: Install deps
-        run: sudo apt update && sudo apt install -y unzip curl wget
+        run: |
+          sudo apt update && sudo apt install -y alien unzip curl wget python3-pip ruby ruby-dev rubygems python3-setuptools
+          pip3 install wheel
+          pip3 install cloudsmith-cli==0.26.0
+          pip3 uninstall click -y
+          pip3 install click==7.1.2
+          sudo gem install --no-document fpm      
 
+      - uses: wangyoucao577/go-release-action@v1.18
+        if: ${{ matrix.service != 'loadtest' && matrix.service != 'keystored' }} 
+        env:
+          GO111MODULE: on
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          goos: ${{ matrix.goos }}
+          goarch: ${{ matrix.goarch }}
+          project_path: "./services/${{ matrix.service }}"
+          binary_name: ${{ matrix.service }}
+          md5sum: false
+          extra_files: README.md
+          release_tag: ${{ steps.previoustag.outputs.tag }}
+     
+      - uses: wangyoucao577/go-release-action@v1.18
+        if: ${{ matrix.service == 'loadtest' }} 
+        env:
+          GO111MODULE: on
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          goos: ${{ matrix.goos }}
+          goarch: ${{ matrix.goarch }}
+          project_path: "./services/friendbot/${{ matrix.service }}"
+          binary_name: ${{ matrix.service }}
+          md5sum: false
+          extra_files: README.md
+          release_tag: ${{ steps.previoustag.outputs.tag }}
+
+      - uses: wangyoucao577/go-release-action@v1.18
+        if: ${{ matrix.service == 'keystored' }} 
+        env:
+          GO111MODULE: on
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          goos: ${{ matrix.goos }}
+          goarch: ${{ matrix.goarch }}
+          project_path: "./services/keystore/cmd/${{ matrix.service }}"
+          binary_name: ${{ matrix.service }}
+          md5sum: false
+          extra_files: README.md
+          release_tag: ${{ steps.previoustag.outputs.tag }}
+      - name: upload RAW
+        if: ${{ matrix.service != 'loadtest' && matrix.service != 'keystored' }} 
+        run: |
+          export CLOUDSMITH_API_KEY=${{ secrets.CLOUDSMITH_API_KEY }}
+          export PATH=$PATH:/home/runner/.local/bin
+          cd `ls -d ./services/${{ matrix.service }}/build-artifacts-*`
+          pwd 
+          ls
+          sudo tar --ignore-failed-read -zcvf ${{ matrix.service }}_${{ steps.previoustag.outputs.tag }}_${{ matrix.goos }}-${{ matrix.goarch }}.tar.gz ${{ matrix.service }} ${{ matrix.service }}.exe
+          cloudsmith push raw xdb-foundation/digitalbits-${{ matrix.service }} ${{ matrix.service }}_${{ steps.previoustag.outputs.tag }}_${{ matrix.goos }}-${{ matrix.goarch }}.tar.gz
+      
+      - name: upload RAW
+        if: ${{ matrix.service == 'loadtest' }} 
+        run: |
+          export CLOUDSMITH_API_KEY=${{ secrets.CLOUDSMITH_API_KEY }}
+          export PATH=$PATH:/home/runner/.local/bin
+          cd `ls -d ./services/friendbot/${{ matrix.service }}/build-artifacts-*`
+          pwd 
+          ls
+          sudo tar --ignore-failed-read -zcvf ${{ matrix.service }}_${{ steps.previoustag.outputs.tag }}_${{ matrix.goos }}-${{ matrix.goarch }}.tar.gz ${{ matrix.service }} ${{ matrix.service }}.exe
+          cloudsmith push raw xdb-foundation/digitalbits-${{ matrix.service }} ${{ matrix.service }}_${{ steps.previoustag.outputs.tag }}_${{ matrix.goos }}-${{ matrix.goarch }}.tar.gz
+
+      - name: upload RAW
+        if: ${{matrix.service == 'keystored' }} 
+        run: |
+          export CLOUDSMITH_API_KEY=${{ secrets.CLOUDSMITH_API_KEY }}
+          export PATH=$PATH:/home/runner/.local/bin
+          cd `ls -d ./services/keystore/cmd/${{ matrix.service }}/build-artifacts-*`
+          pwd
+          ls
+          sudo tar --ignore-failed-read -zcvf ${{ matrix.service }}_${{ steps.previoustag.outputs.tag }}_${{ matrix.goos }}-${{ matrix.goarch }}.tar.gz ${{ matrix.service }} ${{ matrix.service }}.exe
+          cloudsmith push raw xdb-foundation/digitalbits-${{ matrix.service }} ${{ matrix.service }}_${{ steps.previoustag.outputs.tag }}_${{ matrix.goos }}-${{ matrix.goarch }}.tar.gz
+
+
+  packagebuild:
+    needs: osbuild
+    runs-on: ubuntu-16.04
+    steps: 
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: '0' 
+      - name: Install deps
+        run: |
+          sudo apt update && sudo apt install -y alien unzip curl wget python3-pip ruby ruby-dev rubygems python3-setuptools
+          pip3 install wheel
+          pip3 install cloudsmith-cli==0.26.0
+          pip3 uninstall click -y
+          pip3 install click==7.1.2
+          sudo gem install --no-document fpm
+      
+      - name: Get Latest Tag
+        id: previoustag
+        uses: WyriHaximus/github-action-get-previous-tag@v1
+      
       - name: Install Go
         uses: actions/setup-go@v2
         with:
           go-version: 1.14.x
 
-      - name: Install AWS CLI
-        run: |
-          curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-          unzip awscliv2.zip
-          sudo ./aws/install
-
       - name: Build the app    
         run: |
           sudo mkdir -p /go/src/github.com/digitalbits/go
-
           export GO111MODULE=on
-
           sudo cp -Rf ./* /go/src/github.com/digitalbits/go/
           sudo go install github.com/digitalbits/go/services/...
-      - name: Release
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_KEY }}
-          AWS_DEFAULT_REGION: eu-central-1
-        run: aws s3 sync /home/runner/go/bin/ s3://digitalbits-bin/services/
+
+      - name: Make .deb package
+        run: |
+          fpm -f -s dir -t deb -n digitalbits-federation -v ${{ steps.previoustag.outputs.tag }} --deb-use-file-permissions /home/runner/go/bin/federation=/usr/local/bin/federation 
+          fpm -f -s dir -t deb -n digitalbits-friendbot -v ${{ steps.previoustag.outputs.tag }} --deb-use-file-permissions /home/runner/go/bin/friendbot=/usr/local/bin/friendbot 
+          fpm -f -s dir -t deb -n digitalbits-frontier -v ${{ steps.previoustag.outputs.tag }} --deb-use-file-permissions /home/runner/go/bin/frontier=/usr/local/bin/frontier 
+          fpm -f -s dir -t deb -n digitalbits-keystored -v ${{ steps.previoustag.outputs.tag }} --deb-use-file-permissions /home/runner/go/bin/keystored=/usr/local/bin/keystored 
+          fpm -f -s dir -t deb -n digitalbits-loadtest -v ${{ steps.previoustag.outputs.tag }} --deb-use-file-permissions /home/runner/go/bin/loadtest=/usr/local/bin/loadtest 
+      - name: Make .rpm package
+        run: |
+          sudo alien -r -k digitalbits-federation_${{ steps.previoustag.outputs.tag }}_amd64.deb
+          sudo alien -r -k digitalbits-friendbot_${{ steps.previoustag.outputs.tag }}_amd64.deb
+          sudo alien -r -k digitalbits-frontier_${{ steps.previoustag.outputs.tag }}_amd64.deb
+          sudo alien -r -k digitalbits-keystored_${{ steps.previoustag.outputs.tag }}_amd64.deb
+          sudo alien -r -k digitalbits-loadtest_${{ steps.previoustag.outputs.tag }}_amd64.deb
+
+      - name: Upload deb to cloudsmith.io
+        run: |
+          export CLOUDSMITH_API_KEY=${{ secrets.CLOUDSMITH_API_KEY }}
+          export PATH=$PATH:/home/runner/.local/bin
+          cloudsmith push deb xdb-foundation/digitalbits-federation/ubuntu/focal digitalbits-federation_${{ steps.previoustag.outputs.tag }}_amd64.deb
+          cloudsmith push deb xdb-foundation/digitalbits-friendbot/ubuntu/focal digitalbits-friendbot_${{ steps.previoustag.outputs.tag }}_amd64.deb  
+          cloudsmith push deb xdb-foundation/digitalbits-frontier/ubuntu/focal digitalbits-frontier_${{ steps.previoustag.outputs.tag }}_amd64.deb  
+          cloudsmith push deb xdb-foundation/digitalbits-keystored/ubuntu/focal digitalbits-keystored_${{ steps.previoustag.outputs.tag }}_amd64.deb  
+          cloudsmith push deb xdb-foundation/digitalbits-loadtest/ubuntu/focal digitalbits-loadtest_${{ steps.previoustag.outputs.tag }}_amd64.deb  
+
+      - name: Upload rpm cloudsmith.io
+        run: |
+          export CLOUDSMITH_API_KEY=${{ secrets.CLOUDSMITH_API_KEY }}
+          export PATH=$PATH:/home/runner/.local/bin
+          cloudsmith push rpm xdb-foundation/digitalbits-federation/any-distro/any-version digitalbits-federation-${{ steps.previoustag.outputs.tag }}-1.x86_64.rpm
+          cloudsmith push rpm xdb-foundation/digitalbits-friendbot/any-distro/any-version digitalbits-friendbot-${{ steps.previoustag.outputs.tag }}-1.x86_64.rpm
+          cloudsmith push rpm xdb-foundation/digitalbits-frontier/any-distro/any-version digitalbits-frontier-${{ steps.previoustag.outputs.tag }}-1.x86_64.rpm
+          cloudsmith push rpm xdb-foundation/digitalbits-keystored/any-distro/any-version digitalbits-keystored-${{ steps.previoustag.outputs.tag }}-1.x86_64.rpm
+          cloudsmith push rpm xdb-foundation/digitalbits-loadtest/any-distro/any-version digitalbits-loadtest-${{ steps.previoustag.outputs.tag }}-1.x86_64.rpm
+ 
