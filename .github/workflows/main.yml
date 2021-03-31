@@ -54,6 +54,7 @@ jobs:
           DEFAULT_BUMP: "patch"
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           WITH_V: false   
+          
       - name: Make .deb package
         run: |
           fpm -f -s dir -t deb -n digitalbits-federation -v ${{ steps.bump_version.outputs.tag }} /home/runner/go/bin/federation=/usr/local/bin/federation 
