@@ -37,12 +37,6 @@ jobs:
         with:
           go-version: 1.14.x
 
-      - name: Install AWS CLI
-        run: |
-          curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-          unzip awscliv2.zip
-          sudo ./aws/install
-
       - name: Build the app    
         run: |
           sudo mkdir -p /go/src/github.com/digitalbits/go
@@ -51,9 +45,21 @@ jobs:
 
           sudo cp -Rf ./* /go/src/github.com/digitalbits/go/
           sudo go install github.com/digitalbits/go/services/...
-      - name: Release
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_KEY }}
-          AWS_DEFAULT_REGION: eu-central-1
-        run: aws s3 sync /home/runner/go/bin/ s3://digitalbits-bin/services/
+          
+      - name: Make .deb package
+        run: |
+          fpm -f -s dir -t deb -n digitalbits-federation -v 1.0.0 /home/runner/go/bin/federation=/usr/local/bin/federation 
+          fpm -f -s dir -t deb -n digitalbits-friendbot -v 1.0.0 /home/runner/go/bin/friendbot=/usr/local/bin/friendbot 
+          fpm -f -s dir -t deb -n digitalbits-frontier -v 1.0.0 /home/runner/go/bin/frontier=/usr/local/bin/frontier 
+          fpm -f -s dir -t deb -n digitalbits-keystored -v 1.0.0 /home/runner/go/bin/keystored=/usr/local/bin/keystored 
+          fpm -f -s dir -t deb -n digitalbits-loadtest -v 1.0.0 /home/runner/go/bin/loadtest=/usr/local/bin/loadtest 
+          
+      - name: Upload to cloudsmith.io
+        run: |
+          export CLOUDSMITH_API_KEY=${{ secrets.CLOUDSMITH_API_KEY }}
+          export PATH=$PATH:/home/runner/.local/bin
+          cloudsmith push deb xdb-foundation/digitalbits-federation/ubuntu/focal digitalbits-federation_1.0.0_amd64.deb
+          cloudsmith push deb xdb-foundation/digitalbits-friendbot/ubuntu/focal digitalbits-friendbot_1.0.0_amd64.deb  
+          cloudsmith push deb xdb-foundation/digitalbits-frontier/ubuntu/focal digitalbits-frontier_1.0.0_amd64.deb  
+          cloudsmith push deb xdb-foundation/digitalbits-keystored/ubuntu/focal digitalbits-keystored_1.0.0_amd64.deb  
+          cloudsmith push deb xdb-foundation/digitalbits-loadtest/ubuntu/focal digitalbits-loadtest_1.0.0_amd64.deb  
