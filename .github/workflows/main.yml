@@ -57,11 +57,11 @@ jobs:
           
       - name: Make .deb package
         run: |
-          fpm -f -s dir -t deb -n digitalbits-federation -v ${{ steps.bump_version.outputs.tag }} /home/runner/go/bin/federation=/usr/local/bin/federation 
-          fpm -f -s dir -t deb -n digitalbits-friendbot -v ${{ steps.bump_version.outputs.tag }} /home/runner/go/bin/friendbot=/usr/local/bin/friendbot 
-          fpm -f -s dir -t deb -n digitalbits-frontier -v ${{ steps.bump_version.outputs.tag }} /home/runner/go/bin/frontier=/usr/local/bin/frontier 
-          fpm -f -s dir -t deb -n digitalbits-keystored -v ${{ steps.bump_version.outputs.tag }} /home/runner/go/bin/keystored=/usr/local/bin/keystored 
-          fpm -f -s dir -t deb -n digitalbits-loadtest -v ${{ steps.bump_version.outputs.tag }} /home/runner/go/bin/loadtest=/usr/local/bin/loadtest 
+          fpm -f -s dir -t deb -n digitalbits-federation -v ${{ steps.bump_version.outputs.tag }} --deb-use-file-permissions /home/runner/go/bin/federation=/usr/local/bin/federation 
+          fpm -f -s dir -t deb -n digitalbits-friendbot -v ${{ steps.bump_version.outputs.tag }} --deb-use-file-permissions /home/runner/go/bin/friendbot=/usr/local/bin/friendbot 
+          fpm -f -s dir -t deb -n digitalbits-frontier -v ${{ steps.bump_version.outputs.tag }} --deb-use-file-permissions /home/runner/go/bin/frontier=/usr/local/bin/frontier 
+          fpm -f -s dir -t deb -n digitalbits-keystored -v ${{ steps.bump_version.outputs.tag }} --deb-use-file-permissions /home/runner/go/bin/keystored=/usr/local/bin/keystored 
+          fpm -f -s dir -t deb -n digitalbits-loadtest -v ${{ steps.bump_version.outputs.tag }} --deb-use-file-permissions /home/runner/go/bin/loadtest=/usr/local/bin/loadtest 
           
       - name: Upload to cloudsmith.io
         run: |
