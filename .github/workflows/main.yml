@@ -28,9 +28,11 @@ jobs:
           fetch-depth: '0' 
       - name: Install deps
         run: |
-          sudo apt update && sudo apt install -y unzip curl wget python3-pip ruby ruby-dev rubygems python3-setuptools
+          sudo apt update && sudo apt install -y alien unzip curl wget python3-pip ruby ruby-dev rubygems python3-setuptools
           pip3 install wheel
-          pip3 install cloudsmith-cli
+          pip3 install cloudsmith-cli==0.26.0
+          pip3 uninstall click -y
+          pip3 install click==7.1.2
           sudo gem install --no-document fpm
 
       - name: Install Go
@@ -62,8 +64,15 @@ jobs:
           fpm -f -s dir -t deb -n digitalbits-frontier -v ${{ steps.bump_version.outputs.tag }} --deb-use-file-permissions /home/runner/go/bin/frontier=/usr/local/bin/frontier 
           fpm -f -s dir -t deb -n digitalbits-keystored -v ${{ steps.bump_version.outputs.tag }} --deb-use-file-permissions /home/runner/go/bin/keystored=/usr/local/bin/keystored 
           fpm -f -s dir -t deb -n digitalbits-loadtest -v ${{ steps.bump_version.outputs.tag }} --deb-use-file-permissions /home/runner/go/bin/loadtest=/usr/local/bin/loadtest 
-          
-      - name: Upload to cloudsmith.io
+      - name: Make .rpm package
+        run: |
+          sudo alien -r -k digitalbits-federation_${{ steps.bump_version.outputs.tag }}_amd64.deb
+          sudo alien -r -k digitalbits-friendbot_${{ steps.bump_version.outputs.tag }}_amd64.deb
+          sudo alien -r -k digitalbits-frontier_${{ steps.bump_version.outputs.tag }}_amd64.deb
+          sudo alien -r -k digitalbits-keystored_${{ steps.bump_version.outputs.tag }}_amd64.deb
+          sudo alien -r -k digitalbits-loadtest_${{ steps.bump_version.outputs.tag }}_amd64.deb
+
+      - name: Upload deb to cloudsmith.io
         run: |
           export CLOUDSMITH_API_KEY=${{ secrets.CLOUDSMITH_API_KEY }}
           export PATH=$PATH:/home/runner/.local/bin
@@ -72,3 +81,14 @@ jobs:
           cloudsmith push deb xdb-foundation/digitalbits-frontier/ubuntu/focal digitalbits-frontier_${{ steps.bump_version.outputs.tag }}_amd64.deb  
           cloudsmith push deb xdb-foundation/digitalbits-keystored/ubuntu/focal digitalbits-keystored_${{ steps.bump_version.outputs.tag }}_amd64.deb  
           cloudsmith push deb xdb-foundation/digitalbits-loadtest/ubuntu/focal digitalbits-loadtest_${{ steps.bump_version.outputs.tag }}_amd64.deb  
+
+      - name: Upload rpm cloudsmith.io
+        run: |
+          export CLOUDSMITH_API_KEY=${{ secrets.CLOUDSMITH_API_KEY }}
+          export PATH=$PATH:/home/runner/.local/bin
+          cloudsmith push rpm xdb-foundation/digitalbits-federation/any-distro/any-version digitalbits-federation_${{ steps.bump_version.outputs.tag }}-1.x86_64.rpm
+          cloudsmith push rpm xdb-foundation/digitalbits-friendbot/any-distro/any-version digitalbits-friendbot_${{ steps.bump_version.outputs.tag }}-1.x86_64.rpm
+          cloudsmith push rpm xdb-foundation/digitalbits-frontier/any-distro/any-version digitalbits-frontier_${{ steps.bump_version.outputs.tag }}-1.x86_64.rpm
+          cloudsmith push rpm xdb-foundation/digitalbits-keystored/any-distro/any-version digitalbits-keystored_${{ steps.bump_version.outputs.tag }}-1.x86_64.rpm
+          cloudsmith push rpm xdb-foundation/digitalbits-loadtest/any-distro/any-version digitalbits-loadtest_${{ steps.bump_version.outputs.tag }}-1.x86_64.rpm
+ 
