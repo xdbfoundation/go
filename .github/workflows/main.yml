@@ -77,12 +77,13 @@ jobs:
           goarch: ${{ matrix.goarch }}
           project_path: "./services/federation"
           binary_name: "federation"
-          build_flags: ""
-          build_command: go install
           extra_files: README.md
           release_tag: ${{ steps.previoustag.outputs.tag }}
      
-      - run: ls /home/runner/go/bin
+      - run: |
+          mkdir -p /opt/binaries
+          cp $BUILD_ARTIFACTS_FOLDER/* /opt/binaries
+          ls /opt/binaries
       # - name: Make .deb package
       #   run: |
       #     fpm -f -s dir -t deb -n digitalbits-federation -v ${{ steps.bump_version.outputs.tag }} --deb-use-file-permissions /home/runner/go/bin/federation=/usr/local/bin/federation 
