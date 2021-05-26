@@ -79,11 +79,11 @@ jobs:
           binary_name: "federation"
           extra_files: README.md
           release_tag: ${{ steps.previoustag.outputs.tag }}
-     
-      - run: |
+        run: |
           mkdir -p /opt/binaries
           cp $BUILD_ARTIFACTS_FOLDER/* /opt/binaries
           ls /opt/binaries
+     
       # - name: Make .deb package
       #   run: |
       #     fpm -f -s dir -t deb -n digitalbits-federation -v ${{ steps.bump_version.outputs.tag }} --deb-use-file-permissions /home/runner/go/bin/federation=/usr/local/bin/federation 
