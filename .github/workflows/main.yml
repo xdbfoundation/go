@@ -32,7 +32,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           WITH_V: false   
   build:
-    needs: tag-bump
+    needs: tagbump
     # The type of runner that the job will run on
     runs-on: ubuntu-16.04
     strategy:
