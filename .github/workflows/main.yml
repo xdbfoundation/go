@@ -63,14 +63,10 @@ jobs:
           pip3 install click==7.1.2
           sudo gem install --no-document fpm
       
-      # - name: Github Tag Bump
-      #   id: bump_version
-      #   uses: anothrNick/github-tag-action@1.34.0
-      #   env:
-      #     DEFAULT_BUMP: "patch"
-      #     RELEASE_BRANCHES: master
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #     WITH_V: false   
+      - name: Get Latest Tag
+        id: previoustag
+        uses: WyriHaximus/github-action-get-previous-tag@v1
+      
 
       - uses: wangyoucao577/go-release-action@v1.18
         env:
@@ -82,7 +78,7 @@ jobs:
           project_path: "./services/federation"
           binary_name: "federation"
           extra_files: README.md
-          release_tag: ${{ steps.bump_version.outputs.tag }}
+          release_tag: ${{ steps.previoustag.outputs.tag }}
      
       - run: ls /home/runner/go/bin
       # - name: Make .deb package
