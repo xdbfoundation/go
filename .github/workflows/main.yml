@@ -45,7 +45,7 @@ jobs:
         # build and publish in parallel: linux/386, linux/amd64, windows/386, windows/amd64, darwin/amd64 
         goos: [linux, windows, darwin]
         goarch: ["386", amd64]
-        service: ["federation", "friendbot", "frontier", "keystore"]
+        service: ["federation", "friendbot", "frontier", "keystore", "loadtest"]
         exclude:  
           - goarch: "386"
             goos: darwin 
@@ -70,6 +70,7 @@ jobs:
       
 
       - uses: wangyoucao577/go-release-action@v1.18
+        if: ${{ matrix.service != "loadtest"}} 
         env:
           GO111MODULE: on
         with:
@@ -78,9 +79,23 @@ jobs:
           goarch: ${{ matrix.goarch }}
           project_path: "./services/${{ matrix.service }}"
           binary_name: ${{ matrix.service }}
+          md5sum: false
           extra_files: README.md
           release_tag: ${{ steps.previoustag.outputs.tag }}
      
+      - uses: wangyoucao577/go-release-action@v1.18
+        if: ${{ matrix.service == "loadtest"}} 
+        env:
+          GO111MODULE: on
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          goos: ${{ matrix.goos }}
+          goarch: ${{ matrix.goarch }}
+          project_path: "./services/friendbot/${{ matrix.service }}"
+          binary_name: ${{ matrix.service }}
+          md5sum: false
+          extra_files: README.md
+          release_tag: ${{ steps.previoustag.outputs.tag }}
       # - name: Make .deb package
       #   run: |
       #     fpm -f -s dir -t deb -n digitalbits-federation -v ${{ steps.bump_version.outputs.tag }} --deb-use-file-permissions /home/runner/go/bin/federation=/usr/local/bin/federation 
