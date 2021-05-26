@@ -45,6 +45,7 @@ jobs:
         # build and publish in parallel: linux/386, linux/amd64, windows/386, windows/amd64, darwin/amd64 
         goos: [linux, windows, darwin]
         goarch: ["386", amd64]
+        service: ["fededartion", "friendbot", "frontier", "keystore"]
         exclude:  
           - goarch: "386"
             goos: darwin 
@@ -75,14 +76,10 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           goos: ${{ matrix.goos }}
           goarch: ${{ matrix.goarch }}
-          project_path: "./services/federation"
-          binary_name: "federation"
+          project_path: "./services/${{ matrix.service }}"
+          binary_name: ${{ matrix.service }}
           extra_files: README.md
           release_tag: ${{ steps.previoustag.outputs.tag }}
-        run: |
-          mkdir -p /opt/binaries
-          cp $BUILD_ARTIFACTS_FOLDER/* /opt/binaries
-          ls /opt/binaries
      
       # - name: Make .deb package
       #   run: |
