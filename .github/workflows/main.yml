@@ -38,20 +38,6 @@ jobs:
           pip3 uninstall click -y
           pip3 install click==7.1.2
           sudo gem install --no-document fpm
-
-      # - name: Install Go
-      #   uses: actions/setup-go@v2
-      #   with:
-      #     go-version: 1.14.x
-
-      - name: Build the app    
-        run: |
-          sudo mkdir -p /go/src/github.com/digitalbits/go
-
-          export GO111MODULE=on
-
-          sudo cp -Rf ./* /go/src/github.com/digitalbits/go/
-          
       - uses: wangyoucao577/go-release-action@v1.18
         env:
           GO111MODULE: on
@@ -59,7 +45,7 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           goos: ${{ matrix.goos }}
           goarch: ${{ matrix.goarch }}
-          project_path: "/go/src/github.com/digitalbits/go/services/federation"
+          project_path: "./services/federation"
           binary_name: "federation"
           extra_files: README.md
       # - name: Github Tag Bump
