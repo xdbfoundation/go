@@ -77,7 +77,7 @@ jobs:
           goarch: ${{ matrix.goarch }}
           project_path: "./services/federation"
           binary_name: "federation"
-          build_command: install
+          build_command: go install
           extra_files: README.md
           release_tag: ${{ steps.previoustag.outputs.tag }}
      
