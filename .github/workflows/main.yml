@@ -30,7 +30,11 @@ jobs:
           DEFAULT_BUMP: "patch"
           RELEASE_BRANCHES: master
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          WITH_V: false   
+          WITH_V: false
+      - uses: ncipollo/release-action@v1
+        with:
+          bodyFile: "README.md"
+          token: ${{ secrets.GITHUB_TOKEN }}   
   build:
     needs: tagbump
     # The type of runner that the job will run on
