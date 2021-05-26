@@ -39,10 +39,10 @@ jobs:
           pip3 install click==7.1.2
           sudo gem install --no-document fpm
 
-      - name: Install Go
-        uses: actions/setup-go@v2
-        with:
-          go-version: 1.14.x
+      # - name: Install Go
+      #   uses: actions/setup-go@v2
+      #   with:
+      #     go-version: 1.14.x
 
       - name: Build the app    
         run: |
@@ -51,9 +51,10 @@ jobs:
           export GO111MODULE=on
 
           sudo cp -Rf ./* /go/src/github.com/digitalbits/go/
-          sudo go install github.com/digitalbits/go/services/...
-
+          
       - uses: wangyoucao577/go-release-action@v1.18
+        env:
+          GO111MODULE: on
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           goos: ${{ matrix.goos }}
