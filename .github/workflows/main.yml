@@ -70,7 +70,7 @@ jobs:
       
 
       - uses: wangyoucao577/go-release-action@v1.18
-        if: ${{ matrix.service != "loadtest"}} 
+        if: ${{ matrix.service != 'loadtest' }} 
         env:
           GO111MODULE: on
         with:
@@ -84,7 +84,7 @@ jobs:
           release_tag: ${{ steps.previoustag.outputs.tag }}
      
       - uses: wangyoucao577/go-release-action@v1.18
-        if: ${{ matrix.service == "loadtest"}} 
+        if: ${{ matrix.service == 'loadtest' }} 
         env:
           GO111MODULE: on
         with:
