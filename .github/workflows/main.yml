@@ -33,6 +33,7 @@ jobs:
           WITH_V: false
       - uses: ncipollo/release-action@v1
         with:
+          tag: ${{ steps.bump_version.outputs.tag }}
           bodyFile: "README.md"
           token: ${{ secrets.GITHUB_TOKEN }}   
   build:
