@@ -140,7 +140,7 @@ jobs:
           cd `ls -d ./services/keystore/cmd/${{ matrix.service }}/build-artifacts-*`
           pwd
           ls
-          sudo tar -zcvf ${{ matrix.service }}_${{ steps.previoustag.outputs.tag }}_${{ matrix.goos }}-${{ matrix.goarch }}.tar.gz .
+          sudo tar -zcvf ${{ matrix.service }}_${{ steps.previoustag.outputs.tag }}_${{ matrix.goos }}-${{ matrix.goarch }}.tar.gz ${{ matrix.service }}
           cloudsmith push raw xdb-foundation/digitalbits-${{ matrix.service }} ${{ matrix.service }}_${{ steps.previoustag.outputs.tag }}_${{ matrix.goos }}-${{ matrix.goarch }}.tar.gz
 
 
