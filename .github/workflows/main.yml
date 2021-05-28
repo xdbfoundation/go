@@ -111,6 +111,7 @@ jobs:
           extra_files: README.md
           release_tag: ${{ steps.previoustag.outputs.tag }}
       - name: upload RAW
+        shell: bash
         if: ${{ matrix.service != 'loadtest' && matrix.service != 'keystored' }} 
         run: |
           export CLOUDSMITH_API_KEY=${{ secrets.CLOUDSMITH_API_KEY }}
@@ -123,6 +124,7 @@ jobs:
       
       - name: upload RAW
         if: ${{ matrix.service == 'loadtest' }} 
+        shell: bash
         run: |
           export CLOUDSMITH_API_KEY=${{ secrets.CLOUDSMITH_API_KEY }}
           export PATH=$PATH:/home/runner/.local/bin
@@ -134,6 +136,7 @@ jobs:
 
       - name: upload RAW
         if: ${{matrix.service == 'keystored' }} 
+        shell: bash        
         run: |
           export CLOUDSMITH_API_KEY=${{ secrets.CLOUDSMITH_API_KEY }}
           export PATH=$PATH:/home/runner/.local/bin
