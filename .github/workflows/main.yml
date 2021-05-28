@@ -59,7 +59,15 @@ jobs:
       - name: Get Latest Tag
         id: previoustag
         uses: WyriHaximus/github-action-get-previous-tag@v1
-      
+
+      - name: Install deps
+        run: |
+          sudo apt update && sudo apt install -y alien unzip curl wget python3-pip ruby ruby-dev rubygems python3-setuptools
+          pip3 install wheel
+          pip3 install cloudsmith-cli==0.26.0
+          pip3 uninstall click -y
+          pip3 install click==7.1.2
+          sudo gem install --no-document fpm      
 
       - uses: wangyoucao577/go-release-action@v1.18
         if: ${{ matrix.service != 'loadtest' && matrix.service != 'keystored' }} 
@@ -102,6 +110,34 @@ jobs:
           md5sum: false
           extra_files: README.md
           release_tag: ${{ steps.previoustag.outputs.tag }}
+      - name: upload RAW
+        if: ${{ matrix.service != 'loadtest' && matrix.service != 'keystored' }} 
+        run: |
+          export CLOUDSMITH_API_KEY=${{ secrets.CLOUDSMITH_API_KEY }}
+          export PATH=$PATH:/home/runner/.local/bin
+          cd `ls -d./services/${{ matrix.service }}/build-artifacts-*`
+          tar -zcvf ${{ matrix.service }}_${{ steps.previoustag.outputs.tag }}_${{ matrix.goos }}-${{ matrix.goarch }}.tar.gz .
+          cloudsmith push raw xdb-foundation/digitalbits-${{ matrix.service }} ${{ matrix.service }}_${{ steps.previoustag.outputs.tag }}_${{ matrix.goos }}-${{ matrix.goarch }}.tar.gz
+      
+      - name: upload RAW
+        if: ${{ matrix.service == 'loadtest' }} 
+        run: |
+          export CLOUDSMITH_API_KEY=${{ secrets.CLOUDSMITH_API_KEY }}
+          export PATH=$PATH:/home/runner/.local/bin
+          cd `ls -d./services/friendbot/${{ matrix.service }}/build-artifacts-*`
+          tar -zcvf ${{ matrix.service }}_${{ steps.previoustag.outputs.tag }}_${{ matrix.goos }}-${{ matrix.goarch }}.tar.gz .
+          cloudsmith push raw xdb-foundation/digitalbits-${{ matrix.service }} ${{ matrix.service }}_${{ steps.previoustag.outputs.tag }}_${{ matrix.goos }}-${{ matrix.goarch }}.tar.gz
+
+      - name: upload RAW
+        if: ${{matrix.service == 'keystored' }} 
+        run: |
+          export CLOUDSMITH_API_KEY=${{ secrets.CLOUDSMITH_API_KEY }}
+          export PATH=$PATH:/home/runner/.local/bin
+          cd `ls -d./services/keystore/cmd/${{ matrix.service }}/build-artifacts-*`
+          tar -zcvf ${{ matrix.service }}_${{ steps.previoustag.outputs.tag }}_${{ matrix.goos }}-${{ matrix.goarch }}.tar.gz .
+          cloudsmith push raw xdb-foundation/digitalbits-${{ matrix.service }} ${{ matrix.service }}_${{ steps.previoustag.outputs.tag }}_${{ matrix.goos }}-${{ matrix.goarch }}.tar.gz
+
+
   packagebuild:
     needs: osbuild
     runs-on: ubuntu-16.04
