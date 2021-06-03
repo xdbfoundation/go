@@ -124,8 +124,8 @@ can be either a simple native asset payment or a fiat asset payment.
 
 |          | Example                                                            | Relation          |
 |----------|--------------------------------------------------------------------|-------------------|
-| sender   | /accounts/GA5WBPYA5Y4WAEHXWR2UKO2UO4BUGHUQ74EUPKON2QHV4WRHOIRNKKH2 | Sending account   |
-| receiver | /accounts/GCEZWKCA5VLDNRLN3RPRJMRZOX3Z6G5CHCGSNFHEYVXM3XOJMDS674JZ | Receiving account |
+| sender   | `/accounts/GA5WBPYA5Y4WAEHXWR2UKO2UO4BUGHUQ74EUPKON2QHV4WRHOIRNKKH2` | Sending account   |
+| receiver | `/accounts/GCEZWKCA5VLDNRLN3RPRJMRZOX3Z6G5CHCGSNFHEYVXM3XOJMDS674JZ` | Receiving account |
 
 #### Example
 
