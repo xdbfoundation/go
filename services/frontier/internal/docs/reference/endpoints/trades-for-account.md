@@ -20,7 +20,7 @@ GET /accounts/{account_id}/trades{?cursor,limit,order}
 
 | name | notes | description | example |
 | ---- | ----- | ----------- | ------- |
-| `account_id` | required, string | ID of an account | GBYTR4MC5JAX4ALGUBJD7EIKZVM7CUGWKXIUJMRSMK573XH2O7VAK3SR |
+| `account_id` | required, string | ID of an account | `GBYTR4MC5JAX4ALGUBJD7EIKZVM7CUGWKXIUJMRSMK573XH2O7VAK3SR` |
 | `?cursor` | optional, any, default _null_ | A paging token, specifying where to start returning records from. When streaming this can be set to `now` to stream object created since your request time. | 12884905984 |
 | `?order`  | optional, string, default `asc` | The order in which to return rows, "asc" or "desc". | `asc` |
 | `?limit`  | optional, number, default: `10` | Maximum number of records to return. | `200` |
