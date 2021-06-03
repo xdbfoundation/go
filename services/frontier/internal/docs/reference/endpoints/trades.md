@@ -27,10 +27,10 @@ GET /trades?base_asset_type={base_asset_type}&base_asset_code={base_asset_code}&
 | ---- | ----- | ----------- | ------- |
 | `base_asset_type` | optional, string | Type of base asset | `native` |
 | `base_asset_code` | optional, string | Code of base asset, not required if type is `native` | `USD` |
-| `base_asset_issuer` | optional, string | Issuer of base asset, not required if type is `native` | 'GA2HGBJIJKI6O4XEM7CZWY5PS6GKSXL6D34ERAJYQSPYA6X6AI7HYW36' |
+| `base_asset_issuer` | optional, string | Issuer of base asset, not required if type is `native` | `GA2HGBJIJKI6O4XEM7CZWY5PS6GKSXL6D34ERAJYQSPYA6X6AI7HYW36` |
 | `counter_asset_type` | optional, string | Type of counter asset  | `credit_alphanum4` |
 | `counter_asset_code` | optional, string | Code of counter asset, not required if type is `native` | `BTC` |
-| `counter_asset_issuer` | optional, string | Issuer of counter asset, not required if type is `native` | 'GD6VWBXI6NY3AOOR55RLVQ4MNIDSXE5JSAVXUTF35FRRI72LYPI3WL6Z' |
+| `counter_asset_issuer` | optional, string | Issuer of counter asset, not required if type is `native` | `GD6VWBXI6NY3AOOR55RLVQ4MNIDSXE5JSAVXUTF35FRRI72LYPI3WL6Z` |
 | `offer_id` | optional, string | filter for by a specific offer id | `283606` |
 | `?cursor` | optional, any, default _null_ | A paging token, specifying where to start returning records from. | `12884905984` |
 | `?order`  | optional, string, default `asc` | The order, in terms of timeline, in which to return rows, "asc" or "desc". | `asc` |
