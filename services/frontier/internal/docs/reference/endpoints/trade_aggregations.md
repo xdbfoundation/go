@@ -32,10 +32,10 @@ GET /trade_aggregations?base_asset_type={base_asset_type}&base_asset_code={base_
 | `offset` | long | segments can be offset using this parameter. Expressed in milliseconds. Can only be used if the resolution is greater than 1 hour. *Value must be in whole hours, less than the provided resolution, and less than 24 hours.* | 3600000 (1 hour) |
 | `base_asset_type` | string | Type of base asset | `native` |
 | `base_asset_code` | string | Code of base asset, not required if type is `native` | `USD` |
-| `base_asset_issuer` | string | Issuer of base asset, not required if type is `native` | 'GA2HGBJIJKI6O4XEM7CZWY5PS6GKSXL6D34ERAJYQSPYA6X6AI7HYW36' |
+| `base_asset_issuer` | string | Issuer of base asset, not required if type is `native` | `GA2HGBJIJKI6O4XEM7CZWY5PS6GKSXL6D34ERAJYQSPYA6X6AI7HYW36` |
 | `counter_asset_type` | string | Type of counter asset  | `credit_alphanum4` |
 | `counter_asset_code` | string | Code of counter asset, not required if type is `native` | `BTC` |
-| `counter_asset_issuer` | string | Issuer of counter asset, not required if type is `native` | 'GATEMHCCKCY67ZUCKTROYN24ZYT5GK4EQZ65JJLDHKHRUZI3EUEKMTCH' |
+| `counter_asset_issuer` | string | Issuer of counter asset, not required if type is `native` | `GATEMHCCKCY67ZUCKTROYN24ZYT5GK4EQZ65JJLDHKHRUZI3EUEKMTCH` |
 | `?order`  | optional, string, default `asc` | The order, in terms of timeline, in which to return rows, "asc" or "desc". | `asc` |
 | `?limit`  | optional, number, default: `10` | Maximum number of records to return. | `200` |
 
