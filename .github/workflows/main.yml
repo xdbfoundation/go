@@ -230,6 +230,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
+          file: services/frontier/Dockerfile
           build-args: FRONTIER_VERSION=${{ steps.previoustag.outputs.tag }}
           tags: docker.cloudsmith.io/xdb-foundation/digitalbits-frontier:${{ steps.previoustag.outputs.tag }}
       -
