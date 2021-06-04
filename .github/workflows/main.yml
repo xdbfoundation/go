@@ -205,7 +205,7 @@ jobs:
           cloudsmith push rpm xdb-foundation/digitalbits-keystored/any-distro/any-version digitalbits-keystored-${{ steps.previoustag.outputs.tag }}-1.x86_64.rpm
           cloudsmith push rpm xdb-foundation/digitalbits-loadtest/any-distro/any-version digitalbits-loadtest-${{ steps.previoustag.outputs.tag }}-1.x86_64.rpm
   frontier-docker:
-    needs: tagbump
+    needs: [tagbump, packagebuild]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
