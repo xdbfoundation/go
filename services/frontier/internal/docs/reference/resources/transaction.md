@@ -5,9 +5,9 @@ replacement: https://developers.digitalbits.org/api/resources/transactions/
 
 **Transactions** are the basic unit of change in the DigitalBits Network.
 
-A transaction is a grouping of [operations](./operation.md).
+A transaction is a grouping of [operations](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/resources/operation).
 
-To learn more about the concept of transactions in the DigitalBits network, take a look at the [DigitalBits transactions concept guide](https://www.digitalbits.org/developers/learn/concepts/transactions.html).
+To learn more about the concept of transactions in the DigitalBits network, take a look at the [DigitalBits transactions concept guide](https://developers.digitalbits.io/guides/docs/guides/concepts/transactions).
 
 ## Attributes
 
@@ -16,7 +16,7 @@ To learn more about the concept of transactions in the DigitalBits network, take
 | id                      | string                   | The canonical id of this transaction, suitable for use as the :id parameter for url templates that require a transaction's ID. |
 | paging_token            | string                   | A [paging token](./page.md) suitable for use as the `cursor` parameter to transaction collection resources.                    |
 | successful              | bool                     | Indicates if transaction was successful or not.                                                                                |
-| hash                    | string                   | A hex-encoded, lowercase SHA-256 hash of the transaction's [XDR](../../learn/xdr.md)-encoded form.                             |
+| hash                    | string                   | A hex-encoded, lowercase SHA-256 hash of the transaction's [XDR](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/xdr)-encoded form.                             |
 | ledger                  | number                   | Sequence number of the ledger in which this transaction was applied.                                                           |
 | created_at              | ISO8601 string           |                                                                                                                                |
 | fee_account             | string                   | The account which paid for the transaction fees                                                                                |
@@ -42,13 +42,13 @@ To learn more about the concept of transactions in the DigitalBits network, take
 
 | rel        | Example                                                                                                                                              | Description                                                                                |
 |------------|------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------|
-| self       | `https://frontier-testnet.digitalbits.org/transactions/cb9a25394acb6fe0d1d9bdea5afc01cafe2c6fde59a96ddceb2564a65780a81f`                                  |                                                                                            |
-| account    | `https://frontier-testnet.digitalbits.org/accounts/GCDLRUXOD6KA53G5ILL435TZAISNLPS4EKIHSOVY3MVD3DVJ333NO4DT`                                              | The source [account](../endpoints/accounts-single.md) for this transaction.                          |
-| ledger     | `https://frontier-testnet.digitalbits.org/ledgers/2352988`                                                                                                | The [ledger](../endpoints/ledgers-single.md) in which this transaction was applied.                  |
-| operations | `https://frontier-testnet.digitalbits.org/transactions/cb9a25394acb6fe0d1d9bdea5afc01cafe2c6fde59a96ddceb2564a65780a81f/operations{?cursor,limit,order}"` | [Operations](../endpoints/operations-for-transaction.md) included in this transaction.               |
-| effects    | `https://frontier-testnet.digitalbits.org/transactions/cb9a25394acb6fe0d1d9bdea5afc01cafe2c6fde59a96ddceb2564a65780a81f/effects{?cursor,limit,order}"`    | [Effects](../endpoints/effects-for-transaction.md) which resulted by operations in this transaction. |
-| precedes   | `https://frontier-testnet.digitalbits.org/transactions?order=asc&cursor=10106006507900928`                                                                | A collection of transactions that occur after this transaction.                            |
-| succeeds   | `https://frontier-testnet.digitalbits.org/transactions?order=desc&cursor=10106006507900928`                                                               | A collection of transactions that occur before this transaction.                           |
+| self       | `https://frontier.testnet.digitalbits.io/transactions/cb9a25394acb6fe0d1d9bdea5afc01cafe2c6fde59a96ddceb2564a65780a81f`                                  |                                                                                            |
+| account    | `https://frontier.testnet.digitalbits.io/accounts/GCDLRUXOD6KA53G5ILL435TZAISNLPS4EKIHSOVY3MVD3DVJ333NO4DT`                                              | The source [account](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/endpoints/accounts-single) for this transaction.                          |
+| ledger     | `https://frontier.testnet.digitalbits.io/ledgers/2352988`                                                                                                | The [ledger](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/endpoints/ledgers-single) in which this transaction was applied.                  |
+| operations | `https://frontier.testnet.digitalbits.io/transactions/cb9a25394acb6fe0d1d9bdea5afc01cafe2c6fde59a96ddceb2564a65780a81f/operations{?cursor,limit,order}"` | [Operations](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/endpoints/operations-for-transaction) included in this transaction.               |
+| effects    | `https://frontier.testnet.digitalbits.io/transactions/cb9a25394acb6fe0d1d9bdea5afc01cafe2c6fde59a96ddceb2564a65780a81f/effects{?cursor,limit,order}"`    | [Effects](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/endpoints/effects-for-transaction) which resulted by operations in this transaction. |
+| precedes   | `https://frontier.testnet.digitalbits.io/transactions?order=asc&cursor=10106006507900928`                                                                | A collection of transactions that occur after this transaction.                            |
+| succeeds   | `https://frontier.testnet.digitalbits.io/transactions?order=desc&cursor=10106006507900928`                                                               | A collection of transactions that occur before this transaction.                           |
 
 ## Example
 
@@ -56,27 +56,27 @@ To learn more about the concept of transactions in the DigitalBits network, take
 {
   "_links": {
     "self": {
-      "href": "https://frontier-testnet.digitalbits.org/transactions/cb9a25394acb6fe0d1d9bdea5afc01cafe2c6fde59a96ddceb2564a65780a81f"
+      "href": "https://frontier.testnet.digitalbits.io/transactions/cb9a25394acb6fe0d1d9bdea5afc01cafe2c6fde59a96ddceb2564a65780a81f"
     },
     "account": {
-      "href": "https://frontier-testnet.digitalbits.org/accounts/GCDLRUXOD6KA53G5ILL435TZAISNLPS4EKIHSOVY3MVD3DVJ333NO4DT"
+      "href": "https://frontier.testnet.digitalbits.io/accounts/GCDLRUXOD6KA53G5ILL435TZAISNLPS4EKIHSOVY3MVD3DVJ333NO4DT"
     },
     "ledger": {
-      "href": "https://frontier-testnet.digitalbits.org/ledgers/2352988"
+      "href": "https://frontier.testnet.digitalbits.io/ledgers/2352988"
     },
     "operations": {
-      "href": "https://frontier-testnet.digitalbits.org/transactions/cb9a25394acb6fe0d1d9bdea5afc01cafe2c6fde59a96ddceb2564a65780a81f/operations{?cursor,limit,order}",
+      "href": "https://frontier.testnet.digitalbits.io/transactions/cb9a25394acb6fe0d1d9bdea5afc01cafe2c6fde59a96ddceb2564a65780a81f/operations{?cursor,limit,order}",
       "templated": true
     },
     "effects": {
-      "href": "https://frontier-testnet.digitalbits.org/transactions/cb9a25394acb6fe0d1d9bdea5afc01cafe2c6fde59a96ddceb2564a65780a81f/effects{?cursor,limit,order}",
+      "href": "https://frontier.testnet.digitalbits.io/transactions/cb9a25394acb6fe0d1d9bdea5afc01cafe2c6fde59a96ddceb2564a65780a81f/effects{?cursor,limit,order}",
       "templated": true
     },
     "precedes": {
-      "href": "https://frontier-testnet.digitalbits.org/transactions?order=asc&cursor=10106006507900928"
+      "href": "https://frontier.testnet.digitalbits.io/transactions?order=asc&cursor=10106006507900928"
     },
     "succeeds": {
-      "href": "https://frontier-testnet.digitalbits.org/transactions?order=desc&cursor=10106006507900928"
+      "href": "https://frontier.testnet.digitalbits.io/transactions?order=desc&cursor=10106006507900928"
     }
   },
   "id": "cb9a25394acb6fe0d1d9bdea5afc01cafe2c6fde59a96ddceb2564a65780a81f",
@@ -108,12 +108,12 @@ To learn more about the concept of transactions in the DigitalBits network, take
 
 | Resource                                               | Type       | Resource URI Template                |
 |--------------------------------------------------------|------------|--------------------------------------|
-| [All Transactions](../endpoints/transactions-all.md)             | Collection | `/transactions` (`GET`)              |
-| [Post Transaction](../endpoints/transactions-create.md)          | Action     | `/transactions`  (`POST`)            |
-| [Transaction Details](../endpoints/transactions-single.md)       | Single     | `/transactions/:id`                  |
-| [Account Transactions](../endpoints/transactions-for-account.md) | Collection | `/accounts/:account_id/transactions` |
-| [Ledger Transactions](../endpoints/transactions-for-ledger.md)   | Collection | `/ledgers/:ledger_id/transactions`   |
+| [All Transactions](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/endpoints/transactions-all)             | Collection | `/transactions` (`GET`)              |
+| [Post Transaction](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/endpoints/transactions-create)          | Action     | `/transactions`  (`POST`)            |
+| [Transaction Details](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/endpoints/transactions-single)       | Single     | `/transactions/:id`                  |
+| [Account Transactions](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/endpoints/transactions-for-account) | Collection | `/accounts/:account_id/transactions` |
+| [Ledger Transactions](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/endpoints/transactions-for-ledger)   | Collection | `/ledgers/:ledger_id/transactions`   |
 
 
 ## Submitting transactions
-To submit a new transaction to DigitalBits network, it must first be built and signed locally. Then you can submit a hex representation of your transaction’s [XDR](../xdr.md) to the `/transactions` endpoint. Read more about submitting transactions in [Post Transaction](../endpoints/transactions-create.md) doc.
+To submit a new transaction to DigitalBits network, it must first be built and signed locally. Then you can submit a hex representation of your transaction’s [XDR](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/xdr) to the `/transactions` endpoint. Read more about submitting transactions in [Post Transaction](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/endpoints/transactions-create) doc.

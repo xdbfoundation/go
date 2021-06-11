@@ -1,11 +1,6 @@
----
-title: Ledger
-replacement: https://developers.digitalbits.org/api/resources/ledgers/
----
-
 A **ledger** resource contains information about a given ledger.
 
-To learn more about the concept of ledgers in the DigitalBits network, take a look at the [DigitalBits ledger concept guide](https://www.digitalbits.org/developers/learn/concepts/ledger.html).
+To learn more about the concept of ledgers in the DigitalBits network, take a look at the [DigitalBits ledger concept guide](https://developers.digitalbits.io/guides/docs/guides/concepts/ledger).
 
 ## Attributes
 
@@ -87,14 +82,14 @@ To learn more about the concept of ledgers in the DigitalBits network, take a lo
 ## Endpoints
 | Resource                | Type       | Resource URI Template              |
 |-------------------------|------------|------------------------------------|
-| [All ledgers](../endpoints/ledgers-all.md)         | Collection | `/ledgers`                         |
-| [Single Ledger](../endpoints/ledgers-single.md)       | Single     | `/ledgers/:id`                     |
-| [Ledger Transactions](../endpoints/transactions-for-ledger.md) | Collection | `/ledgers/:ledger_id/transactions` |
-| [Ledger Operations](../endpoints/operations-for-ledger.md)   | Collection | `/ledgers/:ledger_id/operations`   |
-| [Ledger Payments](../endpoints/payments-for-ledger.md)     | Collection | `/ledgers/:ledger_id/payments`     |
-| [Ledger Effects](../endpoints/effects-for-ledger.md)      | Collection | `/ledgers/:ledger_id/effects`      |
+| [All ledgers](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/endpoints/ledgers-all)         | Collection | `/ledgers`                         |
+| [Single Ledger](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/endpoints/ledgers-single)       | Single     | `/ledgers/:id`                     |
+| [Ledger Transactions](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/endpoints/transactions-for-ledger) | Collection | `/ledgers/:ledger_id/transactions` |
+| [Ledger Operations](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/endpoints/operations-for-ledger)   | Collection | `/ledgers/:ledger_id/operations`   |
+| [Ledger Payments](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/endpoints/payments-for-ledger)     | Collection | `/ledgers/:ledger_id/payments`     |
+| [Ledger Effects](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/endpoints/effects-for-ledger)      | Collection | `/ledgers/:ledger_id/effects`      |
 
 
 
-[inflation]: https://www.digitalbits.org/developers/learn/concepts/inflation.html
-[fee]: https://www.digitalbits.org/developers/learn/concepts/fees.html
+[inflation]: https://developers.digitalbits.io/guides/docs/guides/concepts/inflation
+[fee]: https://developers.digitalbits.io/guides/docs/guides/concepts/fees

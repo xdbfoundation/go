@@ -5,7 +5,7 @@ replacement: https://developers.digitalbits.org/docs/run-api-server/quickstart/
 ## Frontier Quickstart
 This document describes how to quickly set up a **test** DigitalBits Core + Frontier node, that you can play around with to get a feel for how a digitalbits node operates. **This configuration is not secure!** It is **not** intended as a guide for production administration.
 
-For detailed information about running Frontier and DigitalBits Core safely in production see the [Frontier Administration Guide](admin.md) and the [DigitalBits Core Administration Guide](https://www.digitalbits.org/developers/digitalbits-core/software/admin.html).
+For detailed information about running Frontier and DigitalBits Core safely in production see the [Frontier Administration Guide](admin.md) and the [DigitalBits Core Administration Guide](https://developers.digitalbits.io/software/DigitalBits/docs/software/adminl).
 
 If you're ready to roll up your sleeves and dig into the code, check out the [Developer Guide](developing.md).
 

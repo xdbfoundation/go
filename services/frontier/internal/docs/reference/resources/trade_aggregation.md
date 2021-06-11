@@ -1,8 +1,3 @@
----
-title: Trade Aggregation
-replacement: https://developers.digitalbits.org/api/aggregations/trade-aggregations/
----
-
 A Trade Aggregation represents aggregated statistics on an asset pair (`base` and `counter`) for a specific time period.
 
 ## Attributes
@@ -36,4 +31,4 @@ Thus to get price you would take n / d.
 
 | Resource                 | Type       | Resource URI Template                |
 |--------------------------|------------|--------------------------------------|
-| [Trade Aggregations](../endpoints/trade_aggregations.md)       | Collection | `/trade_aggregations?{orderbook_params}`       |
+| [Trade Aggregations](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/endpoints/trade_aggregations)       | Collection | `/trade_aggregations?{orderbook_params}`       |

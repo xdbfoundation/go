@@ -1,8 +1,3 @@
----
-title: Payment Path
-replacement: https://developers.digitalbits.org/api/aggregations/paths/
----
-
 A **path** resource contains information about a payment path.  A path can be used by code to populate necessary fields on path payment operation, such as `path` and `sendMax`.
 
 
@@ -51,4 +46,4 @@ A **path** resource contains information about a payment path.  A path can be us
 ## Endpoints
 | Resource                                 | Type       | Resource URI Template |
 |------------------------------------------|------------|-----------------------|
-| [Find Payment Paths](../endpoints/path-finding.md) | Collection | `/paths`              |
+| [Find Payment Paths](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/endpoints/path-finding) | Collection | `/paths`              |

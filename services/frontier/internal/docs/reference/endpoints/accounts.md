@@ -3,7 +3,7 @@ title: Accounts
 replacement: https://developers.digitalbits.org/api/resources/accounts/
 ---
 
-This endpoint allows filtering accounts who have a given `signer` or have a trustline to an `asset`. The result is a list of [accounts](../resources/account.md).
+This endpoint allows filtering accounts who have a given `signer` or have a trustline to an `asset`. The result is a list of [accounts](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/resources/account).
 
 To find all accounts who are trustees to an asset, pass the query parameter `asset` using the canonical representation for an issued assets which is `Code:IssuerAccountID`. Read more about canonical representation of assets in [SEP-0011](https://github.com/digitalbits/digitalbits-protocol/blob/0c675fb3a482183dcf0f5db79c12685acf82a95c/ecosystem/sep-0011.md#values).
 
@@ -29,14 +29,14 @@ GET /accounts{?signer,asset,cursor,limit,order}
 ### curl Example Request
 
 ```sh
-curl "https://frontier-testnet.digitalbits.org/accounts?signer=GBPOFUJUHOFTZHMZ63H5GE6NX5KVKQRD6N3I2E5AL3T2UG7HSLPLXN2K"
+curl "https://frontier.testnet.digitalbits.io/accounts?signer=GBPOFUJUHOFTZHMZ63H5GE6NX5KVKQRD6N3I2E5AL3T2UG7HSLPLXN2K"
 ```
 
 <!-- ### JavaScript Example Request -->
 
 <!-- ```javascript -->
 <!-- var DigitalBitsSdk = require('digitalbits-sdk'); -->
-<!-- var server = new DigitalBitsSdk.Server('https://frontier-testnet.digitalbits.org'); -->
+<!-- var server = new DigitalBitsSdk.Server('https://frontier.testnet.digitalbits.io'); -->
 
 <!-- server.accounts(asset: asset) -->
 <!--   .call() -->
@@ -50,20 +50,20 @@ curl "https://frontier-testnet.digitalbits.org/accounts?signer=GBPOFUJUHOFTZHMZ6
 
 ## Response
 
-This endpoint responds with the details of all accounts matching the filters. See [account resource](../resources/account.md) for reference.
+This endpoint responds with the details of all accounts matching the filters. See [account resource](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/resources/account) for reference.
 
 ### Example Response
 ```json
 {
   "_links": {
     "self": {
-      "href": "https://frontier-testnet.digitalbits.org/accounts?cursor=\u0026limit=10\u0026order=asc\u0026signer=GBPOFUJUHOFTZHMZ63H5GE6NX5KVKQRD6N3I2E5AL3T2UG7HSLPLXN2K"
+      "href": "https://frontier.testnet.digitalbits.io/accounts?cursor=\u0026limit=10\u0026order=asc\u0026signer=GBPOFUJUHOFTZHMZ63H5GE6NX5KVKQRD6N3I2E5AL3T2UG7HSLPLXN2K"
     },
     "next": {
-      "href": "https://frontier-testnet.digitalbits.org/accounts?cursor=GDRREYWHQWJDICNH4SAH4TT2JRBYRPTDYIMLK4UWBDT3X3ZVVYT6I4UQ\u0026limit=10\u0026order=asc\u0026signer=GBPOFUJUHOFTZHMZ63H5GE6NX5KVKQRD6N3I2E5AL3T2UG7HSLPLXN2K"
+      "href": "https://frontier.testnet.digitalbits.io/accounts?cursor=GDRREYWHQWJDICNH4SAH4TT2JRBYRPTDYIMLK4UWBDT3X3ZVVYT6I4UQ\u0026limit=10\u0026order=asc\u0026signer=GBPOFUJUHOFTZHMZ63H5GE6NX5KVKQRD6N3I2E5AL3T2UG7HSLPLXN2K"
     },
     "prev": {
-      "href": "https://frontier-testnet.digitalbits.org/accounts?cursor=GDRREYWHQWJDICNH4SAH4TT2JRBYRPTDYIMLK4UWBDT3X3ZVVYT6I4UQ\u0026limit=10\u0026order=desc\u0026signer=GBPOFUJUHOFTZHMZ63H5GE6NX5KVKQRD6N3I2E5AL3T2UG7HSLPLXN2K"
+      "href": "https://frontier.testnet.digitalbits.io/accounts?cursor=GDRREYWHQWJDICNH4SAH4TT2JRBYRPTDYIMLK4UWBDT3X3ZVVYT6I4UQ\u0026limit=10\u0026order=desc\u0026signer=GBPOFUJUHOFTZHMZ63H5GE6NX5KVKQRD6N3I2E5AL3T2UG7HSLPLXN2K"
     }
   },
   "_embedded": {
@@ -71,34 +71,34 @@ This endpoint responds with the details of all accounts matching the filters. Se
       {
         "_links": {
           "self": {
-            "href": "https://frontier-testnet.digitalbits.org/accounts/GD42RQNXTRIW6YR3E2HXV5T2AI27LBRHOERV2JIYNFMXOBA234SWLQQB"
+            "href": "https://frontier.testnet.digitalbits.io/accounts/GD42RQNXTRIW6YR3E2HXV5T2AI27LBRHOERV2JIYNFMXOBA234SWLQQB"
           },
           "transactions": {
-            "href": "https://frontier-testnet.digitalbits.org/accounts/GD42RQNXTRIW6YR3E2HXV5T2AI27LBRHOERV2JIYNFMXOBA234SWLQQB/transactions{?cursor,limit,order}",
+            "href": "https://frontier.testnet.digitalbits.io/accounts/GD42RQNXTRIW6YR3E2HXV5T2AI27LBRHOERV2JIYNFMXOBA234SWLQQB/transactions{?cursor,limit,order}",
             "templated": true
           },
           "operations": {
-            "href": "https://frontier-testnet.digitalbits.org/accounts/GD42RQNXTRIW6YR3E2HXV5T2AI27LBRHOERV2JIYNFMXOBA234SWLQQB/operations{?cursor,limit,order}",
+            "href": "https://frontier.testnet.digitalbits.io/accounts/GD42RQNXTRIW6YR3E2HXV5T2AI27LBRHOERV2JIYNFMXOBA234SWLQQB/operations{?cursor,limit,order}",
             "templated": true
           },
           "payments": {
-            "href": "https://frontier-testnet.digitalbits.org/accounts/GD42RQNXTRIW6YR3E2HXV5T2AI27LBRHOERV2JIYNFMXOBA234SWLQQB/payments{?cursor,limit,order}",
+            "href": "https://frontier.testnet.digitalbits.io/accounts/GD42RQNXTRIW6YR3E2HXV5T2AI27LBRHOERV2JIYNFMXOBA234SWLQQB/payments{?cursor,limit,order}",
             "templated": true
           },
           "effects": {
-            "href": "https://frontier-testnet.digitalbits.org/accounts/GD42RQNXTRIW6YR3E2HXV5T2AI27LBRHOERV2JIYNFMXOBA234SWLQQB/effects{?cursor,limit,order}",
+            "href": "https://frontier.testnet.digitalbits.io/accounts/GD42RQNXTRIW6YR3E2HXV5T2AI27LBRHOERV2JIYNFMXOBA234SWLQQB/effects{?cursor,limit,order}",
             "templated": true
           },
           "offers": {
-            "href": "https://frontier-testnet.digitalbits.org/accounts/GD42RQNXTRIW6YR3E2HXV5T2AI27LBRHOERV2JIYNFMXOBA234SWLQQB/offers{?cursor,limit,order}",
+            "href": "https://frontier.testnet.digitalbits.io/accounts/GD42RQNXTRIW6YR3E2HXV5T2AI27LBRHOERV2JIYNFMXOBA234SWLQQB/offers{?cursor,limit,order}",
             "templated": true
           },
           "trades": {
-            "href": "https://frontier-testnet.digitalbits.org/accounts/GD42RQNXTRIW6YR3E2HXV5T2AI27LBRHOERV2JIYNFMXOBA234SWLQQB/trades{?cursor,limit,order}",
+            "href": "https://frontier.testnet.digitalbits.io/accounts/GD42RQNXTRIW6YR3E2HXV5T2AI27LBRHOERV2JIYNFMXOBA234SWLQQB/trades{?cursor,limit,order}",
             "templated": true
           },
           "data": {
-            "href": "https://frontier-testnet.digitalbits.org/accounts/GD42RQNXTRIW6YR3E2HXV5T2AI27LBRHOERV2JIYNFMXOBA234SWLQQB/data/{key}",
+            "href": "https://frontier.testnet.digitalbits.io/accounts/GD42RQNXTRIW6YR3E2HXV5T2AI27LBRHOERV2JIYNFMXOBA234SWLQQB/data/{key}",
             "templated": true
           }
         },
@@ -174,4 +174,4 @@ This endpoint responds with the details of all accounts matching the filters. Se
 
 ## Possible Errors
 
-- The [standard errors](../errors.md#Standard-Errors).
+- The [standard errors](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/errors#standard-errors).

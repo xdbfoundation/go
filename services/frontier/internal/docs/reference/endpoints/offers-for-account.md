@@ -1,14 +1,7 @@
----
-title: Offers for Account
-clientData:
-  laboratoryUrl: https://www.digitalbits.org/laboratory/#explorer?resource=offers&endpoint=for_account
-replacement: https://developers.digitalbits.org/api/resources/accounts/offers/
----
-
-People on the DigitalBits network can make [offers](../resources/offer.md) to buy or sell assets. This
+People on the DigitalBits network can make [offers](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/resources/offer) to buy or sell assets. This
 endpoint represents all the offers a particular account makes.
 
-This endpoint can also be used in [streaming](../streaming.md) mode so it is possible to use it to
+This endpoint can also be used in [streaming](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/streaming) mode so it is possible to use it to
 listen as offers are processed in the DigitalBits network. If called in streaming mode Frontier will
 start at the earliest known offer unless a `cursor` is set. In that case it will start from the
 `cursor`. You can also set `cursor` value to `now` to only stream offers created since your request
@@ -32,14 +25,14 @@ GET /accounts/{account}/offers{?cursor,limit,order}
 ### curl Example Request
 
 ```sh
-curl "https://frontier-testnet.digitalbits.org/accounts/GBYUUJHG6F4EPJGNLERINATVQLNDOFRUD7SGJZ26YZLG5PAYLG7XUSGF/offers"
+curl "https://frontier.testnet.digitalbits.io/accounts/GBYUUJHG6F4EPJGNLERINATVQLNDOFRUD7SGJZ26YZLG5PAYLG7XUSGF/offers"
 ```
 
 ### JavaScript Example Request
 
 ```javascript
 var DigitalBitsSdk = require('digitalbits-sdk');
-var server = new DigitalBitsSdk.Server('https://frontier-testnet.digitalbits.org');
+var server = new DigitalBitsSdk.Server('https://frontier.testnet.digitalbits.io');
 
 server.offers('accounts', 'GBYUUJHG6F4EPJGNLERINATVQLNDOFRUD7SGJZ26YZLG5PAYLG7XUSGF')
   .call()
@@ -55,7 +48,7 @@ server.offers('accounts', 'GBYUUJHG6F4EPJGNLERINATVQLNDOFRUD7SGJZ26YZLG5PAYLG7XU
 
 ```javascript
 var DigitalBitsSdk = require('digitalbits-sdk')
-var server = new DigitalBitsSdk.Server('https://frontier-testnet.digitalbits.org');
+var server = new DigitalBitsSdk.Server('https://frontier.testnet.digitalbits.io');
 
 var offerHandler = function (offerResponse) {
   console.log(offerResponse);
@@ -81,13 +74,13 @@ The list of offers.
 {
   "_links": {
     "self": {
-      "href": "https://frontier-testnet.digitalbits.org/accounts/GBYUUJHG6F4EPJGNLERINATVQLNDOFRUD7SGJZ26YZLG5PAYLG7XUSGF/offers?cursor=&limit=10&order=asc"
+      "href": "https://frontier.testnet.digitalbits.io/accounts/GBYUUJHG6F4EPJGNLERINATVQLNDOFRUD7SGJZ26YZLG5PAYLG7XUSGF/offers?cursor=&limit=10&order=asc"
     },
     "next": {
-      "href": "https://frontier-testnet.digitalbits.org/accounts/GBYUUJHG6F4EPJGNLERINATVQLNDOFRUD7SGJZ26YZLG5PAYLG7XUSGF/offers?cursor=5443256&limit=10&order=asc"
+      "href": "https://frontier.testnet.digitalbits.io/accounts/GBYUUJHG6F4EPJGNLERINATVQLNDOFRUD7SGJZ26YZLG5PAYLG7XUSGF/offers?cursor=5443256&limit=10&order=asc"
     },
     "prev": {
-      "href": "https://frontier-testnet.digitalbits.org/accounts/GBYUUJHG6F4EPJGNLERINATVQLNDOFRUD7SGJZ26YZLG5PAYLG7XUSGF/offers?cursor=5443256&limit=10&order=desc"
+      "href": "https://frontier.testnet.digitalbits.io/accounts/GBYUUJHG6F4EPJGNLERINATVQLNDOFRUD7SGJZ26YZLG5PAYLG7XUSGF/offers?cursor=5443256&limit=10&order=desc"
     }
   },
   "_embedded": {
@@ -95,10 +88,10 @@ The list of offers.
       {
         "_links": {
           "self": {
-            "href": "https://frontier-testnet.digitalbits.org/offers/5443256"
+            "href": "https://frontier.testnet.digitalbits.io/offers/5443256"
           },
           "offer_maker": {
-            "href": "https://frontier-testnet.digitalbits.org/accounts/GBYUUJHG6F4EPJGNLERINATVQLNDOFRUD7SGJZ26YZLG5PAYLG7XUSGF"
+            "href": "https://frontier.testnet.digitalbits.io/accounts/GBYUUJHG6F4EPJGNLERINATVQLNDOFRUD7SGJZ26YZLG5PAYLG7XUSGF"
           }
         },
         "id": "5443256",
@@ -128,4 +121,4 @@ The list of offers.
 
 ## Possible Errors
 
-- The [standard errors](../errors.md#standard-errors).
+- The [standard errors](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/errors#standard-errors).

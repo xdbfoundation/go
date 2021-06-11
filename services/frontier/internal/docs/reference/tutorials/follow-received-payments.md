@@ -1,9 +1,5 @@
----
-title: Follow Received Payments
----
-
-This tutorial shows how easy it is to use Frontier to watch for incoming payments on an [account](../../reference/resources/account.md)
-using JavaScript and `EventSource`.  We will eschew using [`js-digitalbits-sdk`](https://github.com/digitalbits/js-digitalbits-sdk), the
+This tutorial shows how easy it is to use Frontier to watch for incoming payments on an [account](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/resources/account)
+using JavaScript and `EventSource`.  We will eschew using [`js-digitalbits-sdk`](https://github.com/xdbfoundation/js-digitalbits-sdk), the
 high-level helper library, to show that it is possible for you to perform this
 task on your own, with whatever programming language you would like to use.
 
@@ -76,7 +72,7 @@ can use to get testnet digitalbits for testing purposes. To fund your account, s
 execute the following curl command:
 
 ```bash
-$ curl "https://friendbot.digitalbits.org/?addr=GB7JFK56QXQ4DVJRNPDBXABNG3IVKIXWWJJRJICHRU22Z5R5PI65GAK3"
+$ curl "https://friendbot.testnet.digitalbits.io/?addr=GB7JFK56QXQ4DVJRNPDBXABNG3IVKIXWWJJRJICHRU22Z5R5PI65GAK3"
 ```
 
 Don't forget to replace the account id above with your own.  If the request
@@ -97,10 +93,10 @@ terminal.
 
 ## Following payments using `curl`
 
-To follow new payments connected to your account you simply need to send `Accept: text/event-stream` header to the [/payments](../../reference/endpoints/payments-all.md) endpoint.
+To follow new payments connected to your account you simply need to send `Accept: text/event-stream` header to the [/payments](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/endpoints/payments-all) endpoint.
 
 ```bash
-$ curl -H "Accept: text/event-stream" "https://frontier-testnet.digitalbits.org/accounts/GB7JFK56QXQ4DVJRNPDBXABNG3IVKIXWWJJRJICHRU22Z5R5PI65GAK3/payments"
+$ curl -H "Accept: text/event-stream" "https://frontier.testnet.digitalbits.io/accounts/GB7JFK56QXQ4DVJRNPDBXABNG3IVKIXWWJJRJICHRU22Z5R5PI65GAK3/payments"
 ```
 
 As a result you will see something like:
@@ -125,18 +121,18 @@ data: {"_links":{"effects":{"href":"/operations/713226564145153/effects/{?cursor
        "type":"create_account"}
 ```
 
-Every time you receive a new payment you will get a new row of data. Payments is not the only endpoint that supports streaming. You can also stream transactions [/transactions](../../reference/endpoints/transactions-all.md) and operations [/operations](../../reference/endpoints/operations-all.md).
+Every time you receive a new payment you will get a new row of data. Payments is not the only endpoint that supports streaming. You can also stream transactions [/transactions](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/endpoints/transactions-all) and operations [/operations](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/endpoints/operations-all).
 
 ## Following payments using `EventStream`
 
 > **Warning!** `EventSource` object does not reconnect for certain error types so it can stop working.
-> If you need a reliable streaming connection please use our [SDK](https://github.com/digitalbits/js-digitalbits-sdk).
+> If you need a reliable streaming connection please use our [SDK](https://github.com/xdbfoundation/js-digitalbits-sdk).
 
 Another way to follow payments is writing a simple JS script that will stream payments and print them to console. Create `stream_payments.js` file and paste the following code into it:
 
 ```js
 var EventSource = require('eventsource');
-var es = new EventSource('https://frontier-testnet.digitalbits.org/accounts/GB7JFK56QXQ4DVJRNPDBXABNG3IVKIXWWJJRJICHRU22Z5R5PI65GAK3/payments');
+var es = new EventSource('https://frontier.testnet.digitalbits.io/accounts/GB7JFK56QXQ4DVJRNPDBXABNG3IVKIXWWJJRJICHRU22Z5R5PI65GAK3/payments');
 es.onmessage = function(message) {
 	var result = message.data ? JSON.parse(message.data) : message;
 	console.log('New payment:');
@@ -168,14 +164,14 @@ New payment:
 
 ## Testing it out
 
-We now know how to get a stream of transactions to an account. Let's check if our solution actually works and if new payments appear. Let's watch as we send a payment ([`create_account` operation](../../../guides/concepts/list-of-operations.html#create-account)) from our account to another account.
+We now know how to get a stream of transactions to an account. Let's check if our solution actually works and if new payments appear. Let's watch as we send a payment ([`create_account` operation](https://developers.digitalbits.io/guides/docs/guides/concepts/list-of-operations#create-account)) from our account to another account.
 
-We use the `create_account` operation because we are sending payment to a new, unfunded account. If we were sending payment to an account that is already funded, we would use the [`payment` operation](../../../guides/concepts/list-of-operations.html#payment).
+We use the `create_account` operation because we are sending payment to a new, unfunded account. If we were sending payment to an account that is already funded, we would use the [`payment` operation](https://developers.digitalbits.io/guides/docs/guides/concepts/list-of-operations#payment).
 
 First, let's check our account sequence number so we can create a payment transaction. To do this we send a request to frontier:
 
 ```bash
-$ curl "https://frontier-testnet.digitalbits.org/accounts/GB7JFK56QXQ4DVJRNPDBXABNG3IVKIXWWJJRJICHRU22Z5R5PI65GAK3"
+$ curl "https://frontier.testnet.digitalbits.io/accounts/GB7JFK56QXQ4DVJRNPDBXABNG3IVKIXWWJJRJICHRU22Z5R5PI65GAK3"
 ```
 
 Sequence number can be found under the `sequence` field. The current sequence number is `713226564141056`. Save this value somewhere.
@@ -207,7 +203,7 @@ After running this script you should see a signed transaction blob. To submit th
 Now to send a transaction just use frontier:
 
 ```bash
-curl -H "Content-Type: application/json" -X POST -d '{"tx":"AAAAAH6Sq76F4cHVMWvGG4AtNtFVIvayUxSgR401rPY9ej3TAAAD6AACiK0AAAABAAAAAAAAAAAAAAABAAAAAAAAAAEAAAAAKc1j3y10+nI+sxuXdbFz71JS35mp/RcPCP45Gw0obdAAAAAAAAAAAAExLQAAAAAAAAAAAT16PdMAAABAsJTBC5N5B9Q/9+ZKS7qkMd/wZHWlP6uCCFLzeD+JWT60/VgGFCpzQhZmMg2k4Vg+AwKJTwko3d7Jt3Y6WhjLCg=="}' "https://frontier-testnet.digitalbits.org/transactions"
+curl -H "Content-Type: application/json" -X POST -d '{"tx":"AAAAAH6Sq76F4cHVMWvGG4AtNtFVIvayUxSgR401rPY9ej3TAAAD6AACiK0AAAABAAAAAAAAAAAAAAABAAAAAAAAAAEAAAAAKc1j3y10+nI+sxuXdbFz71JS35mp/RcPCP45Gw0obdAAAAAAAAAAAAExLQAAAAAAAAAAAT16PdMAAABAsJTBC5N5B9Q/9+ZKS7qkMd/wZHWlP6uCCFLzeD+JWT60/VgGFCpzQhZmMg2k4Vg+AwKJTwko3d7Jt3Y6WhjLCg=="}' "https://frontier.testnet.digitalbits.io/transactions"
 ```
 
 You should see a new payment in a window running `stream_payments.js` script.

@@ -1,13 +1,8 @@
----
-title: Asset
-replacement: https://developers.digitalbits.org/api/resources/assets/
----
-
 **Assets** are the units that are traded on the DigitalBits Network.
 
 An asset consists of an type, code, and issuer.
 
-To learn more about the concept of assets in the DigitalBits network, take a look at the [DigitalBits assets concept guide](https://www.digitalbits.org/developers/guides/concepts/assets.html).
+To learn more about the concept of assets in the DigitalBits network, take a look at the [DigitalBits assets concept guide](https://developers.digitalbits.io/guides/docs/guides/concepts/assets).
 
 ## Attributes
 
@@ -19,7 +14,7 @@ To learn more about the concept of assets in the DigitalBits network, take a loo
 | amount                   | number | The number of units of credit issued. |
 | num_accounts             | number | The number of accounts that: 1) trust this asset and 2) where if the asset has the auth_required flag then the account is authorized to hold the asset. |
 | flags                    | object | The flags denote the enabling/disabling of certain asset issuer privileges. |
-| paging_token             | string | A [paging token](./page.md) suitable for use as the `cursor` parameter to transaction collection resources.                   |
+| paging_token             | string | A [paging token](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/resources/page) suitable for use as the `cursor` parameter to transaction collection resources.                   |
 
 #### Flag Object
 |    Attribute     |  Type  |                                                                                                                                |
@@ -31,7 +26,7 @@ To learn more about the concept of assets in the DigitalBits network, take a loo
 ## Links
 | rel          | Example                                                                                           | Description                                                
 |--------------|---------------------------------------------------------------------------------------------------|------------------------------------------------------------
-| toml  | `https://www.digitalbits.org/.well-known/digitalbits.toml`| Link to the TOML file for this issuer |
+| toml  | `https://livenet.digitalbits.io/.well-known/digitalbits.toml`| Link to the TOML file for this issuer |
 
 ## Example
 
@@ -39,7 +34,7 @@ To learn more about the concept of assets in the DigitalBits network, take a loo
 {
   "_links": {
     "toml": {
-      "href": "https://www.digitalbits.org/.well-known/digitalbits.toml"
+      "href": "https://livenet.digitalbits.io/.well-known/digitalbits.toml"
     }
   },
   "asset_type": "credit_alphanum4",
@@ -59,4 +54,4 @@ To learn more about the concept of assets in the DigitalBits network, take a loo
 
 |  Resource                                |    Type    |    Resource URI Template     |
 | ---------------------------------------- | ---------- | ---------------------------- |
-| [All Assets](../endpoints/assets-all.md) | Collection | `/assets` (`GET`)            |
+| [All Assets](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/endpoints/assets-all) | Collection | `/assets` (`GET`)            |

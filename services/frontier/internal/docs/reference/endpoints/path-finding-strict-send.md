@@ -1,15 +1,8 @@
----
-title: Strict Send Payment Paths
-clientData:
-  laboratoryUrl: https://www.digitalbits.org/laboratory/#explorer?resource=paths&endpoint=all
-replacement: https://developers.digitalbits.org/api/aggregations/paths/strict-send/
----
-
 The DigitalBits Network allows payments to be made across assets through _path payments_.  A path
 payment specifies a series of assets to route a payment through, from source asset (the asset
 debited from the payer) to destination asset (the asset credited to the payee).
 
-A [Path Payment Strict Send](../../../guides/concepts/list-of-operations.html#path-payment-strict-send) allows a user to specify the amount of the asset to send. The amount received will vary based on offers in the order books.
+A Path Payment Strict Send allows a user to specify the amount of the asset to send. The amount received will vary based on offers in the order books.
 
 
 A path payment strict send search is specified using:
@@ -23,7 +16,7 @@ As part of the search, frontier will load a list of assets available to the sour
 ## Request
 
 ```
-https://frontier-testnet.digitalbits.org/paths/strict-send?&source_amount={sa}&source_asset_type={at}&source_asset_code={ac}&source_asset_issuer={ai}&destination_account={da}
+https://frontier.testnet.digitalbits.io/paths/strict-send?&source_amount={sa}&source_asset_type={at}&source_asset_code={ac}&source_asset_issuer={ai}&destination_account={da}
 ```
 
 ## Arguments
@@ -46,14 +39,14 @@ XDB should be represented as `"native"`. Issued assets should be represented as 
 ### curl Example Request
 
 ```sh
-curl "https://frontier-testnet.digitalbits.org/paths/strict-send?&source_amount=10&source_asset_type=native&destination_assets=MXN:GC2GFGZ5CZCFCDJSQF3YYEAYBOS3ZREXJSPU7LUJ7JU3LP3BQNHY7YKS"
+curl "https://frontier.testnet.digitalbits.io/paths/strict-send?&source_amount=10&source_asset_type=native&destination_assets=MXN:GC2GFGZ5CZCFCDJSQF3YYEAYBOS3ZREXJSPU7LUJ7JU3LP3BQNHY7YKS"
 ```
 
 ### JavaScript Example Request
 
 ```javascript
 var DigitalBitsSdk = require('digitalbits-sdk');
-var server = new DigitalBitsSdk.Server('https://frontier-testnet.digitalbits.org');
+var server = new DigitalBitsSdk.Server('https://frontier.testnet.digitalbits.io');
 
 var sourceAsset = DigitalBitsSdk.Asset.native();
 var sourceAmount = "20";
@@ -75,7 +68,7 @@ server.strictSendPaths(sourceAsset, sourceAmount, [destinationAsset])
 
 ## Response
 
-This endpoint responds with a page of path resources.  See [path resource](../resources/path.md) for reference.
+This endpoint responds with a page of path resources.  See [path resource](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/resources/path) for reference.
 
 ### Example Response
 
@@ -101,5 +94,5 @@ This endpoint responds with a page of path resources.  See [path resource](../re
 
 ## Possible Errors
 
-- The [standard errors](../errors.md#Standard-Errors).
-- [not_found](../errors/not-found.md): A `not_found` error will be returned if no paths could be found to fulfill this payment request
+- The [standard errors](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/errors#standard-errors).
+- [not_found](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/errors/not-found): A `not_found` error will be returned if no paths could be found to fulfill this payment request

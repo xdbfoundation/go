@@ -1,11 +1,4 @@
----
-title: Operations for Transaction
-clientData:
-  laboratoryUrl: https://www.digitalbits.org/laboratory/#explorer?resource=operations&endpoint=for_transaction
-replacement: https://developers.digitalbits.org/api/resources/transactions/operations/
----
-
-This endpoint represents successful [operations](../resources/operation.md) that are part of a given [transaction](../resources/transaction.md).
+This endpoint represents successful [operations](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/resources/operation) that are part of a given [transaction](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/resources/transaction).
 
 ### Warning - failed transactions
 
@@ -32,14 +25,14 @@ GET /transactions/{hash}/operations{?cursor,limit,order}
 ### curl Example Request
 
 ```sh
-curl "https://frontier-testnet.digitalbits.org/transactions/4a3365180521e16b478d9f0c9198b97a9434fc9cb07b34f83ecc32fc54d0ca8a/operations?limit=1"
+curl "https://frontier.testnet.digitalbits.io/transactions/4a3365180521e16b478d9f0c9198b97a9434fc9cb07b34f83ecc32fc54d0ca8a/operations?limit=1"
 ```
 
 ### JavaScript Example Request
 
 ```javascript
 var DigitalBitsSdk = require('digitalbits-sdk');
-var server = new DigitalBitsSdk.Server('https://frontier-testnet.digitalbits.org');
+var server = new DigitalBitsSdk.Server('https://frontier.testnet.digitalbits.io');
 
 server.operations()
   .forTransaction("4a3365180521e16b478d9f0c9198b97a9434fc9cb07b34f83ecc32fc54d0ca8a")
@@ -54,7 +47,7 @@ server.operations()
 
 ## Response
 
-This endpoint responds with a list of operations that are part of a given transaction. See [operation resource](../resources/operation.md) for reference.
+This endpoint responds with a list of operations that are part of a given transaction. See [operation resource](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/resources/operation) for reference.
 
 ### Example Response
 
@@ -62,13 +55,13 @@ This endpoint responds with a list of operations that are part of a given transa
 {
   "_links": {
     "self": {
-      "href": "https://frontier-testnet.digitalbits.org/transactions/4a3365180521e16b478d9f0c9198b97a9434fc9cb07b34f83ecc32fc54d0ca8a/operations?cursor=&limit=10&order=asc"
+      "href": "https://frontier.testnet.digitalbits.io/transactions/4a3365180521e16b478d9f0c9198b97a9434fc9cb07b34f83ecc32fc54d0ca8a/operations?cursor=&limit=10&order=asc"
     },
     "next": {
-      "href": "https://frontier-testnet.digitalbits.org/transactions/4a3365180521e16b478d9f0c9198b97a9434fc9cb07b34f83ecc32fc54d0ca8a/operations?cursor=2927608622747649&limit=10&order=asc"
+      "href": "https://frontier.testnet.digitalbits.io/transactions/4a3365180521e16b478d9f0c9198b97a9434fc9cb07b34f83ecc32fc54d0ca8a/operations?cursor=2927608622747649&limit=10&order=asc"
     },
     "prev": {
-      "href": "https://frontier-testnet.digitalbits.org/transactions/4a3365180521e16b478d9f0c9198b97a9434fc9cb07b34f83ecc32fc54d0ca8a/operations?cursor=2927608622747649&limit=10&order=desc"
+      "href": "https://frontier.testnet.digitalbits.io/transactions/4a3365180521e16b478d9f0c9198b97a9434fc9cb07b34f83ecc32fc54d0ca8a/operations?cursor=2927608622747649&limit=10&order=desc"
     }
   },
   "_embedded": {
@@ -76,19 +69,19 @@ This endpoint responds with a list of operations that are part of a given transa
       {
         "_links": {
           "self": {
-            "href": "https://frontier-testnet.digitalbits.org/operations/2927608622747649"
+            "href": "https://frontier.testnet.digitalbits.io/operations/2927608622747649"
           },
           "transaction": {
-            "href": "https://frontier-testnet.digitalbits.org/transactions/4a3365180521e16b478d9f0c9198b97a9434fc9cb07b34f83ecc32fc54d0ca8a"
+            "href": "https://frontier.testnet.digitalbits.io/transactions/4a3365180521e16b478d9f0c9198b97a9434fc9cb07b34f83ecc32fc54d0ca8a"
           },
           "effects": {
-            "href": "https://frontier-testnet.digitalbits.org/operations/2927608622747649/effects"
+            "href": "https://frontier.testnet.digitalbits.io/operations/2927608622747649/effects"
           },
           "succeeds": {
-            "href": "https://frontier-testnet.digitalbits.org/effects?order=desc&cursor=2927608622747649"
+            "href": "https://frontier.testnet.digitalbits.io/effects?order=desc&cursor=2927608622747649"
           },
           "precedes": {
-            "href": "https://frontier-testnet.digitalbits.org/effects?order=asc&cursor=2927608622747649"
+            "href": "https://frontier.testnet.digitalbits.io/effects?order=asc&cursor=2927608622747649"
           }
         },
         "id": "2927608622747649",
@@ -111,5 +104,5 @@ This endpoint responds with a list of operations that are part of a given transa
 
 ## Possible Errors
 
-- The [standard errors](../errors.md#Standard-Errors).
-- [not_found](../errors/not-found.md): A `not_found` error will be returned if there is no account whose ID matches the `hash` argument.
+- The [standard errors](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/errors#standard-errors).
+- [not_found](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/errors/not-found): A `not_found` error will be returned if there is no account whose ID matches the `hash` argument.

@@ -1,7 +1,3 @@
----
-title: Metrics
----
-
 The metrics endpoint returns a host of useful data points for monitoring the health of the underlying Frontier process. 
 
 Since Frontier 1.0.0 this endpoint is not part of the public API. It's available in the internal server (listening on the internal port set via `ADMIN_PORT` env variable or `--admin-port` CLI param).
@@ -15,7 +11,7 @@ GET /metrics
 ### curl Example Request
 
 ```sh
-curl "https://frontier-testnet.digitalbits.org/metrics"
+curl "https://frontier.testnet.digitalbits.io/metrics"
 ```
 
 
@@ -75,7 +71,7 @@ Frontier maintains its own database (postgres), a verbose and user friendly acco
 ```
 
 #### Ingester
-Ingester represents metrics specific to Frontier's [ingestion](https://github.com/digitalbits/go/blob/master/services/frontier/internal/docs/reference/admin.md#ingesting-digitalbits-core-data) process, or the process by which Frontier consumes transaction results from a connected DigitalBits Core instance.
+Ingester represents metrics specific to Frontier's [ingestion](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/admin#ingesting-live-digitalbits-core-data) process, or the process by which Frontier consumes transaction results from a connected DigitalBits Core instance.
 
 |    Metric     |  Description                                                                                                                               |
 | ---------------- |  ------------------------------------------------------------------------------------------------------------------------------ |
@@ -237,9 +233,9 @@ Frontier does not submit transactions directly to the DigitalBits network. Inste
 
 ##### Frontier Transaction Sequencing and Submission
 
-The following is a simplified version of the transaction submission process that glosses over the finer details. To dive deeper, check out the [source code](https://github.com/digitalbits/go/tree/master/services/frontier/internal/txsub).
+The following is a simplified version of the transaction submission process that glosses over the finer details. To dive deeper, check out the [source code](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/txsub).
 
-Frontier's sequencing mechanism consists of a [manager](https://github.com/digitalbits/go/blob/master/services/frontier/internal/txsub/sequence/manager.go) that keeps track of [submission queues](https://github.com/digitalbits/go/blob/master/services/frontier/internal/txsub/sequence/queue.go) for a set of addresses. A submission queue is a  priority queue, prioritized by minimum transaction sequence number, that holds a set of pending transactions for an account. A pending transaction is represented as an object with a sequence number and a channel. Periodically, this queue is updated, popping off finished transactions, sending down the transaction's channel a successful/failure response.
+Frontier's sequencing mechanism consists of a [manager](https://github.com/xdbfoundation/go/blob/master/services/frontier/internal/txsub/sequence/manager.go) that keeps track of [submission queues](https://github.com/xdbfoundation/go/blob/master/services/frontier/internal/txsub/sequence/queue.go) for a set of addresses. A submission queue is a  priority queue, prioritized by minimum transaction sequence number, that holds a set of pending transactions for an account. A pending transaction is represented as an object with a sequence number and a channel. Periodically, this queue is updated, popping off finished transactions, sending down the transaction's channel a successful/failure response.
 
 These metrics contain useful [sub metrics](#sub-metrics).
 

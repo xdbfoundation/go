@@ -1,8 +1,3 @@
----
-title: Not Acceptable
-replacement: https://developers.digitalbits.org/api/errors/http-status-codes/standard/
----
-
 When your client only accepts certain formats of data from Frontier and Frontier cannot fulfill that
 request, Frontier will return a `not_acceptable` error. This is analogous to a
 [HTTP 406 Error](https://developer.mozilla.org/en-US/docs/Web/HTTP/Response_codes).
@@ -29,7 +24,7 @@ draft specification guide and thus has the following attributes:
 ## Example
 
 ```shell
-$ curl -X GET -H "Accept: application/xml" "https://frontier-testnet.digitalbits.org/accounts/GALWEV6GY73RJ255JC7XUOZ2L7WZ5JJDTKATB2MUK7F3S67DVT2A6R5G"
+$ curl -X GET -H "Accept: application/xml" "https://frontier.testnet.digitalbits.io/accounts/GALWEV6GY73RJ255JC7XUOZ2L7WZ5JJDTKATB2MUK7F3S67DVT2A6R5G"
 {
   "type": "https://digitalbits.org/frontier-errors/not_acceptable",
   "title": "An acceptable response content-type could not be provided for this request",
@@ -39,4 +34,4 @@ $ curl -X GET -H "Accept: application/xml" "https://frontier-testnet.digitalbits
 
 ## Related
 
-- [Not Found](./not-found.md)
+- [Not Found](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/errors/not-found)

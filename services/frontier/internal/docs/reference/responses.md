@@ -1,8 +1,3 @@
----
-title: Response Format
-replacement: https://developers.digitalbits.org/api/introduction/response-format/
----
-
 Rather than using a fully custom way of representing the resources we expose in
 Frontier, we use [HAL](http://stateless.co/hal_specification.html). HAL is a
 hypermedia format in JSON that remains simple while giving us a couple of
@@ -66,10 +61,11 @@ valid URI before navigating to it.
 
 Pages represent a subset of a larger collection of objects.  
 As an example, it would be unfeasible to provide the
-[All Transactions](../reference/endpoints/transactions-all.md) endpoint without paging.  
+[All Transactions](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/endpoints/transactions-all) endpoint without paging.  
 Over time there will be millions of transactions in the DigitalBits network's ledger
 and returning them all over a single request would be unfeasible.
 
 Read more about paging in following docs:
-- [Page](../reference/resources/page.md)
-- [Paging](./paging.md)
+
+- [Page](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/resources/page)
+- [Paging](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/paging)

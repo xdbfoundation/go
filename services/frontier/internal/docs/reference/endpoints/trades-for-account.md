@@ -1,13 +1,6 @@
----
-title: Trades for Account
-clientData:
-  laboratoryUrl: https://www.digitalbits.org/laboratory/#explorer?resource=trades&endpoint=for_account
-replacement: https://developers.digitalbits.org/api/resources/accounts/trades/
----
+This endpoint represents all [trades](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/resources/trade) that affect a given [account](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/resources/account).
 
-This endpoint represents all [trades](../resources/trade.md) that affect a given [account](../resources/account.md).
-
-This endpoint can also be used in [streaming](../streaming.md) mode, making it possible to listen for new trades that affect the given account as they occur on the DigitalBits network.
+This endpoint can also be used in [streaming](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/streaming) mode, making it possible to listen for new trades that affect the given account as they occur on the DigitalBits network.
 If called in streaming mode Frontier will start at the earliest known trade unless a `cursor` is set. In that case it will start from the `cursor`. You can also set `cursor` value to `now` to only stream trades created since your request time.
 
 ## Request
@@ -28,14 +21,14 @@ GET /accounts/{account_id}/trades{?cursor,limit,order}
 ### curl Example Request
 
 ```sh
-curl "https://frontier-testnet.digitalbits.org/accounts/GBYTR4MC5JAX4ALGUBJD7EIKZVM7CUGWKXIUJMRSMK573XH2O7VAK3SR/trades?limit=1"
+curl "https://frontier.testnet.digitalbits.io/accounts/GBYTR4MC5JAX4ALGUBJD7EIKZVM7CUGWKXIUJMRSMK573XH2O7VAK3SR/trades?limit=1"
 ```
 
 ### JavaScript Example Request
 
 ```javascript
 var DigitalBitsSdk = require('digitalbits-sdk');
-var server = new DigitalBitsSdk.Server('https://frontier-testnet.digitalbits.org');
+var server = new DigitalBitsSdk.Server('https://frontier.testnet.digitalbits.io');
 
 server.trades()
   .forAccount("GBYTR4MC5JAX4ALGUBJD7EIKZVM7CUGWKXIUJMRSMK573XH2O7VAK3SR")
@@ -51,7 +44,7 @@ server.trades()
 
 ## Response
 
-This endpoint responds with a list of trades that changed a given account's state. See the [trade resource](../resources/trade.md) for reference.
+This endpoint responds with a list of trades that changed a given account's state. See the [trade resource](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/resources/trade) for reference.
 
 ### Example Response
 ```json
@@ -110,7 +103,8 @@ This endpoint responds with a list of trades that changed a given account's stat
 ```
 
 ## Example Streaming Event
-```
+
+```cgo
 { 
   _links: 
     { self: { href: '' },
@@ -136,5 +130,5 @@ This endpoint responds with a list of trades that changed a given account's stat
 
 ## Possible Errors
 
-- The [standard errors](../errors.md#Standard-Errors).
-- [not_found](../errors/not-found.md): A `not_found` error will be returned if there is no account whose ID matches the `account_id` argument.
+- The [standard errors](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/errors#standard-errors).
+- [not_found](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/errors/not-found): A `not_found` error will be returned if there is no account whose ID matches the `account_id` argument.
