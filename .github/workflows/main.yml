@@ -236,17 +236,13 @@ jobs:
           push: false
           file: services/frontier/Dockerfile
           build-args: FRONTIER_VERSION=${{ steps.previoustag.outputs.tag }}
-          tags: docker.cloudsmith.io/xdb-foundation/digitalbits-frontier:${{ steps.previoustag.outputs.tag }}
-      - 
-        name: Export
-        id: docker_save
-        run: |
-            docker save -o image.docker docker.cloudsmith.io/xdb-foundation/digitalbits-frontier:${{ steps.previoustag.outputs.tag }}
+          tags: docker.cloudsmith.io/xdb-foundation/digitalbits-frontier:${{ steps.previoustag.outputs.tag }}  
+          outputs: type=docker,dest=/tmp/image.tar
       - 
         name: Push
         id: docker_push
         run: |
-            cloudsmith push docker xdb-foundation/digitalbits-frontier image.docker      
+            cloudsmith push docker xdb-foundation/digitalbits-frontier /tmp/image.tar     
       -
         name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
