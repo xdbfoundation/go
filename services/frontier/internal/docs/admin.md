@@ -2,7 +2,7 @@
 
 Frontier is responsible for providing an HTTP API to data in the DigitalBits network. It ingests and re-serves the data produced by the digitalbits network in a form that is easier to consume than the performance-oriented data representations used by digitalbits-core.
 
-This document describes how to administer a **production** Frontier instance. If you are just starting with Frontier and want to try it out, consider the [Quickstart Guide](quickstart.md) instead. For information about developing on the Frontier codebase, check out the [Development Guide](developing.md).
+This document describes how to administer a **production** Frontier instance. If you are just starting with Frontier and want to try it out, consider the [Quickstart Guide](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/quickstart) instead. For information about developing on the Frontier codebase, check out the [Development Guide](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/developing).
 
 ## Why run Frontier?
 
@@ -18,7 +18,7 @@ Frontier is dependent upon a digitalbits-core server.  Frontier needs access to 
 
 ## Installing
 
-To install Frontier, you have a choice: either downloading a [prebuilt release for your target architecture](https://github.com/xdbfoundation/go/releases) and operation system, or [building Frontier yourself](#Building).  When either approach is complete, you will find yourself with a directory containing a file named `frontier`.  This file is a native binary.
+To install Frontier, you have a choice: either downloading a [prebuilt release for your target architecture](https://github.com/xdbfoundation/go/releases) and operation system, or [building Frontier yourself](#building).  When either approach is complete, you will find yourself with a directory containing a file named `frontier`.  This file is a native binary.
 
 After building or unpacking Frontier, you simply need to copy the native binary into a directory that is part of your PATH.  Most unix-like systems have `/usr/local/bin` in PATH by default, so unless you have a preference or know better, we recommend you copy the binary there.
 
@@ -83,7 +83,7 @@ INFO[0000] Starting frontier on :8000                     pid=29013
 
 The log line above announces that Frontier is ready to serve client requests. Note: the numbers shown above may be different for your installation.  Next we can confirm that Frontier is responding correctly by loading the root resource.  In the example above, that URL would be [http://127.0.0.1:8000/](http://127.0.0.1:8000/) and simply running 
 
-```curl http://127.0.0.1:8000/````
+```curl http://127.0.0.1:8000/```
 
  shows you that the root resource can be loaded correctly.
 
@@ -268,17 +268,18 @@ Below we present a few standard log entries with associated fields. You can use 
 ### Metrics
 
 Using the entries above you can build metrics that will help understand performance of a given Frontier node, some examples below:
-* Number of requests per minute.
-* Number of requests per route (the most popular routes).
-* Average response time per route.
-* Maximum response time for non-streaming requests.
-* Number of streaming vs. non-streaming requests.
-* Number of rate-limited requests.
-* List of rate-limited IPs.
-* Unique IPs.
-* The most popular SDKs/apps sending requests to a given Frontier node.
-* Average ingestion time of a ledger.
-* Average ingestion time of a transaction.
+
+- Number of requests per minute.
+- Number of requests per route (the most popular routes).
+- Average response time per route.
+- Maximum response time for non-streaming requests.
+- Number of streaming vs. non-streaming requests.
+- Number of rate-limited requests.
+- List of rate-limited IPs.
+- Unique IPs.
+- The most popular SDKs/apps sending requests to a given Frontier node.
+- Average ingestion time of a ledger.
+- Average ingestion time of a transaction.
 
 ### Alerts
 
