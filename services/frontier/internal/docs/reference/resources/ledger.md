@@ -23,8 +23,8 @@ To learn more about the concept of ledgers in the DigitalBits network, take a lo
 | max_tx_set_size              | number | The maximum number of transactions validators have agreed to process in a given ledger.                                      |
 | protocol_version             | number | The protocol version that the digitalbits network was running when this ledger was committed.                                    |
 | header_xdr                   | string | A base64 encoded string of the raw `LedgerHeader` xdr struct for this ledger.                                                |
-| base_fee_in_stroops          | number | The [fee] the network charges per operation in a transaction.  Expressed in stroops.                                         |
-| base_reserve_in_stroops      | number | The [reserve][fee] the network uses when calculating an account's minimum balance. Expressed in stroops.                     |
+| base_fee_in_nibbs          | number | The [fee] the network charges per operation in a transaction.  Expressed in nibbs.                                         |
+| base_reserve_in_nibbs      | number | The [reserve][fee] the network uses when calculating an account's minimum balance. Expressed in nibbs.                     |
 
 ## Links
 |              | Example                                           | Relation                        | templated |
@@ -74,8 +74,8 @@ To learn more about the concept of ledgers in the DigitalBits network, take a lo
   "max_tx_set_size": 50,
   "protocol_version": 8,
   "header_xdr": "...",
-  "base_fee_in_stroops": 100,
-  "base_reserve_in_stroops": 100000000
+  "base_fee_in_nibbs": 100,
+  "base_reserve_in_nibbs": 100000000
 }
 ```
 

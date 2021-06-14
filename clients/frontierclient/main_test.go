@@ -1710,8 +1710,8 @@ var ledgerResponse = `{
   "closed_at": "2019-03-03T13:38:16Z",
   "total_coins": "100000000000.0000000",
   "fee_pool": "10.7338093",
-  "base_fee_in_stroops": 100,
-  "base_reserve_in_stroops": 5000000,
+  "base_fee_in_nibbs": 100,
+  "base_reserve_in_nibbs": 5000000,
   "max_tx_set_size": 100,
   "protocol_version": 10,
   "header_xdr": "AAAACniXm+0VRjv8OwwZFazGrshmVl02C6ZWXSb/uz3EhPGMLuFhI0sVqAG57WnGMUKmOUk/J8TAktUB97VgrgEsZuEAAAAAXHvYyAAAAAAAAAAAcvWzXsmT72oXZ7QPC1nZLJei+lFwYRXF4FIz/PQguubMDKGRJrT/0ofTHlZjWAMWjABeGgup7zhfZkm0xrthCAABEOMN4Lazp2QAAAAAAAAGZdltAAAAAAAAAAAABOqvAAAAZABMS0AAAABk4Vse3u3dDM9UWfoH9ooQLLSXYEee8xiHu/k9p6YLlWR2KT4hYGehoHGmp04rhMRMAEp+GHE+KXv0UUxAPmmNmwGYK2HFCnl5a931YmTQYrHQzEeCHx+aI4+TLjTlFjMqAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
