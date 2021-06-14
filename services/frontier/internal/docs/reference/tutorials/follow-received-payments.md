@@ -142,7 +142,9 @@ es.onerror = function(error) {
 	console.log('An error occurred!');
 }
 ```
+
 Now, run our script: `node stream_payments.js`. You should see following output:
+
 ```bash
 New payment:
 { _links:
