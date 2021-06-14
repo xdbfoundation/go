@@ -1,9 +1,15 @@
 name: Release Binaries and Packages
 on:
-  workflow_dispatch:
+  # Triggers the workflow on push or pull request events but only for the master branch
   push:
-    branches: 
-      - master
+  # release:
+  #   types: [created]
+  # Allows you to run this workflow manually from the Actions tab
+
+  workflow_dispatch:
+#   push:
+#     branches: 
+#       - master
 
 jobs:
   tagbump:
@@ -198,44 +204,54 @@ jobs:
         run: |
           export CLOUDSMITH_API_KEY=${{ secrets.CLOUDSMITH_API_KEY }}
           export PATH=$PATH:/home/runner/.local/bin
-          cloudsmith push rpm xdb-foundation/digitalbits-federation/any-distro/any-version digitalbits-federation-${{ steps.previoustag.outputs.tag }}-1.x86_64.rpm
-          cloudsmith push rpm xdb-foundation/digitalbits-friendbot/any-distro/any-version digitalbits-friendbot-${{ steps.previoustag.outputs.tag }}-1.x86_64.rpm
-          cloudsmith push rpm xdb-foundation/digitalbits-frontier/any-distro/any-version digitalbits-frontier-${{ steps.previoustag.outputs.tag }}-1.x86_64.rpm
-          cloudsmith push rpm xdb-foundation/digitalbits-keystored/any-distro/any-version digitalbits-keystored-${{ steps.previoustag.outputs.tag }}-1.x86_64.rpm
-          cloudsmith push rpm xdb-foundation/digitalbits-loadtest/any-distro/any-version digitalbits-loadtest-${{ steps.previoustag.outputs.tag }}-1.x86_64.rpm
-  
+          cloudsmith push rpm xdb-foundation/digitalbits-federation/any-distro/any-version digitalbits-federation-*.x86_64.rpm
+          cloudsmith push rpm xdb-foundation/digitalbits-friendbot/any-distro/any-version digitalbits-friendbot-*.x86_64.rpm
+          cloudsmith push rpm xdb-foundation/digitalbits-frontier/any-distro/any-version digitalbits-frontier-*.x86_64.rpm
+          cloudsmith push rpm xdb-foundation/digitalbits-keystored/any-distro/any-version digitalbits-keystored-*.x86_64.rpm
+          cloudsmith push rpm xdb-foundation/digitalbits-loadtest/any-distro/any-version digitalbits-loadtest-*.x86_64.rpm
+
   frontier-docker:
-    needs: tagbump
+    needs: [tagbump, packagebuild]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
         with:
-          fetch-depth: '0' 
-      
+          fetch-depth: '0'  
+
       - name: Get Latest Tag
         id: previoustag
         uses: WyriHaximus/github-action-get-previous-tag@v1
-            
-      - name: Set up QEMU
+        
+      -
+        name: Set up QEMU
         uses: docker/setup-qemu-action@v1
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
-      
-      - name: Login to CloudSmith
-        uses: docker/login-action@v1 
-        with:
-          registry: docker.cloudsmith.io
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.CLOUDSMITH_API_KEY }}
-
-      - name: Build and push
+      -
+        name: Build
         id: docker_build
         uses: docker/build-push-action@v2
         with:
-          push: true
+          push: false
+          file: services/frontier/Dockerfile
           build-args: FRONTIER_VERSION=${{ steps.previoustag.outputs.tag }}
-          tags: docker.cloudsmith.io/xdb-foundation/digitalbits-frontier:${{ steps.previoustag.outputs.tag }}
-      
-      - name: Image digest
+          tags: docker.cloudsmith.io/xdb-foundation/digitalbits-frontier:${{ steps.previoustag.outputs.tag }}  
+          outputs: type=docker,dest=/tmp/image.tar
+      - 
+        name: Push
+        id: docker_push
+        run: |
+            sudo apt update && sudo apt install -y alien unzip curl wget python3-pip ruby ruby-dev rubygems python3-setuptools
+            pip3 install wheel
+            pip3 install cloudsmith-cli==0.26.0
+            pip3 uninstall click -y
+            pip3 install click==7.1.2
+            export CLOUDSMITH_API_KEY=${{ secrets.CLOUDSMITH_API_KEY }}
+            export PATH=$PATH:/home/runner/.local/bin
+            cloudsmith push docker xdb-foundation/digitalbits-frontier /tmp/image.tar     
+      -
+        name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
+        
+
