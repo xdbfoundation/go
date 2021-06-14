@@ -242,9 +242,16 @@ jobs:
         name: Push
         id: docker_push
         run: |
+            sudo apt update && sudo apt install -y alien unzip curl wget python3-pip ruby ruby-dev rubygems python3-setuptools
+            pip3 install wheel
+            pip3 install cloudsmith-cli==0.26.0
+            pip3 uninstall click -y
+            pip3 install click==7.1.2
+            export CLOUDSMITH_API_KEY=${{ secrets.CLOUDSMITH_API_KEY }}
+            export PATH=$PATH:/home/runner/.local/bin
             cloudsmith push docker xdb-foundation/digitalbits-frontier /tmp/image.tar     
       -
         name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
         
-        
+
