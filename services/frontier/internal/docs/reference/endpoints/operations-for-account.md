@@ -1,13 +1,6 @@
----
-title: Operations for Account
-clientData:
-  laboratoryUrl: https://www.digitalbits.org/laboratory/#explorer?resource=operations&endpoint=for_account
-replacement: https://developers.digitalbits.org/api/resources/accounts/offers/
----
+This endpoint represents successful [operations](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/resources/operation) that were included in valid [transactions](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/resources/transaction) that affected a particular [account](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/resources/account).
 
-This endpoint represents successful [operations](../resources/operation.md) that were included in valid [transactions](../resources/transaction.md) that affected a particular [account](../resources/account.md).
-
-This endpoint can also be used in [streaming](../streaming.md) mode so it is possible to use it to listen for new operations that affect a given account as they happen.
+This endpoint can also be used in [streaming](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/streaming) mode so it is possible to use it to listen for new operations that affect a given account as they happen.
 If called in streaming mode Frontier will start at the earliest known operation unless a `cursor` is set. In that case it will start from the `cursor`. You can also set `cursor` value to `now` to only stream operations created since your request time.
 
 ## Request
@@ -30,14 +23,14 @@ GET /accounts/{account}/operations{?cursor,limit,order,include_failed}
 ### curl Example Request
 
 ```sh
-curl "https://frontier-testnet.digitalbits.org/accounts/GA2HGBJIJKI6O4XEM7CZWY5PS6GKSXL6D34ERAJYQSPYA6X6AI7HYW36/operations"
+curl "https://frontier.testnet.digitalbits.io/accounts/GA2HGBJIJKI6O4XEM7CZWY5PS6GKSXL6D34ERAJYQSPYA6X6AI7HYW36/operations"
 ```
 
 ### JavaScript Example Request
 
 ```js
 var DigitalBitsSdk = require('digitalbits-sdk');
-var server = new DigitalBitsSdk.Server('https://frontier-testnet.digitalbits.org');
+var server = new DigitalBitsSdk.Server('https://frontier.testnet.digitalbits.io');
 
 server.operations()
   .forAccount("GAKLBGHNHFQ3BMUYG5KU4BEWO6EYQHZHAXEWC33W34PH2RBHZDSQBD75")
@@ -54,7 +47,7 @@ server.operations()
 
 ```javascript
 var DigitalBitsSdk = require('digitalbits-sdk')
-var server = new DigitalBitsSdk.Server('https://frontier-testnet.digitalbits.org');
+var server = new DigitalBitsSdk.Server('https://frontier.testnet.digitalbits.io');
 
 var operationHandler = function (operationResponse) {
     console.log(operationResponse);
@@ -70,7 +63,7 @@ var es = server.operations()
 
 ## Response
 
-This endpoint responds with a list of operations that affected the given account. See [operation resource](../resources/operation.md) for reference.
+This endpoint responds with a list of operations that affected the given account. See [operation resource](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/resources/operation) for reference.
 
 ### Example Response
 
@@ -158,5 +151,5 @@ This endpoint responds with a list of operations that affected the given account
 
 ## Possible Errors
 
-- The [standard errors](../errors.md#Standard-Errors).
-- [not_found](../errors/not-found.md): A `not_found` error will be returned if there is no account whose ID matches the `account` argument.
+- The [standard errors](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/errors#standard-errors).
+- [not_found](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/errors/not-found): A `not_found` error will be returned if there is no account whose ID matches the `account` argument.

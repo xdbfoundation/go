@@ -1,8 +1,3 @@
----
-title: Trade Aggregations
-replacement: https://developers.digitalbits.org/api/aggregations/trade-aggregations/
----
-
 Trade Aggregations are catered specifically for developers of trading clients. They facilitate
 efficient gathering of historical trade data. This is done by dividing a given time range into
 segments and aggregating statistics, for a given asset pair (`base`, `counter`) over each of these
@@ -72,11 +67,10 @@ server.tradeAggregation(base, counter, startTime, endTime, resolution, offset)
 A list of collected trade aggregations.
 
 Note
+
 - Segments that fit into the time range but have 0 trades in them, will not be included.
 - Partial segments, in the beginning and end of the time range, will not be included. Thus if your
-  start time is noon Wednesday, your end time is noon Thursday, and your resolution is one day, you
-  will not receive back any data. Instead, you would want to either start at midnight Wednesday and
-  midnight Thursday, or shorten the resolution interval to better cover your time frame.
+  start time is noon Wednesday, your end time is noon Thursday, and your resolution is one day, you will not receive back any data. Instead, you would want to either start at midnight Wednesday and midnight Thursday, or shorten the resolution interval to better cover your time frame.
 
 ### Example Response
 ```json
@@ -152,4 +146,4 @@ Note
 
 ## Possible Errors
 
-- The [standard errors](../errors.md#standard-errors).
+- The [standard errors](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/errors#standard-errors).

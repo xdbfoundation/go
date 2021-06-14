@@ -1,11 +1,4 @@
----
-title: Transactions for Ledger
-clientData:
-  laboratoryUrl: https://www.digitalbits.org/laboratory/#explorer?resource=transactions&endpoint=for_ledger
-replacement: https://developers.digitalbits.org/api/resources/ledgers/transactions/
----
-
-This endpoint represents successful [transactions](../resources/transaction.md) in a given [ledger](../resources/ledger.md).
+This endpoint represents successful [transactions](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/resources/transaction) in a given [ledger](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/resources/ledger).
 
 ## Request
 
@@ -26,14 +19,14 @@ GET /ledgers/{id}/transactions{?cursor,limit,order,include_failed}
 ### curl Example Request
 
 ```sh
-curl "https://frontier-testnet.digitalbits.org/ledgers/697121/transactions?limit=1"
+curl "https://frontier.testnet.digitalbits.io/ledgers/697121/transactions?limit=1"
 ```
 
 ### JavaScript Example Request
 
 ```javascript
 var DigitalBitsSdk = require('digitalbits-sdk');
-var server = new DigitalBitsSdk.Server('https://frontier-testnet.digitalbits.org');
+var server = new DigitalBitsSdk.Server('https://frontier.testnet.digitalbits.io');
 
 server.transactions()
   .forLedger("697121")
@@ -50,7 +43,7 @@ server.transactions()
 ## Response
 
 This endpoint responds with a list of transactions in a given ledger. See [transaction
-resource](../resources/transaction.md) for reference.
+resource](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/resources/transaction) for reference.
 
 ### Example Response
 
@@ -58,13 +51,13 @@ resource](../resources/transaction.md) for reference.
 {
   "_links": {
     "self": {
-      "href": "https://frontier-testnet.digitalbits.org/ledgers/697121/transactions?cursor=&limit=10&order=asc"
+      "href": "https://frontier.testnet.digitalbits.io/ledgers/697121/transactions?cursor=&limit=10&order=asc"
     },
     "next": {
-      "href": "https://frontier-testnet.digitalbits.org/ledgers/697121/transactions?cursor=2994111896367104&limit=10&order=asc"
+      "href": "https://frontier.testnet.digitalbits.io/ledgers/697121/transactions?cursor=2994111896367104&limit=10&order=asc"
     },
     "prev": {
-      "href": "https://frontier-testnet.digitalbits.org/ledgers/697121/transactions?cursor=2994111896358912&limit=10&order=desc"
+      "href": "https://frontier.testnet.digitalbits.io/ledgers/697121/transactions?cursor=2994111896358912&limit=10&order=desc"
     }
   },
   "_embedded": {
@@ -72,27 +65,27 @@ resource](../resources/transaction.md) for reference.
       {
         "_links": {
           "self": {
-            "href": "https://frontier-testnet.digitalbits.org/transactions/264226cb06af3b86299031884175155e67a02e0a8ad0b3ab3a88b409a8c09d5c"
+            "href": "https://frontier.testnet.digitalbits.io/transactions/264226cb06af3b86299031884175155e67a02e0a8ad0b3ab3a88b409a8c09d5c"
           },
           "account": {
-            "href": "https://frontier-testnet.digitalbits.org/accounts/GAIH3ULLFQ4DGSECF2AR555KZ4KNDGEKN4AFI4SU2M7B43MGK3QJZNSR"
+            "href": "https://frontier.testnet.digitalbits.io/accounts/GAIH3ULLFQ4DGSECF2AR555KZ4KNDGEKN4AFI4SU2M7B43MGK3QJZNSR"
           },
           "ledger": {
-            "href": "https://frontier-testnet.digitalbits.org/ledgers/697121"
+            "href": "https://frontier.testnet.digitalbits.io/ledgers/697121"
           },
           "operations": {
-            "href": "https://frontier-testnet.digitalbits.org/transactions/264226cb06af3b86299031884175155e67a02e0a8ad0b3ab3a88b409a8c09d5c/operations{?cursor,limit,order}",
+            "href": "https://frontier.testnet.digitalbits.io/transactions/264226cb06af3b86299031884175155e67a02e0a8ad0b3ab3a88b409a8c09d5c/operations{?cursor,limit,order}",
             "templated": true
           },
           "effects": {
-            "href": "https://frontier-testnet.digitalbits.org/transactions/264226cb06af3b86299031884175155e67a02e0a8ad0b3ab3a88b409a8c09d5c/effects{?cursor,limit,order}",
+            "href": "https://frontier.testnet.digitalbits.io/transactions/264226cb06af3b86299031884175155e67a02e0a8ad0b3ab3a88b409a8c09d5c/effects{?cursor,limit,order}",
             "templated": true
           },
           "precedes": {
-            "href": "https://frontier-testnet.digitalbits.org/transactions?order=asc&cursor=2994111896358912"
+            "href": "https://frontier.testnet.digitalbits.io/transactions?order=asc&cursor=2994111896358912"
           },
           "succeeds": {
-            "href": "https://frontier-testnet.digitalbits.org/transactions?order=desc&cursor=2994111896358912"
+            "href": "https://frontier.testnet.digitalbits.io/transactions?order=desc&cursor=2994111896358912"
           }
         },
         "id": "264226cb06af3b86299031884175155e67a02e0a8ad0b3ab3a88b409a8c09d5c",
@@ -119,27 +112,27 @@ resource](../resources/transaction.md) for reference.
         "memo": "2A1V6J5703G47XHY",
         "_links": {
           "self": {
-            "href": "https://frontier-testnet.digitalbits.org/transactions/f175108e5c64619705b112a99fa32884dfa0511d9a8986aade87905b08eabe5b"
+            "href": "https://frontier.testnet.digitalbits.io/transactions/f175108e5c64619705b112a99fa32884dfa0511d9a8986aade87905b08eabe5b"
           },
           "account": {
-            "href": "https://frontier-testnet.digitalbits.org/accounts/GAZ4A54KE6MTMXYEPM7T3IDLZWGNCCKB5ME422NZ3MAMTHWWP37RPEBW"
+            "href": "https://frontier.testnet.digitalbits.io/accounts/GAZ4A54KE6MTMXYEPM7T3IDLZWGNCCKB5ME422NZ3MAMTHWWP37RPEBW"
           },
           "ledger": {
-            "href": "https://frontier-testnet.digitalbits.org/ledgers/697121"
+            "href": "https://frontier.testnet.digitalbits.io/ledgers/697121"
           },
           "operations": {
-            "href": "https://frontier-testnet.digitalbits.org/transactions/f175108e5c64619705b112a99fa32884dfa0511d9a8986aade87905b08eabe5b/operations{?cursor,limit,order}",
+            "href": "https://frontier.testnet.digitalbits.io/transactions/f175108e5c64619705b112a99fa32884dfa0511d9a8986aade87905b08eabe5b/operations{?cursor,limit,order}",
             "templated": true
           },
           "effects": {
-            "href": "https://frontier-testnet.digitalbits.org/transactions/f175108e5c64619705b112a99fa32884dfa0511d9a8986aade87905b08eabe5b/effects{?cursor,limit,order}",
+            "href": "https://frontier.testnet.digitalbits.io/transactions/f175108e5c64619705b112a99fa32884dfa0511d9a8986aade87905b08eabe5b/effects{?cursor,limit,order}",
             "templated": true
           },
           "precedes": {
-            "href": "https://frontier-testnet.digitalbits.org/transactions?order=asc&cursor=2994111896363008"
+            "href": "https://frontier.testnet.digitalbits.io/transactions?order=asc&cursor=2994111896363008"
           },
           "succeeds": {
-            "href": "https://frontier-testnet.digitalbits.org/transactions?order=desc&cursor=2994111896363008"
+            "href": "https://frontier.testnet.digitalbits.io/transactions?order=desc&cursor=2994111896363008"
           }
         },
         "id": "f175108e5c64619705b112a99fa32884dfa0511d9a8986aade87905b08eabe5b",
@@ -166,27 +159,27 @@ resource](../resources/transaction.md) for reference.
         "memo": "WHALE",
         "_links": {
           "self": {
-            "href": "https://frontier-testnet.digitalbits.org/transactions/83b6ebf4b3aec5b36cab14ae0f438a23487746857903a9e0bb002564b4641e25"
+            "href": "https://frontier.testnet.digitalbits.io/transactions/83b6ebf4b3aec5b36cab14ae0f438a23487746857903a9e0bb002564b4641e25"
           },
           "account": {
-            "href": "https://frontier-testnet.digitalbits.org/accounts/GABRMXDIJCTDSMPC67J64NSAMWRSYXVCXYTXVFC73DTHBKELHNKWANXP"
+            "href": "https://frontier.testnet.digitalbits.io/accounts/GABRMXDIJCTDSMPC67J64NSAMWRSYXVCXYTXVFC73DTHBKELHNKWANXP"
           },
           "ledger": {
-            "href": "https://frontier-testnet.digitalbits.org/ledgers/697121"
+            "href": "https://frontier.testnet.digitalbits.io/ledgers/697121"
           },
           "operations": {
-            "href": "https://frontier-testnet.digitalbits.org/transactions/83b6ebf4b3aec5b36cab14ae0f438a23487746857903a9e0bb002564b4641e25/operations{?cursor,limit,order}",
+            "href": "https://frontier.testnet.digitalbits.io/transactions/83b6ebf4b3aec5b36cab14ae0f438a23487746857903a9e0bb002564b4641e25/operations{?cursor,limit,order}",
             "templated": true
           },
           "effects": {
-            "href": "https://frontier-testnet.digitalbits.org/transactions/83b6ebf4b3aec5b36cab14ae0f438a23487746857903a9e0bb002564b4641e25/effects{?cursor,limit,order}",
+            "href": "https://frontier.testnet.digitalbits.io/transactions/83b6ebf4b3aec5b36cab14ae0f438a23487746857903a9e0bb002564b4641e25/effects{?cursor,limit,order}",
             "templated": true
           },
           "precedes": {
-            "href": "https://frontier-testnet.digitalbits.org/transactions?order=asc&cursor=2994111896367104"
+            "href": "https://frontier.testnet.digitalbits.io/transactions?order=asc&cursor=2994111896367104"
           },
           "succeeds": {
-            "href": "https://frontier-testnet.digitalbits.org/transactions?order=desc&cursor=2994111896367104"
+            "href": "https://frontier.testnet.digitalbits.io/transactions?order=desc&cursor=2994111896367104"
           }
         },
         "id": "83b6ebf4b3aec5b36cab14ae0f438a23487746857903a9e0bb002564b4641e25",
@@ -218,5 +211,5 @@ resource](../resources/transaction.md) for reference.
 
 ## Possible Errors
 
-- The [standard errors](../errors.md#Standard-Errors).
-- [not_found](../errors/not-found.md): A `not_found` error will be returned if there is no ledgers whose sequence matches the `id` argument.
+- The [standard errors](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/errors#standard-errors).
+- [not_found](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/errors/not-found): A `not_found` error will be returned if there is no ledgers whose sequence matches the `id` argument.

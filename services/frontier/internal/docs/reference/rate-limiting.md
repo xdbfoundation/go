@@ -1,8 +1,3 @@
----
-title: Rate Limiting
-replacement: https://developers.digitalbits.org/api/introduction/rate-limiting/
----
-
 In order to provide service stability, Frontier limits the number of requests a
 client (single IP) can perform within a one hour window.  By default this is set to 3600
 requests per hour—an average of one request per second. Also, while streaming

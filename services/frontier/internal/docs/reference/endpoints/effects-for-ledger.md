@@ -1,12 +1,6 @@
----
-title: Effects for Ledger
-clientData:
-  laboratoryUrl: https://www.digitalbits.org/laboratory/#explorer?resource=effects&endpoint=for_ledger
----
-
 Effects are the specific ways that the ledger was changed by any operation.
 
-This endpoint represents all [effects](../resources/effect.md) that occurred in the given [ledger](../resources/ledger.md).
+This endpoint represents all [effects](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/resources/effect) that occurred in the given [ledger](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/resources/ledger).
 
 ## Request
 
@@ -26,14 +20,14 @@ GET /ledgers/{sequence}/effects{?cursor,limit,order}
 ### curl Example Request
 
 ```sh
-curl "https://frontier-testnet.digitalbits.org/ledgers/680777/effects?limit=1"
+curl "https://frontier.testnet.digitalbits.io/ledgers/680777/effects?limit=1"
 ```
 
 ### JavaScript Example Request
 
 ```javascript
 var DigitalBitsSdk = require('digitalbits-sdk');
-var server = new DigitalBitsSdk.Server('https://frontier-testnet.digitalbits.org');
+var server = new DigitalBitsSdk.Server('https://frontier.testnet.digitalbits.io');
 
 server.effects()
   .forLedger("680777")
@@ -50,7 +44,7 @@ server.effects()
 
 ## Response
 
-This endpoint responds with a list of effects that occurred in the ledger. See [effect resource](../resources/effect.md) for reference.
+This endpoint responds with a list of effects that occurred in the ledger. See [effect resource](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/resources/effect) for reference.
 
 ### Example Response
 
@@ -58,13 +52,13 @@ This endpoint responds with a list of effects that occurred in the ledger. See [
 {
   "_links": {
     "self": {
-      "href": "https://frontier-testnet.digitalbits.org/ledgers/680777/effects?cursor=&limit=10&order=asc"
+      "href": "https://frontier.testnet.digitalbits.io/ledgers/680777/effects?cursor=&limit=10&order=asc"
     },
     "next": {
-      "href": "https://frontier-testnet.digitalbits.org/ledgers/680777/effects?cursor=2923914950873089-3&limit=10&order=asc"
+      "href": "https://frontier.testnet.digitalbits.io/ledgers/680777/effects?cursor=2923914950873089-3&limit=10&order=asc"
     },
     "prev": {
-      "href": "https://frontier-testnet.digitalbits.org/ledgers/680777/effects?cursor=2923914950873089-1&limit=10&order=desc"
+      "href": "https://frontier.testnet.digitalbits.io/ledgers/680777/effects?cursor=2923914950873089-1&limit=10&order=desc"
     }
   },
   "_embedded": {
@@ -72,13 +66,13 @@ This endpoint responds with a list of effects that occurred in the ledger. See [
       {
         "_links": {
           "operation": {
-            "href": "https://frontier-testnet.digitalbits.org/operations/2923914950873089"
+            "href": "https://frontier.testnet.digitalbits.io/operations/2923914950873089"
           },
           "succeeds": {
-            "href": "https://frontier-testnet.digitalbits.org/effects?order=desc&cursor=2923914950873089-1"
+            "href": "https://frontier.testnet.digitalbits.io/effects?order=desc&cursor=2923914950873089-1"
           },
           "precedes": {
-            "href": "https://frontier-testnet.digitalbits.org/effects?order=asc&cursor=2923914950873089-1"
+            "href": "https://frontier.testnet.digitalbits.io/effects?order=asc&cursor=2923914950873089-1"
           }
         },
         "id": "0002923914950873089-0000000001",
@@ -92,13 +86,13 @@ This endpoint responds with a list of effects that occurred in the ledger. See [
       {
         "_links": {
           "operation": {
-            "href": "https://frontier-testnet.digitalbits.org/operations/2923914950873089"
+            "href": "https://frontier.testnet.digitalbits.io/operations/2923914950873089"
           },
           "succeeds": {
-            "href": "https://frontier-testnet.digitalbits.org/effects?order=desc&cursor=2923914950873089-2"
+            "href": "https://frontier.testnet.digitalbits.io/effects?order=desc&cursor=2923914950873089-2"
           },
           "precedes": {
-            "href": "https://frontier-testnet.digitalbits.org/effects?order=asc&cursor=2923914950873089-2"
+            "href": "https://frontier.testnet.digitalbits.io/effects?order=asc&cursor=2923914950873089-2"
           }
         },
         "id": "0002923914950873089-0000000002",
@@ -113,13 +107,13 @@ This endpoint responds with a list of effects that occurred in the ledger. See [
       {
         "_links": {
           "operation": {
-            "href": "https://frontier-testnet.digitalbits.org/operations/2923914950873089"
+            "href": "https://frontier.testnet.digitalbits.io/operations/2923914950873089"
           },
           "succeeds": {
-            "href": "https://frontier-testnet.digitalbits.org/effects?order=desc&cursor=2923914950873089-3"
+            "href": "https://frontier.testnet.digitalbits.io/effects?order=desc&cursor=2923914950873089-3"
           },
           "precedes": {
-            "href": "https://frontier-testnet.digitalbits.org/effects?order=asc&cursor=2923914950873089-3"
+            "href": "https://frontier.testnet.digitalbits.io/effects?order=asc&cursor=2923914950873089-3"
           }
         },
         "id": "0002923914950873089-0000000003",
@@ -139,5 +133,5 @@ This endpoint responds with a list of effects that occurred in the ledger. See [
 
 ## Possible Errors
 
-- The [standard errors](../errors.md#Standard-Errors).
-- [not_found](../errors/not-found.md): A `not_found` error will be returned if there are no effects for a given ledger.
+- The [standard errors](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/errors#standard-errors).
+- [not_found](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/errors/not-found): A `not_found` error will be returned if there are no effects for a given ledger.

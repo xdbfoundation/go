@@ -1,16 +1,12 @@
----
-title: Frontier Administration Guide
-replacement: https://developers.digitalbits.org/docs/run-api-server/
----
 ## Frontier Administration Guide
 
 Frontier is responsible for providing an HTTP API to data in the DigitalBits network. It ingests and re-serves the data produced by the digitalbits network in a form that is easier to consume than the performance-oriented data representations used by digitalbits-core.
 
-This document describes how to administer a **production** Frontier instance. If you are just starting with Frontier and want to try it out, consider the [Quickstart Guide](quickstart.md) instead. For information about developing on the Frontier codebase, check out the [Development Guide](developing.md).
+This document describes how to administer a **production** Frontier instance. If you are just starting with Frontier and want to try it out, consider the [Quickstart Guide](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/quickstart) instead. For information about developing on the Frontier codebase, check out the [Development Guide](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/developing).
 
 ## Why run Frontier?
 
-The DigitalBits Development Foundation runs two Frontier servers, one for the public network and one for the test network, free for anyone's use at https://frontier.digitalbits.org and https://frontier-testnet.digitalbits.org.  These servers should be fine for development and small scale projects, but it is not recommended that you use them for production services that need strong reliability.  By running Frontier within your own infrastructure provides a number of benefits:
+The DigitalBits Development Foundation runs two Frontier servers, one for the public network and one for the test network, free for anyone's use at https://frontier.livenet.digitalbits.io and https://frontier.testnet.digitalbits.io.  These servers should be fine for development and small scale projects, but it is not recommended that you use them for production services that need strong reliability.  By running Frontier within your own infrastructure provides a number of benefits:
 
   - Multiple instances can be run for redundancy and scalability.
   - Request rate limiting can be disabled.
@@ -18,11 +14,11 @@ The DigitalBits Development Foundation runs two Frontier servers, one for the pu
 
 ## Prerequisites
 
-Frontier is dependent upon a digitalbits-core server.  Frontier needs access to both the SQL database and the HTTP API that is published by digitalbits-core. See [the administration guide](https://www.digitalbits.org/developers/digitalbits-core/software/admin.html) to learn how to set up and administer a digitalbits-core server.  Secondly, Frontier is dependent upon a postgres server, which it uses to store processed core data for ease of use. Frontier requires postgres version >= 9.5.
+Frontier is dependent upon a digitalbits-core server.  Frontier needs access to both the SQL database and the HTTP API that is published by digitalbits-core. See [the administration guide](https://developers.digitalbits.io/software/DigitalBits/docs/software/admin) to learn how to set up and administer a digitalbits-core server.  Secondly, Frontier is dependent upon a postgres server, which it uses to store processed core data for ease of use. Frontier requires postgres version >= 9.5.
 
 ## Installing
 
-To install Frontier, you have a choice: either downloading a [prebuilt release for your target architecture](https://github.com/digitalbits/go/releases) and operation system, or [building Frontier yourself](#Building).  When either approach is complete, you will find yourself with a directory containing a file named `frontier`.  This file is a native binary.
+To install Frontier, you have a choice: either downloading a [prebuilt release for your target architecture](https://github.com/xdbfoundation/go/releases) and operation system, or [building Frontier yourself](#building).  When either approach is complete, you will find yourself with a directory containing a file named `frontier`.  This file is a native binary.
 
 After building or unpacking Frontier, you simply need to copy the native binary into a directory that is part of your PATH.  Most unix-like systems have `/usr/local/bin` in PATH by default, so unless you have a preference or know better, we recommend you copy the binary there.
 
@@ -38,8 +34,8 @@ Should you decide not to use one of our prebuilt releases, you may instead build
 - [git](https://git-scm.com/)
 - [mercurial](https://www.mercurial-scm.org/)
 
-1. See the details in [README.md](../../../../README.md#dependencies) for installing dependencies.
-2. Compile the Frontier binary: `go install github.com/digitalbits/go/services/frontier`. You should see the `frontier` binary in `$GOPATH/bin`.
+1. See the details in [README.md](https://github.com/xdbfoundation/go/blob/master/README.md#dependencies) for installing dependencies.
+2. Compile the Frontier binary: `go install github.com/xdbfoundation/go/services/frontier`. You should see the `frontier` binary in `$GOPATH/bin`.
 3. Add Go binaries to your PATH in your `bashrc` or equivalent, for easy access: `export PATH=${GOPATH//://bin:}/bin:$PATH`
 
 Open a new terminal. Confirm everything worked by running `frontier --help` successfully.
@@ -61,7 +57,7 @@ As you will see if you run the command above, Frontier defines a large number of
 | `--digitalbits-core-db-url` | `DIGITALBITS_CORE_DATABASE_URL` | postgres://localhost/core_testnet    |
 | `--digitalbits-core-url`    | `DIGITALBITS_CORE_URL`          | http://localhost:11626               |
 
-`--db-url` specifies the Frontier database, and its value should be a valid [PostgreSQL Connection URI](http://www.postgresql.org/docs/9.2/static/libpq-connect.html#AEN38419).  `--digitalbits-core-db-url` specifies a digitalbits-core database which will be used to load data about the digitalbits ledger.  Finally, `--digitalbits-core-url` specifies the HTTP control port for an instance of digitalbits-core.  This URL should be associated with the digitalbits-core that is writing to the database at `--digitalbits-core-db-url`.
+`--db-url` specifies the Frontier database, and its value should be a valid [PostgreSQL Connection URI](https://www.postgresql.org/docs/9.6/libpq-connect.html#AEN46025).  `--digitalbits-core-db-url` specifies a digitalbits-core database which will be used to load data about the digitalbits ledger.  Finally, `--digitalbits-core-url` specifies the HTTP control port for an instance of digitalbits-core.  This URL should be associated with the digitalbits-core that is writing to the database at `--digitalbits-core-db-url`.
 
 Specifying command line flags every time you invoke Frontier can be cumbersome, and so we recommend using environment variables.  There are many tools you can use to manage environment variables:  we recommend either [direnv](http://direnv.net/) or [dotenv](https://github.com/bkeepers/dotenv).
 
@@ -71,7 +67,7 @@ Specifying command line flags every time you invoke Frontier can be cumbersome, 
 
 Before the Frontier server can be run, we must first prepare the Frontier database.  This database will be used for all of the information produced by Frontier, notably historical information about successful transactions that have occurred on the digitalbits network.
 
-To prepare a database for Frontier's use, first you must ensure the database is blank.  It's easiest to simply create a new database on your postgres server specifically for Frontier's use.  Next you must install the schema by running `frontier db init`.  Remember to use the appropriate command line flags or environment variables to configure Frontier as explained in [Configuring ](#Configuring).  This command will log any errors that occur.
+To prepare a database for Frontier's use, first you must ensure the database is blank.  It's easiest to simply create a new database on your postgres server specifically for Frontier's use.  Next you must install the schema by running `frontier db init`.  Remember to use the appropriate command line flags or environment variables to configure Frontier as explained in [Configuring](#Configuring).  This command will log any errors that occur.
 
 ### Postgres configuration
 
@@ -85,13 +81,19 @@ Once your Frontier database is configured, you're ready to run Frontier.  To run
 INFO[0000] Starting frontier on :8000                     pid=29013
 ```
 
-The log line above announces that Frontier is ready to serve client requests. Note: the numbers shown above may be different for your installation.  Next we can confirm that Frontier is responding correctly by loading the root resource.  In the example above, that URL would be [http://127.0.0.1:8000/] and simply running `curl http://127.0.0.1:8000/` shows you that the root resource can be loaded correctly.
+The log line above announces that Frontier is ready to serve client requests. Note: the numbers shown above may be different for your installation.  Next we can confirm that Frontier is responding correctly by loading the root resource.  In the example above, that URL would be [http://127.0.0.1:8000/](http://127.0.0.1:8000/) and simply running 
+
+```curl http://127.0.0.1:8000/```
+
+ shows you that the root resource can be loaded correctly.
 
 If you didn't set up a digitalbits-core yet, you may see an error like this:
+
 ```
 ERRO[2019-05-06T16:21:14.126+08:00] Error getting core latest ledger err="get failed: pq: relation \"ledgerheaders\" does not exist"
 ```
-Frontier requires a functional digitalbits-core. Go back and set up digitalbits-core as described in the admin guide. In particular, you need to initialise the database as [described here](https://www.digitalbits.org/developers/digitalbits-core/software/admin.html#database-and-local-state).
+
+Frontier requires a functional digitalbits-core. Go back and set up digitalbits-core as described in the admin guide. In particular, you need to initialise the database as [described here](http://developers.digitalbits.io/software/DigitalBits/docs/software/admin#database-and-local-state).
 
 ## Ingesting live digitalbits-core data
 
@@ -127,7 +129,7 @@ Unless your node is a full validator and archive publisher we _do not_ recommend
 
 ### Correcting gaps in historical data
 
-In the section above, we mentioned that Frontier _tries_ to maintain a gap-free window.  Unfortunately, it cannot directly control the state of digitalbits-core and [so gaps may form](https://www.digitalbits.org/developers/software/known-issues.html#gaps-detected) due to extended down time.  When a gap is encountered, Frontier will stop ingesting historical data and complain loudly in the log with error messages (log lines will include "ledger gap detected").  To resolve this situation, you must re-establish the expected state of the digitalbits-core database and purge historical data from Frontier's database.  We leave the details of this process up to the reader as it is dependent upon your operating needs and configuration, but we offer one potential solution:
+In the section above, we mentioned that Frontier _tries_ to maintain a gap-free window.  Unfortunately, it cannot directly control the state of digitalbits-core and so gaps may form due to extended down time.  When a gap is encountered, Frontier will stop ingesting historical data and complain loudly in the log with error messages (log lines will include "ledger gap detected").  To resolve this situation, you must re-establish the expected state of the digitalbits-core database and purge historical data from Frontier's database.  We leave the details of this process up to the reader as it is dependent upon your operating needs and configuration, but we offer one potential solution:
 
 We recommend you configure the HISTORY_RETENTION_COUNT in Frontier to a value less than or equal to the configured value for CATCHUP_RECENT in digitalbits-core.  Given this situation any downtime that would cause a ledger gap will require a downtime greater than the amount of historical data retained by Frontier.  To re-establish continuity:
 
@@ -149,7 +151,7 @@ It's possible that the progress logs (see below) will not show anything new for 
 
 If you see that ingestion is not proceeding for a very long period of time:
 1. Check the RAM usage on the machine. It's possible that the system ran out of RAM and is using swap memory, which is extremely slow.
-2. If above is not the case, file a [new issue](https://github.com/digitalbits/go/issues/new/choose) in this repository.
+2. If above is not the case, file a [new issue](https://github.com/xdbfoundation/go/issues/new/choose) in this repository.
 
 ### CPU usage goes high every few minutes
 
@@ -166,11 +168,14 @@ If you were running the new system in the past during experimental stage (`ENABL
 In order to check the progress and the status of experimental ingestion you should check the logs. All logs connected to experimental ingestion are tagged with `service=ingest`.
 
 It starts with informing you about state ingestion:
+
 ```
 INFO[2019-08-29T13:04:13.473+02:00] Starting ingestion system from empty state...  pid=5965 service=ingest temp_set="*io.MemoryTempSet"
 INFO[2019-08-29T13:04:15.263+02:00] Reading from History Archive Snapshot         ledger=25565887 pid=5965 service=ingest
 ```
-During state ingestion, Frontier will log number of processed entries every 100,000 entries (there are currently around 7M entries in the public network):
+
+During state ingestion, Frontier will log number of processed entries every 100,000 entries (there are currently around 1M entries in the public network):
+
 ```
 INFO[2019-08-29T13:04:34.652+02:00] Processing entries from History Archive Snapshot  ledger=25565887 numEntries=100000 pid=5965 service=ingest
 INFO[2019-08-29T13:04:38.487+02:00] Processing entries from History Archive Snapshot  ledger=25565887 numEntries=200000 pid=5965 service=ingest
@@ -178,7 +183,9 @@ INFO[2019-08-29T13:04:41.322+02:00] Processing entries from History Archive Snap
 INFO[2019-08-29T13:04:48.429+02:00] Processing entries from History Archive Snapshot  ledger=25565887 numEntries=400000 pid=5965 service=ingest
 INFO[2019-08-29T13:05:00.306+02:00] Processing entries from History Archive Snapshot  ledger=25565887 numEntries=500000 pid=5965 service=ingest
 ```
+
 When state ingestion is finished it will proceed to ledger ingestion starting from the next ledger after checkpoint ledger (25565887+1 in this example) to update the state using transaction meta:
+
 ```
 INFO[2019-08-29T13:39:41.590+02:00] Processing entries from History Archive Snapshot  ledger=25565887 numEntries=5300000 pid=5965 service=ingest
 INFO[2019-08-29T13:39:44.518+02:00] Processing entries from History Archive Snapshot  ledger=25565887 numEntries=5400000 pid=5965 service=ingest
@@ -204,7 +211,7 @@ INFO[2019-08-29T13:40:00.972+02:00] Finished processing ledger                  
 
 Frontier ingests ledger data from a connected instance of digitalbits-core.  In the event that digitalbits-core stops running (or if Frontier stops ingesting data for any other reason), the view provided by Frontier will start to lag behind reality.  For simpler applications, this may be fine, but in many cases this lag is unacceptable and the application should not continue operating until the lag is resolved.
 
-To help applications that cannot tolerate lag, Frontier provides a configurable "staleness" threshold.  Given that enough lag has accumulated to surpass this threshold (expressed in number of ledgers), Frontier will only respond with an error: [`stale_history`](./reference/errors/stale-history.md).  To configure this option, use either the `--history-stale-threshold` command line flag or the `HISTORY_STALE_THRESHOLD` environment variable.  NOTE:  non-historical requests (such as submitting transactions or finding payment paths) will not error out when the staleness threshold is surpassed.
+To help applications that cannot tolerate lag, Frontier provides a configurable "staleness" threshold.  Given that enough lag has accumulated to surpass this threshold (expressed in number of ledgers), Frontier will only respond with an error: [`stale_history`](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/errors/stale-history).  To configure this option, use either the `--history-stale-threshold` command line flag or the `HISTORY_STALE_THRESHOLD` environment variable.  NOTE:  non-historical requests (such as submitting transactions or finding payment paths) will not error out when the staleness threshold is surpassed.
 
 ## Monitoring
 
@@ -212,7 +219,7 @@ To ensure that your instance of Frontier is performing correctly we encourage yo
 
 Frontier will output logs to standard out.  Information about what requests are coming in will be reported, but more importantly, warnings or errors will also be emitted by default.  A correctly running Frontier instance will not output any warning or error log entries.
 
-Metrics are collected while a Frontier process is running and they are exposed at the `/metrics` path.  You can see an example at (https://frontier-testnet.digitalbits.org/metrics).
+Metrics are collected while a Frontier process is running and they are exposed at the `/metrics` path through the Frontier admin port. You need to configure this via `--admin-port` or `ADMIN_PORT`, since it’s disabled by default. 
 
 Below we present a few standard log entries with associated fields. You can use them to build metrics and alerts. We present below some examples. Please note that this represents Frontier app metrics only. You should also monitor your hardware metrics like CPU or RAM Utilization.
 
@@ -261,17 +268,18 @@ Below we present a few standard log entries with associated fields. You can use 
 ### Metrics
 
 Using the entries above you can build metrics that will help understand performance of a given Frontier node, some examples below:
-* Number of requests per minute.
-* Number of requests per route (the most popular routes).
-* Average response time per route.
-* Maximum response time for non-streaming requests.
-* Number of streaming vs. non-streaming requests.
-* Number of rate-limited requests.
-* List of rate-limited IPs.
-* Unique IPs.
-* The most popular SDKs/apps sending requests to a given Frontier node.
-* Average ingestion time of a ledger.
-* Average ingestion time of a transaction.
+
+- Number of requests per minute.
+- Number of requests per route (the most popular routes).
+- Average response time per route.
+- Maximum response time for non-streaming requests.
+- Number of streaming vs. non-streaming requests.
+- Number of rate-limited requests.
+- List of rate-limited IPs.
+- Unique IPs.
+- The most popular SDKs/apps sending requests to a given Frontier node.
+- Average ingestion time of a ledger.
+- Average ingestion time of a transaction.
 
 ### Alerts
 
@@ -283,11 +291,3 @@ Spike in number of requests | Potential DoS attack | Lower rate-limiting thresho
 Large number of rate-limited requests | Rate-limiting threshold too low | Increase rate-limiting threshold
 Ingestion is slow | Frontier server spec too low | Increase hardware spec
 Spike in average response time of a single route | Possible bug in a code responsible for rendering a route | Report an issue in Frontier repository.
-
-## I'm Stuck! Help!
-
-If any of the above steps don't work or you are otherwise prevented from correctly setting up
-Frontier, please come to our community and tell us. Either
-[post a question at our Stack Exchange](https://digitalbits.stackexchange.com/) or
-[chat with us on Keybase in #dev_discussion](https://keybase.io/team/digitalbits.public) to ask for
-help.

@@ -1,13 +1,6 @@
----
-title: Transactions for Account
-clientData:
-  laboratoryUrl: https://www.digitalbits.org/laboratory/#explorer?resource=transactions&endpoint=for_account
-replacement: https://developers.digitalbits.org/api/resources/accounts/transactions/
----
-
-This endpoint represents successful [transactions](../resources/transaction.md) that affected a
-given [account](../resources/account.md).  This endpoint can also be used in
-[streaming](../streaming.md) mode so it is possible to use it to listen for new transactions that
+This endpoint represents successful [transactions](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/resources/transaction) that affected a
+given [account](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/resources/account).  This endpoint can also be used in
+[streaming](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/streaming) mode so it is possible to use it to listen for new transactions that
 affect a given account as they get made in the DigitalBits network.
 
 If called in streaming mode Frontier will start at the earliest known transaction unless a `cursor`
@@ -33,14 +26,14 @@ GET /accounts/{account_id}/transactions{?cursor,limit,order,include_failed}
 ### curl Example Request
 
 ```sh
-curl "https://frontier-testnet.digitalbits.org/accounts/GBS43BF24ENNS3KPACUZVKK2VYPOZVBQO2CISGZ777RYGOPYC2FT6S3K/transactions?limit=1"
+curl "https://frontier.testnet.digitalbits.io/accounts/GBS43BF24ENNS3KPACUZVKK2VYPOZVBQO2CISGZ777RYGOPYC2FT6S3K/transactions?limit=1"
 ```
 
 ### JavaScript Example Request
 
 ```javascript
 var DigitalBitsSdk = require('digitalbits-sdk');
-var server = new DigitalBitsSdk.Server('https://frontier-testnet.digitalbits.org');
+var server = new DigitalBitsSdk.Server('https://frontier.testnet.digitalbits.io');
 
 server.transactions()
   .forAccount("GBS43BF24ENNS3KPACUZVKK2VYPOZVBQO2CISGZ777RYGOPYC2FT6S3K")
@@ -57,7 +50,7 @@ server.transactions()
 
 ```javascript
 var DigitalBitsSdk = require('digitalbits-sdk')
-var server = new DigitalBitsSdk.Server('https://frontier-testnet.digitalbits.org');
+var server = new DigitalBitsSdk.Server('https://frontier.testnet.digitalbits.io');
 
 var txHandler = function (txResponse) {
   console.log(txResponse);
@@ -74,20 +67,20 @@ var es = server.transactions()
 ## Response
 
 This endpoint responds with a list of transactions that changed a given account's state. See
-[transaction resource](../resources/transaction.md) for reference.
+[transaction resource](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/resources/transaction) for reference.
 
 ### Example Response
 ```json
 {
   "_links": {
     "self": {
-      "href": "https://frontier-testnet.digitalbits.org/accounts/GBYUUJHG6F4EPJGNLERINATVQLNDOFRUD7SGJZ26YZLG5PAYLG7XUSGF/payments?cursor=&limit=10&order=asc"
+      "href": "https://frontier.testnet.digitalbits.io/accounts/GBYUUJHG6F4EPJGNLERINATVQLNDOFRUD7SGJZ26YZLG5PAYLG7XUSGF/payments?cursor=&limit=10&order=asc"
     },
     "next": {
-      "href": "https://frontier-testnet.digitalbits.org/accounts/GBYUUJHG6F4EPJGNLERINATVQLNDOFRUD7SGJZ26YZLG5PAYLG7XUSGF/payments?cursor=2714719978786817&limit=10&order=asc"
+      "href": "https://frontier.testnet.digitalbits.io/accounts/GBYUUJHG6F4EPJGNLERINATVQLNDOFRUD7SGJZ26YZLG5PAYLG7XUSGF/payments?cursor=2714719978786817&limit=10&order=asc"
     },
     "prev": {
-      "href": "https://frontier-testnet.digitalbits.org/accounts/GBYUUJHG6F4EPJGNLERINATVQLNDOFRUD7SGJZ26YZLG5PAYLG7XUSGF/payments?cursor=1919197546291201&limit=10&order=desc"
+      "href": "https://frontier.testnet.digitalbits.io/accounts/GBYUUJHG6F4EPJGNLERINATVQLNDOFRUD7SGJZ26YZLG5PAYLG7XUSGF/payments?cursor=1919197546291201&limit=10&order=desc"
     }
   },
   "_embedded": {
@@ -95,19 +88,19 @@ This endpoint responds with a list of transactions that changed a given account'
       {
         "_links": {
           "self": {
-            "href": "https://frontier-testnet.digitalbits.org/operations/1919197546291201"
+            "href": "https://frontier.testnet.digitalbits.io/operations/1919197546291201"
           },
           "transaction": {
-            "href": "https://frontier-testnet.digitalbits.org/transactions/7e2050abc676003efc3eaadd623c927f753b7a6c37f50864bf284f4e1510d088"
+            "href": "https://frontier.testnet.digitalbits.io/transactions/7e2050abc676003efc3eaadd623c927f753b7a6c37f50864bf284f4e1510d088"
           },
           "effects": {
-            "href": "https://frontier-testnet.digitalbits.org/operations/1919197546291201/effects"
+            "href": "https://frontier.testnet.digitalbits.io/operations/1919197546291201/effects"
           },
           "succeeds": {
-            "href": "https://frontier-testnet.digitalbits.org/effects?order=desc&cursor=1919197546291201"
+            "href": "https://frontier.testnet.digitalbits.io/effects?order=desc&cursor=1919197546291201"
           },
           "precedes": {
-            "href": "https://frontier-testnet.digitalbits.org/effects?order=asc&cursor=1919197546291201"
+            "href": "https://frontier.testnet.digitalbits.io/effects?order=asc&cursor=1919197546291201"
           }
         },
         "id": "1919197546291201",
@@ -125,19 +118,19 @@ This endpoint responds with a list of transactions that changed a given account'
       {
         "_links": {
           "self": {
-            "href": "https://frontier-testnet.digitalbits.org/operations/2714719978786817"
+            "href": "https://frontier.testnet.digitalbits.io/operations/2714719978786817"
           },
           "transaction": {
-            "href": "https://frontier-testnet.digitalbits.org/transactions/7cea6abe90654578b42ee696e823187d89d91daa157a1077b542ee7c77413ce3"
+            "href": "https://frontier.testnet.digitalbits.io/transactions/7cea6abe90654578b42ee696e823187d89d91daa157a1077b542ee7c77413ce3"
           },
           "effects": {
-            "href": "https://frontier-testnet.digitalbits.org/operations/2714719978786817/effects"
+            "href": "https://frontier.testnet.digitalbits.io/operations/2714719978786817/effects"
           },
           "succeeds": {
-            "href": "https://frontier-testnet.digitalbits.org/effects?order=desc&cursor=2714719978786817"
+            "href": "https://frontier.testnet.digitalbits.io/effects?order=desc&cursor=2714719978786817"
           },
           "precedes": {
-            "href": "https://frontier-testnet.digitalbits.org/effects?order=asc&cursor=2714719978786817"
+            "href": "https://frontier.testnet.digitalbits.io/effects?order=asc&cursor=2714719978786817"
           }
         },
         "id": "2714719978786817",
@@ -162,5 +155,5 @@ This endpoint responds with a list of transactions that changed a given account'
 
 ## Possible Errors
 
-- The [standard errors](../errors.md#Standard-Errors).
-- [not_found](../errors/not-found.md): A `not_found` error will be returned if there is no account whose ID matches the `account_id` argument.
+- The [standard errors](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/errors#standard-errors).
+- [not_found](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/errors/not-found): A `not_found` error will be returned if there is no account whose ID matches the `account_id` argument.

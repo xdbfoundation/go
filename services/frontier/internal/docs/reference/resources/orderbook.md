@@ -1,17 +1,12 @@
----
-title: Orderbook
-replacement: https://developers.digitalbits.org/api/aggregations/order-books/
----
-
-[Orderbooks](https://www.digitalbits.org/developers/learn/concepts/exchange.html) are collections of offers for each issuer and currency pairs.  Let's say you wanted to exchange EUR issued by a particular bank for BTC issued by a particular exchange.  You would look at the orderbook and see who is buying `foo_bank/EUR` and selling `baz_exchange/BTC` and at what prices.
+[Orderbooks](https://developers.digitalbits.io/guides/docs/guides/concepts/exchange#orderbook) are collections of offers for each issuer and currency pairs.  Let's say you wanted to exchange EUR issued by a particular bank for BTC issued by a particular exchange.  You would look at the orderbook and see who is buying `foo_bank/EUR` and selling `baz_exchange/BTC` and at what prices.
 
 ## Attributes
 | Attribute    | Type             |                                                                                                                        |
 |--------------|------------------|------------------------------------------------------------------------------------------------------------------------|
 | bids | object     |  Array of {`price_r`, `price`, `amount`} objects (see [offers](./offer.md)).  These represent prices and amounts accounts are willing to buy for the given `selling` and `buying` pair. |
 | asks | object |  Array of {`price_r`, `price`, `amount`} objects (see [offers](./offer.md)).  These represent prices and amounts accounts are willing to sell for the given `selling` and `buying` pair.|
-| base | [Asset](http://digitalbits.org/developers/learn/concepts/assets.html) | The Asset this offer wants to sell.|
-| counter | [Asset](http://digitalbits.org/developers/learn/concepts/assets.html) | The Asset this offer wants to buy.|
+| base | [Asset](https://developers.digitalbits.io/guides/docs/guides/concepts/assets) | The Asset this offer wants to sell.|
+| counter | [Asset](https://developers.digitalbits.io/guides/docs/guides/concepts/assets) | The Asset this offer wants to buy.|
 
 #### Bid Object
 |    Attribute     |  Type  |                                                                                                                                |
@@ -46,5 +41,5 @@ This resource has no links.
 
 | Resource                 | Type       | Resource URI Template                |
 |--------------------------|------------|--------------------------------------|
-| [Orderbook Details](../endpoints/orderbook-details.md)       | Single | `/orderbook?{orderbook_params}`       |
-| [Trades](../endpoints/trades.md)   | Collection | `/trades?{orderbook_params}`       |
+| [Orderbook Details](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/endpoints/orderbook-details)       | Single | `/orderbook?{orderbook_params}`       |
+| [Trades](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/endpoints/trades)   | Collection | `/trades?{orderbook_params}`       |

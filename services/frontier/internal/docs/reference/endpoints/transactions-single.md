@@ -1,12 +1,5 @@
----
-title: Transaction Details
-clientData:
-  laboratoryUrl: https://www.digitalbits.org/laboratory/#explorer?resource=transactions&endpoint=single
-replacement: https://developers.digitalbits.org/api/resources/transactions/single/
----
-
 The transaction details endpoint provides information on a single
-[transaction](../resources/transaction.md). The transaction hash provided in the `hash` argument
+[transaction](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/resources/transaction). The transaction hash provided in the `hash` argument
 specifies which transaction to load.
 
 ### Warning - failed transactions
@@ -29,14 +22,14 @@ GET /transactions/{hash}
 ### curl Example Request
 
 ```sh
-curl "https://frontier-testnet.digitalbits.org/transactions/264226cb06af3b86299031884175155e67a02e0a8ad0b3ab3a88b409a8c09d5c"
+curl "https://frontier.testnet.digitalbits.io/transactions/264226cb06af3b86299031884175155e67a02e0a8ad0b3ab3a88b409a8c09d5c"
 ```
 
 ### JavaScript Example Request
 
 ```javascript
 var DigitalBitsSdk = require('digitalbits-sdk');
-var server = new DigitalBitsSdk.Server('https://frontier-testnet.digitalbits.org');
+var server = new DigitalBitsSdk.Server('https://frontier.testnet.digitalbits.io');
 
 server.transactions()
   .transaction("264226cb06af3b86299031884175155e67a02e0a8ad0b3ab3a88b409a8c09d5c")
@@ -51,7 +44,7 @@ server.transactions()
 
 ## Response
 
-This endpoint responds with a single Transaction.  See [transaction resource](../resources/transaction.md) for reference.
+This endpoint responds with a single Transaction.  See [transaction resource](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/resources/transaction) for reference.
 
 ### Example Response
 
@@ -59,27 +52,27 @@ This endpoint responds with a single Transaction.  See [transaction resource](..
 {
   "_links": {
     "self": {
-      "href": "https://frontier-testnet.digitalbits.org/transactions/264226cb06af3b86299031884175155e67a02e0a8ad0b3ab3a88b409a8c09d5c"
+      "href": "https://frontier.testnet.digitalbits.io/transactions/264226cb06af3b86299031884175155e67a02e0a8ad0b3ab3a88b409a8c09d5c"
     },
     "account": {
-      "href": "https://frontier-testnet.digitalbits.org/accounts/GAIH3ULLFQ4DGSECF2AR555KZ4KNDGEKN4AFI4SU2M7B43MGK3QJZNSR"
+      "href": "https://frontier.testnet.digitalbits.io/accounts/GAIH3ULLFQ4DGSECF2AR555KZ4KNDGEKN4AFI4SU2M7B43MGK3QJZNSR"
     },
     "ledger": {
-      "href": "https://frontier-testnet.digitalbits.org/ledgers/697121"
+      "href": "https://frontier.testnet.digitalbits.io/ledgers/697121"
     },
     "operations": {
-      "href": "https://frontier-testnet.digitalbits.org/transactions/264226cb06af3b86299031884175155e67a02e0a8ad0b3ab3a88b409a8c09d5c/operations{?cursor,limit,order}",
+      "href": "https://frontier.testnet.digitalbits.io/transactions/264226cb06af3b86299031884175155e67a02e0a8ad0b3ab3a88b409a8c09d5c/operations{?cursor,limit,order}",
       "templated": true
     },
     "effects": {
-      "href": "https://frontier-testnet.digitalbits.org/transactions/264226cb06af3b86299031884175155e67a02e0a8ad0b3ab3a88b409a8c09d5c/effects{?cursor,limit,order}",
+      "href": "https://frontier.testnet.digitalbits.io/transactions/264226cb06af3b86299031884175155e67a02e0a8ad0b3ab3a88b409a8c09d5c/effects{?cursor,limit,order}",
       "templated": true
     },
     "precedes": {
-      "href": "https://frontier-testnet.digitalbits.org/transactions?order=asc&cursor=2994111896358912"
+      "href": "https://frontier.testnet.digitalbits.io/transactions?order=asc&cursor=2994111896358912"
     },
     "succeeds": {
-      "href": "https://frontier-testnet.digitalbits.org/transactions?order=desc&cursor=2994111896358912"
+      "href": "https://frontier.testnet.digitalbits.io/transactions?order=desc&cursor=2994111896358912"
     }
   },
   "id": "264226cb06af3b86299031884175155e67a02e0a8ad0b3ab3a88b409a8c09d5c",
@@ -107,6 +100,6 @@ This endpoint responds with a single Transaction.  See [transaction resource](..
 
 ## Possible Errors
 
-- The [standard errors](../errors.md#Standard-Errors).
-- [not_found](../errors/not-found.md): A `not_found` error will be returned if there is no
+- The [standard errors](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/errors#standard-errors).
+- [not_found](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/errors/not-found): A `not_found` error will be returned if there is no
   transaction whose ID matches the `hash` argument.

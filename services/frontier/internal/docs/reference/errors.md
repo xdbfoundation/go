@@ -1,8 +1,3 @@
----
-title: Errors
-replacement: https://developers.digitalbits.org/api/errors/
----
-
 In the event that an error occurs while processing a request to frontier, an
 **error** response will be returned to the client.  This error response will
 contain information detailing why the request couldn't complete successfully.
@@ -27,6 +22,5 @@ json document with the following attributes:
 There are a set of errors that can occur in any request to frontier which we
 call **standard errors**.  These errors are:
 
-- [Server Error](../reference/errors/server-error.md)
-- [Rate Limit Exceeded](../reference/errors/rate-limit-exceeded.md)
-- [Forbidden](../reference/errors/forbidden.md)
+- [Server Error](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/errors/server-error)
+- [Rate Limit Exceeded](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/errors/rate-limit-exceeded)

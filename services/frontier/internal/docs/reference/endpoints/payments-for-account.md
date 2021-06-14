@@ -1,14 +1,7 @@
----
-title: Payments for Account
-clientData:
-  laboratoryUrl: https://www.digitalbits.org/laboratory/#explorer?resource=payments&endpoint=for_account
-replacement: https://developers.digitalbits.org/api/resources/accounts/payments/
----
-
 This endpoint responds with a collection of payment-related operations where the given
-[account](../resources/account.md) was either the sender or receiver.
+[account](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/resources/account) was either the sender or receiver.
 
-This endpoint can also be used in [streaming](../streaming.md) mode so it is possible to use it to
+This endpoint can also be used in [streaming](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/streaming) mode so it is possible to use it to
 listen for new payments to or from an account as they get made in the DigitalBits network.
 If called in streaming mode Frontier will start at the earliest known payment unless a `cursor` is
 set. In that case it will start from the `cursor`. You can also set `cursor` value to `now` to only
@@ -41,14 +34,14 @@ GET /accounts/{id}/payments{?cursor,limit,order}
 
 ```bash
 # Retrieve the 25 latest payments for a specific account.
-curl "https://frontier-testnet.digitalbits.org/accounts/GCEZWKCA5VLDNRLN3RPRJMRZOX3Z6G5CHCGSNFHEYVXM3XOJMDS674JZ/payments?limit=25&order=desc"
+curl "https://frontier.testnet.digitalbits.io/accounts/GCEZWKCA5VLDNRLN3RPRJMRZOX3Z6G5CHCGSNFHEYVXM3XOJMDS674JZ/payments?limit=25&order=desc"
 ```
 
 ### JavaScript Example Request
 
 ```javascript
 var DigitalBitsSdk = require('digitalbits-sdk');
-var server = new DigitalBitsSdk.Server('https://frontier-testnet.digitalbits.org');
+var server = new DigitalBitsSdk.Server('https://frontier.testnet.digitalbits.io');
 
 server.payments()
   .forAccount("GCEZWKCA5VLDNRLN3RPRJMRZOX3Z6G5CHCGSNFHEYVXM3XOJMDS674JZ")
@@ -65,7 +58,7 @@ server.payments()
 
 ```javascript
 var DigitalBitsSdk = require('digitalbits-sdk')
-var server = new DigitalBitsSdk.Server('https://frontier-testnet.digitalbits.org');
+var server = new DigitalBitsSdk.Server('https://frontier.testnet.digitalbits.io');
 
 var paymentHandler = function (paymentResponse) {
   console.log(paymentResponse);
@@ -81,7 +74,7 @@ var es = server.payments()
 
 ## Response
 
-This endpoint responds with a [page](../resources/page.md) of [payment operations](../resources/operation.md).
+This endpoint responds with a [page](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/resources/page) of [payment operations](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/resources/operation).
 
 ### Example Response
 
@@ -165,4 +158,4 @@ This endpoint responds with a [page](../resources/page.md) of [payment operation
 
 ## Possible Errors
 
-- The [standard errors](../errors.md#standard-errors).
+- The [standard errors](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/errors#standard-errors).

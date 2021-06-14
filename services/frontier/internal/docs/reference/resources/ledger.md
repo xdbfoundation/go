@@ -1,11 +1,6 @@
----
-title: Ledger
-replacement: https://developers.digitalbits.org/api/resources/ledgers/
----
-
 A **ledger** resource contains information about a given ledger.
 
-To learn more about the concept of ledgers in the DigitalBits network, take a look at the [DigitalBits ledger concept guide](https://www.digitalbits.org/developers/learn/concepts/ledger.html).
+To learn more about the concept of ledgers in the DigitalBits network, take a look at the [DigitalBits ledger concept guide](https://developers.digitalbits.io/guides/docs/guides/concepts/ledger).
 
 ## Attributes
 
@@ -28,8 +23,8 @@ To learn more about the concept of ledgers in the DigitalBits network, take a lo
 | max_tx_set_size              | number | The maximum number of transactions validators have agreed to process in a given ledger.                                      |
 | protocol_version             | number | The protocol version that the digitalbits network was running when this ledger was committed.                                    |
 | header_xdr                   | string | A base64 encoded string of the raw `LedgerHeader` xdr struct for this ledger.                                                |
-| base_fee_in_stroops          | number | The [fee] the network charges per operation in a transaction.  Expressed in stroops.                                         |
-| base_reserve_in_stroops      | number | The [reserve][fee] the network uses when calculating an account's minimum balance. Expressed in stroops.                     |
+| base_fee_in_nibbs          | number | The [fee] the network charges per operation in a transaction.  Expressed in nibbs.                                         |
+| base_reserve_in_nibbs      | number | The [reserve][fee] the network uses when calculating an account's minimum balance. Expressed in nibbs.                     |
 
 ## Links
 |              | Example                                           | Relation                        | templated |
@@ -79,22 +74,22 @@ To learn more about the concept of ledgers in the DigitalBits network, take a lo
   "max_tx_set_size": 50,
   "protocol_version": 8,
   "header_xdr": "...",
-  "base_fee_in_stroops": 100,
-  "base_reserve_in_stroops": 100000000
+  "base_fee_in_nibbs": 100,
+  "base_reserve_in_nibbs": 100000000
 }
 ```
 
 ## Endpoints
 | Resource                | Type       | Resource URI Template              |
 |-------------------------|------------|------------------------------------|
-| [All ledgers](../endpoints/ledgers-all.md)         | Collection | `/ledgers`                         |
-| [Single Ledger](../endpoints/ledgers-single.md)       | Single     | `/ledgers/:id`                     |
-| [Ledger Transactions](../endpoints/transactions-for-ledger.md) | Collection | `/ledgers/:ledger_id/transactions` |
-| [Ledger Operations](../endpoints/operations-for-ledger.md)   | Collection | `/ledgers/:ledger_id/operations`   |
-| [Ledger Payments](../endpoints/payments-for-ledger.md)     | Collection | `/ledgers/:ledger_id/payments`     |
-| [Ledger Effects](../endpoints/effects-for-ledger.md)      | Collection | `/ledgers/:ledger_id/effects`      |
+| [All ledgers](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/endpoints/ledgers-all)         | Collection | `/ledgers`                         |
+| [Single Ledger](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/endpoints/ledgers-single)       | Single     | `/ledgers/:id`                     |
+| [Ledger Transactions](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/endpoints/transactions-for-ledger) | Collection | `/ledgers/:ledger_id/transactions` |
+| [Ledger Operations](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/endpoints/operations-for-ledger)   | Collection | `/ledgers/:ledger_id/operations`   |
+| [Ledger Payments](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/endpoints/payments-for-ledger)     | Collection | `/ledgers/:ledger_id/payments`     |
+| [Ledger Effects](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/endpoints/effects-for-ledger)      | Collection | `/ledgers/:ledger_id/effects`      |
 
 
 
-[inflation]: https://www.digitalbits.org/developers/learn/concepts/inflation.html
-[fee]: https://www.digitalbits.org/developers/learn/concepts/fees.html
+[inflation]: https://developers.digitalbits.io/guides/docs/guides/concepts/inflation
+[fee]: https://developers.digitalbits.io/guides/docs/guides/concepts/fees

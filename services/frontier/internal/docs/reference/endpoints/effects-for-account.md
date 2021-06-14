@@ -1,15 +1,8 @@
----
-title: Effects for Account
-clientData:
-  laboratoryUrl: https://www.digitalbits.org/laboratory/#explorer?resource=effects&endpoint=for_account
-replacement: https://developers.digitalbits.org/api/resources/accounts/effects/
----
-
-This endpoint represents all [effects](../resources/effect.md) that changed a given
-[account](../resources/account.md). It will return relevant effects from the creation of the
+This endpoint represents all [effects](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/resources/effect) that changed a given
+[account](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/resources/account). It will return relevant effects from the creation of the
 account to the current ledger.
 
-This endpoint can also be used in [streaming](../streaming.md) mode so it is possible to use it to
+This endpoint can also be used in [streaming](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/streaming) mode so it is possible to use it to
 listen for new effects as transactions happen in the DigitalBits network.
 If called in streaming mode Frontier will start at the earliest known effect unless a `cursor` is
 set. In that case it will start from the `cursor`. You can also set `cursor` value to `now` to only
@@ -33,14 +26,14 @@ GET /accounts/{account}/effects{?cursor,limit,order}
 ### curl Example Request
 
 ```sh
-curl "https://frontier-testnet.digitalbits.org/accounts/GA2HGBJIJKI6O4XEM7CZWY5PS6GKSXL6D34ERAJYQSPYA6X6AI7HYW36/effects?limit=1"
+curl "https://frontier.testnet.digitalbits.io/accounts/GA2HGBJIJKI6O4XEM7CZWY5PS6GKSXL6D34ERAJYQSPYA6X6AI7HYW36/effects?limit=1"
 ```
 
 ### JavaScript Example Request
 
 ```javascript
 var DigitalBitsSdk = require('digitalbits-sdk');
-var server = new DigitalBitsSdk.Server('https://frontier-testnet.digitalbits.org');
+var server = new DigitalBitsSdk.Server('https://frontier.testnet.digitalbits.io');
 
 server.effects()
   .forAccount("GA2HGBJIJKI6O4XEM7CZWY5PS6GKSXL6D34ERAJYQSPYA6X6AI7HYW36")
@@ -58,7 +51,7 @@ server.effects()
 
 ```javascript
 var DigitalBitsSdk = require('digitalbits-sdk')
-var server = new DigitalBitsSdk.Server('https://frontier-testnet.digitalbits.org');
+var server = new DigitalBitsSdk.Server('https://frontier.testnet.digitalbits.io');
 
 var effectHandler = function (effectResponse) {
   console.log(effectResponse);
@@ -82,13 +75,13 @@ The list of effects.
 {
   "_links": {
     "self": {
-      "href": "https://frontier-testnet.digitalbits.org/accounts/GA2HGBJIJKI6O4XEM7CZWY5PS6GKSXL6D34ERAJYQSPYA6X6AI7HYW36/effects?cursor=&limit=1&order=asc"
+      "href": "https://frontier.testnet.digitalbits.io/accounts/GA2HGBJIJKI6O4XEM7CZWY5PS6GKSXL6D34ERAJYQSPYA6X6AI7HYW36/effects?cursor=&limit=1&order=asc"
     },
     "next": {
-      "href": "https://frontier-testnet.digitalbits.org/accounts/GA2HGBJIJKI6O4XEM7CZWY5PS6GKSXL6D34ERAJYQSPYA6X6AI7HYW36/effects?cursor=1919197546291201-1&limit=1&order=asc"
+      "href": "https://frontier.testnet.digitalbits.io/accounts/GA2HGBJIJKI6O4XEM7CZWY5PS6GKSXL6D34ERAJYQSPYA6X6AI7HYW36/effects?cursor=1919197546291201-1&limit=1&order=asc"
     },
     "prev": {
-      "href": "https://frontier-testnet.digitalbits.org/accounts/GA2HGBJIJKI6O4XEM7CZWY5PS6GKSXL6D34ERAJYQSPYA6X6AI7HYW36/effects?cursor=1919197546291201-1&limit=1&order=desc"
+      "href": "https://frontier.testnet.digitalbits.io/accounts/GA2HGBJIJKI6O4XEM7CZWY5PS6GKSXL6D34ERAJYQSPYA6X6AI7HYW36/effects?cursor=1919197546291201-1&limit=1&order=desc"
     }
   },
   "_embedded": {
@@ -96,13 +89,13 @@ The list of effects.
       {
         "_links": {
           "operation": {
-            "href": "https://frontier-testnet.digitalbits.org/operations/1919197546291201"
+            "href": "https://frontier.testnet.digitalbits.io/operations/1919197546291201"
           },
           "succeeds": {
-            "href": "https://frontier-testnet.digitalbits.org/effects?order=desc&cursor=1919197546291201-1"
+            "href": "https://frontier.testnet.digitalbits.io/effects?order=desc&cursor=1919197546291201-1"
           },
           "precedes": {
-            "href": "https://frontier-testnet.digitalbits.org/effects?order=asc&cursor=1919197546291201-1"
+            "href": "https://frontier.testnet.digitalbits.io/effects?order=asc&cursor=1919197546291201-1"
           }
         },
         "id": "0001919197546291201-0000000001",
@@ -120,5 +113,5 @@ The list of effects.
 
 ## Possible Errors
 
-- The [standard errors](../errors.md#Standard-Errors).
-- [not_found](../errors/not-found.md): A `not_found` error will be returned if there are no effects for the given account.
+- The [standard errors](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/errors#standard-errors).
+- [not_found](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/errors/not-found): A `not_found` error will be returned if there are no effects for the given account.

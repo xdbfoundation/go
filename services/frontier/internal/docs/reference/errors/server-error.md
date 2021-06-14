@@ -1,8 +1,3 @@
----
-title: Internal Server Error
-replacement: https://developers.digitalbits.org/api/errors/http-status-codes/standard/
----
-
 If there's an internal error within Frontier, Frontier will return a
 `server_error` response.  This response is a catch-all, and can refer to many
 possible errors in the Frontier server: a configuration mistake, a database
@@ -45,4 +40,4 @@ draft specification guide and thus has the following attributes:
 
 ## Related
 
-- [Not Implemented](./not-implemented.md)
+- [Not Implemented](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/errors/not-implemented)

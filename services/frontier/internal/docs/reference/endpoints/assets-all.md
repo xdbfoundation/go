@@ -1,11 +1,4 @@
----
-title: All Assets
-clientData:
-  laboratoryUrl:
-replacement: https://developers.digitalbits.org/api/resources/assets/
----
-
-This endpoint represents all [assets](../resources/asset.md).
+This endpoint represents all [assets](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/resources/asset).
 It will give you all the assets in the system along with various statistics about each.
 
 ### Notes
@@ -31,14 +24,14 @@ GET /assets{?asset_code,asset_issuer,cursor,limit,order}
 
 ```sh
 # Retrieve the 200 assets, ordered alphabetically:
-curl "https://frontier-testnet.digitalbits.org/assets?limit=200"
+curl "https://frontier.testnet.digitalbits.io/assets?limit=200"
 ```
 
 ### JavaScript Example Request
 
 ```javascript
 var DigitalBitsSdk = require('digitalbits-sdk');
-var server = new DigitalBitsSdk.Server('https://frontier-testnet.digitalbits.org');
+var server = new DigitalBitsSdk.Server('https://frontier.testnet.digitalbits.io');
 
 server.assets()
   .call()
@@ -52,7 +45,7 @@ server.assets()
 
 ## Response
 
-If called normally this endpoint responds with a [page](../resources/page.md) of assets.
+If called normally this endpoint responds with a [page](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/resources/page) of assets.
 
 ### Example Response
 
@@ -74,7 +67,7 @@ If called normally this endpoint responds with a [page](../resources/page.md) of
       {
         "_links": {
           "toml": {
-            "href": "https://www.digitalbits.org/.well-known/digitalbits.toml"
+            "href": "https://livenet.digitalbits.io/.well-known/digitalbits.toml"
           }
         },
         "asset_type": "credit_alphanum12",
@@ -91,7 +84,7 @@ If called normally this endpoint responds with a [page](../resources/page.md) of
       {
         "_links": {
           "toml": {
-            "href": "https://www.digitalbits.org/.well-known/digitalbits.toml"
+            "href": "https://livenet.digitalbits.io/.well-known/digitalbits.toml"
           }
         },
         "asset_type": "credit_alphanum4",
@@ -108,7 +101,7 @@ If called normally this endpoint responds with a [page](../resources/page.md) of
       {
         "_links": {
           "toml": {
-            "href": "https://www.digitalbits.org/.well-known/digitalbits.toml"
+            "href": "https://livenet.digitalbits.io/.well-known/digitalbits.toml"
           }
         },
         "asset_type": "credit_alphanum4",
@@ -129,4 +122,4 @@ If called normally this endpoint responds with a [page](../resources/page.md) of
 
 ## Possible Errors
 
-- The [standard errors](../errors.md#standard-errors).
+- The [standard errors](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/errors#standard-errors).

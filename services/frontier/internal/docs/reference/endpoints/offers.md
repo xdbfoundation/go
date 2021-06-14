@@ -1,9 +1,4 @@
----
-title: Offers
-replacement: https://developers.digitalbits.org/api/resources/offers/list/
----
-
-People on the DigitalBits network can make [offers](../resources/offer.md) to buy or sell assets. This
+People on the DigitalBits network can make [offers](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/resources/offer) to buy or sell assets. This
 endpoint represents all the current offers, allowing filtering by `seller`, `selling_asset` or `buying_asset`.
 
 ## Request
@@ -26,14 +21,14 @@ GET /offers{?selling_asset_type,selling_asset_issuer,selling_asset_code,buying_a
 ### curl Example Request
 
 ```sh
-curl "https://frontier-testnet.digitalbits.org/offers{?selling_asset_type,selling_asset_issuer,selling_asset_code,buying_asset_type,buying_asset_issuer,buying_asset_code,seller,cursor,limit,order}"
+curl "https://frontier.testnet.digitalbits.io/offers{?selling_asset_type,selling_asset_issuer,selling_asset_code,buying_asset_type,buying_asset_issuer,buying_asset_code,seller,cursor,limit,order}"
 ```
 
 <!-- ### JavaScript Example Request -->
 
 <!-- ```javascript -->
 <!-- var DigitalBitsSdk = require('digitalbits-sdk'); -->
-<!-- var server = new DigitalBitsSdk.Server('https://frontier-testnet.digitalbits.org'); -->
+<!-- var server = new DigitalBitsSdk.Server('https://frontier.testnet.digitalbits.io'); -->
 
 <!-- server.offers('accounts', 'GBYUUJHG6F4EPJGNLERINATVQLNDOFRUD7SGJZ26YZLG5PAYLG7XUSGF') -->
 <!--   .call() -->
@@ -49,7 +44,7 @@ curl "https://frontier-testnet.digitalbits.org/offers{?selling_asset_type,sellin
 
 <!-- ```javascript -->
 <!-- var DigitalBitsSdk = require('digitalbits-sdk') -->
-<!-- var server = new DigitalBitsSdk.Server('https://frontier-testnet.digitalbits.org'); -->
+<!-- var server = new DigitalBitsSdk.Server('https://frontier.testnet.digitalbits.io'); -->
 
 <!-- var offerHandler = function (offerResponse) { -->
 <!--   console.log(offerResponse); -->
@@ -72,13 +67,13 @@ The list of offers.
 {
   "_links": {
     "self": {
-      "href": "https://frontier-testnet.digitalbits.org/offers?cursor=&limit=10&order=asc"
+      "href": "https://frontier.testnet.digitalbits.io/offers?cursor=&limit=10&order=asc"
     },
     "next": {
-      "href": "https://frontier-testnet.digitalbits.org/offers?cursor=5443256&limit=10&order=asc"
+      "href": "https://frontier.testnet.digitalbits.io/offers?cursor=5443256&limit=10&order=asc"
     },
     "prev": {
-      "href": "https://frontier-testnet.digitalbits.org/offers?cursor=5443256&limit=10&order=desc"
+      "href": "https://frontier.testnet.digitalbits.io/offers?cursor=5443256&limit=10&order=desc"
     }
   },
   "_embedded": {
@@ -86,10 +81,10 @@ The list of offers.
       {
         "_links": {
           "self": {
-            "href": "https://frontier-testnet.digitalbits.org/offers/5443256"
+            "href": "https://frontier.testnet.digitalbits.io/offers/5443256"
           },
           "offer_maker": {
-            "href": "https://frontier-testnet.digitalbits.org/"
+            "href": "https://frontier.testnet.digitalbits.io/"
           }
         },
         "id": "5443256",
@@ -119,4 +114,4 @@ The list of offers.
 
 ## Possible Errors
 
-- The [standard errors](../errors.md#standard-errors).
+- The [standard errors](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/errors#standard-errors).

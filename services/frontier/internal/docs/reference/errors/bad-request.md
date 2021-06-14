@@ -1,8 +1,3 @@
----
-title: Bad Request
-replacement: https://developers.digitalbits.org/api/errors/http-status-codes/standard/
----
-
 If Frontier cannot understand a request due to invalid parameters, it will return a `bad_request`
 error. This is analogous to the
 [HTTP 400 Error](https://developer.mozilla.org/en-US/docs/Web/HTTP/Response_codes).
@@ -26,7 +21,7 @@ draft specification guide and thus has the following attributes:
 ## Example
 
 ```shell
-$ curl -X GET "https://frontier-testnet.digitalbits.org/ledgers?limit=invalidlimit"
+$ curl -X GET "https://frontier.testnet.digitalbits.io/ledgers?limit=invalidlimit"
 {
   "type": "https://digitalbits.org/frontier-errors/bad_request",
   "title": "Bad Request",
@@ -41,4 +36,4 @@ $ curl -X GET "https://frontier-testnet.digitalbits.org/ledgers?limit=invalidlim
 
 ## Related
 
-- [Malformed Transaction](./transaction-malformed.md)
+- [Malformed Transaction](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/errors/transaction-malformed)
