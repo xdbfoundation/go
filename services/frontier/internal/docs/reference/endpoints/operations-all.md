@@ -1,14 +1,7 @@
----
-title: All Operations
-clientData:
-  laboratoryUrl: https://www.digitalbits.org/laboratory/#explorer?resource=operations&endpoint=all
-replacement: https://developers.digitalbits.org/api/resources/operations/
----
-
-This endpoint represents [operations](../resources/operation.md) that are part of successfully validated [transactions](../resources/transaction.md).
+This endpoint represents [operations](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/resources/operation) that are part of successfully validated [transactions](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/resources/transaction).
 Please note that this endpoint returns operations that are part of failed transactions if `include_failed` parameter is `true`
 and Frontier is ingesting failed transactions.
-This endpoint can also be used in [streaming](../streaming.md) mode so it is possible to use it to listen as operations are processed in the DigitalBits network.
+This endpoint can also be used in [streaming](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/streaming) mode so it is possible to use it to listen as operations are processed in the DigitalBits network.
 If called in streaming mode Frontier will start at the earliest known operation unless a `cursor` is set. In that case it will start from the `cursor`. You can also set `cursor` value to `now` to only stream operations created since your request time.
 
 ## Request
@@ -30,14 +23,14 @@ GET /operations{?cursor,limit,order,include_failed}
 ### curl Example Request
 
 ```sh
-curl "https://frontier-testnet.digitalbits.org/operations?limit=200&order=desc"
+curl "https://frontier.testnet.digitalbits.io/operations?limit=200&order=desc"
 ```
 
 ### JavaScript Example Request
 
 ```js
 var DigitalBitsSdk = require('digitalbits-sdk');
-var server = new DigitalBitsSdk.Server('https://frontier-testnet.digitalbits.org');
+var server = new DigitalBitsSdk.Server('https://frontier.testnet.digitalbits.io');
 
 server.operations()
   .call()
@@ -59,7 +52,7 @@ server.operations()
 
 ```javascript
 var DigitalBitsSdk = require('digitalbits-sdk')
-var server = new DigitalBitsSdk.Server('https://frontier-testnet.digitalbits.org');
+var server = new DigitalBitsSdk.Server('https://frontier.testnet.digitalbits.io');
 
 var operationHandler = function (operationResponse) {
   console.log(operationResponse);
@@ -74,7 +67,7 @@ var es = server.operations()
 
 ## Response
 
-This endpoint responds with a list of operations. See [operation resource](../resources/operation.md) for reference.
+This endpoint responds with a list of operations. See [operation resource](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/resources/operation) for reference.
 
 ### Example Response
 
@@ -189,4 +182,4 @@ This endpoint responds with a list of operations. See [operation resource](../re
 
 ## Possible Errors
 
-- The [standard errors](../errors.md#standard-errors).
+- The [standard errors](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/errors#standard-errors).

@@ -1,17 +1,10 @@
----
-title: Post Transaction
-clientData:
-  laboratoryUrl: https://www.digitalbits.org/laboratory/#explorer?resource=transactions&endpoint=create
-replacement: https://developers.digitalbits.org/api/resources/transactions/post/
----
-
-Posts a new [transaction](../resources/transaction.md) to the DigitalBits Network.
+Posts a new [transaction](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/resources/transaction) to the DigitalBits Network.
 Note that creating a valid transaction and signing it properly is the
 responsibility of your client library.
 
 Transaction submission and the subsequent validation and inclusion into the
 DigitalBits Network's ledger is a [complicated and asynchronous
-process](https://www.digitalbits.org/developers/learn/concepts/transactions.html#life-cycle).
+process](https://developers.digitalbits.io/guides/docs/guides/concepts/transactions#life-cycle).
 To reduce the complexity, frontier manages these asynchronous processes for the
 client and will wait to hear results from the DigitalBits Network before returning
 an HTTP response to a client.
@@ -25,7 +18,7 @@ and not attempt to submit the transaction again. Only in cases where a
 transaction's status is unknown (and thus will have a chance of being included
 into a ledger) will a resubmission to the network occur.
 
-Information about [building transactions](https://www.digitalbits.org/developers/js-digitalbits-base/reference/building-transactions.html) in JavaScript.
+Information about [building transactions](https://www.digitalbits.org/developers/js-digitalbits-base/reference/building-transactions) in JavaScript.
 
 ### Timeout
 
@@ -37,7 +30,7 @@ If you are encountering this error it means that either:
 The former case may happen because there was no room for your transaction in the 3 consecutive ledgers. In such case, Core server removes a transaction from a queue. To solve this you can either:
 
 * Keep resubmitting the same transaction (with the same sequence number) and wait until it finally is added to a new ledger or:
-* Increase the [fee](../../../guides/concepts/fees.html).
+* Increase the [fee](https://developers.digitalbits.io/guides/docs/guides/concepts/fees).
 
 ## Request
 
@@ -49,7 +42,7 @@ POST /transactions
 
 | name | loc  |  notes   |         example        | description |
 | ---- | ---- | -------- | ---------------------- | ----------- |
-| `tx` | body | required | `AAAAAO`....`f4yDBA==` | Base64 representation of transaction envelope [XDR](../xdr.md) |
+| `tx` | body | required | `AAAAAO`....`f4yDBA==` | Base64 representation of transaction envelope [XDR](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/xdr) |
 
 
 ### curl Example Request
@@ -57,7 +50,7 @@ POST /transactions
 ```sh
 curl -X POST \
      -F "tx=AAAAAOo1QK/3upA74NLkdq4Io3DQAQZPi4TVhuDnvCYQTKIVAAAACgAAH8AAAAABAAAAAAAAAAAAAAABAAAAAQAAAADqNUCv97qQO+DS5HauCKNw0AEGT4uE1Ybg57wmEEyiFQAAAAEAAAAAZc2EuuEa2W1PAKmaqVquHuzUMHaEiRs//+ODOfgWiz8AAAAAAAAAAAAAA+gAAAAAAAAAARBMohUAAABAPnnZL8uPlS+c/AM02r4EbxnZuXmP6pQHvSGmxdOb0SzyfDB2jUKjDtL+NC7zcMIyw4NjTa9Ebp4lvONEf4yDBA==" \
-  "https://frontier-testnet.digitalbits.org/transactions"
+  "https://frontier.testnet.digitalbits.io/transactions"
 ```
 
 ## Response
@@ -70,7 +63,7 @@ If the transaction failed or errored, then an error response will be returned. P
 
 ### Attributes
 
-The response will include all fields from the [transaction resource](../resources/transaction.md).
+The response will include all fields from the [transaction resource](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/resources/transaction).
 
 ### Example Response
 
@@ -78,27 +71,27 @@ The response will include all fields from the [transaction resource](../resource
 {
   "_links": {
     "self": {
-      "href": "https://frontier-testnet.digitalbits.org/transactions/264226cb06af3b86299031884175155e67a02e0a8ad0b3ab3a88b409a8c09d5c"
+      "href": "https://frontier.testnet.digitalbits.io/transactions/264226cb06af3b86299031884175155e67a02e0a8ad0b3ab3a88b409a8c09d5c"
     },
     "account": {
-      "href": "https://frontier-testnet.digitalbits.org/accounts/GAIH3ULLFQ4DGSECF2AR555KZ4KNDGEKN4AFI4SU2M7B43MGK3QJZNSR"
+      "href": "https://frontier.testnet.digitalbits.io/accounts/GAIH3ULLFQ4DGSECF2AR555KZ4KNDGEKN4AFI4SU2M7B43MGK3QJZNSR"
     },
     "ledger": {
-      "href": "https://frontier-testnet.digitalbits.org/ledgers/697121"
+      "href": "https://frontier.testnet.digitalbits.io/ledgers/697121"
     },
     "operations": {
-      "href": "https://frontier-testnet.digitalbits.org/transactions/264226cb06af3b86299031884175155e67a02e0a8ad0b3ab3a88b409a8c09d5c/operations{?cursor,limit,order}",
+      "href": "https://frontier.testnet.digitalbits.io/transactions/264226cb06af3b86299031884175155e67a02e0a8ad0b3ab3a88b409a8c09d5c/operations{?cursor,limit,order}",
       "templated": true
     },
     "effects": {
-      "href": "https://frontier-testnet.digitalbits.org/transactions/264226cb06af3b86299031884175155e67a02e0a8ad0b3ab3a88b409a8c09d5c/effects{?cursor,limit,order}",
+      "href": "https://frontier.testnet.digitalbits.io/transactions/264226cb06af3b86299031884175155e67a02e0a8ad0b3ab3a88b409a8c09d5c/effects{?cursor,limit,order}",
       "templated": true
     },
     "precedes": {
-      "href": "https://frontier-testnet.digitalbits.org/transactions?order=asc&cursor=2994111896358912"
+      "href": "https://frontier.testnet.digitalbits.io/transactions?order=asc&cursor=2994111896358912"
     },
     "succeeds": {
-      "href": "https://frontier-testnet.digitalbits.org/transactions?order=desc&cursor=2994111896358912"
+      "href": "https://frontier.testnet.digitalbits.io/transactions?order=desc&cursor=2994111896358912"
     }
   },
   "id": "264226cb06af3b86299031884175155e67a02e0a8ad0b3ab3a88b409a8c09d5c",
@@ -126,7 +119,7 @@ The response will include all fields from the [transaction resource](../resource
 
 ## Possible Errors
 
-- The [standard errors](../errors.md#Standard_Errors).
-- [transaction_failed](../errors/transaction-failed.md): The transaction failed and could not be applied to the ledger.
-- [transaction_malformed](../errors/transaction-malformed.md): The transaction could not be decoded and was not submitted to the network.
-- [timeout](../errors/timeout.md): No response from the Core server in a timely manner. Please check "Timeout" section above.
+- The [standard errors](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/errors#standard-errors).
+- [transaction_failed](/reference/go/services/frontier/internal/docs/reference/errors/transaction-failed): The transaction failed and could not be applied to the ledger.
+- [transaction_malformed](/reference/go/services/frontier/internal/docs/reference/errors/transaction-malformed): The transaction could not be decoded and was not submitted to the network.
+- [timeout](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/errors/timeout): No response from the Core server in a timely manner. Please check "Timeout" section above.

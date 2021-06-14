@@ -1,13 +1,6 @@
----
-title: All Effects
-clientData:
-  laboratoryUrl: https://www.digitalbits.org/laboratory/#explorer?resource=effects&endpoint=all
-replacement: https://developers.digitalbits.org/api/resources/effects/list/
----
+This endpoint represents all [effects](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/resources/effect).
 
-This endpoint represents all [effects](../resources/effect.md).
-
-This endpoint can also be used in [streaming](../streaming.md) mode so it is possible to use it to listen for new effects as transactions happen in the DigitalBits network.
+This endpoint can also be used in [streaming](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/streaming) mode so it is possible to use it to listen for new effects as transactions happen in the DigitalBits network.
 If called in streaming mode Frontier will start at the earliest known effect unless a `cursor` is set. In that case it will start from the `cursor`. You can also set `cursor` value to `now` to only stream effects created since your request time.
 
 ## Request
@@ -27,14 +20,14 @@ GET /effects{?cursor,limit,order}
 ### curl Example Request
 
 ```sh
-curl "https://frontier-testnet.digitalbits.org/effects"
+curl "https://frontier.testnet.digitalbits.io/effects"
 ```
 
 ### JavaScript Example Request
 
 ```javascript
 var DigitalBitsSdk = require('digitalbits-sdk');
-var server = new DigitalBitsSdk.Server('https://frontier-testnet.digitalbits.org');
+var server = new DigitalBitsSdk.Server('https://frontier.testnet.digitalbits.io');
 
 server.effects()
   .call()
@@ -51,7 +44,7 @@ server.effects()
 
 ```javascript
 var DigitalBitsSdk = require('digitalbits-sdk')
-var server = new DigitalBitsSdk.Server('https://frontier-testnet.digitalbits.org');
+var server = new DigitalBitsSdk.Server('https://frontier.testnet.digitalbits.io');
 
 var effectHandler = function (effectResponse) {
   console.log(effectResponse);
@@ -129,5 +122,5 @@ The list of effects.
 
 ## Possible Errors
 
-- The [standard errors](../errors.md#Standard-Errors).
-- [not_found](../errors/not-found.md): A `not_found` error will be returned if there are no effects for the given account.
+- The [standard errors](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/errors#standard-errors).
+- [not_found](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/errors/not-found): A `not_found` error will be returned if there are no effects for the given account.

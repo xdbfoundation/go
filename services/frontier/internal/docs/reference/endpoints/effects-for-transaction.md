@@ -1,11 +1,4 @@
----
-title: Effects for Transaction
-clientData:
-  laboratoryUrl: https://www.digitalbits.org/laboratory/#explorer?resource=effects&endpoint=for_transaction
-replacement: https://developers.digitalbits.org/api/resources/transactions/effects/
----
-
-This endpoint represents all [effects](../resources/effect.md) that occurred as a result of a given [transaction](../resources/transaction.md).
+This endpoint represents all [effects](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/resources/effect) that occurred as a result of a given [transaction](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/resources/transaction).
 
 ## Request
 
@@ -25,14 +18,14 @@ GET /transactions/{hash}/effects{?cursor,limit,order}
 ### curl Example Request
 
 ```sh
-curl "https://frontier-testnet.digitalbits.org/transactions/7e2050abc676003efc3eaadd623c927f753b7a6c37f50864bf284f4e1510d088/effects?limit=1"
+curl "https://frontier.testnet.digitalbits.io/transactions/7e2050abc676003efc3eaadd623c927f753b7a6c37f50864bf284f4e1510d088/effects?limit=1"
 ```
 
 ### JavaScript Example Request
 
 ```javascript
 var DigitalBitsSdk = require('digitalbits-sdk');
-var server = new DigitalBitsSdk.Server('https://frontier-testnet.digitalbits.org');
+var server = new DigitalBitsSdk.Server('https://frontier.testnet.digitalbits.io');
 
 server.effects()
   .forTransaction("7e2050abc676003efc3eaadd623c927f753b7a6c37f50864bf284f4e1510d088")
@@ -49,7 +42,7 @@ server.effects()
 
 ## Response
 
-This endpoint responds with a list of effects on the ledger as a result of a given transaction. See [effect resource](../resources/effect.md) for reference.
+This endpoint responds with a list of effects on the ledger as a result of a given transaction. See [effect resource](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/resources/effect) for reference.
 
 ### Example Response
 
@@ -57,13 +50,13 @@ This endpoint responds with a list of effects on the ledger as a result of a giv
 {
   "_links": {
     "self": {
-      "href": "https://frontier-testnet.digitalbits.org/transactions/7e2050abc676003efc3eaadd623c927f753b7a6c37f50864bf284f4e1510d088/effects?cursor=&limit=10&order=asc"
+      "href": "https://frontier.testnet.digitalbits.io/transactions/7e2050abc676003efc3eaadd623c927f753b7a6c37f50864bf284f4e1510d088/effects?cursor=&limit=10&order=asc"
     },
     "next": {
-      "href": "https://frontier-testnet.digitalbits.org/transactions/7e2050abc676003efc3eaadd623c927f753b7a6c37f50864bf284f4e1510d088/effects?cursor=1919197546291201-3&limit=10&order=asc"
+      "href": "https://frontier.testnet.digitalbits.io/transactions/7e2050abc676003efc3eaadd623c927f753b7a6c37f50864bf284f4e1510d088/effects?cursor=1919197546291201-3&limit=10&order=asc"
     },
     "prev": {
-      "href": "https://frontier-testnet.digitalbits.org/transactions/7e2050abc676003efc3eaadd623c927f753b7a6c37f50864bf284f4e1510d088/effects?cursor=1919197546291201-1&limit=10&order=desc"
+      "href": "https://frontier.testnet.digitalbits.io/transactions/7e2050abc676003efc3eaadd623c927f753b7a6c37f50864bf284f4e1510d088/effects?cursor=1919197546291201-1&limit=10&order=desc"
     }
   },
   "_embedded": {
@@ -71,13 +64,13 @@ This endpoint responds with a list of effects on the ledger as a result of a giv
       {
         "_links": {
           "operation": {
-            "href": "https://frontier-testnet.digitalbits.org/operations/1919197546291201"
+            "href": "https://frontier.testnet.digitalbits.io/operations/1919197546291201"
           },
           "succeeds": {
-            "href": "https://frontier-testnet.digitalbits.org/effects?order=desc&cursor=1919197546291201-1"
+            "href": "https://frontier.testnet.digitalbits.io/effects?order=desc&cursor=1919197546291201-1"
           },
           "precedes": {
-            "href": "https://frontier-testnet.digitalbits.org/effects?order=asc&cursor=1919197546291201-1"
+            "href": "https://frontier.testnet.digitalbits.io/effects?order=asc&cursor=1919197546291201-1"
           }
         },
         "id": "0001919197546291201-0000000001",
@@ -91,13 +84,13 @@ This endpoint responds with a list of effects on the ledger as a result of a giv
       {
         "_links": {
           "operation": {
-            "href": "https://frontier-testnet.digitalbits.org/operations/1919197546291201"
+            "href": "https://frontier.testnet.digitalbits.io/operations/1919197546291201"
           },
           "succeeds": {
-            "href": "https://frontier-testnet.digitalbits.org/effects?order=desc&cursor=1919197546291201-2"
+            "href": "https://frontier.testnet.digitalbits.io/effects?order=desc&cursor=1919197546291201-2"
           },
           "precedes": {
-            "href": "https://frontier-testnet.digitalbits.org/effects?order=asc&cursor=1919197546291201-2"
+            "href": "https://frontier.testnet.digitalbits.io/effects?order=asc&cursor=1919197546291201-2"
           }
         },
         "id": "0001919197546291201-0000000002",
@@ -112,13 +105,13 @@ This endpoint responds with a list of effects on the ledger as a result of a giv
       {
         "_links": {
           "operation": {
-            "href": "https://frontier-testnet.digitalbits.org/operations/1919197546291201"
+            "href": "https://frontier.testnet.digitalbits.io/operations/1919197546291201"
           },
           "succeeds": {
-            "href": "https://frontier-testnet.digitalbits.org/effects?order=desc&cursor=1919197546291201-3"
+            "href": "https://frontier.testnet.digitalbits.io/effects?order=desc&cursor=1919197546291201-3"
           },
           "precedes": {
-            "href": "https://frontier-testnet.digitalbits.org/effects?order=asc&cursor=1919197546291201-3"
+            "href": "https://frontier.testnet.digitalbits.io/effects?order=asc&cursor=1919197546291201-3"
           }
         },
         "id": "0001919197546291201-0000000003",
@@ -138,5 +131,5 @@ This endpoint responds with a list of effects on the ledger as a result of a giv
 
 ## Errors
 
-- The [standard errors](../errors.md#Standard-Errors).
-- [not_found](../errors/not-found.md): A `not_found` error will be returned if there are no effects for transaction whose hash matches the `hash` argument.
+- The [standard errors](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/errors#standard-errors).
+- [not_found](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/errors/not-found): A `not_found` error will be returned if there are no effects for transaction whose hash matches the `hash` argument.

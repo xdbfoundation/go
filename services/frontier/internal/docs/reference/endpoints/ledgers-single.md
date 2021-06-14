@@ -1,11 +1,4 @@
----
-title: Ledger Details
-clientData:
-  laboratoryUrl: https://www.digitalbits.org/laboratory/#explorer?resource=ledgers&endpoint=single
-replacement: https://developers.digitalbits.org/api/resources/ledgers/single/
----
-
-The ledger details endpoint provides information on a single [ledger](../resources/ledger.md).
+The ledger details endpoint provides information on a single [ledger](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/resources/ledger).
 
 ## Request
 
@@ -22,14 +15,14 @@ GET /ledgers/{sequence}
 ### curl Example Request
 
 ```sh
-curl "https://frontier-testnet.digitalbits.org/ledgers/69859"
+curl "https://frontier.testnet.digitalbits.io/ledgers/69859"
 ```
 
 ### JavaScript Example Request
 
 ```js
 var DigitalBitsSdk = require('digitalbits-sdk')
-var server = new DigitalBitsSdk.Server('https://frontier-testnet.digitalbits.org');
+var server = new DigitalBitsSdk.Server('https://frontier.testnet.digitalbits.io');
 
 server.ledgers()
   .ledger('69858')
@@ -44,7 +37,7 @@ server.ledgers()
 ```
 ## Response
 
-This endpoint responds with a single Ledger.  See [ledger resource](../resources/ledger.md) for reference.
+This endpoint responds with a single Ledger.  See [ledger resource](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/resources/ledger) for reference.
 
 ### Example Response
 
@@ -80,13 +73,13 @@ This endpoint responds with a single Ledger.  See [ledger resource](../resources
   "closed_at": "2015-07-20T15:51:52Z",
   "total_coins": "100000000000.0000000",
   "fee_pool": "0.0025600",
-  "base_fee_in_stroops": 100,
-  "base_reserve_in_stroops": 100000000,
+  "base_fee_in_nibbs": 100,
+  "base_reserve_in_nibbs": 100000000,
   "max_tx_set_size": 50
 }
 ```
 
 ## Errors
 
-- The [standard errors](../errors.md#Standard-Errors).
-- [not_found](../errors/not-found.md): A `not_found` error will be returned if there is no ledger whose sequence number matches the `sequence` argument.
+- The [standard errors](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/errors#standard-errors).
+- [not_found](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/errors/not-found): A `not_found` error will be returned if there is no ledger whose sequence number matches the `sequence` argument.

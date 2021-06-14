@@ -1,8 +1,3 @@
----
-title: Stale History
-replacement: https://developers.digitalbits.org/api/errors/http-status-codes/frontier-specific/
----
-
 A frontier server may be configured to reject historical requests when the history is known to be
 further out of date than the configured threshold. In such cases, this error is returned.  To
 resolve this error (provided you are the frontier instance's operator) please ensure that the
@@ -36,4 +31,4 @@ draft specification guide and thus has the following attributes:
 
 ## Related
 
-- [Internal Server Error](./server-error.md)
+- [Internal Server Error](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/errors/server-error.md)

@@ -1,12 +1,5 @@
----
-title: Operation Details
-clientData:
-  laboratoryUrl: https://www.digitalbits.org/laboratory/#explorer?resource=operations&endpoint=single
-replacement: https://developers.digitalbits.org/api/resources/operations/single/
----
-
 The operation details endpoint provides information on a single
-[operation](../resources/operation.md). The operation ID provided in the `id` argument specifies
+[operation](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/resources/operation). The operation ID provided in the `id` argument specifies
 which operation to load.
 
 ### Warning - failed transactions
@@ -30,14 +23,14 @@ GET /operations/{id}
 ### curl Example Request
 
 ```sh
-curl https://frontier-testnet.digitalbits.org/operations/2927608622747649
+curl https://frontier.testnet.digitalbits.io/operations/2927608622747649
 ```
 
 ### JavaScript Example Request
 
 ```javascript
 var DigitalBitsSdk = require('digitalbits-sdk');
-var server = new DigitalBitsSdk.Server('https://frontier-testnet.digitalbits.org');
+var server = new DigitalBitsSdk.Server('https://frontier.testnet.digitalbits.io');
 
 server.operations()
   .operation('2927608622747649')
@@ -52,7 +45,7 @@ server.operations()
 
 ## Response
 
-This endpoint responds with a single Operation.  See [operation resource](../resources/operation.md) for reference.
+This endpoint responds with a single Operation.  See [operation resource](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/resources/operation) for reference.
 
 ### Example Response
 
@@ -60,19 +53,19 @@ This endpoint responds with a single Operation.  See [operation resource](../res
 {
   "_links": {
     "self": {
-      "href": "https://frontier-testnet.digitalbits.org/operations/2927608622747649"
+      "href": "https://frontier.testnet.digitalbits.io/operations/2927608622747649"
     },
     "transaction": {
-      "href": "https://frontier-testnet.digitalbits.org/transactions/4a3365180521e16b478d9f0c9198b97a9434fc9cb07b34f83ecc32fc54d0ca8a"
+      "href": "https://frontier.testnet.digitalbits.io/transactions/4a3365180521e16b478d9f0c9198b97a9434fc9cb07b34f83ecc32fc54d0ca8a"
     },
     "effects": {
-      "href": "https://frontier-testnet.digitalbits.org/operations/2927608622747649/effects"
+      "href": "https://frontier.testnet.digitalbits.io/operations/2927608622747649/effects"
     },
     "succeeds": {
-      "href": "https://frontier-testnet.digitalbits.org/effects?order=desc&cursor=2927608622747649"
+      "href": "https://frontier.testnet.digitalbits.io/effects?order=desc&cursor=2927608622747649"
     },
     "precedes": {
-      "href": "https://frontier-testnet.digitalbits.org/effects?order=asc&cursor=2927608622747649"
+      "href": "https://frontier.testnet.digitalbits.io/effects?order=asc&cursor=2927608622747649"
     }
   },
   "id": "2927608622747649",
@@ -92,6 +85,6 @@ This endpoint responds with a single Operation.  See [operation resource](../res
 
 ## Possible Errors
 
-- The [standard errors](../errors.md#Standard-Errors).
-- [not_found](../errors/not-found.md): A `not_found` error will be returned if the
+- The [standard errors](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/errors#standard-errors).
+- [not_found](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/errors/not-found): A `not_found` error will be returned if the
   there is no operation that matches the ID argument, i.e. the operation does not exist.

@@ -1,9 +1,4 @@
----
-title: Offer Details
-replacement: https://developers.digitalbits.org/api/resources/offers/
----
-
-Returns information and links relating to a single [offer](../resources/offer.md).
+Returns information and links relating to a single [offer](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/resources/offer).
 
 ## Request
 
@@ -20,14 +15,14 @@ GET /offers/{offer}
 ### curl Example Request
 
 ```sh
-curl "https://frontier-testnet.digitalbits.org/offers/1347876"
+curl "https://frontier.testnet.digitalbits.io/offers/1347876"
 ```
 
 <!-- ### JavaScript Example Request -->
 
 ## Response
 
-This endpoint responds with the details of a single offer for a given ID. See [offer resource](../resources/offer.md) for reference.
+This endpoint responds with the details of a single offer for a given ID. See [offer resource](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/resources/offer) for reference.
 
 ### Example Response
 
@@ -35,10 +30,10 @@ This endpoint responds with the details of a single offer for a given ID. See [o
 {
   "_links": {
     "self": {
-      "href": "https://frontier-testnet.digitalbits.org/offers/1347876"
+      "href": "https://frontier.testnet.digitalbits.io/offers/1347876"
     },
     "offer_maker": {
-      "href": "https://frontier-testnet.digitalbits.org/accounts/GAQHWQYBBW272OOXNQMMLCA5WY2XAZPODGB7Q3S5OKKIXVESKO55ZQ7C"
+      "href": "https://frontier.testnet.digitalbits.io/accounts/GAQHWQYBBW272OOXNQMMLCA5WY2XAZPODGB7Q3S5OKKIXVESKO55ZQ7C"
     }
   },
   "id": "1347876",
@@ -67,5 +62,5 @@ This endpoint responds with the details of a single offer for a given ID. See [o
 
 ## Possible Errors
 
-- The [standard errors](../errors.md#standard-errors).
-- [not_found](../errors/not-found.md): A `not_found` error will be returned if there is no offer whose ID matches the `offer` argument.
+- The [standard errors](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/errors#standard-errors).
+- [not_found](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/errors/not-found): A `not_found` error will be returned if there is no offer whose ID matches the `offer` argument.

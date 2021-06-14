@@ -1,14 +1,9 @@
----
-title: Trades
-replacement: https://developers.digitalbits.org/api/resources/trades/
----
-
-People on the DigitalBits network can make [offers](../resources/offer.md) to buy or sell assets. When
-an offer is fully or partially fulfilled, a [trade](../resources/trade.md) happens.
+People on the DigitalBits network can make [offers](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/resources/offer) to buy or sell assets. When
+an offer is fully or partially fulfilled, a [trade](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/resources/trade) happens.
 
 Trades can be filtered for a specific orderbook, defined by an asset pair: `base` and `counter`.
 
-This endpoint can also be used in [streaming](../streaming.md) mode, making it possible to listen
+This endpoint can also be used in [streaming](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/streaming) mode, making it possible to listen
 for new trades as they occur on the DigitalBits network.
 
 If called in streaming mode Frontier will start at the earliest known trade unless a `cursor` is
@@ -45,7 +40,7 @@ curl https://frontier.digitalbits.org/trades?base_asset_type=native&counter_asse
 
 ```javascript
 var DigitalBitsSdk = require('digitalbits-sdk');
-var server = new DigitalBitsSdk.Server('https://frontier-testnet.digitalbits.org');
+var server = new DigitalBitsSdk.Server('https://frontier.testnet.digitalbits.io');
 
 server.trades()
   .call()
@@ -61,7 +56,7 @@ server.trades()
 
 ```javascript
 var DigitalBitsSdk = require('digitalbits-sdk')
-var server = new DigitalBitsSdk.Server('https://frontier-testnet.digitalbits.org');
+var server = new DigitalBitsSdk.Server('https://frontier.testnet.digitalbits.io');
 
 var tradesHandler = function (tradeResponse) {
   console.log(tradeResponse);
@@ -83,13 +78,13 @@ The list of trades. `base` and `counter` in the records will match the asset pai
 {
   "_links": {
     "self": {
-      "href": "https://frontier-testnet.digitalbits.org/trades?cursor=&limit=10&order=asc"
+      "href": "https://frontier.testnet.digitalbits.io/trades?cursor=&limit=10&order=asc"
     },
     "next": {
-      "href": "https://frontier-testnet.digitalbits.org/trades?cursor=6025839120434-0&limit=10&order=asc"
+      "href": "https://frontier.testnet.digitalbits.io/trades?cursor=6025839120434-0&limit=10&order=asc"
     },
     "prev": {
-      "href": "https://frontier-testnet.digitalbits.org/trades?cursor=6012954218535-0&limit=10&order=desc"
+      "href": "https://frontier.testnet.digitalbits.io/trades?cursor=6012954218535-0&limit=10&order=desc"
     }
   },
   "_embedded": {
@@ -100,13 +95,13 @@ The list of trades. `base` and `counter` in the records will match the asset pai
             "href": ""
           },
           "base": {
-            "href": "https://frontier-testnet.digitalbits.org/accounts/GAQHWQYBBW272OOXNQMMLCA5WY2XAZPODGB7Q3S5OKKIXVESKO55ZQ7C"
+            "href": "https://frontier.testnet.digitalbits.io/accounts/GAQHWQYBBW272OOXNQMMLCA5WY2XAZPODGB7Q3S5OKKIXVESKO55ZQ7C"
           },
           "counter": {
-            "href": "https://frontier-testnet.digitalbits.org/accounts/GCYN7MI6VXVRP74KR6MKBAW2ELLCXL6QCY5H4YQ62HVWZWMCE6Y232UC"
+            "href": "https://frontier.testnet.digitalbits.io/accounts/GCYN7MI6VXVRP74KR6MKBAW2ELLCXL6QCY5H4YQ62HVWZWMCE6Y232UC"
           },
           "operation": {
-            "href": "https://frontier-testnet.digitalbits.org/operations/6012954218535"
+            "href": "https://frontier.testnet.digitalbits.io/operations/6012954218535"
           }
         },
         "id": "6012954218535-0",
@@ -137,13 +132,13 @@ The list of trades. `base` and `counter` in the records will match the asset pai
             "href": ""
           },
           "base": {
-            "href": "https://frontier-testnet.digitalbits.org/accounts/GAQHWQYBBW272OOXNQMMLCA5WY2XAZPODGB7Q3S5OKKIXVESKO55ZQ7C"
+            "href": "https://frontier.testnet.digitalbits.io/accounts/GAQHWQYBBW272OOXNQMMLCA5WY2XAZPODGB7Q3S5OKKIXVESKO55ZQ7C"
           },
           "counter": {
-            "href": "https://frontier-testnet.digitalbits.org/accounts/GCYN7MI6VXVRP74KR6MKBAW2ELLCXL6QCY5H4YQ62HVWZWMCE6Y232UC"
+            "href": "https://frontier.testnet.digitalbits.io/accounts/GCYN7MI6VXVRP74KR6MKBAW2ELLCXL6QCY5H4YQ62HVWZWMCE6Y232UC"
           },
           "operation": {
-            "href": "https://frontier-testnet.digitalbits.org/operations/6025839120385"
+            "href": "https://frontier.testnet.digitalbits.io/operations/6025839120385"
           }
         },
         "id": "6025839120385-0",
@@ -175,4 +170,4 @@ The list of trades. `base` and `counter` in the records will match the asset pai
 
 ## Possible Errors
 
-- The [standard errors](../errors.md#standard-errors).
+- The [standard errors](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/errors#standard-errors).

@@ -1,12 +1,5 @@
----
-title: All Ledgers
-clientData:
-  laboratoryUrl: https://www.digitalbits.org/laboratory/#explorer?resource=ledgers&endpoint=all
-replacement: https://developers.digitalbits.org/api/resources/ledgers/
----
-
-This endpoint represents all [ledgers](../resources/ledger.md).
-This endpoint can also be used in [streaming](../streaming.md) mode so it is possible to use it to get notifications as ledgers are closed by the DigitalBits network.
+This endpoint represents all [ledgers](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/resources/ledger).
+This endpoint can also be used in [streaming](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/streaming) mode so it is possible to use it to get notifications as ledgers are closed by the DigitalBits network.
 If called in streaming mode Frontier will start at the earliest known ledger unless a `cursor` is set. In that case it will start from the `cursor`. You can also set `cursor` value to `now` to only stream ledgers created since your request time.
 
 ## Request
@@ -27,7 +20,7 @@ GET /ledgers{?cursor,limit,order}
 
 ```sh
 # Retrieve the 200 latest ledgers, ordered chronologically
-curl "https://frontier-testnet.digitalbits.org/ledgers?limit=200&order=desc"
+curl "https://frontier.testnet.digitalbits.io/ledgers?limit=200&order=desc"
 ```
 
 ### JavaScript Example Request
@@ -54,7 +47,7 @@ server.ledgers()
 
 ```javascript
 var DigitalBitsSdk = require('digitalbits-sdk')
-var server = new DigitalBitsSdk.Server('https://frontier-testnet.digitalbits.org');
+var server = new DigitalBitsSdk.Server('https://frontier.testnet.digitalbits.io');
 
 var ledgerHandler = function (ledgerResponse) {
   console.log(ledgerResponse);
@@ -69,7 +62,7 @@ var es = server.ledgers()
 
 ## Response
 
-This endpoint responds with a list of ledgers.  See [ledger resource](../resources/ledger.md) for reference.
+This endpoint responds with a list of ledgers.  See [ledger resource](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/resources/ledger) for reference.
 
 ### Example Response
 
@@ -107,8 +100,8 @@ This endpoint responds with a list of ledgers.  See [ledger resource](../resourc
         "closed_at": "1970-01-01T00:00:00Z",
         "total_coins": "100000000000.0000000",
         "fee_pool": "0.0000000",
-        "base_fee_in_stroops": 100,
-        "base_reserve_in_stroops": 100000000,
+        "base_fee_in_nibbs": 100,
+        "base_reserve_in_nibbs": 100000000,
         "max_tx_set_size": 50
       },
       {
@@ -141,8 +134,8 @@ This endpoint responds with a list of ledgers.  See [ledger resource](../resourc
         "closed_at": "2015-07-16T23:49:00Z",
         "total_coins": "100000000000.0000000",
         "fee_pool": "0.0000000",
-        "base_fee_in_stroops": 100,
-        "base_reserve_in_stroops": 100000000,
+        "base_fee_in_nibbs": 100,
+        "base_reserve_in_nibbs": 100000000,
         "max_tx_set_size": 100
       }
     ]
@@ -194,12 +187,12 @@ This endpoint responds with a list of ledgers.  See [ledger resource](../resourc
   "closed_at": "2015-07-20T15:51:52Z",
   "total_coins": "100000000000.0000000",
   "fee_pool": "0.0025600",
-  "base_fee_in_stroops": 100,
-  "base_reserve_in_stroops": "100000000",
+  "base_fee_in_nibbs": 100,
+  "base_reserve_in_nibbs": "100000000",
   "max_tx_set_size": 50
 }
 ```
 
 ## Errors
 
-- The [standard errors](../errors.md#standard-errors).
+- The [standard errors](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/errors#standard-errors).

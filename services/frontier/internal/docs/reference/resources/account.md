@@ -1,11 +1,6 @@
----
-title: Account
-replacement: https://developers.digitalbits.org/api/resources/accounts/
----
+In the DigitalBits network, users interact using **accounts** which can be controlled by a corresponding keypair that can authorize transactions. One can create a new account with the [Create Account](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/resources/operation#create-account) operation.
 
-In the DigitalBits network, users interact using **accounts** which can be controlled by a corresponding keypair that can authorize transactions. One can create a new account with the [Create Account](./operation.md#create-account) operation.
-
-To learn more about the concept of accounts in the DigitalBits network, take a look at the [DigitalBits account concept guide](https://www.digitalbits.org/developers/learn/concepts/accounts.html).
+To learn more about the concept of accounts in the DigitalBits network, take a look at the [DigitalBits account concept guide](https://developers.digitalbits.io/guides/docs/guides/concepts/accounts).
 
 When frontier returns information about an account it uses the following format:
 
@@ -15,12 +10,12 @@ When frontier returns information about an account it uses the following format:
 | id             | string           | The canonical id of this account, suitable for use as the :id parameter for url templates that require an account's ID.                      |
 | account_id     | string           | The account's public key encoded into a base32 string representation.                                                                        |
 | sequence       | number           | The current sequence number that can be used when submitting a transaction from this account.                                                |
-| subentry_count | number           | The number of [account subentries](https://www.digitalbits.org/developers/guides/concepts/ledger.html#ledger-entries).                           |
+| subentry_count | number           | The number of [account subentries](https://developers.digitalbits.io/guides/docs/guides/concepts/ledger#ledger-entries).                           |
 | balances       | array of objects | An array of the native asset or credits this account holds.                                                                                  |
 | thresholds     | object           | An object of account thresholds.                                                                                                             |
 | flags          | object           | The flags denote the enabling/disabling of certain asset issuer privileges.                                                                  |
-| signers        | array of objects | An array of [account signers](https://www.digitalbits.org/developers/guides/concepts/multi-sig.html#additional-signing-keys) with their weights. |
-| data           | object           | An array of account [data](./data.md) fields.                                                                                                |
+| signers        | array of objects | An array of [account signers](https://developers.digitalbits.io/guides/docs/guides/concepts/multi-sig#additional-signing-keys) with their weights. |
+| data           | object           | An array of account [data](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/resources/data) fields.                                                                                                |
 
 ### Signer Object
 | Attribute  | Type   | Description                                                                                                      |
@@ -61,20 +56,20 @@ When frontier returns information about an account it uses the following format:
 | med_threshold  | number | The weight required for a valid transaction including the [Create Account][create_acc], [Payment][payment], [Path Payment Strict Send][path_payment_send], [Path Payment Strict Receive][path_payment_receive], [Manage Buy Offer][manage_buy_offer], [Manage Sell Offer][manage_sell_offer], [Create Passive Sell Offer][passive_sell_offer], [Change Trust][change_trust], [Inflation][inflation], and [Manage Data][manage_data] operations. |
 | high_threshold | number | The weight required for a valid transaction including the [Account Merge][account_merge] and [Set Options]() operations.                                                                                                                                                                                                                                                  |
 
-[account_merge]: https://www.digitalbits.org/developers/guides/concepts/list-of-operations.html#account-merge
-[allow_trust]: https://www.digitalbits.org/developers/guides/concepts/list-of-operations.html#allow-trust
-[bump_seq]: https://www.digitalbits.org/developers/guides/concepts/list-of-operations.html#bump-sequence
-[change_trust]: https://www.digitalbits.org/developers/guides/concepts/list-of-operations.html#change-trust
-[create_acc]: https://www.digitalbits.org/developers/guides/concepts/list-of-operations.html#create-account
-[inflation]: https://www.digitalbits.org/developers/guides/concepts/list-of-operations.html#inflation
-[manage_data]: https://www.digitalbits.org/developers/guides/concepts/list-of-operations.html#manage-data
-[manage_buy_offer]: https://www.digitalbits.org/developers/guides/concepts/list-of-operations.html#manage-buy-offer
-[manage_sell_offer]: https://www.digitalbits.org/developers/guides/concepts/list-of-operations.html#manage-sell-offer
-[passive_sell_offer]: https://www.digitalbits.org/developers/guides/concepts/list-of-operations.html#create-passive-sell-offer
-[path_payment_receive]: https://www.digitalbits.org/developers/guides/concepts/list-of-operations.html#path-payment-strict-receive
-[path_payment_send]: https://www.digitalbits.org/developers/guides/concepts/list-of-operations.html#path-payment-strict-send
-[payment]: https://www.digitalbits.org/developers/guides/concepts/list-of-operations.html#payment
-[set_options]: https://www.digitalbits.org/developers/guides/concepts/list-of-operations.html#set-options
+[account_merge]: https://developers.digitalbits.io/guides/docs/guides/concepts/list-of-operations#account-merge
+[allow_trust]: https://developers.digitalbits.io/guides/docs/guides/concepts/list-of-operations#allow-trust
+[bump_seq]: https://developers.digitalbits.io/guides/docs/guides/concepts/list-of-operations#bump-sequence
+[change_trust]: https://developers.digitalbits.io/guides/docs/guides/concepts/list-of-operations#change-trust
+[create_acc]: https://developers.digitalbits.io/guides/docs/guides/concepts/list-of-operations#create-account
+[inflation]: https://developers.digitalbits.io/guides/docs/guides/concepts/list-of-operations#inflation
+[manage_data]: https://developers.digitalbits.io/guides/docs/guides/concepts/list-of-operations#manage-data
+[manage_buy_offer]: https://developers.digitalbits.io/guides/docs/guides/concepts/list-of-operations#manage-buy-offer
+[manage_sell_offer]: https://developers.digitalbits.io/guides/docs/guides/concepts/list-of-operations#manage-sell-offer
+[passive_sell_offer]: https://developers.digitalbits.io/guides/docs/guides/concepts/list-of-operations#create-passive-sell-offer
+[path_payment_receive]: https://developers.digitalbits.io/guides/docs/guides/concepts/list-of-operations#path-payment-strict-receive
+[path_payment_send]: https://developers.digitalbits.io/guides/docs/guides/concepts/list-of-operations#path-payment-strict-send
+[payment]: https://developers.digitalbits.io/guides/docs/guides/concepts/list-of-operations#payment
+[set_options]: https://developers.digitalbits.io/guides/docs/guides/concepts/list-of-operations#set-options
 
 ## Links
 | rel          | Example                                                                                                 | Description                                                  | `templated` |
@@ -93,34 +88,34 @@ When frontier returns information about an account it uses the following format:
 {
   "_links": {
     "self": {
-      "href": "https://frontier-testnet.digitalbits.org/accounts/GBWRID7MPYUDBTNQPEHUN4XOBVVDPJOHYXAVW3UTOD2RG7BDAY6O3PHW"
+      "href": "https://frontier.testnet.digitalbits.io/accounts/GBWRID7MPYUDBTNQPEHUN4XOBVVDPJOHYXAVW3UTOD2RG7BDAY6O3PHW"
     },
     "transactions": {
-      "href": "https://frontier-testnet.digitalbits.org/accounts/GBWRID7MPYUDBTNQPEHUN4XOBVVDPJOHYXAVW3UTOD2RG7BDAY6O3PHW/transactions{?cursor,limit,order}",
+      "href": "https://frontier.testnet.digitalbits.io/accounts/GBWRID7MPYUDBTNQPEHUN4XOBVVDPJOHYXAVW3UTOD2RG7BDAY6O3PHW/transactions{?cursor,limit,order}",
       "templated": true
     },
     "operations": {
-      "href": "https://frontier-testnet.digitalbits.org/accounts/GBWRID7MPYUDBTNQPEHUN4XOBVVDPJOHYXAVW3UTOD2RG7BDAY6O3PHW/operations{?cursor,limit,order}",
+      "href": "https://frontier.testnet.digitalbits.io/accounts/GBWRID7MPYUDBTNQPEHUN4XOBVVDPJOHYXAVW3UTOD2RG7BDAY6O3PHW/operations{?cursor,limit,order}",
       "templated": true
     },
     "payments": {
-      "href": "https://frontier-testnet.digitalbits.org/accounts/GBWRID7MPYUDBTNQPEHUN4XOBVVDPJOHYXAVW3UTOD2RG7BDAY6O3PHW/payments{?cursor,limit,order}",
+      "href": "https://frontier.testnet.digitalbits.io/accounts/GBWRID7MPYUDBTNQPEHUN4XOBVVDPJOHYXAVW3UTOD2RG7BDAY6O3PHW/payments{?cursor,limit,order}",
       "templated": true
     },
     "effects": {
-      "href": "https://frontier-testnet.digitalbits.org/accounts/GBWRID7MPYUDBTNQPEHUN4XOBVVDPJOHYXAVW3UTOD2RG7BDAY6O3PHW/effects{?cursor,limit,order}",
+      "href": "https://frontier.testnet.digitalbits.io/accounts/GBWRID7MPYUDBTNQPEHUN4XOBVVDPJOHYXAVW3UTOD2RG7BDAY6O3PHW/effects{?cursor,limit,order}",
       "templated": true
     },
     "offers": {
-      "href": "https://frontier-testnet.digitalbits.org/accounts/GBWRID7MPYUDBTNQPEHUN4XOBVVDPJOHYXAVW3UTOD2RG7BDAY6O3PHW/offers{?cursor,limit,order}",
+      "href": "https://frontier.testnet.digitalbits.io/accounts/GBWRID7MPYUDBTNQPEHUN4XOBVVDPJOHYXAVW3UTOD2RG7BDAY6O3PHW/offers{?cursor,limit,order}",
       "templated": true
     },
     "trades": {
-      "href": "https://frontier-testnet.digitalbits.org/accounts/GBWRID7MPYUDBTNQPEHUN4XOBVVDPJOHYXAVW3UTOD2RG7BDAY6O3PHW/trades{?cursor,limit,order}",
+      "href": "https://frontier.testnet.digitalbits.io/accounts/GBWRID7MPYUDBTNQPEHUN4XOBVVDPJOHYXAVW3UTOD2RG7BDAY6O3PHW/trades{?cursor,limit,order}",
       "templated": true
     },
     "data": {
-      "href": "https://frontier-testnet.digitalbits.org/accounts/GBWRID7MPYUDBTNQPEHUN4XOBVVDPJOHYXAVW3UTOD2RG7BDAY6O3PHW/data/{key}",
+      "href": "https://frontier.testnet.digitalbits.io/accounts/GBWRID7MPYUDBTNQPEHUN4XOBVVDPJOHYXAVW3UTOD2RG7BDAY6O3PHW/data/{key}",
       "templated": true
     }
   },
@@ -190,10 +185,10 @@ When frontier returns information about an account it uses the following format:
 ## Endpoints
 | Resource                                                         | Type       | Resource URI Template                |
 |------------------------------------------------------------------|------------|--------------------------------------|
-| [Account Details](../endpoints/accounts-single.md)               | Single     | `/accounts/:id`                      |
-| [Account Data](../endpoints/data-for-account.md)                 | Single     | `/accounts/:id/data/:key`            |
-| [Account Transactions](../endpoints/transactions-for-account.md) | Collection | `/accounts/:account_id/transactions` |
-| [Account Operations](../endpoints/operations-for-account.md)     | Collection | `/accounts/:account_id/operations`   |
-| [Account Payments](../endpoints/payments-for-account.md)         | Collection | `/accounts/:account_id/payments`     |
-| [Account Effects](../endpoints/effects-for-account.md)           | Collection | `/accounts/:account_id/effects`      |
-| [Account Offers](../endpoints/offers-for-account.md)             | Collection | `/accounts/:account_id/offers`       |
+| [Account Details](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/endpoints/accounts-single)               | Single     | `/accounts/:id`                      |
+| [Account Data](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/endpoints/data-for-account)                 | Single     | `/accounts/:id/data/:key`            |
+| [Account Transactions](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/endpoints/transactions-for-account) | Collection | `/accounts/:account_id/transactions` |
+| [Account Operations](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/endpoints/operations-for-account)     | Collection | `/accounts/:account_id/operations`   |
+| [Account Payments](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/endpoints/payments-for-account)         | Collection | `/accounts/:account_id/payments`     |
+| [Account Effects](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/endpoints/effects-for-account)           | Collection | `/accounts/:account_id/effects`      |
+| [Account Offers](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/endpoints/offers-for-account)             | Collection | `/accounts/:account_id/offers`       |

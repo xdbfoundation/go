@@ -1,8 +1,3 @@
----
-title: Not Implemented
-replacement: https://developers.digitalbits.org/api/errors/http-status-codes/standard/
----
-
 If your [request method](http://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html) is not supported by
 Frontier, Frontier will return a `not_implemented` error. Likewise, if functionality that is intended
 but does not exist (thus reserving the endpoint for future use), it will also return a
@@ -27,7 +22,7 @@ draft specification guide and thus has the following attributes:
 ## Example
 
 ```shell
-$ curl -X GET "https://frontier-testnet.digitalbits.org/offers/1234"
+$ curl -X GET "https://frontier.testnet.digitalbits.io/offers/1234"
 {
   "type": "https://digitalbits.org/frontier-errors/not_implemented",
   "title": "Resource Not Yet Implemented",
@@ -38,4 +33,4 @@ $ curl -X GET "https://frontier-testnet.digitalbits.org/offers/1234"
 
 ## Related
 
-- [Server Error](./server-error.md)
+- [Server Error](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/errors/server-error)

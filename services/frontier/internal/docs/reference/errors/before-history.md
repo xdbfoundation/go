@@ -1,8 +1,3 @@
----
-title: Before History
-replacement: https://developers.digitalbits.org/api/errors/http-status-codes/frontier-specific/
----
-
 A frontier server may be configured to only keep a portion of the digitalbits network's history stored
 within its database.  This error will be returned when a client requests a piece of information
 (such as a page of transactions or a single operation) that the server can positively identify as
@@ -27,7 +22,7 @@ draft specification guide and thus has the following attributes:
 ## Example
 
 ```shell
-$ curl -X GET "https://frontier-testnet.digitalbits.org/transactions?cursor=1&order=desc"
+$ curl -X GET "https://frontier.testnet.digitalbits.io/transactions?cursor=1&order=desc"
 {
   "type": "https://digitalbits.org/frontier-errors/before_history",
   "title": "Data Requested Is Before Recorded History",
@@ -38,4 +33,4 @@ $ curl -X GET "https://frontier-testnet.digitalbits.org/transactions?cursor=1&or
 
 ## Related
 
-- [Not Found](./not-found.md)
+- [Not Found](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/errors/not-found)

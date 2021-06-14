@@ -1,18 +1,11 @@
----
-title: Orderbook Details
-clientData:
-  laboratoryUrl: https://www.digitalbits.org/laboratory/#explorer?resource=order_book&endpoint=details
-replacement: https://developers.digitalbits.org/api/aggregations/order-books/
----
-
-People on the DigitalBits network can make [offers](../resources/offer.md) to buy or sell assets.
+People on the DigitalBits network can make [offers](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/resources/offer) to buy or sell assets.
 These offers are summarized by the assets being bought and sold in
 [orderbooks](../resources/orderbook.md).
 
 Frontier will return, for each orderbook, a summary of the orderbook and the bids and asks
 associated with that orderbook.
 
-This endpoint can also be used in [streaming](../streaming.md) mode so it is possible to use it to
+This endpoint can also be used in [streaming](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/streaming) mode so it is possible to use it to
 listen as offers are processed in the DigitalBits network.  If called in streaming mode Frontier will
 start at the earliest known offer unless a `cursor` is set. In that case it will start from the
 `cursor`. You can also set `cursor` value to `now` to only stream offers created since your request
@@ -39,14 +32,14 @@ GET /order_book?selling_asset_type={selling_asset_type}&selling_asset_code={sell
 ### curl Example Request
 
 ```sh
-curl "https://frontier-testnet.digitalbits.org/order_book?selling_asset_type=native&buying_asset_type=credit_alphanum4&buying_asset_code=FOO&buying_asset_issuer=GBAUUA74H4XOQYRSOW2RZUA4QL5PB37U3JS5NE3RTB2ELJVMIF5RLMAG&limit=20"
+curl "https://frontier.testnet.digitalbits.io/order_book?selling_asset_type=native&buying_asset_type=credit_alphanum4&buying_asset_code=FOO&buying_asset_issuer=GBAUUA74H4XOQYRSOW2RZUA4QL5PB37U3JS5NE3RTB2ELJVMIF5RLMAG&limit=20"
 ```
 
 ### JavaScript Example Request
 
 ```javascript
 var DigitalBitsSdk = require('digitalbits-sdk');
-var server = new DigitalBitsSdk.Server('https://frontier-testnet.digitalbits.org');
+var server = new DigitalBitsSdk.Server('https://frontier.testnet.digitalbits.io');
 
 server.orderbook(new DigitalBitsSdk.Asset.native(), new DigitalBitsSdk.Asset('FOO', 'GBAUUA74H4XOQYRSOW2RZUA4QL5PB37U3JS5NE3RTB2ELJVMIF5RLMAG'))
   .call()
@@ -62,7 +55,7 @@ server.orderbook(new DigitalBitsSdk.Asset.native(), new DigitalBitsSdk.Asset('FO
 
 ```javascript
 var DigitalBitsSdk = require('digitalbits-sdk')
-var server = new DigitalBitsSdk.Server('https://frontier-testnet.digitalbits.org');
+var server = new DigitalBitsSdk.Server('https://frontier.testnet.digitalbits.io');
 
 var orderbookHandler = function (orderbookResponse) {
   console.log(orderbookResponse);
@@ -115,4 +108,4 @@ The summary of the orderbook and its bids and asks.
 
 ## Possible Errors
 
-- The [standard errors](../errors.md#standard-errors).
+- The [standard errors](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/errors#standard-errors).

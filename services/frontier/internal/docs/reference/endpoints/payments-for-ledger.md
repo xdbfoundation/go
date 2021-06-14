@@ -1,14 +1,8 @@
----
-title: Payments for Ledger
-clientData:
-  laboratoryUrl: https://www.digitalbits.org/laboratory/#explorer?resource=payments&endpoint=for_ledger
-replacement: https://developers.digitalbits.org/api/resources/ledgers/payments/
----
-
-This endpoint represents all payment-related [operations](../resources/operation.md) that are part
-of a valid [transactions](../resources/transaction.md) in a given [ledger](../resources/ledger.md).
+This endpoint represents all payment-related [operations](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/resources/operation) that are part
+of a valid [transactions](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/resources/transaction) in a given [ledger](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/resources/ledger).
 
 The operations that can be returned in by this endpoint are:
+
 - `create_account`
 - `payment`
 - `path_payment`
@@ -34,14 +28,14 @@ GET /ledgers/{id}/payments{?cursor,limit,order,include_failed}
 ### curl Example Request
 
 ```sh
-curl "https://frontier-testnet.digitalbits.org/ledgers/696960/payments?limit=1"
+curl "https://frontier.testnet.digitalbits.io/ledgers/696960/payments?limit=1"
 ```
 
 ### JavaScript Example Request
 
 ```javascript
 var DigitalBitsSdk = require('digitalbits-sdk')
-var server = new DigitalBitsSdk.Server('https://frontier-testnet.digitalbits.org');
+var server = new DigitalBitsSdk.Server('https://frontier.testnet.digitalbits.io');
 
 server.payments()
   .forLedger("696960")
@@ -57,7 +51,7 @@ server.payments()
 ## Response
 
 This endpoint responds with a list of payment operations in a given ledger. See [operation
-resource](../resources/operation.md) for more information about operations (and payment
+resource](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/resources/operation) for more information about operations (and payment
 operations).
 
 ### Example Response
@@ -66,13 +60,13 @@ operations).
 {
   "_links": {
     "self": {
-      "href": "https://frontier-testnet.digitalbits.org/ledgers/696960/payments?cursor=&limit=1&order=asc"
+      "href": "https://frontier.testnet.digitalbits.io/ledgers/696960/payments?cursor=&limit=1&order=asc"
     },
     "next": {
-      "href": "https://frontier-testnet.digitalbits.org/ledgers/696960/payments?cursor=2993420406628353&limit=1&order=asc"
+      "href": "https://frontier.testnet.digitalbits.io/ledgers/696960/payments?cursor=2993420406628353&limit=1&order=asc"
     },
     "prev": {
-      "href": "https://frontier-testnet.digitalbits.org/ledgers/696960/payments?cursor=2993420406628353&limit=1&order=desc"
+      "href": "https://frontier.testnet.digitalbits.io/ledgers/696960/payments?cursor=2993420406628353&limit=1&order=desc"
     }
   },
   "_embedded": {
@@ -80,19 +74,19 @@ operations).
       {
         "_links": {
           "self": {
-            "href": "https://frontier-testnet.digitalbits.org/operations/2993420406628353"
+            "href": "https://frontier.testnet.digitalbits.io/operations/2993420406628353"
           },
           "transaction": {
-            "href": "https://frontier-testnet.digitalbits.org/transactions/f65278b36875d170e865853838da400515f59ca23836f072e8d62cac18b803e5"
+            "href": "https://frontier.testnet.digitalbits.io/transactions/f65278b36875d170e865853838da400515f59ca23836f072e8d62cac18b803e5"
           },
           "effects": {
-            "href": "https://frontier-testnet.digitalbits.org/operations/2993420406628353/effects"
+            "href": "https://frontier.testnet.digitalbits.io/operations/2993420406628353/effects"
           },
           "succeeds": {
-            "href": "https://frontier-testnet.digitalbits.org/effects?order=desc&cursor=2993420406628353"
+            "href": "https://frontier.testnet.digitalbits.io/effects?order=desc&cursor=2993420406628353"
           },
           "precedes": {
-            "href": "https://frontier-testnet.digitalbits.org/effects?order=asc&cursor=2993420406628353"
+            "href": "https://frontier.testnet.digitalbits.io/effects?order=asc&cursor=2993420406628353"
           }
         },
         "id": "2993420406628353",
@@ -115,5 +109,5 @@ operations).
 
 ## Possible Errors
 
-- The [standard errors](../errors.md#Standard-Errors).
-- [not_found](../errors/not-found.md): A `not_found` error will be returned if there is no ledger whose ID matches the `id` argument.
+- The [standard errors](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/errors#standard-errors).
+- [not_found](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/errors/not-found): A `not_found` error will be returned if there is no ledger whose ID matches the `id` argument.

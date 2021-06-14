@@ -1,14 +1,7 @@
----
-title: All Transactions
-clientData:
-  laboratoryUrl: https://www.digitalbits.org/laboratory/#explorer?resource=transactions&endpoint=all
-replacement: https://developers.digitalbits.org/api/resources/transactions/single/
----
-
-This endpoint represents all successful [transactions](../resources/transaction.md).
+This endpoint represents all successful [transactions](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/resources/transaction).
 Please note that this endpoint returns failed transactions that are included in the ledger if
 `include_failed` parameter is `true` and Frontier is ingesting failed transactions.
-This endpoint can also be used in [streaming](../streaming.md) mode. This makes it possible to use
+This endpoint can also be used in [streaming](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/streaming) mode. This makes it possible to use
 it to listen for new transactions as they get made in the DigitalBits network. If called in streaming
 mode Frontier will start at the earliest known transaction unless a `cursor` is set. In that case it
 will start from the `cursor`. You can also set `cursor` value to `now` to only stream transaction
@@ -33,14 +26,14 @@ GET /transactions{?cursor,limit,order,include_failed}
 
 ```sh
 # Retrieve the 200 latest transactions, ordered chronologically:
-curl "https://frontier-testnet.digitalbits.org/transactions?limit=200&order=desc"
+curl "https://frontier.testnet.digitalbits.io/transactions?limit=200&order=desc"
 ```
 
 ### JavaScript Example Request
 
 ```javascript
 var DigitalBitsSdk = require('digitalbits-sdk');
-var server = new DigitalBitsSdk.Server('https://frontier-testnet.digitalbits.org');
+var server = new DigitalBitsSdk.Server('https://frontier.testnet.digitalbits.io');
 
 server.transactions()
   .call()
@@ -61,7 +54,7 @@ server.transactions()
 
 ```javascript
 var DigitalBitsSdk = require('digitalbits-sdk')
-var server = new DigitalBitsSdk.Server('https://frontier-testnet.digitalbits.org');
+var server = new DigitalBitsSdk.Server('https://frontier.testnet.digitalbits.io');
 
 var txHandler = function (txResponse) {
   console.log(txResponse);
@@ -76,9 +69,9 @@ var es = server.transactions()
 
 ## Response
 
-If called normally this endpoint responds with a [page](../resources/page.md) of transactions.
+If called normally this endpoint responds with a [page](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/resources/page) of transactions.
 If called in streaming mode the transaction resources are returned individually.
-See [transaction resource](../resources/transaction.md) for reference.
+See [transaction resource](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/resources/transaction) for reference.
 
 ### Example Response
 
@@ -186,4 +179,4 @@ See [transaction resource](../resources/transaction.md) for reference.
 
 ## Possible Errors
 
-- The [standard errors](../errors.md#standard-errors).
+- The [standard errors](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/errors#standard-errors).

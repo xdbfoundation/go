@@ -3,7 +3,7 @@ title: Offer
 replacement: https://developers.digitalbits.org/api/resources/offers/
 ---
 
-Accounts on the DigitalBits network can make [offers](http://digitalbits.org/developers/learn/concepts/exchange.html) to buy or sell assets.  Users can create offers with the [Manage Offer](http://digitalbits.org/developers/learn/concepts/list-of-operations.html) operation.
+Accounts on the DigitalBits network can make to buy or sell assets.  Users can create offers with the [Manage Offer](https://developers.digitalbits.io/guides/docs/guides/concepts/list-of-operations#manage-offer) operation.
 
 Frontier only returns offers that belong to a particular account.  When it does, it uses the following format:
 
@@ -11,10 +11,10 @@ Frontier only returns offers that belong to a particular account.  When it does,
 | Attribute            | Type                                                              |                                                                                                                          |
 |----------------------|-------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------|
 | id                   | string                                                            | The ID of this offer.                                                                                                    |
-| paging_token         | string                                                            | A [paging token](./page.md) suitable for use as a `cursor` parameter.                                                    |
+| paging_token         | string                                                            | A [paging token](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/resources/page) suitable for use as a `cursor` parameter.                                                    |
 | seller               | string                                                            | Account id of the account making this offer.                                                                             |
-| selling              | [Asset](http://digitalbits.org/developers/learn/concepts/assets.html) | The Asset this offer wants to sell.                                                                                      |
-| buying               | [Asset](http://digitalbits.org/developers/learn/concepts/assets.html) | The Asset this offer wants to buy.                                                                                       |
+| selling              | [Asset](https://developers.digitalbits.io/guides/docs/guides/concepts/assets) | The Asset this offer wants to sell.                                                                                      |
+| buying               | [Asset](https://developers.digitalbits.io/guides/docs/guides/concepts/assets) | The Asset this offer wants to buy.                                                                                       |
 | amount               | string                                                            | The amount of `selling` the account making this offer is willing to sell.                                                |
 | price_r              | object                                                            | An object of a number numerator and number denominator that represent the buy and sell price of the currencies on offer. |
 | price                | string                                                            | How many units of `buying` it takes to get 1 unit of `selling`. A number representing the decimal form of `price_r`.     |
@@ -44,10 +44,10 @@ Thus to get price you would take n / d.
 {
   "_links": {
     "self": {
-      "href": "https://frontier-testnet.digitalbits.org/offers/2611"
+      "href": "https://frontier.testnet.digitalbits.io/offers/2611"
     },
     "offer_maker": {
-      "href": "https://frontier-testnet.digitalbits.org/accounts/GDG3NOK5YI7A4FCBHE6SKI4L65R7UPRBZUZVBT44IBTQBWGUSTJDDKBQ"
+      "href": "https://frontier.testnet.digitalbits.io/accounts/GDG3NOK5YI7A4FCBHE6SKI4L65R7UPRBZUZVBT44IBTQBWGUSTJDDKBQ"
     }
   },
   "id": "2611",
@@ -76,6 +76,6 @@ Thus to get price you would take n / d.
 
 | Resource                                             | Type       | Resource URI Template          |
 |------------------------------------------------------|------------|--------------------------------|
-| [Offers](../endpoints/offers.md)                     | Collection | `/offers`                      |
-| [Account Offers](../endpoints/offers-for-account.md) | Collection | `/accounts/:account_id/offers` |
-| [Offers Details](../endpoints/offer-details.md)      | Single     | `/offers/:offer_id`            |
+| [Offers](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/endpoints/offers)                     | Collection | `/offers`                      |
+| [Account Offers](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/endpoints/offers-for-account) | Collection | `/accounts/:account_id/offers` |
+| [Offers Details](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/endpoints/offer-details)      | Single     | `/offers/:offer_id`            |

@@ -1,8 +1,3 @@
----
-title: Not Found
-replacement: https://developers.digitalbits.org/api/errors/http-status-codes/standard/
----
-
 When Frontier can't find whatever data you are requesting, it will return a `not_found` error. This
 is similar to a
 [HTTP 404 Error](https://developer.mozilla.org/en-US/docs/Web/HTTP/Response_codes) error
@@ -27,7 +22,7 @@ draft specification guide and thus has the following attributes:
 ## Example
 
 ```shell
-$ curl -X GET "https://frontier-testnet.digitalbits.org/accounts/accountthatdoesntexist"
+$ curl -X GET "https://frontier.testnet.digitalbits.io/accounts/accountthatdoesntexist"
 {
   "type": "https://digitalbits.org/frontier-errors/bad_request",
   "title": "Bad Request",
@@ -42,4 +37,4 @@ $ curl -X GET "https://frontier-testnet.digitalbits.org/accounts/accountthatdoes
 
 ## Related
 
-- [Not Acceptable](./not-acceptable.md)
+- [Not Acceptable](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/errors/not-acceptable)

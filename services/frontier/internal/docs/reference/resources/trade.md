@@ -1,7 +1,3 @@
----
-title: Trade
----
-
 A trade represents a fulfilled offer.  For example, let's say that there exists an offer to sell 9 `foo_bank/EUR` for 3 `baz_exchange/BTC` and you make an offer to buy 3 `foo_bank/EUR` for 1 `baz_exchange/BTC`.  Since your offer and the existing one cross, a trade happens.  After the trade completes:
 
 - you are 3 `foo_bank/EUR` richer and 1 `baz_exchange/BTC` poorer
@@ -9,7 +5,7 @@ A trade represents a fulfilled offer.  For example, let's say that there exists 
 - your offer is completely fulfilled and no longer exists
 - the other offer is partially fulfilled and becomes an offer to sell 6 `foo_bank/EUR` for 2 `baz_exchange/BTC`.  The price of that offer doesn't change, but the amount does.
 
-Trades can also be caused by successful [path payments](https://www.digitalbits.org/developers/learn/concepts/exchange.html), because path payments involve fulfilling offers.
+Trades can also be caused by successful path payments, because path payments involve fulfilling offers.
 
 Payments are one-way in that afterwards, the source account has a smaller balance and the destination account of the payment has a bigger one.  Trades are two-way; both accounts increase and decrease their balances.
 
@@ -48,7 +44,7 @@ Price is a precise representation of a bid/ask offer.
 Thus to get price you would take n / d.
 
 #### Synthetic Offer Ids
-Offer ids in the frontier trade resource (base_offer_id, counter_offer_id) are synthetic and don't always reflect the respective digitalbits-core offer ids. This is due to the fact that digitalbits-core does not assign offer ids when an offer gets filled immediately. In these cases, Frontier synthetically generates an offer id for the buying offer, based on the total order id of the offer operation. This allows wallets to aggregate historical trades based on offer ids without adding special handling for edge cases. The exact encoding can be found [here](https://github.com/digitalbits/go/blob/master/services/frontier/internal/db2/history/synt_offer_id.go). 
+Offer ids in the frontier trade resource (base_offer_id, counter_offer_id) are synthetic and don't always reflect the respective digitalbits-core offer ids. This is due to the fact that digitalbits-core does not assign offer ids when an offer gets filled immediately. In these cases, Frontier synthetically generates an offer id for the buying offer, based on the total order id of the offer operation. This allows wallets to aggregate historical trades based on offer ids without adding special handling for edge cases. The exact encoding can be found [here](https://github.com/xdbfoundation/go/blob/master/services/frontier/internal/db2/history/synt_offer_id.go). 
 
 ## Links
 
@@ -62,5 +58,5 @@ Offer ids in the frontier trade resource (base_offer_id, counter_offer_id) are s
 
 | Resource                 | Type       | Resource URI Template                |
 |--------------------------|------------|--------------------------------------|
-| [Trades](../endpoints/trades.md)       | Collection | `/trades`       |
-| [Account Trades](../endpoints/trades-for-account.md) | Collection | `/accounts/:account_id/trades`      |
+| [Trades](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/endpoints/trades)       | Collection | `/trades`       |
+| [Account Trades](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/endpoints/trades-for-account) | Collection | `/accounts/:account_id/trades`      |

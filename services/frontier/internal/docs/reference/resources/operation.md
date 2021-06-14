@@ -3,11 +3,11 @@ title: Operation
 replacement: https://developers.digitalbits.org/api/resources/operations/
 ---
 
-[Operations](https://www.digitalbits.org/developers/learn/concepts/operations.html) are objects that represent a desired change to the ledger: payments,
+[Operations](https://developers.digitalbits.io/guides/docs/guides/concepts/operations) are objects that represent a desired change to the ledger: payments,
 offers to exchange currency, changes made to account options, etc.  Operations
-are submitted to the DigitalBits network grouped in a [Transaction](./transaction.md).
+are submitted to the DigitalBits network grouped in a [Transaction](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/resources/transaction).
 
-To learn more about the concept of operations in the DigitalBits network, take a look at the [DigitalBits operations concept guide](https://www.digitalbits.org/developers/learn/concepts/operations.html).
+To learn more about the concept of operations in the DigitalBits network, take a look at the [DigitalBits operations concept guide](https://developers.digitalbits.io/guides/docs/guides/concepts/operations).
 
 ## Operation Types
 
@@ -182,7 +182,7 @@ A path payment strict receive operation represents a payment from one account to
 | source_asset_type   | string                        | Source asset type (native / alphanum4 / alphanum12)                         |
 | source_max          | string                        | Max send amount.                                                            |
 | source_amount       | string                        | Amount sent.                                                                |
-| path                | array of [Assets](./asset.md) | Additional hops the operation went through to get to the destination asset. |
+| path                | array of [Assets](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/resources/asset) | Additional hops the operation went through to get to the destination asset. |
 
 #### Example
 
@@ -248,7 +248,7 @@ Unlike [path payment strict receive](#path-payment), this operation sends precis
 | source_asset_issuer | string                        | Source asset issuer.                                                        |
 | source_amount       | string                        | Amount sent.                                                                |
 | destination_min     | string                        | The minimum amount of destination asset expected to be received.            |
-| path                | array of [Assets](./asset.md) | Additional hops the operation went through to get to the destination asset. |
+| path                | array of [Assets](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/resources/asset) | Additional hops the operation went through to get to the destination asset. |
 
 
 #### Example
@@ -833,8 +833,8 @@ Bumps forward the sequence number of the source account of the operation, allowi
 
 | Resource                                           | Type       | Resource URI Template                           |
 |----------------------------------------------------|------------|-------------------------------------------------|
-| [All Operations](../endpoints/operations-all.md)             | Collection | `/operations`                                   |
-| [Operations Details](../endpoints/operations-single.md)      | Single     | `/operations/:id`                               |
-| [Ledger Operations](../endpoints/operations-for-ledger.md)   | Collection | `/ledgers/{id}/operations{?cursor,limit,order}` |
-| [Account Operations](../endpoints/operations-for-account.md) | Collection | `/accounts/:account_id/operations`              |
-| [Account Payments](../endpoints/payments-for-account.md)     | Collection | `/accounts/:account_id/payments`                |
+| [All Operations](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/endpoints/operations-all)             | Collection | `/operations`                                   |
+| [Operations Details](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/endpoints/operations-single)      | Single     | `/operations/:id`                               |
+| [Ledger Operations](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/endpoints/operations-for-ledger)   | Collection | `/ledgers/{id}/operations{?cursor,limit,order}` |
+| [Account Operations](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/endpoints/operations-for-account) | Collection | `/accounts/:account_id/operations`              |
+| [Account Payments](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/endpoints/payments-for-account)     | Collection | `/accounts/:account_id/payments`                |

@@ -1,13 +1,8 @@
----
-title: Payments for Transaction
-clientData:
-  laboratoryUrl: https://www.digitalbits.org/laboratory/#explorer?resource=payments&endpoint=for_transaction
----
-
-This endpoint represents all payment-related [operations](../resources/operation.md) that are part
-of a given [transaction](../resources/transaction.md).
+This endpoint represents all payment-related [operations](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/resources/operation) that are part
+of a given [transaction](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/resources/transaction).
 
 The operations that can be returned in by this endpoint are:
+
 - `create_account`
 - `payment`
 - `path_payment`
@@ -38,14 +33,14 @@ GET /transactions/{hash}/payments{?cursor,limit,order}
 ### curl Example Request
 
 ```sh
-curl "https://frontier-testnet.digitalbits.org/transactions/f65278b36875d170e865853838da400515f59ca23836f072e8d62cac18b803e5/payments"
+curl "https://frontier.testnet.digitalbits.io/transactions/f65278b36875d170e865853838da400515f59ca23836f072e8d62cac18b803e5/payments"
 ```
 
 ### JavaScript Example Request
 
 ```javascript
 var DigitalBitsSdk = require('digitalbits-sdk');
-var server = new DigitalBitsSdk.Server('https://frontier-testnet.digitalbits.org');
+var server = new DigitalBitsSdk.Server('https://frontier.testnet.digitalbits.io');
 
 server.payments()
   .forTransaction("f65278b36875d170e865853838da400515f59ca23836f072e8d62cac18b803e5")
@@ -61,7 +56,7 @@ server.payments()
 ## Response
 
 This endpoint responds with a list of payments operations that are part of a given transaction. See
-[operation resource](../resources/operation.md) for more information about operations (and payment
+[operation resource](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/resources/operation) for more information about operations (and payment
 operations).
 
 ### Example Response
@@ -70,13 +65,13 @@ operations).
 {
   "_links": {
     "self": {
-      "href": "https://frontier-testnet.digitalbits.org/transactions/f65278b36875d170e865853838da400515f59ca23836f072e8d62cac18b803e5/payments?cursor=&limit=10&order=asc"
+      "href": "https://frontier.testnet.digitalbits.io/transactions/f65278b36875d170e865853838da400515f59ca23836f072e8d62cac18b803e5/payments?cursor=&limit=10&order=asc"
     },
     "next": {
-      "href": "https://frontier-testnet.digitalbits.org/transactions/f65278b36875d170e865853838da400515f59ca23836f072e8d62cac18b803e5/payments?cursor=2993420406628353&limit=10&order=asc"
+      "href": "https://frontier.testnet.digitalbits.io/transactions/f65278b36875d170e865853838da400515f59ca23836f072e8d62cac18b803e5/payments?cursor=2993420406628353&limit=10&order=asc"
     },
     "prev": {
-      "href": "https://frontier-testnet.digitalbits.org/transactions/f65278b36875d170e865853838da400515f59ca23836f072e8d62cac18b803e5/payments?cursor=2993420406628353&limit=10&order=desc"
+      "href": "https://frontier.testnet.digitalbits.io/transactions/f65278b36875d170e865853838da400515f59ca23836f072e8d62cac18b803e5/payments?cursor=2993420406628353&limit=10&order=desc"
     }
   },
   "_embedded": {
@@ -84,19 +79,19 @@ operations).
       {
         "_links": {
           "self": {
-            "href": "https://frontier-testnet.digitalbits.org/operations/2993420406628353"
+            "href": "https://frontier.testnet.digitalbits.io/operations/2993420406628353"
           },
           "transaction": {
-            "href": "https://frontier-testnet.digitalbits.org/transactions/f65278b36875d170e865853838da400515f59ca23836f072e8d62cac18b803e5"
+            "href": "https://frontier.testnet.digitalbits.io/transactions/f65278b36875d170e865853838da400515f59ca23836f072e8d62cac18b803e5"
           },
           "effects": {
-            "href": "https://frontier-testnet.digitalbits.org/operations/2993420406628353/effects"
+            "href": "https://frontier.testnet.digitalbits.io/operations/2993420406628353/effects"
           },
           "succeeds": {
-            "href": "https://frontier-testnet.digitalbits.org/effects?order=desc&cursor=2993420406628353"
+            "href": "https://frontier.testnet.digitalbits.io/effects?order=desc&cursor=2993420406628353"
           },
           "precedes": {
-            "href": "https://frontier-testnet.digitalbits.org/effects?order=asc&cursor=2993420406628353"
+            "href": "https://frontier.testnet.digitalbits.io/effects?order=asc&cursor=2993420406628353"
           }
         },
         "id": "2993420406628353",
@@ -119,6 +114,6 @@ operations).
 
 ## Possible Errors
 
-- The [standard errors](../errors.md#Standard-Errors).
-- [not_found](../errors/not-found.md): A `not_found` error will be returned if there is no
+- The [standard errors](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/errors#standard-errors).
+- [not_found](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/errors/not-found): A `not_found` error will be returned if there is no
   transaction whose ID matches the `hash` argument.

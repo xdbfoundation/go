@@ -1,8 +1,3 @@
----
-title: Timeout
-replacement: https://developers.digitalbits.org/api/errors/http-status-codes/frontier-specific/
----
-
 If you are encountering this error it means that either:
 
 * Frontier has not received a confirmation from the DigitalBits Core server that the transaction you are
@@ -15,7 +10,7 @@ this you can:
 
 * Keep resubmitting the same transaction (with the same sequence number) and wait until it finally
   is added to a new ledger.
-* Increase the [fee](../../../guides/concepts/fees.md) in order to prioritize the transaction.
+* Increase the [fee](https://developers.digitalbits.io/guides/docs/guides/concepts/fees) in order to prioritize the transaction.
 
 This error returns a
 [HTTP 504 Error](https://developer.mozilla.org/en-US/docs/Web/HTTP/Response_codes).
@@ -45,5 +40,5 @@ draft specification guide and thus has the following attributes:
 
 ## Related
 
-- [Not Acceptable](./not-acceptable.md)
-- [Transaction Failed](./transaction-failed.md)
+- [Not Acceptable](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/errors/not-acceptable)
+- [Transaction Failed](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/errors/transaction-failed)

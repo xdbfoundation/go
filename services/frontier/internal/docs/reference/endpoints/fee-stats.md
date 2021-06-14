@@ -1,10 +1,3 @@
----
-title: Fee Stats
-clientData:
-  laboratoryUrl:
-replacement: https://developers.digitalbits.org/api/aggregations/fee-stats/
----
-
 This endpoint gives useful information about per-operation fee stats in the last 5 ledgers. It can be used to
 predict a fee set on the transaction that will be submitted to the network.
 
@@ -17,7 +10,7 @@ GET /fee_stats
 ### curl Example Request
 
 ```sh
-curl "https://frontier-testnet.digitalbits.org/fee_stats"
+curl "https://frontier.testnet.digitalbits.io/fee_stats"
 ```
 
 ## Response
@@ -121,4 +114,4 @@ Information about max fee bid for transactions over the last 5 ledgers.
 
 ## Possible Errors
 
-- The [standard errors](../errors.md#standard-errors).
+- The [standard errors](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/errors#standard-errors).

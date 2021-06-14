@@ -1,19 +1,12 @@
----
-title: Account Details
-clientData:
-  laboratoryUrl: https://www.digitalbits.org/laboratory/#explorer?resource=accounts&endpoint=single
-replacement: https://developers.digitalbits.org/api/resources/accounts/single/
----
-
-Returns information and links relating to a single [account](../resources/account.md).
+Returns information and links relating to a single [account](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/resources/account).
 
 The balances section in the returned JSON will also list all the
-[trustlines](https://www.digitalbits.org/developers/learn/concepts/assets.html) this account
+[trustlines](https://developers.digitalbits.io/guides/docs/guides/concepts/assets#trustlines) this account
 established. Note this will only return trustlines that have the necessary authorization to work.
 Meaning if an account `A` trusts another account `B` that has the
-[authorization required](https://www.digitalbits.org/developers/guides/concepts/accounts.html#flags)
+[authorization required](https://developers.digitalbits.io/guides/docs/guides/concepts/accounts#flags)
 flag set, the trustline won't show up until account `B`
-[allows](https://www.digitalbits.org/developers/guides/concepts/list-of-operations.html#allow-trust)
+[allows](https://developers.digitalbits.io/guides/docs/guides/concepts/list-of-operations#allow-trust)
 account `A` to hold its assets.
 
 ## Request
@@ -31,14 +24,14 @@ GET /accounts/{account}
 ### curl Example Request
 
 ```sh
-curl "https://frontier-testnet.digitalbits.org/accounts/GD42RQNXTRIW6YR3E2HXV5T2AI27LBRHOERV2JIYNFMXOBA234SWLQQB"
+curl "https://frontier.testnet.digitalbits.io/accounts/GD42RQNXTRIW6YR3E2HXV5T2AI27LBRHOERV2JIYNFMXOBA234SWLQQB"
 ```
 
 ### JavaScript Example Request
 
 ```javascript
 var DigitalBitsSdk = require('digitalbits-sdk');
-var server = new DigitalBitsSdk.Server('https://frontier-testnet.digitalbits.org');
+var server = new DigitalBitsSdk.Server('https://frontier.testnet.digitalbits.io');
 
 server.accounts()
   .accountId("GD42RQNXTRIW6YR3E2HXV5T2AI27LBRHOERV2JIYNFMXOBA234SWLQQB")
@@ -53,41 +46,41 @@ server.accounts()
 
 ## Response
 
-This endpoint responds with the details of a single account for a given ID. See [account resource](../resources/account.md) for reference.
+This endpoint responds with the details of a single account for a given ID. See [account resource](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/resources/account) for reference.
 
 ### Example Response
 ```json
 {
   "_links": {
     "self": {
-      "href": "https://frontier-testnet.digitalbits.org/accounts/GD42RQNXTRIW6YR3E2HXV5T2AI27LBRHOERV2JIYNFMXOBA234SWLQQB"
+      "href": "https://frontier.testnet.digitalbits.io/accounts/GD42RQNXTRIW6YR3E2HXV5T2AI27LBRHOERV2JIYNFMXOBA234SWLQQB"
     },
     "transactions": {
-      "href": "https://frontier-testnet.digitalbits.org/accounts/GD42RQNXTRIW6YR3E2HXV5T2AI27LBRHOERV2JIYNFMXOBA234SWLQQB/transactions{?cursor,limit,order}",
+      "href": "https://frontier.testnet.digitalbits.io/accounts/GD42RQNXTRIW6YR3E2HXV5T2AI27LBRHOERV2JIYNFMXOBA234SWLQQB/transactions{?cursor,limit,order}",
       "templated": true
     },
     "operations": {
-      "href": "https://frontier-testnet.digitalbits.org/accounts/GD42RQNXTRIW6YR3E2HXV5T2AI27LBRHOERV2JIYNFMXOBA234SWLQQB/operations{?cursor,limit,order}",
+      "href": "https://frontier.testnet.digitalbits.io/accounts/GD42RQNXTRIW6YR3E2HXV5T2AI27LBRHOERV2JIYNFMXOBA234SWLQQB/operations{?cursor,limit,order}",
       "templated": true
     },
     "payments": {
-      "href": "https://frontier-testnet.digitalbits.org/accounts/GD42RQNXTRIW6YR3E2HXV5T2AI27LBRHOERV2JIYNFMXOBA234SWLQQB/payments{?cursor,limit,order}",
+      "href": "https://frontier.testnet.digitalbits.io/accounts/GD42RQNXTRIW6YR3E2HXV5T2AI27LBRHOERV2JIYNFMXOBA234SWLQQB/payments{?cursor,limit,order}",
       "templated": true
     },
     "effects": {
-      "href": "https://frontier-testnet.digitalbits.org/accounts/GD42RQNXTRIW6YR3E2HXV5T2AI27LBRHOERV2JIYNFMXOBA234SWLQQB/effects{?cursor,limit,order}",
+      "href": "https://frontier.testnet.digitalbits.io/accounts/GD42RQNXTRIW6YR3E2HXV5T2AI27LBRHOERV2JIYNFMXOBA234SWLQQB/effects{?cursor,limit,order}",
       "templated": true
     },
     "offers": {
-      "href": "https://frontier-testnet.digitalbits.org/accounts/GD42RQNXTRIW6YR3E2HXV5T2AI27LBRHOERV2JIYNFMXOBA234SWLQQB/offers{?cursor,limit,order}",
+      "href": "https://frontier.testnet.digitalbits.io/accounts/GD42RQNXTRIW6YR3E2HXV5T2AI27LBRHOERV2JIYNFMXOBA234SWLQQB/offers{?cursor,limit,order}",
       "templated": true
     },
     "trades": {
-      "href": "https://frontier-testnet.digitalbits.org/accounts/GD42RQNXTRIW6YR3E2HXV5T2AI27LBRHOERV2JIYNFMXOBA234SWLQQB/trades{?cursor,limit,order}",
+      "href": "https://frontier.testnet.digitalbits.io/accounts/GD42RQNXTRIW6YR3E2HXV5T2AI27LBRHOERV2JIYNFMXOBA234SWLQQB/trades{?cursor,limit,order}",
       "templated": true
     },
     "data": {
-      "href": "https://frontier-testnet.digitalbits.org/accounts/GD42RQNXTRIW6YR3E2HXV5T2AI27LBRHOERV2JIYNFMXOBA234SWLQQB/data/{key}",
+      "href": "https://frontier.testnet.digitalbits.io/accounts/GD42RQNXTRIW6YR3E2HXV5T2AI27LBRHOERV2JIYNFMXOBA234SWLQQB/data/{key}",
       "templated": true
     }
   },
@@ -160,5 +153,5 @@ This endpoint responds with the details of a single account for a given ID. See 
 
 ## Possible Errors
 
-- The [standard errors](../errors.md#Standard-Errors).
-- [not_found](../errors/not-found.md): A `not_found` error will be returned if there is no account whose ID matches the `account` argument.
+- The [standard errors](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/errors#standard-errors).
+- [not_found](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/errors/not-found): A `not_found` error will be returned if there is no account whose ID matches the `account` argument.
