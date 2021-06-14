@@ -16,4 +16,4 @@ RUN apt-get update && apt-get install curl postgresql-client libpq-dev -y
 RUN curl -o frontier.deb https://dl.cloudsmith.io/public/xdb-foundation/digitalbits-frontier/deb/ubuntu/pool/focal/main/d/di/digitalbits-frontier_${FRONTIER_VERSION}_amd64.deb \
 && dpkg -i frontier.deb && rm frontier.deb
 
-ENTRYPOINT [ "frontier" ]
+ENTRYPOINT frontier db migrate up && frontier
