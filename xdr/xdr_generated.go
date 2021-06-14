@@ -4438,7 +4438,7 @@ var (
 //        uint32 ledgerSeq; // sequence number of this ledger
 //
 //        int64 totalCoins; // total number of nibbs in existence.
-//                          // 10,000,000 nibbs in 1 XLM
+//                          // 10,000,000 nibbs in 1 XDB
 //
 //        int64 feePool;       // fees burned since last inflation run
 //        uint32 inflationSeq; // inflation sequence number
