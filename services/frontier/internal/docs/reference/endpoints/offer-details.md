@@ -10,12 +10,12 @@ GET /offers/{offer}
 
 | name | notes | description | example |
 | ---- | ----- | ----------- | ------- |
-| `offer` | required, string | Offer ID | `126628073` |
+| `offer` | required, string | Offer ID | `1` |
 
 ### curl Example Request
 
 ```sh
-curl "https://frontier.testnet.digitalbits.io/offers/1347876"
+curl "https://frontier.testnet.digitalbits.io/offers/1"
 ```
 
 <!-- ### JavaScript Example Request -->
@@ -28,36 +28,39 @@ This endpoint responds with the details of a single offer for a given ID. See [o
 
 ```json
 {
-  "_links": {
-    "self": {
-      "href": "https://frontier.testnet.digitalbits.io/offers/1347876"
-    },
-    "offer_maker": {
-      "href": "https://frontier.testnet.digitalbits.io/accounts/GAQHWQYBBW272OOXNQMMLCA5WY2XAZPODGB7Q3S5OKKIXVESKO55ZQ7C"
+  "records": [
+    {
+      "_links": {
+        "self": {
+          "href": "https://frontier.testnet.digitalbits.io/offers/1"
+        },
+        "offer_maker": {
+          "href": "https://frontier.testnet.digitalbits.io/accounts/GDFOHLMYCXVZD2CDXZLMW6W6TMU4YO27XFF2IBAFAV66MSTPDDSK2LAY"
+        }
+      },
+      "id": "1",
+      "paging_token": "1",
+      "seller": "GDFOHLMYCXVZD2CDXZLMW6W6TMU4YO27XFF2IBAFAV66MSTPDDSK2LAY",
+      "selling": {
+        "asset_type": "credit_alphanum4",
+        "asset_code": "USD",
+        "asset_issuer": "GB4RZUSF3HZGCAKB3VBM2S7QOHHC5KTV3LLZXGBYR5ZO4B26CKHFZTSZ"
+      },
+      "buying": {
+        "asset_type": "native"
+      },
+      "amount": "1.0000000",
+      "price_r": {
+        "n": 2,
+        "d": 1
+      },
+      "price": "2.0000000",
+      "last_modified_ledger": 963496,
+      "last_modified_time": "2021-06-16T18:15:07Z"
     }
-  },
-  "id": "1347876",
-  "paging_token": "1347876",
-  "seller": "GAQHWQYBBW272OOXNQMMLCA5WY2XAZPODGB7Q3S5OKKIXVESKO55ZQ7C",
-  "selling": {
-    "asset_type": "credit_alphanum4",
-    "asset_code": "DSQ",
-    "asset_issuer": "GBDQPTQJDATT7Z7EO4COS4IMYXH44RDLLI6N6WIL5BZABGMUOVMLWMQF"
-  },
-  "buying": {
-    "asset_type": "credit_alphanum4",
-    "asset_code": "USD",
-    "asset_issuer": "GAA4MFNZGUPJAVLWWG6G5XZJFZDHLKQNG3Q6KB24BAD6JHNNVXDCF4XG"
-  },
-  "amount": "60.4544008",
-  "price_r": {
-    "n": 84293,
-    "d": 2000000
-  },
-  "price": "0.0421465",
-  "last_modified_ledger": 1429506,
-  "last_modified_time": "2019-10-29T22:08:23Z"
+  ]
 }
+
 ```
 
 ## Possible Errors
