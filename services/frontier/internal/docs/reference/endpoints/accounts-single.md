@@ -19,12 +19,12 @@ GET /accounts/{account}
 
 | name | notes | description | example |
 | ---- | ----- | ----------- | ------- |
-| `account` | required, string | Account ID | `GCLHMNEO2XW24POXS7HCWKHK5O5ZTM7R3DNRIKJS3DTHBWVLSVACYAOT` |
+| `account` | required, string | Account ID | `GDFOHLMYCXVZD2CDXZLMW6W6TMU4YO27XFF2IBAFAV66MSTPDDSK2LAY` |
 
 ### curl Example Request
 
 ```sh
-curl "https://frontier.testnet.digitalbits.io/accounts/GCLHMNEO2XW24POXS7HCWKHK5O5ZTM7R3DNRIKJS3DTHBWVLSVACYAOT"
+curl "https://frontier.testnet.digitalbits.io/accounts/GDFOHLMYCXVZD2CDXZLMW6W6TMU4YO27XFF2IBAFAV66MSTPDDSK2LAY"
 ```
 
 ### JavaScript Example Request
@@ -34,7 +34,7 @@ var DigitalBitsSdk = require('digitalbits-sdk');
 var server = new DigitalBitsSdk.Server('https://frontier.testnet.digitalbits.io');
 
 server.accounts()
-  .accountId("GCLHMNEO2XW24POXS7HCWKHK5O5ZTM7R3DNRIKJS3DTHBWVLSVACYAOT")
+  .accountId("GDFOHLMYCXVZD2CDXZLMW6W6TMU4YO27XFF2IBAFAV66MSTPDDSK2LAY")
   .call()
   .then(function (accountResult) {
     console.log(JSON.stringify(accountResult));
@@ -53,43 +53,43 @@ This endpoint responds with the details of a single account for a given ID. See 
 {
   "_links": {
     "self": {
-      "href": "https://frontier.testnet.digitalbits.io/accounts/GCLHMNEO2XW24POXS7HCWKHK5O5ZTM7R3DNRIKJS3DTHBWVLSVACYAOT"
+      "href": "https://frontier.testnet.digitalbits.io/accounts/GDFOHLMYCXVZD2CDXZLMW6W6TMU4YO27XFF2IBAFAV66MSTPDDSK2LAY"
     },
     "transactions": {
-      "href": "https://frontier.testnet.digitalbits.io/accounts/GCLHMNEO2XW24POXS7HCWKHK5O5ZTM7R3DNRIKJS3DTHBWVLSVACYAOT/transactions{?cursor,limit,order}",
+      "href": "https://frontier.testnet.digitalbits.io/accounts/GDFOHLMYCXVZD2CDXZLMW6W6TMU4YO27XFF2IBAFAV66MSTPDDSK2LAY/transactions{?cursor,limit,order}",
       "templated": true
     },
     "operations": {
-      "href": "https://frontier.testnet.digitalbits.io/accounts/GCLHMNEO2XW24POXS7HCWKHK5O5ZTM7R3DNRIKJS3DTHBWVLSVACYAOT/operations{?cursor,limit,order}",
+      "href": "https://frontier.testnet.digitalbits.io/accounts/GDFOHLMYCXVZD2CDXZLMW6W6TMU4YO27XFF2IBAFAV66MSTPDDSK2LAY/operations{?cursor,limit,order}",
       "templated": true
     },
     "payments": {
-      "href": "https://frontier.testnet.digitalbits.io/accounts/GCLHMNEO2XW24POXS7HCWKHK5O5ZTM7R3DNRIKJS3DTHBWVLSVACYAOT/payments{?cursor,limit,order}",
+      "href": "https://frontier.testnet.digitalbits.io/accounts/GDFOHLMYCXVZD2CDXZLMW6W6TMU4YO27XFF2IBAFAV66MSTPDDSK2LAY/payments{?cursor,limit,order}",
       "templated": true
     },
     "effects": {
-      "href": "https://frontier.testnet.digitalbits.io/accounts/GCLHMNEO2XW24POXS7HCWKHK5O5ZTM7R3DNRIKJS3DTHBWVLSVACYAOT/effects{?cursor,limit,order}",
+      "href": "https://frontier.testnet.digitalbits.io/accounts/GDFOHLMYCXVZD2CDXZLMW6W6TMU4YO27XFF2IBAFAV66MSTPDDSK2LAY/effects{?cursor,limit,order}",
       "templated": true
     },
     "offers": {
-      "href": "https://frontier.testnet.digitalbits.io/accounts/GCLHMNEO2XW24POXS7HCWKHK5O5ZTM7R3DNRIKJS3DTHBWVLSVACYAOT/offers{?cursor,limit,order}",
+      "href": "https://frontier.testnet.digitalbits.io/accounts/GDFOHLMYCXVZD2CDXZLMW6W6TMU4YO27XFF2IBAFAV66MSTPDDSK2LAY/offers{?cursor,limit,order}",
       "templated": true
     },
     "trades": {
-      "href": "https://frontier.testnet.digitalbits.io/accounts/GCLHMNEO2XW24POXS7HCWKHK5O5ZTM7R3DNRIKJS3DTHBWVLSVACYAOT/trades{?cursor,limit,order}",
+      "href": "https://frontier.testnet.digitalbits.io/accounts/GDFOHLMYCXVZD2CDXZLMW6W6TMU4YO27XFF2IBAFAV66MSTPDDSK2LAY/trades{?cursor,limit,order}",
       "templated": true
     },
     "data": {
-      "href": "https://frontier.testnet.digitalbits.io/accounts/GCLHMNEO2XW24POXS7HCWKHK5O5ZTM7R3DNRIKJS3DTHBWVLSVACYAOT/data/{key}",
+      "href": "https://frontier.testnet.digitalbits.io/accounts/GDFOHLMYCXVZD2CDXZLMW6W6TMU4YO27XFF2IBAFAV66MSTPDDSK2LAY/data/{key}",
       "templated": true
     }
   },
-  "id": "GCLHMNEO2XW24POXS7HCWKHK5O5ZTM7R3DNRIKJS3DTHBWVLSVACYAOT",
-  "account_id": "GCLHMNEO2XW24POXS7HCWKHK5O5ZTM7R3DNRIKJS3DTHBWVLSVACYAOT",
-  "sequence": "4056944503422978",
-  "subentry_count": 0,
-  "last_modified_ledger": 944602,
-  "last_modified_time": "2021-06-15T12:08:01Z",
+  "id": "GDFOHLMYCXVZD2CDXZLMW6W6TMU4YO27XFF2IBAFAV66MSTPDDSK2LAY",
+  "account_id": "GDFOHLMYCXVZD2CDXZLMW6W6TMU4YO27XFF2IBAFAV66MSTPDDSK2LAY",
+  "sequence": "4113023891406850",
+  "subentry_count": 2,
+  "last_modified_ledger": 957773,
+  "last_modified_time": "2021-06-16T09:08:23Z",
   "thresholds": {
     "low_threshold": 0,
     "med_threshold": 0,
@@ -102,7 +102,31 @@ This endpoint responds with the details of a single account for a given ID. See 
   },
   "balances": [
     {
-      "balance": "9599.9999800",
+      "balance": "5.0000000",
+      "limit": "1000.0000000",
+      "buying_liabilities": "0.0000000",
+      "selling_liabilities": "0.0000000",
+      "last_modified_ledger": 957774,
+      "is_authorized": true,
+      "is_authorized_to_maintain_liabilities": true,
+      "asset_type": "credit_alphanum4",
+      "asset_code": "EUR",
+      "asset_issuer": "GDCIQQY2UKVNLLWGIX74DMTEAFCMQKAKYUWPBO7PLTHIHRKSFZN7V2FC"
+    },
+    {
+      "balance": "10.0000000",
+      "limit": "1000.0000000",
+      "buying_liabilities": "0.0000000",
+      "selling_liabilities": "0.0000000",
+      "last_modified_ledger": 957671,
+      "is_authorized": true,
+      "is_authorized_to_maintain_liabilities": true,
+      "asset_type": "credit_alphanum4",
+      "asset_code": "USD",
+      "asset_issuer": "GB4RZUSF3HZGCAKB3VBM2S7QOHHC5KTV3LLZXGBYR5ZO4B26CKHFZTSZ"
+    },
+    {
+      "balance": "9999.9999800",
       "buying_liabilities": "0.0000000",
       "selling_liabilities": "0.0000000",
       "asset_type": "native"
@@ -111,13 +135,13 @@ This endpoint responds with the details of a single account for a given ID. See 
   "signers": [
     {
       "weight": 1,
-      "key": "GCLHMNEO2XW24POXS7HCWKHK5O5ZTM7R3DNRIKJS3DTHBWVLSVACYAOT",
+      "key": "GDFOHLMYCXVZD2CDXZLMW6W6TMU4YO27XFF2IBAFAV66MSTPDDSK2LAY",
       "type": "ed25519_public_key"
     }
   ],
   "num_sponsoring": 0,
   "num_sponsored": 0,
-  "paging_token": "GCLHMNEO2XW24POXS7HCWKHK5O5ZTM7R3DNRIKJS3DTHBWVLSVACYAOT",
+  "paging_token": "GDFOHLMYCXVZD2CDXZLMW6W6TMU4YO27XFF2IBAFAV66MSTPDDSK2LAY",
   "data_attr": {}
 }
 ```
