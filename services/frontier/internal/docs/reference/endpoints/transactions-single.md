@@ -17,12 +17,12 @@ GET /transactions/{hash}
 
 |  name  |  notes  | description | example |
 | ------ | ------- | ----------- | ------- |
-| `hash` | required, string | A transaction hash, hex-encoded, lowercase. | `264226cb06af3b86299031884175155e67a02e0a8ad0b3ab3a88b409a8c09d5c` |
+| `hash` | required, string | A transaction hash, hex-encoded, lowercase. | `c60f666cda020d13033bb44926adf7f6c2b659857f13959e3988351055c0b52f` |
 
 ### curl Example Request
 
 ```sh
-curl "https://frontier.testnet.digitalbits.io/transactions/264226cb06af3b86299031884175155e67a02e0a8ad0b3ab3a88b409a8c09d5c"
+curl "https://frontier.testnet.digitalbits.io/transactions/c60f666cda020d13033bb44926adf7f6c2b659857f13959e3988351055c0b52f"
 ```
 
 ### JavaScript Example Request
@@ -32,10 +32,10 @@ var DigitalBitsSdk = require('digitalbits-sdk');
 var server = new DigitalBitsSdk.Server('https://frontier.testnet.digitalbits.io');
 
 server.transactions()
-  .transaction("264226cb06af3b86299031884175155e67a02e0a8ad0b3ab3a88b409a8c09d5c")
+  .transaction("c60f666cda020d13033bb44926adf7f6c2b659857f13959e3988351055c0b52f")
   .call()
   .then(function (transactionResult) {
-    console.log(transactionResult)
+    console.log(JSON.stringify(transactionResult))
   })
   .catch(function (err) {
     console.log(err)
@@ -52,50 +52,56 @@ This endpoint responds with a single Transaction.  See [transaction resource](ht
 {
   "_links": {
     "self": {
-      "href": "https://frontier.testnet.digitalbits.io/transactions/264226cb06af3b86299031884175155e67a02e0a8ad0b3ab3a88b409a8c09d5c"
+      "href": "https://frontier.testnet.digitalbits.io/transactions/c60f666cda020d13033bb44926adf7f6c2b659857f13959e3988351055c0b52f"
     },
     "account": {
-      "href": "https://frontier.testnet.digitalbits.io/accounts/GAIH3ULLFQ4DGSECF2AR555KZ4KNDGEKN4AFI4SU2M7B43MGK3QJZNSR"
+      "href": "https://frontier.testnet.digitalbits.io/accounts/GCHQ6AOZST6YPMROCQWPE3SVFY57FHPYC3WJGGSFCHOQ5HFZC5HSHQYK"
     },
     "ledger": {
-      "href": "https://frontier.testnet.digitalbits.io/ledgers/697121"
+      "href": "https://frontier.testnet.digitalbits.io/ledgers/958064"
     },
     "operations": {
-      "href": "https://frontier.testnet.digitalbits.io/transactions/264226cb06af3b86299031884175155e67a02e0a8ad0b3ab3a88b409a8c09d5c/operations{?cursor,limit,order}",
+      "href": "https://frontier.testnet.digitalbits.io/transactions/c60f666cda020d13033bb44926adf7f6c2b659857f13959e3988351055c0b52f/operations{?cursor,limit,order}",
       "templated": true
     },
     "effects": {
-      "href": "https://frontier.testnet.digitalbits.io/transactions/264226cb06af3b86299031884175155e67a02e0a8ad0b3ab3a88b409a8c09d5c/effects{?cursor,limit,order}",
+      "href": "https://frontier.testnet.digitalbits.io/transactions/c60f666cda020d13033bb44926adf7f6c2b659857f13959e3988351055c0b52f/effects{?cursor,limit,order}",
       "templated": true
     },
     "precedes": {
-      "href": "https://frontier.testnet.digitalbits.io/transactions?order=asc&cursor=2994111896358912"
+      "href": "https://frontier.testnet.digitalbits.io/transactions?order=asc&cursor=4114853547479040"
     },
     "succeeds": {
-      "href": "https://frontier.testnet.digitalbits.io/transactions?order=desc&cursor=2994111896358912"
+      "href": "https://frontier.testnet.digitalbits.io/transactions?order=desc&cursor=4114853547479040"
+    },
+    "transaction": {
+      "href": "https://frontier.testnet.digitalbits.io/transactions/c60f666cda020d13033bb44926adf7f6c2b659857f13959e3988351055c0b52f"
     }
   },
-  "id": "264226cb06af3b86299031884175155e67a02e0a8ad0b3ab3a88b409a8c09d5c",
-  "paging_token": "2994111896358912",
+  "id": "c60f666cda020d13033bb44926adf7f6c2b659857f13959e3988351055c0b52f",
+  "paging_token": "4114853547479040",
   "successful": true,
-  "hash": "264226cb06af3b86299031884175155e67a02e0a8ad0b3ab3a88b409a8c09d5c",
-  "ledger": 697121,
-  "created_at": "2019-04-09T20:14:25Z",
-  "source_account": "GAIH3ULLFQ4DGSECF2AR555KZ4KNDGEKN4AFI4SU2M7B43MGK3QJZNSR",
-  "fee_account": "GAIH3ULLFQ4DGSECF2AR555KZ4KNDGEKN4AFI4SU2M7B43MGK3QJZNSR",
-  "source_account_sequence": "4660039994869",
-  "fee_charged": 100,
-  "max_fee": 100,
+  "hash": "c60f666cda020d13033bb44926adf7f6c2b659857f13959e3988351055c0b52f",
+  "created_at": "2021-06-16T09:36:04Z",
+  "source_account": "GCHQ6AOZST6YPMROCQWPE3SVFY57FHPYC3WJGGSFCHOQ5HFZC5HSHQYK",
+  "source_account_sequence": "4109304449728515",
+  "fee_account": "GCHQ6AOZST6YPMROCQWPE3SVFY57FHPYC3WJGGSFCHOQ5HFZC5HSHQYK",
+  "fee_charged": "100",
+  "max_fee": "100",
   "operation_count": 1,
-  "envelope_xdr": "AAAAABB90WssODNIgi6BHveqzxTRmIpvAFRyVNM+Hm2GVuCcAAAAZAAABD0AB031AAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAFIMRkFZ9gZifhRSlklQpsz/9P04Earv0dzS3MkIM1cYAAAAXSHboAAAAAAAAAAABhlbgnAAAAEA+biIjrDy8yi+SvhFElIdWGBRYlDscnSSHkPchePy2JYDJn4wvJYDBumXI7/NmttUey3+cGWbBFfnnWh1H5EoD",
-  "result_xdr": "AAAAAAAAAGQAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAA=",
-  "result_meta_xdr": "AAAAAQAAAAIAAAADAAqjIQAAAAAAAAAAEH3Rayw4M0iCLoEe96rPFNGYim8AVHJU0z4ebYZW4JwBOLmYhGq/IAAABD0AB030AAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAABAAqjIQAAAAAAAAAAEH3Rayw4M0iCLoEe96rPFNGYim8AVHJU0z4ebYZW4JwBOLmYhGq/IAAABD0AB031AAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAABAAAAAwAAAAMACqMhAAAAAAAAAAAQfdFrLDgzSIIugR73qs8U0ZiKbwBUclTTPh5thlbgnAE4uZiEar8gAAAEPQAHTfUAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAEACqMhAAAAAAAAAAAQfdFrLDgzSIIugR73qs8U0ZiKbwBUclTTPh5thlbgnAE4uYE789cgAAAEPQAHTfUAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAACqMhAAAAAAAAAAAUgxGQVn2BmJ+FFKWSVCmzP/0/TgRqu/R3NLcyQgzVxgAAABdIdugAAAqjIQAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA==",
-  "fee_meta_xdr": "AAAAAgAAAAMACqMgAAAAAAAAAAAQfdFrLDgzSIIugR73qs8U0ZiKbwBUclTTPh5thlbgnAE4uZiEar+EAAAEPQAHTfQAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAEACqMhAAAAAAAAAAAQfdFrLDgzSIIugR73qs8U0ZiKbwBUclTTPh5thlbgnAE4uZiEar8gAAAEPQAHTfQAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA==",
+  "envelope_xdr": "AAAAAgAAAACPDwHZlP2Hsi4ULPJuVS478p34FuyTGkUR3Q6cuRdPIwAAAGQADplkAAAAAwAAAAEAAAAAAAAAAAAAAABgycZkAAAAAAAAAAEAAAAAAAAAAQAAAADK462YFeuR6EO+Vst63pspzDtfuUukBAUFfeZKbxjkrQAAAAFIVUYAAAAAAI8PAdmU/YeyLhQs8m5VLjvynfgW7JMaRRHdDpy5F08jAAAAdGpSiAAAAAAAAAAAAbkXTyMAAABA7wnV5V0MZeIdMojlytJWWD6kDFTlA70EaQCPQ/N+4+PKtAGCYn0KVXvSKxL59eSFwZCviQ2dgep97MfAgN32Aw==",
+  "result_xdr": "AAAAAAAAAGQAAAAAAAAAAQAAAAAAAAABAAAAAAAAAAA=",
+  "result_meta_xdr": "AAAAAgAAAAIAAAADAA6ecAAAAAAAAAAAjw8B2ZT9h7IuFCzyblUuO/Kd+BbskxpFEd0OnLkXTyMAAAAXSHbm1AAOmWQAAAACAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAABAA6ecAAAAAAAAAAAjw8B2ZT9h7IuFCzyblUuO/Kd+BbskxpFEd0OnLkXTyMAAAAXSHbm1AAOmWQAAAADAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAABAAAAAgAAAAMADp5vAAAAAQAAAADK462YFeuR6EO+Vst63pspzDtfuUukBAUFfeZKbxjkrQAAAAFIVUYAAAAAAI8PAdmU/YeyLhQs8m5VLjvynfgW7JMaRRHdDpy5F08jAAAAAAAAAAB//////////wAAAAEAAAAAAAAAAAAAAAEADp5wAAAAAQAAAADK462YFeuR6EO+Vst63pspzDtfuUukBAUFfeZKbxjkrQAAAAFIVUYAAAAAAI8PAdmU/YeyLhQs8m5VLjvynfgW7JMaRRHdDpy5F08jAAAAdGpSiAB//////////wAAAAEAAAAAAAAAAAAAAAA=",
+  "fee_meta_xdr": "AAAABAAAAAMADp5kAAAAAAAAAACPDwHZlP2Hsi4ULPJuVS478p34FuyTGkUR3Q6cuRdPIwAAABdIduc4AA6ZZAAAAAIAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAEADp5wAAAAAAAAAACPDwHZlP2Hsi4ULPJuVS478p34FuyTGkUR3Q6cuRdPIwAAABdIdubUAA6ZZAAAAAIAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAMADp5vAAAAAAAAAAC300+A8SGiACMZeKQTbc3s0U6aNTBLD14/5rrFIEl/hAAAAAAAAyakAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAEADp5wAAAAAAAAAAC300+A8SGiACMZeKQTbc3s0U6aNTBLD14/5rrFIEl/hAAAAAAAAycIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA==",
   "memo_type": "none",
   "signatures": [
-    "Pm4iI6w8vMovkr4RRJSHVhgUWJQ7HJ0kh5D3IXj8tiWAyZ+MLyWAwbplyO/zZrbVHst/nBlmwRX551odR+RKAw=="
-  ]
+    "7wnV5V0MZeIdMojlytJWWD6kDFTlA70EaQCPQ/N+4+PKtAGCYn0KVXvSKxL59eSFwZCviQ2dgep97MfAgN32Aw=="
+  ],
+  "valid_after": "1970-01-01T00:00:00Z",
+  "valid_before": "2021-06-16T09:37:40Z",
+  "ledger_attr": 958064
 }
+
 ```
 
 ## Possible Errors
