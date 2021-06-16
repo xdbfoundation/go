@@ -12,7 +12,7 @@ GET /ledgers/{sequence}/effects{?cursor,limit,order}
 
 | name | notes | description | example |
 | ---- | ----- | ----------- | ------- |
-| `sequence` | required, number | Ledger Sequence Number | `680777` |
+| `sequence` | required, number | Ledger Sequence Number | `957773` |
 | `?cursor` | optional, default _null_ | A paging token, specifying where to start returning records from. | `12884905984` |
 | `?order` | optional, string, default `asc` | The order in which to return rows, "asc" or "desc". | `asc` |
 | `?limit` | optional, number, default `10` | Maximum number of records to return. | `200` |
