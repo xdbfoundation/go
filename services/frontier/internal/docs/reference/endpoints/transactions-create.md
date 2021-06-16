@@ -18,7 +18,7 @@ and not attempt to submit the transaction again. Only in cases where a
 transaction's status is unknown (and thus will have a chance of being included
 into a ledger) will a resubmission to the network occur.
 
-Information about [building transactions](https://www.digitalbits.org/developers/js-digitalbits-base/reference/building-transactions) in JavaScript.
+Information about [building transactions](https://developers.digitalbits.io/reference/js-digitalbits-base/docs/reference/building-transactions) in JavaScript.
 
 ### Timeout
 
@@ -49,7 +49,7 @@ POST /transactions
 
 ```sh
 curl -X POST \
-     -F "tx=AAAAAOo1QK/3upA74NLkdq4Io3DQAQZPi4TVhuDnvCYQTKIVAAAACgAAH8AAAAABAAAAAAAAAAAAAAABAAAAAQAAAADqNUCv97qQO+DS5HauCKNw0AEGT4uE1Ybg57wmEEyiFQAAAAEAAAAAZc2EuuEa2W1PAKmaqVquHuzUMHaEiRs//+ODOfgWiz8AAAAAAAAAAAAAA+gAAAAAAAAAARBMohUAAABAPnnZL8uPlS+c/AM02r4EbxnZuXmP6pQHvSGmxdOb0SzyfDB2jUKjDtL+NC7zcMIyw4NjTa9Ebp4lvONEf4yDBA==" \
+     -F "tx=AAAAAgAAAACPDwHZlP2Hsi4ULPJuVS478p34FuyTGkUR3Q6cuRdPIwAAAGQADplkAAAABAAAAAEAAAAAAAAAAAAAAABgye7BAAAAAAAAAAEAAAAAAAAAAQAAAAB5HNJF2fJhAUHdQs1L8HHOLqp12tebmDiPcu4HXhKOXAAAAAAAAAAAC+vCAAAAAAAAAAABuRdPIwAAAEA3j3oirwDyN1yR0gz3fPkgMonyVfchwftbo+EOvgrLYvADNT0Uqsa0LmM7/LQBeitk2v5GEiMT7PCzlORbnFsP" \
   "https://frontier.testnet.digitalbits.io/transactions"
 ```
 
@@ -71,49 +71,54 @@ The response will include all fields from the [transaction resource](https://dev
 {
   "_links": {
     "self": {
-      "href": "https://frontier.testnet.digitalbits.io/transactions/264226cb06af3b86299031884175155e67a02e0a8ad0b3ab3a88b409a8c09d5c"
+      "href": "https://frontier.testnet.digitalbits.io/transactions/f5d126b3b2e870d3ec5f2ed7d11135cf4cefc95459d5ffb8c67dcd3731c08cc6"
     },
     "account": {
-      "href": "https://frontier.testnet.digitalbits.io/accounts/GAIH3ULLFQ4DGSECF2AR555KZ4KNDGEKN4AFI4SU2M7B43MGK3QJZNSR"
+      "href": "https://frontier.testnet.digitalbits.io/accounts/GCHQ6AOZST6YPMROCQWPE3SVFY57FHPYC3WJGGSFCHOQ5HFZC5HSHQYK"
     },
     "ledger": {
-      "href": "https://frontier.testnet.digitalbits.io/ledgers/697121"
+      "href": "https://frontier.testnet.digitalbits.io/ledgers/959837"
     },
     "operations": {
-      "href": "https://frontier.testnet.digitalbits.io/transactions/264226cb06af3b86299031884175155e67a02e0a8ad0b3ab3a88b409a8c09d5c/operations{?cursor,limit,order}",
+      "href": "https://frontier.testnet.digitalbits.io/transactions/f5d126b3b2e870d3ec5f2ed7d11135cf4cefc95459d5ffb8c67dcd3731c08cc6/operations{?cursor,limit,order}",
       "templated": true
     },
     "effects": {
-      "href": "https://frontier.testnet.digitalbits.io/transactions/264226cb06af3b86299031884175155e67a02e0a8ad0b3ab3a88b409a8c09d5c/effects{?cursor,limit,order}",
+      "href": "https://frontier.testnet.digitalbits.io/transactions/f5d126b3b2e870d3ec5f2ed7d11135cf4cefc95459d5ffb8c67dcd3731c08cc6/effects{?cursor,limit,order}",
       "templated": true
     },
     "precedes": {
-      "href": "https://frontier.testnet.digitalbits.io/transactions?order=asc&cursor=2994111896358912"
+      "href": "https://frontier.testnet.digitalbits.io/transactions?order=asc\u0026cursor=4122468524494848"
     },
     "succeeds": {
-      "href": "https://frontier.testnet.digitalbits.io/transactions?order=desc&cursor=2994111896358912"
+      "href": "https://frontier.testnet.digitalbits.io/transactions?order=desc\u0026cursor=4122468524494848"
+    },
+    "transaction": {
+      "href": "https://frontier.testnet.digitalbits.io/transactions/f5d126b3b2e870d3ec5f2ed7d11135cf4cefc95459d5ffb8c67dcd3731c08cc6"
     }
   },
-  "id": "264226cb06af3b86299031884175155e67a02e0a8ad0b3ab3a88b409a8c09d5c",
-  "paging_token": "2994111896358912",
+  "id": "f5d126b3b2e870d3ec5f2ed7d11135cf4cefc95459d5ffb8c67dcd3731c08cc6",
+  "paging_token": "4122468524494848",
   "successful": true,
-  "hash": "264226cb06af3b86299031884175155e67a02e0a8ad0b3ab3a88b409a8c09d5c",
-  "ledger": 697121,
-  "created_at": "2019-04-09T20:14:25Z",
-  "source_account": "GAIH3ULLFQ4DGSECF2AR555KZ4KNDGEKN4AFI4SU2M7B43MGK3QJZNSR",
-  "fee_account": "GAIH3ULLFQ4DGSECF2AR555KZ4KNDGEKN4AFI4SU2M7B43MGK3QJZNSR",
-  "source_account_sequence": "4660039994869",
-  "fee_charged": 100,
-  "max_fee": 100,
+  "hash": "f5d126b3b2e870d3ec5f2ed7d11135cf4cefc95459d5ffb8c67dcd3731c08cc6",
+  "ledger": 959837,
+  "created_at": "2021-06-16T12:26:02Z",
+  "source_account": "GCHQ6AOZST6YPMROCQWPE3SVFY57FHPYC3WJGGSFCHOQ5HFZC5HSHQYK",
+  "source_account_sequence": "4109304449728516",
+  "fee_account": "GCHQ6AOZST6YPMROCQWPE3SVFY57FHPYC3WJGGSFCHOQ5HFZC5HSHQYK",
+  "fee_charged": "100",
+  "max_fee": "100",
   "operation_count": 1,
-  "envelope_xdr": "AAAAABB90WssODNIgi6BHveqzxTRmIpvAFRyVNM+Hm2GVuCcAAAAZAAABD0AB031AAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAFIMRkFZ9gZifhRSlklQpsz/9P04Earv0dzS3MkIM1cYAAAAXSHboAAAAAAAAAAABhlbgnAAAAEA+biIjrDy8yi+SvhFElIdWGBRYlDscnSSHkPchePy2JYDJn4wvJYDBumXI7/NmttUey3+cGWbBFfnnWh1H5EoD",
-  "result_xdr": "AAAAAAAAAGQAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAA=",
-  "result_meta_xdr": "AAAAAQAAAAIAAAADAAqjIQAAAAAAAAAAEH3Rayw4M0iCLoEe96rPFNGYim8AVHJU0z4ebYZW4JwBOLmYhGq/IAAABD0AB030AAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAABAAqjIQAAAAAAAAAAEH3Rayw4M0iCLoEe96rPFNGYim8AVHJU0z4ebYZW4JwBOLmYhGq/IAAABD0AB031AAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAABAAAAAwAAAAMACqMhAAAAAAAAAAAQfdFrLDgzSIIugR73qs8U0ZiKbwBUclTTPh5thlbgnAE4uZiEar8gAAAEPQAHTfUAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAEACqMhAAAAAAAAAAAQfdFrLDgzSIIugR73qs8U0ZiKbwBUclTTPh5thlbgnAE4uYE789cgAAAEPQAHTfUAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAACqMhAAAAAAAAAAAUgxGQVn2BmJ+FFKWSVCmzP/0/TgRqu/R3NLcyQgzVxgAAABdIdugAAAqjIQAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA==",
-  "fee_meta_xdr": "AAAAAgAAAAMACqMgAAAAAAAAAAAQfdFrLDgzSIIugR73qs8U0ZiKbwBUclTTPh5thlbgnAE4uZiEar+EAAAEPQAHTfQAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAEACqMhAAAAAAAAAAAQfdFrLDgzSIIugR73qs8U0ZiKbwBUclTTPh5thlbgnAE4uZiEar8gAAAEPQAHTfQAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA==",
+  "envelope_xdr": "AAAAAgAAAACPDwHZlP2Hsi4ULPJuVS478p34FuyTGkUR3Q6cuRdPIwAAAGQADplkAAAABAAAAAEAAAAAAAAAAAAAAABgye7BAAAAAAAAAAEAAAAAAAAAAQAAAAB5HNJF2fJhAUHdQs1L8HHOLqp12tebmDiPcu4HXhKOXAAAAAAAAAAAC+vCAAAAAAAAAAABuRdPIwAAAEA3j3oirwDyN1yR0gz3fPkgMonyVfchwftbo+EOvgrLYvADNT0Uqsa0LmM7/LQBeitk2v5GEiMT7PCzlORbnFsP",
+  "result_xdr": "AAAAAAAAAGQAAAAAAAAAAQAAAAAAAAABAAAAAAAAAAA=",
+  "result_meta_xdr": "AAAAAgAAAAIAAAADAA6lXQAAAAAAAAAAjw8B2ZT9h7IuFCzyblUuO/Kd+BbskxpFEd0OnLkXTyMAAAAXSHbmcAAOmWQAAAADAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAABAA6lXQAAAAAAAAAAjw8B2ZT9h7IuFCzyblUuO/Kd+BbskxpFEd0OnLkXTyMAAAAXSHbmcAAOmWQAAAAEAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAABAAAABAAAAAMADpznAAAAAAAAAAB5HNJF2fJhAUHdQs1L8HHOLqp12tebmDiPcu4HXhKOXAAAABdIduecAA6cxAAAAAEAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAEADqVdAAAAAAAAAAB5HNJF2fJhAUHdQs1L8HHOLqp12tebmDiPcu4HXhKOXAAAABdUYqmcAA6cxAAAAAEAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAMADqVdAAAAAAAAAACPDwHZlP2Hsi4ULPJuVS478p34FuyTGkUR3Q6cuRdPIwAAABdIduZwAA6ZZAAAAAQAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAEADqVdAAAAAAAAAACPDwHZlP2Hsi4ULPJuVS478p34FuyTGkUR3Q6cuRdPIwAAABc8iyRwAA6ZZAAAAAQAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAA=",
+  "fee_meta_xdr": "AAAABAAAAAMADp5wAAAAAAAAAACPDwHZlP2Hsi4ULPJuVS478p34FuyTGkUR3Q6cuRdPIwAAABdIdubUAA6ZZAAAAAMAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAEADqVdAAAAAAAAAACPDwHZlP2Hsi4ULPJuVS478p34FuyTGkUR3Q6cuRdPIwAAABdIduZwAA6ZZAAAAAMAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAMADp89AAAAAAAAAAC300+A8SGiACMZeKQTbc3s0U6aNTBLD14/5rrFIEl/hAAAAAAAAynEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAEADqVdAAAAAAAAAAC300+A8SGiACMZeKQTbc3s0U6aNTBLD14/5rrFIEl/hAAAAAAAAyooAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA==",
   "memo_type": "none",
   "signatures": [
-    "Pm4iI6w8vMovkr4RRJSHVhgUWJQ7HJ0kh5D3IXj8tiWAyZ+MLyWAwbplyO/zZrbVHst/nBlmwRX551odR+RKAw=="
-  ]
+    "N496Iq8A8jdckdIM93z5IDKJ8lX3IcH7W6PhDr4Ky2LwAzU9FKrGtC5jO/y0AXorZNr+RhIjE+zws5TkW5xbDw=="
+  ],
+  "valid_after": "1970-01-01T00:00:00Z",
+  "valid_before": "2021-06-16T12:29:53Z"
 }
 ```
 
