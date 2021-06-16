@@ -74,13 +74,13 @@ When frontier returns information about an account it uses the following format:
 ## Links
 | rel          | Example                                                                                                 | Description                                                  | `templated` |
 |--------------|---------------------------------------------------------------------------------------------------------|--------------------------------------------------------------|-------------|
-| data         | `/accounts/GAOEWNUEKXKNGB2AAOX6S6FEP6QKCFTU7KJH647XTXQXTMOAUATX2VF5/data/{key}`                         | [Data fields](./data.md) related to this account             | true        |
-| effects      | `/accounts/GAOEWNUEKXKNGB2AAOX6S6FEP6QKCFTU7KJH647XTXQXTMOAUATX2VF5/effects/{?cursor,limit,order}`      | The [effects](./effect.md) related to this account           | true        |
-| offers       | `/accounts/GAOEWNUEKXKNGB2AAOX6S6FEP6QKCFTU7KJH647XTXQXTMOAUATX2VF5/offers/{?cursor,limit,order}`       | The [offers](./offer.md) related to this account             | true        |
-| operations   | `/accounts/GAOEWNUEKXKNGB2AAOX6S6FEP6QKCFTU7KJH647XTXQXTMOAUATX2VF5/operations/{?cursor,limit,order}`   | The [operations](./operation.md) related to this account     | true        |
-| payments     | `/accounts/GAOEWNUEKXKNGB2AAOX6S6FEP6QKCFTU7KJH647XTXQXTMOAUATX2VF5/payments/{?cursor,limit,order}`     | The [payments](./payment.md) related to this account         | true        |
-| trades       | `/accounts/GAOEWNUEKXKNGB2AAOX6S6FEP6QKCFTU7KJH647XTXQXTMOAUATX2VF5/trades/{?cursor,limit,order}`       | The [trades](./trade.md) related to this account             | true        |
-| transactions | `/accounts/GAOEWNUEKXKNGB2AAOX6S6FEP6QKCFTU7KJH647XTXQXTMOAUATX2VF5/transactions/{?cursor,limit,order}` | The [transactions](./transaction.md) related to this account | true        |
+| data         | `/accounts/GDFOHLMYCXVZD2CDXZLMW6W6TMU4YO27XFF2IBAFAV66MSTPDDSK2LAY/data/{key}`                         | [Data fields](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/resources/data) related to this account             | true        |
+| effects      | `/accounts/GDFOHLMYCXVZD2CDXZLMW6W6TMU4YO27XFF2IBAFAV66MSTPDDSK2LAY/effects/{?cursor,limit,order}`      | The [effects](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/resources/effect) related to this account           | true        |
+| offers       | `/accounts/GDFOHLMYCXVZD2CDXZLMW6W6TMU4YO27XFF2IBAFAV66MSTPDDSK2LAY/offers/{?cursor,limit,order}`       | The [offers](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/resources/offer) related to this account             | true        |
+| operations   | `/accounts/GDFOHLMYCXVZD2CDXZLMW6W6TMU4YO27XFF2IBAFAV66MSTPDDSK2LAY/operations/{?cursor,limit,order}`   | The [operations](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/resources/operation) related to this account     | true        |
+| payments     | `/accounts/GDFOHLMYCXVZD2CDXZLMW6W6TMU4YO27XFF2IBAFAV66MSTPDDSK2LAY/payments/{?cursor,limit,order}`     | The [payments](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/resources/payment) related to this account         | true        |
+| trades       | `/accounts/GDFOHLMYCXVZD2CDXZLMW6W6TMU4YO27XFF2IBAFAV66MSTPDDSK2LAY/trades/{?cursor,limit,order}`       | The [trades](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/resources/trade) related to this account             | true        |
+| transactions | `/accounts/GDFOHLMYCXVZD2CDXZLMW6W6TMU4YO27XFF2IBAFAV66MSTPDDSK2LAY/transactions/{?cursor,limit,order}` | The [transactions](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/resources/transaction) related to this account | true        |
 
 ## Example
 
@@ -88,42 +88,43 @@ When frontier returns information about an account it uses the following format:
 {
   "_links": {
     "self": {
-      "href": "https://frontier.testnet.digitalbits.io/accounts/GBWRID7MPYUDBTNQPEHUN4XOBVVDPJOHYXAVW3UTOD2RG7BDAY6O3PHW"
+      "href": "https://frontier.testnet.digitalbits.io/accounts/GDFOHLMYCXVZD2CDXZLMW6W6TMU4YO27XFF2IBAFAV66MSTPDDSK2LAY"
     },
     "transactions": {
-      "href": "https://frontier.testnet.digitalbits.io/accounts/GBWRID7MPYUDBTNQPEHUN4XOBVVDPJOHYXAVW3UTOD2RG7BDAY6O3PHW/transactions{?cursor,limit,order}",
+      "href": "https://frontier.testnet.digitalbits.io/accounts/GDFOHLMYCXVZD2CDXZLMW6W6TMU4YO27XFF2IBAFAV66MSTPDDSK2LAY/transactions{?cursor,limit,order}",
       "templated": true
     },
     "operations": {
-      "href": "https://frontier.testnet.digitalbits.io/accounts/GBWRID7MPYUDBTNQPEHUN4XOBVVDPJOHYXAVW3UTOD2RG7BDAY6O3PHW/operations{?cursor,limit,order}",
+      "href": "https://frontier.testnet.digitalbits.io/accounts/GDFOHLMYCXVZD2CDXZLMW6W6TMU4YO27XFF2IBAFAV66MSTPDDSK2LAY/operations{?cursor,limit,order}",
       "templated": true
     },
     "payments": {
-      "href": "https://frontier.testnet.digitalbits.io/accounts/GBWRID7MPYUDBTNQPEHUN4XOBVVDPJOHYXAVW3UTOD2RG7BDAY6O3PHW/payments{?cursor,limit,order}",
+      "href": "https://frontier.testnet.digitalbits.io/accounts/GDFOHLMYCXVZD2CDXZLMW6W6TMU4YO27XFF2IBAFAV66MSTPDDSK2LAY/payments{?cursor,limit,order}",
       "templated": true
     },
     "effects": {
-      "href": "https://frontier.testnet.digitalbits.io/accounts/GBWRID7MPYUDBTNQPEHUN4XOBVVDPJOHYXAVW3UTOD2RG7BDAY6O3PHW/effects{?cursor,limit,order}",
+      "href": "https://frontier.testnet.digitalbits.io/accounts/GDFOHLMYCXVZD2CDXZLMW6W6TMU4YO27XFF2IBAFAV66MSTPDDSK2LAY/effects{?cursor,limit,order}",
       "templated": true
     },
     "offers": {
-      "href": "https://frontier.testnet.digitalbits.io/accounts/GBWRID7MPYUDBTNQPEHUN4XOBVVDPJOHYXAVW3UTOD2RG7BDAY6O3PHW/offers{?cursor,limit,order}",
+      "href": "https://frontier.testnet.digitalbits.io/accounts/GDFOHLMYCXVZD2CDXZLMW6W6TMU4YO27XFF2IBAFAV66MSTPDDSK2LAY/offers{?cursor,limit,order}",
       "templated": true
     },
     "trades": {
-      "href": "https://frontier.testnet.digitalbits.io/accounts/GBWRID7MPYUDBTNQPEHUN4XOBVVDPJOHYXAVW3UTOD2RG7BDAY6O3PHW/trades{?cursor,limit,order}",
+      "href": "https://frontier.testnet.digitalbits.io/accounts/GDFOHLMYCXVZD2CDXZLMW6W6TMU4YO27XFF2IBAFAV66MSTPDDSK2LAY/trades{?cursor,limit,order}",
       "templated": true
     },
     "data": {
-      "href": "https://frontier.testnet.digitalbits.io/accounts/GBWRID7MPYUDBTNQPEHUN4XOBVVDPJOHYXAVW3UTOD2RG7BDAY6O3PHW/data/{key}",
+      "href": "https://frontier.testnet.digitalbits.io/accounts/GDFOHLMYCXVZD2CDXZLMW6W6TMU4YO27XFF2IBAFAV66MSTPDDSK2LAY/data/{key}",
       "templated": true
     }
   },
-  "id": "GBWRID7MPYUDBTNQPEHUN4XOBVVDPJOHYXAVW3UTOD2RG7BDAY6O3PHW",
-  "paging_token": "",
-  "account_id": "GBWRID7MPYUDBTNQPEHUN4XOBVVDPJOHYXAVW3UTOD2RG7BDAY6O3PHW",
-  "sequence": "43692723777044483",
-  "subentry_count": 3,
+  "id": "GDFOHLMYCXVZD2CDXZLMW6W6TMU4YO27XFF2IBAFAV66MSTPDDSK2LAY",
+  "account_id": "GDFOHLMYCXVZD2CDXZLMW6W6TMU4YO27XFF2IBAFAV66MSTPDDSK2LAY",
+  "sequence": "4113023891406853",
+  "subentry_count": 4,
+  "last_modified_ledger": 958207,
+  "last_modified_time": "2021-06-16T09:49:53Z",
   "thresholds": {
     "low_threshold": 0,
     "med_threshold": 0,
@@ -136,17 +137,43 @@ When frontier returns information about an account it uses the following format:
   },
   "balances": [
     {
-      "balance": "1000000.0000000",
+      "balance": "5.0000000",
+      "limit": "1000.0000000",
+      "buying_liabilities": "0.0000000",
+      "selling_liabilities": "0.0000000",
+      "last_modified_ledger": 957774,
+      "is_authorized": true,
+      "is_authorized_to_maintain_liabilities": true,
+      "asset_type": "credit_alphanum4",
+      "asset_code": "EUR",
+      "asset_issuer": "GDCIQQY2UKVNLLWGIX74DMTEAFCMQKAKYUWPBO7PLTHIHRKSFZN7V2FC"
+    },
+    {
+      "balance": "50000.0000000",
       "limit": "922337203685.4775807",
       "buying_liabilities": "0.0000000",
       "selling_liabilities": "0.0000000",
-      "last_modified_ledger": 632070,
+      "last_modified_ledger": 958064,
+      "is_authorized": true,
+      "is_authorized_to_maintain_liabilities": true,
       "asset_type": "credit_alphanum4",
-      "asset_code": "FOO",
-      "asset_issuer": "GAGLYFZJMN5HEULSTH5CIGPOPAVUYPG5YSWIYDJMAPIECYEBPM2TA3QR"
+      "asset_code": "HUF",
+      "asset_issuer": "GCHQ6AOZST6YPMROCQWPE3SVFY57FHPYC3WJGGSFCHOQ5HFZC5HSHQYK"
     },
     {
-      "balance": "10000.0000000",
+      "balance": "10.0000000",
+      "limit": "1000.0000000",
+      "buying_liabilities": "0.0000000",
+      "selling_liabilities": "0.0000000",
+      "last_modified_ledger": 957671,
+      "is_authorized": true,
+      "is_authorized_to_maintain_liabilities": true,
+      "asset_type": "credit_alphanum4",
+      "asset_code": "USD",
+      "asset_issuer": "GB4RZUSF3HZGCAKB3VBM2S7QOHHC5KTV3LLZXGBYR5ZO4B26CKHFZTSZ"
+    },
+    {
+      "balance": "9999.9999500",
       "buying_liabilities": "0.0000000",
       "selling_liabilities": "0.0000000",
       "asset_type": "native"
@@ -154,31 +181,17 @@ When frontier returns information about an account it uses the following format:
   ],
   "signers": [
     {
-      "public_key": "GDLEPBJBC2VSKJCLJB264F2WDK63X4NKOG774A3QWVH2U6PERGDPUCS4",
       "weight": 1,
-      "key": "GDLEPBJBC2VSKJCLJB264F2WDK63X4NKOG774A3QWVH2U6PERGDPUCS4",
-      "type": "ed25519_public_key"
-    },
-    {
-      "public_key": "XCPNCUKYDHPMMH6TMHK73K5VP5A6ZTQ2L7Q74JR3TDANNFB3TMRS5OKG",
-      "weight": 1,
-      "key": "XCPNCUKYDHPMMH6TMHK73K5VP5A6ZTQ2L7Q74JR3TDANNFB3TMRS5OKG",
-      "type": "sha256_hash"
-    },
-    {
-      "public_key": "TABGGIW6EXOVOSNJ2O27U2DUX7RWHSRBGOKQLGYDTOXPANEX6LXBX7O7",
-      "weight": 1,
-      "key": "TABGGIW6EXOVOSNJ2O27U2DUX7RWHSRBGOKQLGYDTOXPANEX6LXBX7O7",
-      "type": "preauth_tx"
-    },
-    {
-      "public_key": "GBWRID7MPYUDBTNQPEHUN4XOBVVDPJOHYXAVW3UTOD2RG7BDAY6O3PHW",
-      "weight": 1,
-      "key": "GBWRID7MPYUDBTNQPEHUN4XOBVVDPJOHYXAVW3UTOD2RG7BDAY6O3PHW",
+      "key": "GDFOHLMYCXVZD2CDXZLMW6W6TMU4YO27XFF2IBAFAV66MSTPDDSK2LAY",
       "type": "ed25519_public_key"
     }
   ],
-  "data": {}
+  "data": {
+    "user-id": "WERCRm91bmRhdGlvbg=="
+  },
+  "num_sponsoring": 0,
+  "num_sponsored": 0,
+  "paging_token": "GDFOHLMYCXVZD2CDXZLMW6W6TMU4YO27XFF2IBAFAV66MSTPDDSK2LAY"
 }
 ```
 
