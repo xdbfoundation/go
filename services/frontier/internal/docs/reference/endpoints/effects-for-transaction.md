@@ -10,7 +10,7 @@ GET /transactions/{hash}/effects{?cursor,limit,order}
 
 | name | notes | description | example |
 | ---- | ----- | ----------- | ------- |
-| `hash` | required, string | A transaction hash, hex-encoded, lowercase. | `7e2050abc676003efc3eaadd623c927f753b7a6c37f50864bf284f4e1510d088` |
+| `hash` | required, string | A transaction hash, hex-encoded, lowercase. | `8b77f4b2a5af0d6fab04dd91a4f0dcc5006034506aebdd86e543d27781372f94` |
 | `?cursor` | optional, default _null_ | A paging token, specifying where to start returning records from. | `12884905984` |
 | `?order` | optional, string, default `asc` | The order in which to return rows, "asc" or "desc". | `asc` |
 | `?limit` | optional, number, default `10` | Maximum number of records to return. | `200` |
@@ -18,7 +18,7 @@ GET /transactions/{hash}/effects{?cursor,limit,order}
 ### curl Example Request
 
 ```sh
-curl "https://frontier.testnet.digitalbits.io/transactions/7e2050abc676003efc3eaadd623c927f753b7a6c37f50864bf284f4e1510d088/effects?limit=1"
+curl "https://frontier.testnet.digitalbits.io/transactions/8b77f4b2a5af0d6fab04dd91a4f0dcc5006034506aebdd86e543d27781372f94/effects?limit=1"
 ```
 
 ### JavaScript Example Request
@@ -28,11 +28,11 @@ var DigitalBitsSdk = require('digitalbits-sdk');
 var server = new DigitalBitsSdk.Server('https://frontier.testnet.digitalbits.io');
 
 server.effects()
-  .forTransaction("7e2050abc676003efc3eaadd623c927f753b7a6c37f50864bf284f4e1510d088")
+  .forTransaction("8b77f4b2a5af0d6fab04dd91a4f0dcc5006034506aebdd86e543d27781372f94")
   .call()
   .then(function (effectResults) {
     //page 1
-    console.log(effectResults.records)
+    console.log(JSON.stringify(effectResults.records))
   })
   .catch(function (err) {
     console.log(err)
@@ -47,86 +47,217 @@ This endpoint responds with a list of effects on the ledger as a result of a giv
 ### Example Response
 
 ```json
-{
-  "_links": {
-    "self": {
-      "href": "https://frontier.testnet.digitalbits.io/transactions/7e2050abc676003efc3eaadd623c927f753b7a6c37f50864bf284f4e1510d088/effects?cursor=&limit=10&order=asc"
-    },
-    "next": {
-      "href": "https://frontier.testnet.digitalbits.io/transactions/7e2050abc676003efc3eaadd623c927f753b7a6c37f50864bf284f4e1510d088/effects?cursor=1919197546291201-3&limit=10&order=asc"
-    },
-    "prev": {
-      "href": "https://frontier.testnet.digitalbits.io/transactions/7e2050abc676003efc3eaadd623c927f753b7a6c37f50864bf284f4e1510d088/effects?cursor=1919197546291201-1&limit=10&order=desc"
-    }
-  },
-  "_embedded": {
-    "records": [
-      {
-        "_links": {
-          "operation": {
-            "href": "https://frontier.testnet.digitalbits.io/operations/1919197546291201"
-          },
-          "succeeds": {
-            "href": "https://frontier.testnet.digitalbits.io/effects?order=desc&cursor=1919197546291201-1"
-          },
-          "precedes": {
-            "href": "https://frontier.testnet.digitalbits.io/effects?order=asc&cursor=1919197546291201-1"
-          }
-        },
-        "id": "0001919197546291201-0000000001",
-        "paging_token": "1919197546291201-1",
-        "account": "GBYUUJHG6F4EPJGNLERINATVQLNDOFRUD7SGJZ26YZLG5PAYLG7XUSGF",
-        "type": "account_created",
-        "type_i": 0,
-        "created_at": "2019-03-25T22:43:38Z",
-        "starting_balance": "10000.0000000"
+[
+  {
+    "_links": {
+      "operation": {
+        "href": "https://frontier.testnet.digitalbits.io/operations/1163936141313"
       },
-      {
-        "_links": {
-          "operation": {
-            "href": "https://frontier.testnet.digitalbits.io/operations/1919197546291201"
-          },
-          "succeeds": {
-            "href": "https://frontier.testnet.digitalbits.io/effects?order=desc&cursor=1919197546291201-2"
-          },
-          "precedes": {
-            "href": "https://frontier.testnet.digitalbits.io/effects?order=asc&cursor=1919197546291201-2"
-          }
-        },
-        "id": "0001919197546291201-0000000002",
-        "paging_token": "1919197546291201-2",
-        "account": "GAIH3ULLFQ4DGSECF2AR555KZ4KNDGEKN4AFI4SU2M7B43MGK3QJZNSR",
-        "type": "account_debited",
-        "type_i": 3,
-        "created_at": "2019-03-25T22:43:38Z",
-        "asset_type": "native",
-        "amount": "10000.0000000"
+      "succeeds": {
+        "href": "https://frontier.testnet.digitalbits.io/effects?order=desc&cursor=1163936141313-1"
       },
-      {
-        "_links": {
-          "operation": {
-            "href": "https://frontier.testnet.digitalbits.io/operations/1919197546291201"
-          },
-          "succeeds": {
-            "href": "https://frontier.testnet.digitalbits.io/effects?order=desc&cursor=1919197546291201-3"
-          },
-          "precedes": {
-            "href": "https://frontier.testnet.digitalbits.io/effects?order=asc&cursor=1919197546291201-3"
-          }
-        },
-        "id": "0001919197546291201-0000000003",
-        "paging_token": "1919197546291201-3",
-        "account": "GBYUUJHG6F4EPJGNLERINATVQLNDOFRUD7SGJZ26YZLG5PAYLG7XUSGF",
-        "type": "signer_created",
-        "type_i": 10,
-        "created_at": "2019-03-25T22:43:38Z",
-        "weight": 1,
-        "public_key": "GBYUUJHG6F4EPJGNLERINATVQLNDOFRUD7SGJZ26YZLG5PAYLG7XUSGF",
-        "key": ""
+      "precedes": {
+        "href": "https://frontier.testnet.digitalbits.io/effects?order=asc&cursor=1163936141313-1"
       }
-    ]
+    },
+    "id": "0000001163936141313-0000000001",
+    "paging_token": "1163936141313-1",
+    "account": "GBUIN5WAS6QARKMUUXKWH2MLACV7XYOB3NQNBZN4ZLCWXCVD7KT5S43P",
+    "type": "account_created",
+    "type_i": 0,
+    "created_at": "2021-04-13T13:57:06Z",
+    "starting_balance": "101.0000000"
+  },
+  {
+    "_links": {
+      "operation": {
+        "href": "https://frontier.testnet.digitalbits.io/operations/1163936141313"
+      },
+      "succeeds": {
+        "href": "https://frontier.testnet.digitalbits.io/effects?order=desc&cursor=1163936141313-2"
+      },
+      "precedes": {
+        "href": "https://frontier.testnet.digitalbits.io/effects?order=asc&cursor=1163936141313-2"
+      }
+    },
+    "id": "0000001163936141313-0000000002",
+    "paging_token": "1163936141313-2",
+    "account": "GC3CLEUNQVWY36AHTGGX2NASAPHD6EBQXE63YH2B3PAASLCCIG4ELGTP",
+    "type": "account_debited",
+    "type_i": 3,
+    "created_at": "2021-04-13T13:57:06Z",
+    "asset_type": "native",
+    "amount": "101.0000000"
+  },
+  {
+    "_links": {
+      "operation": {
+        "href": "https://frontier.testnet.digitalbits.io/operations/1163936141313"
+      },
+      "succeeds": {
+        "href": "https://frontier.testnet.digitalbits.io/effects?order=desc&cursor=1163936141313-3"
+      },
+      "precedes": {
+        "href": "https://frontier.testnet.digitalbits.io/effects?order=asc&cursor=1163936141313-3"
+      }
+    },
+    "id": "0000001163936141313-0000000003",
+    "paging_token": "1163936141313-3",
+    "account": "GBUIN5WAS6QARKMUUXKWH2MLACV7XYOB3NQNBZN4ZLCWXCVD7KT5S43P",
+    "type": "signer_created",
+    "type_i": 10,
+    "created_at": "2021-04-13T13:57:06Z",
+    "weight": 1,
+    "public_key": "GBUIN5WAS6QARKMUUXKWH2MLACV7XYOB3NQNBZN4ZLCWXCVD7KT5S43P",
+    "key": ""
+  },
+  {
+    "_links": {
+      "operation": {
+        "href": "https://frontier.testnet.digitalbits.io/operations/1163936141314"
+      },
+      "succeeds": {
+        "href": "https://frontier.testnet.digitalbits.io/effects?order=desc&cursor=1163936141314-1"
+      },
+      "precedes": {
+        "href": "https://frontier.testnet.digitalbits.io/effects?order=asc&cursor=1163936141314-1"
+      }
+    },
+    "id": "0000001163936141314-0000000001",
+    "paging_token": "1163936141314-1",
+    "account": "GCZEBR7M3M2EEBDFL77E4QTPABKYE4UF6UCD4CEOGLREM7YCHLJELB52",
+    "type": "account_created",
+    "type_i": 0,
+    "created_at": "2021-04-13T13:57:06Z",
+    "starting_balance": "101.0000000"
+  },
+  {
+    "_links": {
+      "operation": {
+        "href": "https://frontier.testnet.digitalbits.io/operations/1163936141314"
+      },
+      "succeeds": {
+        "href": "https://frontier.testnet.digitalbits.io/effects?order=desc&cursor=1163936141314-2"
+      },
+      "precedes": {
+        "href": "https://frontier.testnet.digitalbits.io/effects?order=asc&cursor=1163936141314-2"
+      }
+    },
+    "id": "0000001163936141314-0000000002",
+    "paging_token": "1163936141314-2",
+    "account": "GC3CLEUNQVWY36AHTGGX2NASAPHD6EBQXE63YH2B3PAASLCCIG4ELGTP",
+    "type": "account_debited",
+    "type_i": 3,
+    "created_at": "2021-04-13T13:57:06Z",
+    "asset_type": "native",
+    "amount": "101.0000000"
+  },
+  {
+    "_links": {
+      "operation": {
+        "href": "https://frontier.testnet.digitalbits.io/operations/1163936141314"
+      },
+      "succeeds": {
+        "href": "https://frontier.testnet.digitalbits.io/effects?order=desc&cursor=1163936141314-3"
+      },
+      "precedes": {
+        "href": "https://frontier.testnet.digitalbits.io/effects?order=asc&cursor=1163936141314-3"
+      }
+    },
+    "id": "0000001163936141314-0000000003",
+    "paging_token": "1163936141314-3",
+    "account": "GCZEBR7M3M2EEBDFL77E4QTPABKYE4UF6UCD4CEOGLREM7YCHLJELB52",
+    "type": "signer_created",
+    "type_i": 10,
+    "created_at": "2021-04-13T13:57:06Z",
+    "weight": 1,
+    "public_key": "GCZEBR7M3M2EEBDFL77E4QTPABKYE4UF6UCD4CEOGLREM7YCHLJELB52",
+    "key": ""
+  },
+  {
+    "_links": {
+      "operation": {
+        "href": "https://frontier.testnet.digitalbits.io/operations/1163936141315"
+      },
+      "succeeds": {
+        "href": "https://frontier.testnet.digitalbits.io/effects?order=desc&cursor=1163936141315-1"
+      },
+      "precedes": {
+        "href": "https://frontier.testnet.digitalbits.io/effects?order=asc&cursor=1163936141315-1"
+      }
+    },
+    "id": "0000001163936141315-0000000001",
+    "paging_token": "1163936141315-1",
+    "account": "GBOAZSYJZJEUADWSBDWX2PIYIDUFMJINM3ZOTOSEIBGPAMYAW7HDGMMC",
+    "type": "account_created",
+    "type_i": 0,
+    "created_at": "2021-04-13T13:57:06Z",
+    "starting_balance": "101.0000000"
+  },
+  {
+    "_links": {
+      "operation": {
+        "href": "https://frontier.testnet.digitalbits.io/operations/1163936141315"
+      },
+      "succeeds": {
+        "href": "https://frontier.testnet.digitalbits.io/effects?order=desc&cursor=1163936141315-2"
+      },
+      "precedes": {
+        "href": "https://frontier.testnet.digitalbits.io/effects?order=asc&cursor=1163936141315-2"
+      }
+    },
+    "id": "0000001163936141315-0000000002",
+    "paging_token": "1163936141315-2",
+    "account": "GC3CLEUNQVWY36AHTGGX2NASAPHD6EBQXE63YH2B3PAASLCCIG4ELGTP",
+    "type": "account_debited",
+    "type_i": 3,
+    "created_at": "2021-04-13T13:57:06Z",
+    "asset_type": "native",
+    "amount": "101.0000000"
+  },
+  {
+    "_links": {
+      "operation": {
+        "href": "https://frontier.testnet.digitalbits.io/operations/1163936141315"
+      },
+      "succeeds": {
+        "href": "https://frontier.testnet.digitalbits.io/effects?order=desc&cursor=1163936141315-3"
+      },
+      "precedes": {
+        "href": "https://frontier.testnet.digitalbits.io/effects?order=asc&cursor=1163936141315-3"
+      }
+    },
+    "id": "0000001163936141315-0000000003",
+    "paging_token": "1163936141315-3",
+    "account": "GBOAZSYJZJEUADWSBDWX2PIYIDUFMJINM3ZOTOSEIBGPAMYAW7HDGMMC",
+    "type": "signer_created",
+    "type_i": 10,
+    "created_at": "2021-04-13T13:57:06Z",
+    "weight": 1,
+    "public_key": "GBOAZSYJZJEUADWSBDWX2PIYIDUFMJINM3ZOTOSEIBGPAMYAW7HDGMMC",
+    "key": ""
+  },
+  {
+    "_links": {
+      "operation": {
+        "href": "https://frontier.testnet.digitalbits.io/operations/1163936141316"
+      },
+      "succeeds": {
+        "href": "https://frontier.testnet.digitalbits.io/effects?order=desc&cursor=1163936141316-1"
+      },
+      "precedes": {
+        "href": "https://frontier.testnet.digitalbits.io/effects?order=asc&cursor=1163936141316-1"
+      }
+    },
+    "id": "0000001163936141316-0000000001",
+    "paging_token": "1163936141316-1",
+    "account": "GCNQVT3Y2XXYKRJLPIDL5Q4SR64HBOSZNM6MLI2BWEVJIH2AEO3LICI4",
+    "type": "account_created",
+    "type_i": 0,
+    "created_at": "2021-04-13T13:57:06Z",
+    "starting_balance": "101.0000000"
   }
-}
+]
 ```
 
 ## Errors
