@@ -81,41 +81,27 @@ Attributes depend on effect type.
 ## Example
 
 ```json
-{
-  "_embedded": {
-    "records": [
-      {
-        "_links": {
-          "operation": {
-            "href": "/operations/141733924865"
-          },
-          "precedes": {
-            "href": "/effects?cursor=141733924865-1\u0026order=asc"
-          },
-          "succeeds": {
-            "href": "/effects?cursor=141733924865-1\u0026order=desc"
-          }
-        },
-        "account": "GBS43BF24ENNS3KPACUZVKK2VYPOZVBQO2CISGZ777RYGOPYC2FT6S3K",
-        "paging_token": "141733924865-1",
-        "starting_balance": "10000000.0",
-        "type_i": 0,
-        "type": "account_created"
+  {
+    "_links": {
+      "operation": {
+        "href": "https://frontier.testnet.digitalbits.io/operations/1099511631876"
+      },
+      "succeeds": {
+        "href": "https://frontier.testnet.digitalbits.io/effects?order=desc&cursor=1099511631876-1"
+      },
+      "precedes": {
+        "href": "https://frontier.testnet.digitalbits.io/effects?order=asc&cursor=1099511631876-1"
       }
-    ]
-  },
-  "_links": {
-    "next": {
-      "href": "/effects?order=asc\u0026limit=1\u0026cursor=141733924865-1"
     },
-    "prev": {
-      "href": "/effects?order=desc\u0026limit=1\u0026cursor=141733924865-1"
-    },
-    "self": {
-      "href": "/effects?order=asc\u0026limit=1\u0026cursor="
-    }
+    "id": "0000001099511631876-0000000001",
+    "paging_token": "1099511631876-1",
+    "account": "GA4E6NUVQE7UO6723X6BYVPZMV3CLYXV64KJOOJ7K37F7KYHUD2C6FV4",
+    "type": "account_created",
+    "type_i": 0,
+    "created_at": "2021-04-13T13:55:32Z",
+    "starting_balance": "101.0000000"
   }
-}
+
 ```
 
 ## Endpoints

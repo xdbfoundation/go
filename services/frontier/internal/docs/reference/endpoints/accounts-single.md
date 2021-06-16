@@ -19,12 +19,12 @@ GET /accounts/{account}
 
 | name | notes | description | example |
 | ---- | ----- | ----------- | ------- |
-| `account` | required, string | Account ID | `GD42RQNXTRIW6YR3E2HXV5T2AI27LBRHOERV2JIYNFMXOBA234SWLQQB` |
+| `account` | required, string | Account ID | `GDFOHLMYCXVZD2CDXZLMW6W6TMU4YO27XFF2IBAFAV66MSTPDDSK2LAY` |
 
 ### curl Example Request
 
 ```sh
-curl "https://frontier.testnet.digitalbits.io/accounts/GD42RQNXTRIW6YR3E2HXV5T2AI27LBRHOERV2JIYNFMXOBA234SWLQQB"
+curl "https://frontier.testnet.digitalbits.io/accounts/GDFOHLMYCXVZD2CDXZLMW6W6TMU4YO27XFF2IBAFAV66MSTPDDSK2LAY"
 ```
 
 ### JavaScript Example Request
@@ -34,10 +34,10 @@ var DigitalBitsSdk = require('digitalbits-sdk');
 var server = new DigitalBitsSdk.Server('https://frontier.testnet.digitalbits.io');
 
 server.accounts()
-  .accountId("GD42RQNXTRIW6YR3E2HXV5T2AI27LBRHOERV2JIYNFMXOBA234SWLQQB")
+  .accountId("GDFOHLMYCXVZD2CDXZLMW6W6TMU4YO27XFF2IBAFAV66MSTPDDSK2LAY")
   .call()
   .then(function (accountResult) {
-    console.log(accountResult);
+    console.log(JSON.stringify(accountResult));
   })
   .catch(function (err) {
     console.error(err);
@@ -53,43 +53,43 @@ This endpoint responds with the details of a single account for a given ID. See 
 {
   "_links": {
     "self": {
-      "href": "https://frontier.testnet.digitalbits.io/accounts/GD42RQNXTRIW6YR3E2HXV5T2AI27LBRHOERV2JIYNFMXOBA234SWLQQB"
+      "href": "https://frontier.testnet.digitalbits.io/accounts/GDFOHLMYCXVZD2CDXZLMW6W6TMU4YO27XFF2IBAFAV66MSTPDDSK2LAY"
     },
     "transactions": {
-      "href": "https://frontier.testnet.digitalbits.io/accounts/GD42RQNXTRIW6YR3E2HXV5T2AI27LBRHOERV2JIYNFMXOBA234SWLQQB/transactions{?cursor,limit,order}",
+      "href": "https://frontier.testnet.digitalbits.io/accounts/GDFOHLMYCXVZD2CDXZLMW6W6TMU4YO27XFF2IBAFAV66MSTPDDSK2LAY/transactions{?cursor,limit,order}",
       "templated": true
     },
     "operations": {
-      "href": "https://frontier.testnet.digitalbits.io/accounts/GD42RQNXTRIW6YR3E2HXV5T2AI27LBRHOERV2JIYNFMXOBA234SWLQQB/operations{?cursor,limit,order}",
+      "href": "https://frontier.testnet.digitalbits.io/accounts/GDFOHLMYCXVZD2CDXZLMW6W6TMU4YO27XFF2IBAFAV66MSTPDDSK2LAY/operations{?cursor,limit,order}",
       "templated": true
     },
     "payments": {
-      "href": "https://frontier.testnet.digitalbits.io/accounts/GD42RQNXTRIW6YR3E2HXV5T2AI27LBRHOERV2JIYNFMXOBA234SWLQQB/payments{?cursor,limit,order}",
+      "href": "https://frontier.testnet.digitalbits.io/accounts/GDFOHLMYCXVZD2CDXZLMW6W6TMU4YO27XFF2IBAFAV66MSTPDDSK2LAY/payments{?cursor,limit,order}",
       "templated": true
     },
     "effects": {
-      "href": "https://frontier.testnet.digitalbits.io/accounts/GD42RQNXTRIW6YR3E2HXV5T2AI27LBRHOERV2JIYNFMXOBA234SWLQQB/effects{?cursor,limit,order}",
+      "href": "https://frontier.testnet.digitalbits.io/accounts/GDFOHLMYCXVZD2CDXZLMW6W6TMU4YO27XFF2IBAFAV66MSTPDDSK2LAY/effects{?cursor,limit,order}",
       "templated": true
     },
     "offers": {
-      "href": "https://frontier.testnet.digitalbits.io/accounts/GD42RQNXTRIW6YR3E2HXV5T2AI27LBRHOERV2JIYNFMXOBA234SWLQQB/offers{?cursor,limit,order}",
+      "href": "https://frontier.testnet.digitalbits.io/accounts/GDFOHLMYCXVZD2CDXZLMW6W6TMU4YO27XFF2IBAFAV66MSTPDDSK2LAY/offers{?cursor,limit,order}",
       "templated": true
     },
     "trades": {
-      "href": "https://frontier.testnet.digitalbits.io/accounts/GD42RQNXTRIW6YR3E2HXV5T2AI27LBRHOERV2JIYNFMXOBA234SWLQQB/trades{?cursor,limit,order}",
+      "href": "https://frontier.testnet.digitalbits.io/accounts/GDFOHLMYCXVZD2CDXZLMW6W6TMU4YO27XFF2IBAFAV66MSTPDDSK2LAY/trades{?cursor,limit,order}",
       "templated": true
     },
     "data": {
-      "href": "https://frontier.testnet.digitalbits.io/accounts/GD42RQNXTRIW6YR3E2HXV5T2AI27LBRHOERV2JIYNFMXOBA234SWLQQB/data/{key}",
+      "href": "https://frontier.testnet.digitalbits.io/accounts/GDFOHLMYCXVZD2CDXZLMW6W6TMU4YO27XFF2IBAFAV66MSTPDDSK2LAY/data/{key}",
       "templated": true
     }
   },
-  "id": "GD42RQNXTRIW6YR3E2HXV5T2AI27LBRHOERV2JIYNFMXOBA234SWLQQB",
-  "paging_token": "",
-  "account_id": "GD42RQNXTRIW6YR3E2HXV5T2AI27LBRHOERV2JIYNFMXOBA234SWLQQB",
-  "sequence": 7275146318446606,
-  "last_modified_ledger": 22379074,
-  "subentry_count": 4,
+  "id": "GDFOHLMYCXVZD2CDXZLMW6W6TMU4YO27XFF2IBAFAV66MSTPDDSK2LAY",
+  "account_id": "GDFOHLMYCXVZD2CDXZLMW6W6TMU4YO27XFF2IBAFAV66MSTPDDSK2LAY",
+  "sequence": "4113023891406850",
+  "subentry_count": 2,
+  "last_modified_ledger": 957773,
+  "last_modified_time": "2021-06-16T09:08:23Z",
   "thresholds": {
     "low_threshold": 0,
     "med_threshold": 0,
@@ -102,18 +102,31 @@ This endpoint responds with the details of a single account for a given ID. See 
   },
   "balances": [
     {
-      "balance": "1000000.0000000",
-      "limit": "922337203685.4775807",
+      "balance": "5.0000000",
+      "limit": "1000.0000000",
       "buying_liabilities": "0.0000000",
       "selling_liabilities": "0.0000000",
-      "last_modified_ledger": 632070,
+      "last_modified_ledger": 957774,
       "is_authorized": true,
+      "is_authorized_to_maintain_liabilities": true,
       "asset_type": "credit_alphanum4",
-      "asset_code": "FOO",
-      "asset_issuer": "GAGLYFZJMN5HEULSTH5CIGPOPAVUYPG5YSWIYDJMAPIECYEBPM2TA3QR"
+      "asset_code": "EUR",
+      "asset_issuer": "GDCIQQY2UKVNLLWGIX74DMTEAFCMQKAKYUWPBO7PLTHIHRKSFZN7V2FC"
     },
     {
-      "balance": "10000.0000000",
+      "balance": "10.0000000",
+      "limit": "1000.0000000",
+      "buying_liabilities": "0.0000000",
+      "selling_liabilities": "0.0000000",
+      "last_modified_ledger": 957671,
+      "is_authorized": true,
+      "is_authorized_to_maintain_liabilities": true,
+      "asset_type": "credit_alphanum4",
+      "asset_code": "USD",
+      "asset_issuer": "GB4RZUSF3HZGCAKB3VBM2S7QOHHC5KTV3LLZXGBYR5ZO4B26CKHFZTSZ"
+    },
+    {
+      "balance": "9999.9999800",
       "buying_liabilities": "0.0000000",
       "selling_liabilities": "0.0000000",
       "asset_type": "native"
@@ -121,33 +134,15 @@ This endpoint responds with the details of a single account for a given ID. See 
   ],
   "signers": [
     {
-      "public_key": "GDLEPBJBC2VSKJCLJB264F2WDK63X4NKOG774A3QWVH2U6PERGDPUCS4",
       "weight": 1,
-      "key": "GDLEPBJBC2VSKJCLJB264F2WDK63X4NKOG774A3QWVH2U6PERGDPUCS4",
-      "type": "ed25519_public_key"
-    },
-    {
-      "public_key": "GBPOFUJUHOFTZHMZ63H5GE6NX5KVKQRD6N3I2E5AL3T2UG7HSLPLXN2K",
-      "weight": 1,
-      "key": "GBPOFUJUHOFTZHMZ63H5GE6NX5KVKQRD6N3I2E5AL3T2UG7HSLPLXN2K",
-      "type": "sha256_hash"
-    },
-    {
-      "public_key": "GDUDIN23QQTB23Q3Q6GUL6I7CEAQY4CWCFVRXFWPF4UJAQO47SPUFCXG",
-      "weight": 1,
-      "key": "GDUDIN23QQTB23Q3Q6GUL6I7CEAQY4CWCFVRXFWPF4UJAQO47SPUFCXG",
-      "type": "preauth_tx"
-    },
-    {
-      "public_key": "GD42RQNXTRIW6YR3E2HXV5T2AI27LBRHOERV2JIYNFMXOBA234SWLQQB",
-      "weight": 1,
-      "key": "GD42RQNXTRIW6YR3E2HXV5T2AI27LBRHOERV2JIYNFMXOBA234SWLQQB",
+      "key": "GDFOHLMYCXVZD2CDXZLMW6W6TMU4YO27XFF2IBAFAV66MSTPDDSK2LAY",
       "type": "ed25519_public_key"
     }
   ],
-  "data": {
-    "best_friend": "c3Ryb29weQ=="
-  }
+  "num_sponsoring": 0,
+  "num_sponsored": 0,
+  "paging_token": "GDFOHLMYCXVZD2CDXZLMW6W6TMU4YO27XFF2IBAFAV66MSTPDDSK2LAY",
+  "data_attr": {}
 }
 ```
 

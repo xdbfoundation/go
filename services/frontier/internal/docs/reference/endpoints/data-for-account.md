@@ -15,7 +15,7 @@ GET /accounts/{account}/data/{key}
 ### curl Example Request
 
 ```sh
-curl "https://frontier.testnet.digitalbits.io/accounts/GA2HGBJIJKI6O4XEM7CZWY5PS6GKSXL6D34ERAJYQSPYA6X6AI7HYW36/data/user-id"
+curl "https://frontier.testnet.digitalbits.io/accounts/GDFOHLMYCXVZD2CDXZLMW6W6TMU4YO27XFF2IBAFAV66MSTPDDSK2LAY/data/user-id"
 ```
 
 ### JavaScript Example Request
@@ -25,13 +25,13 @@ var DigitalBitsSdk = require('digitalbits-sdk');
 var server = new DigitalBitsSdk.Server('https://frontier.testnet.digitalbits.io');
 
 server.accounts()
-  .accountId("GAKLBGHNHFQ3BMUYG5KU4BEWO6EYQHZHAXEWC33W34PH2RBHZDSQBD75")
+  .accountId("GDFOHLMYCXVZD2CDXZLMW6W6TMU4YO27XFF2IBAFAV66MSTPDDSK2LAY")
   .call()
   .then(function (account) {
     return account.data({key: 'user-id'})
   })
   .then(function(dataValue) {
-    console.log(dataValue)
+    console.log(JSON.stringify(dataValue))
   })
   .catch(function (err) {
     console.log(err)
@@ -46,7 +46,7 @@ This endpoint responds with a value of the data field for the given account. See
 
 ```json
 {
-  "value": "MTAw"
+  "value": "WERCRm91bmRhdGlvbg=="
 }
 ```
 
