@@ -32,21 +32,22 @@ To learn more about the concept of assets in the DigitalBits network, take a loo
 
 ```json
 {
-  "_links": {
-    "toml": {
-      "href": "https://livenet.digitalbits.io/.well-known/digitalbits.toml"
+    "_links": {
+      "toml": {
+        "href": ""
+      }
+    },
+    "asset_type": "credit_alphanum4",
+    "asset_code": "EUR",
+    "asset_issuer": "GDCIQQY2UKVNLLWGIX74DMTEAFCMQKAKYUWPBO7PLTHIHRKSFZN7V2FC",
+    "paging_token": "EUR_GDCIQQY2UKVNLLWGIX74DMTEAFCMQKAKYUWPBO7PLTHIHRKSFZN7V2FC_credit_alphanum4",
+    "amount": "15.0000000",
+    "num_accounts": 2,
+    "flags": {
+      "auth_required": false,
+      "auth_revocable": false,
+      "auth_immutable": false
     }
-  },
-  "asset_type": "credit_alphanum4",
-  "asset_code": "USD",
-  "asset_issuer": "GBAUUA74H4XOQYRSOW2RZUA4QL5PB37U3JS5NE3RTB2ELJVMIF5RLMAG",
-  "paging_token": "USD_GBAUUA74H4XOQYRSOW2RZUA4QL5PB37U3JS5NE3RTB2ELJVMIF5RLMAG_credit_alphanum4",
-  "amount": "100.0000000",
-  "num_accounts": 91547871,
-  "flags": {
-    "auth_required": false,
-    "auth_revocable": false
-  }
 }
 ```
 
