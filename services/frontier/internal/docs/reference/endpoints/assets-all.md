@@ -15,7 +15,7 @@ GET /assets{?asset_code,asset_issuer,cursor,limit,order}
 | name | notes | description | example |
 | ---- | ----- | ----------- | ------- |
 | `?asset_code` | optional, string, default _null_ | Code of the Asset to filter by | `USD` |
-| `?asset_issuer` | optional, string, default _null_ | Issuer of the Asset to filter by | `GA2HGBJIJKI6O4XEM7CZWY5PS6GKSXL6D34ERAJYQSPYA6X6AI7HYW36` |
+| `?asset_issuer` | optional, string, default _null_ | Issuer of the Asset to filter by | `GB4RZUSF3HZGCAKB3VBM2S7QOHHC5KTV3LLZXGBYR5ZO4B26CKHFZTSZ` |
 | `?cursor` | optional, any, default _null_ | A paging token, specifying where to start returning records from. | `1` |
 | `?order` | optional, string, default `asc` | The order in which to return rows, "asc" or "desc", ordered by asset_code then by asset_issuer. | `asc` |
 | `?limit` | optional, number, default: `10` | Maximum number of records to return. | `200` |
@@ -36,7 +36,7 @@ var server = new DigitalBitsSdk.Server('https://frontier.testnet.digitalbits.io'
 server.assets()
   .call()
   .then(function (result) {
-    console.log(result.records);
+    console.log(JSON.stringify(result.records));
   })
   .catch(function (err) {
     console.log(err)
@@ -50,74 +50,80 @@ If called normally this endpoint responds with a [page](https://developers.digit
 ### Example Response
 
 ```json
-{
-  "_links": {
-    "self": {
-      "href": "/assets?order=asc\u0026limit=10\u0026cursor="
+[
+  {
+    "_links": {
+      "toml": {
+        "href": ""
+      }
     },
-    "next": {
-      "href": "/assets?order=asc\u0026limit=10\u0026cursor=3"
-    },
-    "prev": {
-      "href": "/assets?order=desc\u0026limit=10\u0026cursor=1"
+    "asset_type": "credit_alphanum4",
+    "asset_code": "EUR",
+    "asset_issuer": "GDCIQQY2UKVNLLWGIX74DMTEAFCMQKAKYUWPBO7PLTHIHRKSFZN7V2FC",
+    "paging_token": "EUR_GDCIQQY2UKVNLLWGIX74DMTEAFCMQKAKYUWPBO7PLTHIHRKSFZN7V2FC_credit_alphanum4",
+    "amount": "15.0000000",
+    "num_accounts": 2,
+    "flags": {
+      "auth_required": false,
+      "auth_revocable": false,
+      "auth_immutable": false
     }
   },
-  "_embedded": {
-    "records": [
-      {
-        "_links": {
-          "toml": {
-            "href": "https://livenet.digitalbits.io/.well-known/digitalbits.toml"
-          }
-        },
-        "asset_type": "credit_alphanum12",
-        "asset_code": "BANANA",
-        "asset_issuer": "GDSBCQO34HWPGUGQSP3QBFEXVTSR2PW46UIGTHVWGWJGQKH3AFNHXHXN",
-        "paging_token": "BANANA_GDSBCQO34HWPGUGQSP3QBFEXVTSR2PW46UIGTHVWGWJGQKH3AFNHXHXN_credit_alphanum4",
-        "amount": "10000.0000000",
-        "num_accounts": 2126,
-        "flags": {
-          "auth_required": true,
-          "auth_revocable": false
-        }
-      },
-      {
-        "_links": {
-          "toml": {
-            "href": "https://livenet.digitalbits.io/.well-known/digitalbits.toml"
-          }
-        },
-        "asset_type": "credit_alphanum4",
-        "asset_code": "BTC",
-        "asset_issuer": "GBAUUA74H4XOQYRSOW2RZUA4QL5PB37U3JS5NE3RTB2ELJVMIF5RLMAG",
-        "paging_token": "BTC_GBAUUA74H4XOQYRSOW2RZUA4QL5PB37U3JS5NE3RTB2ELJVMIF5RLMAG_credit_alphanum4",
-        "amount": "5000.0000000",
-        "num_accounts": 32,
-        "flags": {
-          "auth_required": false,
-          "auth_revocable": false
-        }
-      },
-      {
-        "_links": {
-          "toml": {
-            "href": "https://livenet.digitalbits.io/.well-known/digitalbits.toml"
-          }
-        },
-        "asset_type": "credit_alphanum4",
-        "asset_code": "USD",
-        "asset_issuer": "GBAUUA74H4XOQYRSOW2RZUA4QL5PB37U3JS5NE3RTB2ELJVMIF5RLMAG",
-        "paging_token": "USD_GBAUUA74H4XOQYRSOW2RZUA4QL5PB37U3JS5NE3RTB2ELJVMIF5RLMAG_credit_alphanum4",
-        "amount": "1000000000.0000000",
-        "num_accounts": 91547871,
-        "flags": {
-          "auth_required": false,
-          "auth_revocable": false
-        }
+  {
+    "_links": {
+      "toml": {
+        "href": ""
       }
-    ]
+    },
+    "asset_type": "credit_alphanum4",
+    "asset_code": "HUF",
+    "asset_issuer": "GCHQ6AOZST6YPMROCQWPE3SVFY57FHPYC3WJGGSFCHOQ5HFZC5HSHQYK",
+    "paging_token": "HUF_GCHQ6AOZST6YPMROCQWPE3SVFY57FHPYC3WJGGSFCHOQ5HFZC5HSHQYK_credit_alphanum4",
+    "amount": "50000.0000000",
+    "num_accounts": 1,
+    "flags": {
+      "auth_required": false,
+      "auth_revocable": false,
+      "auth_immutable": false
+    }
+  },
+  {
+    "_links": {
+      "toml": {
+        "href": ""
+      }
+    },
+    "asset_type": "credit_alphanum4",
+    "asset_code": "UAH",
+    "asset_issuer": "GCHQ6AOZST6YPMROCQWPE3SVFY57FHPYC3WJGGSFCHOQ5HFZC5HSHQYK",
+    "paging_token": "UAH_GCHQ6AOZST6YPMROCQWPE3SVFY57FHPYC3WJGGSFCHOQ5HFZC5HSHQYK_credit_alphanum4",
+    "amount": "10.0000000",
+    "num_accounts": 1,
+    "flags": {
+      "auth_required": false,
+      "auth_revocable": false,
+      "auth_immutable": false
+    }
+  },
+  {
+    "_links": {
+      "toml": {
+        "href": ""
+      }
+    },
+    "asset_type": "credit_alphanum4",
+    "asset_code": "USD",
+    "asset_issuer": "GB4RZUSF3HZGCAKB3VBM2S7QOHHC5KTV3LLZXGBYR5ZO4B26CKHFZTSZ",
+    "paging_token": "USD_GB4RZUSF3HZGCAKB3VBM2S7QOHHC5KTV3LLZXGBYR5ZO4B26CKHFZTSZ_credit_alphanum4",
+    "amount": "10.0000000",
+    "num_accounts": 1,
+    "flags": {
+      "auth_required": false,
+      "auth_revocable": false,
+      "auth_immutable": false
+    }
   }
-}
+]
 ```
 
 ## Possible Errors
