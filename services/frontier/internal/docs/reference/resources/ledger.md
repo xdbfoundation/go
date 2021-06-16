@@ -7,8 +7,8 @@ To learn more about the concept of ledgers in the DigitalBits network, take a lo
 | Attribute                    | Type   |                                                                                                                              |
 |------------------------------|--------|------------------------------------------------------------------------------------------------------------------------------|
 | id                           | string | The id is a unique identifier for this ledger.                                                                               |
-| paging_token                 | number | A [paging token](./page.md) suitable for use as a `cursor` parameter.                                                        |
-| hash                         | string | A hex-encoded, lowercase SHA-256 hash of the ledger's [XDR](../../learn/xdr.md)-encoded form.                                |
+| paging_token                 | number | A [paging token](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/resources/page) suitable for use as a `cursor` parameter.                                                        |
+| hash                         | string | A hex-encoded, lowercase SHA-256 hash of the ledger's [XDR](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/xdr)-encoded form.                                |
 | prev_hash                    | string | The hash of the ledger that chronologically came before this one.                                                            |
 | sequence                     | number | Sequence number of this ledger, suitable for use as the as the :id parameter for url templates that require a ledger number. |
 | successful_transaction_count | number | The number of successful transactions in this ledger.                                                                        |
@@ -29,10 +29,10 @@ To learn more about the concept of ledgers in the DigitalBits network, take a lo
 ## Links
 |              | Example                                           | Relation                        | templated |
 |--------------|---------------------------------------------------|---------------------------------|-----------|
-| self         | `/ledgers/500`                                    |                                 |           |
-| effects      | `/ledgers/500/effects/{?cursor,limit,order}`      | The effects in this transaction | true      |
-| operations   | `/ledgers/500/operations/{?cursor,limit,order}`   | The operations in this ledger   | true      |
-| transactions | `/ledgers/500/transactions/{?cursor,limit,order}` | The transactions in this ledger | true      |
+| self         | `/ledgers/957773`                                    |                                 |           |
+| effects      | `/ledgers/957773/effects/{?cursor,limit,order}`      | The effects in this transaction | true      |
+| operations   | `/ledgers/957773/operations/{?cursor,limit,order}`   | The operations in this ledger   | true      |
+| transactions | `/ledgers/957773/transactions/{?cursor,limit,order}` | The transactions in this ledger | true      |
 
 
 ## Example
@@ -40,43 +40,45 @@ To learn more about the concept of ledgers in the DigitalBits network, take a lo
 ```json
 {
   "_links": {
-    "effects": {
-      "href": "/ledgers/500/effects/{?cursor,limit,order}",
+    "self": {
+      "href": "https://frontier.testnet.digitalbits.io/ledgers/957773"
+    },
+    "transactions": {
+      "href": "https://frontier.testnet.digitalbits.io/ledgers/957773/transactions{?cursor,limit,order}",
       "templated": true
     },
     "operations": {
-      "href": "/ledgers/500/operations/{?cursor,limit,order}",
+      "href": "https://frontier.testnet.digitalbits.io/ledgers/957773/operations{?cursor,limit,order}",
       "templated": true
     },
-    "self": {
-      "href": "/ledgers/500"
+    "payments": {
+      "href": "https://frontier.testnet.digitalbits.io/ledgers/957773/payments{?cursor,limit,order}",
+      "templated": true
     },
-    "transactions": {
-      "href": "/ledgers/500/transactions/{?cursor,limit,order}",
+    "effects": {
+      "href": "https://frontier.testnet.digitalbits.io/ledgers/957773/effects{?cursor,limit,order}",
       "templated": true
     }
   },
-  "id": "689f00d4824b8e69330bf4ad7eb10092ff2f8fdb76d4668a41eebb9469ef7f30",
-  "paging_token": "2147483648000",
-  "hash": "689f00d4824b8e69330bf4ad7eb10092ff2f8fdb76d4668a41eebb9469ef7f30",
-  "prev_hash": "b608e110c7cc58200c912140f121af50dc5ef407aabd53b76e1741080aca1cf0",
-  "sequence": 500,
-  "transaction_count": 0,
-  "successful_transaction_count": 0,
+  "id": "65e18185725ec118092b4915e341c7c75917738b238bee8998deead91946be75",
+  "paging_token": "4113603711991808",
+  "hash": "65e18185725ec118092b4915e341c7c75917738b238bee8998deead91946be75",
+  "prev_hash": "d5c1154590395e887757be1809a48135d2ca8822e505ef50f52065f0cb21c1eb",
+  "sequence": 957773,
+  "successful_transaction_count": 1,
   "failed_transaction_count": 0,
-  "operation_count": 0,
-  "tx_set_operation_count": 0,
-  "closed_at": "2015-07-09T21:39:28Z",
-  "total_coins": "100000000000.0000000",
-  "fee_pool": "0.0025600",
-  "base_fee": 100,
-  "base_reserve": "10.0000000",
-  "max_tx_set_size": 50,
-  "protocol_version": 8,
-  "header_xdr": "...",
+  "operation_count": 1,
+  "tx_set_operation_count": 1,
+  "closed_at": "2021-06-16T09:08:23Z",
+  "total_coins": "20000000000.0000000",
+  "fee_pool": "0.0206000",
   "base_fee_in_nibbs": 100,
-  "base_reserve_in_nibbs": 100000000
+  "base_reserve_in_nibbs": 100000000,
+  "max_tx_set_size": 100,
+  "protocol_version": 15,
+  "header_xdr": "AAAAD9XBFUWQOV6Id1e+GAmkgTXSyogi5QXvUPUgZfDLIcHrux5WF1JwRkTjTUEZ93mXRq4N8U6Xp53revUuRqqGiksAAAAAYMm/hwAAAAAAAAABAAAAAKvZnpGcHWYsIfQkvokpnA88t6aedQMkQ3LW/icyV30jAAAAQNqKT73RmwY7exn3h85m8RAlZ57SXrMH/TfYk6Gxvy1owUiHbyL1m1LcWDfjGLY429i3Ppwqb+XW35132vSOFgjTwPMb1bVYrBmvDFs/huBlb3dyFHWxx0guIrpv+rJCRlm1t9zYqfOiTdbG7MebuJxNp/r7H+dD0foh9v12OJ3FAA6dTQLGivC7FAAAAAAAAAADJLAAAAAAAAAAAAAAAAAAAABkBfXhAAAAAGSaOd07uLsDMIPf6nvuLuj6ev7+suXe3mfFES+inzTMUbGnoJtIrqPU36tDFU4XORBgsCvIi04GG/A0tVIWclCY2pL7Nkua71s2zrhLvP2xk17wI1QdTs2NbP8p4hUvqO96TzEzCTu1IfbrP9QD0x0cN77mrkt2Hhi4BP6sYQcbDgAAAAA="
 }
+
 ```
 
 ## Endpoints

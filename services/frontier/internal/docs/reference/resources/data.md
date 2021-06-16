@@ -12,6 +12,6 @@ When frontier returns information about a single account data key it uses the fo
 
 ```json
 {
-  "value": "MTAw"
+  "value": "WERCRm91bmRhdGlvbg=="
 }
 ```
