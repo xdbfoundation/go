@@ -1,8 +1,3 @@
----
-title: Operation
-replacement: https://developers.digitalbits.org/api/resources/operations/
----
-
 [Operations](https://developers.digitalbits.io/guides/docs/guides/concepts/operations) are objects that represent a desired change to the ledger: payments,
 offers to exchange currency, changes made to account options, etc.  Operations
 are submitted to the DigitalBits network grouped in a [Transaction](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/resources/transaction).
@@ -76,30 +71,50 @@ Create Account operation represents a new account creation.
 ```json
 {
   "_links": {
-    "effects": {
-      "href": "/operations/402494270214144/effects/{?cursor,limit,order}",
-      "templated": true
-    },
-    "precedes": {
-      "href": "/operations?cursor=402494270214144&order=asc"
-    },
     "self": {
-      "href": "/operations/402494270214144"
+      "href": "https://frontier.testnet.digitalbits.io/transactions/a94ea88f6de5d4a9018c536096921879ff04053d6a865b3810b548ef7854bfae/operations?cursor=&limit=10&order=asc"
     },
-    "succeeds": {
-      "href": "/operations?cursor=402494270214144&order=desc"
+    "next": {
+      "href": "https://frontier.testnet.digitalbits.io/transactions/a94ea88f6de5d4a9018c536096921879ff04053d6a865b3810b548ef7854bfae/operations?cursor=4126119246696449&limit=10&order=asc"
     },
-    "transactions": {
-      "href": "/transactions/402494270214144"
+    "prev": {
+      "href": "https://frontier.testnet.digitalbits.io/transactions/a94ea88f6de5d4a9018c536096921879ff04053d6a865b3810b548ef7854bfae/operations?cursor=4126119246696449&limit=10&order=desc"
     }
   },
-  "account": "GCEZWKCA5VLDNRLN3RPRJMRZOX3Z6G5CHCGSNFHEYVXM3XOJMDS674JZ",
-  "funder": "GBIA4FH6TV64KSPDAJCNUQSM7PFL4ILGUVJDPCLUOPJ7ONMKBBVUQHRO",
-  "id": "402494270214144",
-  "paging_token": "402494270214144",
-  "starting_balance": "10000.0",
-  "type_i": 0,
-  "type": "create_account"
+  "_embedded": {
+    "records": [
+      {
+        "_links": {
+          "self": {
+            "href": "https://frontier.testnet.digitalbits.io/operations/4126119246696449"
+          },
+          "transaction": {
+            "href": "https://frontier.testnet.digitalbits.io/transactions/a94ea88f6de5d4a9018c536096921879ff04053d6a865b3810b548ef7854bfae"
+          },
+          "effects": {
+            "href": "https://frontier.testnet.digitalbits.io/operations/4126119246696449/effects"
+          },
+          "succeeds": {
+            "href": "https://frontier.testnet.digitalbits.io/effects?order=desc&cursor=4126119246696449"
+          },
+          "precedes": {
+            "href": "https://frontier.testnet.digitalbits.io/effects?order=asc&cursor=4126119246696449"
+          }
+        },
+        "id": "4126119246696449",
+        "paging_token": "4126119246696449",
+        "transaction_successful": true,
+        "source_account": "GC3CLEUNQVWY36AHTGGX2NASAPHD6EBQXE63YH2B3PAASLCCIG4ELGTP",
+        "type": "create_account",
+        "type_i": 0,
+        "created_at": "2021-06-16T13:46:30Z",
+        "transaction_hash": "a94ea88f6de5d4a9018c536096921879ff04053d6a865b3810b548ef7854bfae",
+        "starting_balance": "10000.0000000",
+        "funder": "GC3CLEUNQVWY36AHTGGX2NASAPHD6EBQXE63YH2B3PAASLCCIG4ELGTP",
+        "account": "GDZTA2VF4L3PKQYGKZO3OM4NNHD2WIPWFGRXHJTVOPQWITQ7PJEKBDD5"
+      }
+    ]
+  }
 }
 ```
 
@@ -124,41 +139,45 @@ can be either a simple native asset payment or a fiat asset payment.
 
 |          | Example                                                            | Relation          |
 |----------|--------------------------------------------------------------------|-------------------|
-| sender   | `/accounts/GA5WBPYA5Y4WAEHXWR2UKO2UO4BUGHUQ74EUPKON2QHV4WRHOIRNKKH2` | Sending account   |
-| receiver | `/accounts/GCEZWKCA5VLDNRLN3RPRJMRZOX3Z6G5CHCGSNFHEYVXM3XOJMDS674JZ` | Receiving account |
+| sender   | `/accounts/GCHQ6AOZST6YPMROCQWPE3SVFY57FHPYC3WJGGSFCHOQ5HFZC5HSHQYK` | Sending account   |
+| receiver | `/accounts/GCKY3VKRJDSRORRMHRDHA6IKRXMGSBRZE42P64AHX4NHVGB3Y224WM3M` | Receiving account |
 
 #### Example
 
 ```json
-{
-  "_links": {
-    "effects": {
-      "href": "/operations/58402965295104/effects/{?cursor,limit,order}",
-      "templated": true
+  {
+    "_links": {
+      "self": {
+        "href": "https://frontier.testnet.digitalbits.io/operations/4109381759143937"
+      },
+      "transaction": {
+        "href": "https://frontier.testnet.digitalbits.io/transactions/f50342ab33a932dceb23bb44cbc03a13515563a07c51d3e76ecb430163345bec"
+      },
+      "effects": {
+        "href": "https://frontier.testnet.digitalbits.io/operations/4109381759143937/effects"
+      },
+      "succeeds": {
+        "href": "https://frontier.testnet.digitalbits.io/effects?order=desc&cursor=4109381759143937"
+      },
+      "precedes": {
+        "href": "https://frontier.testnet.digitalbits.io/effects?order=asc&cursor=4109381759143937"
+      }
     },
-    "precedes": {
-      "href": "/operations?cursor=58402965295104&order=asc"
-    },
-    "self": {
-      "href": "/operations/58402965295104"
-    },
-    "succeeds": {
-      "href": "/operations?cursor=58402965295104&order=desc"
-    },
-    "transactions": {
-      "href": "/transactions/58402965295104"
-    }
-  },
-  "amount": "200.0",
-  "asset_type": "native",
-  "from": "GAKLBGHNHFQ3BMUYG5KU4BEWO6EYQHZHAXEWC33W34PH2RBHZDSQBD75",
-  "id": "58402965295104",
-  "paging_token": "58402965295104",
-  "to": "GCEZWKCA5VLDNRLN3RPRJMRZOX3Z6G5CHCGSNFHEYVXM3XOJMDS674JZ",
-  "transaction_successful": true,
-  "type_i": 1,
-  "type": "payment"
-}
+    "id": "4109381759143937",
+    "paging_token": "4109381759143937",
+    "transaction_successful": true,
+    "source_account": "GCHQ6AOZST6YPMROCQWPE3SVFY57FHPYC3WJGGSFCHOQ5HFZC5HSHQYK",
+    "type": "payment",
+    "type_i": 1,
+    "created_at": "2021-06-16T07:35:18Z",
+    "transaction_hash": "f50342ab33a932dceb23bb44cbc03a13515563a07c51d3e76ecb430163345bec",
+    "asset_type": "credit_alphanum4",
+    "asset_code": "UAH",
+    "asset_issuer": "GCHQ6AOZST6YPMROCQWPE3SVFY57FHPYC3WJGGSFCHOQ5HFZC5HSHQYK",
+    "from": "GCHQ6AOZST6YPMROCQWPE3SVFY57FHPYC3WJGGSFCHOQ5HFZC5HSHQYK",
+    "to": "GCKY3VKRJDSRORRMHRDHA6IKRXMGSBRZE42P64AHX4NHVGB3Y224WM3M",
+    "amount": "10.0000000"
+  }
 ```
 
 <a id="path-payment"></a>
@@ -533,39 +552,42 @@ Use “Set Options” operation to set following options to your account:
 ```json
 {
   "_links": {
-    "effects": {
-      "href": "/operations/696867033714691/effects{?cursor,limit,order}",
-      "templated": true
-    },
-    "precedes": {
-      "href": "/operations?cursor=696867033714691\u0026order=asc"
-    },
     "self": {
-      "href": "/operations/696867033714691"
+      "href": "https://frontier.testnet.digitalbits.io/operations/4126510088720385/effects?cursor=&limit=10&order=asc"
     },
-    "succeeds": {
-      "href": "/operations?cursor=696867033714691\u0026order=desc"
+    "next": {
+      "href": "https://frontier.testnet.digitalbits.io/operations/4126510088720385/effects?cursor=4126510088720385-1&limit=10&order=asc"
     },
-    "transaction": {
-      "href": "/transactions/696867033714688"
+    "prev": {
+      "href": "https://frontier.testnet.digitalbits.io/operations/4126510088720385/effects?cursor=4126510088720385-1&limit=10&order=desc"
     }
   },
-  "high_threshold": 3,
-  "home_domain": "digitalbits.org",
-  "id": "696867033714691",
-  "low_threshold": 0,
-  "med_threshold": 3,
-  "paging_token": "696867033714691",
-  "set_flags": [
-    1
-  ],
-  "set_flags_s": [
-    "auth_required_flag"
-  ],
-  "transaction_successful": true,
-  "type_i": 5,
-  "type": "set_options"
+  "_embedded": {
+    "records": [
+      {
+        "_links": {
+          "operation": {
+            "href": "https://frontier.testnet.digitalbits.io/operations/4126510088720385"
+          },
+          "succeeds": {
+            "href": "https://frontier.testnet.digitalbits.io/effects?order=desc&cursor=4126510088720385-1"
+          },
+          "precedes": {
+            "href": "https://frontier.testnet.digitalbits.io/effects?order=asc&cursor=4126510088720385-1"
+          }
+        },
+        "id": "0004126510088720385-0000000001",
+        "paging_token": "4126510088720385-1",
+        "account": "GCHQ6AOZST6YPMROCQWPE3SVFY57FHPYC3WJGGSFCHOQ5HFZC5HSHQYK",
+        "type": "account_home_domain_updated",
+        "type_i": 5,
+        "created_at": "2021-06-16T13:55:12Z",
+        "home_domain": "developers.digitalbits.io"
+      }
+    ]
+  }
 }
+
 ```
 
 <a id="change-trust"></a>
@@ -589,35 +611,38 @@ Use “Change Trust” operation to create/update/delete a trust line from the s
 ```json
 {
   "_links": {
-    "effects": {
-      "href": "/operations/574731048718337/effects{?cursor,limit,order}",
-      "templated": true
-    },
-    "precedes": {
-      "href": "/operations?cursor=574731048718337\u0026order=asc"
-    },
     "self": {
-      "href": "/operations/574731048718337"
-    },
-    "succeeds": {
-      "href": "/operations?cursor=574731048718337\u0026order=desc"
+      "href": "https://frontier.testnet.digitalbits.io/operations/4113161330364417"
     },
     "transaction": {
-      "href": "/transactions/574731048718336"
+      "href": "https://frontier.testnet.digitalbits.io/transactions/49d8adc71d64c6fba21883a59ffc3239194b6ace7b889f2835eda92d8bb41f0b"
+    },
+    "effects": {
+      "href": "https://frontier.testnet.digitalbits.io/operations/4113161330364417/effects"
+    },
+    "succeeds": {
+      "href": "https://frontier.testnet.digitalbits.io/effects?order=desc&cursor=4113161330364417"
+    },
+    "precedes": {
+      "href": "https://frontier.testnet.digitalbits.io/effects?order=asc&cursor=4113161330364417"
     }
   },
-  "asset_code": "CHP",
-  "asset_issuer": "GAC2ZUXVI5266NMMGDPBMXHH4BTZKJ7MMTGXRZGX2R5YLMFRYLJ7U5EA",
-  "asset_type": "credit_alphanum4",
-  "id": "574731048718337",
-  "limit": "5.0",
-  "paging_token": "574731048718337",
-  "trustee": "GAC2ZUXVI5266NMMGDPBMXHH4BTZKJ7MMTGXRZGX2R5YLMFRYLJ7U5EA",
-  "trustor": "GDVXG2FMFFSUMMMBIUEMWPZAIU2FNCH7QNGJMWRXRD6K5FZK5KJS4DDR",
+  "id": "4113161330364417",
+  "paging_token": "4113161330364417",
   "transaction_successful": true,
+  "source_account": "GDFOHLMYCXVZD2CDXZLMW6W6TMU4YO27XFF2IBAFAV66MSTPDDSK2LAY",
+  "type": "change_trust",
   "type_i": 6,
-  "type": "change_trust"
+  "created_at": "2021-06-16T08:58:29Z",
+  "transaction_hash": "49d8adc71d64c6fba21883a59ffc3239194b6ace7b889f2835eda92d8bb41f0b",
+  "asset_type": "credit_alphanum4",
+  "asset_code": "USD",
+  "asset_issuer": "GB4RZUSF3HZGCAKB3VBM2S7QOHHC5KTV3LLZXGBYR5ZO4B26CKHFZTSZ",
+  "limit": "1000.0000000",
+  "trustee": "GB4RZUSF3HZGCAKB3VBM2S7QOHHC5KTV3LLZXGBYR5ZO4B26CKHFZTSZ",
+  "trustor": "GDFOHLMYCXVZD2CDXZLMW6W6TMU4YO27XFF2IBAFAV66MSTPDDSK2LAY"
 }
+
 ```
 
 <a id="allow-trust"></a>
@@ -762,30 +787,33 @@ Set, modify or delete a Data Entry (name/value pair) for an account.
 {
   "_links": {
     "self": {
-      "href": "/operations/5250180907536385"
+      "href": "https://frontier.testnet.digitalbits.io/operations/4115467727802369"
     },
     "transaction": {
-      "href": "/transactions/e0710d3e410fe6b1ba77fcfec9e3789e94ff29b2424f1f4bf51e530dbbdf221c"
+      "href": "https://frontier.testnet.digitalbits.io/transactions/896ebf830df1ad883603a9b08a3486110e8a81e877fb4078f8edb341d38266c9"
     },
     "effects": {
-      "href": "/operations/5250180907536385/effects"
+      "href": "https://frontier.testnet.digitalbits.io/operations/4115467727802369/effects"
     },
     "succeeds": {
-      "href": "/effects?order=desc&cursor=5250180907536385"
+      "href": "https://frontier.testnet.digitalbits.io/effects?order=desc&cursor=4115467727802369"
     },
     "precedes": {
-      "href": "/effects?order=asc&cursor=5250180907536385"
+      "href": "https://frontier.testnet.digitalbits.io/effects?order=asc&cursor=4115467727802369"
     }
   },
-  "id": "5250180907536385",
-  "paging_token": "5250180907536385",
-  "source_account": "GCGG3CIRBG2TTBR4HYZJ7JLDRFKZIYOAHFXRWLU62CA2QN52P2SUQNPJ",
+  "id": "4115467727802369",
+  "paging_token": "4115467727802369",
+  "transaction_successful": true,
+  "source_account": "GDFOHLMYCXVZD2CDXZLMW6W6TMU4YO27XFF2IBAFAV66MSTPDDSK2LAY",
   "type": "manage_data",
   "type_i": 10,
-  "transaction_successful": true,
-  "name": "lang",
-  "value": "aW5kb25lc2lhbg=="
+  "created_at": "2021-06-16T09:49:53Z",
+  "transaction_hash": "896ebf830df1ad883603a9b08a3486110e8a81e877fb4078f8edb341d38266c9",
+  "name": "user-id",
+  "value": "WERCRm91bmRhdGlvbg=="
 }
+
 ```
 
 <a id="bump-sequence"></a>
