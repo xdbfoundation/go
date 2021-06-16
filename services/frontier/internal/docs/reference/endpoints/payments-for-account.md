@@ -23,7 +23,7 @@ GET /accounts/{id}/payments{?cursor,limit,order}
 
 | name | notes | description | example |
 | ---- | ----- | ----------- | ------- |
-| `id` | required, string | The account id of the account used to constrain results. | `GCEZWKCA5VLDNRLN3RPRJMRZOX3Z6G5CHCGSNFHEYVXM3XOJMDS674JZ` |
+| `id` | required, string | The account id of the account used to constrain results. | `GCKY3VKRJDSRORRMHRDHA6IKRXMGSBRZE42P64AHX4NHVGB3Y224WM3M` |
 | `?cursor` | optional, default _null_ | A payment paging token specifying from where to begin results. When streaming this can be set to `now` to stream object created since your request time. | `8589934592` |
 | `?limit` | optional, number, default `10` | Specifies the count of records at most to return. | `200` |
 | `?order` | optional, string, default `asc` | Specifies order of returned results. `asc` means older payments first, `desc` mean newer payments first. | `desc` |
@@ -34,7 +34,7 @@ GET /accounts/{id}/payments{?cursor,limit,order}
 
 ```bash
 # Retrieve the 25 latest payments for a specific account.
-curl "https://frontier.testnet.digitalbits.io/accounts/GCEZWKCA5VLDNRLN3RPRJMRZOX3Z6G5CHCGSNFHEYVXM3XOJMDS674JZ/payments?limit=25&order=desc"
+curl "https://frontier.testnet.digitalbits.io/accounts/GCKY3VKRJDSRORRMHRDHA6IKRXMGSBRZE42P64AHX4NHVGB3Y224WM3M/payments?limit=25&order=desc"
 ```
 
 ### JavaScript Example Request
@@ -44,10 +44,10 @@ var DigitalBitsSdk = require('digitalbits-sdk');
 var server = new DigitalBitsSdk.Server('https://frontier.testnet.digitalbits.io');
 
 server.payments()
-  .forAccount("GCEZWKCA5VLDNRLN3RPRJMRZOX3Z6G5CHCGSNFHEYVXM3XOJMDS674JZ")
+  .forAccount("GCKY3VKRJDSRORRMHRDHA6IKRXMGSBRZE42P64AHX4NHVGB3Y224WM3M")
   .call()
   .then(function (accountResult) {
-    console.log(accountResult);
+    console.log(JSON.stingify(accountResult));
   })
   .catch(function (err) {
     console.error(err);
@@ -65,7 +65,7 @@ var paymentHandler = function (paymentResponse) {
 };
 
 var es = server.payments()
-  .forAccount("GCEZWKCA5VLDNRLN3RPRJMRZOX3Z6G5CHCGSNFHEYVXM3XOJMDS674JZ")
+  .forAccount("GCKY3VKRJDSRORRMHRDHA6IKRXMGSBRZE42P64AHX4NHVGB3Y224WM3M")
   .cursor('now')
   .stream({
     onmessage: paymentHandler
@@ -79,48 +79,72 @@ This endpoint responds with a [page](https://developers.digitalbits.io/reference
 ### Example Response
 
 ```json
-{"_embedded": {
+{
   "records": [
     {
       "_links": {
         "self": {
-          "href": "/operations/12884905984"
+          "href": "https://frontier.testnet.digitalbits.io/operations/4109317334634497"
         },
         "transaction": {
-          "href": "/transaction/6391dd190f15f7d1665ba53c63842e368f485651a53d8d852ed442a446d1c69a"
+          "href": "https://frontier.testnet.digitalbits.io/transactions/a12a1fc9f3a0d86e1bc2f04e086a027c84f290d30b5c5412b68addee1d039d03"
         },
-        "precedes": {
-          "href": "/accounts/GCEZWKCA5VLDNRLN3RPRJMRZOX3Z6G5CHCGSNFHEYVXM3XOJMDS674JZ/payments?cursor=12884905984&order=asc{?limit}",
-          "templated": true
+        "effects": {
+          "href": "https://frontier.testnet.digitalbits.io/operations/4109317334634497/effects"
         },
         "succeeds": {
-          "href": "/accounts/GCEZWKCA5VLDNRLN3RPRJMRZOX3Z6G5CHCGSNFHEYVXM3XOJMDS674JZ/payments?cursor=12884905984&order=desc{?limit}",
-          "templated": true
+          "href": "https://frontier.testnet.digitalbits.io/effects?order=desc&cursor=4109317334634497"
+        },
+        "precedes": {
+          "href": "https://frontier.testnet.digitalbits.io/effects?order=asc&cursor=4109317334634497"
         }
       },
-      "id": 12884905984,
-      "paging_token": "12884905984",
+      "id": "4109317334634497",
+      "paging_token": "4109317334634497",
+      "transaction_successful": true,
+      "source_account": "GC3CLEUNQVWY36AHTGGX2NASAPHD6EBQXE63YH2B3PAASLCCIG4ELGTP",
+      "type": "create_account",
       "type_i": 0,
-      "type": "payment",
-      "sender": "GCEZWKCA5VLDNRLN3RPRJMRZOX3Z6G5CHCGSNFHEYVXM3XOJMDS674JZ",
-      "receiver": "GCXKG6RN4ONIEPCMNFB732A436Z5PNDSRLGWK7GBLCMQLIFO4S7EYWVU",
-      "asset": {
-        "code": "XDB"
+      "created_at": "2021-06-16T07:33:52Z",
+      "transaction_hash": "a12a1fc9f3a0d86e1bc2f04e086a027c84f290d30b5c5412b68addee1d039d03",
+      "starting_balance": "10000.0000000",
+      "funder": "GC3CLEUNQVWY36AHTGGX2NASAPHD6EBQXE63YH2B3PAASLCCIG4ELGTP",
+      "account": "GCKY3VKRJDSRORRMHRDHA6IKRXMGSBRZE42P64AHX4NHVGB3Y224WM3M"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://frontier.testnet.digitalbits.io/operations/4109381759143937"
+        },
+        "transaction": {
+          "href": "https://frontier.testnet.digitalbits.io/transactions/f50342ab33a932dceb23bb44cbc03a13515563a07c51d3e76ecb430163345bec"
+        },
+        "effects": {
+          "href": "https://frontier.testnet.digitalbits.io/operations/4109381759143937/effects"
+        },
+        "succeeds": {
+          "href": "https://frontier.testnet.digitalbits.io/effects?order=desc&cursor=4109381759143937"
+        },
+        "precedes": {
+          "href": "https://frontier.testnet.digitalbits.io/effects?order=asc&cursor=4109381759143937"
+        }
       },
-      "amount": 1000000000,
-      "amount_f": 100.00
+      "id": "4109381759143937",
+      "paging_token": "4109381759143937",
+      "transaction_successful": true,
+      "source_account": "GCHQ6AOZST6YPMROCQWPE3SVFY57FHPYC3WJGGSFCHOQ5HFZC5HSHQYK",
+      "type": "payment",
+      "type_i": 1,
+      "created_at": "2021-06-16T07:35:18Z",
+      "transaction_hash": "f50342ab33a932dceb23bb44cbc03a13515563a07c51d3e76ecb430163345bec",
+      "asset_type": "credit_alphanum4",
+      "asset_code": "UAH",
+      "asset_issuer": "GCHQ6AOZST6YPMROCQWPE3SVFY57FHPYC3WJGGSFCHOQ5HFZC5HSHQYK",
+      "from": "GCHQ6AOZST6YPMROCQWPE3SVFY57FHPYC3WJGGSFCHOQ5HFZC5HSHQYK",
+      "to": "GCKY3VKRJDSRORRMHRDHA6IKRXMGSBRZE42P64AHX4NHVGB3Y224WM3M",
+      "amount": "10.0000000"
     }
   ]
-},
-"_links": {
-  "next": {
-    "href": "/accounts/GCEZWKCA5VLDNRLN3RPRJMRZOX3Z6G5CHCGSNFHEYVXM3XOJMDS674JZ/payments?cursor=12884905984&order=asc{?limit}",
-    "templated": true
-  },
-  "self": {
-    "href": "/accounts/GCEZWKCA5VLDNRLN3RPRJMRZOX3Z6G5CHCGSNFHEYVXM3XOJMDS674JZ/payments"
-  }
-}
 }
 ```
 
@@ -129,30 +153,66 @@ This endpoint responds with a [page](https://developers.digitalbits.io/reference
 ```json
 {
   "_links": {
-    "effects": {
-      "href": "/operations/77309415424/effects/{?cursor,limit,order}",
-      "templated": true
-    },
-    "precedes": {
-      "href": "/operations?cursor=77309415424&order=asc"
-    },
     "self": {
-      "href": "/operations/77309415424"
+      "href": "https://frontier.testnet.digitalbits.io/operations/4109317334634497"
+    },
+    "transaction": {
+      "href": "https://frontier.testnet.digitalbits.io/transactions/a12a1fc9f3a0d86e1bc2f04e086a027c84f290d30b5c5412b68addee1d039d03"
+    },
+    "effects": {
+      "href": "https://frontier.testnet.digitalbits.io/operations/4109317334634497/effects"
     },
     "succeeds": {
-      "href": "/operations?cursor=77309415424&order=desc"
+      "href": "https://frontier.testnet.digitalbits.io/effects?order=desc&cursor=4109317334634497"
     },
-    "transactions": {
-      "href": "/transactions/77309415424"
+    "precedes": {
+      "href": "https://frontier.testnet.digitalbits.io/effects?order=asc&cursor=4109317334634497"
     }
   },
-  "account": "GBIA4FH6TV64KSPDAJCNUQSM7PFL4ILGUVJDPCLUOPJ7ONMKBBVUQHRO",
-  "funder": "GCEZWKCA5VLDNRLN3RPRJMRZOX3Z6G5CHCGSNFHEYVXM3XOJMDS674JZ",
-  "id": 77309415424,
-  "paging_token": "77309415424",
-  "starting_balance": 1e+14,
+  "id": "4109317334634497",
+  "paging_token": "4109317334634497",
+  "transaction_successful": true,
+  "source_account": "GC3CLEUNQVWY36AHTGGX2NASAPHD6EBQXE63YH2B3PAASLCCIG4ELGTP",
+  "type": "create_account",
   "type_i": 0,
-  "type": "create_account"
+  "created_at": "2021-06-16T07:33:52Z",
+  "transaction_hash": "a12a1fc9f3a0d86e1bc2f04e086a027c84f290d30b5c5412b68addee1d039d03",
+  "starting_balance": "10000.0000000",
+  "funder": "GC3CLEUNQVWY36AHTGGX2NASAPHD6EBQXE63YH2B3PAASLCCIG4ELGTP",
+  "account": "GCKY3VKRJDSRORRMHRDHA6IKRXMGSBRZE42P64AHX4NHVGB3Y224WM3M"
+}
+{
+  "_links": {
+    "self": {
+      "href": "https://frontier.testnet.digitalbits.io/operations/4109381759143937"
+    },
+    "transaction": {
+      "href": "https://frontier.testnet.digitalbits.io/transactions/f50342ab33a932dceb23bb44cbc03a13515563a07c51d3e76ecb430163345bec"
+    },
+    "effects": {
+      "href": "https://frontier.testnet.digitalbits.io/operations/4109381759143937/effects"
+    },
+    "succeeds": {
+      "href": "https://frontier.testnet.digitalbits.io/effects?order=desc&cursor=4109381759143937"
+    },
+    "precedes": {
+      "href": "https://frontier.testnet.digitalbits.io/effects?order=asc&cursor=4109381759143937"
+    }
+  },
+  "id": "4109381759143937",
+  "paging_token": "4109381759143937",
+  "transaction_successful": true,
+  "source_account": "GCHQ6AOZST6YPMROCQWPE3SVFY57FHPYC3WJGGSFCHOQ5HFZC5HSHQYK",
+  "type": "payment",
+  "type_i": 1,
+  "created_at": "2021-06-16T07:35:18Z",
+  "transaction_hash": "f50342ab33a932dceb23bb44cbc03a13515563a07c51d3e76ecb430163345bec",
+  "asset_type": "credit_alphanum4",
+  "asset_code": "UAH",
+  "asset_issuer": "GCHQ6AOZST6YPMROCQWPE3SVFY57FHPYC3WJGGSFCHOQ5HFZC5HSHQYK",
+  "from": "GCHQ6AOZST6YPMROCQWPE3SVFY57FHPYC3WJGGSFCHOQ5HFZC5HSHQYK",
+  "to": "GCKY3VKRJDSRORRMHRDHA6IKRXMGSBRZE42P64AHX4NHVGB3Y224WM3M",
+  "amount": "10.0000000"
 }
 ```
 
