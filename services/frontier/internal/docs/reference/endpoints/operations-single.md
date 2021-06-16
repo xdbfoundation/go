@@ -17,13 +17,13 @@ GET /operations/{id}
 
 | name | notes | description | example |
 | ---- | ----- | ----------- | ------- |
-| `id` | required, number | An operation ID. | 2927608622747649 |
+| `id` | required, number | An operation ID. | 1099511631873 |
 | `?join` | optional, string, default: _null_ | Set to `transactions` to include the transactions which created each of the operations in the response. | `transactions` |
 
 ### curl Example Request
 
 ```sh
-curl https://frontier.testnet.digitalbits.io/operations/2927608622747649
+curl https://frontier.testnet.digitalbits.io/operations/1099511631873
 ```
 
 ### JavaScript Example Request
@@ -33,10 +33,10 @@ var DigitalBitsSdk = require('digitalbits-sdk');
 var server = new DigitalBitsSdk.Server('https://frontier.testnet.digitalbits.io');
 
 server.operations()
-  .operation('2927608622747649')
+  .operation('1099511631873')
   .call()
   .then(function (operationsResult) {
-    console.log(operationsResult)
+    console.log(JSON.stringify(operationsResult))
   })
   .catch(function (err) {
     console.log(err)
@@ -53,34 +53,34 @@ This endpoint responds with a single Operation.  See [operation resource](https:
 {
   "_links": {
     "self": {
-      "href": "https://frontier.testnet.digitalbits.io/operations/2927608622747649"
+      "href": "https://frontier.testnet.digitalbits.io/operations/1099511631873"
     },
     "transaction": {
-      "href": "https://frontier.testnet.digitalbits.io/transactions/4a3365180521e16b478d9f0c9198b97a9434fc9cb07b34f83ecc32fc54d0ca8a"
+      "href": "https://frontier.testnet.digitalbits.io/transactions/081c8114fe004413a325294413c9372ce47ac4fc6925b5b994d80f854e0bddf9"
     },
     "effects": {
-      "href": "https://frontier.testnet.digitalbits.io/operations/2927608622747649/effects"
+      "href": "https://frontier.testnet.digitalbits.io/operations/1099511631873/effects"
     },
     "succeeds": {
-      "href": "https://frontier.testnet.digitalbits.io/effects?order=desc&cursor=2927608622747649"
+      "href": "https://frontier.testnet.digitalbits.io/effects?order=desc&cursor=1099511631873"
     },
     "precedes": {
-      "href": "https://frontier.testnet.digitalbits.io/effects?order=asc&cursor=2927608622747649"
+      "href": "https://frontier.testnet.digitalbits.io/effects?order=asc&cursor=1099511631873"
     }
   },
-  "id": "2927608622747649",
-  "paging_token": "2927608622747649",
+  "id": "1099511631873",
+  "paging_token": "1099511631873",
   "transaction_successful": true,
-  "source_account": "GCGXZPH2QNKJP4GI2J77EFQQUMP3NYY4PCUZ4UPKHR2XYBKRUYKQ2DS6",
-  "type": "payment",
-  "type_i": 1,
-  "created_at": "2019-04-08T21:59:27Z",
-  "transaction_hash": "4a3365180521e16b478d9f0c9198b97a9434fc9cb07b34f83ecc32fc54d0ca8a",
-  "asset_type": "native",
-  "from": "GCGXZPH2QNKJP4GI2J77EFQQUMP3NYY4PCUZ4UPKHR2XYBKRUYKQ2DS6",
-  "to": "GDGEQS64ISS6Y2KDM5V67B6LXALJX4E7VE4MIA54NANSUX5MKGKBZM5G",
-  "amount": "404.0000000"
+  "source_account": "GC3CLEUNQVWY36AHTGGX2NASAPHD6EBQXE63YH2B3PAASLCCIG4ELGTP",
+  "type": "create_account",
+  "type_i": 0,
+  "created_at": "2021-04-13T13:55:32Z",
+  "transaction_hash": "081c8114fe004413a325294413c9372ce47ac4fc6925b5b994d80f854e0bddf9",
+  "starting_balance": "101.0000000",
+  "funder": "GC3CLEUNQVWY36AHTGGX2NASAPHD6EBQXE63YH2B3PAASLCCIG4ELGTP",
+  "account": "GDE3XSDA4G7MZJXZ6SYYD7CHQSOUFMEDTSU2WINVJ42DOFOCBTLGI5O4"
 }
+
 ```
 
 ## Possible Errors
