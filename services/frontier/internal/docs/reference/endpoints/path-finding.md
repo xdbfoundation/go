@@ -75,15 +75,37 @@ This endpoint responds with a page of path resources.  See [path resource](https
 ### Example Response
 
 ```json
-{
-  "source_asset_type": "native",
-  "source_amount": "2.0000000",
-  "destination_asset_type": "credit_alphanum4",
-  "destination_asset_code": "USD",
-  "destination_asset_issuer": "GB4RZUSF3HZGCAKB3VBM2S7QOHHC5KTV3LLZXGBYR5ZO4B26CKHFZTSZ",
-  "destination_amount": "1.0000000",
-  "path": []
-}
+[
+  {
+    "source_asset_type": "native",
+    "source_amount": "0.2500000",
+    "destination_asset_type": "credit_alphanum4",
+    "destination_asset_code": "USD",
+    "destination_asset_issuer": "GB4RZUSF3HZGCAKB3VBM2S7QOHHC5KTV3LLZXGBYR5ZO4B26CKHFZTSZ",
+    "destination_amount": "1.0000000",
+    "path": [
+      {
+        "asset_type": "credit_alphanum4",
+        "asset_code": "UAH",
+        "asset_issuer": "GCHQ6AOZST6YPMROCQWPE3SVFY57FHPYC3WJGGSFCHOQ5HFZC5HSHQYK"
+      },
+      {
+        "asset_type": "credit_alphanum4",
+        "asset_code": "EUR",
+        "asset_issuer": "GDCIQQY2UKVNLLWGIX74DMTEAFCMQKAKYUWPBO7PLTHIHRKSFZN7V2FC"
+      }
+    ]
+  },
+  {
+    "source_asset_type": "native",
+    "source_amount": "1.0000000",
+    "destination_asset_type": "credit_alphanum4",
+    "destination_asset_code": "USD",
+    "destination_asset_issuer": "GB4RZUSF3HZGCAKB3VBM2S7QOHHC5KTV3LLZXGBYR5ZO4B26CKHFZTSZ",
+    "destination_amount": "1.0000000",
+    "path": []
+  }
+]
 ```
 
 ## Possible Errors
