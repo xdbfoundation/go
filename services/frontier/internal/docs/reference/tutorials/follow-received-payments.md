@@ -5,7 +5,7 @@ task on your own, with whatever programming language you would like to use.
 
 This tutorial assumes that you:
 
-- Have node.js installed locally on your machine.
+- Have node.js installed locally on your machine. (Node version >= 12.0.0)
 - Have curl installed locally on your machine.
 - Are running on Linux, OS X, or any other system that has access to a bash-like
   shell.
@@ -22,17 +22,11 @@ In this tutorial we will learn:
 Let's get started by building our project skeleton:
 
 ```bash
-$ nvm install v6
-$ git clone git@github.com:xdbfoundation/js-digitalbits-sdk.git && cd js-digitalbits-sdk && yarn install
-$ npm link
-$ cd ../
-$ mkdir follow_tutorial
-$ cd follow_tutorial
-$ npm link --save digitalbits-base
-$ npm install --save eventsource
+$ git clone git@github.com:xdbfoundation/js-digitalbits-base.git && cd js-digitalbits-base && yarn && gulp build && yarn link && cd ../
+$ git clone git@github.com:xdbfoundation/js-digitalbits-sdk.git && cd js-digitalbits-sdk && yarn link "digitalbits-base" && yarn &&  yarn link && cd ../
+$ mkdir follow_tutorial && cd follow_tutorial && yarn link digitalbits-sdk digitalbits-base
 ```
 
-This should have created a `package.json` in the `follow_tutorial` directory.
 You can check that everything went well by running the following command:
 
 ```bash
