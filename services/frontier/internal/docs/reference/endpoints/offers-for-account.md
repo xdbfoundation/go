@@ -17,7 +17,7 @@ GET /accounts/{account}/offers{?cursor,limit,order}
 
 | name | notes | description | example |
 | ---- | ----- | ----------- | ------- |
-| `account` | required, string | Account ID | `GBYUUJHG6F4EPJGNLERINATVQLNDOFRUD7SGJZ26YZLG5PAYLG7XUSGF` |
+| `account` | required, string | Account ID | `GDFOHLMYCXVZD2CDXZLMW6W6TMU4YO27XFF2IBAFAV66MSTPDDSK2LAY` |
 | `?cursor` | optional, any, default _null_ | A paging token, specifying where to start returning records from. | `12884905984` |
 | `?order`  | optional, string, default `asc` | The order in which to return rows, "asc" or "desc". | `asc` |
 | `?limit`  | optional, number, default: `10` | Maximum number of records to return. | `200` |
@@ -25,7 +25,7 @@ GET /accounts/{account}/offers{?cursor,limit,order}
 ### curl Example Request
 
 ```sh
-curl "https://frontier.testnet.digitalbits.io/accounts/GBYUUJHG6F4EPJGNLERINATVQLNDOFRUD7SGJZ26YZLG5PAYLG7XUSGF/offers"
+curl "https://frontier.testnet.digitalbits.io/accounts/GDFOHLMYCXVZD2CDXZLMW6W6TMU4YO27XFF2IBAFAV66MSTPDDSK2LAY/offers"
 ```
 
 ### JavaScript Example Request
@@ -34,10 +34,10 @@ curl "https://frontier.testnet.digitalbits.io/accounts/GBYUUJHG6F4EPJGNLERINATVQ
 var DigitalBitsSdk = require('digitalbits-sdk');
 var server = new DigitalBitsSdk.Server('https://frontier.testnet.digitalbits.io');
 
-server.offers('accounts', 'GBYUUJHG6F4EPJGNLERINATVQLNDOFRUD7SGJZ26YZLG5PAYLG7XUSGF')
+server.offers('accounts', 'GDFOHLMYCXVZD2CDXZLMW6W6TMU4YO27XFF2IBAFAV66MSTPDDSK2LAY')
   .call()
   .then(function (offerResult) {
-    console.log(offerResult);
+    console.log(JSON.stringify(offerResult));
   })
   .catch(function (err) {
     console.error(err);
@@ -54,7 +54,7 @@ var offerHandler = function (offerResponse) {
   console.log(offerResponse);
 };
 
-var es = server.offers('accounts', 'GBYUUJHG6F4EPJGNLERINATVQLNDOFRUD7SGJZ26YZLG5PAYLG7XUSGF')
+var es = server.offers('accounts', 'GDFOHLMYCXVZD2CDXZLMW6W6TMU4YO27XFF2IBAFAV66MSTPDDSK2LAY')
   .cursor('now')
   .stream({
     onmessage: offerHandler
@@ -72,51 +72,39 @@ The list of offers.
 
 ```json
 {
-  "_links": {
-    "self": {
-      "href": "https://frontier.testnet.digitalbits.io/accounts/GBYUUJHG6F4EPJGNLERINATVQLNDOFRUD7SGJZ26YZLG5PAYLG7XUSGF/offers?cursor=&limit=10&order=asc"
-    },
-    "next": {
-      "href": "https://frontier.testnet.digitalbits.io/accounts/GBYUUJHG6F4EPJGNLERINATVQLNDOFRUD7SGJZ26YZLG5PAYLG7XUSGF/offers?cursor=5443256&limit=10&order=asc"
-    },
-    "prev": {
-      "href": "https://frontier.testnet.digitalbits.io/accounts/GBYUUJHG6F4EPJGNLERINATVQLNDOFRUD7SGJZ26YZLG5PAYLG7XUSGF/offers?cursor=5443256&limit=10&order=desc"
+  "records": [
+    {
+      "_links": {
+        "self": {
+          "href": "https://frontier.testnet.digitalbits.io/offers/1"
+        },
+        "offer_maker": {
+          "href": "https://frontier.testnet.digitalbits.io/accounts/GDFOHLMYCXVZD2CDXZLMW6W6TMU4YO27XFF2IBAFAV66MSTPDDSK2LAY"
+        }
+      },
+      "id": "1",
+      "paging_token": "1",
+      "seller": "GDFOHLMYCXVZD2CDXZLMW6W6TMU4YO27XFF2IBAFAV66MSTPDDSK2LAY",
+      "selling": {
+        "asset_type": "credit_alphanum4",
+        "asset_code": "USD",
+        "asset_issuer": "GB4RZUSF3HZGCAKB3VBM2S7QOHHC5KTV3LLZXGBYR5ZO4B26CKHFZTSZ"
+      },
+      "buying": {
+        "asset_type": "native"
+      },
+      "amount": "1.0000000",
+      "price_r": {
+        "n": 2,
+        "d": 1
+      },
+      "price": "2.0000000",
+      "last_modified_ledger": 963496,
+      "last_modified_time": "2021-06-16T18:15:07Z"
     }
-  },
-  "_embedded": {
-    "records": [
-      {
-        "_links": {
-          "self": {
-            "href": "https://frontier.testnet.digitalbits.io/offers/5443256"
-          },
-          "offer_maker": {
-            "href": "https://frontier.testnet.digitalbits.io/accounts/GBYUUJHG6F4EPJGNLERINATVQLNDOFRUD7SGJZ26YZLG5PAYLG7XUSGF"
-          }
-        },
-        "id": "5443256",
-        "paging_token": "5443256",
-        "seller": "GBYUUJHG6F4EPJGNLERINATVQLNDOFRUD7SGJZ26YZLG5PAYLG7XUSGF",
-        "selling": {
-          "asset_type": "native"
-        },
-        "buying": {
-          "asset_type": "credit_alphanum4",
-          "asset_code": "FOO",
-          "asset_issuer": "GAGLYFZJMN5HEULSTH5CIGPOPAVUYPG5YSWIYDJMAPIECYEBPM2TA3QR"
-        },
-        "amount": "10.0000000",
-        "price_r": {
-          "n": 1,
-          "d": 1
-        },
-        "price": "1.0000000",
-        "last_modified_ledger": 694974,
-        "last_modified_time": "2019-04-09T17:14:22Z"
-      }
-    ]
-  }
+  ]
 }
+
 ```
 
 ## Possible Errors

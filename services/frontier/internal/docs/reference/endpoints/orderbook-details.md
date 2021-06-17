@@ -1,6 +1,6 @@
 People on the DigitalBits network can make [offers](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/resources/offer) to buy or sell assets.
 These offers are summarized by the assets being bought and sold in
-[orderbooks](../resources/orderbook.md).
+[orderbooks](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/resources/orderbook).
 
 Frontier will return, for each orderbook, a summary of the orderbook and the bids and asks
 associated with that orderbook.
@@ -23,16 +23,16 @@ GET /order_book?selling_asset_type={selling_asset_type}&selling_asset_code={sell
 | ---- | ----- | ----------- | ------- |
 | `selling_asset_type` | required, string | Type of the Asset being sold | `native` |
 | `selling_asset_code` | optional, string | Code of the Asset being sold | `USD` |
-| `selling_asset_issuer` | optional, string | Account ID of the issuer of the Asset being sold | `GA2HGBJIJKI6O4XEM7CZWY5PS6GKSXL6D34ERAJYQSPYA6X6AI7HYW36` |
+| `selling_asset_issuer` | optional, string | Account ID of the issuer of the Asset being sold | `GDCIQQY2UKVNLLWGIX74DMTEAFCMQKAKYUWPBO7PLTHIHRKSFZN7V2FC` |
 | `buying_asset_type` | required, string | Type of the Asset being bought | `credit_alphanum4` |
 | `buying_asset_code` | optional, string | Code of the Asset being bought | `BTC` |
-| `buying_asset_issuer` | optional, string | Account ID of the issuer of the Asset being bought | `GD6VWBXI6NY3AOOR55RLVQ4MNIDSXE5JSAVXUTF35FRRI72LYPI3WL6Z` |
+| `buying_asset_issuer` | optional, string | Account ID of the issuer of the Asset being bought | `GB4RZUSF3HZGCAKB3VBM2S7QOHHC5KTV3LLZXGBYR5ZO4B26CKHFZTSZ` |
 | `limit` | optional, string | Limit the number of items returned | `20` |
 
 ### curl Example Request
 
 ```sh
-curl "https://frontier.testnet.digitalbits.io/order_book?selling_asset_type=native&buying_asset_type=credit_alphanum4&buying_asset_code=FOO&buying_asset_issuer=GBAUUA74H4XOQYRSOW2RZUA4QL5PB37U3JS5NE3RTB2ELJVMIF5RLMAG&limit=20"
+curl "https://frontier.testnet.digitalbits.io/order_book?selling_asset_type=credit_alphanum4&selling_asset_code=EUR&selling_asset_issuer=GDCIQQY2UKVNLLWGIX74DMTEAFCMQKAKYUWPBO7PLTHIHRKSFZN7V2FC&buying_asset_type=credit_alphanum4&buying_asset_code=USD&buying_asset_issuer=GB4RZUSF3HZGCAKB3VBM2S7QOHHC5KTV3LLZXGBYR5ZO4B26CKHFZTSZ&limit=20"
 ```
 
 ### JavaScript Example Request
@@ -41,10 +41,10 @@ curl "https://frontier.testnet.digitalbits.io/order_book?selling_asset_type=nati
 var DigitalBitsSdk = require('digitalbits-sdk');
 var server = new DigitalBitsSdk.Server('https://frontier.testnet.digitalbits.io');
 
-server.orderbook(new DigitalBitsSdk.Asset.native(), new DigitalBitsSdk.Asset('FOO', 'GBAUUA74H4XOQYRSOW2RZUA4QL5PB37U3JS5NE3RTB2ELJVMIF5RLMAG'))
+server.orderbook(new DigitalBitsSdk.Asset('EUR', 'GDCIQQY2UKVNLLWGIX74DMTEAFCMQKAKYUWPBO7PLTHIHRKSFZN7V2FC'), new DigitalBitsSdk.Asset('USD', 'GB4RZUSF3HZGCAKB3VBM2S7QOHHC5KTV3LLZXGBYR5ZO4B26CKHFZTSZ'))
   .call()
   .then(function(resp) {
-    console.log(resp);
+    console.log(JSON.stringify(resp));
   })
   .catch(function(err) {
     console.log(err);
@@ -61,7 +61,7 @@ var orderbookHandler = function (orderbookResponse) {
   console.log(orderbookResponse);
 };
 
-var es = server.orderbook(new DigitalBitsSdk.Asset.native(), new DigitalBitsSdk.Asset('FOO', 'GBAUUA74H4XOQYRSOW2RZUA4QL5PB37U3JS5NE3RTB2ELJVMIF5RLMAG'))
+var es = server.orderbook(new DigitalBitsSdk.Asset('EUR', 'GDCIQQY2UKVNLLWGIX74DMTEAFCMQKAKYUWPBO7PLTHIHRKSFZN7V2FC'), new DigitalBitsSdk.Asset('USD', 'GB4RZUSF3HZGCAKB3VBM2S7QOHHC5KTV3LLZXGBYR5ZO4B26CKHFZTSZ'))
   .cursor('now')
   .stream({
     onmessage: orderbookHandler
@@ -78,32 +78,26 @@ The summary of the orderbook and its bids and asks.
   "bids": [
     {
       "price_r": {
-        "n": 100000000,
-        "d": 12953367
+        "n": 2,
+        "d": 1
       },
-      "price": "7.7200005",
-      "amount": "12.0000000"
+      "price": "2.0000000",
+      "amount": "2.0000000"
     }
   ],
-  "asks": [
-    {
-      "price_r": {
-        "n": 194,
-        "d": 25
-      },
-      "price": "7.7600000",
-      "amount": "238.4804125"
-    }
-  ],
+  "asks": [],
   "base": {
-    "asset_type": "native"
+    "asset_type": "credit_alphanum4",
+    "asset_code": "EUR",
+    "asset_issuer": "GDCIQQY2UKVNLLWGIX74DMTEAFCMQKAKYUWPBO7PLTHIHRKSFZN7V2FC"
   },
   "counter": {
     "asset_type": "credit_alphanum4",
-    "asset_code": "FOO",
-    "asset_issuer": "GBAUUA74H4XOQYRSOW2RZUA4QL5PB37U3JS5NE3RTB2ELJVMIF5RLMAG"
+    "asset_code": "USD",
+    "asset_issuer": "GB4RZUSF3HZGCAKB3VBM2S7QOHHC5KTV3LLZXGBYR5ZO4B26CKHFZTSZ"
   }
 }
+
 ```
 
 ## Possible Errors

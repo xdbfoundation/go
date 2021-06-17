@@ -22,18 +22,18 @@ GET /trades?base_asset_type={base_asset_type}&base_asset_code={base_asset_code}&
 | ---- | ----- | ----------- | ------- |
 | `base_asset_type` | optional, string | Type of base asset | `native` |
 | `base_asset_code` | optional, string | Code of base asset, not required if type is `native` | `USD` |
-| `base_asset_issuer` | optional, string | Issuer of base asset, not required if type is `native` | `GA2HGBJIJKI6O4XEM7CZWY5PS6GKSXL6D34ERAJYQSPYA6X6AI7HYW36` |
+| `base_asset_issuer` | optional, string | Issuer of base asset, not required if type is `native` | `GB4RZUSF3HZGCAKB3VBM2S7QOHHC5KTV3LLZXGBYR5ZO4B26CKHFZTSZ` |
 | `counter_asset_type` | optional, string | Type of counter asset  | `credit_alphanum4` |
-| `counter_asset_code` | optional, string | Code of counter asset, not required if type is `native` | `BTC` |
-| `counter_asset_issuer` | optional, string | Issuer of counter asset, not required if type is `native` | `GD6VWBXI6NY3AOOR55RLVQ4MNIDSXE5JSAVXUTF35FRRI72LYPI3WL6Z` |
-| `offer_id` | optional, string | filter for by a specific offer id | `283606` |
+| `counter_asset_code` | optional, string | Code of counter asset, not required if type is `native` | `EUR` |
+| `counter_asset_issuer` | optional, string | Issuer of counter asset, not required if type is `native` | `GDCIQQY2UKVNLLWGIX74DMTEAFCMQKAKYUWPBO7PLTHIHRKSFZN7V2FC` |
+| `offer_id` | optional, string | filter for by a specific offer id | `5` |
 | `?cursor` | optional, any, default _null_ | A paging token, specifying where to start returning records from. | `12884905984` |
 | `?order`  | optional, string, default `asc` | The order, in terms of timeline, in which to return rows, "asc" or "desc". | `asc` |
 | `?limit`  | optional, number, default: `10` | Maximum number of records to return. | `200` |
 
 ### curl Example Request
 ```sh
-curl https://frontier.digitalbits.org/trades?base_asset_type=native&counter_asset_code=SLT&counter_asset_issuer=GCKA6K5PCQ6PNF5RQBF7PQDJWRHO6UOGFMRLK3DYHDOI244V47XKQ4GP&counter_asset_type=credit_alphanum4&limit=2&order=desc
+curl https://frontier.testnet.digitalbits.io/trades?base_asset_type=native&counter_asset_code=USD&counter_asset_issuer=GB4RZUSF3HZGCAKB3VBM2S7QOHHC5KTV3LLZXGBYR5ZO4B26CKHFZTSZ&counter_asset_type=credit_alphanum4&limit=2&order=desc
 ```
 
 ### JavaScript Example Request
@@ -75,97 +75,79 @@ The list of trades. `base` and `counter` in the records will match the asset pai
 
 ### Example Response
 ```json
-{
-  "_links": {
-    "self": {
-      "href": "https://frontier.testnet.digitalbits.io/trades?cursor=&limit=10&order=asc"
+[
+  {
+    "_links": {
+      "self": {
+        "href": ""
+      },
+      "base": {
+        "href": "https://frontier.testnet.digitalbits.io/accounts/GCKY3VKRJDSRORRMHRDHA6IKRXMGSBRZE42P64AHX4NHVGB3Y224WM3M"
+      },
+      "counter": {
+        "href": "https://frontier.testnet.digitalbits.io/accounts/GCRGG47RE7L2KVOEZCMYSQ6FTZF7KQJM3N3VA6IEF46GLPPAZHQGOSOA"
+      },
+      "operation": {
+        "href": "https://frontier.testnet.digitalbits.io/operations/4173759023943681"
+      }
     },
-    "next": {
-      "href": "https://frontier.testnet.digitalbits.io/trades?cursor=6025839120434-0&limit=10&order=asc"
-    },
-    "prev": {
-      "href": "https://frontier.testnet.digitalbits.io/trades?cursor=6012954218535-0&limit=10&order=desc"
+    "id": "4173759023943681-0",
+    "paging_token": "4173759023943681-0",
+    "ledger_close_time": "2021-06-17T07:29:30Z",
+    "offer_id": "6",
+    "base_offer_id": "6",
+    "base_account": "GCKY3VKRJDSRORRMHRDHA6IKRXMGSBRZE42P64AHX4NHVGB3Y224WM3M",
+    "base_amount": "10.0000000",
+    "base_asset_type": "credit_alphanum4",
+    "base_asset_code": "UAH",
+    "base_asset_issuer": "GCHQ6AOZST6YPMROCQWPE3SVFY57FHPYC3WJGGSFCHOQ5HFZC5HSHQYK",
+    "counter_offer_id": "4615859777451331585",
+    "counter_account": "GCRGG47RE7L2KVOEZCMYSQ6FTZF7KQJM3N3VA6IEF46GLPPAZHQGOSOA",
+    "counter_amount": "5.0000000",
+    "counter_asset_type": "native",
+    "base_is_seller": true,
+    "price": {
+      "n": 1,
+      "d": 2
     }
   },
-  "_embedded": {
-    "records": [
-      {
-        "_links": {
-          "self": {
-            "href": ""
-          },
-          "base": {
-            "href": "https://frontier.testnet.digitalbits.io/accounts/GAQHWQYBBW272OOXNQMMLCA5WY2XAZPODGB7Q3S5OKKIXVESKO55ZQ7C"
-          },
-          "counter": {
-            "href": "https://frontier.testnet.digitalbits.io/accounts/GCYN7MI6VXVRP74KR6MKBAW2ELLCXL6QCY5H4YQ62HVWZWMCE6Y232UC"
-          },
-          "operation": {
-            "href": "https://frontier.testnet.digitalbits.io/operations/6012954218535"
-          }
-        },
-        "id": "6012954218535-0",
-        "paging_token": "6012954218535-0",
-        "ledger_close_time": "2019-02-27T11:54:53Z",
-        "offer_id": "37",
-        "base_offer_id": "4611692031381606439",
-        "base_account": "GAQHWQYBBW272OOXNQMMLCA5WY2XAZPODGB7Q3S5OKKIXVESKO55ZQ7C",
-        "base_amount": "25.6687300",
-        "base_asset_type": "credit_alphanum4",
-        "base_asset_code": "DSQ",
-        "base_asset_issuer": "GBDQPTQJDATT7Z7EO4COS4IMYXH44RDLLI6N6WIL5BZABGMUOVMLWMQF",
-        "counter_offer_id": "37",
-        "counter_account": "GCYN7MI6VXVRP74KR6MKBAW2ELLCXL6QCY5H4YQ62HVWZWMCE6Y232UC",
-        "counter_amount": "1.0265563",
-        "counter_asset_type": "credit_alphanum4",
-        "counter_asset_code": "USD",
-        "counter_asset_issuer": "GAA4MFNZGUPJAVLWWG6G5XZJFZDHLKQNG3Q6KB24BAD6JHNNVXDCF4XG",
-        "base_is_seller": false,
-        "price": {
-          "n": 10000000,
-          "d": 250046977
-        }
+  {
+    "_links": {
+      "self": {
+        "href": ""
       },
-      {
-        "_links": {
-          "self": {
-            "href": ""
-          },
-          "base": {
-            "href": "https://frontier.testnet.digitalbits.io/accounts/GAQHWQYBBW272OOXNQMMLCA5WY2XAZPODGB7Q3S5OKKIXVESKO55ZQ7C"
-          },
-          "counter": {
-            "href": "https://frontier.testnet.digitalbits.io/accounts/GCYN7MI6VXVRP74KR6MKBAW2ELLCXL6QCY5H4YQ62HVWZWMCE6Y232UC"
-          },
-          "operation": {
-            "href": "https://frontier.testnet.digitalbits.io/operations/6025839120385"
-          }
-        },
-        "id": "6025839120385-0",
-        "paging_token": "6025839120385-0",
-        "ledger_close_time": "2019-02-27T11:55:09Z",
-        "offer_id": "1",
-        "base_offer_id": "4611692044266508289",
-        "base_account": "GAQHWQYBBW272OOXNQMMLCA5WY2XAZPODGB7Q3S5OKKIXVESKO55ZQ7C",
-        "base_amount": "1434.4442973",
-        "base_asset_type": "credit_alphanum4",
-        "base_asset_code": "DSQ",
-        "base_asset_issuer": "GBDQPTQJDATT7Z7EO4COS4IMYXH44RDLLI6N6WIL5BZABGMUOVMLWMQF",
-        "counter_offer_id": "1",
-        "counter_account": "GCYN7MI6VXVRP74KR6MKBAW2ELLCXL6QCY5H4YQ62HVWZWMCE6Y232UC",
-        "counter_amount": "0.5622050",
-        "counter_asset_type": "credit_alphanum4",
-        "counter_asset_code": "SXRT",
-        "counter_asset_issuer": "GAIOQ3UYK5NYIZY5ZFAG4JBN4O37NAVFKZM5YDYEB6YEFBZSZ5KDCUFO",
-        "base_is_seller": false,
-        "price": {
-          "n": 642706,
-          "d": 1639839483
-        }
+      "base": {
+        "href": "https://frontier.testnet.digitalbits.io/accounts/GCKY3VKRJDSRORRMHRDHA6IKRXMGSBRZE42P64AHX4NHVGB3Y224WM3M"
+      },
+      "counter": {
+        "href": "https://frontier.testnet.digitalbits.io/accounts/GDFOHLMYCXVZD2CDXZLMW6W6TMU4YO27XFF2IBAFAV66MSTPDDSK2LAY"
+      },
+      "operation": {
+        "href": "https://frontier.testnet.digitalbits.io/operations/4185647493419009"
       }
-    ]
+    },
+    "id": "4185647493419009-0",
+    "paging_token": "4185647493419009-0",
+    "ledger_close_time": "2021-06-17T11:54:15Z",
+    "offer_id": "7",
+    "base_offer_id": "4615871665920806913",
+    "base_account": "GCKY3VKRJDSRORRMHRDHA6IKRXMGSBRZE42P64AHX4NHVGB3Y224WM3M",
+    "base_amount": "1.0000000",
+    "base_asset_type": "native",
+    "counter_offer_id": "7",
+    "counter_account": "GDFOHLMYCXVZD2CDXZLMW6W6TMU4YO27XFF2IBAFAV66MSTPDDSK2LAY",
+    "counter_amount": "1.0000000",
+    "counter_asset_type": "credit_alphanum4",
+    "counter_asset_code": "USD",
+    "counter_asset_issuer": "GB4RZUSF3HZGCAKB3VBM2S7QOHHC5KTV3LLZXGBYR5ZO4B26CKHFZTSZ",
+    "base_is_seller": false,
+    "price": {
+      "n": 1,
+      "d": 1
+    }
   }
-}
+]
+
 ```
 
 ## Possible Errors
