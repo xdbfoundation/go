@@ -39,7 +39,7 @@ XDB should be represented as `"native"`. Issued assets should be represented as 
 ### curl Example Request
 
 ```sh
-curl "https://frontier.testnet.digitalbits.io/paths/strict-send?&source_amount=10&source_asset_type=native&destination_assets=MXN:GC2GFGZ5CZCFCDJSQF3YYEAYBOS3ZREXJSPU7LUJ7JU3LP3BQNHY7YKS"
+curl "https://frontier.testnet.digitalbits.io/paths/strict-send?&source_amount=2&source_asset_type=credit_alphanum4&source_asset_code=USD&source_asset_issuer=GB4RZUSF3HZGCAKB3VBM2S7QOHHC5KTV3LLZXGBYR5ZO4B26CKHFZTSZ&destination_assets=EUR:GDCIQQY2UKVNLLWGIX74DMTEAFCMQKAKYUWPBO7PLTHIHRKSFZN7V2FC"
 ```
 
 ### JavaScript Example Request
@@ -48,18 +48,14 @@ curl "https://frontier.testnet.digitalbits.io/paths/strict-send?&source_amount=1
 var DigitalBitsSdk = require('digitalbits-sdk');
 var server = new DigitalBitsSdk.Server('https://frontier.testnet.digitalbits.io');
 
-var sourceAsset = DigitalBitsSdk.Asset.native();
-var sourceAmount = "20";
-var destinationAsset = new DigitalBitsSdk.Asset(
-  'USD',
-  'GDSBCQO34HWPGUGQSP3QBFEXVTSR2PW46UIGTHVWGWJGQKH3AFNHXHXN'
-)
+var source_asset = new DigitalBitsSdk.Asset('USD', 'GB4RZUSF3HZGCAKB3VBM2S7QOHHC5KTV3LLZXGBYR5ZO4B26CKHFZTSZ');
+var destination_asset = new DigitalBitsSdk.Asset('EUR', 'GDCIQQY2UKVNLLWGIX74DMTEAFCMQKAKYUWPBO7PLTHIHRKSFZN7V2FC');
+var source_amount = "2";
 
-
-server.strictSendPaths(sourceAsset, sourceAmount, [destinationAsset])
+server.strictSendPaths(source_asset, source_amount, [destination_asset])
   .call()
   .then(function (pathResult) {
-    console.log(pathResult.records);
+    console.log(JSON.stringify(pathResult.records));
   })
   .catch(function (err) {
     console.log(err)
@@ -73,23 +69,25 @@ This endpoint responds with a page of path resources.  See [path resource](https
 ### Example Response
 
 ```json
-{
-  "_embedded": {
-    "records": [
+[
+  {
+    "source_asset_type": "credit_alphanum4",
+    "source_asset_code": "USD",
+    "source_asset_issuer": "GB4RZUSF3HZGCAKB3VBM2S7QOHHC5KTV3LLZXGBYR5ZO4B26CKHFZTSZ",
+    "source_amount": "2.0000000",
+    "destination_asset_type": "credit_alphanum4",
+    "destination_asset_code": "EUR",
+    "destination_asset_issuer": "GDCIQQY2UKVNLLWGIX74DMTEAFCMQKAKYUWPBO7PLTHIHRKSFZN7V2FC",
+    "destination_amount": "2.0000000",
+    "path": [
       {
-        "source_asset_type": "credit_alphanum4",
-        "source_asset_code": "FOO",
-        "source_asset_issuer": "GAGLYFZJMN5HEULSTH5CIGPOPAVUYPG5YSWIYDJMAPIECYEBPM2TA3QR",
-        "source_amount": "100.0000000",
-        "destination_asset_type": "credit_alphanum4",
-        "destination_asset_code": "FOO",
-        "destination_asset_issuer": "GAGLYFZJMN5HEULSTH5CIGPOPAVUYPG5YSWIYDJMAPIECYEBPM2TA3QR",
-        "destination_amount": "100.0000000",
-        "path": []
+        "asset_type": "credit_alphanum4",
+        "asset_code": "UAH",
+        "asset_issuer": "GCHQ6AOZST6YPMROCQWPE3SVFY57FHPYC3WJGGSFCHOQ5HFZC5HSHQYK"
       }
     ]
   }
-}
+]
 ```
 
 ## Possible Errors
