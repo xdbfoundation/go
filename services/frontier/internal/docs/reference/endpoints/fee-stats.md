@@ -74,9 +74,9 @@ Information about max fee bid for transactions over the last 5 ledgers.
 
 ```json
 {
-  "last_ledger": "22606298",
+  "last_ledger": "985516",
   "last_ledger_base_fee": "100",
-  "ledger_capacity_usage": "0.97",
+  "ledger_capacity_usage": "0",
   "fee_charged": {
     "max": "100",
     "min": "100",
@@ -94,7 +94,7 @@ Information about max fee bid for transactions over the last 5 ledgers.
     "p99": "100"
   },
   "max_fee": {
-    "max": "100000",
+    "max": "100",
     "min": "100",
     "mode": "100",
     "p10": "100",
@@ -105,9 +105,9 @@ Information about max fee bid for transactions over the last 5 ledgers.
     "p60": "100",
     "p70": "100",
     "p80": "100",
-    "p90": "15000",
-    "p95": "100000",
-    "p99": "100000"
+    "p90": "100",
+    "p95": "100",
+    "p99": "100"
   }
 }
 ```
