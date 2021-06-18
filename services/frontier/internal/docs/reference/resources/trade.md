@@ -1,9 +1,9 @@
-A trade represents a fulfilled offer.  For example, let's say that there exists an offer to sell 9 `foo_bank/EUR` for 3 `baz_exchange/BTC` and you make an offer to buy 3 `foo_bank/EUR` for 1 `baz_exchange/BTC`.  Since your offer and the existing one cross, a trade happens.  After the trade completes:
+A trade represents a fulfilled offer.  For example, let's say that there exists an offer to sell 9 `bank1/EUR` for 3 `bank2/USD` and you make an offer to buy 3 `bank1/EUR` for 1 `bank2/USD`.  Since your offer and the existing one cross, a trade happens.  After the trade completes:
 
-- you are 3 `foo_bank/EUR` richer and 1 `baz_exchange/BTC` poorer
-- the maker of the other offer is 1 `baz_exchange/BTC` richer and 3 `foo_bank/EUR` poorer
+- you are 3 `bank1/EUR` richer and 1 `bank2/USD` poorer
+- the maker of the other offer is 1 `bank2/USD` richer and 3 `bank1/EUR` poorer
 - your offer is completely fulfilled and no longer exists
-- the other offer is partially fulfilled and becomes an offer to sell 6 `foo_bank/EUR` for 2 `baz_exchange/BTC`.  The price of that offer doesn't change, but the amount does.
+- the other offer is partially fulfilled and becomes an offer to sell 6 `bank1/EUR` for 2 `bank2/USD`.  The price of that offer doesn't change, but the amount does.
 
 Trades can also be caused by successful path payments, because path payments involve fulfilling offers.
 
