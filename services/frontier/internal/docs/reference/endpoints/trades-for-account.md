@@ -13,15 +13,15 @@ GET /accounts/{account_id}/trades{?cursor,limit,order}
 
 | name | notes | description | example |
 | ---- | ----- | ----------- | ------- |
-| `account_id` | required, string | ID of an account | `GBYTR4MC5JAX4ALGUBJD7EIKZVM7CUGWKXIUJMRSMK573XH2O7VAK3SR` |
-| `?cursor` | optional, any, default _null_ | A paging token, specifying where to start returning records from. When streaming this can be set to `now` to stream object created since your request time. | 12884905984 |
+| `account_id` | required, string | ID of an account | `GDFOHLMYCXVZD2CDXZLMW6W6TMU4YO27XFF2IBAFAV66MSTPDDSK2LAY` |
+| `?cursor` | optional, any, default _null_ | A paging token, specifying where to start returning records from. When streaming this can be set to `now` to stream object created since your request time. | 1623820974 |
 | `?order`  | optional, string, default `asc` | The order in which to return rows, "asc" or "desc". | `asc` |
 | `?limit`  | optional, number, default: `10` | Maximum number of records to return. | `200` |
 
 ### curl Example Request
 
 ```sh
-curl "https://frontier.testnet.digitalbits.io/accounts/GBYTR4MC5JAX4ALGUBJD7EIKZVM7CUGWKXIUJMRSMK573XH2O7VAK3SR/trades?limit=1"
+curl "https://frontier.testnet.digitalbits.io/accounts/GDFOHLMYCXVZD2CDXZLMW6W6TMU4YO27XFF2IBAFAV66MSTPDDSK2LAY/trades?limit=1"
 ```
 
 ### JavaScript Example Request
@@ -31,10 +31,10 @@ var DigitalBitsSdk = require('digitalbits-sdk');
 var server = new DigitalBitsSdk.Server('https://frontier.testnet.digitalbits.io');
 
 server.trades()
-  .forAccount("GBYTR4MC5JAX4ALGUBJD7EIKZVM7CUGWKXIUJMRSMK573XH2O7VAK3SR")
+  .forAccount("GDFOHLMYCXVZD2CDXZLMW6W6TMU4YO27XFF2IBAFAV66MSTPDDSK2LAY")
   .call()
   .then(function (accountResult) {
-    console.log(accountResult);
+    console.log(JSON.stringify(accountResult));
   })
   .catch(function (err) {
     console.error(err);
@@ -47,85 +47,48 @@ server.trades()
 This endpoint responds with a list of trades that changed a given account's state. See the [trade resource](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/resources/trade) for reference.
 
 ### Example Response
+
 ```json
 {
-  "_links": {
-    "self": {
-      "href": "/accounts/GBYTR4MC5JAX4ALGUBJD7EIKZVM7CUGWKXIUJMRSMK573XH2O7VAK3SR/trades?cursor=\u0026limit=1\u0026order=asc"
-    },
-    "next": {
-      "href": "/accounts/GBYTR4MC5JAX4ALGUBJD7EIKZVM7CUGWKXIUJMRSMK573XH2O7VAK3SR/trades?cursor=940258535411713-0\u0026limit=1\u0026order=asc"
-    },
-    "prev": {
-      "href": "/accounts/GBYTR4MC5JAX4ALGUBJD7EIKZVM7CUGWKXIUJMRSMK573XH2O7VAK3SR/trades?cursor=940258535411713-0\u0026limit=1\u0026order=desc"
-    }
-  },
-  "_embedded": {
-    "records": [
-      {
-        "_links": {
-          "self": {
-            "href": ""
-          },
-          "base": {
-            "href": "/accounts/GBYTR4MC5JAX4ALGUBJD7EIKZVM7CUGWKXIUJMRSMK573XH2O7VAK3SR"
-          },
-          "counter": {
-            "href": "/accounts/GBOOAYCAJIN7YCUUAHEQJJARNQMRUP4P2WXVO6P4KAMAB27NGA3CYTZU"
-          },
-          "operation": {
-            "href": "/operations/940258535411713"
-          }
+  "records": [
+    {
+      "_links": {
+        "self": {
+          "href": ""
         },
-        "id": "940258535411713-0",
-        "paging_token": "940258535411713-0",
-        "ledger_close_time": "2017-03-30T13:20:41Z",
-        "offer_id": "8",
-        "base_offer_id": "8",
-        "base_account": "GBYTR4MC5JAX4ALGUBJD7EIKZVM7CUGWKXIUJMRSMK573XH2O7VAK3SR",
-        "base_amount": "1.0000000",
-        "base_asset_type": "credit_alphanum4",
-        "base_asset_code": "BTC",
-        "base_asset_issuer": "GB6FN4C7ZLWKENAOZDLZOQHNIOK4RDMV6EKLR53LWCHEBR6LVXOEKDZH",
-        "counter_offer_id": "4611686044197195777",
-        "counter_account": "GBOOAYCAJIN7YCUUAHEQJJARNQMRUP4P2WXVO6P4KAMAB27NGA3CYTZU",
-        "counter_amount": "1.0000000",
-        "counter_asset_type": "native",
-        "base_is_seller": true,
-        "price": {
-          "n": 1,
-          "d": 1
+        "base": {
+          "href": "https://frontier.testnet.digitalbits.io/accounts/GCKY3VKRJDSRORRMHRDHA6IKRXMGSBRZE42P64AHX4NHVGB3Y224WM3M"
+        },
+        "counter": {
+          "href": "https://frontier.testnet.digitalbits.io/accounts/GDFOHLMYCXVZD2CDXZLMW6W6TMU4YO27XFF2IBAFAV66MSTPDDSK2LAY"
+        },
+        "operation": {
+          "href": "https://frontier.testnet.digitalbits.io/operations/4185647493419009"
         }
+      },
+      "id": "4185647493419009-0",
+      "paging_token": "4185647493419009-0",
+      "ledger_close_time": "2021-06-17T11:54:15Z",
+      "offer_id": "7",
+      "base_offer_id": "4615871665920806913",
+      "base_account": "GCKY3VKRJDSRORRMHRDHA6IKRXMGSBRZE42P64AHX4NHVGB3Y224WM3M",
+      "base_amount": "1.0000000",
+      "base_asset_type": "native",
+      "counter_offer_id": "7",
+      "counter_account": "GDFOHLMYCXVZD2CDXZLMW6W6TMU4YO27XFF2IBAFAV66MSTPDDSK2LAY",
+      "counter_amount": "1.0000000",
+      "counter_asset_type": "credit_alphanum4",
+      "counter_asset_code": "USD",
+      "counter_asset_issuer": "GB4RZUSF3HZGCAKB3VBM2S7QOHHC5KTV3LLZXGBYR5ZO4B26CKHFZTSZ",
+      "base_is_seller": false,
+      "price": {
+        "n": 1,
+        "d": 1
       }
-    ]
-  }
+    }
+  ]
 }
-```
 
-## Example Streaming Event
-
-```cgo
-{ 
-  _links: 
-    { self: { href: '' },
-      base: { href: '/accounts/GDICGE2CFCNM3ZWRUVOWDJB2RAO667UE7WOSJJ2Z3IMISUA7CJZCE3KO' },
-      counter: { href: '/accounts/GBILENMVJPVPEPXUPUPRBUEAME5OUQWAHIGZAX7TQX65NIQW3G3DGUYX' },
-      operation: { href: '/operations/47274327069954049' } },
-  id: '47274327069954049-0',
-  paging_token: '47274327069954049-0',
-  ledger_close_time: '2018-09-12T00:00:34Z',
-  offer_id: '711437',
-  base_account: 'GDICGE2CFCNM3ZWRUVOWDJB2RAO667UE7WOSJJ2Z3IMISUA7CJZCE3KO',
-  base_amount: '13.0000000',
-  base_asset_type: 'native',
-  counter_account: 'GBILENMVJPVPEPXUPUPRBUEAME5OUQWAHIGZAX7TQX65NIQW3G3DGUYX',
-  counter_amount: '13.0000000',
-  counter_asset_type: 'credit_alphanum4',
-  counter_asset_code: 'CNY',
-  counter_asset_issuer: 'GAREELUB43IRHWEASCFBLKHURCGMHE5IF6XSE7EXDLACYHGRHM43RFOX',
-  base_is_seller: true,
-  price: { n: 1, d: 1 } 
-}
 ```
 
 ## Possible Errors

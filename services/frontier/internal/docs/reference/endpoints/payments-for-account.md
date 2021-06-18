@@ -31,9 +31,9 @@ GET /accounts/{id}/payments{?cursor,limit,order}
 | `?join` | optional, string, default: _null_ | Set to `transactions` to include the transactions which created each of the payments in the response. | `transactions` |
 
 ### curl Example Request
+# Retrieve the 25 latest payments for a specific account.
 
 ```bash
-# Retrieve the 25 latest payments for a specific account.
 curl "https://frontier.testnet.digitalbits.io/accounts/GCKY3VKRJDSRORRMHRDHA6IKRXMGSBRZE42P64AHX4NHVGB3Y224WM3M/payments?limit=25&order=desc"
 ```
 

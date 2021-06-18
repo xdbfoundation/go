@@ -18,7 +18,21 @@ GET /offers/{offer}
 curl "https://frontier.testnet.digitalbits.io/offers/1"
 ```
 
-<!-- ### JavaScript Example Request -->
+### JavaScript Example Request
+
+```javascript
+var DigitalBitsSdk = require('digitalbits-sdk');
+var server = new DigitalBitsSdk.Server('https://frontier.testnet.digitalbits.io');
+
+server.offers('accounts', 'GDFOHLMYCXVZD2CDXZLMW6W6TMU4YO27XFF2IBAFAV66MSTPDDSK2LAY')
+  .call()
+  .then(function (offerResult) {
+    console.log(JSON.stringify(offerResult));
+  })
+  .catch(function (err) {
+    console.error(err);
+  })
+```
 
 ## Response
 

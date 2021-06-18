@@ -11,7 +11,7 @@ GET /ledgers/{id}/transactions{?cursor,limit,order,include_failed}
 |  name  |  notes  | description | example |
 | ------ | ------- | ----------- | ------- |
 | `id` | required, number | Ledger ID | `958064` |
-| `?cursor` | optional, default _null_ | A paging token, specifying where to start returning records from. | `12884905984` |
+| `?cursor` | optional, default _null_ | A paging token, specifying where to start returning records from. | `1623820974` |
 | `?order`  | optional, string, default `asc` | The order in which to return rows, "asc" or "desc". | `asc` |
 | `?limit`  | optional, number, default `10` | Maximum number of records to return. | `200` |
 | `?include_failed` | optional, bool, default: `false` | Set to `true` to include failed transactions in results. | `true` |

@@ -13,7 +13,7 @@ GET /effects{?cursor,limit,order}
 
 |  name  |  notes  | description | example |
 | ------ | ------- | ----------- | ------- |
-| `?cursor` | optional, default _null_ | A paging token, specifying where to start returning records from. When streaming this can be set to `now` to stream object created since your request time. | `12884905984` |
+| `?cursor` | optional, default _null_ | A paging token, specifying where to start returning records from. When streaming this can be set to `now` to stream object created since your request time. | `1623820974` |
 | `?order`  | optional, string, default `asc` | The order in which to return rows, "asc" or "desc".               | `asc`         |
 | `?limit`  | optional, number, default `10` | Maximum number of records to return. | `200` |
 
@@ -168,111 +168,6 @@ The list of effects.
     "created_at": "2021-04-13T13:55:32Z",
     "asset_type": "native",
     "amount": "101.0000000"
-  },
-  {
-    "_links": {
-      "operation": {
-        "href": "https://frontier.testnet.digitalbits.io/operations/1099511631874"
-      },
-      "succeeds": {
-        "href": "https://frontier.testnet.digitalbits.io/effects?order=desc&cursor=1099511631874-3"
-      },
-      "precedes": {
-        "href": "https://frontier.testnet.digitalbits.io/effects?order=asc&cursor=1099511631874-3"
-      }
-    },
-    "id": "0000001099511631874-0000000003",
-    "paging_token": "1099511631874-3",
-    "account": "GBPULLXKNDHPAP25N66JA4SH5SOQSNAIWKPVFTATMY6DDV43GBH2TUGV",
-    "type": "signer_created",
-    "type_i": 10,
-    "created_at": "2021-04-13T13:55:32Z",
-    "weight": 1,
-    "public_key": "GBPULLXKNDHPAP25N66JA4SH5SOQSNAIWKPVFTATMY6DDV43GBH2TUGV",
-    "key": ""
-  },
-  {
-    "_links": {
-      "operation": {
-        "href": "https://frontier.testnet.digitalbits.io/operations/1099511631875"
-      },
-      "succeeds": {
-        "href": "https://frontier.testnet.digitalbits.io/effects?order=desc&cursor=1099511631875-1"
-      },
-      "precedes": {
-        "href": "https://frontier.testnet.digitalbits.io/effects?order=asc&cursor=1099511631875-1"
-      }
-    },
-    "id": "0000001099511631875-0000000001",
-    "paging_token": "1099511631875-1",
-    "account": "GBQJVYYXDLTZ7RH6OWEQTTQ5G3A77WEZUFTFIYTXYOZUQHUI7NYOC6TO",
-    "type": "account_created",
-    "type_i": 0,
-    "created_at": "2021-04-13T13:55:32Z",
-    "starting_balance": "101.0000000"
-  },
-  {
-    "_links": {
-      "operation": {
-        "href": "https://frontier.testnet.digitalbits.io/operations/1099511631875"
-      },
-      "succeeds": {
-        "href": "https://frontier.testnet.digitalbits.io/effects?order=desc&cursor=1099511631875-2"
-      },
-      "precedes": {
-        "href": "https://frontier.testnet.digitalbits.io/effects?order=asc&cursor=1099511631875-2"
-      }
-    },
-    "id": "0000001099511631875-0000000002",
-    "paging_token": "1099511631875-2",
-    "account": "GC3CLEUNQVWY36AHTGGX2NASAPHD6EBQXE63YH2B3PAASLCCIG4ELGTP",
-    "type": "account_debited",
-    "type_i": 3,
-    "created_at": "2021-04-13T13:55:32Z",
-    "asset_type": "native",
-    "amount": "101.0000000"
-  },
-  {
-    "_links": {
-      "operation": {
-        "href": "https://frontier.testnet.digitalbits.io/operations/1099511631875"
-      },
-      "succeeds": {
-        "href": "https://frontier.testnet.digitalbits.io/effects?order=desc&cursor=1099511631875-3"
-      },
-      "precedes": {
-        "href": "https://frontier.testnet.digitalbits.io/effects?order=asc&cursor=1099511631875-3"
-      }
-    },
-    "id": "0000001099511631875-0000000003",
-    "paging_token": "1099511631875-3",
-    "account": "GBQJVYYXDLTZ7RH6OWEQTTQ5G3A77WEZUFTFIYTXYOZUQHUI7NYOC6TO",
-    "type": "signer_created",
-    "type_i": 10,
-    "created_at": "2021-04-13T13:55:32Z",
-    "weight": 1,
-    "public_key": "GBQJVYYXDLTZ7RH6OWEQTTQ5G3A77WEZUFTFIYTXYOZUQHUI7NYOC6TO",
-    "key": ""
-  },
-  {
-    "_links": {
-      "operation": {
-        "href": "https://frontier.testnet.digitalbits.io/operations/1099511631876"
-      },
-      "succeeds": {
-        "href": "https://frontier.testnet.digitalbits.io/effects?order=desc&cursor=1099511631876-1"
-      },
-      "precedes": {
-        "href": "https://frontier.testnet.digitalbits.io/effects?order=asc&cursor=1099511631876-1"
-      }
-    },
-    "id": "0000001099511631876-0000000001",
-    "paging_token": "1099511631876-1",
-    "account": "GA4E6NUVQE7UO6723X6BYVPZMV3CLYXV64KJOOJ7K37F7KYHUD2C6FV4",
-    "type": "account_created",
-    "type_i": 0,
-    "created_at": "2021-04-13T13:55:32Z",
-    "starting_balance": "101.0000000"
   }
 ]
 ```

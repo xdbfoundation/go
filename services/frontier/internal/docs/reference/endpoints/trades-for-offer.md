@@ -13,14 +13,14 @@ GET /offers/{offer_id}/trades{?cursor,limit,order}
 | name | notes | description | example |
 | ---- | ----- | ----------- | ------- |
 | `offer_id` | required, number | ID of an offer | 323223 |
-| `?cursor` | optional, any, default _null_ | A paging token, specifying where to start returning records from. | 12884905984 |
+| `?cursor` | optional, any, default _null_ | A paging token, specifying where to start returning records from. | 1623820974 |
 | `?order`  | optional, string, default `asc` | The order in which to return rows, "asc" or "desc". | `asc` |
 | `?limit`  | optional, number, default: `10` | Maximum number of records to return. | `200` |
 
 ### curl Example Request
 
 ```sh
-curl "https://frontier.testnet.digitalbits.io/offers/323223/trades"
+curl "https://frontier.testnet.digitalbits.io/offers/6/trades"
 ```
 
 ### JavaScript Example Request
@@ -30,10 +30,10 @@ var DigitalBitsSdk = require('digitalbits-sdk');
 var server = new DigitalBitsSdk.Server('https://frontier.testnet.digitalbits.io');
 
 server.trades()
-    .forOffer(323223)
+    .forOffer(6)
     .call()
     .then(function (tradesResult) {
-      console.log(tradesResult);
+      console.log(JSON.stringify(tradesResult));
     })
     .catch(function (err) {
       console.error(err);
@@ -48,86 +48,47 @@ This endpoint responds with a list of trades that consumed a given offer. See th
 ### Example Response
 ```json
 {
-  "_links": {
-    "self": {
-      "href": "https://frontier.testnet.digitalbits.io/offers/323223/trades?cursor=\u0026limit=10\u0026order=asc"
-    },
-    "next": {
-      "href": "https://frontier.testnet.digitalbits.io/offers/323223/trades?cursor=35789107779080193-0\u0026limit=10\u0026order=asc"
-    },
-    "prev": {
-      "href": "https://frontier.testnet.digitalbits.io/offers/323223/trades?cursor=35789107779080193-0\u0026limit=10\u0026order=desc"
-    }
-  },
-  "_embedded": {
-    "records": [
-      {
-        "_links": {
-          "self": {
-            "href": ""
-          },
-          "base": {
-            "href": "https://frontier.testnet.digitalbits.io/accounts/GDRCFIQAUEFUQ6GXF5DPRO2M77E4UB7RW7EWI2FTKOW7CWYKZCHSI75K"
-          },
-          "counter": {
-            "href": "https://frontier.testnet.digitalbits.io/accounts/GCUD7CBKTQI4D7ZR7IKHMGXZKKVABML7XFBHV4AIYBOEN5UQFZ5DSPPT"
-          },
-          "operation": {
-            "href": "https://frontier.testnet.digitalbits.io/operations/35789107779080193"
-          }
+  "records": [
+    {
+      "_links": {
+        "self": {
+          "href": ""
         },
-        "id": "35789107779080193-0",
-        "paging_token": "35789107779080193-0",
-        "ledger_close_time": "2018-04-08T05:58:37Z",
-        "base_offer_id": "323223",
-        "base_account": "GDRCFIQAUEFUQ6GXF5DPRO2M77E4UB7RW7EWI2FTKOW7CWYKZCHSI75K",
-        "base_amount": "912.6607285",
-        "base_asset_type": "native",
-        "counter_offer_id": "4611686044197195777",   
-        "counter_account": "GCUD7CBKTQI4D7ZR7IKHMGXZKKVABML7XFBHV4AIYBOEN5UQFZ5DSPPT",
-        "counter_amount": "16.5200719",
-        "counter_asset_type": "credit_alphanum4",
-        "counter_asset_code": "CM10",
-        "counter_asset_issuer": "GBUJJAYHS64L4RDHPLURQJUKSHHPINSAYXYVMWPEF4LECHDKB2EFMKBX",
-        "base_is_seller": true,
-        "price": {
-          "n": 18101,
-          "d": 1000000
+        "base": {
+          "href": "https://frontier.testnet.digitalbits.io/accounts/GCKY3VKRJDSRORRMHRDHA6IKRXMGSBRZE42P64AHX4NHVGB3Y224WM3M"
+        },
+        "counter": {
+          "href": "https://frontier.testnet.digitalbits.io/accounts/GCRGG47RE7L2KVOEZCMYSQ6FTZF7KQJM3N3VA6IEF46GLPPAZHQGOSOA"
+        },
+        "operation": {
+          "href": "https://frontier.testnet.digitalbits.io/operations/4173759023943681"
         }
+      },
+      "id": "4173759023943681-0",
+      "paging_token": "4173759023943681-0",
+      "ledger_close_time": "2021-06-17T07:29:30Z",
+      "offer_id": "6",
+      "base_offer_id": "6",
+      "base_account": "GCKY3VKRJDSRORRMHRDHA6IKRXMGSBRZE42P64AHX4NHVGB3Y224WM3M",
+      "base_amount": "10.0000000",
+      "base_asset_type": "credit_alphanum4",
+      "base_asset_code": "UAH",
+      "base_asset_issuer": "GCHQ6AOZST6YPMROCQWPE3SVFY57FHPYC3WJGGSFCHOQ5HFZC5HSHQYK",
+      "counter_offer_id": "4615859777451331585",
+      "counter_account": "GCRGG47RE7L2KVOEZCMYSQ6FTZF7KQJM3N3VA6IEF46GLPPAZHQGOSOA",
+      "counter_amount": "5.0000000",
+      "counter_asset_type": "native",
+      "base_is_seller": true,
+      "price": {
+        "n": 1,
+        "d": 2
       }
-    ]
-  }
+    }
+  ]
 }
+
 ```
 
-## Example Streaming Event
-
-```cgo
-{ _links: 
-   { self: { href: '' },
-     base: 
-      { href: '/accounts/GDJNMHET4DTS7HUHU7IG5DB274OSMHUYA7TRRKOD6ZABHPUW5YWJ4SUD' },
-     counter: 
-      { href: '/accounts/GCALYDRCCJEUPMV24TAX2N2N3IBX7NUUYZNM7I5FQS5GIEQ4A7EVKUOP' },
-     operation: { href: '/operations/47261068505915393' } },
-  id: '47261068505915393-0',
-  paging_token: '47261068505915393-0',
-  ledger_close_time: '2018-09-11T19:42:04Z',
-  offer_id: '734529',
-  base_account: 'GDJNMHET4DTS7HUHU7IG5DB274OSMHUYA7TRRKOD6ZABHPUW5YWJ4SUD',
-  base_amount: '0.0175999',
-  base_asset_type: 'credit_alphanum4',
-  base_asset_code: 'BOC',
-  base_asset_issuer: 'GCTS32RGWRH6RJM62UVZ4UT5ZN5L6B2D3LPGO6Z2NM2EOGVQA7TA6SKO',
-  counter_account: 'GCALYDRCCJEUPMV24TAX2N2N3IBX7NUUYZNM7I5FQS5GIEQ4A7EVKUOP',
-  counter_amount: '0.0199998',
-  counter_asset_type: 'credit_alphanum4',
-  counter_asset_code: 'ABC',
-  counter_asset_issuer: 'GCTS32RGWRH6RJM62UVZ4UT5ZN5L6B2D3LPGO6Z2NM2EOGVQA7TA6SKO',
-  base_is_seller: true,
-  price: { n: 2840909, d: 2500000 }
-}
-```
 ## Possible Errors
 
 - The [standard errors](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/errors#standard-errors).

@@ -258,7 +258,6 @@ Now, create `make_payment.js` file and paste the following code into it:
 
 ```js
 var DigitalBitsBase = require("digitalbits-base");
-DigitalBitsBase.Networks.TESTNET;
 
 var keypair = DigitalBitsBase.Keypair.fromSecret('SBODKDHUKBCXEPDZZBANAPKV2BNH32RWL2PY6OYIUH7FQZ3L2XYVPUJU');
 var account = new DigitalBitsBase.Account(keypair.publicKey(), "4007749948014592");
