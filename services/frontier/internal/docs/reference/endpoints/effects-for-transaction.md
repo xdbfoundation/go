@@ -11,7 +11,7 @@ GET /transactions/{hash}/effects{?cursor,limit,order}
 | name | notes | description | example |
 | ---- | ----- | ----------- | ------- |
 | `hash` | required, string | A transaction hash, hex-encoded, lowercase. | `8b77f4b2a5af0d6fab04dd91a4f0dcc5006034506aebdd86e543d27781372f94` |
-| `?cursor` | optional, default _null_ | A paging token, specifying where to start returning records from. | `12884905984` |
+| `?cursor` | optional, default _null_ | A paging token, specifying where to start returning records from. | `1623820974` |
 | `?order` | optional, string, default `asc` | The order in which to return rows, "asc" or "desc". | `asc` |
 | `?limit` | optional, number, default `10` | Maximum number of records to return. | `200` |
 

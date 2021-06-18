@@ -25,7 +25,7 @@ GET /transactions/{hash}/payments{?cursor,limit,order}
 | name | notes | description | example |
 | ---- | ----- | ----------- | ------- |
 | `hash` | required, string | A transaction hash, hex-encoded, lowercase. | `c60f666cda020d13033bb44926adf7f6c2b659857f13959e3988351055c0b52f` |
-| `?cursor` | optional, default _null_ | A paging token, specifying where to start returning records from. | `12884905984` |
+| `?cursor` | optional, default _null_ | A paging token, specifying where to start returning records from. | `1623820974` |
 | `?order` | optional, string, default `asc` | The order in which to return rows, "asc" or "desc". | `asc` |
 | `?limit` | optional, number, default `10` | Maximum number of records to return. | `200` |
 | `?join` | optional, string, default: _null_ | Set to `transactions` to include the transactions which created each of the payments in the response. | `transactions` |

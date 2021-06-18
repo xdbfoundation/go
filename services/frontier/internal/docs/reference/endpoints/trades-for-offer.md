@@ -13,7 +13,7 @@ GET /offers/{offer_id}/trades{?cursor,limit,order}
 | name | notes | description | example |
 | ---- | ----- | ----------- | ------- |
 | `offer_id` | required, number | ID of an offer | 323223 |
-| `?cursor` | optional, any, default _null_ | A paging token, specifying where to start returning records from. | 12884905984 |
+| `?cursor` | optional, any, default _null_ | A paging token, specifying where to start returning records from. | 1623820974 |
 | `?order`  | optional, string, default `asc` | The order in which to return rows, "asc" or "desc". | `asc` |
 | `?limit`  | optional, number, default: `10` | Maximum number of records to return. | `200` |
 

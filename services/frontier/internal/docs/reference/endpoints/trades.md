@@ -27,7 +27,7 @@ GET /trades?base_asset_type={base_asset_type}&base_asset_code={base_asset_code}&
 | `counter_asset_code` | optional, string | Code of counter asset, not required if type is `native` | `EUR` |
 | `counter_asset_issuer` | optional, string | Issuer of counter asset, not required if type is `native` | `GDCIQQY2UKVNLLWGIX74DMTEAFCMQKAKYUWPBO7PLTHIHRKSFZN7V2FC` |
 | `offer_id` | optional, string | filter for by a specific offer id | `5` |
-| `?cursor` | optional, any, default _null_ | A paging token, specifying where to start returning records from. | `12884905984` |
+| `?cursor` | optional, any, default _null_ | A paging token, specifying where to start returning records from. | `1623820974` |
 | `?order`  | optional, string, default `asc` | The order, in terms of timeline, in which to return rows, "asc" or "desc". | `asc` |
 | `?limit`  | optional, number, default: `10` | Maximum number of records to return. | `200` |
 

@@ -26,8 +26,8 @@ A page provides a couple of links to ease in iteration.
 |      |                        Example                         |           Relation           |
 | ---- | ------------------------------------------------------ | ---------------------------- |
 | self | `/transactions`                                        |                              |
-| prev | `/transactions?cursor=12884905984&order=desc&limit=10` | The previous page of results |
-| next | `/transactions?cursor=12884905984&order=asc&limit=10`  | The next page of results     |
+| prev | `/transactions?cursor=1623820974&order=desc&limit=10` | The previous page of results |
+| next | `/transactions?cursor=1623820974&order=asc&limit=10`  | The next page of results     |
 
 ## Example
 

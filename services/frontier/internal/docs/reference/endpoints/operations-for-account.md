@@ -14,7 +14,7 @@ GET /accounts/{account}/operations{?cursor,limit,order,include_failed}
 | name     | notes                          | description                                                      | example                                                   |
 | ------   | -------                        | -----------                                                      | -------                                                   |
 | `account`| required, string               | Account ID                                                  | `GDFOHLMYCXVZD2CDXZLMW6W6TMU4YO27XFF2IBAFAV66MSTPDDSK2LAY`|
-| `?cursor`| optional, default _null_       | A paging token, specifying where to start returning records from.  When streaming this can be set to `now` to stream object created since your request time. | `12884905984`                                             |
+| `?cursor`| optional, default _null_       | A paging token, specifying where to start returning records from.  When streaming this can be set to `now` to stream object created since your request time. | `1623820974`                                             |
 | `?order` | optional, string, default `asc`| The order in which to return rows, "asc" or "desc".              | `asc`                                                     |
 | `?limit` | optional, number, default `10` | Maximum number of records to return.                             | `200`
 | `?include_failed` | optional, bool, default: `false` | Set to `true` to include operations of failed transactions in results. | `true` |                                                     |
