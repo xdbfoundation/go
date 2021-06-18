@@ -63,7 +63,7 @@ Frontier maintains its own database (postgres), a verbose and user friendly acco
   "value": 1
 },
 "history.latest_ledger": {
-  "value": 19203710
+  "value": 1074437
 },
 "history.open_connections": {
   "value": 4
