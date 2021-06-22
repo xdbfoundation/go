@@ -1,4 +1,4 @@
-This endpoint represents successful [operations](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/resources/operation) that are part of a given [transaction](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/resources/transaction).
+This endpoint represents successful [operations](../resources/operation.md) that are part of a given [transaction](../resources/transaction.md).
 
 ### Warning - failed transactions
 
@@ -47,7 +47,7 @@ server.operations()
 
 ## Response
 
-This endpoint responds with a list of operations that are part of a given transaction. See [operation resource](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/resources/operation) for reference.
+This endpoint responds with a list of operations that are part of a given transaction. See [operation resource](../resources/operation.md) for reference.
 
 ### Example Response
 
@@ -119,5 +119,5 @@ This endpoint responds with a list of operations that are part of a given transa
 
 ## Possible Errors
 
-- The [standard errors](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/errors#standard-errors).
-- [not_found](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/errors/not-found): A `not_found` error will be returned if there is no account whose ID matches the `hash` argument.
+- The [standard errors](../errors.md#standard-errors).
+- [not_found](../errors/not-found.md): A `not_found` error will be returned if there is no account whose ID matches the `hash` argument.

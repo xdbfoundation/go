@@ -40,4 +40,4 @@ draft specification guide and thus has the following attributes:
 
 ## Related
 
-- [Not Implemented](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/errors/not-implemented)
+- [Not Implemented](./not-implemented.md)

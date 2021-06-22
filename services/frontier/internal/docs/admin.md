@@ -2,7 +2,7 @@
 
 Frontier is responsible for providing an HTTP API to data in the DigitalBits network. It ingests and re-serves the data produced by the digitalbits network in a form that is easier to consume than the performance-oriented data representations used by digitalbits-core.
 
-This document describes how to administer a **production** Frontier instance. If you are just starting with Frontier and want to try it out, consider the [Quickstart Guide](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/quickstart) instead. For information about developing on the Frontier codebase, check out the [Development Guide](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/developing).
+This document describes how to administer a **production** Frontier instance. If you are just starting with Frontier and want to try it out, consider the [Quickstart Guide](./quickstart.md) instead. For information about developing on the Frontier codebase, check out the [Development Guide](./developing.md).
 
 ## Why run Frontier?
 
@@ -14,7 +14,7 @@ The DigitalBits Development Foundation runs two Frontier servers, one for the pu
 
 ## Prerequisites
 
-Frontier is dependent upon a digitalbits-core server.  Frontier needs access to both the SQL database and the HTTP API that is published by digitalbits-core. See [the administration guide](https://developers.digitalbits.io/software/DigitalBits/docs/software/admin) to learn how to set up and administer a digitalbits-core server.  Secondly, Frontier is dependent upon a postgres server, which it uses to store processed core data for ease of use. Frontier requires postgres version >= 9.5.
+Frontier is dependent upon a digitalbits-core server.  Frontier needs access to both the SQL database and the HTTP API that is published by digitalbits-core. See [the administration guide](https://github.com/xdbfoundation/DigitalBits/blob/master/docs/software/admin.md) to learn how to set up and administer a digitalbits-core server.  Secondly, Frontier is dependent upon a postgres server, which it uses to store processed core data for ease of use. Frontier requires postgres version >= 9.5.
 
 ## Installing
 
@@ -93,7 +93,7 @@ If you didn't set up a digitalbits-core yet, you may see an error like this:
 ERRO[2019-05-06T16:21:14.126+08:00] Error getting core latest ledger err="get failed: pq: relation \"ledgerheaders\" does not exist"
 ```
 
-Frontier requires a functional digitalbits-core. Go back and set up digitalbits-core as described in the admin guide. In particular, you need to initialise the database as [described here](http://developers.digitalbits.io/software/DigitalBits/docs/software/admin#database-and-local-state).
+Frontier requires a functional digitalbits-core. Go back and set up digitalbits-core as described in the admin guide. In particular, you need to initialise the database as [described here](https://github.com/xdbfoundation/DigitalBits/blob/master/docs/software/admin.md#database-and-local-state).
 
 ## Ingesting live digitalbits-core data
 
@@ -211,7 +211,7 @@ INFO[2019-08-29T13:40:00.972+02:00] Finished processing ledger                  
 
 Frontier ingests ledger data from a connected instance of digitalbits-core.  In the event that digitalbits-core stops running (or if Frontier stops ingesting data for any other reason), the view provided by Frontier will start to lag behind reality.  For simpler applications, this may be fine, but in many cases this lag is unacceptable and the application should not continue operating until the lag is resolved.
 
-To help applications that cannot tolerate lag, Frontier provides a configurable "staleness" threshold.  Given that enough lag has accumulated to surpass this threshold (expressed in number of ledgers), Frontier will only respond with an error: [`stale_history`](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/errors/stale-history).  To configure this option, use either the `--history-stale-threshold` command line flag or the `HISTORY_STALE_THRESHOLD` environment variable.  NOTE:  non-historical requests (such as submitting transactions or finding payment paths) will not error out when the staleness threshold is surpassed.
+To help applications that cannot tolerate lag, Frontier provides a configurable "staleness" threshold.  Given that enough lag has accumulated to surpass this threshold (expressed in number of ledgers), Frontier will only respond with an error: [`stale_history`](./reference/errors/stale-history.md).  To configure this option, use either the `--history-stale-threshold` command line flag or the `HISTORY_STALE_THRESHOLD` environment variable.  NOTE:  non-historical requests (such as submitting transactions or finding payment paths) will not error out when the staleness threshold is surpassed.
 
 ## Monitoring
 

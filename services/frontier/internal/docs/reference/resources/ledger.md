@@ -1,14 +1,14 @@
 A **ledger** resource contains information about a given ledger.
 
-To learn more about the concept of ledgers in the DigitalBits network, take a look at the [DigitalBits ledger concept guide](https://developers.digitalbits.io/guides/docs/guides/concepts/ledger).
+To learn more about the concept of ledgers in the DigitalBits network, take a look at the [DigitalBits ledger concept guide](https://github.com/xdbfoundation/docs/blob/master/guides/concepts/ledger.md).
 
 ## Attributes
 
 | Attribute                    | Type   |                                                                                                                              |
 |------------------------------|--------|------------------------------------------------------------------------------------------------------------------------------|
 | id                           | string | The id is a unique identifier for this ledger.                                                                               |
-| paging_token                 | number | A [paging token](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/resources/page) suitable for use as a `cursor` parameter.                                                        |
-| hash                         | string | A hex-encoded, lowercase SHA-256 hash of the ledger's [XDR](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/xdr)-encoded form.                                |
+| paging_token                 | number | A [paging token](../resources/page.md) suitable for use as a `cursor` parameter.                                                        |
+| hash                         | string | A hex-encoded, lowercase SHA-256 hash of the ledger's [XDR](../xdr.md)-encoded form.                                |
 | prev_hash                    | string | The hash of the ledger that chronologically came before this one.                                                            |
 | sequence                     | number | Sequence number of this ledger, suitable for use as the as the :id parameter for url templates that require a ledger number. |
 | successful_transaction_count | number | The number of successful transactions in this ledger.                                                                        |
@@ -84,14 +84,14 @@ To learn more about the concept of ledgers in the DigitalBits network, take a lo
 ## Endpoints
 | Resource                | Type       | Resource URI Template              |
 |-------------------------|------------|------------------------------------|
-| [All ledgers](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/endpoints/ledgers-all)         | Collection | `/ledgers`                         |
-| [Single Ledger](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/endpoints/ledgers-single)       | Single     | `/ledgers/:id`                     |
-| [Ledger Transactions](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/endpoints/transactions-for-ledger) | Collection | `/ledgers/:ledger_id/transactions` |
-| [Ledger Operations](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/endpoints/operations-for-ledger)   | Collection | `/ledgers/:ledger_id/operations`   |
-| [Ledger Payments](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/endpoints/payments-for-ledger)     | Collection | `/ledgers/:ledger_id/payments`     |
-| [Ledger Effects](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/endpoints/effects-for-ledger)      | Collection | `/ledgers/:ledger_id/effects`      |
+| [All ledgers](../endpoints/ledgers-all.md)         | Collection | `/ledgers`                         |
+| [Single Ledger](../endpoints/ledgers-single.md)       | Single     | `/ledgers/:id`                     |
+| [Ledger Transactions](../endpoints/transactions-for-ledger.md) | Collection | `/ledgers/:ledger_id/transactions` |
+| [Ledger Operations](../endpoints/operations-for-ledger.md)   | Collection | `/ledgers/:ledger_id/operations`   |
+| [Ledger Payments](../endpoints/payments-for-ledger.md)     | Collection | `/ledgers/:ledger_id/payments`     |
+| [Ledger Effects](../endpoints/effects-for-ledger.md)      | Collection | `/ledgers/:ledger_id/effects`      |
 
 
 
-[inflation]: https://developers.digitalbits.io/guides/docs/guides/concepts/inflation
-[fee]: https://developers.digitalbits.io/guides/docs/guides/concepts/fees
+[inflation]: https://github.com/xdbfoundation/docs/blob/master/guides/concepts/inflation.md
+[fee]: https://github.com/xdbfoundation/docs/blob/master/guides/concepts/fees.md

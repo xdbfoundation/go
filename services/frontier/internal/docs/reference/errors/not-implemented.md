@@ -33,4 +33,4 @@ $ curl -X GET "https://frontier.testnet.digitalbits.io/offers/1234"
 
 ## Related
 
-- [Server Error](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/errors/server-error)
+- [Server Error](./server-error.md)

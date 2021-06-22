@@ -1,6 +1,6 @@
 Effects are the specific ways that the ledger was changed by any operation.
 
-This endpoint represents all [effects](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/resources/effect) that occurred in the given [ledger](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/resources/ledger).
+This endpoint represents all [effects](../resources/effect.md) that occurred in the given [ledger](../resources/ledger.md).
 
 ## Request
 
@@ -44,7 +44,7 @@ server.effects()
 
 ## Response
 
-This endpoint responds with a list of effects that occurred in the ledger. See [effect resource](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/resources/effect) for reference.
+This endpoint responds with a list of effects that occurred in the ledger. See [effect resource](../resources/effect.md) for reference.
 
 ### Example Response
 
@@ -78,5 +78,5 @@ This endpoint responds with a list of effects that occurred in the ledger. See [
 
 ## Possible Errors
 
-- The [standard errors](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/errors#standard-errors).
-- [not_found](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/errors/not-found): A `not_found` error will be returned if there are no effects for a given ledger.
+- The [standard errors](../errors.md#standard-errors).
+- [not_found](../errors/not-found.md): A `not_found` error will be returned if there are no effects for a given ledger.

@@ -1,6 +1,6 @@
-This endpoint represents all [trades](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/resources/trade) for a given [offer](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/resources/offer).
+This endpoint represents all [trades](../resources/trade.md) for a given [offer](../resources/offer.md).
 
-This endpoint can also be used in [streaming](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/streaming) mode, making it possible to listen for new trades for the given offer as they occur on the DigitalBits network.
+This endpoint can also be used in [streaming](../streaming.md) mode, making it possible to listen for new trades for the given offer as they occur on the DigitalBits network.
 If called in streaming mode Frontier will start at the earliest known trade unless a `cursor` is set. In that case it will start from the `cursor`. You can also set `cursor` value to `now` to only stream trades created since your request time.
 ## Request
 
@@ -43,7 +43,7 @@ server.trades()
 
 ## Response
 
-This endpoint responds with a list of trades that consumed a given offer. See the [trade resource](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/resources/trade) for reference.
+This endpoint responds with a list of trades that consumed a given offer. See the [trade resource](../resources/trade.md) for reference.
 
 ### Example Response
 ```json
@@ -91,5 +91,5 @@ This endpoint responds with a list of trades that consumed a given offer. See th
 
 ## Possible Errors
 
-- The [standard errors](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/errors#standard-errors).
-- [not_found](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/errors/not-found): A `not_found` error will be returned if there is no offer whose ID matches the `offer_id` argument.
+- The [standard errors](../errors.md#standard-errors).
+- [not_found](../errors/not-found.md): A `not_found` error will be returned if there is no offer whose ID matches the `offer_id` argument.

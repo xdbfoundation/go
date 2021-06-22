@@ -1,8 +1,3 @@
----
-title: Transaction Failed
-replacement: https://developers.digitalbits.org/api/errors/http-status-codes/frontier-specific/
----
-
 The `transaction_failed` error occurs when a client submits a transaction that was well-formed but
 was not included into the ledger due to some other failure. For example, a transaction may fail if:
 
@@ -50,7 +45,7 @@ In addition, the following additional data is provided in the `extras` field of 
   "type": "https://digitalbits.org/frontier-errors/transaction_failed",
   "title": "Transaction Failed",
   "status": 400,
-  "detail": "The transaction failed when submitted to the digitalbits network. The `extras.result_codes` field on this response contains further details.  Descriptions of each code can be found at: https://developers.digitalbits.io/guides/docs/guides/concepts/list-of-operations",
+  "detail": "The transaction failed when submitted to the digitalbits network. The `extras.result_codes` field on this response contains further details.  Descriptions of each code can be found at: https://github.com/xdbfoundation/docs/blob/master/guides/concepts/list-of-operations.md",
   "extras": {
     "envelope_xdr": "AAAAANNVpdQ9vctZdAJ67sFmNe1KDzaj51dAdkW3vKKM51H3AAAAZAAAAABJlgLSAAAAAAAAAAAAAAABAAAAAAAAAAEAAAAA01Wl1D29y1l0AnruwWY17UoPNqPnV0B2Rbe8ooznUfcAAAAAAAAAAAL68IAAAAAAAAAAAA==",
     "result_codes": {
@@ -67,7 +62,7 @@ In addition, the following additional data is provided in the `extras` field of 
   "type": "https://digitalbits.org/frontier-errors/transaction_failed",
   "title": "Transaction Failed",
   "status": 400,
-  "detail": "The transaction failed when submitted to the digitalbits network. The `extras.result_codes` field on this response contains further details.  Descriptions of each code can be found at: https://developers.digitalbits.io/guides/docs/guides/concepts/list-of-operations",
+  "detail": "The transaction failed when submitted to the digitalbits network. The `extras.result_codes` field on this response contains further details.  Descriptions of each code can be found at: https://github.com/xdbfoundation/docs/blob/master/guides/concepts/list-of-operations.md",
   "extras": {
     "envelope_xdr": "AAAAAPORy3CoX6ox2ilbeiVjBA5WlpCSZRcjZ7VE9Wf4QVk7AAAAZAAAQz0AAAACAAAAAAAAAAAAAAABAAAAAAAAAAEAAAAA85HLcKhfqjHaKVt6JWMEDlaWkJJlFyNntUT1Z/hBWTsAAAAAAAAAAAL68IAAAAAAAAAAARN17BEAAABAA9Ad7OKc7y60NT/JuobaHOfmuq8KbZqcV6G/es94u9yT84fi0aI7tJsFMOyy8cZ4meY3Nn908OU+KfRWV40UCw==",
     "result_codes": {
@@ -80,4 +75,4 @@ In addition, the following additional data is provided in the `extras` field of 
 
 ## Related
 
-- [Transaction Malformed](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/errors/transaction-malformed)
+- [Transaction Malformed](./transaction-malformed.md)

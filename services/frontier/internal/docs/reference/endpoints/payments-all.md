@@ -1,6 +1,6 @@
-This endpoint represents all payment-related [operations](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/resources/operation) that are part
-of validated [transactions](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/resources/transaction). This endpoint can also be used in
-[streaming](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/streaming) mode so it is possible to use it to listen for new payments as they
+This endpoint represents all payment-related [operations](../resources/operation.md) that are part
+of validated [transactions](../resources/transaction.md). This endpoint can also be used in
+[streaming](../streaming.md) mode so it is possible to use it to listen for new payments as they
 get made in the DigitalBits network.
 
 If called in streaming mode Frontier will start at the earliest known payment unless a `cursor` is
@@ -78,7 +78,7 @@ var es = server.payments()
 
 ## Response
 
-This endpoint responds with a list of payments. See [operation resource](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/resources/operation) for more information about operations (and payment operations).
+This endpoint responds with a list of payments. See [operation resource](../resources/operation.md) for more information about operations (and payment operations).
 
 ### Example Response
 
@@ -215,4 +215,4 @@ This endpoint responds with a list of payments. See [operation resource](https:/
 
 ## Possible Errors
 
-- The [standard errors](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/errors#standard-errors).
+- The [standard errors](../errors.md#standard-errors).

@@ -1,10 +1,10 @@
-Posts a new [transaction](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/resources/transaction) to the DigitalBits Network.
+Posts a new [transaction](../resources/transaction.md) to the DigitalBits Network.
 Note that creating a valid transaction and signing it properly is the
 responsibility of your client library.
 
 Transaction submission and the subsequent validation and inclusion into the
 DigitalBits Network's ledger is a [complicated and asynchronous
-process](https://developers.digitalbits.io/guides/docs/guides/concepts/transactions#life-cycle).
+process](https://github.com/xdbfoundation/docs/blob/master/guides/concepts/transactions.md#life-cycle).
 To reduce the complexity, frontier manages these asynchronous processes for the
 client and will wait to hear results from the DigitalBits Network before returning
 an HTTP response to a client.
@@ -18,7 +18,7 @@ and not attempt to submit the transaction again. Only in cases where a
 transaction's status is unknown (and thus will have a chance of being included
 into a ledger) will a resubmission to the network occur.
 
-Information about [building transactions](https://developers.digitalbits.io/reference/js-digitalbits-base/docs/reference/building-transactions) in JavaScript.
+Information about [building transactions](https://github.com/xdbfoundation/js-digitalbits-base/blob/master/docs/reference/building-transactions.md) in JavaScript.
 
 ### Timeout
 
@@ -30,7 +30,7 @@ If you are encountering this error it means that either:
 The former case may happen because there was no room for your transaction in the 3 consecutive ledgers. In such case, Core server removes a transaction from a queue. To solve this you can either:
 
 * Keep resubmitting the same transaction (with the same sequence number) and wait until it finally is added to a new ledger or:
-* Increase the [fee](https://developers.digitalbits.io/guides/docs/guides/concepts/fees).
+* Increase the [fee](https://github.com/xdbfoundation/docs/blob/master/guides/concepts/fees.md).
 
 ## Request
 
@@ -42,7 +42,7 @@ POST /transactions
 
 | name | loc  |  notes   |         example        | description |
 | ---- | ---- | -------- | ---------------------- | ----------- |
-| `tx` | body | required | `AAAAAO`....`f4yDBA==` | Base64 representation of transaction envelope [XDR](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/xdr) |
+| `tx` | body | required | `AAAAAO`....`f4yDBA==` | Base64 representation of transaction envelope [XDR](../xdr.md) |
 
 
 ### curl Example Request
@@ -63,7 +63,7 @@ If the transaction failed or errored, then an error response will be returned. P
 
 ### Attributes
 
-The response will include all fields from the [transaction resource](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/resources/transaction).
+The response will include all fields from the [transaction resource](../resources/transaction.md).
 
 ### Example Response
 
@@ -124,7 +124,7 @@ The response will include all fields from the [transaction resource](https://dev
 
 ## Possible Errors
 
-- The [standard errors](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/errors#standard-errors).
-- [transaction_failed](/reference/go/services/frontier/internal/docs/reference/errors/transaction-failed): The transaction failed and could not be applied to the ledger.
-- [transaction_malformed](/reference/go/services/frontier/internal/docs/reference/errors/transaction-malformed): The transaction could not be decoded and was not submitted to the network.
-- [timeout](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/errors/timeout): No response from the Core server in a timely manner. Please check "Timeout" section above.
+- The [standard errors](../errors.md#standard-errors).
+- [transaction_failed](../errors/transaction-failed.md): The transaction failed and could not be applied to the ledger.
+- [transaction_malformed](../errors/transaction-malformed.md): The transaction could not be decoded and was not submitted to the network.
+- [timeout](../errors/timeout.md): No response from the Core server in a timely manner. Please check "Timeout" section above.

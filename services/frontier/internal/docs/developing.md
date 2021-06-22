@@ -92,8 +92,8 @@ Now run your development version of Frontier (which is outside of the container)
 frontier --db-url="postgres://localhost/frontier_dev" --digitalbits-core-db-url="postgres://digitalbits:postgres@localhost:8002/core" --digitalbits-core-url="http://localhost:11626" --port 8001 --network-passphrase "Test SDF Network ; September 2015" --ingest
 ```
 
-If all is well, you should see ingest logs written to standard out. You can test your Frontier instance with a query like: http://localhost:8001/transactions?limit=10&order=asc. Use the [DigitalBits Laboratory](https://www.digitalbits.org/laboratory/) to craft other queries to try out,
-and read about the available endpoints and see examples in the [Frontier API reference](https://www.digitalbits.org/developers/frontier/reference/).
+If all is well, you should see ingest logs written to standard out. You can test your Frontier instance with a query like: http://localhost:8001/transactions?limit=10&order=asc. Use the [DigitalBits Laboratory](https://developers.digitalbits.io/lab/) to craft other queries to try out,
+and read about the available endpoints and see examples in the [Frontier API reference](./readme.md).
 
 ## The development cycle
 Congratulations! You can now run the full development cycle to build and test your code.

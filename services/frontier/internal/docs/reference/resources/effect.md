@@ -1,6 +1,6 @@
 A successful operation will yield zero or more **effects**.  These effects
 represent specific changes that occur in the ledger, but are not necessarily
-directly reflected in the [ledger](https://developers.digitalbits.io/guides/docs/guides/concepts/ledger) or [history](https://github.com/xdbfoundation/DigitalBits/blob/master/docs/history.md), as [transactions](https://developers.digitalbits.io/guides/docs/guides/concepts/transactions) and [operations](https://developers.digitalbits.io/guides/docs/guides/concepts/operations) are.
+directly reflected in the [ledger](https://github.com/xdbfoundation/docs/blob/master/guides/concepts/ledger.md) or [history](https://github.com/xdbfoundation/DigitalBits/blob/master/docs/history.md), as [transactions](https://github.com/xdbfoundation/docs/blob/master/guides/concepts/transactions.md) and [operations](https://github.com/xdbfoundation/docs/blob/master/guides/concepts/operations.md) are.
 
 ## Effect types
 
@@ -108,7 +108,7 @@ Attributes depend on effect type.
 
 | Resource                                                                                                                                   | Type       | Resource URI Template           |
 |--------------------------------------------------------------------------------------------------------------------------------------------|------------|---------------------------------|
-| [All Effects](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/endpoints/effects-all)                 | Collection | `/effects`                      |
-| [Operation Effects](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/endpoints/effects-for-operation) | Collection | `/operations/:id/effects`       |
-| [Account Effects](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/endpoints/effects-for-account)     | Collection | `/accounts/:account_id/effects` |
-| [Ledger Effects](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/endpoints/effects-for-ledger)       | Collection | `/ledgers/:ledger_id/effects`   |
+| [All Effects](../endpoints/effects-all.md)                 | Collection | `/effects`                      |
+| [Operation Effects](../endpoints/effects-for-operation.md) | Collection | `/operations/:id/effects`       |
+| [Account Effects](../endpoints/effects-for-account.md)     | Collection | `/accounts/:account_id/effects` |
+| [Ledger Effects](../endpoints/effects-for-ledger.md)       | Collection | `/ledgers/:ledger_id/effects`   |

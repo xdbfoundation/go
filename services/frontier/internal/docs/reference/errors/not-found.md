@@ -37,4 +37,4 @@ $ curl -X GET "https://frontier.testnet.digitalbits.io/accounts/accountthatdoesn
 
 ## Related
 
-- [Not Acceptable](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/errors/not-acceptable)
+- [Not Acceptable](./not-acceptable.md)
