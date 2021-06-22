@@ -236,7 +236,7 @@ jobs:
           push: false
           file: services/frontier/Dockerfile
           build-args: FRONTIER_VERSION=${{ steps.previoustag.outputs.tag }}
-          tags: docker.cloudsmith.io/xdb-foundation/digitalbits-frontier:${{ steps.previoustag.outputs.tag }}  
+          tags: digitalbits-frontier:${{ steps.previoustag.outputs.tag }}  
           outputs: type=docker,dest=/tmp/image.tar
       - 
         name: Push
