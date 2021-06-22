@@ -1,4 +1,4 @@
-This endpoint represents all [assets](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/resources/asset).
+This endpoint represents all [assets](../resources/asset.md).
 It will give you all the assets in the system along with various statistics about each.
 
 ### Notes
@@ -45,7 +45,7 @@ server.assets()
 
 ## Response
 
-If called normally this endpoint responds with a [page](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/resources/page) of assets.
+If called normally this endpoint responds with a [page](../resources/page.md) of assets.
 
 ### Example Response
 
@@ -128,4 +128,4 @@ If called normally this endpoint responds with a [page](https://developers.digit
 
 ## Possible Errors
 
-- The [standard errors](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/errors#standard-errors).
+- The [standard errors](../errors#standard-errors).

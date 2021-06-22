@@ -2,7 +2,7 @@
 
 An asset consists of an type, code, and issuer.
 
-To learn more about the concept of assets in the DigitalBits network, take a look at the [DigitalBits assets concept guide](https://developers.digitalbits.io/guides/docs/guides/concepts/assets).
+To learn more about the concept of assets in the DigitalBits network, take a look at the [DigitalBits assets concept guide](https://github.com/xdbfoundation/docs/blob/master/guides/concepts/assets.md).
 
 ## Attributes
 
@@ -14,7 +14,7 @@ To learn more about the concept of assets in the DigitalBits network, take a loo
 | amount                   | number | The number of units of credit issued. |
 | num_accounts             | number | The number of accounts that: 1) trust this asset and 2) where if the asset has the auth_required flag then the account is authorized to hold the asset. |
 | flags                    | object | The flags denote the enabling/disabling of certain asset issuer privileges. |
-| paging_token             | string | A [paging token](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/resources/page) suitable for use as the `cursor` parameter to transaction collection resources.                   |
+| paging_token             | string | A [paging token](../resources/page.md) suitable for use as the `cursor` parameter to transaction collection resources.                   |
 
 #### Flag Object
 |    Attribute     |  Type  |                                                                                                                                |
@@ -55,4 +55,4 @@ To learn more about the concept of assets in the DigitalBits network, take a loo
 
 |  Resource                                |    Type    |    Resource URI Template     |
 | ---------------------------------------- | ---------- | ---------------------------- |
-| [All Assets](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/endpoints/assets-all) | Collection | `/assets` (`GET`)            |
+| [All Assets](../endpoints/assets-all.md) | Collection | `/assets` (`GET`)            |

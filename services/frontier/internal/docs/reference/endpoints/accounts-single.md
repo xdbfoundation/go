@@ -1,12 +1,12 @@
-Returns information and links relating to a single [account](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/resources/account).
+Returns information and links relating to a single [account](../resources/account.md).
 
 The balances section in the returned JSON will also list all the
-[trustlines](https://developers.digitalbits.io/guides/docs/guides/concepts/assets#trustlines) this account
+[trustlines](https://github.com/xdbfoundation/docs/tree/master/guides/concepts/assets.md#trustlines) this account
 established. Note this will only return trustlines that have the necessary authorization to work.
 Meaning if an account `A` trusts another account `B` that has the
-[authorization required](https://developers.digitalbits.io/guides/docs/guides/concepts/accounts#flags)
+[authorization required](https://github.com/xdbfoundation/docs/tree/master/guides/concepts/accounts.md#flags)
 flag set, the trustline won't show up until account `B`
-[allows](https://developers.digitalbits.io/guides/docs/guides/concepts/list-of-operations#allow-trust)
+[allows](https://github.com/xdbfoundation/docs/tree/master/guides/concepts/list-of-operations.md#allow-trust)
 account `A` to hold its assets.
 
 ## Request
@@ -46,7 +46,7 @@ server.accounts()
 
 ## Response
 
-This endpoint responds with the details of a single account for a given ID. See [account resource](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/resources/account) for reference.
+This endpoint responds with the details of a single account for a given ID. See [account resource](../resources/account.md) for reference.
 
 ### Example Response
 ```json
@@ -148,5 +148,5 @@ This endpoint responds with the details of a single account for a given ID. See 
 
 ## Possible Errors
 
-- The [standard errors](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/errors#standard-errors).
-- [not_found](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/errors/not-found): A `not_found` error will be returned if there is no account whose ID matches the `account` argument.
+- The [standard errors](../errors.md#standard-errors).
+- [not_found](../errors/not-found.md): A `not_found` error will be returned if there is no account whose ID matches the `account` argument.

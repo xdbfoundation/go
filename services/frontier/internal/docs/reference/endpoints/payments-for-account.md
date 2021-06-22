@@ -1,7 +1,7 @@
 This endpoint responds with a collection of payment-related operations where the given
-[account](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/resources/account) was either the sender or receiver.
+[account](../resources/account.md) was either the sender or receiver.
 
-This endpoint can also be used in [streaming](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/streaming) mode so it is possible to use it to
+This endpoint can also be used in [streaming](../streaming.md) mode so it is possible to use it to
 listen for new payments to or from an account as they get made in the DigitalBits network.
 If called in streaming mode Frontier will start at the earliest known payment unless a `cursor` is
 set. In that case it will start from the `cursor`. You can also set `cursor` value to `now` to only
@@ -74,7 +74,7 @@ var es = server.payments()
 
 ## Response
 
-This endpoint responds with a [page](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/resources/page) of [payment operations](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/resources/operation).
+This endpoint responds with a [page](../resources/page.md) of [payment operations](../resources/operation.md).
 
 ### Example Response
 
@@ -218,4 +218,4 @@ This endpoint responds with a [page](https://developers.digitalbits.io/reference
 
 ## Possible Errors
 
-- The [standard errors](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/errors#standard-errors).
+- The [standard errors](../errors.md#standard-errors).

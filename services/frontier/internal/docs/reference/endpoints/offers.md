@@ -1,4 +1,4 @@
-People on the DigitalBits network can make [offers](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/resources/offer) to buy or sell assets. This
+People on the DigitalBits network can make [offers](../resources/offer.md) to buy or sell assets. This
 endpoint represents all the current offers, allowing filtering by `seller`, `selling_asset` or `buying_asset`.
 
 ## Request
@@ -132,4 +132,4 @@ The list of offers.
 
 ## Possible Errors
 
-- The [standard errors](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/errors#standard-errors).
+- The [standard errors](../errors.md#standard-errors).

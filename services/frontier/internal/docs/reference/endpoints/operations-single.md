@@ -1,5 +1,5 @@
 The operation details endpoint provides information on a single
-[operation](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/resources/operation). The operation ID provided in the `id` argument specifies
+[operation](../resources/operation.md). The operation ID provided in the `id` argument specifies
 which operation to load.
 
 ### Warning - failed transactions
@@ -45,7 +45,7 @@ server.operations()
 
 ## Response
 
-This endpoint responds with a single Operation.  See [operation resource](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/resources/operation) for reference.
+This endpoint responds with a single Operation.  See [operation resource](../resources/operation.md) for reference.
 
 ### Example Response
 
@@ -85,6 +85,6 @@ This endpoint responds with a single Operation.  See [operation resource](https:
 
 ## Possible Errors
 
-- The [standard errors](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/errors#standard-errors).
-- [not_found](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/errors/not-found): A `not_found` error will be returned if the
+- The [standard errors](../errors.md#standard-errors).
+- [not_found](../errors/not-found.md): A `not_found` error will be returned if the
   there is no operation that matches the ID argument, i.e. the operation does not exist.

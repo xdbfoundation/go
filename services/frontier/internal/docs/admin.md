@@ -93,7 +93,7 @@ If you didn't set up a digitalbits-core yet, you may see an error like this:
 ERRO[2019-05-06T16:21:14.126+08:00] Error getting core latest ledger err="get failed: pq: relation \"ledgerheaders\" does not exist"
 ```
 
-Frontier requires a functional digitalbits-core. Go back and set up digitalbits-core as described in the admin guide. In particular, you need to initialise the database as [described here](http://developers.digitalbits.io/software/DigitalBits/docs/software/admin#database-and-local-state).
+Frontier requires a functional digitalbits-core. Go back and set up digitalbits-core as described in the admin guide. In particular, you need to initialise the database as [described here](https://github.com/xdbfoundation/DigitalBits/blob/master/docs/software/admin.md#database-and-local-state).
 
 ## Ingesting live digitalbits-core data
 

@@ -36,4 +36,4 @@ $ curl -X GET "https://frontier.testnet.digitalbits.io/ledgers?limit=invalidlimi
 
 ## Related
 
-- [Malformed Transaction](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/errors/transaction-malformed)
+- [Malformed Transaction](./transaction-malformed.md)

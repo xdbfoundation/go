@@ -1,7 +1,7 @@
-People on the DigitalBits network can make [offers](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/resources/offer) to buy or sell assets. This
+People on the DigitalBits network can make [offers](../resources/offer.md) to buy or sell assets. This
 endpoint represents all the offers a particular account makes.
 
-This endpoint can also be used in [streaming](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/streaming) mode so it is possible to use it to
+This endpoint can also be used in [streaming](../streaming.md) mode so it is possible to use it to
 listen as offers are processed in the DigitalBits network. If called in streaming mode Frontier will
 start at the earliest known offer unless a `cursor` is set. In that case it will start from the
 `cursor`. You can also set `cursor` value to `now` to only stream offers created since your request
@@ -109,4 +109,4 @@ The list of offers.
 
 ## Possible Errors
 
-- The [standard errors](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/errors#standard-errors).
+- The [standard errors](../errors.md#standard-errors).

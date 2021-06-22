@@ -1,8 +1,8 @@
-This endpoint represents all [effects](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/resources/effect) that changed a given
-[account](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/resources/account). It will return relevant effects from the creation of the
+This endpoint represents all [effects](../resources/effect.md) that changed a given
+[account](../resources/account.md). It will return relevant effects from the creation of the
 account to the current ledger.
 
-This endpoint can also be used in [streaming](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/streaming) mode so it is possible to use it to
+This endpoint can also be used in [streaming](../streaming.md) mode so it is possible to use it to
 listen for new effects as transactions happen in the DigitalBits network.
 If called in streaming mode Frontier will start at the earliest known effect unless a `cursor` is
 set. In that case it will start from the `cursor`. You can also set `cursor` value to `now` to only
@@ -144,5 +144,5 @@ The list of effects.
 
 ## Possible Errors
 
-- The [standard errors](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/errors#standard-errors).
-- [not_found](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/errors/not-found): A `not_found` error will be returned if there are no effects for the given account.
+- The [standard errors](../errors.md#standard-errors).
+- [not_found](../errors/not-found.md): A `not_found` error will be returned if there are no effects for the given account.

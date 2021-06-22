@@ -1,4 +1,4 @@
-**Note**: This endpoint will be deprecated, use [/path/strict-receive](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/endpoints/path-finding-strict-receive) instead. There are no differences between both endpoints, `/paths` is an alias for `/path/strict-receive`.
+**Note**: This endpoint will be deprecated, use [/path/strict-receive](./path-finding-strict-receive.md) instead. There are no differences between both endpoints, `/paths` is an alias for `/path/strict-receive`.
 
 
 The DigitalBits Network allows payments to be made across assets through _path payments_.  A path
@@ -70,7 +70,7 @@ curl "https://frontier.testnet.digitalbits.io/paths/strict-receive?destination_a
 
 ## Response
 
-This endpoint responds with a page of path resources.  See [path resource](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/resources/path) for reference.
+This endpoint responds with a page of path resources.  See [path resource](../resources/path.md) for reference.
 
 ### Example Response
 
@@ -110,5 +110,5 @@ This endpoint responds with a page of path resources.  See [path resource](https
 
 ## Possible Errors
 
-- The [standard errors](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/errors#standard-errors).
-- [not_found](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/errors/not-found): A `not_found` error will be returned if no paths could be found to fulfill this payment request
+- The [standard errors](../errors.md#standard-errors).
+- [not_found](../errors/not-found.md): A `not_found` error will be returned if no paths could be found to fulfill this payment request

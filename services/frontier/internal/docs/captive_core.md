@@ -1,7 +1,3 @@
----
-title: Using Captive DigitalBits-Core in Frontier
-replacement: https://developers.digitalbits.org/docs/frontier-captive-core/
----
 ## Using Captive DigitalBits-Core in Frontier
 
 Starting with version v1.6.0, Frontier contains an experimental feature to use DigitalBits-Core in the captive mode. In this mode DigitalBits-Core is started as a subprocess of Frontier and streams ledger data over a filesystem pipe. It completely eliminates all issues connected to ledgers missing in DigitalBits-Core's database but requires extra time to initialize the DigitalBits-Core subprocess.

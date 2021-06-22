@@ -33,4 +33,4 @@ $ curl -X GET "https://frontier.testnet.digitalbits.io/transactions?cursor=1&ord
 
 ## Related
 
-- [Not Found](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/errors/not-found)
+- [Not Found](./not-found.md)

@@ -1,9 +1,9 @@
-People on the DigitalBits network can make [offers](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/resources/offer) to buy or sell assets. When
-an offer is fully or partially fulfilled, a [trade](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/resources/trade) happens.
+People on the DigitalBits network can make [offers](../resources/offer.md) to buy or sell assets. When
+an offer is fully or partially fulfilled, a [trade](../resources/trade.md) happens.
 
 Trades can be filtered for a specific orderbook, defined by an asset pair: `base` and `counter`.
 
-This endpoint can also be used in [streaming](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/streaming) mode, making it possible to listen
+This endpoint can also be used in [streaming](../streaming.md) mode, making it possible to listen
 for new trades as they occur on the DigitalBits network.
 
 If called in streaming mode Frontier will start at the earliest known trade unless a `cursor` is
@@ -152,4 +152,4 @@ The list of trades. `base` and `counter` in the records will match the asset pai
 
 ## Possible Errors
 
-- The [standard errors](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/errors#standard-errors).
+- The [standard errors](../errors.md#standard-errors).

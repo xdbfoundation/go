@@ -34,4 +34,4 @@ $ curl -X GET -H "Accept: application/xml" "https://frontier.testnet.digitalbits
 
 ## Related
 
-- [Not Found](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/errors/not-found)
+- [Not Found](./not-found.md)

@@ -1,5 +1,5 @@
-This endpoint represents all payment-related [operations](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/resources/operation) that are part
-of a valid [transactions](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/resources/transaction) in a given [ledger](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/resources/ledger).
+This endpoint represents all payment-related [operations](../resources/operation.md) that are part
+of a valid [transactions](../resources/transaction.md) in a given [ledger](../resources/ledger.md).
 
 The operations that can be returned in by this endpoint are:
 
@@ -51,7 +51,7 @@ server.payments()
 ## Response
 
 This endpoint responds with a list of payment operations in a given ledger. See [operation
-resource](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/resources/operation) for more information about operations (and payment
+resource](../resources/operation.md) for more information about operations (and payment
 operations).
 
 ### Example Response
@@ -98,5 +98,5 @@ operations).
 
 ## Possible Errors
 
-- The [standard errors](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/errors#standard-errors).
-- [not_found](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/errors/not-found): A `not_found` error will be returned if there is no ledger whose ID matches the `id` argument.
+- The [standard errors](../errors.md#standard-errors).
+- [not_found](../errors/not-found.md): A `not_found` error will be returned if there is no ledger whose ID matches the `id` argument.

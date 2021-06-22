@@ -31,4 +31,4 @@ draft specification guide and thus has the following attributes:
 
 ## Related
 
-- [Internal Server Error](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/errors/server-error.md)
+- [Internal Server Error](./server-error.md)

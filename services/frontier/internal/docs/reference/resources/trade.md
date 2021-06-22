@@ -58,5 +58,5 @@ Offer ids in the frontier trade resource (base_offer_id, counter_offer_id) are s
 
 | Resource                 | Type       | Resource URI Template                |
 |--------------------------|------------|--------------------------------------|
-| [Trades](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/endpoints/trades)       | Collection | `/trades`       |
-| [Account Trades](https://developers.digitalbits.io/reference/go/services/frontier/internal/docs/reference/endpoints/trades-for-account) | Collection | `/accounts/:account_id/trades`      |
+| [Trades](../endpoints/trades.md)       | Collection | `/trades`       |
+| [Account Trades](../endpoints/trades-for-account.md) | Collection | `/accounts/:account_id/trades`      |
