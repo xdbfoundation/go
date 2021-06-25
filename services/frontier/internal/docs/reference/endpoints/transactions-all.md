@@ -1,7 +1,7 @@
-This endpoint represents all successful [transactions](../resources/transaction.md).
+This endpoint represents all successful [transactions](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/resources/transaction.md).
 Please note that this endpoint returns failed transactions that are included in the ledger if
 `include_failed` parameter is `true` and Frontier is ingesting failed transactions.
-This endpoint can also be used in [streaming](../streaming.md) mode. This makes it possible to use
+This endpoint can also be used in [streaming](https://github.com/xdbfoundation/go/blob/master/services/frontier/internal/docs/reference/streaming.md) mode. This makes it possible to use
 it to listen for new transactions as they get made in the DigitalBits network. If called in streaming
 mode Frontier will start at the earliest known transaction unless a `cursor` is set. In that case it
 will start from the `cursor`. You can also set `cursor` value to `now` to only stream transaction
@@ -69,9 +69,9 @@ var es = server.transactions()
 
 ## Response
 
-If called normally this endpoint responds with a [page](../resources/page.md) of transactions.
+If called normally this endpoint responds with a [page](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/resources/page.md) of transactions.
 If called in streaming mode the transaction resources are returned individually.
-See [transaction resource](../resources/transaction.md) for reference.
+See [transaction resource](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/resources/transaction.md) for reference.
 
 ### Example Response
 
@@ -187,4 +187,4 @@ See [transaction resource](../resources/transaction.md) for reference.
 
 ## Possible Errors
 
-- The [standard errors](../errors.md#standard-errors).
+- The [standard errors](https://github.com/xdbfoundation/go/blob/master/services/frontier/internal/docs/reference/errors.md#standard-errors).

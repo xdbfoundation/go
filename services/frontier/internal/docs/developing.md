@@ -5,7 +5,7 @@ title: Frontier Development Guide
 
 This document describes how to build Frontier from source, so that you can test and edit the code locally to develop bug fixes and new features.
 
-If you are just starting with Frontier and want to try it out, consider the [Quickstart Guide](quickstart.md) instead. For information about administrating a Frontier instance in production, check out the [Administration Guide](admin.md).
+If you are just starting with Frontier and want to try it out, consider the [Quickstart Guide](https://github.com/xdbfoundation/go/blob/master/services/frontier/internal/docs/quickstart.md) instead. For information about administrating a Frontier instance in production, check out the [Administration Guide](https://github.com/xdbfoundation/go/blob/master/services/frontier/internal/docs/admin.md).
 
 ## Building Frontier
 Building Frontier requires the following developer tools:
@@ -24,7 +24,7 @@ Building Frontier requires the following developer tools:
    ```
    git checkout https://github.com/digitalbits/go $GOPATH/src/github.com/digitalbits/go
    ```
-   If developing inside `GOPATH` set the `GO111MODULE=on` environment variable to turn on Modules for managing dependencies. See the repository [README](../../../../README.md#dependencies) for more information.
+   If developing inside `GOPATH` set the `GO111MODULE=on` environment variable to turn on Modules for managing dependencies. See the repository [README](https://github.com/xdbfoundation/go/blob/master/README.md#dependencies) for more information.
 3. Change to the directory where the repository is checked out. e.g. `cd go`, or if developing inside the `GOPATH`, `cd $GOPATH/src/github.com/digitalbits/go`.
 4. Compile the Frontier binary: `go install ./services/frontier`. You should see the resulting `frontier` executable in `$GOPATH/bin`.
 5. Add Go binaries to your PATH in your `bashrc` or equivalent, for easy access: `export PATH=${GOPATH//://bin:}/bin:$PATH`
@@ -93,7 +93,7 @@ frontier --db-url="postgres://localhost/frontier_dev" --digitalbits-core-db-url=
 ```
 
 If all is well, you should see ingest logs written to standard out. You can test your Frontier instance with a query like: http://localhost:8001/transactions?limit=10&order=asc. Use the [DigitalBits Laboratory](https://developers.digitalbits.io/lab/) to craft other queries to try out,
-and read about the available endpoints and see examples in the [Frontier API reference](./readme.md).
+and read about the available endpoints and see examples in the [Frontier API reference](https://github.com/xdbfoundation/go/blob/master/services/frontier/internal/docs/readme.md).
 
 ## The development cycle
 Congratulations! You can now run the full development cycle to build and test your code.

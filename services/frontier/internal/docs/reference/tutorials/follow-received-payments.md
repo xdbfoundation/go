@@ -1,4 +1,4 @@
-This tutorial shows how easy it is to use Frontier to watch for incoming payments on an [account](../resources/account.md)
+This tutorial shows how easy it is to use Frontier to watch for incoming payments on an [account](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/resources/account.md)
 using JavaScript and `EventSource`.  We will eschew using [`js-digitalbits-sdk`](https://github.com/xdbfoundation/js-digitalbits-sdk), the
 high-level helper library, to show that it is possible for you to perform this
 task on your own, with whatever programming language you would like to use.
@@ -138,7 +138,7 @@ terminal.
 
 ## Following payments using `curl`
 
-To follow new payments connected to your account you simply need to send `Accept: text/event-stream` header to the [/payments](../endpoints/payments-all.md) endpoint.
+To follow new payments connected to your account you simply need to send `Accept: text/event-stream` header to the [/payments](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/endpoints/payments-all.md) endpoint.
 
 ```bash
 $ curl -H "Accept: text/event-stream" "https://frontier.testnet.digitalbits.io/accounts/GB7JFK56QXQ4DVJRNPDBXABNG3IVKIXWWJJRJICHRU22Z5R5PI65GAK3/payments"
@@ -184,7 +184,7 @@ data: {
 }
 ```
 
-Every time you receive a new payment you will get a new row of data. Payments is not the only endpoint that supports streaming. You can also stream transactions [/transactions](../endpoints/transactions-all.md) and operations [/operations](../endpoints/operations-all.md).
+Every time you receive a new payment you will get a new row of data. Payments is not the only endpoint that supports streaming. You can also stream transactions [/transactions](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/endpoints/transactions-all.md) and operations [/operations](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/endpoints/operations-all.md).
 
 ## Following payments using `EventStream`
 

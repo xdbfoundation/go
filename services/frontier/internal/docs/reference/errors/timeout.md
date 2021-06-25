@@ -40,5 +40,5 @@ draft specification guide and thus has the following attributes:
 
 ## Related
 
-- [Not Acceptable](./not-acceptable.md)
-- [Transaction Failed](./transaction-failed.md)
+- [Not Acceptable](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/errors/not-acceptable.md)
+- [Transaction Failed](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/errors/transaction-failed.md)

@@ -2,7 +2,7 @@
 
 Frontier is responsible for providing an HTTP API to data in the DigitalBits network. It ingests and re-serves the data produced by the digitalbits network in a form that is easier to consume than the performance-oriented data representations used by digitalbits-core.
 
-This document describes how to administer a **production** Frontier instance. If you are just starting with Frontier and want to try it out, consider the [Quickstart Guide](./quickstart.md) instead. For information about developing on the Frontier codebase, check out the [Development Guide](./developing.md).
+This document describes how to administer a **production** Frontier instance. If you are just starting with Frontier and want to try it out, consider the [Quickstart Guide](https://github.com/xdbfoundation/go/blob/master/services/frontier/internal/docs/quickstart.md) instead. For information about developing on the Frontier codebase, check out the [Development Guide](https://github.com/xdbfoundation/go/blob/master/services/frontier/internal/docs/developing.md).
 
 ## Why run Frontier?
 
@@ -211,7 +211,7 @@ INFO[2019-08-29T13:40:00.972+02:00] Finished processing ledger                  
 
 Frontier ingests ledger data from a connected instance of digitalbits-core.  In the event that digitalbits-core stops running (or if Frontier stops ingesting data for any other reason), the view provided by Frontier will start to lag behind reality.  For simpler applications, this may be fine, but in many cases this lag is unacceptable and the application should not continue operating until the lag is resolved.
 
-To help applications that cannot tolerate lag, Frontier provides a configurable "staleness" threshold.  Given that enough lag has accumulated to surpass this threshold (expressed in number of ledgers), Frontier will only respond with an error: [`stale_history`](./reference/errors/stale-history.md).  To configure this option, use either the `--history-stale-threshold` command line flag or the `HISTORY_STALE_THRESHOLD` environment variable.  NOTE:  non-historical requests (such as submitting transactions or finding payment paths) will not error out when the staleness threshold is surpassed.
+To help applications that cannot tolerate lag, Frontier provides a configurable "staleness" threshold.  Given that enough lag has accumulated to surpass this threshold (expressed in number of ledgers), Frontier will only respond with an error: [`stale_history`](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/errors/stale-history.md).  To configure this option, use either the `--history-stale-threshold` command line flag or the `HISTORY_STALE_THRESHOLD` environment variable.  NOTE:  non-historical requests (such as submitting transactions or finding payment paths) will not error out when the staleness threshold is surpassed.
 
 ## Monitoring
 

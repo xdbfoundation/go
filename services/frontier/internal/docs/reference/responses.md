@@ -79,11 +79,11 @@ valid URI before navigating to it.
 
 Pages represent a subset of a larger collection of objects.  
 As an example, it would be unfeasible to provide the
-[All Transactions](./endpoints/transactions-all.md) endpoint without paging.  
+[All Transactions](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/endpoints/transactions-all.md) endpoint without paging.  
 Over time there will be millions of transactions in the DigitalBits network's ledger
 and returning them all over a single request would be unfeasible.
 
 Read more about paging in following docs:
 
-- [Page](./resources/page.md)
-- [Paging](./paging.md)
+- [Page](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/resources/page.md)
+- [Paging](https://github.com/xdbfoundation/go/blob/master/services/frontier/internal/docs/reference/paging.md)

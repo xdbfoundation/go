@@ -3,8 +3,8 @@
 ## Attributes
 | Attribute    | Type             |                                                                                                                        |
 |--------------|------------------|------------------------------------------------------------------------------------------------------------------------|
-| bids | object     |  Array of {`price_r`, `price`, `amount`} objects (see [offers](./offer.md)).  These represent prices and amounts accounts are willing to buy for the given `selling` and `buying` pair. |
-| asks | object |  Array of {`price_r`, `price`, `amount`} objects (see [offers](./offer.md)).  These represent prices and amounts accounts are willing to sell for the given `selling` and `buying` pair.|
+| bids | object     |  Array of {`price_r`, `price`, `amount`} objects (see [offers](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/resources/offer.md)).  These represent prices and amounts accounts are willing to buy for the given `selling` and `buying` pair. |
+| asks | object |  Array of {`price_r`, `price`, `amount`} objects (see [offers](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/resources/offer.md)).  These represent prices and amounts accounts are willing to sell for the given `selling` and `buying` pair.|
 | base | [Asset](https://github.com/xdbfoundation/docs/blob/master/guides/concepts/assets.md) | The Asset this offer wants to sell.|
 | counter | [Asset](https://github.com/xdbfoundation/docs/blob/master/guides/concepts/assets.md) | The Asset this offer wants to buy.|
 
@@ -41,5 +41,5 @@ This resource has no links.
 
 | Resource                 | Type       | Resource URI Template                |
 |--------------------------|------------|--------------------------------------|
-| [Orderbook Details](../endpoints/orderbook-details.md)       | Single | `/orderbook?{orderbook_params}`       |
-| [Trades](../endpoints/trades.md)   | Collection | `/trades?{orderbook_params}`       |
+| [Orderbook Details](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/endpoints/orderbook-details.md)       | Single | `/orderbook?{orderbook_params}`       |
+| [Trades](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/endpoints/trades.md)   | Collection | `/trades?{orderbook_params}`       |

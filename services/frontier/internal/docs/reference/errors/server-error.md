@@ -40,4 +40,4 @@ draft specification guide and thus has the following attributes:
 
 ## Related
 
-- [Not Implemented](./not-implemented.md)
+- [Not Implemented](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/errors/not-implemented.md)

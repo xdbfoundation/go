@@ -15,7 +15,7 @@ A trade occurs between two parties - `base` and `counter`. Which is either arbit
 | Attribute    | Type             |                                                                                                                        |
 |--------------|------------------|------------------------------------------------------------------------------------------------------------------------|
 | id | string | The ID of this trade. |
-| paging_token | string | A [paging token](./page.md) suitable for use as a `cursor` parameter.|
+| paging_token | string | A [paging token](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/resources/page.md) suitable for use as a `cursor` parameter.|
 | ledger_close_time | string | An ISO 8601 formatted string of when the ledger with this trade was closed.|
 | offer_id | string | DEPRECATED. the sell offer id.
 | base_account | string | base party of this trade|
@@ -58,5 +58,5 @@ Offer ids in the frontier trade resource (base_offer_id, counter_offer_id) are s
 
 | Resource                 | Type       | Resource URI Template                |
 |--------------------------|------------|--------------------------------------|
-| [Trades](../endpoints/trades.md)       | Collection | `/trades`       |
-| [Account Trades](../endpoints/trades-for-account.md) | Collection | `/accounts/:account_id/trades`      |
+| [Trades](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/endpoints/trades.md)       | Collection | `/trades`       |
+| [Account Trades](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/endpoints/trades-for-account.md) | Collection | `/accounts/:account_id/trades`      |

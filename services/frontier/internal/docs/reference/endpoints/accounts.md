@@ -1,5 +1,5 @@
 
-This endpoint allows filtering accounts who have a given `signer` or have a trustline to an `asset`. The result is a list of [accounts](../resources/account.md).
+This endpoint allows filtering accounts who have a given `signer` or have a trustline to an `asset`. The result is a list of [accounts](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/resources/account.md).
 
 To find all accounts who are trustees to an asset, pass the query parameter `asset` using the canonical representation for an issued assets which is `Code:IssuerAccountID`. 
 
@@ -44,7 +44,7 @@ server.accounts().forAsset("USD:GB4RZUSF3HZGCAKB3VBM2S7QOHHC5KTV3LLZXGBYR5ZO4B26
 
 ## Response
 
-This endpoint responds with the details of all accounts matching the filters. See [account resource](../resources/account.md) for reference.
+This endpoint responds with the details of all accounts matching the filters. See [account resource](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/resources/account.md) for reference.
 
 ### Example Response
 
@@ -272,4 +272,4 @@ This endpoint responds with the details of all accounts matching the filters. Se
 
 ## Possible Errors
 
-- The [standard errors](../errors#standard-errors).
+- The [standard errors](https://github.com/xdbfoundation/go/blob/master/services/frontier/internal/docs/reference/errors.md#standard-errors).

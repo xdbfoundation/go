@@ -1,4 +1,4 @@
-In the DigitalBits network, users interact using **accounts** which can be controlled by a corresponding keypair that can authorize transactions. One can create a new account with the [Create Account](./operation.md#create-account) operation.
+In the DigitalBits network, users interact using **accounts** which can be controlled by a corresponding keypair that can authorize transactions. One can create a new account with the [Create Account](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/resources/operation.md#create-account) operation.
 
 To learn more about the concept of accounts in the DigitalBits network, take a look at the [DigitalBits account concept guide](https://github.com/xdbfoundation/docs/blob/master/guides/concepts/accounts.md).
 
@@ -15,7 +15,7 @@ When frontier returns information about an account it uses the following format:
 | thresholds     | object           | An object of account thresholds.                                                                                                             |
 | flags          | object           | The flags denote the enabling/disabling of certain asset issuer privileges.                                                                  |
 | signers        | array of objects | An array of [account signers](https://github.com/xdbfoundation/docs/blob/master/guides/concepts/multi-sig.md#additional-signing-keys) with their weights. |
-| data           | object           | An array of account [data](./data.md) fields.                                                                                                |
+| data           | object           | An array of account [data](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/resources/data.md) fields.                                                                                                |
 
 ### Signer Object
 | Attribute  | Type   | Description                                                                                                      |
@@ -74,13 +74,13 @@ When frontier returns information about an account it uses the following format:
 ## Links
 | rel          | Example                                                                                                 | Description                                                  | `templated` |
 |--------------|---------------------------------------------------------------------------------------------------------|--------------------------------------------------------------|-------------|
-| data         | `/accounts/GDFOHLMYCXVZD2CDXZLMW6W6TMU4YO27XFF2IBAFAV66MSTPDDSK2LAY/data/{key}`                         | [Data fields](./data.md) related to this account             | true        |
-| effects      | `/accounts/GDFOHLMYCXVZD2CDXZLMW6W6TMU4YO27XFF2IBAFAV66MSTPDDSK2LAY/effects/{?cursor,limit,order}`      | The [effects](./effect.md) related to this account           | true        |
-| offers       | `/accounts/GDFOHLMYCXVZD2CDXZLMW6W6TMU4YO27XFF2IBAFAV66MSTPDDSK2LAY/offers/{?cursor,limit,order}`       | The [offers](./offer.md) related to this account             | true        |
-| operations   | `/accounts/GDFOHLMYCXVZD2CDXZLMW6W6TMU4YO27XFF2IBAFAV66MSTPDDSK2LAY/operations/{?cursor,limit,order}`   | The [operations](./operation.md) related to this account     | true        |
-| payments     | `/accounts/GDFOHLMYCXVZD2CDXZLMW6W6TMU4YO27XFF2IBAFAV66MSTPDDSK2LAY/payments/{?cursor,limit,order}`     | The [payments](./payment.md) related to this account         | true        |
-| trades       | `/accounts/GDFOHLMYCXVZD2CDXZLMW6W6TMU4YO27XFF2IBAFAV66MSTPDDSK2LAY/trades/{?cursor,limit,order}`       | The [trades](./trade.md) related to this account             | true        |
-| transactions | `/accounts/GDFOHLMYCXVZD2CDXZLMW6W6TMU4YO27XFF2IBAFAV66MSTPDDSK2LAY/transactions/{?cursor,limit,order}` | The [transactions](./transaction.md) related to this account | true        |
+| data         | `/accounts/GDFOHLMYCXVZD2CDXZLMW6W6TMU4YO27XFF2IBAFAV66MSTPDDSK2LAY/data/{key}`                         | [Data fields](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/resources/data.md) related to this account             | true        |
+| effects      | `/accounts/GDFOHLMYCXVZD2CDXZLMW6W6TMU4YO27XFF2IBAFAV66MSTPDDSK2LAY/effects/{?cursor,limit,order}`      | The [effects](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/resources/effect.md) related to this account           | true        |
+| offers       | `/accounts/GDFOHLMYCXVZD2CDXZLMW6W6TMU4YO27XFF2IBAFAV66MSTPDDSK2LAY/offers/{?cursor,limit,order}`       | The [offers](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/resources/offer.md) related to this account             | true        |
+| operations   | `/accounts/GDFOHLMYCXVZD2CDXZLMW6W6TMU4YO27XFF2IBAFAV66MSTPDDSK2LAY/operations/{?cursor,limit,order}`   | The [operations](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/resources/operation.md) related to this account     | true        |
+| payments     | `/accounts/GDFOHLMYCXVZD2CDXZLMW6W6TMU4YO27XFF2IBAFAV66MSTPDDSK2LAY/payments/{?cursor,limit,order}`     | The [payments](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/resources/payment.md) related to this account         | true        |
+| trades       | `/accounts/GDFOHLMYCXVZD2CDXZLMW6W6TMU4YO27XFF2IBAFAV66MSTPDDSK2LAY/trades/{?cursor,limit,order}`       | The [trades](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/resources/trade.md) related to this account             | true        |
+| transactions | `/accounts/GDFOHLMYCXVZD2CDXZLMW6W6TMU4YO27XFF2IBAFAV66MSTPDDSK2LAY/transactions/{?cursor,limit,order}` | The [transactions](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/resources/transaction.md) related to this account | true        |
 
 ## Example
 
@@ -198,10 +198,10 @@ When frontier returns information about an account it uses the following format:
 ## Endpoints
 | Resource                                                         | Type       | Resource URI Template                |
 |------------------------------------------------------------------|------------|--------------------------------------|
-| [Account Details](../endpoints/accounts-single.md)               | Single     | `/accounts/:id`                      |
-| [Account Data](../endpoints/data-for-account.md)                 | Single     | `/accounts/:id/data/:key`            |
-| [Account Transactions](../endpoints/transactions-for-account.md) | Collection | `/accounts/:account_id/transactions` |
-| [Account Operations](../endpoints/operations-for-account.md)     | Collection | `/accounts/:account_id/operations`   |
-| [Account Payments](../endpoints/payments-for-account.md)         | Collection | `/accounts/:account_id/payments`     |
-| [Account Effects](../endpoints/effects-for-account.md)           | Collection | `/accounts/:account_id/effects`      |
-| [Account Offers](../endpoints/offers-for-account.md)             | Collection | `/accounts/:account_id/offers`       |
+| [Account Details](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/endpoints/accounts-single.md)               | Single     | `/accounts/:id`                      |
+| [Account Data](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/endpoints/data-for-account.md)                 | Single     | `/accounts/:id/data/:key`            |
+| [Account Transactions](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/endpoints/transactions-for-account.md) | Collection | `/accounts/:account_id/transactions` |
+| [Account Operations](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/endpoints/operations-for-account.md)     | Collection | `/accounts/:account_id/operations`   |
+| [Account Payments](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/endpoints/payments-for-account.md)         | Collection | `/accounts/:account_id/payments`     |
+| [Account Effects](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/endpoints/effects-for-account.md)           | Collection | `/accounts/:account_id/effects`      |
+| [Account Offers](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/endpoints/offers-for-account.md)             | Collection | `/accounts/:account_id/offers`       |

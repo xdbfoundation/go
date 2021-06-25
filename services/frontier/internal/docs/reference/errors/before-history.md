@@ -33,4 +33,4 @@ $ curl -X GET "https://frontier.testnet.digitalbits.io/transactions?cursor=1&ord
 
 ## Related
 
-- [Not Found](./not-found.md)
+- [Not Found](https://github.com/xdbfoundation/go/blob/master/services/frontier/internal/docs/reference/errors/not-found.md)
