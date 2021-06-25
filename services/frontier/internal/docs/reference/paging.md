@@ -2,6 +2,6 @@ The DigitalBits network contains a lot of data and it would be infeasible to ret
 a user to request a "page" of data containing only a limited number of results. Then, the user can use the paging system
 to request results adjacent to the current page where they left off at.
 
-Read about the [page resource](./resources/page.md) for information on the paging system's usage and representation.
+Read about the [page resource](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/resources/page.md) for information on the paging system's usage and representation.
 
 

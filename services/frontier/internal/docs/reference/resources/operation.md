@@ -1,6 +1,6 @@
 [Operations](https://github.com/xdbfoundation/docs/blob/master/guides/concepts/operations.md) are objects that represent a desired change to the ledger: payments,
 offers to exchange currency, changes made to account options, etc.  Operations
-are submitted to the DigitalBits network grouped in a [Transaction](./transaction.md).
+are submitted to the DigitalBits network grouped in a [Transaction](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/resources/transaction.md).
 
 To learn more about the concept of operations in the DigitalBits network, take a look at the [DigitalBits operations concept guide](https://github.com/xdbfoundation/docs/blob/master/guides/concepts/operations.md).
 
@@ -34,7 +34,7 @@ additional attributes and links specific to that operation type.
 |                        | Type   |                                                                                                                             |
 |------------------------|--------|-----------------------------------------------------------------------------------------------------------------------------|
 | id                     | number | The canonical id of this operation, suitable for use as the :id parameter for url templates that require an operation's ID. |
-| paging_token           | any    | A [paging token](./page.md) suitable for use as a `cursor` parameter.                                                       |
+| paging_token           | any    | A [paging token](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/resources/page.md) suitable for use as a `cursor` parameter.                                                       |
 | transaction_successful | bool   | Indicates if this operation is part of successful transaction.                                                              |
 | type                   | string | A string representation of the type of operation.                                                                           |
 | type_i                 | number | Specifies the type of operation, See "Types" section below for reference.                                                   |
@@ -201,7 +201,7 @@ A path payment strict receive operation represents a payment from one account to
 | source_asset_type   | string                        | Source asset type (native / alphanum4 / alphanum12)                         |
 | source_max          | string                        | Max send amount.                                                            |
 | source_amount       | string                        | Amount sent.                                                                |
-| path                | array of [Assets](./asset.md) | Additional hops the operation went through to get to the destination asset. |
+| path                | array of [Assets](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/resources/asset.md) | Additional hops the operation went through to get to the destination asset. |
 
 #### Example
 
@@ -267,7 +267,7 @@ Unlike [path payment strict receive](#path-payment), this operation sends precis
 | source_asset_issuer | string                        | Source asset issuer.                                                        |
 | source_amount       | string                        | Amount sent.                                                                |
 | destination_min     | string                        | The minimum amount of destination asset expected to be received.            |
-| path                | array of [Assets](./asset.md) | Additional hops the operation went through to get to the destination asset. |
+| path                | array of [Assets](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/resources/asset.md) | Additional hops the operation went through to get to the destination asset. |
 
 
 #### Example
@@ -861,8 +861,8 @@ Bumps forward the sequence number of the source account of the operation, allowi
 
 | Resource                                           | Type       | Resource URI Template                           |
 |----------------------------------------------------|------------|-------------------------------------------------|
-| [All Operations](../endpoints/operations-all.md)             | Collection | `/operations`                                   |
-| [Operations Details](../endpoints/operations-single.md)      | Single     | `/operations/:id`                               |
-| [Ledger Operations](../endpoints/operations-for-ledger.md)   | Collection | `/ledgers/{id}/operations{?cursor,limit,order}` |
-| [Account Operations](../endpoints/operations-for-account.md) | Collection | `/accounts/:account_id/operations`              |
-| [Account Payments](../endpoints/payments-for-account.md)     | Collection | `/accounts/:account_id/payments`                |
+| [All Operations](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/endpoints/operations-all.md)             | Collection | `/operations`                                   |
+| [Operations Details](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/endpoints/operations-single.md)      | Single     | `/operations/:id`                               |
+| [Ledger Operations](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/endpoints/operations-for-ledger.md)   | Collection | `/ledgers/{id}/operations{?cursor,limit,order}` |
+| [Account Operations](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/endpoints/operations-for-account.md) | Collection | `/accounts/:account_id/operations`              |
+| [Account Payments](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/endpoints/payments-for-account.md)     | Collection | `/accounts/:account_id/payments`                |

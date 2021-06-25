@@ -7,8 +7,8 @@ To learn more about the concept of ledgers in the DigitalBits network, take a lo
 | Attribute                    | Type   |                                                                                                                              |
 |------------------------------|--------|------------------------------------------------------------------------------------------------------------------------------|
 | id                           | string | The id is a unique identifier for this ledger.                                                                               |
-| paging_token                 | number | A [paging token](../resources/page.md) suitable for use as a `cursor` parameter.                                                        |
-| hash                         | string | A hex-encoded, lowercase SHA-256 hash of the ledger's [XDR](../xdr.md)-encoded form.                                |
+| paging_token                 | number | A [paging token](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/resources/page.md) suitable for use as a `cursor` parameter.                                                        |
+| hash                         | string | A hex-encoded, lowercase SHA-256 hash of the ledger's [XDR](https://github.com/xdbfoundation/go/blob/master/services/frontier/internal/docs/reference/xdr.md)-encoded form.                                |
 | prev_hash                    | string | The hash of the ledger that chronologically came before this one.                                                            |
 | sequence                     | number | Sequence number of this ledger, suitable for use as the as the :id parameter for url templates that require a ledger number. |
 | successful_transaction_count | number | The number of successful transactions in this ledger.                                                                        |
@@ -84,12 +84,12 @@ To learn more about the concept of ledgers in the DigitalBits network, take a lo
 ## Endpoints
 | Resource                | Type       | Resource URI Template              |
 |-------------------------|------------|------------------------------------|
-| [All ledgers](../endpoints/ledgers-all.md)         | Collection | `/ledgers`                         |
-| [Single Ledger](../endpoints/ledgers-single.md)       | Single     | `/ledgers/:id`                     |
-| [Ledger Transactions](../endpoints/transactions-for-ledger.md) | Collection | `/ledgers/:ledger_id/transactions` |
-| [Ledger Operations](../endpoints/operations-for-ledger.md)   | Collection | `/ledgers/:ledger_id/operations`   |
-| [Ledger Payments](../endpoints/payments-for-ledger.md)     | Collection | `/ledgers/:ledger_id/payments`     |
-| [Ledger Effects](../endpoints/effects-for-ledger.md)      | Collection | `/ledgers/:ledger_id/effects`      |
+| [All ledgers](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/endpoints/ledgers-all.md)         | Collection | `/ledgers`                         |
+| [Single Ledger](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/endpoints/ledgers-single.md)       | Single     | `/ledgers/:id`                     |
+| [Ledger Transactions](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/endpoints/transactions-for-ledger.md) | Collection | `/ledgers/:ledger_id/transactions` |
+| [Ledger Operations](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/endpoints/operations-for-ledger.md)   | Collection | `/ledgers/:ledger_id/operations`   |
+| [Ledger Payments](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/endpoints/payments-for-ledger.md)     | Collection | `/ledgers/:ledger_id/payments`     |
+| [Ledger Effects](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/endpoints/effects-for-ledger.md)      | Collection | `/ledgers/:ledger_id/effects`      |
 
 
 

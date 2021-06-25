@@ -1,6 +1,6 @@
 ## Notes for Developers
 
-This document contains additional information related to the development of Frontier. For a detailed discussion of how to build and develop against Frontier, see the [Frontier development guide](developing.md).
+This document contains additional information related to the development of Frontier. For a detailed discussion of how to build and develop against Frontier, see the [Frontier development guide](https://github.com/xdbfoundation/go/blob/master/services/frontier/internal/docs/developing.md).
 
 - [Initial set up](#setup)
 - [Regenerating generated code](#regen)
@@ -12,7 +12,7 @@ This document contains additional information related to the development of Fron
 
 ---
 ## <a name="setup"></a> Initial set up
-Compile and install Frontier as described in the [Frontier development guide](developing.md).
+Compile and install Frontier as described in the [Frontier development guide](https://github.com/xdbfoundation/go/blob/master/services/frontier/internal/docs/developing.md).
 
 ## <a name="regen"></a> Regenerating generated code
 

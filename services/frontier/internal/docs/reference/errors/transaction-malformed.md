@@ -3,8 +3,8 @@ error. There are many ways in which a transaction could be malformed, including:
 
 - You submitted an empty string.
 - Your base64-encoded string is invalid.
-- Your [XDR](../xdr.md) structure is invalid.
-- You have leftover bytes in your [XDR](../xdr.md) structure.
+- Your [XDR](https://github.com/xdbfoundation/go/blob/master/services/frontier/internal/docs/reference/xdr.md) structure is invalid.
+- You have leftover bytes in your [XDR](https://github.com/xdbfoundation/go/blob/master/services/frontier/internal/docs/reference/xdr.md) structure.
 
 If you are encountering this error, please check the contents of the transaction you are
 submitting. This error returns a
@@ -45,4 +45,4 @@ In addition, the following additional data is provided in the `extras` field of 
 
 ## Related
 
-- [Bad Request](./bad-request.md)
+- [Bad Request](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/errors/bad-request.md)

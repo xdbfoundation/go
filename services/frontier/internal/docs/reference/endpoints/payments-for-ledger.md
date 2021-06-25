@@ -1,5 +1,5 @@
-This endpoint represents all payment-related [operations](../resources/operation.md) that are part
-of a valid [transactions](../resources/transaction.md) in a given [ledger](../resources/ledger.md).
+This endpoint represents all payment-related [operations](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/resources/operation.md) that are part
+of a valid [transactions](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/resources/transaction.md) in a given [ledger](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/resources/ledger.md).
 
 The operations that can be returned in by this endpoint are:
 
@@ -51,7 +51,7 @@ server.payments()
 ## Response
 
 This endpoint responds with a list of payment operations in a given ledger. See [operation
-resource](../resources/operation.md) for more information about operations (and payment
+resource](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/resources/operation.md) for more information about operations (and payment
 operations).
 
 ### Example Response
@@ -98,5 +98,5 @@ operations).
 
 ## Possible Errors
 
-- The [standard errors](../errors.md#standard-errors).
-- [not_found](../errors/not-found.md): A `not_found` error will be returned if there is no ledger whose ID matches the `id` argument.
+- The [standard errors](https://github.com/xdbfoundation/go/blob/master/services/frontier/internal/docs/reference/errors.md#standard-errors).
+- [not_found](https://github.com/xdbfoundation/go/blob/master/services/frontier/internal/docs/reference/errors/not-found.md): A `not_found` error will be returned if there is no ledger whose ID matches the `id` argument.

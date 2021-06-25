@@ -71,7 +71,7 @@ Frontier maintains its own database (postgres), a verbose and user friendly acco
 ```
 
 #### Ingester
-Ingester represents metrics specific to Frontier's [ingestion](../../admin.md#ingesting-live-digitalbits-core-data) process, or the process by which Frontier consumes transaction results from a connected DigitalBits Core instance.
+Ingester represents metrics specific to Frontier's [ingestion](https://github.com/xdbfoundation/go/blob/master/services/frontier/internal/docs/admin.md#ingesting-live-digitalbits-core-data) process, or the process by which Frontier consumes transaction results from a connected DigitalBits Core instance.
 
 |    Metric     |  Description                                                                                                                               |
 | ---------------- |  ------------------------------------------------------------------------------------------------------------------------------ |

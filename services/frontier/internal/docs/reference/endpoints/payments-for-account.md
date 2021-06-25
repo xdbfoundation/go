@@ -1,7 +1,7 @@
 This endpoint responds with a collection of payment-related operations where the given
-[account](../resources/account.md) was either the sender or receiver.
+[account](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/resources/account.md) was either the sender or receiver.
 
-This endpoint can also be used in [streaming](../streaming.md) mode so it is possible to use it to
+This endpoint can also be used in [streaming](https://github.com/xdbfoundation/go/blob/master/services/frontier/internal/docs/reference/streaming.md) mode so it is possible to use it to
 listen for new payments to or from an account as they get made in the DigitalBits network.
 If called in streaming mode Frontier will start at the earliest known payment unless a `cursor` is
 set. In that case it will start from the `cursor`. You can also set `cursor` value to `now` to only
@@ -74,7 +74,7 @@ var es = server.payments()
 
 ## Response
 
-This endpoint responds with a [page](../resources/page.md) of [payment operations](../resources/operation.md).
+This endpoint responds with a [page](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/resources/page.md) of [payment operations](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/resources/operation.md).
 
 ### Example Response
 
@@ -218,4 +218,4 @@ This endpoint responds with a [page](../resources/page.md) of [payment operation
 
 ## Possible Errors
 
-- The [standard errors](../errors.md#standard-errors).
+- The [standard errors](https://github.com/xdbfoundation/go/blob/master/services/frontier/internal/docs/reference/errors.md#standard-errors).

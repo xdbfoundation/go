@@ -1,9 +1,9 @@
 ## Frontier Quickstart
 This document describes how to quickly set up a **test** DigitalBits Core + Frontier node, that you can play around with to get a feel for how a digitalbits node operates. **This configuration is not secure!** It is **not** intended as a guide for production administration.
 
-For detailed information about running Frontier and DigitalBits Core safely in production see the [Frontier Administration Guide](./admin.md) and the [DigitalBits Core Administration Guide](https://github.com/xdbfoundation/DigitalBits/blob/master/docs/software/admin.md).
+For detailed information about running Frontier and DigitalBits Core safely in production see the [Frontier Administration Guide](https://github.com/xdbfoundation/go/blob/master/services/frontier/internal/docs/admin.md) and the [DigitalBits Core Administration Guide](https://github.com/xdbfoundation/DigitalBits/blob/master/docs/software/admin.md).
 
-If you're ready to roll up your sleeves and dig into the code, check out the [Developer Guide](developing.md).
+If you're ready to roll up your sleeves and dig into the code, check out the [Developer Guide](https://github.com/xdbfoundation/go/blob/master/services/frontier/internal/docs/developing.md).
 
 ### Install and run the Quickstart Docker Image
 The fastest way to get up and running is using the [DigitalBits Quickstart Docker Image](https://github.com/digitalbits/docker-digitalbits-core-frontier). This is a Docker container that provides both `digitalbits-core` and `frontier`, pre-configured for testing.
@@ -34,5 +34,5 @@ On a modern laptop this test setup takes about 15 minutes to synchronise with th
 See the [Quickstart Docker Image](https://github.com/digitalbits/docker-digitalbits-core-frontier) documentation for more details, and alternative ways to run the container. 
 
 You can test your Frontier instance with a query like: http://localhost:8000/transactions?cursor=&limit=10&order=asc. Use the [DigitalBits Laboratory](https://www.digitalbits.org/laboratory/) to craft other queries to try out,
-and read about the available endpoints and see examples in the [Frontier API reference](./readme.md).
+and read about the available endpoints and see examples in the [Frontier API reference](https://github.com/xdbfoundation/go/blob/master/services/frontier/internal/docs/readme.md).
 

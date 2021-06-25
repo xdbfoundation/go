@@ -75,4 +75,4 @@ In addition, the following additional data is provided in the `extras` field of 
 
 ## Related
 
-- [Transaction Malformed](./transaction-malformed.md)
+- [Transaction Malformed](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/errors/transaction-malformed.md)

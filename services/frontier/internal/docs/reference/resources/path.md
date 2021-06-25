@@ -60,4 +60,4 @@ A **path** resource contains information about a payment path.  A path can be us
 ## Endpoints
 | Resource                                 | Type       | Resource URI Template |
 |------------------------------------------|------------|-----------------------|
-| [Find Payment Paths](../endpoints/path-finding.md) | Collection | `/paths`              |
+| [Find Payment Paths](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/endpoints/path-finding.md) | Collection | `/paths`              |
