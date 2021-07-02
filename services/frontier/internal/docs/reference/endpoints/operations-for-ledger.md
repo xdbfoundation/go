@@ -4,7 +4,7 @@ clientData:
   laboratoryUrl: https://laboratory.livenet.digitalbits.io/#explorer?resource=operations&endpoint=for_ledger
 ---
 
-This endpoint returns successful [operations](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/resources/operation.md) that occurred in a given [ledger](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/resources/ledger.md).
+This endpoint returns successful [operations](../operation.md) that occurred in a given [ledger](../ledger.md).
 
 ## Request
 
@@ -48,7 +48,7 @@ server.operations()
 
 ## Response
 
-This endpoint responds with a list of operations in a given ledger.  See [operation resource](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/resources/operation.md) for reference.
+This endpoint responds with a list of operations in a given ledger.  See [operation resource](../operation.md) for reference.
 
 ### Example Response
 
@@ -93,5 +93,5 @@ This endpoint responds with a list of operations in a given ledger.  See [operat
 
 ## Possible Errors
 
-- The [standard errors](https://github.com/xdbfoundation/go/blob/master/services/frontier/internal/docs/reference/errors.md#standard-errors).
-- [not_found](https://github.com/xdbfoundation/go/blob/master/services/frontier/internal/docs/reference/errors/not-found.md): A `not_found` error will be returned if there is no ledger whose ID matches the `id` argument.
+- The [standard errors](../errors.md#standard-errors).
+- [not_found](../errors/not-found.md): A `not_found` error will be returned if there is no ledger whose ID matches the `id` argument.

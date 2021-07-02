@@ -4,8 +4,8 @@ clientData:
   laboratoryUrl: https://laboratory.livenet.digitalbits.io/#explorer?resource=payments&endpoint=for_transaction
 ---
 
-This endpoint represents all payment-related [operations](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/resources/operation.md) that are part
-of a given [transaction](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/resources/transaction.md).
+This endpoint represents all payment-related [operations](../operation.md) that are part
+of a given [transaction](../transaction.md).
 
 The operations that can be returned in by this endpoint are:
 
@@ -62,7 +62,7 @@ server.payments()
 ## Response
 
 This endpoint responds with a list of payments operations that are part of a given transaction. See
-[operation resource](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/resources/operation.md) for more information about operations (and payment
+[operation resource](../operation.md) for more information about operations (and payment
 operations).
 
 ### Example Response
@@ -107,6 +107,6 @@ operations).
 
 ## Possible Errors
 
-- The [standard errors](https://github.com/xdbfoundation/go/blob/master/services/frontier/internal/docs/reference/errors.md#standard-errors).
-- [not_found](https://github.com/xdbfoundation/go/blob/master/services/frontier/internal/docs/reference/errors/not-found.md): A `not_found` error will be returned if there is no
+- The [standard errors](../errors.md#standard-errors).
+- [not_found](../errors/not-found.md): A `not_found` error will be returned if there is no
   transaction whose ID matches the `hash` argument.

@@ -4,10 +4,10 @@ clientData:
   laboratoryUrl: https://laboratory.livenet.digitalbits.io/#explorer?resource=operations&endpoint=all
 ---
 
-This endpoint represents [operations](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/resources/operation.md) that are part of successfully validated [transactions](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/resources/transaction.md).
+This endpoint represents [operations](../operation.md) that are part of successfully validated [transactions](../transaction.md).
 Please note that this endpoint returns operations that are part of failed transactions if `include_failed` parameter is `true`
 and Frontier is ingesting failed transactions.
-This endpoint can also be used in [streaming](https://github.com/xdbfoundation/go/blob/master/services/frontier/internal/docs/reference/streaming.md) mode so it is possible to use it to listen as operations are processed in the DigitalBits network.
+This endpoint can also be used in [streaming](../streaming.md) mode so it is possible to use it to listen as operations are processed in the DigitalBits network.
 If called in streaming mode Frontier will start at the earliest known operation unless a `cursor` is set. In that case it will start from the `cursor`. You can also set `cursor` value to `now` to only stream operations created since your request time.
 
 ## Request
@@ -68,7 +68,7 @@ var es = server.operations()
 
 ## Response
 
-This endpoint responds with a list of operations. See [operation resource](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/resources/operation.md) for reference.
+This endpoint responds with a list of operations. See [operation resource](../operation.md) for reference.
 
 ### Example Response
 
@@ -204,4 +204,4 @@ This endpoint responds with a list of operations. See [operation resource](https
 
 ## Possible Errors
 
-- The [standard errors](https://github.com/xdbfoundation/go/blob/master/services/frontier/internal/docs/reference/errors.md#standard-errors).
+- The [standard errors](../errors.md#standard-errors).

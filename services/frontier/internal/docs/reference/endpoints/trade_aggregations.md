@@ -114,4 +114,4 @@ Note
 
 ## Possible Errors
 
-- The [standard errors](https://github.com/xdbfoundation/go/blob/master/services/frontier/internal/docs/reference/errors.md#standard-errors).
+- The [standard errors](../errors.md#standard-errors).

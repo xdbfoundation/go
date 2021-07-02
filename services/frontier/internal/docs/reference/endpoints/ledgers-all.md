@@ -4,8 +4,8 @@ clientData:
   laboratoryUrl: https://laboratory.livenet.digitalbits.io/#explorer?resource=ledgers&endpoint=all
 ---
 
-This endpoint represents all [ledgers](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/resources/ledger.md).
-This endpoint can also be used in [streaming](https://github.com/xdbfoundation/go/blob/master/services/frontier/internal/docs/reference/streaming.md) mode so it is possible to use it to get notifications as ledgers are closed by the DigitalBits network.
+This endpoint represents all [ledgers](../ledger.md).
+This endpoint can also be used in [streaming](../streaming.md) mode so it is possible to use it to get notifications as ledgers are closed by the DigitalBits network.
 If called in streaming mode Frontier will start at the earliest known ledger unless a `cursor` is set. In that case it will start from the `cursor`. You can also set `cursor` value to `now` to only stream ledgers created since your request time.
 
 ## Request
@@ -67,7 +67,7 @@ var es = server.ledgers()
 
 ## Response
 
-This endpoint responds with a list of ledgers.  See [ledger resource](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/resources/ledger.md) for reference.
+This endpoint responds with a list of ledgers.  See [ledger resource](../ledger.md) for reference.
 
 ### Example Response
 
@@ -204,4 +204,4 @@ This endpoint responds with a list of ledgers.  See [ledger resource](https://gi
 
 ## Errors
 
-- The [standard errors](https://github.com/xdbfoundation/go/blob/master/services/frontier/internal/docs/reference/errors.md#standard-errors).
+- The [standard errors](../errors.md#standard-errors).

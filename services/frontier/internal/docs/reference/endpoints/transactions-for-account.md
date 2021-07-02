@@ -4,9 +4,9 @@ clientData:
   laboratoryUrl: https://laboratory.livenet.digitalbits.io/#explorer?resource=transactions&endpoint=for_account
 ---
 
-This endpoint represents successful [transactions](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/resources/transaction.md) that affected a
-given [account](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/resources/account.md).  This endpoint can also be used in
-[streaming](https://github.com/xdbfoundation/go/blob/master/services/frontier/internal/docs/reference/streaming.md) mode so it is possible to use it to listen for new transactions that
+This endpoint represents successful [transactions](../transaction.md) that affected a
+given [account](../account.md).  This endpoint can also be used in
+[streaming](../streaming.md) mode so it is possible to use it to listen for new transactions that
 affect a given account as they get made in the DigitalBits network.
 
 If called in streaming mode Frontier will start at the earliest known transaction unless a `cursor`
@@ -73,7 +73,7 @@ var es = server.transactions()
 ## Response
 
 This endpoint responds with a list of transactions that changed a given account's state. See
-[transaction resource](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/resources/transaction.md) for reference.
+[transaction resource](../transaction.md) for reference.
 
 ### Example Response
 ```json
@@ -188,5 +188,5 @@ This endpoint responds with a list of transactions that changed a given account'
 
 ## Possible Errors
 
-- The [standard errors](https://github.com/xdbfoundation/go/blob/master/services/frontier/internal/docs/reference/errors.md#standard-errors).
-- [not_found](https://github.com/xdbfoundation/go/blob/master/services/frontier/internal/docs/reference/errors/not-found.md): A `not_found` error will be returned if there is no account whose ID matches the `account_id` argument.
+- The [standard errors](../errors.md#standard-errors).
+- [not_found](../errors/not-found.md): A `not_found` error will be returned if there is no account whose ID matches the `account_id` argument.

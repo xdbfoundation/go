@@ -5,7 +5,7 @@ clientData:
 ---
 
 
-This endpoint represents successful [transactions](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/resources/transaction.md) in a given [ledger](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/resources/ledger.md).
+This endpoint represents successful [transactions](../transaction.md) in a given [ledger](../ledger.md).
 
 ## Request
 
@@ -50,7 +50,7 @@ server.transactions()
 ## Response
 
 This endpoint responds with a list of transactions in a given ledger. See [transaction
-resource](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/resources/transaction.md) for reference.
+resource](../transaction.md) for reference.
 
 ### Example Response
 
@@ -113,5 +113,5 @@ resource](https://github.com/xdbfoundation/go/tree/master/services/frontier/inte
 
 ## Possible Errors
 
-- The [standard errors](https://github.com/xdbfoundation/go/blob/master/services/frontier/internal/docs/reference/errors.md#standard-errors).
-- [not_found](https://github.com/xdbfoundation/go/blob/master/services/frontier/internal/docs/reference/errors/not-found.md): A `not_found` error will be returned if there is no ledgers whose sequence matches the `id` argument.
+- The [standard errors](../errors.md#standard-errors).
+- [not_found](../errors/not-found.md): A `not_found` error will be returned if there is no ledgers whose sequence matches the `id` argument.

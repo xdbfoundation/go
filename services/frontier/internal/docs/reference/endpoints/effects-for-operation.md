@@ -4,7 +4,7 @@ clientData:
   laboratoryUrl: https://laboratory.livenet.digitalbits.io/#explorer?resource=effects&endpoint=for_operation
 ---
 
-This endpoint represents all [effects](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/resources/effect.md) that occurred as a result of a given [operation](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/resources/operation.md).
+This endpoint represents all [effects](../effect.md) that occurred as a result of a given [operation](../operation.md).
 
 ## Request
 
@@ -48,7 +48,7 @@ server.effects()
 
 ## Response
 
-This endpoint responds with a list of effects on the ledger as a result of a given operation. See [effect resource](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/resources/effect.md) for reference.
+This endpoint responds with a list of effects on the ledger as a result of a given operation. See [effect resource](../effect.md) for reference.
 
 ### Example Response
 
@@ -122,5 +122,5 @@ This endpoint responds with a list of effects on the ledger as a result of a giv
 
 ## Possible Errors
 
-- The [standard errors](https://github.com/xdbfoundation/go/blob/master/services/frontier/internal/docs/reference/errors.md#standard-errors).
-- [not_found](https://github.com/xdbfoundation/go/blob/master/services/frontier/internal/docs/reference/errors/not-found.md): A `not_found` errors will be returned if there are no effects for operation whose ID matches the `id` argument.
+- The [standard errors](../errors.md#standard-errors).
+- [not_found](../errors/not-found.md): A `not_found` errors will be returned if there are no effects for operation whose ID matches the `id` argument.

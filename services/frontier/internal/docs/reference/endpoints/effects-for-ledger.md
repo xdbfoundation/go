@@ -6,7 +6,7 @@ clientData:
 
 Effects are the specific ways that the ledger was changed by any operation.
 
-This endpoint represents all [effects](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/resources/effect.md) that occurred in the given [ledger](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/resources/ledger.md).
+This endpoint represents all [effects](../effect.md) that occurred in the given [ledger](../ledger.md).
 
 ## Request
 
@@ -50,7 +50,7 @@ server.effects()
 
 ## Response
 
-This endpoint responds with a list of effects that occurred in the ledger. See [effect resource](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/resources/effect.md) for reference.
+This endpoint responds with a list of effects that occurred in the ledger. See [effect resource](../effect.md) for reference.
 
 ### Example Response
 
@@ -84,5 +84,5 @@ This endpoint responds with a list of effects that occurred in the ledger. See [
 
 ## Possible Errors
 
-- The [standard errors](https://github.com/xdbfoundation/go/blob/master/services/frontier/internal/docs/reference/errors.md#standard-errors).
-- [not_found](https://github.com/xdbfoundation/go/blob/master/services/frontier/internal/docs/reference/errors/not-found.md): A `not_found` error will be returned if there are no effects for a given ledger.
+- The [standard errors](../errors.md#standard-errors).
+- [not_found](../errors/not-found.md): A `not_found` error will be returned if there are no effects for a given ledger.

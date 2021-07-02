@@ -4,7 +4,7 @@ clientData:
   laboratoryUrl: https://laboratory.livenet.digitalbits.io/#explorer?resource=accounts&endpoint=single
 ---
 
-Returns information and links relating to a single [account](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/resources/account.md).
+Returns information and links relating to a single [account](../account.md).
 
 The balances section in the returned JSON will also list all the
 [trustlines](https://github.com/xdbfoundation/docs/tree/master/guides/concepts/assets.md#trustlines) this account
@@ -52,7 +52,7 @@ server.accounts()
 
 ## Response
 
-This endpoint responds with the details of a single account for a given ID. See [account resource](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/resources/account.md) for reference.
+This endpoint responds with the details of a single account for a given ID. See [account resource](../account.md) for reference.
 
 ### Example Response
 ```json
@@ -154,5 +154,5 @@ This endpoint responds with the details of a single account for a given ID. See 
 
 ## Possible Errors
 
-- The [standard errors](https://github.com/xdbfoundation/go/blob/master/services/frontier/internal/docs/reference/errors.md#standard-errors).
-- [not_found](https://github.com/xdbfoundation/go/blob/master/services/frontier/internal/docs/reference/errors/not-found.md): A `not_found` error will be returned if there is no account whose ID matches the `account` argument.
+- The [standard errors](../errors.md#standard-errors).
+- [not_found](../errors/not-found.md): A `not_found` error will be returned if there is no account whose ID matches the `account` argument.

@@ -5,7 +5,7 @@ replacement: https://developers.stellar.org/api/resources/transactions/
 
 **Transactions** are the basic unit of change in the DigitalBits Network.
 
-A transaction is a grouping of [operations](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/resources/operation.md).
+A transaction is a grouping of [operations](./operation.md).
 
 To learn more about the concept of transactions in the DigitalBits network, take a look at the [DigitalBits transactions concept guide](https://github.com/xdbfoundation/docs/blob/master/guides/concepts/transactions.md).
 
@@ -14,9 +14,9 @@ To learn more about the concept of transactions in the DigitalBits network, take
 | Attribute               | Type                     |                                                                                                                                |
 |-------------------------|--------------------------|--------------------------------------------------------------------------------------------------------------------------------|
 | id                      | string                   | The canonical id of this transaction, suitable for use as the :id parameter for url templates that require a transaction's ID. |
-| paging_token            | string                   | A [paging token](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/resources/page.md) suitable for use as the `cursor` parameter to transaction collection resources.                    |
+| paging_token            | string                   | A [paging token](./page.md) suitable for use as the `cursor` parameter to transaction collection resources.                    |
 | successful              | bool                     | Indicates if transaction was successful or not.                                                                                |
-| hash                    | string                   | A hex-encoded, lowercase SHA-256 hash of the transaction's [XDR](https://github.com/xdbfoundation/go/blob/master/services/frontier/internal/docs/reference/xdr.md)-encoded form.                             |
+| hash                    | string                   | A hex-encoded, lowercase SHA-256 hash of the transaction's [XDR](../xdr.md)-encoded form.                             |
 | ledger                  | number                   | Sequence number of the ledger in which this transaction was applied.                                                           |
 | created_at              | ISO8601 string           |                                                                                                                                |
 | fee_account             | string                   | The account which paid for the transaction fees                                                                                |
@@ -43,10 +43,10 @@ To learn more about the concept of transactions in the DigitalBits network, take
 | rel        | Example                                                                                                                                              | Description                                                                                |
 |------------|------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------|
 | self       | `https://frontier.testnet.digitalbits.io/transactions/a8b22539d1f62825c527dbdfee8ba8d4faf701126021ccfa33bbe8cb149de9fd`                                  |                                                                                            |
-| account    | `https://frontier.testnet.digitalbits.io/accounts/GC3CLEUNQVWY36AHTGGX2NASAPHD6EBQXE63YH2B3PAASLCCIG4ELGTP`                                              | The source [account](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/endpoints/accounts-single.md) for this transaction.                          |
-| ledger     | `https://frontier.testnet.digitalbits.io/ledgers/257`                                                                                                | The [ledger](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/endpoints/ledgers-single.md) in which this transaction was applied.                  |
-| operations | `https://frontier.testnet.digitalbits.io/transactions/a8b22539d1f62825c527dbdfee8ba8d4faf701126021ccfa33bbe8cb149de9fd/operations{?cursor,limit,order}"` | [Operations](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/endpoints/operations-for-transaction.md) included in this transaction.               |
-| effects    | `https://frontier.testnet.digitalbits.io/transactions/a8b22539d1f62825c527dbdfee8ba8d4faf701126021ccfa33bbe8cb149de9fd/effects{?cursor,limit,order}"`    | [Effects](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/endpoints/effects-for-transaction.md) which resulted by operations in this transaction. |
+| account    | `https://frontier.testnet.digitalbits.io/accounts/GC3CLEUNQVWY36AHTGGX2NASAPHD6EBQXE63YH2B3PAASLCCIG4ELGTP`                                              | The source [account](../endpoints/accounts-single.md) for this transaction.                          |
+| ledger     | `https://frontier.testnet.digitalbits.io/ledgers/257`                                                                                                | The [ledger](../endpoints/ledgers-single.md) in which this transaction was applied.                  |
+| operations | `https://frontier.testnet.digitalbits.io/transactions/a8b22539d1f62825c527dbdfee8ba8d4faf701126021ccfa33bbe8cb149de9fd/operations{?cursor,limit,order}"` | [Operations](../endpoints/operations-for-transaction.md) included in this transaction.               |
+| effects    | `https://frontier.testnet.digitalbits.io/transactions/a8b22539d1f62825c527dbdfee8ba8d4faf701126021ccfa33bbe8cb149de9fd/effects{?cursor,limit,order}"`    | [Effects](../endpoints/effects-for-transaction.md) which resulted by operations in this transaction. |
 | precedes   | `https://frontier.testnet.digitalbits.io/transactions?order=asc&cursor=1103806599168`                                                                | A collection of transactions that occur after this transaction.                            |
 | succeeds   | `https://frontier.testnet.digitalbits.io/transactions?order=desc&cursor=1103806599168`                                                               | A collection of transactions that occur before this transaction.                           |
 
@@ -112,12 +112,12 @@ To learn more about the concept of transactions in the DigitalBits network, take
 
 | Resource                                               | Type       | Resource URI Template                |
 |--------------------------------------------------------|------------|--------------------------------------|
-| [All Transactions](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/endpoints/transactions-all.md)             | Collection | `/transactions` (`GET`)              |
-| [Post Transaction](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/endpoints/transactions-create.md)          | Action     | `/transactions`  (`POST`)            |
-| [Transaction Details](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/endpoints/transactions-single.md)       | Single     | `/transactions/:id`                  |
-| [Account Transactions](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/endpoints/transactions-for-account.md) | Collection | `/accounts/:account_id/transactions` |
-| [Ledger Transactions](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/endpoints/transactions-for-ledger.md)   | Collection | `/ledgers/:ledger_id/transactions`   |
+| [All Transactions](../endpoints/transactions-all.md)             | Collection | `/transactions` (`GET`)              |
+| [Post Transaction](../endpoints/transactions-create.md)          | Action     | `/transactions`  (`POST`)            |
+| [Transaction Details](../endpoints/transactions-single.md)       | Single     | `/transactions/:id`                  |
+| [Account Transactions](../endpoints/transactions-for-account.md) | Collection | `/accounts/:account_id/transactions` |
+| [Ledger Transactions](../endpoints/transactions-for-ledger.md)   | Collection | `/ledgers/:ledger_id/transactions`   |
 
 
 ## Submitting transactions
-To submit a new transaction to DigitalBits network, it must first be built and signed locally. Then you can submit a hex representation of your transaction’s [XDR](https://github.com/xdbfoundation/go/blob/master/services/frontier/internal/docs/reference/xdr.md) to the `/transactions` endpoint. Read more about submitting transactions in [Post Transaction](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/endpoints/transactions-create.md) doc.
+To submit a new transaction to DigitalBits network, it must first be built and signed locally. Then you can submit a hex representation of your transaction’s [XDR](../xdr.md) to the `/transactions` endpoint. Read more about submitting transactions in [Post Transaction](../endpoints/transactions-create.md) doc.
