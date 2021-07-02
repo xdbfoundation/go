@@ -41,4 +41,4 @@ $ curl -X GET "https://frontier.testnet.digitalbits.io/accounts/accountthatdoesn
 
 ## Related
 
-- [Not Acceptable](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/errors/not-acceptable.md)
+- [Not Acceptable](./not-acceptable.md)

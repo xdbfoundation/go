@@ -2,7 +2,7 @@
 title: Offer
 ---
 
-Accounts on the DigitalBits network can make to buy or sell assets.  Users can create offers with the [Manage Offer](https://github.com/xdbfoundation/docs/blob/master/guides/concepts/list-of-operations.md#manage-offer) operation.
+Accounts on the DigitalBits network can make to buy or sell assets.  Users can create offers with the [Manage Offer](https://developers.digitalbits.io/guides/concepts/list-of-operations.html#manage-offer) operation.
 
 Frontier only returns offers that belong to a particular account.  When it does, it uses the following format:
 
@@ -12,8 +12,8 @@ Frontier only returns offers that belong to a particular account.  When it does,
 | id                   | string                                                            | The ID of this offer.                                                                                                    |
 | paging_token         | string                                                            | A [paging token](./page.md) suitable for use as a `cursor` parameter.                                                    |
 | seller               | string                                                            | Account id of the account making this offer.                                                                             |
-| selling              | [Asset](https://github.com/xdbfoundation/docs/blob/master/guides/concepts/assets.md) | The Asset this offer wants to sell.                                                                                      |
-| buying               | [Asset](https://github.com/xdbfoundation/docs/blob/master/guides/concepts/assets.md) | The Asset this offer wants to buy.                                                                                       |
+| selling              | [Asset](https://developers.digitalbits.io/guides/concepts/assets.html) | The Asset this offer wants to sell.                                                                                      |
+| buying               | [Asset](https://developers.digitalbits.io/guides/concepts/assets.html) | The Asset this offer wants to buy.                                                                                       |
 | amount               | string                                                            | The amount of `selling` the account making this offer is willing to sell.                                                |
 | price_r              | object                                                            | An object of a number numerator and number denominator that represent the buy and sell price of the currencies on offer. |
 | price                | string                                                            | How many units of `buying` it takes to get 1 unit of `selling`. A number representing the decimal form of `price_r`.     |

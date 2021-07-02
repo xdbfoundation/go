@@ -40,4 +40,4 @@ $ curl -X GET "https://frontier.testnet.digitalbits.io/ledgers?limit=invalidlimi
 
 ## Related
 
-- [Malformed Transaction](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/errors/transaction-malformed.md)
+- [Malformed Transaction](./transaction-malformed.md)

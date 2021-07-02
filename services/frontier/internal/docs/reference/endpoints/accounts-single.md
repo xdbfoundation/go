@@ -7,12 +7,12 @@ clientData:
 Returns information and links relating to a single [account](../resources/account.md).
 
 The balances section in the returned JSON will also list all the
-[trustlines](https://github.com/xdbfoundation/docs/tree/master/guides/concepts/assets.md#trustlines) this account
+[trustlines](https://developers.digitalbits.io/guides/concepts/assets.html#trustlines) this account
 established. Note this will only return trustlines that have the necessary authorization to work.
 Meaning if an account `A` trusts another account `B` that has the
-[authorization required](https://github.com/xdbfoundation/docs/tree/master/guides/concepts/accounts.md#flags)
+[authorization required](https://developers.digitalbits.io/guides/concepts/accounts.html#flags)
 flag set, the trustline won't show up until account `B`
-[allows](https://github.com/xdbfoundation/docs/tree/master/guides/concepts/list-of-operations.md#allow-trust)
+[allows](https://developers.digitalbits.io/guides/concepts/list-of-operations.html#allow-trust)
 account `A` to hold its assets.
 
 ## Request

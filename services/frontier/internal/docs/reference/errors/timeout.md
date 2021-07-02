@@ -14,7 +14,7 @@ this you can:
 
 * Keep resubmitting the same transaction (with the same sequence number) and wait until it finally
   is added to a new ledger.
-* Increase the [fee](https://github.com/xdbfoundation/docs/blob/master/guides/concepts/fees.md) in order to prioritize the transaction.
+* Increase the [fee](https://developers.digitalbits.io/guides/concepts/fees.html) in order to prioritize the transaction.
 
 This error returns a
 [HTTP 504 Error](https://developer.mozilla.org/en-US/docs/Web/HTTP/Response_codes).
@@ -44,5 +44,5 @@ draft specification guide and thus has the following attributes:
 
 ## Related
 
-- [Not Acceptable](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/errors/not-acceptable.md)
-- [Transaction Failed](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/errors/transaction-failed.md)
+- [Not Acceptable](./not-acceptable.md)
+- [Transaction Failed](./transaction-failed.md)

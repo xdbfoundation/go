@@ -6,7 +6,7 @@ title: Asset
 
 An asset consists of an type, code, and issuer.
 
-To learn more about the concept of assets in the DigitalBits network, take a look at the [DigitalBits assets concept guide](https://github.com/xdbfoundation/docs/blob/master/guides/concepts/assets.md).
+To learn more about the concept of assets in the DigitalBits network, take a look at the [DigitalBits assets concept guide](https://developers.digitalbits.io/guides/concepts/assets.html).
 
 ## Attributes
 
