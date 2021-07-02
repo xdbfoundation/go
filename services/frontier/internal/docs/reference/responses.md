@@ -1,3 +1,7 @@
+---
+title: Response Format
+---
+
 Rather than using a fully custom way of representing the resources we expose in
 Frontier, we use [HAL](http://stateless.co/hal_specification.html). HAL is a
 hypermedia format in JSON that remains simple while giving us a couple of

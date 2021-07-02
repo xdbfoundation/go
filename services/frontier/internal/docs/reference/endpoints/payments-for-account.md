@@ -1,3 +1,9 @@
+---
+title: Payments for Account
+clientData:
+  laboratoryUrl: https://laboratory.livenet.digitalbits.io/#explorer?resource=payments&endpoint=for_account
+---
+
 This endpoint responds with a collection of payment-related operations where the given
 [account](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/resources/account.md) was either the sender or receiver.
 

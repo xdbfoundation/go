@@ -1,3 +1,8 @@
+---
+title: Not Implemented
+---
+
+
 If your [request method](http://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html) is not supported by
 Frontier, Frontier will return a `not_implemented` error. Likewise, if functionality that is intended
 but does not exist (thus reserving the endpoint for future use), it will also return a

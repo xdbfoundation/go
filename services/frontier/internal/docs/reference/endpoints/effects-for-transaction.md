@@ -1,3 +1,10 @@
+---
+title: Effects for Transaction
+clientData:
+  laboratoryUrl: https://laboratory.livenet.digitalbits.io/#explorer?resource=effects&endpoint=for_transaction
+---
+
+
 This endpoint represents all [effects](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/resources/effect.md) that occurred as a result of a given [transaction](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/resources/transaction.md).
 
 ## Request

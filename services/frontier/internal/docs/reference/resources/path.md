@@ -1,3 +1,7 @@
+---
+title: Payment Path
+---
+
 A **path** resource contains information about a payment path.  A path can be used by code to populate necessary fields on path payment operation, such as `path` and `sendMax`.
 
 

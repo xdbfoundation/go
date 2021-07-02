@@ -1,3 +1,7 @@
+---
+title: Ledger
+---
+
 A **ledger** resource contains information about a given ledger.
 
 To learn more about the concept of ledgers in the DigitalBits network, take a look at the [DigitalBits ledger concept guide](https://github.com/xdbfoundation/docs/blob/master/guides/concepts/ledger.md).

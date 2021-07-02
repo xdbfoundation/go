@@ -1,3 +1,7 @@
+---
+title: Before History
+---
+
 A frontier server may be configured to only keep a portion of the digitalbits network's history stored
 within its database.  This error will be returned when a client requests a piece of information
 (such as a page of transactions or a single operation) that the server can positively identify as

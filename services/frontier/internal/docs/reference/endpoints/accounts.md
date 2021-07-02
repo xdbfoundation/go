@@ -1,3 +1,6 @@
+---
+title: Accounts
+---
 
 This endpoint allows filtering accounts who have a given `signer` or have a trustline to an `asset`. The result is a list of [accounts](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/resources/account.md).
 

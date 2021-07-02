@@ -1,3 +1,7 @@
+---
+title: Overview
+---
+
 Frontier is an API server for the DigitalBits ecosystem.  It acts as the interface between [digitalbits-core](https://github.com/xdbfoundation/DigitalBits) and applications that want to access the DigitalBits network. It allows you to submit transactions to the network, check the status of accounts, subscribe to event streams, etc. See [an overview of the DigitalBits ecosystem](https://github.com/xdbfoundation/docs/blob/master/guides/get-started/readme.md) for details of where Frontier fits in.
 
 Frontier provides a RESTful API to allow client applications to interact with the DigitalBits network. You can communicate with Frontier using cURL or just your web browser. However, if you're building a client application, you'll likely want to use a DigitalBits SDK in the language of your client.

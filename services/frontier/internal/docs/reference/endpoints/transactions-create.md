@@ -1,3 +1,9 @@
+---
+title: Post Transaction
+clientData:
+  laboratoryUrl: https://laboratory.livenet.digitalbits.io/#explorer?resource=transactions&endpoint=create
+---
+
 Posts a new [transaction](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/resources/transaction.md) to the DigitalBits Network.
 Note that creating a valid transaction and signing it properly is the
 responsibility of your client library.

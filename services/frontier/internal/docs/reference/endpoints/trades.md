@@ -1,3 +1,7 @@
+---
+title: Trades
+---
+
 People on the DigitalBits network can make [offers](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/resources/offer.md) to buy or sell assets. When
 an offer is fully or partially fulfilled, a [trade](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/resources/trade.md) happens.
 

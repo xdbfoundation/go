@@ -1,3 +1,7 @@
+---
+title: Rate Limit Exceeded
+---
+
 When a single user makes too many requests to Frontier in a one hour time frame, Frontier returns a
 `rate_limit_exceeded` error. By default, Frontier allows 3600 requests per hour -- an average of one
 request per second. This is analogous to a

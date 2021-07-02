@@ -1,3 +1,9 @@
+---
+title: Transaction Details
+clientData:
+  laboratoryUrl: https://laboratory.livenet.digitalbits.io/#explorer?resource=transactions&endpoint=single
+---
+
 The transaction details endpoint provides information on a single
 [transaction](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/resources/transaction.md). The transaction hash provided in the `hash` argument
 specifies which transaction to load.

@@ -1,3 +1,9 @@
+---
+title: Trades for Account
+clientData:
+  laboratoryUrl: https://laboratory.livenet.digitalbits.io/#explorer?resource=trades&endpoint=for_account
+---
+
 This endpoint represents all [trades](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/resources/trade.md) that affect a given [account](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/resources/account.md).
 
 This endpoint can also be used in [streaming](https://github.com/xdbfoundation/go/blob/master/services/frontier/internal/docs/reference/streaming.md) mode, making it possible to listen for new trades that affect the given account as they occur on the DigitalBits network.

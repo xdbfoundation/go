@@ -1,3 +1,8 @@
+---
+title: Transaction
+replacement: https://developers.stellar.org/api/resources/transactions/
+---
+
 **Transactions** are the basic unit of change in the DigitalBits Network.
 
 A transaction is a grouping of [operations](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/resources/operation.md).

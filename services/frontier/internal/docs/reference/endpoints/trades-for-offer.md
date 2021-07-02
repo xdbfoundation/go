@@ -1,3 +1,9 @@
+---
+title: Trades for Offer
+clientData:
+  laboratoryUrl: https://laboratory.livenet.digitalbits.io/#explorer?resource=trades&endpoint=for_offer
+---
+
 This endpoint represents all [trades](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/resources/trade.md) for a given [offer](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/resources/offer.md).
 
 This endpoint can also be used in [streaming](https://github.com/xdbfoundation/go/blob/master/services/frontier/internal/docs/reference/streaming.md) mode, making it possible to listen for new trades for the given offer as they occur on the DigitalBits network.

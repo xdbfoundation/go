@@ -1,3 +1,9 @@
+---
+title: All Operations
+clientData:
+  laboratoryUrl: https://laboratory.livenet.digitalbits.io/#explorer?resource=operations&endpoint=all
+---
+
 This endpoint represents [operations](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/resources/operation.md) that are part of successfully validated [transactions](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/resources/transaction.md).
 Please note that this endpoint returns operations that are part of failed transactions if `include_failed` parameter is `true`
 and Frontier is ingesting failed transactions.

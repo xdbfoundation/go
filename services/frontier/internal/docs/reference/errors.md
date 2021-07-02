@@ -1,3 +1,7 @@
+---
+title: Errors
+---
+
 In the event that an error occurs while processing a request to frontier, an
 **error** response will be returned to the client.  This error response will
 contain information detailing why the request couldn't complete successfully.

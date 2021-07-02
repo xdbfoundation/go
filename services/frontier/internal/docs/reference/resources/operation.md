@@ -1,3 +1,7 @@
+---
+title: Operation
+---
+
 [Operations](https://github.com/xdbfoundation/docs/blob/master/guides/concepts/operations.md) are objects that represent a desired change to the ledger: payments,
 offers to exchange currency, changes made to account options, etc.  Operations
 are submitted to the DigitalBits network grouped in a [Transaction](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/resources/transaction.md).

@@ -1,3 +1,9 @@
+---
+title: Orderbook Details
+clientData:
+  laboratoryUrl: https://laboratory.livenet.digitalbits.io/#explorer?resource=order_book&endpoint=details
+---
+
 People on the DigitalBits network can make [offers](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/resources/offer.md) to buy or sell assets.
 These offers are summarized by the assets being bought and sold in
 [orderbooks](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/resources/orderbook.md).

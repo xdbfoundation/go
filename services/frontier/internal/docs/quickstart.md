@@ -1,3 +1,7 @@
+---
+title: Frontier Quickstart
+---
+
 ## Frontier Quickstart
 This document describes how to quickly set up a **test** DigitalBits Core + Frontier node, that you can play around with to get a feel for how a digitalbits node operates. **This configuration is not secure!** It is **not** intended as a guide for production administration.
 

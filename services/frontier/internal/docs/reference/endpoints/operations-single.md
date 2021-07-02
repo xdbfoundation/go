@@ -1,3 +1,9 @@
+---
+title: Operation Details
+clientData:
+  laboratoryUrl: https://laboratory.livenet.digitalbits.io/#explorer?resource=operations&endpoint=single
+---
+
 The operation details endpoint provides information on a single
 [operation](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/resources/operation.md). The operation ID provided in the `id` argument specifies
 which operation to load.

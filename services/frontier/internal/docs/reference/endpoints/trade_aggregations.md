@@ -1,3 +1,7 @@
+---
+title: Trade Aggregations
+---
+
 Trade Aggregations are catered specifically for developers of trading clients. They facilitate
 efficient gathering of historical trade data. This is done by dividing a given time range into
 segments and aggregating statistics, for a given asset pair (`base`, `counter`) over each of these

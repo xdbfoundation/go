@@ -1,3 +1,7 @@
+---
+title: Timeout
+---
+
 If you are encountering this error it means that either:
 
 * Frontier has not received a confirmation from the DigitalBits Core server that the transaction you are

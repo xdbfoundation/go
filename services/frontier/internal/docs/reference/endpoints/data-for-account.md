@@ -1,3 +1,7 @@
+---
+title: Data for Account
+---
+
 This endpoint represents a single [data](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/resources/data.md) associated with a given [account](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/resources/account.md).
 
 ## Request

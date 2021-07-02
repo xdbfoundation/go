@@ -1,3 +1,7 @@
+---
+title: Transaction Malformed
+---
+
 When you submit a malformed transaction to Frontier, Frontier will return a `transaction_malformed`
 error. There are many ways in which a transaction could be malformed, including:
 

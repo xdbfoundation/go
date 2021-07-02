@@ -1,3 +1,7 @@
+---
+title: Internal Server Error
+---
+
 If there's an internal error within Frontier, Frontier will return a
 `server_error` response.  This response is a catch-all, and can refer to many
 possible errors in the Frontier server: a configuration mistake, a database

@@ -1,3 +1,7 @@
+---
+title: Page
+---
+
 Pages represent a subset of a larger collection of objects.
 As an example, it would be unfeasible to provide the
 [All Transactions](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/endpoints/transactions-all.md) endpoint without paging.  Over time there

@@ -1,3 +1,7 @@
+---
+title: Effect
+---
+
 A successful operation will yield zero or more **effects**.  These effects
 represent specific changes that occur in the ledger, but are not necessarily
 directly reflected in the [ledger](https://github.com/xdbfoundation/docs/blob/master/guides/concepts/ledger.md) or [history](https://github.com/xdbfoundation/DigitalBits/blob/master/docs/history.md), as [transactions](https://github.com/xdbfoundation/docs/blob/master/guides/concepts/transactions.md) and [operations](https://github.com/xdbfoundation/docs/blob/master/guides/concepts/operations.md) are.
