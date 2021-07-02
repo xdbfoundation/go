@@ -26,5 +26,5 @@ json document with the following attributes:
 There are a set of errors that can occur in any request to frontier which we
 call **standard errors**.  These errors are:
 
-- [Server Error](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/errors/server-error.md)
-- [Rate Limit Exceeded](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/errors/rate-limit-exceeded)
+- [Server Error](./errors/server-error.md)
+- [Rate Limit Exceeded](./errors/rate-limit-exceeded.md)
