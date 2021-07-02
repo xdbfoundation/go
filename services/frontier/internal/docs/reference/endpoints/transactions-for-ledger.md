@@ -5,7 +5,7 @@ clientData:
 ---
 
 
-This endpoint represents successful [transactions](../transaction.md) in a given [ledger](../ledger.md).
+This endpoint represents successful [transactions](../resources/transaction.md) in a given [ledger](../resources/ledger.md).
 
 ## Request
 
@@ -50,7 +50,7 @@ server.transactions()
 ## Response
 
 This endpoint responds with a list of transactions in a given ledger. See [transaction
-resource](../transaction.md) for reference.
+resource](../resources/transaction.md) for reference.
 
 ### Example Response
 

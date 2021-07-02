@@ -2,7 +2,7 @@
 title: Data for Account
 ---
 
-This endpoint represents a single [data](../data.md) associated with a given [account](../account.md).
+This endpoint represents a single [data](../resources/data.md) associated with a given [account](../resources/account.md).
 
 ## Request
 
@@ -44,7 +44,7 @@ server.accounts()
 
 ## Response
 
-This endpoint responds with a value of the data field for the given account. See [data resource](../data.md) for reference.
+This endpoint responds with a value of the data field for the given account. See [data resource](../resources/data.md) for reference.
 
 ### Example Response
 

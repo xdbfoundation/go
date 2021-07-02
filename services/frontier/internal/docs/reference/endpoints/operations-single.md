@@ -5,7 +5,7 @@ clientData:
 ---
 
 The operation details endpoint provides information on a single
-[operation](../operation.md). The operation ID provided in the `id` argument specifies
+[operation](../resources/operation.md). The operation ID provided in the `id` argument specifies
 which operation to load.
 
 ### Warning - failed transactions
@@ -51,7 +51,7 @@ server.operations()
 
 ## Response
 
-This endpoint responds with a single Operation.  See [operation resource](../operation.md) for reference.
+This endpoint responds with a single Operation.  See [operation resource](../resources/operation.md) for reference.
 
 ### Example Response
 

@@ -2,7 +2,7 @@
 title: Offer Details
 ---
 
-Returns information and links relating to a single [offer](../offer.md).
+Returns information and links relating to a single [offer](../resources/offer.md).
 
 ## Request
 
@@ -40,7 +40,7 @@ server.offers('accounts', 'GDFOHLMYCXVZD2CDXZLMW6W6TMU4YO27XFF2IBAFAV66MSTPDDSK2
 
 ## Response
 
-This endpoint responds with the details of a single offer for a given ID. See [offer resource](../offer.md) for reference.
+This endpoint responds with the details of a single offer for a given ID. See [offer resource](../resources/offer.md) for reference.
 
 ### Example Response
 

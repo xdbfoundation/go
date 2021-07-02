@@ -2,7 +2,7 @@
 title: All Assets
 ---
 
-This endpoint represents all [assets](../asset.md).
+This endpoint represents all [assets](../resources/asset.md).
 It will give you all the assets in the system along with various statistics about each.
 
 ### Notes
@@ -49,7 +49,7 @@ server.assets()
 
 ## Response
 
-If called normally this endpoint responds with a [page](../page.md) of assets.
+If called normally this endpoint responds with a [page](../resources/page.md) of assets.
 
 ### Example Response
 

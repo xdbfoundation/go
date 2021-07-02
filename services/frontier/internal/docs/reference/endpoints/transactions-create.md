@@ -4,7 +4,7 @@ clientData:
   laboratoryUrl: https://laboratory.livenet.digitalbits.io/#explorer?resource=transactions&endpoint=create
 ---
 
-Posts a new [transaction](../transaction.md) to the DigitalBits Network.
+Posts a new [transaction](../resources/transaction.md) to the DigitalBits Network.
 Note that creating a valid transaction and signing it properly is the
 responsibility of your client library.
 
@@ -69,7 +69,7 @@ If the transaction failed or errored, then an error response will be returned. P
 
 ### Attributes
 
-The response will include all fields from the [transaction resource](../transaction.md).
+The response will include all fields from the [transaction resource](../resources/transaction.md).
 
 ### Example Response
 

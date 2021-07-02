@@ -4,8 +4,8 @@ clientData:
   laboratoryUrl: https://laboratory.livenet.digitalbits.io/#explorer?resource=payments&endpoint=for_transaction
 ---
 
-This endpoint represents all payment-related [operations](../operation.md) that are part
-of a given [transaction](../transaction.md).
+This endpoint represents all payment-related [operations](../resources/operation.md) that are part
+of a given [transaction](../resources/transaction.md).
 
 The operations that can be returned in by this endpoint are:
 
@@ -62,7 +62,7 @@ server.payments()
 ## Response
 
 This endpoint responds with a list of payments operations that are part of a given transaction. See
-[operation resource](../operation.md) for more information about operations (and payment
+[operation resource](../resources/operation.md) for more information about operations (and payment
 operations).
 
 ### Example Response

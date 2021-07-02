@@ -4,7 +4,7 @@ clientData:
   laboratoryUrl: https://laboratory.livenet.digitalbits.io/#explorer?resource=ledgers&endpoint=single
 ---
 
-The ledger details endpoint provides information on a single [ledger](../ledger.md).
+The ledger details endpoint provides information on a single [ledger](../resources/ledger.md).
 
 ## Request
 
@@ -43,7 +43,7 @@ server.ledgers()
 ```
 ## Response
 
-This endpoint responds with a single Ledger.  See [ledger resource](../ledger.md) for reference.
+This endpoint responds with a single Ledger.  See [ledger resource](../resources/ledger.md) for reference.
 
 ### Example Response
 

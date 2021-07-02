@@ -4,7 +4,7 @@ clientData:
   laboratoryUrl: https://laboratory.livenet.digitalbits.io/#explorer?resource=operations&endpoint=for_transaction
 ---
 
-This endpoint represents successful [operations](../operation.md) that are part of a given [transaction](../transaction.md).
+This endpoint represents successful [operations](../resources/operation.md) that are part of a given [transaction](../resources/transaction.md).
 
 ### Warning - failed transactions
 
@@ -53,7 +53,7 @@ server.operations()
 
 ## Response
 
-This endpoint responds with a list of operations that are part of a given transaction. See [operation resource](../operation.md) for reference.
+This endpoint responds with a list of operations that are part of a given transaction. See [operation resource](../resources/operation.md) for reference.
 
 ### Example Response
 

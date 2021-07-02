@@ -4,7 +4,7 @@ clientData:
   laboratoryUrl: https://laboratory.livenet.digitalbits.io/#explorer?resource=trades&endpoint=for_offer
 ---
 
-This endpoint represents all [trades](../trade.md) for a given [offer](../offer.md).
+This endpoint represents all [trades](../resources/trade.md) for a given [offer](../resources/offer.md).
 
 This endpoint can also be used in [streaming](../streaming.md) mode, making it possible to listen for new trades for the given offer as they occur on the DigitalBits network.
 If called in streaming mode Frontier will start at the earliest known trade unless a `cursor` is set. In that case it will start from the `cursor`. You can also set `cursor` value to `now` to only stream trades created since your request time.
@@ -49,7 +49,7 @@ server.trades()
 
 ## Response
 
-This endpoint responds with a list of trades that consumed a given offer. See the [trade resource](../trade.md) for reference.
+This endpoint responds with a list of trades that consumed a given offer. See the [trade resource](../resources/trade.md) for reference.
 
 ### Example Response
 ```json

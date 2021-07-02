@@ -4,7 +4,7 @@ clientData:
   laboratoryUrl: https://laboratory.livenet.digitalbits.io/#explorer?resource=operations&endpoint=all
 ---
 
-This endpoint represents [operations](../operation.md) that are part of successfully validated [transactions](../transaction.md).
+This endpoint represents [operations](../resources/operation.md) that are part of successfully validated [transactions](../resources/transaction.md).
 Please note that this endpoint returns operations that are part of failed transactions if `include_failed` parameter is `true`
 and Frontier is ingesting failed transactions.
 This endpoint can also be used in [streaming](../streaming.md) mode so it is possible to use it to listen as operations are processed in the DigitalBits network.
@@ -68,7 +68,7 @@ var es = server.operations()
 
 ## Response
 
-This endpoint responds with a list of operations. See [operation resource](../operation.md) for reference.
+This endpoint responds with a list of operations. See [operation resource](../resources/operation.md) for reference.
 
 ### Example Response
 

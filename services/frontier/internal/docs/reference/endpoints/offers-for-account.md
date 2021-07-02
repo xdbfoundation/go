@@ -5,7 +5,7 @@ clientData:
 ---
 
 
-People on the DigitalBits network can make [offers](../offer.md) to buy or sell assets. This
+People on the DigitalBits network can make [offers](../resources/offer.md) to buy or sell assets. This
 endpoint represents all the offers a particular account makes.
 
 This endpoint can also be used in [streaming](../streaming.md) mode so it is possible to use it to

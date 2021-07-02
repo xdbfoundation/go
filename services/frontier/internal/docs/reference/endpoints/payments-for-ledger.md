@@ -4,8 +4,8 @@ clientData:
   laboratoryUrl: https://laboratory.livenet.digitalbits.io/#explorer?resource=payments&endpoint=for_ledger
 ---
 
-This endpoint represents all payment-related [operations](../operation.md) that are part
-of a valid [transactions](../transaction.md) in a given [ledger](../ledger.md).
+This endpoint represents all payment-related [operations](../resources/operation.md) that are part
+of a valid [transactions](../resources/transaction.md) in a given [ledger](../resources/ledger.md).
 
 The operations that can be returned in by this endpoint are:
 
@@ -57,7 +57,7 @@ server.payments()
 ## Response
 
 This endpoint responds with a list of payment operations in a given ledger. See [operation
-resource](../operation.md) for more information about operations (and payment
+resource](../resources/operation.md) for more information about operations (and payment
 operations).
 
 ### Example Response

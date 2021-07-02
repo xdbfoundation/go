@@ -3,8 +3,8 @@ title: Effects for Account
 clientData:
   laboratoryUrl: https://laboratory.livenet.digitalbits.io/#explorer?resource=effects&endpoint=for_account
 ---
-This endpoint represents all [effects](../effect.md) that changed a given
-[account](../account.md). It will return relevant effects from the creation of the
+This endpoint represents all [effects](../resources/effect.md) that changed a given
+[account](../resources/account.md). It will return relevant effects from the creation of the
 account to the current ledger.
 
 This endpoint can also be used in [streaming](../streaming.md) mode so it is possible to use it to

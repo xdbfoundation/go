@@ -5,7 +5,7 @@ clientData:
 ---
 
 This endpoint responds with a collection of payment-related operations where the given
-[account](../account.md) was either the sender or receiver.
+[account](../resources/account.md) was either the sender or receiver.
 
 This endpoint can also be used in [streaming](../streaming.md) mode so it is possible to use it to
 listen for new payments to or from an account as they get made in the DigitalBits network.
@@ -80,7 +80,7 @@ var es = server.payments()
 
 ## Response
 
-This endpoint responds with a [page](../page.md) of [payment operations](../operation.md).
+This endpoint responds with a [page](../resources/page.md) of [payment operations](../resources/operation.md).
 
 ### Example Response
 

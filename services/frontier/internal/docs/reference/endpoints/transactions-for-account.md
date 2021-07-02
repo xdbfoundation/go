@@ -4,8 +4,8 @@ clientData:
   laboratoryUrl: https://laboratory.livenet.digitalbits.io/#explorer?resource=transactions&endpoint=for_account
 ---
 
-This endpoint represents successful [transactions](../transaction.md) that affected a
-given [account](../account.md).  This endpoint can also be used in
+This endpoint represents successful [transactions](../resources/transaction.md) that affected a
+given [account](../resources/account.md).  This endpoint can also be used in
 [streaming](../streaming.md) mode so it is possible to use it to listen for new transactions that
 affect a given account as they get made in the DigitalBits network.
 
@@ -73,7 +73,7 @@ var es = server.transactions()
 ## Response
 
 This endpoint responds with a list of transactions that changed a given account's state. See
-[transaction resource](../transaction.md) for reference.
+[transaction resource](../resources/transaction.md) for reference.
 
 ### Example Response
 ```json
