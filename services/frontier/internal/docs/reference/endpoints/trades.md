@@ -2,8 +2,8 @@
 title: Trades
 ---
 
-People on the DigitalBits network can make [offers](../offer.md) to buy or sell assets. When
-an offer is fully or partially fulfilled, a [trade](../trade.md) happens.
+People on the DigitalBits network can make [offers](../resources/offer.md) to buy or sell assets. When
+an offer is fully or partially fulfilled, a [trade](../resources/trade.md) happens.
 
 Trades can be filtered for a specific orderbook, defined by an asset pair: `base` and `counter`.
 

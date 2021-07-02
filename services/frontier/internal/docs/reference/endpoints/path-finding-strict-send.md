@@ -70,7 +70,7 @@ server.strictSendPaths(source_asset, source_amount, [destination_asset])
 
 ## Response
 
-This endpoint responds with a page of path resources.  See [path resource](../path.md) for reference.
+This endpoint responds with a page of path resources.  See [path resource](../resources/path.md) for reference.
 
 ### Example Response
 

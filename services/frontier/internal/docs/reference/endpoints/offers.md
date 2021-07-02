@@ -2,7 +2,7 @@
 title: Offers
 ---
 
-People on the DigitalBits network can make [offers](../offer.md) to buy or sell assets. This
+People on the DigitalBits network can make [offers](../resources/offer.md) to buy or sell assets. This
 endpoint represents all the current offers, allowing filtering by `seller`, `selling_asset` or `buying_asset`.
 
 ## Request

@@ -4,7 +4,7 @@ clientData:
   laboratoryUrl: https://laboratory.livenet.digitalbits.io/#explorer?resource=operations&endpoint=for_ledger
 ---
 
-This endpoint returns successful [operations](../operation.md) that occurred in a given [ledger](../ledger.md).
+This endpoint returns successful [operations](../resources/operation.md) that occurred in a given [ledger](../resources/ledger.md).
 
 ## Request
 
@@ -48,7 +48,7 @@ server.operations()
 
 ## Response
 
-This endpoint responds with a list of operations in a given ledger.  See [operation resource](../operation.md) for reference.
+This endpoint responds with a list of operations in a given ledger.  See [operation resource](../resources/operation.md) for reference.
 
 ### Example Response
 

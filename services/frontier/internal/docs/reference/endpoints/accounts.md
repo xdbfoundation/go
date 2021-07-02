@@ -2,7 +2,7 @@
 title: Accounts
 ---
 
-This endpoint allows filtering accounts who have a given `signer` or have a trustline to an `asset`. The result is a list of [accounts](../account.md).
+This endpoint allows filtering accounts who have a given `signer` or have a trustline to an `asset`. The result is a list of [accounts](../resources/account.md).
 
 To find all accounts who are trustees to an asset, pass the query parameter `asset` using the canonical representation for an issued assets which is `Code:IssuerAccountID`. 
 
@@ -47,7 +47,7 @@ server.accounts().forAsset("USD:GB4RZUSF3HZGCAKB3VBM2S7QOHHC5KTV3LLZXGBYR5ZO4B26
 
 ## Response
 
-This endpoint responds with the details of all accounts matching the filters. See [account resource](../account.md) for reference.
+This endpoint responds with the details of all accounts matching the filters. See [account resource](../resources/account.md) for reference.
 
 ### Example Response
 

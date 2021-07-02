@@ -4,7 +4,7 @@ clientData:
   laboratoryUrl: https://laboratory.livenet.digitalbits.io/#explorer?resource=effects&endpoint=for_operation
 ---
 
-This endpoint represents all [effects](../effect.md) that occurred as a result of a given [operation](../operation.md).
+This endpoint represents all [effects](../resources/effect.md) that occurred as a result of a given [operation](../resources/operation.md).
 
 ## Request
 
@@ -48,7 +48,7 @@ server.effects()
 
 ## Response
 
-This endpoint responds with a list of effects on the ledger as a result of a given operation. See [effect resource](../effect.md) for reference.
+This endpoint responds with a list of effects on the ledger as a result of a given operation. See [effect resource](../resources/effect.md) for reference.
 
 ### Example Response
 

@@ -5,7 +5,7 @@ clientData:
 ---
 
 The transaction details endpoint provides information on a single
-[transaction](../transaction.md). The transaction hash provided in the `hash` argument
+[transaction](../resources/transaction.md). The transaction hash provided in the `hash` argument
 specifies which transaction to load.
 
 ### Warning - failed transactions
@@ -50,7 +50,7 @@ server.transactions()
 
 ## Response
 
-This endpoint responds with a single Transaction.  See [transaction resource](../transaction.md) for reference.
+This endpoint responds with a single Transaction.  See [transaction resource](../resources/transaction.md) for reference.
 
 ### Example Response
 

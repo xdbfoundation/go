@@ -4,8 +4,8 @@ clientData:
   laboratoryUrl: https://laboratory.livenet.digitalbits.io/#explorer?resource=payments&endpoint=all
 ---
 
-This endpoint represents all payment-related [operations](../operation.md) that are part
-of validated [transactions](../transaction.md). This endpoint can also be used in
+This endpoint represents all payment-related [operations](../resources/operation.md) that are part
+of validated [transactions](../resources/transaction.md). This endpoint can also be used in
 [streaming](../streaming.md) mode so it is possible to use it to listen for new payments as they
 get made in the DigitalBits network.
 
@@ -84,7 +84,7 @@ var es = server.payments()
 
 ## Response
 
-This endpoint responds with a list of payments. See [operation resource](../operation.md) for more information about operations (and payment operations).
+This endpoint responds with a list of payments. See [operation resource](../resources/operation.md) for more information about operations (and payment operations).
 
 ### Example Response
 

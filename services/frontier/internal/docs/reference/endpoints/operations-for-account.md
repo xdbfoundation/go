@@ -4,7 +4,7 @@ clientData:
   laboratoryUrl: https://laboratory.livenet.digitalbits.io/#explorer?resource=operations&endpoint=for_account
 ---
 
-This endpoint represents successful [operations](../operation.md) that were included in valid [transactions](../transaction.md) that affected a particular [account](../account.md).
+This endpoint represents successful [operations](../resources/operation.md) that were included in valid [transactions](../resources/transaction.md) that affected a particular [account](../resources/account.md).
 
 This endpoint can also be used in [streaming](../streaming.md) mode so it is possible to use it to listen for new operations that affect a given account as they happen.
 If called in streaming mode Frontier will start at the earliest known operation unless a `cursor` is set. In that case it will start from the `cursor`. You can also set `cursor` value to `now` to only stream operations created since your request time.
@@ -69,7 +69,7 @@ var es = server.operations()
 
 ## Response
 
-This endpoint responds with a list of operations that affected the given account. See [operation resource](../operation.md) for reference.
+This endpoint responds with a list of operations that affected the given account. See [operation resource](../resources/operation.md) for reference.
 
 ### Example Response
 

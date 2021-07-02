@@ -5,7 +5,7 @@ clientData:
 ---
 
 
-This endpoint represents all successful [transactions](../transaction.md).
+This endpoint represents all successful [transactions](../resources/transaction.md).
 Please note that this endpoint returns failed transactions that are included in the ledger if
 `include_failed` parameter is `true` and Frontier is ingesting failed transactions.
 This endpoint can also be used in [streaming](../streaming.md) mode. This makes it possible to use
@@ -76,9 +76,9 @@ var es = server.transactions()
 
 ## Response
 
-If called normally this endpoint responds with a [page](../page.md) of transactions.
+If called normally this endpoint responds with a [page](../resources/page.md) of transactions.
 If called in streaming mode the transaction resources are returned individually.
-See [transaction resource](../transaction.md) for reference.
+See [transaction resource](../resources/transaction.md) for reference.
 
 ### Example Response
 

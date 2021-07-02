@@ -4,9 +4,9 @@ clientData:
   laboratoryUrl: https://laboratory.livenet.digitalbits.io/#explorer?resource=order_book&endpoint=details
 ---
 
-People on the DigitalBits network can make [offers](../offer.md) to buy or sell assets.
+People on the DigitalBits network can make [offers](../resources/offer.md) to buy or sell assets.
 These offers are summarized by the assets being bought and sold in
-[orderbooks](../orderbook.md).
+[orderbooks](../resources/orderbook.md).
 
 Frontier will return, for each orderbook, a summary of the orderbook and the bids and asks
 associated with that orderbook.

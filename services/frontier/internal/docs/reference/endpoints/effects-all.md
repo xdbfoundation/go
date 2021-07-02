@@ -4,7 +4,7 @@ clientData:
   laboratoryUrl: https://laboratory.livenet.digitalbits.io/#explorer?resource=effects&endpoint=all
 ---
 
-This endpoint represents all [effects](../effect.md).
+This endpoint represents all [effects](../resources/effect.md).
 
 This endpoint can also be used in [streaming](../streaming.md) mode so it is possible to use it to listen for new effects as transactions happen in the DigitalBits network.
 If called in streaming mode Frontier will start at the earliest known effect unless a `cursor` is set. In that case it will start from the `cursor`. You can also set `cursor` value to `now` to only stream effects created since your request time.

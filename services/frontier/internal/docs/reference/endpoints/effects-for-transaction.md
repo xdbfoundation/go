@@ -5,7 +5,7 @@ clientData:
 ---
 
 
-This endpoint represents all [effects](../effect.md) that occurred as a result of a given [transaction](../transaction.md).
+This endpoint represents all [effects](../resources/effect.md) that occurred as a result of a given [transaction](../resources/transaction.md).
 
 ## Request
 
@@ -49,7 +49,7 @@ server.effects()
 
 ## Response
 
-This endpoint responds with a list of effects on the ledger as a result of a given transaction. See [effect resource](../effect.md) for reference.
+This endpoint responds with a list of effects on the ledger as a result of a given transaction. See [effect resource](../resources/effect.md) for reference.
 
 ### Example Response
 

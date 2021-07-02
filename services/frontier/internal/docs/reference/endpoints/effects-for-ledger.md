@@ -6,7 +6,7 @@ clientData:
 
 Effects are the specific ways that the ledger was changed by any operation.
 
-This endpoint represents all [effects](../effect.md) that occurred in the given [ledger](../ledger.md).
+This endpoint represents all [effects](../resources/effect.md) that occurred in the given [ledger](../resources/ledger.md).
 
 ## Request
 
@@ -50,7 +50,7 @@ server.effects()
 
 ## Response
 
-This endpoint responds with a list of effects that occurred in the ledger. See [effect resource](../effect.md) for reference.
+This endpoint responds with a list of effects that occurred in the ledger. See [effect resource](../resources/effect.md) for reference.
 
 ### Example Response
 
