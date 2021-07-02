@@ -35,4 +35,4 @@ Thus to get price you would take n / d.
 
 | Resource                 | Type       | Resource URI Template                |
 |--------------------------|------------|--------------------------------------|
-| [Trade Aggregations](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/endpoints/trade_aggregations.md)       | Collection | `/trade_aggregations?{orderbook_params}`       |
+| [Trade Aggregations](../endpoints/trade_aggregations.md)       | Collection | `/trade_aggregations?{orderbook_params}`       |

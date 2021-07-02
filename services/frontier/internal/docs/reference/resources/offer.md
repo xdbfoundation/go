@@ -10,7 +10,7 @@ Frontier only returns offers that belong to a particular account.  When it does,
 | Attribute            | Type                                                              |                                                                                                                          |
 |----------------------|-------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------|
 | id                   | string                                                            | The ID of this offer.                                                                                                    |
-| paging_token         | string                                                            | A [paging token](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/resources/page.md) suitable for use as a `cursor` parameter.                                                    |
+| paging_token         | string                                                            | A [paging token](./page.md) suitable for use as a `cursor` parameter.                                                    |
 | seller               | string                                                            | Account id of the account making this offer.                                                                             |
 | selling              | [Asset](https://github.com/xdbfoundation/docs/blob/master/guides/concepts/assets.md) | The Asset this offer wants to sell.                                                                                      |
 | buying               | [Asset](https://github.com/xdbfoundation/docs/blob/master/guides/concepts/assets.md) | The Asset this offer wants to buy.                                                                                       |
@@ -75,6 +75,6 @@ Thus to get price you would take n / d.
 
 | Resource                                             | Type       | Resource URI Template          |
 |------------------------------------------------------|------------|--------------------------------|
-| [Offers](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/endpoints/offers.md)                     | Collection | `/offers`                      |
-| [Account Offers](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/endpoints/offers-for-account.md) | Collection | `/accounts/:account_id/offers` |
-| [Offers Details](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/endpoints/offer-details.md)      | Single     | `/offers/:offer_id`            |
+| [Offers](../endpoints/offers.md)                     | Collection | `/offers`                      |
+| [Account Offers](../endpoints/offers-for-account.md) | Collection | `/accounts/:account_id/offers` |
+| [Offers Details](../endpoints/offer-details.md)      | Single     | `/offers/:offer_id`            |

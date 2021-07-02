@@ -2,7 +2,7 @@
 title: Offer Details
 ---
 
-Returns information and links relating to a single [offer](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/resources/offer.md).
+Returns information and links relating to a single [offer](../offer.md).
 
 ## Request
 
@@ -40,7 +40,7 @@ server.offers('accounts', 'GDFOHLMYCXVZD2CDXZLMW6W6TMU4YO27XFF2IBAFAV66MSTPDDSK2
 
 ## Response
 
-This endpoint responds with the details of a single offer for a given ID. See [offer resource](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/resources/offer.md) for reference.
+This endpoint responds with the details of a single offer for a given ID. See [offer resource](../offer.md) for reference.
 
 ### Example Response
 
@@ -83,5 +83,5 @@ This endpoint responds with the details of a single offer for a given ID. See [o
 
 ## Possible Errors
 
-- The [standard errors](https://github.com/xdbfoundation/go/blob/master/services/frontier/internal/docs/reference/errors.md#standard-errors).
-- [not_found](https://github.com/xdbfoundation/go/blob/master/services/frontier/internal/docs/reference/errors/not-found.md): A `not_found` error will be returned if there is no offer whose ID matches the `offer` argument.
+- The [standard errors](../errors.md#standard-errors).
+- [not_found](../errors/not-found.md): A `not_found` error will be returned if there is no offer whose ID matches the `offer` argument.

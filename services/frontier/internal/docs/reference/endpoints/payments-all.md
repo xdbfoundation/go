@@ -4,9 +4,9 @@ clientData:
   laboratoryUrl: https://laboratory.livenet.digitalbits.io/#explorer?resource=payments&endpoint=all
 ---
 
-This endpoint represents all payment-related [operations](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/resources/operation.md) that are part
-of validated [transactions](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/resources/transaction.md). This endpoint can also be used in
-[streaming](https://github.com/xdbfoundation/go/blob/master/services/frontier/internal/docs/reference/streaming.md) mode so it is possible to use it to listen for new payments as they
+This endpoint represents all payment-related [operations](../operation.md) that are part
+of validated [transactions](../transaction.md). This endpoint can also be used in
+[streaming](../streaming.md) mode so it is possible to use it to listen for new payments as they
 get made in the DigitalBits network.
 
 If called in streaming mode Frontier will start at the earliest known payment unless a `cursor` is
@@ -84,7 +84,7 @@ var es = server.payments()
 
 ## Response
 
-This endpoint responds with a list of payments. See [operation resource](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/resources/operation.md) for more information about operations (and payment operations).
+This endpoint responds with a list of payments. See [operation resource](../operation.md) for more information about operations (and payment operations).
 
 ### Example Response
 
@@ -221,4 +221,4 @@ This endpoint responds with a list of payments. See [operation resource](https:/
 
 ## Possible Errors
 
-- The [standard errors](https://github.com/xdbfoundation/go/blob/master/services/frontier/internal/docs/reference/errors.md#standard-errors).
+- The [standard errors](../errors.md#standard-errors).

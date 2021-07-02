@@ -8,7 +8,7 @@ The DigitalBits Network allows payments to be made across assets through _path p
 payment specifies a series of assets to route a payment through, from source asset (the asset
 debited from the payer) to destination asset (the asset credited to the payee).
 
-A Path Payment Strict Receive allows a user to specify the *amount of the asset received*. The amount sent varies based on offers in the order books.  If you would like to search for a path specifying the amount to be sent, use the [Find Payment Paths (Strict Send)](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/endpoints/path-finding-strict-send.md).
+A Path Payment Strict Receive allows a user to specify the *amount of the asset received*. The amount sent varies based on offers in the order books.  If you would like to search for a path specifying the amount to be sent, use the [Find Payment Paths (Strict Send)](./path-finding-strict-send.md).
 
 A strict receive path search is specified using:
 
@@ -71,7 +71,7 @@ server.strictReceivePaths([new DigitalBitsSdk.Asset.native()], destination_asset
 
 ## Response
 
-This endpoint responds with a page of path resources.  See [path resource](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/resources/path.md) for reference.
+This endpoint responds with a page of path resources.  See [path resource](../path.md) for reference.
 
 ### Example Response
 
@@ -111,5 +111,5 @@ This endpoint responds with a page of path resources.  See [path resource](https
 
 ## Possible Errors
 
-- The [standard errors](https://github.com/xdbfoundation/go/blob/master/services/frontier/internal/docs/reference/errors.md#standard-errors).
-- [not_found](https://github.com/xdbfoundation/go/blob/master/services/frontier/internal/docs/reference/errors/not-found.md): A `not_found` error will be returned if no paths could be found to fulfill this payment request
+- The [standard errors](../errors.md#standard-errors).
+- [not_found](../errors/not-found.md): A `not_found` error will be returned if no paths could be found to fulfill this payment request

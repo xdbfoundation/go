@@ -4,7 +4,7 @@ clientData:
   laboratoryUrl: https://laboratory.livenet.digitalbits.io/#explorer?resource=transactions&endpoint=create
 ---
 
-Posts a new [transaction](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/resources/transaction.md) to the DigitalBits Network.
+Posts a new [transaction](../transaction.md) to the DigitalBits Network.
 Note that creating a valid transaction and signing it properly is the
 responsibility of your client library.
 
@@ -48,7 +48,7 @@ POST /transactions
 
 | name | loc  |  notes   |         example        | description |
 | ---- | ---- | -------- | ---------------------- | ----------- |
-| `tx` | body | required | `AAAAAO`....`f4yDBA==` | Base64 representation of transaction envelope [XDR](https://github.com/xdbfoundation/go/blob/master/services/frontier/internal/docs/reference/xdr.md) |
+| `tx` | body | required | `AAAAAO`....`f4yDBA==` | Base64 representation of transaction envelope [XDR](../xdr.md) |
 
 
 ### curl Example Request
@@ -69,7 +69,7 @@ If the transaction failed or errored, then an error response will be returned. P
 
 ### Attributes
 
-The response will include all fields from the [transaction resource](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/resources/transaction.md).
+The response will include all fields from the [transaction resource](../transaction.md).
 
 ### Example Response
 
@@ -130,7 +130,7 @@ The response will include all fields from the [transaction resource](https://git
 
 ## Possible Errors
 
-- The [standard errors](https://github.com/xdbfoundation/go/blob/master/services/frontier/internal/docs/reference/errors.md#standard-errors).
-- [transaction_failed](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/errors/transaction-failed.md): The transaction failed and could not be applied to the ledger.
-- [transaction_malformed](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/errors/transaction-malformed.md): The transaction could not be decoded and was not submitted to the network.
-- [timeout](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/errors/timeout.md): No response from the Core server in a timely manner. Please check "Timeout" section above.
+- The [standard errors](../errors.md#standard-errors).
+- [transaction_failed](../errors/transaction-failed.md): The transaction failed and could not be applied to the ledger.
+- [transaction_malformed](../errors/transaction-malformed.md): The transaction could not be decoded and was not submitted to the network.
+- [timeout](../errors/timeout.md): No response from the Core server in a timely manner. Please check "Timeout" section above.

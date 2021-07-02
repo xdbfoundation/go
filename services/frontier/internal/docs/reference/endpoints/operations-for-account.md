@@ -4,9 +4,9 @@ clientData:
   laboratoryUrl: https://laboratory.livenet.digitalbits.io/#explorer?resource=operations&endpoint=for_account
 ---
 
-This endpoint represents successful [operations](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/resources/operation.md) that were included in valid [transactions](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/resources/transaction.md) that affected a particular [account](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/resources/account.md).
+This endpoint represents successful [operations](../operation.md) that were included in valid [transactions](../transaction.md) that affected a particular [account](../account.md).
 
-This endpoint can also be used in [streaming](https://github.com/xdbfoundation/go/blob/master/services/frontier/internal/docs/reference/streaming.md) mode so it is possible to use it to listen for new operations that affect a given account as they happen.
+This endpoint can also be used in [streaming](../streaming.md) mode so it is possible to use it to listen for new operations that affect a given account as they happen.
 If called in streaming mode Frontier will start at the earliest known operation unless a `cursor` is set. In that case it will start from the `cursor`. You can also set `cursor` value to `now` to only stream operations created since your request time.
 
 ## Request
@@ -69,7 +69,7 @@ var es = server.operations()
 
 ## Response
 
-This endpoint responds with a list of operations that affected the given account. See [operation resource](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/resources/operation.md) for reference.
+This endpoint responds with a list of operations that affected the given account. See [operation resource](../operation.md) for reference.
 
 ### Example Response
 
@@ -210,5 +210,5 @@ This endpoint responds with a list of operations that affected the given account
 
 ## Possible Errors
 
-- The [standard errors](https://github.com/xdbfoundation/go/blob/master/services/frontier/internal/docs/reference/errors.md#standard-errors).
-- [not_found](https://github.com/xdbfoundation/go/blob/master/services/frontier/internal/docs/reference/errors/not-found.md): A `not_found` error will be returned if there is no account whose ID matches the `account` argument.
+- The [standard errors](../errors.md#standard-errors).
+- [not_found](../errors/not-found.md): A `not_found` error will be returned if there is no account whose ID matches the `account` argument.

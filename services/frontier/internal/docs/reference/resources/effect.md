@@ -112,7 +112,7 @@ Attributes depend on effect type.
 
 | Resource                                                                                                                                   | Type       | Resource URI Template           |
 |--------------------------------------------------------------------------------------------------------------------------------------------|------------|---------------------------------|
-| [All Effects](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/endpoints/effects-all.md)                 | Collection | `/effects`                      |
-| [Operation Effects](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/endpoints/effects-for-operation.md) | Collection | `/operations/:id/effects`       |
-| [Account Effects](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/endpoints/effects-for-account.md)     | Collection | `/accounts/:account_id/effects` |
-| [Ledger Effects](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/endpoints/effects-for-ledger.md)       | Collection | `/ledgers/:ledger_id/effects`   |
+| [All Effects](../endpoints/effects-all.md)                 | Collection | `/effects`                      |
+| [Operation Effects](../endpoints/effects-for-operation.md) | Collection | `/operations/:id/effects`       |
+| [Account Effects](../endpoints/effects-for-account.md)     | Collection | `/accounts/:account_id/effects` |
+| [Ledger Effects](../endpoints/effects-for-ledger.md)       | Collection | `/ledgers/:ledger_id/effects`   |
