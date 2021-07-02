@@ -7,7 +7,7 @@ replacement: https://developers.stellar.org/api/resources/transactions/
 
 A transaction is a grouping of [operations](./operation.md).
 
-To learn more about the concept of transactions in the DigitalBits network, take a look at the [DigitalBits transactions concept guide](https://github.com/xdbfoundation/docs/blob/master/guides/concepts/transactions.md).
+To learn more about the concept of transactions in the DigitalBits network, take a look at the [DigitalBits transactions concept guide](https://developers.digitalbits.io/guides/concepts/transactions.html).
 
 ## Attributes
 

@@ -13,7 +13,7 @@ doing so:
 * Try streaming responses to watch for new data instead of pulling data every time.
 * Cache immutable data, such as transaction details, locally.
 
-See the [Rate Limiting Guide](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/rate-limiting.md) for more info.
+See the [Rate Limiting Guide](../rate-limiting.md) for more info.
 
 ## Attributes
 

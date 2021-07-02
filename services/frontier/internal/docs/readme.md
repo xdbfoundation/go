@@ -1,9 +1,9 @@
 ---
 title: Frontier
 ---
-Frontier is the server for the client facing API for the DigitalBits ecosystem.  It acts as the interface between [digitalbits-core](https://github.com/xdbfoundation/docs/blob/master/software/readme.md#digitalbits-core) and applications that want to access the DigitalBits network. It allows you to submit transactions to the network, check the status of accounts, subscribe to event streams, etc. See [an overview of the DigitalBits ecosystem](https://github.com/xdbfoundation/docs/blob/master/guides/readme.md) for more details.
+Frontier is the server for the client facing API for the DigitalBits ecosystem.  It acts as the interface between [digitalbits-core](https://developers.digitalbits.io/software/#digitalbits-core) and applications that want to access the DigitalBits network. It allows you to submit transactions to the network, check the status of accounts, subscribe to event streams, etc. See [an overview of the DigitalBits ecosystem](https://developers.digitalbits.io/guides/get-started/index.html) for more details.
 
-You can interact directly with frontier via curl or a web browser but SDF provides a [JavaScript SDK](https://github.com/xdbfoundation/js-digitalbits-sdk/blob/master/docs/reference/readme.md) for clients to use to interact with Frontier.
+You can interact directly with frontier via curl or a web browser but SDF provides a [JavaScript SDK](https://developers.digitalbits.io/js-digitalbits-sdk/reference/index.html) for clients to use to interact with Frontier.
 
 XDB Foundation runs an instance of Frontier that is connected to the testnet [https://frontier.testnet.digitalbits.io/](https://frontier.testnet.digitalbits.io/) and an instance of Frontier that is connected to the livenet [https://frontier.livenet.digitalbits.io/](https://frontier.livenet.digitalbits.io/)
 

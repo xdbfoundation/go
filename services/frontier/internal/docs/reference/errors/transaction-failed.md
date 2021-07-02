@@ -49,7 +49,7 @@ In addition, the following additional data is provided in the `extras` field of 
   "type": "https://digitalbits.org/frontier-errors/transaction_failed",
   "title": "Transaction Failed",
   "status": 400,
-  "detail": "The transaction failed when submitted to the digitalbits network. The `extras.result_codes` field on this response contains further details.  Descriptions of each code can be found at: https://github.com/xdbfoundation/docs/blob/master/guides/concepts/list-of-operations.md",
+  "detail": "The transaction failed when submitted to the digitalbits network. The `extras.result_codes` field on this response contains further details.  Descriptions of each code can be found at: https://developers.digitalbits.io/guides/concepts/list-of-operations.html",
   "extras": {
     "envelope_xdr": "AAAAANNVpdQ9vctZdAJ67sFmNe1KDzaj51dAdkW3vKKM51H3AAAAZAAAAABJlgLSAAAAAAAAAAAAAAABAAAAAAAAAAEAAAAA01Wl1D29y1l0AnruwWY17UoPNqPnV0B2Rbe8ooznUfcAAAAAAAAAAAL68IAAAAAAAAAAAA==",
     "result_codes": {
@@ -66,7 +66,7 @@ In addition, the following additional data is provided in the `extras` field of 
   "type": "https://digitalbits.org/frontier-errors/transaction_failed",
   "title": "Transaction Failed",
   "status": 400,
-  "detail": "The transaction failed when submitted to the digitalbits network. The `extras.result_codes` field on this response contains further details.  Descriptions of each code can be found at: https://github.com/xdbfoundation/docs/blob/master/guides/concepts/list-of-operations.md",
+  "detail": "The transaction failed when submitted to the digitalbits network. The `extras.result_codes` field on this response contains further details.  Descriptions of each code can be found at: https://developers.digitalbits.io/guides/concepts/list-of-operations.html",
   "extras": {
     "envelope_xdr": "AAAAAPORy3CoX6ox2ilbeiVjBA5WlpCSZRcjZ7VE9Wf4QVk7AAAAZAAAQz0AAAACAAAAAAAAAAAAAAABAAAAAAAAAAEAAAAA85HLcKhfqjHaKVt6JWMEDlaWkJJlFyNntUT1Z/hBWTsAAAAAAAAAAAL68IAAAAAAAAAAARN17BEAAABAA9Ad7OKc7y60NT/JuobaHOfmuq8KbZqcV6G/es94u9yT84fi0aI7tJsFMOyy8cZ4meY3Nn908OU+KfRWV40UCw==",
     "result_codes": {
@@ -79,4 +79,4 @@ In addition, the following additional data is provided in the `extras` field of 
 
 ## Related
 
-- [Transaction Malformed](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/errors/transaction-malformed.md)
+- [Transaction Malformed](./transaction-malformed.md)

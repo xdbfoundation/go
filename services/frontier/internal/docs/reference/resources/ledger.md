@@ -4,7 +4,7 @@ title: Ledger
 
 A **ledger** resource contains information about a given ledger.
 
-To learn more about the concept of ledgers in the DigitalBits network, take a look at the [DigitalBits ledger concept guide](https://github.com/xdbfoundation/docs/blob/master/guides/concepts/ledger.md).
+To learn more about the concept of ledgers in the DigitalBits network, take a look at the [DigitalBits ledger concept guide](https://developers.digitalbits.io/guides/concepts/ledger.html).
 
 ## Attributes
 
@@ -97,5 +97,5 @@ To learn more about the concept of ledgers in the DigitalBits network, take a lo
 
 
 
-[inflation]: https://github.com/xdbfoundation/docs/blob/master/guides/concepts/inflation.md
-[fee]: https://github.com/xdbfoundation/docs/blob/master/guides/concepts/fees.md
+[inflation]: https://developers.digitalbits.io/guides/concepts/inflation.html
+[fee]: https://developers.digitalbits.io/guides/concepts/fees.html

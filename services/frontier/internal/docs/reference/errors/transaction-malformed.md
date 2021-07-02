@@ -49,4 +49,4 @@ In addition, the following additional data is provided in the `extras` field of 
 
 ## Related
 
-- [Bad Request](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/errors/bad-request.md)
+- [Bad Request](./bad-request.md)

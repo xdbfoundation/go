@@ -10,7 +10,7 @@ responsibility of your client library.
 
 Transaction submission and the subsequent validation and inclusion into the
 DigitalBits Network's ledger is a [complicated and asynchronous
-process](https://github.com/xdbfoundation/docs/blob/master/guides/concepts/transactions.md#life-cycle).
+process](https://developers.digitalbits.io/guides/concepts/transactions.html#life-cycle).
 To reduce the complexity, frontier manages these asynchronous processes for the
 client and will wait to hear results from the DigitalBits Network before returning
 an HTTP response to a client.
@@ -36,7 +36,7 @@ If you are encountering this error it means that either:
 The former case may happen because there was no room for your transaction in the 3 consecutive ledgers. In such case, Core server removes a transaction from a queue. To solve this you can either:
 
 * Keep resubmitting the same transaction (with the same sequence number) and wait until it finally is added to a new ledger or:
-* Increase the [fee](https://github.com/xdbfoundation/docs/blob/master/guides/concepts/fees.md).
+* Increase the [fee](https://developers.digitalbits.io/guides/concepts/fees.html).
 
 ## Request
 

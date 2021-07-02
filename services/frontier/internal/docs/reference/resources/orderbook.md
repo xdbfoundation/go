@@ -2,15 +2,15 @@
 title: Orderbook
 ---
 
-[Orderbooks](https://github.com/xdbfoundation/docs/blob/master/guides/concepts/exchange.md#orderbook) are collections of offers for each issuer and currency pairs.  Let's say you wanted to exchange EUR issued by a particular bank for BTC issued by a particular exchange.  You would look at the orderbook and see who is buying `bank1/EUR` and selling `bank2/USD` and at what prices.
+[Orderbooks](https://developers.digitalbits.io/guides/concepts/exchange.html#orderbook) are collections of offers for each issuer and currency pairs.  Let's say you wanted to exchange EUR issued by a particular bank for BTC issued by a particular exchange.  You would look at the orderbook and see who is buying `bank1/EUR` and selling `bank2/USD` and at what prices.
 
 ## Attributes
 | Attribute    | Type             |                                                                                                                        |
 |--------------|------------------|------------------------------------------------------------------------------------------------------------------------|
 | bids | object     |  Array of {`price_r`, `price`, `amount`} objects (see [offers](./offer.md)).  These represent prices and amounts accounts are willing to buy for the given `selling` and `buying` pair. |
 | asks | object |  Array of {`price_r`, `price`, `amount`} objects (see [offers](./offer.md)).  These represent prices and amounts accounts are willing to sell for the given `selling` and `buying` pair.|
-| base | [Asset](https://github.com/xdbfoundation/docs/blob/master/guides/concepts/assets.md) | The Asset this offer wants to sell.|
-| counter | [Asset](https://github.com/xdbfoundation/docs/blob/master/guides/concepts/assets.md) | The Asset this offer wants to buy.|
+| base | [Asset](https://developers.digitalbits.io/guides/concepts/assets.html) | The Asset this offer wants to sell.|
+| counter | [Asset](https://developers.digitalbits.io/guides/concepts/assets.html) | The Asset this offer wants to buy.|
 
 #### Bid Object
 |    Attribute     |  Type  |                                                                                                                                |
