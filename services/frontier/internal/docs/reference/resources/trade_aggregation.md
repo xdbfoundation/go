@@ -1,3 +1,7 @@
+---
+title: Trade Aggregation
+---
+
 A Trade Aggregation represents aggregated statistics on an asset pair (`base` and `counter`) for a specific time period.
 
 ## Attributes

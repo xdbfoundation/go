@@ -1,3 +1,7 @@
+---
+title: All Assets
+---
+
 This endpoint represents all [assets](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/resources/asset.md).
 It will give you all the assets in the system along with various statistics about each.
 

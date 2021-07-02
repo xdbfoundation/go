@@ -1,3 +1,9 @@
+---
+title: Effects for Operation
+clientData:
+  laboratoryUrl: https://laboratory.livenet.digitalbits.io/#explorer?resource=effects&endpoint=for_operation
+---
+
 This endpoint represents all [effects](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/resources/effect.md) that occurred as a result of a given [operation](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/resources/operation.md).
 
 ## Request

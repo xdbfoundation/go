@@ -1,3 +1,9 @@
+---
+title: All Effects
+clientData:
+  laboratoryUrl: https://laboratory.livenet.digitalbits.io/#explorer?resource=effects&endpoint=all
+---
+
 This endpoint represents all [effects](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/resources/effect.md).
 
 This endpoint can also be used in [streaming](https://github.com/xdbfoundation/go/blob/master/services/frontier/internal/docs/reference/streaming.md) mode so it is possible to use it to listen for new effects as transactions happen in the DigitalBits network.

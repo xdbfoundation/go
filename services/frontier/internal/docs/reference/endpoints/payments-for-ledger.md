@@ -1,3 +1,9 @@
+---
+title: Payments for Ledger
+clientData:
+  laboratoryUrl: https://laboratory.livenet.digitalbits.io/#explorer?resource=payments&endpoint=for_ledger
+---
+
 This endpoint represents all payment-related [operations](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/resources/operation.md) that are part
 of a valid [transactions](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/resources/transaction.md) in a given [ledger](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/resources/ledger.md).
 

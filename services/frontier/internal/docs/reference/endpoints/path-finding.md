@@ -1,3 +1,9 @@
+---
+title: Find Payment Paths
+clientData:
+  laboratoryUrl: https://laboratory.livenet.digitalbits.io/#explorer?resource=paths&endpoint=all
+---
+
 **Note**: This endpoint will be deprecated, use [/path/strict-receive](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/endpoints/path-finding-strict-receive.md) instead. There are no differences between both endpoints, `/paths` is an alias for `/path/strict-receive`.
 
 

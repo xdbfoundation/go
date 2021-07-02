@@ -1,3 +1,9 @@
+---
+title: Strict Receive Payment Paths
+clientData:
+  laboratoryUrl: https://laboratory.livenet.digitalbits.io/#explorer?resource=paths&endpoint=all
+---
+
 The DigitalBits Network allows payments to be made across assets through _path payments_.  A path
 payment specifies a series of assets to route a payment through, from source asset (the asset
 debited from the payer) to destination asset (the asset credited to the payee).

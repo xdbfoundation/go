@@ -1,3 +1,9 @@
+---
+title: Account Details
+clientData:
+  laboratoryUrl: https://laboratory.livenet.digitalbits.io/#explorer?resource=accounts&endpoint=single
+---
+
 Returns information and links relating to a single [account](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/resources/account.md).
 
 The balances section in the returned JSON will also list all the

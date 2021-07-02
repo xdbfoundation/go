@@ -1,3 +1,7 @@
+---
+title: Asset
+---
+
 **Assets** are the units that are traded on the DigitalBits Network.
 
 An asset consists of an type, code, and issuer.

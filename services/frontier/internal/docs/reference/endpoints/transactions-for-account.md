@@ -1,3 +1,9 @@
+---
+title: Transactions for Account
+clientData:
+  laboratoryUrl: https://laboratory.livenet.digitalbits.io/#explorer?resource=transactions&endpoint=for_account
+---
+
 This endpoint represents successful [transactions](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/resources/transaction.md) that affected a
 given [account](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/resources/account.md).  This endpoint can also be used in
 [streaming](https://github.com/xdbfoundation/go/blob/master/services/frontier/internal/docs/reference/streaming.md) mode so it is possible to use it to listen for new transactions that

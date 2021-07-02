@@ -1,3 +1,9 @@
+---
+title: Effects for Ledger
+clientData:
+  laboratoryUrl: https://laboratory.livenet.digitalbits.io/#explorer?resource=effects&endpoint=for_ledger
+---
+
 Effects are the specific ways that the ledger was changed by any operation.
 
 This endpoint represents all [effects](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/resources/effect.md) that occurred in the given [ledger](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/resources/ledger.md).

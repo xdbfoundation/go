@@ -1,3 +1,7 @@
+---
+title: Streaming
+---
+
 ## Streaming
 
 Certain endpoints in Frontier can be called in streaming mode using Server-Sent Events. This mode will keep the connection to Frontier open and Frontier will continue to return responses as ledgers close. All parameters for the endpoints that allow this mode are the same. The way a caller initiates this mode is by setting `Accept: text/event-stream` in the HTTP header when you make the request.

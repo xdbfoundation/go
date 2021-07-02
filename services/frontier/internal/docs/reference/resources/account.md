@@ -1,3 +1,7 @@
+---
+title: Account
+---
+
 In the DigitalBits network, users interact using **accounts** which can be controlled by a corresponding keypair that can authorize transactions. One can create a new account with the [Create Account](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/resources/operation.md#create-account) operation.
 
 To learn more about the concept of accounts in the DigitalBits network, take a look at the [DigitalBits account concept guide](https://github.com/xdbfoundation/docs/blob/master/guides/concepts/accounts.md).

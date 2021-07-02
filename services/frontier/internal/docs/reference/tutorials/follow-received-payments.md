@@ -1,3 +1,7 @@
+---
+title: Follow Received Payments
+---
+
 This tutorial shows how easy it is to use Frontier to watch for incoming payments on an [account](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/resources/account.md)
 using JavaScript and `EventSource`.  We will eschew using [`js-digitalbits-sdk`](https://github.com/xdbfoundation/js-digitalbits-sdk), the
 high-level helper library, to show that it is possible for you to perform this

@@ -1,3 +1,10 @@
+---
+title: All Transactions
+clientData:
+  laboratoryUrl: https://laboratory.livenet.digitalbits.io/#explorer?resource=transactions&endpoint=all
+---
+
+
 This endpoint represents all successful [transactions](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/resources/transaction.md).
 Please note that this endpoint returns failed transactions that are included in the ledger if
 `include_failed` parameter is `true` and Frontier is ingesting failed transactions.

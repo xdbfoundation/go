@@ -1,3 +1,9 @@
+---
+title: Payments for Transaction
+clientData:
+  laboratoryUrl: https://laboratory.livenet.digitalbits.io/#explorer?resource=payments&endpoint=for_transaction
+---
+
 This endpoint represents all payment-related [operations](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/resources/operation.md) that are part
 of a given [transaction](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/resources/transaction.md).
 

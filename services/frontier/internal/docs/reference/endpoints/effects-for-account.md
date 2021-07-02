@@ -1,3 +1,8 @@
+---
+title: Effects for Account
+clientData:
+  laboratoryUrl: https://laboratory.livenet.digitalbits.io/#explorer?resource=effects&endpoint=for_account
+---
 This endpoint represents all [effects](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/resources/effect.md) that changed a given
 [account](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/resources/account.md). It will return relevant effects from the creation of the
 account to the current ledger.

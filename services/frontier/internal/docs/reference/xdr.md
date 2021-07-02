@@ -1,3 +1,7 @@
+---
+title: XDR
+---
+
 **XDR**, also known as _External Data Representation_, is used extensively in
 the DigitalBits Network, especially in the core protocol.  The ledger, transactions, results,
 history, and even the messages passed between computers running digitalbits-core

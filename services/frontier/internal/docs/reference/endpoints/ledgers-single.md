@@ -1,3 +1,9 @@
+---
+title: Ledger Details
+clientData:
+  laboratoryUrl: https://laboratory.livenet.digitalbits.io/#explorer?resource=ledgers&endpoint=single
+---
+
 The ledger details endpoint provides information on a single [ledger](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/resources/ledger.md).
 
 ## Request

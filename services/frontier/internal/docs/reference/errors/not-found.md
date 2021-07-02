@@ -1,3 +1,7 @@
+---
+title: Not Found
+---
+
 When Frontier can't find whatever data you are requesting, it will return a `not_found` error. This
 is similar to a
 [HTTP 404 Error](https://developer.mozilla.org/en-US/docs/Web/HTTP/Response_codes) error

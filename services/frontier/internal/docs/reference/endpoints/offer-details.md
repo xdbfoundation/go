@@ -1,3 +1,7 @@
+---
+title: Offer Details
+---
+
 Returns information and links relating to a single [offer](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/resources/offer.md).
 
 ## Request

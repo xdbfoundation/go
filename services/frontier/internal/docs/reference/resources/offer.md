@@ -1,3 +1,7 @@
+---
+title: Offer
+---
+
 Accounts on the DigitalBits network can make to buy or sell assets.  Users can create offers with the [Manage Offer](https://github.com/xdbfoundation/docs/blob/master/guides/concepts/list-of-operations.md#manage-offer) operation.
 
 Frontier only returns offers that belong to a particular account.  When it does, it uses the following format:

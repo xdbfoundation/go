@@ -1,3 +1,7 @@
+---
+title: Bad Request
+---
+
 If Frontier cannot understand a request due to invalid parameters, it will return a `bad_request`
 error. This is analogous to the
 [HTTP 400 Error](https://developer.mozilla.org/en-US/docs/Web/HTTP/Response_codes).

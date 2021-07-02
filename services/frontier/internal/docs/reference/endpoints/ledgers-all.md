@@ -1,3 +1,9 @@
+---
+title: All Ledgers
+clientData:
+  laboratoryUrl: https://laboratory.livenet.digitalbits.io/#explorer?resource=ledgers&endpoint=all
+---
+
 This endpoint represents all [ledgers](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/resources/ledger.md).
 This endpoint can also be used in [streaming](https://github.com/xdbfoundation/go/blob/master/services/frontier/internal/docs/reference/streaming.md) mode so it is possible to use it to get notifications as ledgers are closed by the DigitalBits network.
 If called in streaming mode Frontier will start at the earliest known ledger unless a `cursor` is set. In that case it will start from the `cursor`. You can also set `cursor` value to `now` to only stream ledgers created since your request time.

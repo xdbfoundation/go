@@ -1,3 +1,9 @@
+---
+title: Operations for Ledger
+clientData:
+  laboratoryUrl: https://laboratory.livenet.digitalbits.io/#explorer?resource=operations&endpoint=for_ledger
+---
+
 This endpoint returns successful [operations](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/resources/operation.md) that occurred in a given [ledger](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/docs/reference/resources/ledger.md).
 
 ## Request

@@ -1,3 +1,7 @@
+---
+title: Stale History
+---
+
 A frontier server may be configured to reject historical requests when the history is known to be
 further out of date than the configured threshold. In such cases, this error is returned.  To
 resolve this error (provided you are the frontier instance's operator) please ensure that the

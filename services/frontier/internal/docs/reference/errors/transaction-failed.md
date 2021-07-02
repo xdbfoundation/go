@@ -1,3 +1,7 @@
+---
+title: Transaction Failed
+---
+
 The `transaction_failed` error occurs when a client submits a transaction that was well-formed but
 was not included into the ledger due to some other failure. For example, a transaction may fail if:
 

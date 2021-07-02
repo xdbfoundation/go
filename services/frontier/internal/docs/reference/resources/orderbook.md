@@ -1,3 +1,7 @@
+---
+title: Orderbook
+---
+
 [Orderbooks](https://github.com/xdbfoundation/docs/blob/master/guides/concepts/exchange.md#orderbook) are collections of offers for each issuer and currency pairs.  Let's say you wanted to exchange EUR issued by a particular bank for BTC issued by a particular exchange.  You would look at the orderbook and see who is buying `bank1/EUR` and selling `bank2/USD` and at what prices.
 
 ## Attributes

@@ -1,3 +1,7 @@
+---
+title: Frontier Administration Guide
+---
+
 ## Frontier Administration Guide
 
 Frontier is responsible for providing an HTTP API to data in the DigitalBits network. It ingests and re-serves the data produced by the digitalbits network in a form that is easier to consume than the performance-oriented data representations used by digitalbits-core.
