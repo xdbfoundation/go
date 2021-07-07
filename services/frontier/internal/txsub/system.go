@@ -8,9 +8,9 @@ import (
 	"time"
 
 	"github.com/prometheus/client_golang/prometheus"
-	"github.com/digitalbits/go/services/frontier/internal/txsub/sequence"
-	"github.com/digitalbits/go/support/log"
-	"github.com/digitalbits/go/xdr"
+	"github.com/xdbfoundation/go/services/frontier/internal/txsub/sequence"
+	"github.com/xdbfoundation/go/support/log"
+	"github.com/xdbfoundation/go/xdr"
 )
 
 type FrontierDB interface {

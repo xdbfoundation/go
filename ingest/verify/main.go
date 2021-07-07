@@ -7,10 +7,10 @@ import (
 	"encoding/base64"
 	stdio "io"
 
-	ingesterrors "github.com/digitalbits/go/ingest/errors"
-	"github.com/digitalbits/go/ingest/io"
-	"github.com/digitalbits/go/support/errors"
-	"github.com/digitalbits/go/xdr"
+	ingesterrors "github.com/xdbfoundation/go/ingest/errors"
+	"github.com/xdbfoundation/go/ingest/io"
+	"github.com/xdbfoundation/go/support/errors"
+	"github.com/xdbfoundation/go/xdr"
 )
 
 // TransformLedgerEntryFunction is a function that transforms ledger entry

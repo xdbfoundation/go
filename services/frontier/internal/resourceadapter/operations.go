@@ -4,12 +4,12 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/digitalbits/go/protocols/frontier"
-	"github.com/digitalbits/go/protocols/frontier/operations"
-	frontierContext "github.com/digitalbits/go/services/frontier/internal/context"
-	"github.com/digitalbits/go/services/frontier/internal/db2/history"
-	"github.com/digitalbits/go/support/render/hal"
-	"github.com/digitalbits/go/xdr"
+	"github.com/xdbfoundation/go/protocols/frontier"
+	"github.com/xdbfoundation/go/protocols/frontier/operations"
+	frontierContext "github.com/xdbfoundation/go/services/frontier/internal/context"
+	"github.com/xdbfoundation/go/services/frontier/internal/db2/history"
+	"github.com/xdbfoundation/go/support/render/hal"
+	"github.com/xdbfoundation/go/xdr"
 )
 
 // NewOperation creates a new operation resource, finding the appropriate type to use

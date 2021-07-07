@@ -6,8 +6,8 @@ import (
 	"sync"
 
 	"github.com/pkg/errors"
-	"github.com/digitalbits/go/support/log"
-	"github.com/digitalbits/go/support/render/problem"
+	"github.com/xdbfoundation/go/support/log"
+	"github.com/xdbfoundation/go/support/render/problem"
 )
 
 var (

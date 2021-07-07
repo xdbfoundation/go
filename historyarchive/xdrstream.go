@@ -15,8 +15,8 @@ import (
 	"io"
 	"io/ioutil"
 
-	"github.com/digitalbits/go/support/errors"
-	"github.com/digitalbits/go/xdr"
+	"github.com/xdbfoundation/go/support/errors"
+	"github.com/xdbfoundation/go/xdr"
 )
 
 type XdrStream struct {

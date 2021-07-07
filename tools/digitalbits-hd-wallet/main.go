@@ -4,7 +4,7 @@ import (
 	"log"
 
 	"github.com/spf13/cobra"
-	"github.com/digitalbits/go/tools/digitalbits-hd-wallet/commands"
+	"github.com/xdbfoundation/go/tools/digitalbits-hd-wallet/commands"
 )
 
 var mainCmd = &cobra.Command{

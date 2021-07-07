@@ -13,14 +13,14 @@ import (
 	"strings"
 	"time"
 
-	"github.com/digitalbits/go/txnbuild"
+	"github.com/xdbfoundation/go/txnbuild"
 
 	"github.com/manucorporat/sse"
 
-	hProtocol "github.com/digitalbits/go/protocols/frontier"
-	"github.com/digitalbits/go/protocols/frontier/effects"
-	"github.com/digitalbits/go/protocols/frontier/operations"
-	"github.com/digitalbits/go/support/errors"
+	hProtocol "github.com/xdbfoundation/go/protocols/frontier"
+	"github.com/xdbfoundation/go/protocols/frontier/effects"
+	"github.com/xdbfoundation/go/protocols/frontier/operations"
+	"github.com/xdbfoundation/go/support/errors"
 )
 
 // sendRequest builds the URL for the given frontier request and sends the url to a frontier server

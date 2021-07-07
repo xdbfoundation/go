@@ -3,25 +3,25 @@
 All notable changes to this project will be documented in this
 file.  This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [v5.0.0](https://github.com/digitalbits/go/releases/tag/frontierclient-v5.0.0) - 2020-11-12
+## [v5.0.0](https://github.com/xdbfoundation/go/releases/tag/frontierclient-v5.0.0) - 2020-11-12
 
 None
 
-## [v4.2.0](https://github.com/digitalbits/go/releases/tag/frontierclient-v4.2.0) - 2020-11-11
+## [v4.2.0](https://github.com/xdbfoundation/go/releases/tag/frontierclient-v4.2.0) - 2020-11-11
 
 None
 
-## [v4.1.0](https://github.com/digitalbits/go/releases/tag/frontierclient-v4.1.0) - 2020-10-16
+## [v4.1.0](https://github.com/xdbfoundation/go/releases/tag/frontierclient-v4.1.0) - 2020-10-16
 
 None
 
-## [v4.0.1](https://github.com/digitalbits/go/releases/tag/frontierclient-v4.0.1) - 2020-10-02
+## [v4.0.1](https://github.com/xdbfoundation/go/releases/tag/frontierclient-v4.0.1) - 2020-10-02
 
 None
 
-## [v4.0.0](https://github.com/digitalbits/go/releases/tag/frontierclient-v4.0.0) - 2020-09-29
+## [v4.0.0](https://github.com/xdbfoundation/go/releases/tag/frontierclient-v4.0.0) - 2020-09-29
 
-Added new client methods and effects supporting [Protocol 14](https://github.com/digitalbits/go/issues/3035).
+Added new client methods and effects supporting [Protocol 14](https://github.com/xdbfoundation/go/issues/3035).
 
 * New client methods
   * `ClaimableBalances(req ClaimableBalanceRequest)` - returns details about available claimable balances, possibly filtered to a specific sponsor or other parameters.
@@ -43,7 +43,7 @@ Added new client methods and effects supporting [Protocol 14](https://github.com
 
 * Dropped support for Go 1.13.
 
-## [v3.0.0](https://github.com/digitalbits/go/releases/tag/frontierclient-v3.0.0) - 2020-04-28
+## [v3.0.0](https://github.com/xdbfoundation/go/releases/tag/frontierclient-v3.0.0) - 2020-04-28
 
 ### Breaking changes
 
@@ -76,7 +76,7 @@ Added new client methods and effects supporting [Protocol 14](https://github.com
 
 - Dropped support for Go 1.12.
 
-## [v2.2.0](https://github.com/digitalbits/go/releases/tag/frontierclient-v2.2.0) - 2020-03-26
+## [v2.2.0](https://github.com/xdbfoundation/go/releases/tag/frontierclient-v2.2.0) - 2020-03-26
 
 ### Added
 
@@ -99,11 +99,11 @@ Added new client methods and effects supporting [Protocol 14](https://github.com
 -  Change `client.SubmitTransaction` to always check if memo is required.
 	If you want to skip the check, call `client.SubmitTransactionWithOptions` instead.
 
-## [v2.1.0](https://github.com/digitalbits/go/releases/tag/frontierclient-v2.1.0) - 2020-02-24
+## [v2.1.0](https://github.com/xdbfoundation/go/releases/tag/frontierclient-v2.1.0) - 2020-02-24
 
 ### Added
 
-- Add `client.StrictReceivePaths` and  `client.StrictSendPaths` ([#2237](https://github.com/digitalbits/go/pull/2237)).
+- Add `client.StrictReceivePaths` and  `client.StrictSendPaths` ([#2237](https://github.com/xdbfoundation/go/pull/2237)).
 
 `client.StrictReceivePaths`:
 
@@ -141,7 +141,7 @@ Added new client methods and effects supporting [Protocol 14](https://github.com
 	paths, err := client.StrictSendPaths(pr)
 ```
 
-- Add `client.OfferDetails` ([#2303](https://github.com/digitalbits/go/pull/2303)).
+- Add `client.OfferDetails` ([#2303](https://github.com/xdbfoundation/go/pull/2303)).
 
 ```go
 	client := frontierclient.DefaultPublicNetClient
@@ -153,7 +153,7 @@ Added new client methods and effects supporting [Protocol 14](https://github.com
 	fmt.Print(offer)
 ```
 
-- Add support to `client.Offers` for the filters: `Seller`, `Selling` and `Buying` ([#2230](https://github.com/digitalbits/go/pull/2230)).
+- Add support to `client.Offers` for the filters: `Seller`, `Selling` and `Buying` ([#2230](https://github.com/xdbfoundation/go/pull/2230)).
 ```go
 	offerRequest = frontierclient.OfferRequest{
 		Seller:  "GCLWGQPMKXQSPF776IU33AH4PZNOOWNAWGGKVTBQMIC5IMKUNP3E6NVU",
@@ -168,7 +168,7 @@ Added new client methods and effects supporting [Protocol 14](https://github.com
 	}
 	fmt.Print(offers)
 ```
-- Add `client.Accounts` ([#2229](https://github.com/digitalbits/go/pull/2229)).
+- Add `client.Accounts` ([#2229](https://github.com/xdbfoundation/go/pull/2229)).
 
 This feature allows account retrieval filtering by signer or by a trustline to an asset.
 
@@ -184,53 +184,53 @@ This feature allows account retrieval filtering by signer or by a trustline to a
 	fmt.Print(account)
 ```
 
-- Add `IsNotFoundError` ([#2197](https://github.com/digitalbits/go/pull/2197)).
+- Add `IsNotFoundError` ([#2197](https://github.com/xdbfoundation/go/pull/2197)).
 
 ### Deprecated
 
-- Make `hProtocol.FeeStats` backwards compatible with Frontier `0.24.1` and `1.0` deprecating usage of `*_accepted_fee` ([#2290](https://github.com/digitalbits/go/pull/2290)).
+- Make `hProtocol.FeeStats` backwards compatible with Frontier `0.24.1` and `1.0` deprecating usage of `*_accepted_fee` ([#2290](https://github.com/xdbfoundation/go/pull/2290)).
 
 All the `_accepted_fee` fields were removed in Frontier 1.0, however we extended this version of the SDK to backfill the `FeeStat` struct using data from `MaxFee`. This is a temporary workaround and it will be removed in frontierclient 3.0. Please start using data from `FeeStat.MaxFee` instead.
 
 
-## [v2.0.0](https://github.com/digitalbits/go/releases/tag/frontierclient-v2.0.0) - 2020-01-13
+## [v2.0.0](https://github.com/xdbfoundation/go/releases/tag/frontierclient-v2.0.0) - 2020-01-13
 
 - Add custom `UnmarshalJSON()` implementations to Frontier protocol structs so `int64` fields can be parsed as JSON numbers or JSON strings
 - Remove deprecated `fee_paid field` from Transaction response
 - Dropped support for Go 1.10, 1.11.
 
-## [v1.4.0](https://github.com/digitalbits/go/releases/tag/frontierclient-v1.4.0) - 2019-08-09
+## [v1.4.0](https://github.com/xdbfoundation/go/releases/tag/frontierclient-v1.4.0) - 2019-08-09
 
-- Add support for querying operation endpoint with `join` parameter [#1521](https://github.com/digitalbits/go/issues/1521).
+- Add support for querying operation endpoint with `join` parameter [#1521](https://github.com/xdbfoundation/go/issues/1521).
 - Add support for querying previous and next trade aggregations with `Client.NextTradeAggregationsPage` and `Client.PrevTradeAggregationsPage` methods.
 
 
-## [v1.3.0](https://github.com/digitalbits/go/releases/tag/frontierclient-v1.3.0) - 2019-07-08
+## [v1.3.0](https://github.com/xdbfoundation/go/releases/tag/frontierclient-v1.3.0) - 2019-07-08
 
 - Transaction information returned by methods now contain new fields: `FeeCharged` and `MaxFee`. `FeePaid` is deprecated and will be removed in later versions.
 - Improved unit test for `Client.FetchTimebounds` method.
 - Added `Client.HomeDomainForAccount` helper method for retrieving the home domain of an account.
 
-## [v1.2.0](https://github.com/digitalbits/go/releases/tag/frontierclient-v1.2.0) - 2019-05-16
+## [v1.2.0](https://github.com/xdbfoundation/go/releases/tag/frontierclient-v1.2.0) - 2019-05-16
 
-- Added support for returning the previous and next set of pages for a frontier response; issue [#985](https://github.com/digitalbits/go/issues/985).
-- Fixed bug reported in [#1254](https://github.com/digitalbits/go/issues/1254)  that causes a panic when using frontierclient in goroutines.
+- Added support for returning the previous and next set of pages for a frontier response; issue [#985](https://github.com/xdbfoundation/go/issues/985).
+- Fixed bug reported in [#1254](https://github.com/xdbfoundation/go/issues/1254)  that causes a panic when using frontierclient in goroutines.
 
 
-## [v1.1.0](https://github.com/digitalbits/go/releases/tag/frontierclient-v1.1.0) - 2019-05-02
+## [v1.1.0](https://github.com/xdbfoundation/go/releases/tag/frontierclient-v1.1.0) - 2019-05-02
 
 ### Added
 
 - `Client.Root()` method for querying the root endpoint of a frontier server.
-- Support for returning concrete effect types[#1217](https://github.com/digitalbits/go/pull/1217)
+- Support for returning concrete effect types[#1217](https://github.com/xdbfoundation/go/pull/1217)
 - Fix when no HTTP client is provided
 
 ### Changes
 
 - `Client.Fund()` now returns `TransactionSuccess` instead of a http response pointer.
 
-- Querying the effects endpoint now supports returning the concrete effect type for each effect. This is also supported in streaming mode. See the [docs](https://godoc.org/github.com/digitalbits/go/clients/frontierclient#Client.Effects) for examples.
+- Querying the effects endpoint now supports returning the concrete effect type for each effect. This is also supported in streaming mode. See the [docs](https://godoc.org/github.com/xdbfoundation/go/clients/frontierclient#Client.Effects) for examples.
 
-## [v1.0.0](https://github.com/digitalbits/go/releases/tag/frontierclient-v1.0) - 2019-04-26
+## [v1.0.0](https://github.com/xdbfoundation/go/releases/tag/frontierclient-v1.0) - 2019-04-26
 
  * Initial release

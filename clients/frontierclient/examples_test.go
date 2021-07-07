@@ -5,13 +5,13 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/digitalbits/go/clients/frontierclient"
-	"github.com/digitalbits/go/keypair"
-	"github.com/digitalbits/go/network"
-	hProtocol "github.com/digitalbits/go/protocols/frontier"
-	"github.com/digitalbits/go/protocols/frontier/effects"
-	"github.com/digitalbits/go/protocols/frontier/operations"
-	"github.com/digitalbits/go/txnbuild"
+	"github.com/xdbfoundation/go/clients/frontierclient"
+	"github.com/xdbfoundation/go/keypair"
+	"github.com/xdbfoundation/go/network"
+	hProtocol "github.com/xdbfoundation/go/protocols/frontier"
+	"github.com/xdbfoundation/go/protocols/frontier/effects"
+	"github.com/xdbfoundation/go/protocols/frontier/operations"
+	"github.com/xdbfoundation/go/txnbuild"
 )
 
 func ExampleClient_Accounts() {

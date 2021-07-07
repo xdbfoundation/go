@@ -10,15 +10,15 @@ import (
 
 	"github.com/prometheus/client_golang/prometheus"
 
-	"github.com/digitalbits/go/clients/digitalbitscore"
-	"github.com/digitalbits/go/historyarchive"
-	"github.com/digitalbits/go/ingest/adapters"
-	ingesterrors "github.com/digitalbits/go/ingest/errors"
-	"github.com/digitalbits/go/ingest/ledgerbackend"
-	"github.com/digitalbits/go/services/frontier/internal/db2/history"
-	"github.com/digitalbits/go/support/db"
-	"github.com/digitalbits/go/support/errors"
-	logpkg "github.com/digitalbits/go/support/log"
+	"github.com/xdbfoundation/go/clients/digitalbitscore"
+	"github.com/xdbfoundation/go/historyarchive"
+	"github.com/xdbfoundation/go/ingest/adapters"
+	ingesterrors "github.com/xdbfoundation/go/ingest/errors"
+	"github.com/xdbfoundation/go/ingest/ledgerbackend"
+	"github.com/xdbfoundation/go/services/frontier/internal/db2/history"
+	"github.com/xdbfoundation/go/support/db"
+	"github.com/xdbfoundation/go/support/errors"
+	logpkg "github.com/xdbfoundation/go/support/log"
 )
 
 const (

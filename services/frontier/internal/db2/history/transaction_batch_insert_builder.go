@@ -12,12 +12,12 @@ import (
 
 	"github.com/guregu/null"
 	"github.com/lib/pq"
-	"github.com/digitalbits/go/ingest/io"
-	"github.com/digitalbits/go/services/frontier/internal/toid"
-	"github.com/digitalbits/go/services/frontier/internal/utf8"
-	"github.com/digitalbits/go/support/db"
-	"github.com/digitalbits/go/support/errors"
-	"github.com/digitalbits/go/xdr"
+	"github.com/xdbfoundation/go/ingest/io"
+	"github.com/xdbfoundation/go/services/frontier/internal/toid"
+	"github.com/xdbfoundation/go/services/frontier/internal/utf8"
+	"github.com/xdbfoundation/go/support/db"
+	"github.com/xdbfoundation/go/support/errors"
+	"github.com/xdbfoundation/go/xdr"
 )
 
 // TransactionBatchInsertBuilder is used to insert transactions into the

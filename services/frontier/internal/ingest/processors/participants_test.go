@@ -2,11 +2,11 @@ package processors
 
 import "testing"
 
-import "github.com/digitalbits/go/ingest/io"
+import "github.com/xdbfoundation/go/ingest/io"
 
 import "github.com/stretchr/testify/assert"
 
-import "github.com/digitalbits/go/xdr"
+import "github.com/xdbfoundation/go/xdr"
 
 func TestParticipantsForTransaction(t *testing.T) {
 	var envelope xdr.TransactionEnvelope

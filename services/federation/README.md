@@ -97,7 +97,7 @@ This service can built from source, provided you have installed the [go tools](h
 Given you have a running golang installation, you can build the server with:
 
 ```
-go get -u github.com/digitalbits/go/services/federation
+go get -u github.com/xdbfoundation/go/services/federation
 ```
 
 After successful completion, you should find `bin/federation` is present in your configured GOPATH.

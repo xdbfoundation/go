@@ -6,8 +6,8 @@ import (
 	"fmt"
 	"net/url"
 
-	hProtocol "github.com/digitalbits/go/protocols/frontier"
-	"github.com/digitalbits/go/support/errors"
+	hProtocol "github.com/xdbfoundation/go/protocols/frontier"
+	"github.com/xdbfoundation/go/support/errors"
 )
 
 // BuildURL creates the endpoint to be queried based on the data in the OrderBookRequest struct.

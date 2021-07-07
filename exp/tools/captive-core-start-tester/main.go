@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/digitalbits/go/ingest/ledgerbackend"
+	"github.com/xdbfoundation/go/ingest/ledgerbackend"
 )
 
 // This little app helped testing CaptiveDigitalBitsCore.runFromParams on a living

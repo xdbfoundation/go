@@ -1,7 +1,7 @@
 package history
 
 import (
-	"github.com/digitalbits/go/services/frontier/internal/db2"
+	"github.com/xdbfoundation/go/services/frontier/internal/db2"
 	"github.com/stretchr/testify/mock"
 )
 

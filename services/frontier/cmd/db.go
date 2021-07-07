@@ -11,13 +11,13 @@ import (
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 
-	frontier "github.com/digitalbits/go/services/frontier/internal"
-	"github.com/digitalbits/go/services/frontier/internal/db2/schema"
-	"github.com/digitalbits/go/services/frontier/internal/ingest"
-	support "github.com/digitalbits/go/support/config"
-	"github.com/digitalbits/go/support/db"
-	"github.com/digitalbits/go/support/errors"
-	hlog "github.com/digitalbits/go/support/log"
+	frontier "github.com/xdbfoundation/go/services/frontier/internal"
+	"github.com/xdbfoundation/go/services/frontier/internal/db2/schema"
+	"github.com/xdbfoundation/go/services/frontier/internal/ingest"
+	support "github.com/xdbfoundation/go/support/config"
+	"github.com/xdbfoundation/go/support/db"
+	"github.com/xdbfoundation/go/support/errors"
+	hlog "github.com/xdbfoundation/go/support/log"
 )
 
 var dbCmd = &cobra.Command{

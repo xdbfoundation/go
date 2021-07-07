@@ -5,8 +5,8 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/digitalbits/go/services/frontier/internal/codes"
-	"github.com/digitalbits/go/xdr"
+	"github.com/xdbfoundation/go/services/frontier/internal/codes"
+	"github.com/xdbfoundation/go/xdr"
 )
 
 var (

@@ -4,9 +4,9 @@ import (
 	"net/http"
 	"net/url"
 
-	hc "github.com/digitalbits/go/clients/frontierclient"
-	"github.com/digitalbits/go/clients/digitalbitstoml"
-	proto "github.com/digitalbits/go/protocols/federation"
+	hc "github.com/xdbfoundation/go/clients/frontierclient"
+	"github.com/xdbfoundation/go/clients/digitalbitstoml"
+	proto "github.com/xdbfoundation/go/protocols/federation"
 )
 
 // FederationResponseMaxSize is the maximum size of response from a federation server

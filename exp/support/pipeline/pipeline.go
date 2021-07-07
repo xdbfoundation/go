@@ -6,7 +6,7 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/digitalbits/go/support/errors"
+	"github.com/xdbfoundation/go/support/errors"
 )
 
 func New(rootProcessor *PipelineNode) *Pipeline {

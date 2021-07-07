@@ -3,7 +3,7 @@ package ingest
 import (
 	"runtime"
 
-	"github.com/digitalbits/go/ingest/io"
+	"github.com/xdbfoundation/go/ingest/io"
 )
 
 func bToMb(b uint64) uint64 {

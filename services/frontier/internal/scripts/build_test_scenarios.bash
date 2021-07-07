@@ -3,10 +3,10 @@ set -e
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 GOTOP="$( cd "$DIR/../../../../../../../.." && pwd )"
-PACKAGES=$(find $GOTOP/src/github.com/digitalbits/go/services/frontier/internal/test/scenarios -iname '*.rb' -not -name '_common_accounts.rb')
-#PACKAGES=$(find $GOTOP/src/github.com/digitalbits/go/services/frontier/internal/test/scenarios -iname 'failed_transactions.rb')
+PACKAGES=$(find $GOTOP/src/github.com/xdbfoundation/go/services/frontier/internal/test/scenarios -iname '*.rb' -not -name '_common_accounts.rb')
+#PACKAGES=$(find $GOTOP/src/github.com/xdbfoundation/go/services/frontier/internal/test/scenarios -iname 'failed_transactions.rb')
 
-go install github.com/digitalbits/go/services/frontier
+go install github.com/xdbfoundation/go/services/frontier
 
 dropdb hayashi_scenarios --if-exists
 createdb hayashi_scenarios
@@ -47,5 +47,5 @@ done
 
 
 # commit new sql files to bindata
-go generate github.com/digitalbits/go/services/frontier/internal/test/scenarios
-# go test github.com/digitalbits/go/services/frontier/internal/ingest
+go generate github.com/xdbfoundation/go/services/frontier/internal/test/scenarios
+# go test github.com/xdbfoundation/go/services/frontier/internal/ingest

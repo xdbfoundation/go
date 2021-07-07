@@ -3,8 +3,8 @@ package history
 import (
 	"testing"
 
-	"github.com/digitalbits/go/services/frontier/internal/test"
-	"github.com/digitalbits/go/xdr"
+	"github.com/xdbfoundation/go/services/frontier/internal/test"
+	"github.com/xdbfoundation/go/xdr"
 	"github.com/stretchr/testify/assert"
 )
 

@@ -3,7 +3,7 @@ package io
 import (
 	"io"
 
-	"github.com/digitalbits/go/ingest/ledgerbackend"
+	"github.com/xdbfoundation/go/ingest/ledgerbackend"
 )
 
 // ChangeReader provides convenient, streaming access to a sequence of Changes.

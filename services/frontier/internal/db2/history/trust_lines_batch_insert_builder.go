@@ -1,8 +1,8 @@
 package history
 
 import (
-	"github.com/digitalbits/go/support/errors"
-	"github.com/digitalbits/go/xdr"
+	"github.com/xdbfoundation/go/support/errors"
+	"github.com/xdbfoundation/go/xdr"
 )
 
 // Add adds a new trust line entry to the batch. `lastModifiedLedger` is another

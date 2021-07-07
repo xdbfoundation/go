@@ -14,7 +14,7 @@ It is much smaller and simpler than `digitalbits-core`, and is intended only for
 ## Installation
 
 ```
-$ go install github.com/digitalbits/go/tools/digitalbits-archivist
+$ go install github.com/xdbfoundation/go/tools/digitalbits-archivist
 ```
 
 ## Usage

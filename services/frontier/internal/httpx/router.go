@@ -16,13 +16,13 @@ import (
 	"github.com/sebest/xff"
 	"github.com/stellar/throttled"
 
-	"github.com/digitalbits/go/services/frontier/internal/actions"
-	"github.com/digitalbits/go/services/frontier/internal/ledger"
-	"github.com/digitalbits/go/services/frontier/internal/paths"
-	"github.com/digitalbits/go/services/frontier/internal/render/sse"
-	"github.com/digitalbits/go/services/frontier/internal/txsub"
-	"github.com/digitalbits/go/support/db"
-	"github.com/digitalbits/go/support/render/problem"
+	"github.com/xdbfoundation/go/services/frontier/internal/actions"
+	"github.com/xdbfoundation/go/services/frontier/internal/ledger"
+	"github.com/xdbfoundation/go/services/frontier/internal/paths"
+	"github.com/xdbfoundation/go/services/frontier/internal/render/sse"
+	"github.com/xdbfoundation/go/services/frontier/internal/txsub"
+	"github.com/xdbfoundation/go/support/db"
+	"github.com/xdbfoundation/go/support/render/problem"
 )
 
 const maxAssetsForPathFinding = 15

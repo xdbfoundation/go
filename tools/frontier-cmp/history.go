@@ -9,8 +9,8 @@ import (
 	"strings"
 
 	"github.com/spf13/cobra"
-	slog "github.com/digitalbits/go/support/log"
-	cmp "github.com/digitalbits/go/tools/frontier-cmp/internal"
+	slog "github.com/xdbfoundation/go/support/log"
+	cmp "github.com/xdbfoundation/go/tools/frontier-cmp/internal"
 )
 
 var (

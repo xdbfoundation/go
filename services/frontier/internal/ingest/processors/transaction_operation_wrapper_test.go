@@ -7,10 +7,10 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/suite"
 
-	"github.com/digitalbits/go/ingest/io"
-	"github.com/digitalbits/go/services/frontier/internal/db2/history"
-	. "github.com/digitalbits/go/services/frontier/internal/test/transactions"
-	"github.com/digitalbits/go/xdr"
+	"github.com/xdbfoundation/go/ingest/io"
+	"github.com/xdbfoundation/go/services/frontier/internal/db2/history"
+	. "github.com/xdbfoundation/go/services/frontier/internal/test/transactions"
+	"github.com/xdbfoundation/go/xdr"
 )
 
 func TestTransactionOperationID(t *testing.T) {
@@ -1330,7 +1330,7 @@ func getSponsoredSandwichWrappers() []*transactionOperationWrapper {
 
 	sponsorMuxed := sponsor.ToMuxedAccount()
 	// Do not provide the source explicitly so that the transaction source is used
-	// It tests https://github.com/digitalbits/go/issues/2982 .
+	// It tests https://github.com/xdbfoundation/go/issues/2982 .
 	// tx.Envelope.Operations()[0].SourceAccount = &sponsorMuxed
 	tx.Envelope.Operations()[0].SourceAccount = nil
 	tx.Envelope.V1.Tx.SourceAccount = sponsorMuxed

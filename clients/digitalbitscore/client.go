@@ -12,8 +12,8 @@ import (
 	"strings"
 	"time"
 
-	proto "github.com/digitalbits/go/protocols/digitalbitscore"
-	"github.com/digitalbits/go/support/errors"
+	proto "github.com/xdbfoundation/go/protocols/digitalbitscore"
+	"github.com/xdbfoundation/go/support/errors"
 )
 
 // Client represents a client that is capable of communicating with a

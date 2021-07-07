@@ -12,9 +12,9 @@ import (
 
 	"github.com/jmoiron/sqlx"
 	"github.com/sirupsen/logrus"
-	"github.com/digitalbits/go/services/frontier/internal/logmetrics"
-	tdb "github.com/digitalbits/go/services/frontier/internal/test/db"
-	"github.com/digitalbits/go/support/log"
+	"github.com/xdbfoundation/go/services/frontier/internal/logmetrics"
+	tdb "github.com/xdbfoundation/go/services/frontier/internal/test/db"
+	"github.com/xdbfoundation/go/support/log"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )

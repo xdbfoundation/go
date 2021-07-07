@@ -2,8 +2,8 @@
 package txnbuild
 
 import (
-	"github.com/digitalbits/go/support/errors"
-	"github.com/digitalbits/go/xdr"
+	"github.com/xdbfoundation/go/support/errors"
+	"github.com/xdbfoundation/go/xdr"
 )
 
 // BeginSponsoringFutureReserves represents the DigitalBits begin sponsoring future reserves operation. See

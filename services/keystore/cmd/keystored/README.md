@@ -4,7 +4,7 @@ Generate the certificate and the private key pair for localhost
 if you haven't done so:
 
 ```sh
-cd github.com/digitalbits/go/exp/services/keystore
+cd github.com/xdbfoundation/go/exp/services/keystore
 ./tls/regen.sh
 ```
 Simply choose all the default options. This will create three files:
@@ -15,7 +15,7 @@ We will only be using `server.crt` and `server.key`.
 ## Install the `keystored` command:
 
 ```sh
-cd github.com/digitalbits/go/exp/services/keystore
+cd github.com/xdbfoundation/go/exp/services/keystore
 go install ./cmd/keystored
 ```
 
@@ -73,19 +73,19 @@ To disable authentication, you can simply add the `-auth=false` flag.
 
 To build docker image:
 ```sh
-cd github.com/digitalbits/go/services/keystore
+cd github.com/xdbfoundation/go/services/keystore
 make docker-build
 ```
 
 to use custom tag:
 ```sh
-cd github.com/digitalbits/go/services/keystore
+cd github.com/xdbfoundation/go/services/keystore
 TAG=my-registry.example.com/keystore:dev make docker-build
 ```
 
 to push image built using the command above:
 ```sh
-cd github.com/digitalbits/go/services/keystore
+cd github.com/xdbfoundation/go/services/keystore
 TAG=my-registry.example.com/keystore:dev make docker-push
 ```
 

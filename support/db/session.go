@@ -10,9 +10,9 @@ import (
 
 	sq "github.com/Masterminds/squirrel"
 	"github.com/jmoiron/sqlx"
-	"github.com/digitalbits/go/support/db/sqlutils"
-	"github.com/digitalbits/go/support/errors"
-	"github.com/digitalbits/go/support/log"
+	"github.com/xdbfoundation/go/support/db/sqlutils"
+	"github.com/xdbfoundation/go/support/errors"
+	"github.com/xdbfoundation/go/support/log"
 )
 
 // Begin binds this session to a new transaction.

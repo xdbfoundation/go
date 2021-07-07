@@ -6,7 +6,7 @@ import (
 	"os"
 
 	"github.com/spf13/cobra"
-	frontier "github.com/digitalbits/go/services/frontier/internal"
+	frontier "github.com/xdbfoundation/go/services/frontier/internal"
 )
 
 var (

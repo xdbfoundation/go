@@ -9,7 +9,7 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"github.com/digitalbits/go/support/log"
+	"github.com/xdbfoundation/go/support/log"
 )
 
 func TestGenerateConfig(t *testing.T) {

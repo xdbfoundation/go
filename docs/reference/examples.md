@@ -16,10 +16,10 @@ package main
 import (
 	"log"
 
-	"github.com/digitalbits/go/clients/frontierclient"
-	"github.com/digitalbits/go/keypair"
-	"github.com/digitalbits/go/network"
-	"github.com/digitalbits/go/txnbuild"
+	"github.com/xdbfoundation/go/clients/frontierclient"
+	"github.com/xdbfoundation/go/keypair"
+	"github.com/xdbfoundation/go/network"
+	"github.com/xdbfoundation/go/txnbuild"
 )
 
 func main() {

@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/digitalbits/go/keypair"
-	"github.com/digitalbits/go/network"
-	frontierclient "github.com/digitalbits/go/txnbuild/examplefrontierclient"
+	"github.com/xdbfoundation/go/keypair"
+	"github.com/xdbfoundation/go/network"
+	frontierclient "github.com/xdbfoundation/go/txnbuild/examplefrontierclient"
 )
 
 func ExampleInflation() {

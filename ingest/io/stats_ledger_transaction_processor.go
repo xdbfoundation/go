@@ -3,7 +3,7 @@ package io
 import (
 	"fmt"
 
-	"github.com/digitalbits/go/xdr"
+	"github.com/xdbfoundation/go/xdr"
 )
 
 // StatsLedgerTransactionProcessor is a state processors that counts number of changes types

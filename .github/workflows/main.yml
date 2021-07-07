@@ -170,10 +170,10 @@ jobs:
 
       - name: Build the app    
         run: |
-          sudo mkdir -p /go/src/github.com/digitalbits/go
+          sudo mkdir -p /go/src/github.com/xdbfoundation/go
           export GO111MODULE=on
-          sudo cp -Rf ./* /go/src/github.com/digitalbits/go/
-          sudo go install github.com/digitalbits/go/services/...
+          sudo cp -Rf ./* /go/src/github.com/xdbfoundation/go/
+          sudo go install github.com/xdbfoundation/go/services/...
 
       - name: Make .deb package
         run: |

@@ -7,9 +7,9 @@ import (
 	"sync"
 
 	"github.com/spf13/cobra"
-	"github.com/digitalbits/go/clients/frontierclient"
-	protocol "github.com/digitalbits/go/protocols/frontier"
-	"github.com/digitalbits/go/xdr"
+	"github.com/xdbfoundation/go/clients/frontierclient"
+	protocol "github.com/xdbfoundation/go/protocols/frontier"
+	"github.com/xdbfoundation/go/xdr"
 )
 
 var frontierURL string

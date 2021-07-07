@@ -3,7 +3,7 @@ package assets
 
 import (
 	"github.com/go-errors/errors"
-	"github.com/digitalbits/go/xdr"
+	"github.com/xdbfoundation/go/xdr"
 )
 
 // ErrInvalidString gets returns when the string form of the asset type is invalid

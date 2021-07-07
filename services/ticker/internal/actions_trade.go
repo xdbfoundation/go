@@ -7,11 +7,11 @@ import (
 	"strconv"
 	"time"
 
-	frontierclient "github.com/digitalbits/go/clients/frontierclient"
-	hProtocol "github.com/digitalbits/go/protocols/frontier"
-	"github.com/digitalbits/go/services/ticker/internal/scraper"
-	"github.com/digitalbits/go/services/ticker/internal/tickerdb"
-	hlog "github.com/digitalbits/go/support/log"
+	frontierclient "github.com/xdbfoundation/go/clients/frontierclient"
+	hProtocol "github.com/xdbfoundation/go/protocols/frontier"
+	"github.com/xdbfoundation/go/services/ticker/internal/scraper"
+	"github.com/xdbfoundation/go/services/ticker/internal/tickerdb"
+	hlog "github.com/xdbfoundation/go/support/log"
 )
 
 // StreamTrades constantly streams and ingests new trades directly from frontier.

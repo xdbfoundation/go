@@ -3,7 +3,7 @@ package address
 import (
 	"testing"
 
-	"github.com/digitalbits/go/support/errors"
+	"github.com/xdbfoundation/go/support/errors"
 	"github.com/stretchr/testify/assert"
 )
 

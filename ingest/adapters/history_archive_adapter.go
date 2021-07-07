@@ -3,10 +3,10 @@ package adapters
 import (
 	"context"
 
-	"github.com/digitalbits/go/historyarchive"
-	"github.com/digitalbits/go/ingest/io"
-	"github.com/digitalbits/go/support/errors"
-	"github.com/digitalbits/go/xdr"
+	"github.com/xdbfoundation/go/historyarchive"
+	"github.com/xdbfoundation/go/ingest/io"
+	"github.com/xdbfoundation/go/support/errors"
+	"github.com/xdbfoundation/go/xdr"
 )
 
 // HistoryArchiveAdapter is an adapter for the historyarchive package to read from history archives

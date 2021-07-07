@@ -7,8 +7,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/digitalbits/go/exp/support/pipeline"
-	"github.com/digitalbits/go/support/errors"
+	"github.com/xdbfoundation/go/exp/support/pipeline"
+	"github.com/xdbfoundation/go/support/errors"
 	"github.com/stretchr/testify/assert"
 )
 

@@ -4,9 +4,9 @@ package ingest
 import (
 	"testing"
 
-	"github.com/digitalbits/go/ingest/adapters"
-	"github.com/digitalbits/go/ingest/io"
-	"github.com/digitalbits/go/support/errors"
+	"github.com/xdbfoundation/go/ingest/adapters"
+	"github.com/xdbfoundation/go/ingest/io"
+	"github.com/xdbfoundation/go/support/errors"
 	"github.com/stretchr/testify/suite"
 )
 

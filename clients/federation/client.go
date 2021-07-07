@@ -7,9 +7,9 @@ import (
 	"net/url"
 	"strings"
 
-	"github.com/digitalbits/go/address"
-	proto "github.com/digitalbits/go/protocols/federation"
-	"github.com/digitalbits/go/support/errors"
+	"github.com/xdbfoundation/go/address"
+	proto "github.com/xdbfoundation/go/protocols/federation"
+	"github.com/xdbfoundation/go/support/errors"
 )
 
 // LookupByAddress performs a federated lookup following to the digitalbits

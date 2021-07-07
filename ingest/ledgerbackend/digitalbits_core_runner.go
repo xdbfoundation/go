@@ -16,7 +16,7 @@ import (
 	"time"
 
 	"github.com/pkg/errors"
-	"github.com/digitalbits/go/support/log"
+	"github.com/xdbfoundation/go/support/log"
 )
 
 type digitalbitsCoreRunnerInterface interface {

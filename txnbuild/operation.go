@@ -1,7 +1,7 @@
 package txnbuild
 
 import (
-	"github.com/digitalbits/go/xdr"
+	"github.com/xdbfoundation/go/xdr"
 )
 
 // Operation represents the operation types of the DigitalBits network.

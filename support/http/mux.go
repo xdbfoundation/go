@@ -4,7 +4,7 @@ import (
 	"github.com/go-chi/chi"
 	"github.com/go-chi/chi/middleware"
 	"github.com/rs/cors"
-	"github.com/digitalbits/go/support/log"
+	"github.com/xdbfoundation/go/support/log"
 )
 
 // NewMux returns a new server mux configured with the common defaults used across all

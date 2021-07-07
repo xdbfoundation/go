@@ -6,11 +6,11 @@ import (
 	"testing"
 
 	"github.com/jmoiron/sqlx"
-	"github.com/digitalbits/go/ingest/adapters"
-	"github.com/digitalbits/go/ingest/io"
-	"github.com/digitalbits/go/ingest/ledgerbackend"
-	"github.com/digitalbits/go/services/frontier/internal/toid"
-	"github.com/digitalbits/go/support/errors"
+	"github.com/xdbfoundation/go/ingest/adapters"
+	"github.com/xdbfoundation/go/ingest/io"
+	"github.com/xdbfoundation/go/ingest/ledgerbackend"
+	"github.com/xdbfoundation/go/services/frontier/internal/toid"
+	"github.com/xdbfoundation/go/support/errors"
 	"github.com/stretchr/testify/suite"
 )
 

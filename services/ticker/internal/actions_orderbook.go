@@ -3,11 +3,11 @@ package ticker
 import (
 	"time"
 
-	frontierclient "github.com/digitalbits/go/clients/frontierclient"
-	"github.com/digitalbits/go/services/ticker/internal/scraper"
-	"github.com/digitalbits/go/services/ticker/internal/tickerdb"
-	"github.com/digitalbits/go/support/errors"
-	hlog "github.com/digitalbits/go/support/log"
+	frontierclient "github.com/xdbfoundation/go/clients/frontierclient"
+	"github.com/xdbfoundation/go/services/ticker/internal/scraper"
+	"github.com/xdbfoundation/go/services/ticker/internal/tickerdb"
+	"github.com/xdbfoundation/go/support/errors"
+	hlog "github.com/xdbfoundation/go/support/log"
 )
 
 // RefreshOrderbookEntries updates the orderbook entries for the relevant markets that were active

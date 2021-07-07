@@ -5,8 +5,8 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"github.com/digitalbits/go/ingest/io"
-	"github.com/digitalbits/go/xdr"
+	"github.com/xdbfoundation/go/ingest/io"
+	"github.com/xdbfoundation/go/xdr"
 )
 
 func TestTransactionToMap_muxed(t *testing.T) {

@@ -3,9 +3,9 @@ package txsub
 import (
 	"database/sql"
 
-	"github.com/digitalbits/go/services/frontier/internal/db2/history"
-	"github.com/digitalbits/go/support/errors"
-	"github.com/digitalbits/go/xdr"
+	"github.com/xdbfoundation/go/services/frontier/internal/db2/history"
+	"github.com/xdbfoundation/go/support/errors"
+	"github.com/xdbfoundation/go/xdr"
 )
 
 func txResultByHash(db FrontierDB, hash string) (history.Transaction, error) {

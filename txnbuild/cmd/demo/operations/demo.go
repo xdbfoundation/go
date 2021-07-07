@@ -9,15 +9,15 @@ import (
 
 	log "github.com/sirupsen/logrus"
 
-	"github.com/digitalbits/go/clients/frontierclient"
-	"github.com/digitalbits/go/network"
-	hProtocol "github.com/digitalbits/go/protocols/frontier"
-	"github.com/digitalbits/go/strkey"
-	"github.com/digitalbits/go/support/errors"
-	"github.com/digitalbits/go/txnbuild"
-	"github.com/digitalbits/go/xdr"
+	"github.com/xdbfoundation/go/clients/frontierclient"
+	"github.com/xdbfoundation/go/network"
+	hProtocol "github.com/xdbfoundation/go/protocols/frontier"
+	"github.com/xdbfoundation/go/strkey"
+	"github.com/xdbfoundation/go/support/errors"
+	"github.com/xdbfoundation/go/txnbuild"
+	"github.com/xdbfoundation/go/xdr"
 
-	"github.com/digitalbits/go/keypair"
+	"github.com/xdbfoundation/go/keypair"
 )
 
 // The account address of the TestNet "friendbot"

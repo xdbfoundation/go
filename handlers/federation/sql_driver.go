@@ -1,7 +1,7 @@
 package federation
 
-import "github.com/digitalbits/go/support/db"
-import "github.com/digitalbits/go/support/errors"
+import "github.com/xdbfoundation/go/support/db"
+import "github.com/xdbfoundation/go/support/errors"
 
 // LookupRecord implements `Driver` by performing `drv.LookupRecordQuery`
 // against `drv.DB` using the provided parameters

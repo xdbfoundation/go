@@ -11,9 +11,9 @@ import (
 	"os"
 	"time"
 
-	"github.com/digitalbits/go/support/config"
-	"github.com/digitalbits/go/support/errors"
-	"github.com/digitalbits/go/support/log"
+	"github.com/xdbfoundation/go/support/config"
+	"github.com/xdbfoundation/go/support/errors"
+	"github.com/xdbfoundation/go/support/log"
 	"gopkg.in/tylerb/graceful.v1"
 )
 

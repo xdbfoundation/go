@@ -4,10 +4,10 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"github.com/digitalbits/go/protocols/frontier"
-	"github.com/digitalbits/go/services/frontier/internal/db2/history"
-	"github.com/digitalbits/go/services/frontier/internal/test"
-	supportProblem "github.com/digitalbits/go/support/render/problem"
+	"github.com/xdbfoundation/go/protocols/frontier"
+	"github.com/xdbfoundation/go/services/frontier/internal/db2/history"
+	"github.com/xdbfoundation/go/services/frontier/internal/test"
+	supportProblem "github.com/xdbfoundation/go/support/render/problem"
 )
 
 func TestGetTransactionsHandler(t *testing.T) {

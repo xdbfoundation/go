@@ -1,7 +1,7 @@
 package history
 
 import (
-	"github.com/digitalbits/go/support/errors"
+	"github.com/xdbfoundation/go/support/errors"
 )
 
 // Queue adds `seq` to the load queue for the cache.

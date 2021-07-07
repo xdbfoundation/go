@@ -4,7 +4,7 @@ import (
 	"testing"
 	"time"
 
-	hProtocol "github.com/digitalbits/go/protocols/frontier"
+	hProtocol "github.com/xdbfoundation/go/protocols/frontier"
 	"github.com/stretchr/testify/assert"
 )
 

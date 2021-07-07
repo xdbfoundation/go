@@ -3,9 +3,9 @@ package txnbuild
 import (
 	"strconv"
 
-	pricepkg "github.com/digitalbits/go/price"
-	"github.com/digitalbits/go/support/errors"
-	"github.com/digitalbits/go/xdr"
+	pricepkg "github.com/xdbfoundation/go/price"
+	"github.com/xdbfoundation/go/support/errors"
+	"github.com/xdbfoundation/go/xdr"
 )
 
 type price struct {

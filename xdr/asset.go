@@ -6,7 +6,7 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/digitalbits/go/strkey"
+	"github.com/xdbfoundation/go/strkey"
 )
 
 // This file contains helpers for working with xdr.Asset structs

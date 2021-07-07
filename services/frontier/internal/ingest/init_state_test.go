@@ -5,8 +5,8 @@ import (
 	"context"
 	"testing"
 
-	"github.com/digitalbits/go/ingest/adapters"
-	"github.com/digitalbits/go/support/errors"
+	"github.com/xdbfoundation/go/ingest/adapters"
+	"github.com/xdbfoundation/go/support/errors"
 	"github.com/stretchr/testify/suite"
 )
 

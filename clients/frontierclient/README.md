@@ -16,13 +16,13 @@ This library is aimed at developers building Go applications that interact with 
 * [Modules](https://github.com/golang/go/wiki/Modules) to manage dependencies
 
 ### Installing
-* `go get github.com/digitalbits/go/clients/frontierclient`
+* `go get github.com/xdbfoundation/go/clients/frontierclient`
 
 ### Usage
 
 ``` golang
     ...
-    import hClient "github.com/digitalbits/go/clients/frontierclient"
+    import hClient "github.com/xdbfoundation/go/clients/frontierclient"
     ...
 
     // Use the default pubnet client

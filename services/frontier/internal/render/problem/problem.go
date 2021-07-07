@@ -3,7 +3,7 @@ package problem
 import (
 	"net/http"
 
-	"github.com/digitalbits/go/support/render/problem"
+	"github.com/xdbfoundation/go/support/render/problem"
 )
 
 // Well-known and reused problems below:

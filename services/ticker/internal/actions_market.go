@@ -4,9 +4,9 @@ import (
 	"encoding/json"
 	"time"
 
-	"github.com/digitalbits/go/services/ticker/internal/tickerdb"
-	"github.com/digitalbits/go/services/ticker/internal/utils"
-	hlog "github.com/digitalbits/go/support/log"
+	"github.com/xdbfoundation/go/services/ticker/internal/tickerdb"
+	"github.com/xdbfoundation/go/services/ticker/internal/utils"
+	hlog "github.com/xdbfoundation/go/support/log"
 )
 
 // GenerateMarketSummaryFile generates a MarketSummary with the statistics for all

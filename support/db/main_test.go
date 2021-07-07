@@ -4,7 +4,7 @@ import (
 	"context"
 	"testing"
 
-	"github.com/digitalbits/go/support/db/dbtest"
+	"github.com/xdbfoundation/go/support/db/dbtest"
 	"github.com/stretchr/testify/assert"
 )
 

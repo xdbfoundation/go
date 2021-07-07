@@ -1,7 +1,7 @@
 package history
 
 import (
-	"github.com/digitalbits/go/support/db"
+	"github.com/xdbfoundation/go/support/db"
 )
 
 // EffectBatchInsertBuilder is used to insert effects into the

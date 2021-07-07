@@ -6,8 +6,8 @@
 </div>
 <p align="center">
 <a href="https://circleci.com/gh/digitalbits/go"><img alt="Build Status" src="https://circleci.com/gh/digitalbits/go.svg?style=shield" /></a>
-<a href="https://godoc.org/github.com/digitalbits/go"><img alt="GoDoc" src="https://godoc.org/github.com/digitalbits/go?status.svg" /></a>
-<a href="https://goreportcard.com/report/github.com/digitalbits/go"><img alt="Go Report Card" src="https://goreportcard.com/badge/github.com/digitalbits/go" /></a>
+<a href="https://godoc.org/github.com/xdbfoundation/go"><img alt="GoDoc" src="https://godoc.org/github.com/xdbfoundation/go?status.svg" /></a>
+<a href="https://goreportcard.com/report/github.com/xdbfoundation/go"><img alt="Go Report Card" src="https://goreportcard.com/badge/github.com/xdbfoundation/go" /></a>
 </p>
 
 This repo is the home for all of the public Go code. This repo contains various tools and services that you can use and deploy, as well as the SDK you can use to develop applications that integrate with the DigitalBits network.
@@ -47,7 +47,7 @@ Each of these directories have their own README file that explain further the na
 
 ### Other packages
 
-In addition to the packages described above, this repository contains various packages related to working with the DigitalBits network from a go program.  It's recommended that you use [godoc](https://godoc.org/github.com/digitalbits/go#pkg-subdirectories) to browse the documentation for each.
+In addition to the packages described above, this repository contains various packages related to working with the DigitalBits network from a go program.  It's recommended that you use [godoc](https://godoc.org/github.com/xdbfoundation/go#pkg-subdirectories) to browse the documentation for each.
 
 
 ## Package source layout

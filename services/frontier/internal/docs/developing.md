@@ -18,14 +18,14 @@ Building Frontier requires the following developer tools:
 1. Set your [GOPATH](https://github.com/golang/go/wiki/GOPATH) environment variable, if you haven't already. The default `GOPATH` is `$HOME/go`. When building any Go package or application the binaries will be installed by default to `$GOPATH/bin`.
 2. Checkout the code into any directory you prefer:
    ```
-   git checkout https://github.com/digitalbits/go
+   git checkout https://github.com/xdbfoundation/go
    ```
-   Or if you prefer to develop inside `GOPATH` check it out to `$GOPATH/src/github.com/digitalbits/go`:
+   Or if you prefer to develop inside `GOPATH` check it out to `$GOPATH/src/github.com/xdbfoundation/go`:
    ```
-   git checkout https://github.com/digitalbits/go $GOPATH/src/github.com/digitalbits/go
+   git checkout https://github.com/xdbfoundation/go $GOPATH/src/github.com/xdbfoundation/go
    ```
    If developing inside `GOPATH` set the `GO111MODULE=on` environment variable to turn on Modules for managing dependencies. See the repository [README](https://github.com/xdbfoundation/go/blob/master/README.md#dependencies) for more information.
-3. Change to the directory where the repository is checked out. e.g. `cd go`, or if developing inside the `GOPATH`, `cd $GOPATH/src/github.com/digitalbits/go`.
+3. Change to the directory where the repository is checked out. e.g. `cd go`, or if developing inside the `GOPATH`, `cd $GOPATH/src/github.com/xdbfoundation/go`.
 4. Compile the Frontier binary: `go install ./services/frontier`. You should see the resulting `frontier` executable in `$GOPATH/bin`.
 5. Add Go binaries to your PATH in your `bashrc` or equivalent, for easy access: `export PATH=${GOPATH//://bin:}/bin:$PATH`
 
@@ -46,7 +46,7 @@ Frontier uses a Postgres database backend to store test fixtures and record info
 ## Run tests
 At this point you should be able to run Frontier's unit tests:
 ```bash
-cd $GOPATH/src/github.com/digitalbits/go/services/frontier
+cd $GOPATH/src/github.com/xdbfoundation/go/services/frontier
 go test ./...
 ```
 
@@ -99,7 +99,7 @@ and read about the available endpoints and see examples in the [Frontier API ref
 Congratulations! You can now run the full development cycle to build and test your code.
 1. Write code + tests
 2. Run tests
-3. Compile Frontier: `go install github.com/digitalbits/go/services/frontier`
+3. Compile Frontier: `go install github.com/xdbfoundation/go/services/frontier`
 4. Run Frontier (pointing at your running `digitalbits-core`)
 5. Try Frontier queries
 

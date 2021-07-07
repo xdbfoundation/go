@@ -5,7 +5,7 @@ import (
 	"errors"
 	"testing"
 
-	"github.com/digitalbits/go/ingest/io"
+	"github.com/xdbfoundation/go/ingest/io"
 	"github.com/stretchr/testify/mock"
 	"github.com/stretchr/testify/suite"
 )

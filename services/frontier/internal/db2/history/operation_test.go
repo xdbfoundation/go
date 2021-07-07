@@ -4,8 +4,8 @@ import (
 	"testing"
 
 	sq "github.com/Masterminds/squirrel"
-	"github.com/digitalbits/go/services/frontier/internal/db2"
-	"github.com/digitalbits/go/services/frontier/internal/test"
+	"github.com/xdbfoundation/go/services/frontier/internal/db2"
+	"github.com/xdbfoundation/go/services/frontier/internal/test"
 )
 
 func TestOperationQueries(t *testing.T) {

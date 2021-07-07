@@ -3,9 +3,9 @@ package history
 import (
 	"time"
 
-	"github.com/digitalbits/go/support/db"
-	"github.com/digitalbits/go/support/errors"
-	"github.com/digitalbits/go/xdr"
+	"github.com/xdbfoundation/go/support/db"
+	"github.com/xdbfoundation/go/support/errors"
+	"github.com/xdbfoundation/go/xdr"
 )
 
 // InsertTrade represents the arguments to TradeBatchInsertBuilder.Add() which is used to insert

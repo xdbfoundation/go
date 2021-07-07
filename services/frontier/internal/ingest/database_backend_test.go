@@ -3,9 +3,9 @@ package ingest
 import (
 	"testing"
 
-	"github.com/digitalbits/go/ingest/ledgerbackend"
-	"github.com/digitalbits/go/network"
-	"github.com/digitalbits/go/services/frontier/internal/test"
+	"github.com/xdbfoundation/go/ingest/ledgerbackend"
+	"github.com/xdbfoundation/go/network"
+	"github.com/xdbfoundation/go/services/frontier/internal/test"
 )
 
 func TestGetLatestLedger(t *testing.T) {

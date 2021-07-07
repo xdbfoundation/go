@@ -4,9 +4,9 @@ import (
 	"io"
 	"sync"
 
-	"github.com/digitalbits/go/amount"
-	"github.com/digitalbits/go/keypair"
-	"github.com/digitalbits/go/xdr"
+	"github.com/xdbfoundation/go/amount"
+	"github.com/xdbfoundation/go/keypair"
+	"github.com/xdbfoundation/go/xdr"
 )
 
 // GenesisLedgerStateReader is a streaming ledger entries for genesis ledger

@@ -1,8 +1,8 @@
 package orderbook
 
 import (
-	"github.com/digitalbits/go/price"
-	"github.com/digitalbits/go/xdr"
+	"github.com/xdbfoundation/go/price"
+	"github.com/xdbfoundation/go/xdr"
 )
 
 // Path represents a payment path from a source asset to some destination asset

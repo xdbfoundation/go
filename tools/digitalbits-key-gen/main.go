@@ -6,7 +6,7 @@ import (
 	"os"
 
 	"github.com/spf13/cobra"
-	"github.com/digitalbits/go/keypair"
+	"github.com/xdbfoundation/go/keypair"
 )
 
 func main() {

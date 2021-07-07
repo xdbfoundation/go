@@ -6,8 +6,8 @@ import (
 	"net/http"
 
 	"github.com/BurntSushi/toml"
-	"github.com/digitalbits/go/address"
-	"github.com/digitalbits/go/support/errors"
+	"github.com/xdbfoundation/go/address"
+	"github.com/xdbfoundation/go/support/errors"
 )
 
 // GetDigitalBitsToml returns digitalbits.toml file for a given domain
@@ -30,7 +30,7 @@ func (c *Client) GetDigitalBitsToml(domain string) (resp *Response, err error) {
 
 	// There is one corner case not handled here: response is exactly
 	// DigitalBitsTomlMaxSize long and is incorrect toml. Check discussion:
-	// https://github.com/digitalbits/go/pull/24#discussion_r89909696
+	// https://github.com/xdbfoundation/go/pull/24#discussion_r89909696
 	if err != nil && limitReader.(*io.LimitedReader).N == 0 {
 		err = errors.Errorf("digitalbits.toml response exceeds %d bytes limit", DigitalBitsTomlMaxSize)
 		return

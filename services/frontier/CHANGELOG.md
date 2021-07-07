@@ -9,25 +9,25 @@ file. This project adheres to [Semantic Versioning](http://semver.org/).
 
 **Upgrading to this version from version before v1.10.0 will trigger state rebuild. During this process (which can take several minutes) it will not ingest new ledgers.**
 
-* Improved performance of `OfferProcessor` ([#3249](https://github.com/digitalbits/go/pull/3249)).
-* Improved speed of state verification startup time ([#3251](https://github.com/digitalbits/go/pull/3251)).
-* Multiple Captive Core improvements and fixes ([#3237](https://github.com/digitalbits/go/pull/3237), [#3257](https://github.com/digitalbits/go/pull/3257), [#3260](https://github.com/digitalbits/go/pull/3260), [#3264](https://github.com/digitalbits/go/pull/3264), [#3262](https://github.com/digitalbits/go/pull/3262), [#3265](https://github.com/digitalbits/go/pull/3265), [#3269](https://github.com/digitalbits/go/pull/3269), [#3271](https://github.com/digitalbits/go/pull/3271), [#3270](https://github.com/digitalbits/go/pull/3270), [#3272](https://github.com/digitalbits/go/pull/3272)).
+* Improved performance of `OfferProcessor` ([#3249](https://github.com/xdbfoundation/go/pull/3249)).
+* Improved speed of state verification startup time ([#3251](https://github.com/xdbfoundation/go/pull/3251)).
+* Multiple Captive Core improvements and fixes ([#3237](https://github.com/xdbfoundation/go/pull/3237), [#3257](https://github.com/xdbfoundation/go/pull/3257), [#3260](https://github.com/xdbfoundation/go/pull/3260), [#3264](https://github.com/xdbfoundation/go/pull/3264), [#3262](https://github.com/xdbfoundation/go/pull/3262), [#3265](https://github.com/xdbfoundation/go/pull/3265), [#3269](https://github.com/xdbfoundation/go/pull/3269), [#3271](https://github.com/xdbfoundation/go/pull/3271), [#3270](https://github.com/xdbfoundation/go/pull/3270), [#3272](https://github.com/xdbfoundation/go/pull/3272)).
 
 ## v1.12.0
 
-* Add Prometheus metrics for the duration of ingestion processors ([#3224](https://github.com/digitalbits/go/pull/3224))
-* Many Captive Core improvements and fixes ([#3232](https://github.com/digitalbits/go/pull/3232), [#3223](https://github.com/digitalbits/go/pull/3223), [#3226](https://github.com/digitalbits/go/pull/3226), [#3203](https://github.com/digitalbits/go/pull/3203), [#3189](https://github.com/digitalbits/go/pull/3189),  [#3187](https://github.com/digitalbits/go/pull/3187))
+* Add Prometheus metrics for the duration of ingestion processors ([#3224](https://github.com/xdbfoundation/go/pull/3224))
+* Many Captive Core improvements and fixes ([#3232](https://github.com/xdbfoundation/go/pull/3232), [#3223](https://github.com/xdbfoundation/go/pull/3223), [#3226](https://github.com/xdbfoundation/go/pull/3226), [#3203](https://github.com/xdbfoundation/go/pull/3203), [#3189](https://github.com/xdbfoundation/go/pull/3189),  [#3187](https://github.com/xdbfoundation/go/pull/3187))
 
 ## v1.11.1
 
-* Fix bug in parsing `db-url` parameter in `frontier db migrate` and `frontier db init` commands ([#3192](https://github.com/digitalbits/go/pull/3192)).
+* Fix bug in parsing `db-url` parameter in `frontier db migrate` and `frontier db init` commands ([#3192](https://github.com/xdbfoundation/go/pull/3192)).
 
 ## v1.11.0
 
-* The `service` field emitted in ingestion logs has been changed from `expingest` to  `ingest` ([#3118](https://github.com/digitalbits/go/pull/3118)).
-* Ledger stats are now exported in `/metrics` in `frontier_ingest_ledger_stats_total` metric ([#3148](https://github.com/digitalbits/go/pull/3148)).
-* DigitalBits Core database URL is no longer required when running in captive mode ([#3150](https://github.com/digitalbits/go/pull/3150)).
-* xdr: Add a custom marshaller for claim predicate timestamp  ([#3183](https://github.com/digitalbits/go/pull/3183)).
+* The `service` field emitted in ingestion logs has been changed from `expingest` to  `ingest` ([#3118](https://github.com/xdbfoundation/go/pull/3118)).
+* Ledger stats are now exported in `/metrics` in `frontier_ingest_ledger_stats_total` metric ([#3148](https://github.com/xdbfoundation/go/pull/3148)).
+* DigitalBits Core database URL is no longer required when running in captive mode ([#3150](https://github.com/xdbfoundation/go/pull/3150)).
+* xdr: Add a custom marshaller for claim predicate timestamp  ([#3183](https://github.com/xdbfoundation/go/pull/3183)).
 
 ## v1.10.1
 
@@ -37,17 +37,17 @@ file. This project adheres to [Semantic Versioning](http://semver.org/).
 
 **After upgrading Frontier will rebuild its state. During this process (which can take several minutes) it will not ingest new ledgers.**
 
-* Fixed a bug that caused a fresh instance of Frontier to be unable to sync with testnet (Protocol 14) correctly. ([#3100](https://github.com/digitalbits/go/pull/3100))
-* Add Golang- and process-related metrics. ([#3103](https://github.com/digitalbits/go/pull/3103))
-* New `network_passphrase` field in History Archives (added in DigitalBits-Core 14.1.0) is now checked. Frontier will return error if incorrect archive is used. ([#3082](https://github.com/digitalbits/go/pull/3082))
-* Fixed a bug that caused some errors to be logged with `info` level instead of `error` level. ([#3094](https://github.com/digitalbits/go/pull/3094))
-* Fixed a bug in `/claimable_balances` that returned 500 error instead of 400 for some requests. ([#3088](https://github.com/digitalbits/go/pull/3088))
-* Print a friendly message when Frontier does not support the current DigitalBits protocol version. ([#3093](https://github.com/digitalbits/go/pull/3093))
+* Fixed a bug that caused a fresh instance of Frontier to be unable to sync with testnet (Protocol 14) correctly. ([#3100](https://github.com/xdbfoundation/go/pull/3100))
+* Add Golang- and process-related metrics. ([#3103](https://github.com/xdbfoundation/go/pull/3103))
+* New `network_passphrase` field in History Archives (added in DigitalBits-Core 14.1.0) is now checked. Frontier will return error if incorrect archive is used. ([#3082](https://github.com/xdbfoundation/go/pull/3082))
+* Fixed a bug that caused some errors to be logged with `info` level instead of `error` level. ([#3094](https://github.com/xdbfoundation/go/pull/3094))
+* Fixed a bug in `/claimable_balances` that returned 500 error instead of 400 for some requests. ([#3088](https://github.com/xdbfoundation/go/pull/3088))
+* Print a friendly message when Frontier does not support the current DigitalBits protocol version. ([#3093](https://github.com/xdbfoundation/go/pull/3093))
 
 ## v1.9.1
 
-* Fixed a bug that caused a fresh instance of Frontier to be unable to sync with testnet (Protocol 14) correctly. ([#3096](https://github.com/digitalbits/go/pull/3096))
-* Use underscore in JSON fields for claim predicate to make the API consistent. ([#3086](https://github.com/digitalbits/go/pull/3086))
+* Fixed a bug that caused a fresh instance of Frontier to be unable to sync with testnet (Protocol 14) correctly. ([#3096](https://github.com/xdbfoundation/go/pull/3096))
+* Use underscore in JSON fields for claim predicate to make the API consistent. ([#3086](https://github.com/xdbfoundation/go/pull/3086))
 
 ## v1.9.0
 
@@ -114,14 +114,14 @@ If the `sponsor` query param is provided, Frontier will search for objects spons
   * `frontier_ingest_state_invalid` - equals `1` if state is invalid, `0` otherwise,
   * `frontier_db_max_open_connections` - determines the maximum possible opened DB connections,
   * `frontier_db_wait_duration_seconds_total` - changed the values to be in seconds instead of nanoseconds.
-* Fixed a data race when shutting down the HTTP server. ([#2958](https://github.com/digitalbits/go/pull/2958)).
-* Fixed emitting incorrect errors related to OrderBook Stream when shutting down the app. ([#2964](https://github.com/digitalbits/go/pull/2964))
+* Fixed a data race when shutting down the HTTP server. ([#2958](https://github.com/xdbfoundation/go/pull/2958)).
+* Fixed emitting incorrect errors related to OrderBook Stream when shutting down the app. ([#2964](https://github.com/xdbfoundation/go/pull/2964))
 
 ### Experimental
 
 The previous implementation of Captive DigitalBits-Core streams meta stream using a filesystem pipe. This implies that both Frontier and DigitalBits-Core had to be deployed to the same server. One of the disadvantages of such requirement is a need for detailed per-process monitoring to be able to connect potential issues (like memory leaks) to the specific service.
 
-To solve this it's now possible to start a [`captivecore`](https://github.com/digitalbits/go/tree/master/exp/services/captivecore) on another machine and configure Frontier to use it in ingestion. This requires two config options set:
+To solve this it's now possible to start a [`captivecore`](https://github.com/xdbfoundation/go/tree/master/exp/services/captivecore) on another machine and configure Frontier to use it in ingestion. This requires two config options set:
 * `ENABLE_CAPTIVE_CORE_INGESTION=true`,
 * `REMOTE_CAPTIVE_CORE_URL` - pointing to `captivecore` server.
 
@@ -132,37 +132,37 @@ This patch release fixes a regression introduced in 1.7.0, breaking the
  
 ### Changes
 * Fix path parameter mismatch in `/offers` endpoint
-  [#2927](https://github.com/digitalbits/go/pull/2927).
+  [#2927](https://github.com/xdbfoundation/go/pull/2927).
 
 ## v1.7.0
 
 ### DB schema migration (expected migration time: < 10 mins)
   * Add new multicolumn index to improve the `/trades`'s
-    endpoint performance [#2869](https://github.com/digitalbits/go/pull/2869).
+    endpoint performance [#2869](https://github.com/xdbfoundation/go/pull/2869).
   * Add constraints on database columns which cannot hold
-    negative values [#2827](https://github.com/digitalbits/go/pull/2827).
+    negative values [#2827](https://github.com/xdbfoundation/go/pull/2827).
 
 ### Changes
 * Update Go toolchain to 1.14.6 in order to fix [golang/go#34775](https://github.com/golang/go/issues/34775),
   which caused some database queries to be executed instead of rolled back.
-* Fix panic on missing command line arguments [#2872](https://github.com/digitalbits/go/pull/2872)
-* Fix race condition where submitting a transaction to Frontier can result in a bad sequence error even though DigitalBits Core accepted the transaction. [#2877](https://github.com/digitalbits/go/pull/2877)
-* Add new DB metrics ([#2844](https://github.com/digitalbits/go/pull/2844)):
+* Fix panic on missing command line arguments [#2872](https://github.com/xdbfoundation/go/pull/2872)
+* Fix race condition where submitting a transaction to Frontier can result in a bad sequence error even though DigitalBits Core accepted the transaction. [#2877](https://github.com/xdbfoundation/go/pull/2877)
+* Add new DB metrics ([#2844](https://github.com/xdbfoundation/go/pull/2844)):
   * `db_in_use_connections` - number of opened DB connections in use (not idle),
   * `db_wait_count` - number of connections waited for,
   * `db_wait_duration` - total time blocked waiting for a new connection.
 
 ## v1.6.0
 
-* Add `--parallel-workers` and `--parallel-job-size` to `frontier db reingest range`. `--parallel-workers` will parallelize reingestion using the supplied number of workers. ([#2724](https://github.com/digitalbits/go/pull/2724))
-* Remove DigitalBits Core's database dependency for non-ingesting instances of Frontier.  ([#2759](https://github.com/digitalbits/go/pull/2759))
+* Add `--parallel-workers` and `--parallel-job-size` to `frontier db reingest range`. `--parallel-workers` will parallelize reingestion using the supplied number of workers. ([#2724](https://github.com/xdbfoundation/go/pull/2724))
+* Remove DigitalBits Core's database dependency for non-ingesting instances of Frontier.  ([#2759](https://github.com/xdbfoundation/go/pull/2759))
   Frontier doesn't require access to a DigitalBits Core database if it is only serving HTTP request, this allows the separation of front-end and ingesting instances. 
   The following config parameters were removed:
   - `core-db-max-open-connections`
   - `core-db-max-idle-connections`
-* HAL response population is implemented using Go `strings` package instead of `regexp`, improving its performance. ([#2806](https://github.com/digitalbits/go/pull/2806))
-* Fix a bug in `POST /transactions` that could cause `tx_bad_seq` errors instead of processing a valid transaction. ([#2805](https://github.com/digitalbits/go/pull/2805))
-* The `--connection-timeout` param is ignored in `POST /transactions`. The requests sent to that endpoint will always timeout after 30 seconds. ([#2818](https://github.com/digitalbits/go/pull/2818))
+* HAL response population is implemented using Go `strings` package instead of `regexp`, improving its performance. ([#2806](https://github.com/xdbfoundation/go/pull/2806))
+* Fix a bug in `POST /transactions` that could cause `tx_bad_seq` errors instead of processing a valid transaction. ([#2805](https://github.com/xdbfoundation/go/pull/2805))
+* The `--connection-timeout` param is ignored in `POST /transactions`. The requests sent to that endpoint will always timeout after 30 seconds. ([#2818](https://github.com/xdbfoundation/go/pull/2818))
 
 ### Experimental
 
@@ -179,17 +179,17 @@ This patch release fixes a regression introduced in 1.7.0, breaking the
 
 ### Changes
 
-* Remove `--ingest-failed-transactions` flag. From now on Frontier will always ingest failed transactions. WARNING: If your application is using Frontier DB directly (not recommended!) remember that now it will also contain failed txs. ([#2702](https://github.com/digitalbits/go/pull/2702)).
-* Add transaction set operation count to `history_ledger`([#2690](https://github.com/digitalbits/go/pull/2690)).
+* Remove `--ingest-failed-transactions` flag. From now on Frontier will always ingest failed transactions. WARNING: If your application is using Frontier DB directly (not recommended!) remember that now it will also contain failed txs. ([#2702](https://github.com/xdbfoundation/go/pull/2702)).
+* Add transaction set operation count to `history_ledger`([#2690](https://github.com/xdbfoundation/go/pull/2690)).
 Extend ingestion to store the total number of operations in the transaction set and expose it in the ledger resource via `tx_set_operation_count`. This feature allows you to assess the used capacity of a transaction set.
-* Fix `/metrics` end-point ([#2717](https://github.com/digitalbits/go/pull/2717)).
-* Gracefully handle incorrect assets in the query parameters of GET `/offers` ([#2634](https://github.com/digitalbits/go/pull/2634)).
-* Fix logging message in OrderBookStream ([#2699](https://github.com/digitalbits/go/pull/2699)).
-* Fix data race in root endpoint ([#2745](https://github.com/digitalbits/go/pull/2745)).
+* Fix `/metrics` end-point ([#2717](https://github.com/xdbfoundation/go/pull/2717)).
+* Gracefully handle incorrect assets in the query parameters of GET `/offers` ([#2634](https://github.com/xdbfoundation/go/pull/2634)).
+* Fix logging message in OrderBookStream ([#2699](https://github.com/xdbfoundation/go/pull/2699)).
+* Fix data race in root endpoint ([#2745](https://github.com/xdbfoundation/go/pull/2745)).
 
 ### Experimental
 
-* Add experimental support for database reingestion using a DigitalBits Core subprocess instead of a persistent DigitalBits Core database ([#2695](https://github.com/digitalbits/go/pull/2695)).
+* Add experimental support for database reingestion using a DigitalBits Core subprocess instead of a persistent DigitalBits Core database ([#2695](https://github.com/xdbfoundation/go/pull/2695)).
 
   [DigitalBits Core v12.3.0](https://github.com/digitalbits/digitalbits-core/releases/tag/v12.3.0) added an experimental feature which allows replaying ledger's metadata in-memory. This feature speeds up reingestion and starts paving the way to remove the dependency between DigitalBits Core's database and Frontier.
 
@@ -200,7 +200,7 @@ Extend ingestion to store the total number of operations in the transaction set 
 
 ### SDK Maintainers: action needed
 
-- Add the new field `tx_set_operation_count` to the `ledger` resource ([#2690](https://github.com/digitalbits/go/pull/2690)). This field can be a `number` or `null`.
+- Add the new field `tx_set_operation_count` to the `ledger` resource ([#2690](https://github.com/xdbfoundation/go/pull/2690)). This field can be a `number` or `null`.
 
 ## v1.4.0
 
@@ -209,28 +209,28 @@ Extend ingestion to store the total number of operations in the transaction set 
 * Replace `SequenceProvider` implementation with one which queries the Frontier DB for sequence numbers instead of the DigitalBits Core DB.
 * Use the Frontier DB instead of Frontier's in memory order book graph to query orderbook details for the /order_book endpoint.
 * Remove JSON variant of `GET /metrics`, both in the server and client code. It's using Prometheus format by default now.
-* Decreased a memory usage of initial state ingestion stage and state verifier ([#2618](https://github.com/digitalbits/go/pull/2618)).
-* Remove `--exp-ingest-in-memory-only` Frontier flag. The in memory order book graph which powers the path finding endpoints is now updated using the Frontier DB instead of directly via ingestion ([#2630](https://github.com/digitalbits/go/pull/2630)).
+* Decreased a memory usage of initial state ingestion stage and state verifier ([#2618](https://github.com/xdbfoundation/go/pull/2618)).
+* Remove `--exp-ingest-in-memory-only` Frontier flag. The in memory order book graph which powers the path finding endpoints is now updated using the Frontier DB instead of directly via ingestion ([#2630](https://github.com/xdbfoundation/go/pull/2630)).
 
 ## v1.3.0
 
 ### Breaking changes
 
-* The type for the following attributes has been changed from `int64` to `string` ([#2555](https://github.com/digitalbits/go/pull/2555)):
+* The type for the following attributes has been changed from `int64` to `string` ([#2555](https://github.com/xdbfoundation/go/pull/2555)):
   - Attribute `fee_charged` in [Transaction](https://www.digitalbits.org/developers/frontier/reference/resources/transaction.html) resource.
   - Attribute `max_fee` in [Transaction](https://www.digitalbits.org/developers/frontier/reference/resources/transaction.html) resource.
 
 ### Changes
 
-* Add `last_modified_time` to account responses. `last_modified_time` is the closing time of the most recent ledger in which the account was modified ([#2528](https://github.com/digitalbits/go/pull/2528)).
-* Balances in the Account resource are now sorted by asset code and asset issuer ([#2516](https://github.com/digitalbits/go/pull/2516)).
-* Ingestion system has its dedicated DB connection pool ([#2560](https://github.com/digitalbits/go/pull/2560)).
-* A new metric has been added to `/metrics` ([#2537](https://github.com/digitalbits/go/pull/2537) and [#2553](https://github.com/digitalbits/go/pull/2553)):
+* Add `last_modified_time` to account responses. `last_modified_time` is the closing time of the most recent ledger in which the account was modified ([#2528](https://github.com/xdbfoundation/go/pull/2528)).
+* Balances in the Account resource are now sorted by asset code and asset issuer ([#2516](https://github.com/xdbfoundation/go/pull/2516)).
+* Ingestion system has its dedicated DB connection pool ([#2560](https://github.com/xdbfoundation/go/pull/2560)).
+* A new metric has been added to `/metrics` ([#2537](https://github.com/xdbfoundation/go/pull/2537) and [#2553](https://github.com/xdbfoundation/go/pull/2553)):
   - `ingest.local_latest_ledger`: a gauge with the local latest ledger,
   - `txsub.v0`: a meter counting `v0` transactions in `POST /transaction`,
   - `txsub.v1`: a meter counting `v1` transactions in `POST /transaction`,
   - `txsub.feebump`: a meter counting `feebump` transactions in `POST /transaction`.
-* Fix a memory leak in the code responsible for streaming ([#2548](https://github.com/digitalbits/go/pull/2548), [#2575](https://github.com/digitalbits/go/pull/2575) and [#2576](https://github.com/digitalbits/go/pull/2576)).
+* Fix a memory leak in the code responsible for streaming ([#2548](https://github.com/xdbfoundation/go/pull/2548), [#2575](https://github.com/xdbfoundation/go/pull/2575) and [#2576](https://github.com/xdbfoundation/go/pull/2576)).
 
 ## v1.2.2
 
@@ -244,7 +244,7 @@ This version removes two unused columns that could overflow in catchup complete 
 
 ### Changes
 
-* Remove `id` columns from `history_operation_participants` and `history_transaction_participants` to prevent possible integer overflow [#2532](https://github.com/digitalbits/go/pull/2532).
+* Remove `id` columns from `history_operation_participants` and `history_transaction_participants` to prevent possible integer overflow [#2532](https://github.com/xdbfoundation/go/pull/2532).
 ## v1.2.0
 
 ### Scheduled Breaking Changes
@@ -257,13 +257,13 @@ The changes are required by [CAP-15](https://github.com/digitalbits/digitalbits-
 
 ### Changes
 
-* Added support for [CAP-27](https://github.com/digitalbits/digitalbits-protocol/blob/master/core/cap-0027.md) and [SEP-23](https://github.com/digitalbits/digitalbits-protocol/blob/master/ecosystem/sep-0023.md) [#2491](https://github.com/digitalbits/go/pull/2491).
+* Added support for [CAP-27](https://github.com/digitalbits/digitalbits-protocol/blob/master/core/cap-0027.md) and [SEP-23](https://github.com/digitalbits/digitalbits-protocol/blob/master/ecosystem/sep-0023.md) [#2491](https://github.com/xdbfoundation/go/pull/2491).
 * The XDR definition of a transaction memo is a string.
 However, XDR strings are actually binary blobs with no enforced encoding.
 It is possible to set the memo in a transaction envelope to a binary sequence which is not valid ASCII or unicode.
 Previously, if you wanted to recover the original binary sequence for a transaction memo, you would have to decode the transaction's envelope.
 In this release, we have added a `memo_bytes` field to the Frontier transaction response for transactions with `memo_type` equal `text`.
-`memo_bytes` stores the base 64 encoding of the memo bytes set in the transaction envelope [#2485](https://github.com/digitalbits/go/pull/2485).
+`memo_bytes` stores the base 64 encoding of the memo bytes set in the transaction envelope [#2485](https://github.com/xdbfoundation/go/pull/2485).
 
 ## v1.1.0
 
@@ -278,17 +278,17 @@ To execute the migration run `frontier db migrate up` using the Frontier v1.1.0 
 **Important Note**: Frontier should not be serving requests or ingesting while the migration is running. For service continuity, if you run a production Frontier deployment it is recommended that you perform the migration on a second instance and then switch over.
 
 ### Changes
-* DB: Remove unnecessary duplicate indexes: `index_history_transactions_on_id`, `index_history_ledgers_on_id`, `exp_asset_stats_by_code`, and `asset_by_code` ([#2419](https://github.com/digitalbits/go/pull/2419)).
-* DB: Remove asset_stats table which is no longer necessary ([#2419](https://github.com/digitalbits/go/pull/2419)).
-* Validate transaction hash IDs as 64 lowercase hex chars. As such, wrongly-formatted parameters which used to cause 404 (`Not found`) errors will now cause 400 (`Bad request`) HTTP errors ([#2394](https://github.com/digitalbits/go/pull/2394)).
-* Fix ask and bid price levels of `GET /order_book` when encountering non-canonical price values. The `limit` parameter is now respected and levels are coallesced properly. Also, `price_r` is now in canonical form ([#2400](https://github.com/digitalbits/go/pull/2400)).
-* Added missing top-level HAL links to the `GET /` response ([#2407](https://github.com/digitalbits/go/pull/2407)).
-* Full transaction details are now included in the `POST /transactions` response. If you submit a transaction and it succeeds, the response will match the `GET /transactions/{hash}` response ([#2406](https://github.com/digitalbits/go/pull/2406)).
+* DB: Remove unnecessary duplicate indexes: `index_history_transactions_on_id`, `index_history_ledgers_on_id`, `exp_asset_stats_by_code`, and `asset_by_code` ([#2419](https://github.com/xdbfoundation/go/pull/2419)).
+* DB: Remove asset_stats table which is no longer necessary ([#2419](https://github.com/xdbfoundation/go/pull/2419)).
+* Validate transaction hash IDs as 64 lowercase hex chars. As such, wrongly-formatted parameters which used to cause 404 (`Not found`) errors will now cause 400 (`Bad request`) HTTP errors ([#2394](https://github.com/xdbfoundation/go/pull/2394)).
+* Fix ask and bid price levels of `GET /order_book` when encountering non-canonical price values. The `limit` parameter is now respected and levels are coallesced properly. Also, `price_r` is now in canonical form ([#2400](https://github.com/xdbfoundation/go/pull/2400)).
+* Added missing top-level HAL links to the `GET /` response ([#2407](https://github.com/xdbfoundation/go/pull/2407)).
+* Full transaction details are now included in the `POST /transactions` response. If you submit a transaction and it succeeds, the response will match the `GET /transactions/{hash}` response ([#2406](https://github.com/xdbfoundation/go/pull/2406)).
 * The following attributes are now included in the transaction resource:
     * `fee_account` (the account which paid the transaction fee)
     * `fee_bump_transaction` (only present in Protocol 13 fee bump transactions)
-    * `inner_transaction` (only present in Protocol 13 fee bump transactions) ([#2406](https://github.com/digitalbits/go/pull/2406)).
-* Add support for [CAP0018](https://github.com/digitalbits/digitalbits-protocol/blob/master/core/cap-0018.md): Fine-Grained Control of Authorization (Protocol 13) ([#2423](https://github.com/digitalbits/go/pull/2423)).
+    * `inner_transaction` (only present in Protocol 13 fee bump transactions) ([#2406](https://github.com/xdbfoundation/go/pull/2406)).
+* Add support for [CAP0018](https://github.com/digitalbits/digitalbits-protocol/blob/master/core/cap-0018.md): Fine-Grained Control of Authorization (Protocol 13) ([#2423](https://github.com/xdbfoundation/go/pull/2423)).
   - Add `is_authorized_to_maintain_liabilities` to `Balance`.
     <pre>
     "balances": [
@@ -346,7 +346,7 @@ To execute the migration run `frontier db migrate up` using the Frontier v1.1.0 
       "asset_code": "USD"
     }
     </pre>
-* It is no longer possible to use Redis as a mechanism for rate-limiting requests ([#2409](https://github.com/digitalbits/go/pull/2409)).
+* It is no longer possible to use Redis as a mechanism for rate-limiting requests ([#2409](https://github.com/xdbfoundation/go/pull/2409)).
 
 * Make `GET /trades` generate an empty response instead of a 404 when no
  trades are found.
@@ -354,16 +354,16 @@ To execute the migration run `frontier db migrate up` using the Frontier v1.1.0 
 ## v1.0.1
 
 ### Fixed
-* Fix `frontier db reap` bug which caused the command to exit without deleting any history table rows ([#2336](https://github.com/digitalbits/go/pull/2336)).
-* The frontier reap system now also deletes rows from `history_trades`. Previously, the reap system only deleted rows from `history_operation_participants`, `history_operations`, `history_transaction_participants`, `history_transactions`, `history_ledgers`, and `history_effects` ([#2336](https://github.com/digitalbits/go/pull/2336)).
-* Fix deadlock when running `frontier db reingest range` ([#2373](https://github.com/digitalbits/go/pull/2373)).
-* Fix signer update effects ([#2375](https://github.com/digitalbits/go/pull/2375)).
-* Fix incorrect error in log when shutting down the system while `verifyState` is running ([#2366](https://github.com/digitalbits/go/pull/2366)).
-* Expose date header to CORS clients ([#2316](https://github.com/digitalbits/go/pull/2316)).
-* Fix inconsistent ledger view in `/accounts/{id}` when streaming ([#2344](https://github.com/digitalbits/go/pull/2344)).
+* Fix `frontier db reap` bug which caused the command to exit without deleting any history table rows ([#2336](https://github.com/xdbfoundation/go/pull/2336)).
+* The frontier reap system now also deletes rows from `history_trades`. Previously, the reap system only deleted rows from `history_operation_participants`, `history_operations`, `history_transaction_participants`, `history_transactions`, `history_ledgers`, and `history_effects` ([#2336](https://github.com/xdbfoundation/go/pull/2336)).
+* Fix deadlock when running `frontier db reingest range` ([#2373](https://github.com/xdbfoundation/go/pull/2373)).
+* Fix signer update effects ([#2375](https://github.com/xdbfoundation/go/pull/2375)).
+* Fix incorrect error in log when shutting down the system while `verifyState` is running ([#2366](https://github.com/xdbfoundation/go/pull/2366)).
+* Expose date header to CORS clients ([#2316](https://github.com/xdbfoundation/go/pull/2316)).
+* Fix inconsistent ledger view in `/accounts/{id}` when streaming ([#2344](https://github.com/xdbfoundation/go/pull/2344)).
 
 ### Removed
-* Dropped support for Go 1.12. ([#2346](https://github.com/digitalbits/go/pull/2346)).
+* Dropped support for Go 1.12. ([#2346](https://github.com/xdbfoundation/go/pull/2346)).
 
 ## v1.0.0
 
@@ -401,7 +401,7 @@ The new engine resolves multiple issues that were present in the old system. For
 
 Finally, the rearchitecting makes new reliability features possible. An example is the new internal state verifier, which guarantees consistency between the local Frontier state and the public history archives.
 
-The [admin guide](https://github.com/digitalbits/go/blob/release-frontier-v0.25.0/services/frontier/internal/docs/admin.md) contains all the information needed to operate the new ingestion system.
+The [admin guide](https://github.com/xdbfoundation/go/blob/release-frontier-v0.25.0/services/frontier/internal/docs/admin.md) contains all the information needed to operate the new ingestion system.
 
 ### Added
 
@@ -415,7 +415,7 @@ The [admin guide](https://github.com/digitalbits/go/blob/release-frontier-v0.25.
 
 ### Changed
 
-- Change multiple operation types to their canonical names for [operation resources](https://www.digitalbits.org/developers/frontier/reference/resources/operation.html) ([#2134](https://github.com/digitalbits/go/pull/2134)).
+- Change multiple operation types to their canonical names for [operation resources](https://www.digitalbits.org/developers/frontier/reference/resources/operation.html) ([#2134](https://github.com/xdbfoundation/go/pull/2134)).
 - Change the type of the following fields from `number` to `string`:
 
     - Attribute `offer_id` in [manage buy offer](https://www.digitalbits.org/developers/frontier/reference/resources/operation.html#manage-buy-offer) and [manage sell offer](https://www.digitalbits.org/developers/frontier/reference/resources/operation.html#manage-sell-offer) operations.
@@ -423,7 +423,7 @@ The [admin guide](https://github.com/digitalbits/go/blob/release-frontier-v0.25.
     - Attribute `id` in [Offer](https://www.digitalbits.org/developers/frontier/reference/resources/offer.html) resource.
     - Attribute `timestamp` and `trade_count` in [Trade Aggregation](https://www.digitalbits.org/developers/frontier/reference/resources/trade_aggregation.html) resource.
 
-    See [#1609](https://github.com/digitalbits/go/issues/1609), [#1909](https://github.com/digitalbits/go/pull/1909) and [#1912](https://github.com/digitalbits/go/issues/1912) for more details.
+    See [#1609](https://github.com/xdbfoundation/go/issues/1609), [#1909](https://github.com/xdbfoundation/go/pull/1909) and [#1912](https://github.com/xdbfoundation/go/issues/1912) for more details.
 
 ### Removed
 
@@ -444,26 +444,26 @@ The [admin guide](https://github.com/digitalbits/go/blob/release-frontier-v0.25.
     - `p95_accepted_fee`
     - `p99_accepted_fee`
 
-- Remove `fee_paid` field from [Transaction resource](https://www.digitalbits.org/developers/frontier/reference/resources/transaction.html) (Use `fee_charged` and `max_fee` fields instead - see [#1372](https://github.com/digitalbits/go/issues/1372)).
+- Remove `fee_paid` field from [Transaction resource](https://www.digitalbits.org/developers/frontier/reference/resources/transaction.html) (Use `fee_charged` and `max_fee` fields instead - see [#1372](https://github.com/xdbfoundation/go/issues/1372)).
 
 ## v0.24.1
 
-* Add cache to improve performance of experimental ingestion system (#[2004](https://github.com/digitalbits/go/pull/2004)).
-* Fix experimental ingestion bug where ledger changes were not applied in the correct order (#[2050](https://github.com/digitalbits/go/pull/2050)).
-* Fix experimental ingestion bug where unique constraint errors are incurred when the ingestion system has to reingest state from history archive checkpoints (#[2055](https://github.com/digitalbits/go/pull/2055)).
-* Fix experimental ingestion bug where a race condition during shutdown leads to a crash (#[2058](https://github.com/digitalbits/go/pull/2058)).
+* Add cache to improve performance of experimental ingestion system (#[2004](https://github.com/xdbfoundation/go/pull/2004)).
+* Fix experimental ingestion bug where ledger changes were not applied in the correct order (#[2050](https://github.com/xdbfoundation/go/pull/2050)).
+* Fix experimental ingestion bug where unique constraint errors are incurred when the ingestion system has to reingest state from history archive checkpoints (#[2055](https://github.com/xdbfoundation/go/pull/2055)).
+* Fix experimental ingestion bug where a race condition during shutdown leads to a crash (#[2058](https://github.com/xdbfoundation/go/pull/2058)).
 
 ## v0.24.0
 
-* Add `fee_charged` and `max_fee` objects to `/fee_stats` endpoint ([#1964](https://github.com/digitalbits/go/pull/1964)).
-* Experimental ledger header ingestion processor ([#1949](https://github.com/digitalbits/go/pull/1949)).
-* Improved performance of asset stats processor ([#1987](https://github.com/digitalbits/go/pull/1987)).
-* Provide mechanism for retrying XDR stream errors ([#1899](https://github.com/digitalbits/go/pull/1899)).
-* Emit error level log after 3 failed attempts to validate state ([#1918](https://github.com/digitalbits/go/pull/1918)).
-* Fixed out of bounds error in ledger backend reader ([#1914](https://github.com/digitalbits/go/pull/1914)).
-* Fixed out of bounds error in URL params handler ([#1973](https://github.com/digitalbits/go/pull/1973)).
-* Rename `OperationFeeStats` to `FeeStats` ([#1952](https://github.com/digitalbits/go/pull/1952)).
-* All DB queries are now cancelled when request is cancelled/timeout. ([#1950](https://github.com/digitalbits/go/pull/1950)).
+* Add `fee_charged` and `max_fee` objects to `/fee_stats` endpoint ([#1964](https://github.com/xdbfoundation/go/pull/1964)).
+* Experimental ledger header ingestion processor ([#1949](https://github.com/xdbfoundation/go/pull/1949)).
+* Improved performance of asset stats processor ([#1987](https://github.com/xdbfoundation/go/pull/1987)).
+* Provide mechanism for retrying XDR stream errors ([#1899](https://github.com/xdbfoundation/go/pull/1899)).
+* Emit error level log after 3 failed attempts to validate state ([#1918](https://github.com/xdbfoundation/go/pull/1918)).
+* Fixed out of bounds error in ledger backend reader ([#1914](https://github.com/xdbfoundation/go/pull/1914)).
+* Fixed out of bounds error in URL params handler ([#1973](https://github.com/xdbfoundation/go/pull/1973)).
+* Rename `OperationFeeStats` to `FeeStats` ([#1952](https://github.com/xdbfoundation/go/pull/1952)).
+* All DB queries are now cancelled when request is cancelled/timeout. ([#1950](https://github.com/xdbfoundation/go/pull/1950)).
 * Fixed multiple issues connected to graceful shutdown of Frontier.
 
 ### Scheduled Breaking Changes
@@ -480,7 +480,7 @@ Previously scheduled breaking changes reminders:
   - Attribute `id` in [Offer](https://www.digitalbits.org/developers/frontier/reference/resources/offer.html) resource.
   - Attribute `timestamp` and `trade_count` in [Trade Aggregation](https://www.digitalbits.org/developers/frontier/reference/resources/trade_aggregation.html) resource.
 
-Check [Beta Testing New Ingestion System](https://github.com/digitalbits/go/blob/master/services/frontier/internal/expingest/BETA_TESTING.md) if you want to test the new ingestion system.
+Check [Beta Testing New Ingestion System](https://github.com/xdbfoundation/go/blob/master/services/frontier/internal/expingest/BETA_TESTING.md) if you want to test the new ingestion system.
 
 ## v0.23.1
 
@@ -491,18 +491,18 @@ Check [Beta Testing New Ingestion System](https://github.com/digitalbits/go/blob
 * New features in experimental ingestion (to enable: set `--enable-experimental-ingestion` CLI param or `ENABLE_EXPERIMENTAL_INGESTION=true` env variable):
   * All state-related endpoints (i.e. ledger entries) are now served from Frontier DB (except `/account/{account_id}`)
 
-  * `/order_book` offers data is served from in-memory store ([#1761](https://github.com/digitalbits/go/pull/1761))
+  * `/order_book` offers data is served from in-memory store ([#1761](https://github.com/xdbfoundation/go/pull/1761))
 
-  * Add `Latest-Ledger` header with the sequence number of the most recent ledger processed by the experimental ingestion system. Endpoints built on the experimental ingestion system will always respond with data which is consistent with the ledger in `Latest-Ledger` ([#1830](https://github.com/digitalbits/go/pull/1830))
+  * Add `Latest-Ledger` header with the sequence number of the most recent ledger processed by the experimental ingestion system. Endpoints built on the experimental ingestion system will always respond with data which is consistent with the ledger in `Latest-Ledger` ([#1830](https://github.com/xdbfoundation/go/pull/1830))
 
   * Add experimental support for filtering accounts who are trustees to an asset via `/accounts`. Example:\
   `/accounts?asset=COP:GC2GFGZ5CZCFCDJSQF3YYEAYBOS3ZREXJSPU7LUJ7JU3LP3BQNHY7YKS`\
-  returns all accounts who have a trustline to the asset `COP` issued by account `GC2GFG...` ([#1835](https://github.com/digitalbits/go/pull/1835))
+  returns all accounts who have a trustline to the asset `COP` issued by account `GC2GFG...` ([#1835](https://github.com/xdbfoundation/go/pull/1835))
 
-  * Experimental "Accounts For Signers" end-point now returns a full account resource ([#1876](https://github.com/digitalbits/go/issues/1875))
-* Prevent "`multiple response.WriteHeader calls`" errors when streaming ([#1870](https://github.com/digitalbits/go/issues/1870))
-* Fix an interpolation bug in `/fee_stats` ([#1857](https://github.com/digitalbits/go/pull/1857))
-* Fix a bug in `/paths/strict-send` where occasionally bad paths were returned ([#1863](https://github.com/digitalbits/go/pull/1863))
+  * Experimental "Accounts For Signers" end-point now returns a full account resource ([#1876](https://github.com/xdbfoundation/go/issues/1875))
+* Prevent "`multiple response.WriteHeader calls`" errors when streaming ([#1870](https://github.com/xdbfoundation/go/issues/1870))
+* Fix an interpolation bug in `/fee_stats` ([#1857](https://github.com/xdbfoundation/go/pull/1857))
+* Fix a bug in `/paths/strict-send` where occasionally bad paths were returned ([#1863](https://github.com/xdbfoundation/go/pull/1863))
 
 ## v0.22.2
 
@@ -549,13 +549,13 @@ This version adds a new index on a table used by experimental ingestion system. 
 * Fixed DoS vector in Go HTTP/2 implementation.
 * Dropped support for Go 1.10, 1.11.
 
-Check [Beta Testing New Ingestion System](https://github.com/digitalbits/go/blob/master/services/frontier/internal/expingest/BETA_TESTING.md) if you want to test new ingestion system.
+Check [Beta Testing New Ingestion System](https://github.com/xdbfoundation/go/blob/master/services/frontier/internal/expingest/BETA_TESTING.md) if you want to test new ingestion system.
 
 ## v0.20.1
 
 * Add `--ingest-state-reader-temp-set` flag (`INGEST_STATE_READER_TEMP_SET` env variable) which defines the storage type used for temporary objects during state ingestion in the new ingestion system. The possible options are: `memory` (requires ~1.5GB RAM, fast) and `postgres` (stores data in temporary table in Postgres, less RAM but slower).
 
-Check [Beta Testing New Ingestion System](https://github.com/digitalbits/go/blob/master/services/frontier/internal/expingest/BETA_TESTING.md) if you want to test new ingestion system.
+Check [Beta Testing New Ingestion System](https://github.com/xdbfoundation/go/blob/master/services/frontier/internal/expingest/BETA_TESTING.md) if you want to test new ingestion system.
 
 ## v0.20.0
 
@@ -568,7 +568,7 @@ If you want to use experimental ingestion skip this version and use v0.20.1 inst
 * `--enable-accounts-for-signer` CLI param or `ENABLE_ACCOUNTS_FOR_SIGNER=true` env variable are merged with `--enable-experimental-ingestion` CLI param or `ENABLE_EXPERIMENTAL_INGESTION=true` env variable.
 * Add experimental get offers by id endpoint`/offers/{id}` which uses the new ingestion system to fill up the offers table. To enable it, set `--enable-experimental-ingestion` CLI param or `ENABLE_EXPERIMENTAL_INGESTION=true` env variable.
 
-Check [Beta Testing New Ingestion System](https://github.com/digitalbits/go/blob/master/services/frontier/internal/expingest/BETA_TESTING.md) if you want to test new ingestion system.
+Check [Beta Testing New Ingestion System](https://github.com/xdbfoundation/go/blob/master/services/frontier/internal/expingest/BETA_TESTING.md) if you want to test new ingestion system.
 
 ### Scheduled Breaking Changes
 
@@ -587,7 +587,7 @@ If you are an SDK maintainer, update your code to prepare for this change.
 * Add `join` parameter to operations and payments endpoints. Currently, the only valid value for the parameter is `transactions`. If `join=transactions` is included in a request then the response will include a `transaction` field for each operation in the response.
 * Add experimental "Accounts For Signers" endpoint. To enable it set `--enable-accounts-for-signer` CLI param or `ENABLE_ACCOUNTS_FOR_SIGNER=true` env variable. Additionally new feature requires links to history archive: CLI: `--history-archive-urls="archive1,archive2,archive3"`, env variable: `HISTORY_ARCHIVE_URLS="archive1,archive2,archive3"`. This will expose `/accounts` endpoint. This requires around 4GB of RAM for initial state ingestion.
 
-Check [Beta Testing New Ingestion System](https://github.com/digitalbits/go/blob/master/services/frontier/internal/expingest/BETA_TESTING.md) if you want to test new ingestion system.
+Check [Beta Testing New Ingestion System](https://github.com/xdbfoundation/go/blob/master/services/frontier/internal/expingest/BETA_TESTING.md) if you want to test new ingestion system.
 
 ## v0.18.1
 
@@ -739,7 +739,7 @@ This release contains several bug fixes and improvements:
 * New `/operation_fee_stats` endpoint includes fee stats for the last 5 ledgers.
 * ["Trades"](https://www.digitalbits.org/developers/frontier/reference/endpoints/trades.html) endpoint can now be streamed.
 * In ["Trade Aggregations"](https://www.digitalbits.org/developers/frontier/reference/endpoints/trade_aggregations.html) endpoint, `offset` parameter has been added.
-* Path finding bugs have been fixed and the algorithm has been improved. Check [#719](https://github.com/digitalbits/go/pull/719) for more information.
+* Path finding bugs have been fixed and the algorithm has been improved. Check [#719](https://github.com/xdbfoundation/go/pull/719) for more information.
 * Connections (including streams) are closed after timeout defined using `--connection-timeout` CLI param or `CONNECTION_TIMEOUT` environment variable. If Frontier is behind a load balancer with idle timeout set, it is recommended to set this to a value equal a few seconds less than idle timeout so streams can be properly closed by Frontier.
 * Streams have been improved to check for updates every `--sse-update-frequency` CLI param or `SSE_UPDATE_FREQUENCY` environment variable seconds. If a new ledger has been closed in this period, new events will be sent to a stream. Previously streams checked for new events every 1 second, even when there were no new ledgers.
 * Rate limiting algorithm has been changed to [GCRA](https://brandur.org/rate-limiting#gcra).
@@ -883,7 +883,7 @@ This release is a bug fix release for v0.12.0.  *Please see the upgrade notes be
 
 ### Bug fixes
 
-- Fixed an issue caused by un-migrated trade rows. (https://github.com/digitalbits/go/issues/357)
+- Fixed an issue caused by un-migrated trade rows. (https://github.com/xdbfoundation/go/issues/357)
 - Command line flags are now useable for subcommands of frontier.
 
 
@@ -933,7 +933,7 @@ Since this release changes both the schema and the data ingestion system, we rec
 - The ingestion system can now properly import envelopes that contain signatures that are zero-length strings.
 - BREAKING CHANGE: specifying a `limit` of `0` now triggers an error instead of interpreting the value to mean "use the default limit".
 - Requests that ask for more records than the maximum page size now trigger a bad request error, instead of an internal server error.
-- Upstream bug fixes to xdr decoding from `github.com/digitalbits/go`.
+- Upstream bug fixes to xdr decoding from `github.com/xdbfoundation/go`.
 
 ### Changed
 

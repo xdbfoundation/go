@@ -5,7 +5,7 @@ import (
 	"runtime"
 
 	"github.com/spf13/cobra"
-	apkg "github.com/digitalbits/go/support/app"
+	apkg "github.com/xdbfoundation/go/support/app"
 )
 
 var versionCmd = &cobra.Command{

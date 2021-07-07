@@ -4,10 +4,10 @@ import (
 	"context"
 	"net/url"
 
-	"github.com/digitalbits/go/protocols/frontier"
-	frontierContext "github.com/digitalbits/go/services/frontier/internal/context"
-	"github.com/digitalbits/go/services/frontier/internal/ledger"
-	"github.com/digitalbits/go/support/render/hal"
+	"github.com/xdbfoundation/go/protocols/frontier"
+	frontierContext "github.com/xdbfoundation/go/services/frontier/internal/context"
+	"github.com/xdbfoundation/go/services/frontier/internal/ledger"
+	"github.com/xdbfoundation/go/support/render/hal"
 )
 
 // Populate fills in the details

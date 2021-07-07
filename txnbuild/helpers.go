@@ -3,10 +3,10 @@ package txnbuild
 import (
 	"fmt"
 
-	"github.com/digitalbits/go/amount"
-	"github.com/digitalbits/go/strkey"
-	"github.com/digitalbits/go/support/errors"
-	"github.com/digitalbits/go/xdr"
+	"github.com/xdbfoundation/go/amount"
+	"github.com/xdbfoundation/go/strkey"
+	"github.com/xdbfoundation/go/support/errors"
+	"github.com/xdbfoundation/go/xdr"
 )
 
 // validateDigitalBitsPublicKey returns an error if a public key is invalid. Otherwise, it returns nil.
@@ -135,7 +135,7 @@ func validateChangeTrustAsset(asset Asset) error {
 // It returns an error if any field is invalid.
 func validatePassiveOffer(buying, selling Asset, offerAmount, price string) error {
 	// Note: see discussion on how this can be improved:
-	// https://github.com/digitalbits/go/pull/1707#discussion_r321508440
+	// https://github.com/xdbfoundation/go/pull/1707#discussion_r321508440
 	err := validateDigitalBitsAsset(buying)
 	if err != nil {
 		return NewValidationError("Buying", err.Error())

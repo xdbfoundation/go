@@ -5,10 +5,10 @@ import (
 	"io/ioutil"
 	"testing"
 
-	"github.com/digitalbits/go/historyarchive"
-	"github.com/digitalbits/go/keypair"
-	"github.com/digitalbits/go/txnbuild"
-	"github.com/digitalbits/go/xdr"
+	"github.com/xdbfoundation/go/historyarchive"
+	"github.com/xdbfoundation/go/keypair"
+	"github.com/xdbfoundation/go/txnbuild"
+	"github.com/xdbfoundation/go/xdr"
 	"github.com/stretchr/testify/suite"
 )
 

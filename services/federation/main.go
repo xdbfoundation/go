@@ -6,13 +6,13 @@ import (
 
 	"github.com/go-chi/chi"
 	"github.com/spf13/cobra"
-	"github.com/digitalbits/go/handlers/federation"
-	"github.com/digitalbits/go/support/app"
-	"github.com/digitalbits/go/support/config"
-	"github.com/digitalbits/go/support/db"
-	"github.com/digitalbits/go/support/errors"
-	"github.com/digitalbits/go/support/http"
-	"github.com/digitalbits/go/support/log"
+	"github.com/xdbfoundation/go/handlers/federation"
+	"github.com/xdbfoundation/go/support/app"
+	"github.com/xdbfoundation/go/support/config"
+	"github.com/xdbfoundation/go/support/db"
+	"github.com/xdbfoundation/go/support/errors"
+	"github.com/xdbfoundation/go/support/http"
+	"github.com/xdbfoundation/go/support/log"
 )
 
 // Config represents the configuration of a federation server

@@ -3,10 +3,10 @@ package scraper
 import (
 	"time"
 
-	"github.com/digitalbits/go/services/ticker/internal/utils"
+	"github.com/xdbfoundation/go/services/ticker/internal/utils"
 
-	frontierclient "github.com/digitalbits/go/clients/frontierclient"
-	hProtocol "github.com/digitalbits/go/protocols/frontier"
+	frontierclient "github.com/xdbfoundation/go/clients/frontierclient"
+	hProtocol "github.com/xdbfoundation/go/protocols/frontier"
 )
 
 // checkRecords check if a list of records contains entries older than minTime. If it does,

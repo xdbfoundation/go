@@ -15,8 +15,8 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/digitalbits/go/support/errors"
-	"github.com/digitalbits/go/xdr"
+	"github.com/xdbfoundation/go/support/errors"
+	"github.com/xdbfoundation/go/xdr"
 )
 
 // One is the value of one whole unit of currency. DigitalBits uses 7 fixed digits

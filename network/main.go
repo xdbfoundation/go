@@ -7,9 +7,9 @@ import (
 
 	"strings"
 
-	"github.com/digitalbits/go/hash"
-	"github.com/digitalbits/go/support/errors"
-	"github.com/digitalbits/go/xdr"
+	"github.com/xdbfoundation/go/hash"
+	"github.com/xdbfoundation/go/support/errors"
+	"github.com/xdbfoundation/go/xdr"
 )
 
 const (

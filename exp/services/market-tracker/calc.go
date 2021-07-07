@@ -3,7 +3,7 @@ package main
 import (
 	"math"
 
-	hProtocol "github.com/digitalbits/go/protocols/frontier"
+	hProtocol "github.com/xdbfoundation/go/protocols/frontier"
 )
 
 func calcSpreadPctForOrderBook(obStats hProtocol.OrderBookSummary) float64 {

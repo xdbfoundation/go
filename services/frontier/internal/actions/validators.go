@@ -7,10 +7,10 @@ import (
 	"github.com/asaskevich/govalidator"
 	"github.com/gorilla/schema"
 
-	"github.com/digitalbits/go/amount"
-	"github.com/digitalbits/go/services/frontier/internal/assets"
-	"github.com/digitalbits/go/support/errors"
-	"github.com/digitalbits/go/xdr"
+	"github.com/xdbfoundation/go/amount"
+	"github.com/xdbfoundation/go/services/frontier/internal/assets"
+	"github.com/xdbfoundation/go/support/errors"
+	"github.com/xdbfoundation/go/xdr"
 )
 
 // Validateable allow structs to define their own custom validations.

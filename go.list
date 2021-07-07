@@ -1,4 +1,4 @@
-github.com/digitalbits/go
+github.com/xdbfoundation/go
 github.com/stellar/go-xdr v0.0.0-20201028102745-f80a23dac78a
 github.com/stellar/throttled v2.2.3-0.20190823235211-89d75816f59d+incompatible
 cloud.google.com/go v0.34.0

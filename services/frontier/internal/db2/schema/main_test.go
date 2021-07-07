@@ -7,8 +7,8 @@ import (
 	assetfs "github.com/elazarl/go-bindata-assetfs"
 	"github.com/stretchr/testify/assert"
 
-	"github.com/digitalbits/go/support/db/dbtest"
-	supportHttp "github.com/digitalbits/go/support/http"
+	"github.com/xdbfoundation/go/support/db/dbtest"
+	supportHttp "github.com/xdbfoundation/go/support/http"
 )
 
 func TestInit(t *testing.T) {

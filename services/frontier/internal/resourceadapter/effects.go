@@ -3,11 +3,11 @@ package resourceadapter
 import (
 	"context"
 
-	"github.com/digitalbits/go/protocols/frontier/base"
-	"github.com/digitalbits/go/protocols/frontier/effects"
-	frontierContext "github.com/digitalbits/go/services/frontier/internal/context"
-	"github.com/digitalbits/go/services/frontier/internal/db2/history"
-	"github.com/digitalbits/go/support/render/hal"
+	"github.com/xdbfoundation/go/protocols/frontier/base"
+	"github.com/xdbfoundation/go/protocols/frontier/effects"
+	frontierContext "github.com/xdbfoundation/go/services/frontier/internal/context"
+	"github.com/xdbfoundation/go/services/frontier/internal/db2/history"
+	"github.com/xdbfoundation/go/support/render/hal"
 )
 
 var EffectTypeNames = map[history.EffectType]string{

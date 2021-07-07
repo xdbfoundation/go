@@ -6,7 +6,7 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"github.com/digitalbits/go/services/frontier/internal/ledger"
+	"github.com/xdbfoundation/go/services/frontier/internal/ledger"
 )
 
 type testingFactory struct {

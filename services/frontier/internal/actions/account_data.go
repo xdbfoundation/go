@@ -4,8 +4,8 @@ import (
 	"io"
 	"net/http"
 
-	"github.com/digitalbits/go/services/frontier/internal/context"
-	"github.com/digitalbits/go/services/frontier/internal/db2/history"
+	"github.com/xdbfoundation/go/services/frontier/internal/context"
+	"github.com/xdbfoundation/go/services/frontier/internal/db2/history"
 )
 
 // AccountDataQuery query struct for account data end-point

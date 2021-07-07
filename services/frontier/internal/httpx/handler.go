@@ -5,17 +5,17 @@ import (
 	"io"
 	"net/http"
 
-	"github.com/digitalbits/go/services/frontier/internal/actions"
-	frontierContext "github.com/digitalbits/go/services/frontier/internal/context"
-	"github.com/digitalbits/go/services/frontier/internal/ledger"
-	"github.com/digitalbits/go/services/frontier/internal/render"
-	hProblem "github.com/digitalbits/go/services/frontier/internal/render/problem"
-	"github.com/digitalbits/go/services/frontier/internal/render/sse"
-	"github.com/digitalbits/go/support/db"
-	"github.com/digitalbits/go/support/errors"
-	"github.com/digitalbits/go/support/render/hal"
-	"github.com/digitalbits/go/support/render/httpjson"
-	"github.com/digitalbits/go/support/render/problem"
+	"github.com/xdbfoundation/go/services/frontier/internal/actions"
+	frontierContext "github.com/xdbfoundation/go/services/frontier/internal/context"
+	"github.com/xdbfoundation/go/services/frontier/internal/ledger"
+	"github.com/xdbfoundation/go/services/frontier/internal/render"
+	hProblem "github.com/xdbfoundation/go/services/frontier/internal/render/problem"
+	"github.com/xdbfoundation/go/services/frontier/internal/render/sse"
+	"github.com/xdbfoundation/go/support/db"
+	"github.com/xdbfoundation/go/support/errors"
+	"github.com/xdbfoundation/go/support/render/hal"
+	"github.com/xdbfoundation/go/support/render/httpjson"
+	"github.com/xdbfoundation/go/support/render/problem"
 )
 
 type objectAction interface {

@@ -4,11 +4,11 @@ import (
 	"sync"
 	"testing"
 
-	"github.com/digitalbits/go/txnbuild"
+	"github.com/xdbfoundation/go/txnbuild"
 
-	"github.com/digitalbits/go/clients/frontierclient"
-	"github.com/digitalbits/go/keypair"
-	hProtocol "github.com/digitalbits/go/protocols/frontier"
+	"github.com/xdbfoundation/go/clients/frontierclient"
+	"github.com/xdbfoundation/go/keypair"
+	hProtocol "github.com/xdbfoundation/go/protocols/frontier"
 	"github.com/stretchr/testify/assert"
 )
 

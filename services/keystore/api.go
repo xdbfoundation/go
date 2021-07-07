@@ -12,10 +12,10 @@ import (
 	"time"
 
 	"github.com/rs/cors"
-	"github.com/digitalbits/go/support/errors"
-	"github.com/digitalbits/go/support/log"
-	"github.com/digitalbits/go/support/render/httpjson"
-	"github.com/digitalbits/go/support/render/problem"
+	"github.com/xdbfoundation/go/support/errors"
+	"github.com/xdbfoundation/go/support/log"
+	"github.com/xdbfoundation/go/support/render/httpjson"
+	"github.com/xdbfoundation/go/support/render/problem"
 )
 
 func init() {

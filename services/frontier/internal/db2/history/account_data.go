@@ -4,8 +4,8 @@ import (
 	"encoding/base64"
 
 	sq "github.com/Masterminds/squirrel"
-	"github.com/digitalbits/go/support/errors"
-	"github.com/digitalbits/go/xdr"
+	"github.com/xdbfoundation/go/support/errors"
+	"github.com/xdbfoundation/go/xdr"
 )
 
 func (q *Q) CountAccountsData() (int, error) {

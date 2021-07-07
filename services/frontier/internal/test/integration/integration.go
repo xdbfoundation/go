@@ -18,14 +18,14 @@ import (
 	"github.com/spf13/cobra"
 	"github.com/stretchr/testify/assert"
 
-	sdk "github.com/digitalbits/go/clients/frontierclient"
-	"github.com/digitalbits/go/clients/digitalbitscore"
-	"github.com/digitalbits/go/keypair"
-	proto "github.com/digitalbits/go/protocols/frontier"
-	frontier "github.com/digitalbits/go/services/frontier/internal"
-	"github.com/digitalbits/go/support/db/dbtest"
-	"github.com/digitalbits/go/txnbuild"
-	"github.com/digitalbits/go/xdr"
+	sdk "github.com/xdbfoundation/go/clients/frontierclient"
+	"github.com/xdbfoundation/go/clients/digitalbitscore"
+	"github.com/xdbfoundation/go/keypair"
+	proto "github.com/xdbfoundation/go/protocols/frontier"
+	frontier "github.com/xdbfoundation/go/services/frontier/internal"
+	"github.com/xdbfoundation/go/support/db/dbtest"
+	"github.com/xdbfoundation/go/txnbuild"
+	"github.com/xdbfoundation/go/xdr"
 )
 
 const (

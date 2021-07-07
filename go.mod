@@ -1,4 +1,4 @@
-module github.com/digitalbits/go
+module github.com/xdbfoundation/go
 
 go 1.13
 

@@ -8,14 +8,14 @@ import (
 
 	"github.com/getsentry/raven-go"
 	"github.com/prometheus/client_golang/prometheus"
-	"github.com/digitalbits/go/exp/orderbook"
-	"github.com/digitalbits/go/services/frontier/internal/db2/history"
-	"github.com/digitalbits/go/services/frontier/internal/ingest"
-	"github.com/digitalbits/go/services/frontier/internal/simplepath"
-	"github.com/digitalbits/go/services/frontier/internal/txsub"
-	"github.com/digitalbits/go/services/frontier/internal/txsub/sequence"
-	"github.com/digitalbits/go/support/db"
-	"github.com/digitalbits/go/support/log"
+	"github.com/xdbfoundation/go/exp/orderbook"
+	"github.com/xdbfoundation/go/services/frontier/internal/db2/history"
+	"github.com/xdbfoundation/go/services/frontier/internal/ingest"
+	"github.com/xdbfoundation/go/services/frontier/internal/simplepath"
+	"github.com/xdbfoundation/go/services/frontier/internal/txsub"
+	"github.com/xdbfoundation/go/services/frontier/internal/txsub/sequence"
+	"github.com/xdbfoundation/go/support/db"
+	"github.com/xdbfoundation/go/support/log"
 )
 
 func mustNewDBSession(databaseURL string, maxIdle, maxOpen int) *db.Session {

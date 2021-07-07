@@ -19,7 +19,7 @@ Compile and install Frontier as described in the [Frontier development guide](ht
 Frontier uses two Go tools you'll need to install:
 1. [go-bindata](github.com/kevinburke/go-bindata) is used to bundle test data
 
-After the above are installed, run `go generate github.com/digitalbits/go/services/frontier/...`.
+After the above are installed, run `go generate github.com/xdbfoundation/go/services/frontier/...`.
 
 ## <a name="scenarios"></a> Adding, rebuilding and using test scenarios
 
@@ -55,11 +55,11 @@ close_ledger
 payment :scott, :bartek,  [:native, 5]
 ```
 
-You can find more recipes in [`scc` examples](https://github.com/digitalbits/digitalbits_core_commander/tree/84d5ffb97202ecc3a0ed34a739c98e69536c0c2c/examples) and [frontier test scenarios](https://github.com/digitalbits/go/tree/master/services/frontier/internal/test/scenarios).
+You can find more recipes in [`scc` examples](https://github.com/digitalbits/digitalbits_core_commander/tree/84d5ffb97202ecc3a0ed34a739c98e69536c0c2c/examples) and [frontier test scenarios](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/test/scenarios).
 
 ### Rebuilding scenarios
 
-1. Create a new or modify existing recipe. All new recipes should be added to [frontier test scenarios](https://github.com/digitalbits/go/tree/master/services/frontier/internal/test/scenarios) directory.
+1. Create a new or modify existing recipe. All new recipes should be added to [frontier test scenarios](https://github.com/xdbfoundation/go/tree/master/services/frontier/internal/test/scenarios) directory.
 2. In `digitalbits/go` repository root directory run `./services/frontier/internal/scripts/build_test_scenarios.bash`.
 3. The command above will rebuild all test scenarios. If you need to rebuild only one scenario modify `PACKAGES` environment variable temporarily in the script.
 
@@ -94,12 +94,12 @@ go test ./...
 or run individual Frontier tests like so, providing the expected arguments:
 
 ```bash
-go test github.com/digitalbits/go/services/frontier/...
+go test github.com/xdbfoundation/go/services/frontier/...
 ```
 
 ## <a name="logging"></a> Logging
 
-All logging infrastructure is in the `github.com/digitalbits/go/tree/master/services/frontier/internal/log` package.  This package provides "level-based" logging:  Each logging statement has a severity, one of "Debug", "Info", "Warn", "Error" or "Panic".  The Frontier server has a configured level "filter", specified either using the `--log-level` command line flag or the `LOG_LEVEL` environment variable.  When a logging statement is executed, the statements declared severity is checked against the filter and will only be emitted if the severity of the statement is equal or higher severity than the filter.
+All logging infrastructure is in the `github.com/xdbfoundation/go/tree/master/services/frontier/internal/log` package.  This package provides "level-based" logging:  Each logging statement has a severity, one of "Debug", "Info", "Warn", "Error" or "Panic".  The Frontier server has a configured level "filter", specified either using the `--log-level` command line flag or the `LOG_LEVEL` environment variable.  When a logging statement is executed, the statements declared severity is checked against the filter and will only be emitted if the severity of the statement is equal or higher severity than the filter.
 
 In addition, the logging subsystem has support for fields: Arbitrary key-value pairs that will be associated with an entry to allow for filtering and additional contextual information.
 

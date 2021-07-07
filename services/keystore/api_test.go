@@ -12,8 +12,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/digitalbits/go/support/errors"
-	"github.com/digitalbits/go/support/render/httpjson"
+	"github.com/xdbfoundation/go/support/errors"
+	"github.com/xdbfoundation/go/support/render/httpjson"
 )
 
 func TestPutKeysAPI(t *testing.T) {

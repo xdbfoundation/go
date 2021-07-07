@@ -5,8 +5,8 @@ import (
 	"go/format"
 
 	"github.com/spf13/cobra"
-	"github.com/digitalbits/go/support/errors"
-	"github.com/digitalbits/go/xdr"
+	"github.com/xdbfoundation/go/support/errors"
+	"github.com/xdbfoundation/go/xdr"
 )
 
 var (

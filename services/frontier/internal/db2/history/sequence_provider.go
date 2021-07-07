@@ -3,7 +3,7 @@ package history
 import (
 	sq "github.com/Masterminds/squirrel"
 
-	"github.com/digitalbits/go/support/errors"
+	"github.com/xdbfoundation/go/support/errors"
 )
 
 func (q *Q) GetSequenceNumbers(addresses []string) (map[string]uint64, error) {

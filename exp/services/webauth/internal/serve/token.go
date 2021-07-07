@@ -5,12 +5,12 @@ import (
 	"strings"
 	"time"
 
-	"github.com/digitalbits/go/clients/frontierclient"
-	"github.com/digitalbits/go/keypair"
-	"github.com/digitalbits/go/support/http/httpdecode"
-	supportlog "github.com/digitalbits/go/support/log"
-	"github.com/digitalbits/go/support/render/httpjson"
-	"github.com/digitalbits/go/txnbuild"
+	"github.com/xdbfoundation/go/clients/frontierclient"
+	"github.com/xdbfoundation/go/keypair"
+	"github.com/xdbfoundation/go/support/http/httpdecode"
+	supportlog "github.com/xdbfoundation/go/support/log"
+	"github.com/xdbfoundation/go/support/render/httpjson"
+	"github.com/xdbfoundation/go/txnbuild"
 	"gopkg.in/square/go-jose.v2"
 	"gopkg.in/square/go-jose.v2/jwt"
 )

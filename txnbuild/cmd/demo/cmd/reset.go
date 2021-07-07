@@ -5,8 +5,8 @@ import (
 
 	log "github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
-	"github.com/digitalbits/go/clients/frontierclient"
-	demo "github.com/digitalbits/go/txnbuild/cmd/demo/operations"
+	"github.com/xdbfoundation/go/clients/frontierclient"
+	demo "github.com/xdbfoundation/go/txnbuild/cmd/demo/operations"
 )
 
 // resetCmd represents the reset command

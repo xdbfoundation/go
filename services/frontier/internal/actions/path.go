@@ -6,16 +6,16 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/digitalbits/go/amount"
-	"github.com/digitalbits/go/protocols/frontier"
-	frontierContext "github.com/digitalbits/go/services/frontier/internal/context"
-	"github.com/digitalbits/go/services/frontier/internal/paths"
-	frontierProblem "github.com/digitalbits/go/services/frontier/internal/render/problem"
-	"github.com/digitalbits/go/services/frontier/internal/resourceadapter"
-	"github.com/digitalbits/go/services/frontier/internal/simplepath"
-	"github.com/digitalbits/go/support/render/hal"
-	"github.com/digitalbits/go/support/render/problem"
-	"github.com/digitalbits/go/xdr"
+	"github.com/xdbfoundation/go/amount"
+	"github.com/xdbfoundation/go/protocols/frontier"
+	frontierContext "github.com/xdbfoundation/go/services/frontier/internal/context"
+	"github.com/xdbfoundation/go/services/frontier/internal/paths"
+	frontierProblem "github.com/xdbfoundation/go/services/frontier/internal/render/problem"
+	"github.com/xdbfoundation/go/services/frontier/internal/resourceadapter"
+	"github.com/xdbfoundation/go/services/frontier/internal/simplepath"
+	"github.com/xdbfoundation/go/support/render/hal"
+	"github.com/xdbfoundation/go/support/render/problem"
+	"github.com/xdbfoundation/go/xdr"
 )
 
 // FindPathsHandler is the http handler for the find payment paths endpoint

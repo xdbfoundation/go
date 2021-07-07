@@ -4,7 +4,7 @@ import (
 	"context"
 	"net/http"
 
-	"github.com/digitalbits/go/support/log"
+	"github.com/xdbfoundation/go/support/log"
 )
 
 // DefaultServiceHost is the default service host used with the default problem

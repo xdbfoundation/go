@@ -2,8 +2,8 @@ package resourceadapter
 
 import (
 	"context"
-	protocol "github.com/digitalbits/go/protocols/frontier"
-	"github.com/digitalbits/go/services/frontier/internal/txsub"
+	protocol "github.com/xdbfoundation/go/protocols/frontier"
+	"github.com/xdbfoundation/go/services/frontier/internal/txsub"
 )
 
 // Populate fills out the details

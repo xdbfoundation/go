@@ -4,13 +4,13 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/digitalbits/go/amount"
-	protocol "github.com/digitalbits/go/protocols/frontier"
-	frontierContext "github.com/digitalbits/go/services/frontier/internal/context"
-	"github.com/digitalbits/go/services/frontier/internal/db2/history"
-	"github.com/digitalbits/go/support/errors"
-	"github.com/digitalbits/go/support/render/hal"
-	"github.com/digitalbits/go/xdr"
+	"github.com/xdbfoundation/go/amount"
+	protocol "github.com/xdbfoundation/go/protocols/frontier"
+	frontierContext "github.com/xdbfoundation/go/services/frontier/internal/context"
+	"github.com/xdbfoundation/go/services/frontier/internal/db2/history"
+	"github.com/xdbfoundation/go/support/errors"
+	"github.com/xdbfoundation/go/support/render/hal"
+	"github.com/xdbfoundation/go/xdr"
 )
 
 // PopulateClaimableBalance fills out the resource's fields

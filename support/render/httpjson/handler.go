@@ -7,9 +7,9 @@ import (
 	"net/http"
 	"reflect"
 
-	"github.com/digitalbits/go/support/errors"
-	"github.com/digitalbits/go/support/http/httpdecode"
-	"github.com/digitalbits/go/support/render/problem"
+	"github.com/xdbfoundation/go/support/errors"
+	"github.com/xdbfoundation/go/support/http/httpdecode"
+	"github.com/xdbfoundation/go/support/render/problem"
 )
 
 var (

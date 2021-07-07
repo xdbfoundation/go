@@ -7,9 +7,9 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"github.com/digitalbits/go/ingest/ledgerbackend"
-	"github.com/digitalbits/go/network"
-	"github.com/digitalbits/go/xdr"
+	"github.com/xdbfoundation/go/ingest/ledgerbackend"
+	"github.com/xdbfoundation/go/network"
+	"github.com/xdbfoundation/go/xdr"
 )
 
 const (

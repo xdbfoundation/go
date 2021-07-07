@@ -3,7 +3,7 @@ Package frontierclient provides client access to a Frontier server, allowing an 
 
 This library provides an interface to the DigitalBits Frontier service. It supports the building of Go applications on
 top of the DigitalBits network (https://www.digitalbits.org/). Transactions may be constructed using the sister package to
-this one, txnbuild (https://github.com/digitalbits/go/tree/master/txnbuild), and then submitted with this client to any
+this one, txnbuild (https://github.com/xdbfoundation/go/tree/master/txnbuild), and then submitted with this client to any
 Frontier instance for processing onto the ledger. Together, these two libraries provide a complete DigitalBits SDK.
 
 For more information and further examples, see https://www.digitalbits.org/developers/go/reference/index.html.
@@ -18,12 +18,12 @@ import (
 	"sync"
 	"time"
 
-	hProtocol "github.com/digitalbits/go/protocols/frontier"
-	"github.com/digitalbits/go/protocols/frontier/effects"
-	"github.com/digitalbits/go/protocols/frontier/operations"
-	"github.com/digitalbits/go/support/clock"
-	"github.com/digitalbits/go/support/render/problem"
-	"github.com/digitalbits/go/txnbuild"
+	hProtocol "github.com/xdbfoundation/go/protocols/frontier"
+	"github.com/xdbfoundation/go/protocols/frontier/effects"
+	"github.com/xdbfoundation/go/protocols/frontier/operations"
+	"github.com/xdbfoundation/go/support/clock"
+	"github.com/xdbfoundation/go/support/render/problem"
+	"github.com/xdbfoundation/go/txnbuild"
 )
 
 // cursor represents `cursor` param in queries

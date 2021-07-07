@@ -14,8 +14,8 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/digitalbits/go/support/errors"
-	"github.com/digitalbits/go/support/log"
+	"github.com/xdbfoundation/go/support/errors"
+	"github.com/xdbfoundation/go/support/log"
 )
 
 var (

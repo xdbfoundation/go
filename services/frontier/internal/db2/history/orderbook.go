@@ -2,11 +2,11 @@ package history
 
 import (
 	"database/sql"
-	"github.com/digitalbits/go/amount"
+	"github.com/xdbfoundation/go/amount"
 	"math/big"
 
-	"github.com/digitalbits/go/support/errors"
-	"github.com/digitalbits/go/xdr"
+	"github.com/xdbfoundation/go/support/errors"
+	"github.com/xdbfoundation/go/xdr"
 )
 
 type priceLevel struct {

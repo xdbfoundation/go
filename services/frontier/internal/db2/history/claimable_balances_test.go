@@ -3,9 +3,9 @@ package history
 import (
 	"testing"
 
-	"github.com/digitalbits/go/services/frontier/internal/db2"
-	"github.com/digitalbits/go/services/frontier/internal/test"
-	"github.com/digitalbits/go/xdr"
+	"github.com/xdbfoundation/go/services/frontier/internal/db2"
+	"github.com/xdbfoundation/go/services/frontier/internal/test"
+	"github.com/xdbfoundation/go/xdr"
 )
 
 func TestRemoveClaimableBalance(t *testing.T) {

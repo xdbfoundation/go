@@ -3,8 +3,8 @@
 package main
 
 import (
-	"github.com/digitalbits/go/services/keystore"
-	"github.com/digitalbits/go/support/env"
+	"github.com/xdbfoundation/go/services/keystore"
+	"github.com/xdbfoundation/go/support/env"
 )
 
 func getConfig() *keystore.Config {

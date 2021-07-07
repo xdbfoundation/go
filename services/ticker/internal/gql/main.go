@@ -6,9 +6,9 @@ import (
 
 	"github.com/graph-gophers/graphql-go"
 	"github.com/graph-gophers/graphql-go/relay"
-	"github.com/digitalbits/go/services/ticker/internal/gql/static"
-	"github.com/digitalbits/go/services/ticker/internal/tickerdb"
-	hlog "github.com/digitalbits/go/support/log"
+	"github.com/xdbfoundation/go/services/ticker/internal/gql/static"
+	"github.com/xdbfoundation/go/services/ticker/internal/tickerdb"
+	hlog "github.com/xdbfoundation/go/support/log"
 )
 
 // asset represents a DigitalBits asset, with some type

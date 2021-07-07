@@ -3,8 +3,8 @@ package txnbuild
 import (
 	"bytes"
 
-	"github.com/digitalbits/go/support/errors"
-	"github.com/digitalbits/go/xdr"
+	"github.com/xdbfoundation/go/support/errors"
+	"github.com/xdbfoundation/go/xdr"
 )
 
 // AssetType represents the type of a DigitalBits asset.

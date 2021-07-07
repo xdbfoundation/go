@@ -6,8 +6,8 @@ import (
 
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
-	frontierclient "github.com/digitalbits/go/clients/frontierclient"
-	hlog "github.com/digitalbits/go/support/log"
+	frontierclient "github.com/xdbfoundation/go/clients/frontierclient"
+	hlog "github.com/xdbfoundation/go/support/log"
 )
 
 var DatabaseURL string

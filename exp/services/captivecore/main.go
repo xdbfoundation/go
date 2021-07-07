@@ -9,13 +9,13 @@ import (
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 
-	"github.com/digitalbits/go/exp/services/captivecore/internal"
-	"github.com/digitalbits/go/ingest/ledgerbackend"
-	"github.com/digitalbits/go/network"
-	"github.com/digitalbits/go/support/config"
-	"github.com/digitalbits/go/support/db"
-	supporthttp "github.com/digitalbits/go/support/http"
-	supportlog "github.com/digitalbits/go/support/log"
+	"github.com/xdbfoundation/go/exp/services/captivecore/internal"
+	"github.com/xdbfoundation/go/ingest/ledgerbackend"
+	"github.com/xdbfoundation/go/network"
+	"github.com/xdbfoundation/go/support/config"
+	"github.com/xdbfoundation/go/support/db"
+	supporthttp "github.com/xdbfoundation/go/support/http"
+	supportlog "github.com/xdbfoundation/go/support/log"
 )
 
 func main() {

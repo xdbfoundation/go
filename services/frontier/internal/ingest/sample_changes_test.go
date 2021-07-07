@@ -9,11 +9,11 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/digitalbits/go/historyarchive"
-	"github.com/digitalbits/go/ingest/adapters"
-	"github.com/digitalbits/go/ingest/io"
-	logpkg "github.com/digitalbits/go/support/log"
-	"github.com/digitalbits/go/xdr"
+	"github.com/xdbfoundation/go/historyarchive"
+	"github.com/xdbfoundation/go/ingest/adapters"
+	"github.com/xdbfoundation/go/ingest/io"
+	logpkg "github.com/xdbfoundation/go/support/log"
+	"github.com/xdbfoundation/go/xdr"
 )
 
 const (

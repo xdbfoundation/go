@@ -8,14 +8,14 @@ import (
 
 	"github.com/guregu/null"
 
-	ingesterrors "github.com/digitalbits/go/ingest/errors"
-	"github.com/digitalbits/go/ingest/verify"
-	"github.com/digitalbits/go/services/frontier/internal/db2"
-	"github.com/digitalbits/go/services/frontier/internal/db2/history"
-	"github.com/digitalbits/go/services/frontier/internal/ingest/processors"
-	"github.com/digitalbits/go/support/errors"
-	logpkg "github.com/digitalbits/go/support/log"
-	"github.com/digitalbits/go/xdr"
+	ingesterrors "github.com/xdbfoundation/go/ingest/errors"
+	"github.com/xdbfoundation/go/ingest/verify"
+	"github.com/xdbfoundation/go/services/frontier/internal/db2"
+	"github.com/xdbfoundation/go/services/frontier/internal/db2/history"
+	"github.com/xdbfoundation/go/services/frontier/internal/ingest/processors"
+	"github.com/xdbfoundation/go/support/errors"
+	logpkg "github.com/xdbfoundation/go/support/log"
+	"github.com/xdbfoundation/go/xdr"
 )
 
 const verifyBatchSize = 50000

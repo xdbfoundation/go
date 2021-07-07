@@ -2,7 +2,7 @@ package history
 
 import (
 	sq "github.com/Masterminds/squirrel"
-	"github.com/digitalbits/go/support/errors"
+	"github.com/xdbfoundation/go/support/errors"
 )
 
 // QOffers defines offer related queries.

@@ -3,8 +3,8 @@ package txnbuild
 import (
 	"fmt"
 
-	"github.com/digitalbits/go/support/errors"
-	"github.com/digitalbits/go/xdr"
+	"github.com/xdbfoundation/go/support/errors"
+	"github.com/xdbfoundation/go/xdr"
 )
 
 // MemoText is used to send human messages of up to 28 bytes of ASCII/UTF-8.

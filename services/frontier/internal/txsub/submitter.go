@@ -5,10 +5,10 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/digitalbits/go/clients/digitalbitscore"
-	proto "github.com/digitalbits/go/protocols/digitalbitscore"
-	"github.com/digitalbits/go/support/errors"
-	"github.com/digitalbits/go/support/log"
+	"github.com/xdbfoundation/go/clients/digitalbitscore"
+	proto "github.com/xdbfoundation/go/protocols/digitalbitscore"
+	"github.com/xdbfoundation/go/support/errors"
+	"github.com/xdbfoundation/go/support/log"
 )
 
 // NewDefaultSubmitter returns a new, simple Submitter implementation

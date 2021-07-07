@@ -7,11 +7,11 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"github.com/digitalbits/go/exp/services/recoverysigner/internal/account"
-	"github.com/digitalbits/go/exp/services/recoverysigner/internal/db/dbtest"
-	"github.com/digitalbits/go/exp/services/recoverysigner/internal/serve/auth"
-	"github.com/digitalbits/go/keypair"
-	supportlog "github.com/digitalbits/go/support/log"
+	"github.com/xdbfoundation/go/exp/services/recoverysigner/internal/account"
+	"github.com/xdbfoundation/go/exp/services/recoverysigner/internal/db/dbtest"
+	"github.com/xdbfoundation/go/exp/services/recoverysigner/internal/serve/auth"
+	"github.com/xdbfoundation/go/keypair"
+	supportlog "github.com/xdbfoundation/go/support/log"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )

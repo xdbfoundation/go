@@ -1,7 +1,7 @@
 package history
 
 import (
-	"github.com/digitalbits/go/support/db"
+	"github.com/xdbfoundation/go/support/db"
 )
 
 // OperationParticipantBatchInsertBuilder is used to insert a transaction's operations into the

@@ -4,9 +4,9 @@ import (
 	"context"
 	"io"
 
-	"github.com/digitalbits/go/historyarchive"
-	"github.com/digitalbits/go/support/errors"
-	"github.com/digitalbits/go/xdr"
+	"github.com/xdbfoundation/go/historyarchive"
+	"github.com/xdbfoundation/go/support/errors"
+	"github.com/xdbfoundation/go/xdr"
 )
 
 // HistoryArchiveBackend is using history archives to get ledger data.

@@ -3,9 +3,9 @@ package frontier
 import (
 	"testing"
 
-	"github.com/digitalbits/go/services/frontier/internal/db2/history"
-	"github.com/digitalbits/go/services/frontier/internal/ingest"
-	"github.com/digitalbits/go/xdr"
+	"github.com/xdbfoundation/go/services/frontier/internal/db2/history"
+	"github.com/xdbfoundation/go/services/frontier/internal/ingest"
+	"github.com/xdbfoundation/go/xdr"
 )
 
 func TestAccountActions_InvalidID(t *testing.T) {

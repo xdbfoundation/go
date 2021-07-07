@@ -14,8 +14,8 @@ import (
 
 	"time"
 
-	"github.com/digitalbits/go/support/errors"
-	"github.com/digitalbits/go/support/log"
+	"github.com/xdbfoundation/go/support/errors"
+	"github.com/xdbfoundation/go/support/log"
 )
 
 var extractBinName = regexp.MustCompile(`^(?P<bin>[a-z0-9-]+)-(?P<tag>.+)$`)
@@ -85,8 +85,8 @@ func binNamesForDir(dir string) []string {
 func build(pkg, dest, version, buildOS, buildArch string) {
 	buildTime := time.Now().Format(time.RFC3339)
 
-	timeFlag := fmt.Sprintf("-X github.com/digitalbits/go/support/app.buildTime=%s", buildTime)
-	versionFlag := fmt.Sprintf("-X github.com/digitalbits/go/support/app.version=%s", version)
+	timeFlag := fmt.Sprintf("-X github.com/xdbfoundation/go/support/app.buildTime=%s", buildTime)
+	versionFlag := fmt.Sprintf("-X github.com/xdbfoundation/go/support/app.version=%s", version)
 
 	if buildOS == "windows" {
 		dest = dest + ".exe"
@@ -330,7 +330,7 @@ func repoName() string {
 	if os.Getenv("REPO") != "" {
 		return os.Getenv("REPO")
 	}
-	return "github.com/digitalbits/go"
+	return "github.com/xdbfoundation/go"
 
 }
 

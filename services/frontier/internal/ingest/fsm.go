@@ -6,12 +6,12 @@ import (
 	"time"
 
 	"github.com/prometheus/client_golang/prometheus"
-	"github.com/digitalbits/go/ingest/ledgerbackend"
+	"github.com/xdbfoundation/go/ingest/ledgerbackend"
 
-	"github.com/digitalbits/go/ingest/io"
-	"github.com/digitalbits/go/services/frontier/internal/toid"
-	"github.com/digitalbits/go/support/errors"
-	logpkg "github.com/digitalbits/go/support/log"
+	"github.com/xdbfoundation/go/ingest/io"
+	"github.com/xdbfoundation/go/services/frontier/internal/toid"
+	"github.com/xdbfoundation/go/support/errors"
+	logpkg "github.com/xdbfoundation/go/support/log"
 )
 
 var (

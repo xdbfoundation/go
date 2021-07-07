@@ -4,7 +4,7 @@ import (
 	"testing"
 
 	"github.com/graph-gophers/graphql-go"
-	"github.com/digitalbits/go/services/ticker/internal/gql/static"
+	"github.com/xdbfoundation/go/services/ticker/internal/gql/static"
 )
 
 func TestValidateSchema(t *testing.T) {

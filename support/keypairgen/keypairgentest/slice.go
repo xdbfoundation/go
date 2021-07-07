@@ -1,7 +1,7 @@
 package keypairgentest
 
 import (
-	"github.com/digitalbits/go/keypair"
+	"github.com/xdbfoundation/go/keypair"
 )
 
 // SliceSource is a keypairgen.Generator source that has the values returned

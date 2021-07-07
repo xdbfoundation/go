@@ -4,11 +4,11 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/digitalbits/go/historyarchive"
-	"github.com/digitalbits/go/ingest/io"
-	"github.com/digitalbits/go/ingest/ledgerbackend"
-	"github.com/digitalbits/go/network"
-	"github.com/digitalbits/go/xdr"
+	"github.com/xdbfoundation/go/historyarchive"
+	"github.com/xdbfoundation/go/ingest/io"
+	"github.com/xdbfoundation/go/ingest/ledgerbackend"
+	"github.com/xdbfoundation/go/network"
+	"github.com/xdbfoundation/go/xdr"
 )
 
 // Example_ledgerentrieshistoryarchive demonstrates how to stream all ledger

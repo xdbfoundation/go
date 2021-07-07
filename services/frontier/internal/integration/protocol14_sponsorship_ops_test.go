@@ -8,14 +8,14 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	sdk "github.com/digitalbits/go/clients/frontierclient"
-	"github.com/digitalbits/go/keypair"
-	protocol "github.com/digitalbits/go/protocols/frontier"
-	"github.com/digitalbits/go/protocols/frontier/effects"
-	"github.com/digitalbits/go/protocols/frontier/operations"
-	"github.com/digitalbits/go/services/frontier/internal/test/integration"
-	"github.com/digitalbits/go/txnbuild"
-	"github.com/digitalbits/go/xdr"
+	sdk "github.com/xdbfoundation/go/clients/frontierclient"
+	"github.com/xdbfoundation/go/keypair"
+	protocol "github.com/xdbfoundation/go/protocols/frontier"
+	"github.com/xdbfoundation/go/protocols/frontier/effects"
+	"github.com/xdbfoundation/go/protocols/frontier/operations"
+	"github.com/xdbfoundation/go/services/frontier/internal/test/integration"
+	"github.com/xdbfoundation/go/txnbuild"
+	"github.com/xdbfoundation/go/xdr"
 )
 
 func TestSponsorships(t *testing.T) {
@@ -385,7 +385,7 @@ func TestSponsorships(t *testing.T) {
 		tt.Condition(preAuthSignerAdded)
 
 		// We don't check effects because we don't process transaction-level changes
-		// See https://github.com/digitalbits/go/pull/3050#discussion_r493651644
+		// See https://github.com/xdbfoundation/go/pull/3050#discussion_r493651644
 	})
 
 	// Let's add a sponsored data entry

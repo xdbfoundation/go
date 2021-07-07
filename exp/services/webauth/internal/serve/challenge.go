@@ -5,11 +5,11 @@ import (
 	"strings"
 	"time"
 
-	"github.com/digitalbits/go/keypair"
-	"github.com/digitalbits/go/strkey"
-	supportlog "github.com/digitalbits/go/support/log"
-	"github.com/digitalbits/go/support/render/httpjson"
-	"github.com/digitalbits/go/txnbuild"
+	"github.com/xdbfoundation/go/keypair"
+	"github.com/xdbfoundation/go/strkey"
+	supportlog "github.com/xdbfoundation/go/support/log"
+	"github.com/xdbfoundation/go/support/render/httpjson"
+	"github.com/xdbfoundation/go/txnbuild"
 )
 
 // ChallengeHandler implements the SEP-10 challenge endpoint and handles

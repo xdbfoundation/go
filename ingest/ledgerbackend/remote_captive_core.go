@@ -12,8 +12,8 @@ import (
 	"sync"
 	"time"
 
-	"github.com/digitalbits/go/support/errors"
-	"github.com/digitalbits/go/xdr"
+	"github.com/xdbfoundation/go/support/errors"
+	"github.com/xdbfoundation/go/xdr"
 )
 
 // PrepareRangeResponse describes the status of the pending PrepareRange operation.
