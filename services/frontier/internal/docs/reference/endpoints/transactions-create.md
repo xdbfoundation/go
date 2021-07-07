@@ -24,7 +24,7 @@ and not attempt to submit the transaction again. Only in cases where a
 transaction's status is unknown (and thus will have a chance of being included
 into a ledger) will a resubmission to the network occur.
 
-Information about [building transactions](https://github.com/xdbfoundation/js-digitalbits-base/blob/master/docs/reference/building-transactions.md) in JavaScript.
+Information about [building transactions](https://developers.digitalbits.io/js-digitalbits-base/reference/building-transactions.html) in JavaScript.
 
 ### Timeout
 

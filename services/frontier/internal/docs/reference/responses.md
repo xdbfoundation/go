@@ -90,4 +90,4 @@ and returning them all over a single request would be unfeasible.
 Read more about paging in following docs:
 
 - [Page](./resources/page.md)
-- [Paging](./reference/paging.md)
+- [Paging](./paging.md)
