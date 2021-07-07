@@ -4,7 +4,7 @@ import (
 	"testing"
 
 	"github.com/jmoiron/sqlx"
-	"github.com/digitalbits/go/exp/services/recoverysigner/internal/db/dbtest"
+	"github.com/xdbfoundation/go/exp/services/recoverysigner/internal/db/dbtest"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )

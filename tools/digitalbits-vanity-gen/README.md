@@ -6,7 +6,7 @@ This folder contains `digitalbits-vanity-gen` a simple utility to generate vanit
 ## Installing
 
 ```bash
-$ go get -u github.com/digitalbits/go/tools/digitalbits-vanity-gen
+$ go get -u github.com/xdbfoundation/go/tools/digitalbits-vanity-gen
 ```
 
 ## Running

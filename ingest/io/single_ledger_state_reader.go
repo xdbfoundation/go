@@ -7,9 +7,9 @@ import (
 	"sync"
 	"time"
 
-	"github.com/digitalbits/go/historyarchive"
-	"github.com/digitalbits/go/support/errors"
-	"github.com/digitalbits/go/xdr"
+	"github.com/xdbfoundation/go/historyarchive"
+	"github.com/xdbfoundation/go/support/errors"
+	"github.com/xdbfoundation/go/xdr"
 )
 
 // readResult is the result of reading a bucket value

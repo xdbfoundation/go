@@ -5,8 +5,8 @@ import (
 
 	sq "github.com/Masterminds/squirrel"
 
-	"github.com/digitalbits/go/support/db"
-	"github.com/digitalbits/go/support/errors"
+	"github.com/xdbfoundation/go/support/db"
+	"github.com/xdbfoundation/go/support/errors"
 )
 
 // AccountByAddress loads a row from `history_accounts`, by address
@@ -33,7 +33,7 @@ func (q *Q) CreateAccounts(addresses []string, batchSize int) (map[string]int64,
 	}
 
 	// sort assets before inserting rows into history_assets to prevent deadlocks on acquiring a ShareLock
-	// https://github.com/digitalbits/go/issues/2370
+	// https://github.com/xdbfoundation/go/issues/2370
 	sort.Strings(addresses)
 	for _, address := range addresses {
 		err := builder.Row(map[string]interface{}{

@@ -6,9 +6,9 @@ import (
 	"math"
 	"testing"
 
-	"github.com/digitalbits/go/keypair"
-	"github.com/digitalbits/go/price"
-	"github.com/digitalbits/go/xdr"
+	"github.com/xdbfoundation/go/keypair"
+	"github.com/xdbfoundation/go/price"
+	"github.com/xdbfoundation/go/xdr"
 )
 
 var (

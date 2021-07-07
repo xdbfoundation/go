@@ -8,16 +8,16 @@ import (
 	"bufio"
 	"flag"
 	"fmt"
-	"github.com/digitalbits/go/keypair"
-	"github.com/digitalbits/go/network"
+	"github.com/xdbfoundation/go/keypair"
+	"github.com/xdbfoundation/go/network"
 	"io/ioutil"
 	"log"
 	"os"
 	"strings"
 
 	"github.com/howeyc/gopass"
-	"github.com/digitalbits/go/txnbuild"
-	"github.com/digitalbits/go/xdr"
+	"github.com/xdbfoundation/go/txnbuild"
+	"github.com/xdbfoundation/go/xdr"
 )
 
 var in *bufio.Reader

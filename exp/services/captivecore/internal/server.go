@@ -4,10 +4,10 @@ import (
 	"encoding/json"
 	"net/http"
 
-	"github.com/digitalbits/go/ingest/ledgerbackend"
-	supporthttp "github.com/digitalbits/go/support/http"
-	"github.com/digitalbits/go/support/http/httpdecode"
-	supportlog "github.com/digitalbits/go/support/log"
+	"github.com/xdbfoundation/go/ingest/ledgerbackend"
+	supporthttp "github.com/xdbfoundation/go/support/http"
+	"github.com/xdbfoundation/go/support/http/httpdecode"
+	supportlog "github.com/xdbfoundation/go/support/log"
 )
 
 func serializeResponse(

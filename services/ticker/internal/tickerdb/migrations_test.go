@@ -9,8 +9,8 @@ import (
 	assetfs "github.com/elazarl/go-bindata-assetfs"
 	"github.com/shurcooL/httpfs/filter"
 
-	bdata "github.com/digitalbits/go/services/ticker/internal/tickerdb/migrations"
-	supportHttp "github.com/digitalbits/go/support/http"
+	bdata "github.com/xdbfoundation/go/services/ticker/internal/tickerdb/migrations"
+	supportHttp "github.com/xdbfoundation/go/support/http"
 )
 
 func TestGeneratedAssets(t *testing.T) {

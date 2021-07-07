@@ -5,12 +5,12 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	sdk "github.com/digitalbits/go/clients/frontierclient"
-	hEffects "github.com/digitalbits/go/protocols/frontier/effects"
-	"github.com/digitalbits/go/protocols/frontier/operations"
-	"github.com/digitalbits/go/services/frontier/internal/test/integration"
-	"github.com/digitalbits/go/txnbuild"
-	"github.com/digitalbits/go/xdr"
+	sdk "github.com/xdbfoundation/go/clients/frontierclient"
+	hEffects "github.com/xdbfoundation/go/protocols/frontier/effects"
+	"github.com/xdbfoundation/go/protocols/frontier/operations"
+	"github.com/xdbfoundation/go/services/frontier/internal/test/integration"
+	"github.com/xdbfoundation/go/txnbuild"
+	"github.com/xdbfoundation/go/xdr"
 )
 
 func TestClaimableBalanceCreationOperationsAndEffects(t *testing.T) {

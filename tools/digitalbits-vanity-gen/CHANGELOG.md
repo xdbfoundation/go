@@ -12,6 +12,6 @@ bumps.  A breaking change will get clearly notified in this log.
 
 ## [v0.1.0] - 2016-08-17
 
-Initial release after import from https://github.com/digitalbits/go-digitalbits-base/cmd/digitalbits-vanity-gen
+Initial release after import from https://github.com/xdbfoundation/go-digitalbits-base/cmd/digitalbits-vanity-gen
 
-[Unreleased]: https://github.com/digitalbits/go/compare/digitalbits-vanity-gen-v0.1.0...master
+[Unreleased]: https://github.com/xdbfoundation/go/compare/digitalbits-vanity-gen-v0.1.0...master

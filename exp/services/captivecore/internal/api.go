@@ -5,9 +5,9 @@ import (
 	"sync"
 	"time"
 
-	"github.com/digitalbits/go/ingest/ledgerbackend"
-	"github.com/digitalbits/go/support/errors"
-	"github.com/digitalbits/go/support/log"
+	"github.com/xdbfoundation/go/ingest/ledgerbackend"
+	"github.com/xdbfoundation/go/support/errors"
+	"github.com/xdbfoundation/go/support/log"
 )
 
 var (

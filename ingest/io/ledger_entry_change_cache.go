@@ -3,9 +3,9 @@ package io
 import (
 	"sync"
 
-	ingesterrors "github.com/digitalbits/go/ingest/errors"
-	"github.com/digitalbits/go/support/errors"
-	"github.com/digitalbits/go/xdr"
+	ingesterrors "github.com/xdbfoundation/go/ingest/errors"
+	"github.com/xdbfoundation/go/support/errors"
+	"github.com/xdbfoundation/go/xdr"
 )
 
 // LedgerEntryChangeCache is a cache of ledger entry changes that squashes all

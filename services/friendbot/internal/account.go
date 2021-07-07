@@ -3,8 +3,8 @@ package internal
 import (
 	"strconv"
 
-	"github.com/digitalbits/go/clients/frontierclient"
-	"github.com/digitalbits/go/support/errors"
+	"github.com/xdbfoundation/go/clients/frontierclient"
+	"github.com/xdbfoundation/go/support/errors"
 )
 
 // Account implements the `txnbuild.Account` interface.

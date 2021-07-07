@@ -3,7 +3,7 @@ package httpjson
 import (
 	"encoding/json"
 
-	"github.com/digitalbits/go/support/errors"
+	"github.com/xdbfoundation/go/support/errors"
 )
 
 // ErrNotJSONObject is returned when Object.UnmarshalJSON is called

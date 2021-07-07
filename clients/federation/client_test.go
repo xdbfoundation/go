@@ -7,9 +7,9 @@ import (
 	"strings"
 	"testing"
 
-	hc "github.com/digitalbits/go/clients/frontierclient"
-	"github.com/digitalbits/go/clients/digitalbitstoml"
-	"github.com/digitalbits/go/support/http/httptest"
+	hc "github.com/xdbfoundation/go/clients/frontierclient"
+	"github.com/xdbfoundation/go/clients/digitalbitstoml"
+	"github.com/xdbfoundation/go/support/http/httptest"
 	"github.com/stretchr/testify/assert"
 )
 

@@ -18,7 +18,7 @@ import (
 
 	"github.com/Masterminds/squirrel"
 	"github.com/jmoiron/sqlx"
-	"github.com/digitalbits/go/support/errors"
+	"github.com/xdbfoundation/go/support/errors"
 
 	// Enable postgres
 	_ "github.com/lib/pq"

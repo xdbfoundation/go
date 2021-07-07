@@ -8,7 +8,7 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
-	. "github.com/digitalbits/go/xdr"
+	. "github.com/xdbfoundation/go/xdr"
 )
 
 var _ = Describe("xdr.Asset#Extract()", func() {

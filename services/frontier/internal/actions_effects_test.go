@@ -3,10 +3,10 @@ package frontier
 import (
 	"testing"
 
-	"github.com/digitalbits/go/protocols/frontier/effects"
-	"github.com/digitalbits/go/services/frontier/internal/db2/history"
-	"github.com/digitalbits/go/services/frontier/internal/ingest"
-	"github.com/digitalbits/go/services/frontier/internal/test"
+	"github.com/xdbfoundation/go/protocols/frontier/effects"
+	"github.com/xdbfoundation/go/services/frontier/internal/db2/history"
+	"github.com/xdbfoundation/go/services/frontier/internal/ingest"
+	"github.com/xdbfoundation/go/services/frontier/internal/test"
 )
 
 func TestEffectActions_Index(t *testing.T) {
@@ -21,7 +21,7 @@ func TestEffectActions_Index(t *testing.T) {
 			ht.Assert.PageOf(11, w.Body)
 		}
 
-		// test streaming, regression for https://github.com/digitalbits/go/services/frontier/internal/issues/147
+		// test streaming, regression for https://github.com/xdbfoundation/go/services/frontier/internal/issues/147
 		w = ht.Get("/effects?limit=2", test.RequestHelperStreaming)
 		ht.Assert.Equal(200, w.Code)
 

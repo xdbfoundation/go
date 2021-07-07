@@ -7,7 +7,7 @@ Packages here provide client libraries for accessing the ecosystem of DigitalBit
 * `federation` - resolve federation addresses into digitalbits account IDs, suitable for use within a transaction
 * `frontier` (DEPRECATED) - the original Frontier client, now superceded by `frontierclient`
 
-See [GoDoc](https://godoc.org/github.com/digitalbits/go/clients) for more details.
+See [GoDoc](https://godoc.org/github.com/xdbfoundation/go/clients) for more details.
 
 ## For developers: Adding new client packages
 

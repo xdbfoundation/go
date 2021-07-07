@@ -1,7 +1,7 @@
 package history
 
 import (
-	"github.com/digitalbits/go/support/db"
+	"github.com/xdbfoundation/go/support/db"
 )
 
 // QParticipants defines ingestion participant related queries.

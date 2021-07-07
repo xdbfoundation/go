@@ -5,12 +5,12 @@ import (
 	"context"
 	"testing"
 
-	"github.com/digitalbits/go/historyarchive"
-	"github.com/digitalbits/go/ingest/adapters"
-	"github.com/digitalbits/go/ingest/io"
-	"github.com/digitalbits/go/ingest/ledgerbackend"
-	"github.com/digitalbits/go/support/errors"
-	"github.com/digitalbits/go/xdr"
+	"github.com/xdbfoundation/go/historyarchive"
+	"github.com/xdbfoundation/go/ingest/adapters"
+	"github.com/xdbfoundation/go/ingest/io"
+	"github.com/xdbfoundation/go/ingest/ledgerbackend"
+	"github.com/xdbfoundation/go/support/errors"
+	"github.com/xdbfoundation/go/xdr"
 	"github.com/stretchr/testify/mock"
 	"github.com/stretchr/testify/suite"
 )

@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"testing"
 
-	"github.com/digitalbits/go/protocols/frontier"
+	"github.com/xdbfoundation/go/protocols/frontier"
 )
 
 func TestLedgerActions_Index(t *testing.T) {

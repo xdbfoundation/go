@@ -7,7 +7,7 @@ import (
 	"time"
 
 	"github.com/prometheus/client_golang/prometheus"
-	hProtocol "github.com/digitalbits/go/protocols/frontier"
+	hProtocol "github.com/xdbfoundation/go/protocols/frontier"
 )
 
 // Volume stores volume of a various base pair in both XDB and USD.

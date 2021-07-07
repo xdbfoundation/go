@@ -2,10 +2,10 @@
 package trades
 
 import (
-	"github.com/digitalbits/go/keypair"
-	"github.com/digitalbits/go/services/frontier/internal/db2/history"
-	"github.com/digitalbits/go/support/time"
-	"github.com/digitalbits/go/xdr"
+	"github.com/xdbfoundation/go/keypair"
+	"github.com/xdbfoundation/go/services/frontier/internal/db2/history"
+	"github.com/xdbfoundation/go/support/time"
+	"github.com/xdbfoundation/go/xdr"
 )
 
 //GetTestAsset generates an issuer on the fly and creates a CreditAlphanum4 Asset with given code

@@ -3,7 +3,7 @@ Package txnbuild implements transactions and operations on the DigitalBits netwo
 This library provides an interface to the DigitalBits transaction model. It supports the building of Go applications on
 top of the DigitalBits network (https://www.digitalbits.org/). Transactions constructed by this library may be submitted
 to any Frontier instance for processing onto the ledger, using any DigitalBits SDK client. The recommended client for Go
-programmers is frontierclient (https://github.com/digitalbits/go/tree/master/clients/frontierclient). Together, these two
+programmers is frontierclient (https://github.com/xdbfoundation/go/tree/master/clients/frontierclient). Together, these two
 libraries provide a complete DigitalBits SDK.
 For more information and further examples, see https://www.digitalbits.org/developers/go/reference/index.html.
 */
@@ -21,11 +21,11 @@ import (
 	"strings"
 	"time"
 
-	"github.com/digitalbits/go/keypair"
-	"github.com/digitalbits/go/network"
-	"github.com/digitalbits/go/strkey"
-	"github.com/digitalbits/go/support/errors"
-	"github.com/digitalbits/go/xdr"
+	"github.com/xdbfoundation/go/keypair"
+	"github.com/xdbfoundation/go/network"
+	"github.com/xdbfoundation/go/strkey"
+	"github.com/xdbfoundation/go/support/errors"
+	"github.com/xdbfoundation/go/xdr"
 )
 
 // MinBaseFee is the minimum transaction fee for the DigitalBits network.

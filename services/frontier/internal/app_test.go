@@ -6,7 +6,7 @@ import (
 
 	"github.com/prometheus/client_golang/prometheus"
 	dto "github.com/prometheus/client_model/go"
-	"github.com/digitalbits/go/services/frontier/internal/test"
+	"github.com/xdbfoundation/go/services/frontier/internal/test"
 )
 
 func TestGenericHTTPFeatures(t *testing.T) {

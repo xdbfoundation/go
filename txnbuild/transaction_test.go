@@ -7,10 +7,10 @@ import (
 	"testing"
 	"time"
 
-	"github.com/digitalbits/go/keypair"
-	"github.com/digitalbits/go/network"
-	"github.com/digitalbits/go/strkey"
-	"github.com/digitalbits/go/xdr"
+	"github.com/xdbfoundation/go/keypair"
+	"github.com/xdbfoundation/go/network"
+	"github.com/xdbfoundation/go/strkey"
+	"github.com/xdbfoundation/go/xdr"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )

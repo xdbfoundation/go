@@ -5,10 +5,10 @@ import (
 	"testing"
 	"time"
 
-	"github.com/digitalbits/go/protocols/frontier"
-	"github.com/digitalbits/go/protocols/frontier/operations"
-	"github.com/digitalbits/go/services/frontier/internal/db2/history"
-	"github.com/digitalbits/go/services/frontier/internal/ingest"
+	"github.com/xdbfoundation/go/protocols/frontier"
+	"github.com/xdbfoundation/go/protocols/frontier/operations"
+	"github.com/xdbfoundation/go/services/frontier/internal/db2/history"
+	"github.com/xdbfoundation/go/services/frontier/internal/ingest"
 )
 
 // Moved to TestGetOperationsOnlyPayments

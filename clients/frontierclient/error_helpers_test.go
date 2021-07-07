@@ -3,8 +3,8 @@ package frontierclient
 import (
 	"testing"
 
-	"github.com/digitalbits/go/support/errors"
-	"github.com/digitalbits/go/support/render/problem"
+	"github.com/xdbfoundation/go/support/errors"
+	"github.com/xdbfoundation/go/support/render/problem"
 	"github.com/stretchr/testify/assert"
 )
 

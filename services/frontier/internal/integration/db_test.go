@@ -7,13 +7,13 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"github.com/digitalbits/go/historyarchive"
-	frontiercmd "github.com/digitalbits/go/services/frontier/cmd"
-	"github.com/digitalbits/go/services/frontier/internal/db2/schema"
-	"github.com/digitalbits/go/services/frontier/internal/test/integration"
-	"github.com/digitalbits/go/support/db"
-	"github.com/digitalbits/go/support/db/dbtest"
-	"github.com/digitalbits/go/txnbuild"
+	"github.com/xdbfoundation/go/historyarchive"
+	frontiercmd "github.com/xdbfoundation/go/services/frontier/cmd"
+	"github.com/xdbfoundation/go/services/frontier/internal/db2/schema"
+	"github.com/xdbfoundation/go/services/frontier/internal/test/integration"
+	"github.com/xdbfoundation/go/support/db"
+	"github.com/xdbfoundation/go/support/db/dbtest"
+	"github.com/xdbfoundation/go/txnbuild"
 )
 
 func initializeDBIntegrationTest(t *testing.T) (itest *integration.Test, reachedLedger int32) {

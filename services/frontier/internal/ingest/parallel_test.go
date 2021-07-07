@@ -10,7 +10,7 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
 
-	"github.com/digitalbits/go/support/errors"
+	"github.com/xdbfoundation/go/support/errors"
 )
 
 func TestCalculateParallelLedgerBatchSize(t *testing.T) {

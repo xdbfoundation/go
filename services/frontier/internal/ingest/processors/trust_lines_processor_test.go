@@ -7,11 +7,11 @@ import (
 	"github.com/stretchr/testify/mock"
 	"github.com/stretchr/testify/suite"
 
-	ingesterrors "github.com/digitalbits/go/ingest/errors"
-	"github.com/digitalbits/go/ingest/io"
-	"github.com/digitalbits/go/services/frontier/internal/db2/history"
-	"github.com/digitalbits/go/support/errors"
-	"github.com/digitalbits/go/xdr"
+	ingesterrors "github.com/xdbfoundation/go/ingest/errors"
+	"github.com/xdbfoundation/go/ingest/io"
+	"github.com/xdbfoundation/go/services/frontier/internal/db2/history"
+	"github.com/xdbfoundation/go/support/errors"
+	"github.com/xdbfoundation/go/xdr"
 )
 
 var trustLineIssuer = xdr.MustAddress("GBRPYHIL2CI3FNQ4BXLFMNDLFJUNPU2HY3ZMFSHONUCEOASW7QC7OX2H")

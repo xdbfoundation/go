@@ -7,8 +7,8 @@ import (
 	stdio "io"
 	"log"
 
-	"github.com/digitalbits/go/historyarchive"
-	"github.com/digitalbits/go/ingest/adapters"
+	"github.com/xdbfoundation/go/historyarchive"
+	"github.com/xdbfoundation/go/ingest/adapters"
 )
 
 func main() {

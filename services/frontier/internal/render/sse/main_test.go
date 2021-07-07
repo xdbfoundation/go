@@ -6,7 +6,7 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"github.com/digitalbits/go/support/test"
+	"github.com/xdbfoundation/go/support/test"
 	"github.com/stretchr/testify/assert"
 )
 

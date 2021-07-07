@@ -8,12 +8,12 @@ import (
 	"github.com/stretchr/testify/mock"
 	"github.com/stretchr/testify/suite"
 
-	"github.com/digitalbits/go/ingest/io"
-	"github.com/digitalbits/go/services/frontier/internal/db2/history"
-	. "github.com/digitalbits/go/services/frontier/internal/test/transactions"
-	"github.com/digitalbits/go/services/frontier/internal/toid"
-	"github.com/digitalbits/go/support/errors"
-	"github.com/digitalbits/go/xdr"
+	"github.com/xdbfoundation/go/ingest/io"
+	"github.com/xdbfoundation/go/services/frontier/internal/db2/history"
+	. "github.com/xdbfoundation/go/services/frontier/internal/test/transactions"
+	"github.com/xdbfoundation/go/services/frontier/internal/toid"
+	"github.com/xdbfoundation/go/support/errors"
+	"github.com/xdbfoundation/go/xdr"
 )
 
 type EffectsProcessorTestSuiteLedger struct {
@@ -1612,7 +1612,7 @@ func TestOperationEffectsSetOptionsSignersOrder(t *testing.T) {
 	tt.Equal(expected, effects)
 }
 
-// Regression for https://github.com/digitalbits/go/issues/2136
+// Regression for https://github.com/xdbfoundation/go/issues/2136
 func TestOperationEffectsSetOptionsSignersNoUpdated(t *testing.T) {
 	tt := assert.New(t)
 	transaction := io.LedgerTransaction{

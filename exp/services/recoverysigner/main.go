@@ -3,8 +3,8 @@ package main
 import (
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
-	"github.com/digitalbits/go/exp/services/recoverysigner/cmd"
-	supportlog "github.com/digitalbits/go/support/log"
+	"github.com/xdbfoundation/go/exp/services/recoverysigner/cmd"
+	supportlog "github.com/xdbfoundation/go/support/log"
 )
 
 func main() {

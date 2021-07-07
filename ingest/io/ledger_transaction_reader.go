@@ -4,10 +4,10 @@ import (
 	"encoding/hex"
 	"io"
 
-	"github.com/digitalbits/go/ingest/ledgerbackend"
-	"github.com/digitalbits/go/network"
-	"github.com/digitalbits/go/support/errors"
-	"github.com/digitalbits/go/xdr"
+	"github.com/xdbfoundation/go/ingest/ledgerbackend"
+	"github.com/xdbfoundation/go/network"
+	"github.com/xdbfoundation/go/support/errors"
+	"github.com/xdbfoundation/go/xdr"
 )
 
 // LedgerTransactionReader reads transactions for a given ledger sequence from a backend.

@@ -3,7 +3,7 @@ package io
 import (
 	"io"
 
-	"github.com/digitalbits/go/support/errors"
+	"github.com/xdbfoundation/go/support/errors"
 )
 
 type ChangeProcessor interface {

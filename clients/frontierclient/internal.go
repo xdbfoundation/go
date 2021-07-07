@@ -7,7 +7,7 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/digitalbits/go/support/errors"
+	"github.com/xdbfoundation/go/support/errors"
 )
 
 // decodeResponse decodes the response from a request to a frontier server

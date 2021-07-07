@@ -3,10 +3,10 @@ package resourceadapter
 import (
 	"context"
 
-	"github.com/digitalbits/go/amount"
-	"github.com/digitalbits/go/price"
-	protocol "github.com/digitalbits/go/protocols/frontier"
-	"github.com/digitalbits/go/services/frontier/internal/db2/history"
+	"github.com/xdbfoundation/go/amount"
+	"github.com/xdbfoundation/go/price"
+	protocol "github.com/xdbfoundation/go/protocols/frontier"
+	"github.com/xdbfoundation/go/services/frontier/internal/db2/history"
 )
 
 // Populate fills out the details of a trade using a row from the history_trades

@@ -5,16 +5,16 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/digitalbits/go/protocols/frontier"
-	"github.com/digitalbits/go/services/frontier/internal/context"
-	"github.com/digitalbits/go/services/frontier/internal/db2"
-	"github.com/digitalbits/go/services/frontier/internal/db2/history"
-	"github.com/digitalbits/go/services/frontier/internal/ledger"
-	"github.com/digitalbits/go/services/frontier/internal/resourceadapter"
-	"github.com/digitalbits/go/support/errors"
-	"github.com/digitalbits/go/support/render/hal"
-	"github.com/digitalbits/go/support/render/problem"
-	"github.com/digitalbits/go/xdr"
+	"github.com/xdbfoundation/go/protocols/frontier"
+	"github.com/xdbfoundation/go/services/frontier/internal/context"
+	"github.com/xdbfoundation/go/services/frontier/internal/db2"
+	"github.com/xdbfoundation/go/services/frontier/internal/db2/history"
+	"github.com/xdbfoundation/go/services/frontier/internal/ledger"
+	"github.com/xdbfoundation/go/services/frontier/internal/resourceadapter"
+	"github.com/xdbfoundation/go/support/errors"
+	"github.com/xdbfoundation/go/support/render/hal"
+	"github.com/xdbfoundation/go/support/render/problem"
+	"github.com/xdbfoundation/go/xdr"
 )
 
 // AssetStatsHandler is the action handler for the /asset endpoint

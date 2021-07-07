@@ -3,7 +3,7 @@ package orderbook
 import (
 	"sort"
 
-	"github.com/digitalbits/go/xdr"
+	"github.com/xdbfoundation/go/xdr"
 )
 
 // edgeSet maintains a maping of strings to sorted lists of offers.

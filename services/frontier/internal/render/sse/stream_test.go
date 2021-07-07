@@ -9,9 +9,9 @@ import (
 	"strconv"
 	"testing"
 
-	hProblem "github.com/digitalbits/go/services/frontier/internal/render/problem"
-	"github.com/digitalbits/go/support/render/problem"
-	"github.com/digitalbits/go/support/test"
+	hProblem "github.com/xdbfoundation/go/services/frontier/internal/render/problem"
+	"github.com/xdbfoundation/go/support/render/problem"
+	"github.com/xdbfoundation/go/support/test"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/suite"
 )

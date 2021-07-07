@@ -4,8 +4,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/digitalbits/go/support/clock"
-	"github.com/digitalbits/go/support/clock/clocktest"
+	"github.com/xdbfoundation/go/support/clock"
+	"github.com/xdbfoundation/go/support/clock/clocktest"
 	"github.com/stretchr/testify/assert"
 )
 

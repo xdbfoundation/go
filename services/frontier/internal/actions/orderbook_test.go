@@ -7,11 +7,11 @@ import (
 	"strconv"
 	"testing"
 
-	"github.com/digitalbits/go/services/frontier/internal/db2/history"
-	"github.com/digitalbits/go/services/frontier/internal/test"
+	"github.com/xdbfoundation/go/services/frontier/internal/db2/history"
+	"github.com/xdbfoundation/go/services/frontier/internal/test"
 	"github.com/stretchr/testify/assert"
 
-	protocol "github.com/digitalbits/go/protocols/frontier"
+	protocol "github.com/xdbfoundation/go/protocols/frontier"
 )
 
 type intObject int

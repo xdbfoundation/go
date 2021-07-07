@@ -6,7 +6,7 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
-	"github.com/digitalbits/go/xdr"
+	"github.com/xdbfoundation/go/xdr"
 )
 
 func TestNativeAssetToXDR(t *testing.T) {

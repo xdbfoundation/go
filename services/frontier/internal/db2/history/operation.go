@@ -5,9 +5,9 @@ import (
 
 	sq "github.com/Masterminds/squirrel"
 	"github.com/go-errors/errors"
-	"github.com/digitalbits/go/services/frontier/internal/db2"
-	"github.com/digitalbits/go/services/frontier/internal/toid"
-	"github.com/digitalbits/go/xdr"
+	"github.com/xdbfoundation/go/services/frontier/internal/db2"
+	"github.com/xdbfoundation/go/services/frontier/internal/toid"
+	"github.com/xdbfoundation/go/xdr"
 )
 
 // LedgerSequence return the ledger in which the effect occurred.

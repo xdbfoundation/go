@@ -4,9 +4,9 @@ import (
 	"net/http"
 	"net/url"
 
-	"github.com/digitalbits/go/protocols/frontier"
-	"github.com/digitalbits/go/services/frontier/internal/ledger"
-	"github.com/digitalbits/go/services/frontier/internal/resourceadapter"
+	"github.com/xdbfoundation/go/protocols/frontier"
+	"github.com/xdbfoundation/go/services/frontier/internal/ledger"
+	"github.com/xdbfoundation/go/services/frontier/internal/resourceadapter"
 )
 
 type CoreSettings struct {

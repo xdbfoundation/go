@@ -3,11 +3,11 @@ package internal
 import (
 	"fmt"
 
-	"github.com/digitalbits/go/clients/frontierclient"
-	"github.com/digitalbits/go/keypair"
-	hProtocol "github.com/digitalbits/go/protocols/frontier"
-	"github.com/digitalbits/go/support/errors"
-	"github.com/digitalbits/go/txnbuild"
+	"github.com/xdbfoundation/go/clients/frontierclient"
+	"github.com/xdbfoundation/go/keypair"
+	hProtocol "github.com/xdbfoundation/go/protocols/frontier"
+	"github.com/xdbfoundation/go/support/errors"
+	"github.com/xdbfoundation/go/txnbuild"
 )
 
 const createAccountAlreadyExistXDR = "AAAAAAAAAGT/////AAAAAQAAAAAAAAAA/////AAAAAA="

@@ -6,8 +6,8 @@ import (
 	"fmt"
 	"net/url"
 
-	"github.com/digitalbits/go/protocols/frontier/effects"
-	"github.com/digitalbits/go/support/errors"
+	"github.com/xdbfoundation/go/protocols/frontier/effects"
+	"github.com/xdbfoundation/go/support/errors"
 )
 
 // EffectHandler is a function that is called when a new effect is received

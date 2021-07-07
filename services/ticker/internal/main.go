@@ -1,7 +1,7 @@
 package ticker
 
 import (
-	"github.com/digitalbits/go/services/ticker/internal/scraper"
+	"github.com/xdbfoundation/go/services/ticker/internal/scraper"
 )
 
 // MarketSummary represents a summary of statistics of all valid markets

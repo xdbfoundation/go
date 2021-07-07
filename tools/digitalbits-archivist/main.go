@@ -12,8 +12,8 @@ import (
 	"os"
 
 	"github.com/spf13/cobra"
-	"github.com/digitalbits/go/historyarchive"
-	"github.com/digitalbits/go/support/errors"
+	"github.com/xdbfoundation/go/historyarchive"
+	"github.com/xdbfoundation/go/support/errors"
 )
 
 const checkpointFrequency = uint32(64)

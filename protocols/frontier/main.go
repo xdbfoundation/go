@@ -8,11 +8,11 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/digitalbits/go/protocols/frontier/base"
-	"github.com/digitalbits/go/strkey"
-	"github.com/digitalbits/go/support/errors"
-	"github.com/digitalbits/go/support/render/hal"
-	"github.com/digitalbits/go/xdr"
+	"github.com/xdbfoundation/go/protocols/frontier/base"
+	"github.com/xdbfoundation/go/strkey"
+	"github.com/xdbfoundation/go/support/errors"
+	"github.com/xdbfoundation/go/support/render/hal"
+	"github.com/xdbfoundation/go/xdr"
 )
 
 // KeyTypeNames maps from strkey version bytes into json string values to use in
@@ -630,7 +630,7 @@ type FeeDistribution struct {
 }
 
 // FeeStats represents a response of fees from frontier
-// To do: implement fee suggestions if agreement is reached in https://github.com/digitalbits/go/issues/926
+// To do: implement fee suggestions if agreement is reached in https://github.com/xdbfoundation/go/issues/926
 type FeeStats struct {
 	LastLedger          uint32  `json:"last_ledger,string"`
 	LastLedgerBaseFee   int64   `json:"last_ledger_base_fee,string"`

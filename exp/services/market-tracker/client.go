@@ -4,8 +4,8 @@ import (
 	"math"
 	"time"
 
-	hClient "github.com/digitalbits/go/clients/frontierclient"
-	hProtocol "github.com/digitalbits/go/protocols/frontier"
+	hClient "github.com/xdbfoundation/go/clients/frontierclient"
+	hProtocol "github.com/xdbfoundation/go/protocols/frontier"
 )
 
 type trackerClient struct {

@@ -2,9 +2,9 @@ package simplepath
 
 import (
 	"github.com/go-errors/errors"
-	"github.com/digitalbits/go/exp/orderbook"
-	"github.com/digitalbits/go/services/frontier/internal/paths"
-	"github.com/digitalbits/go/xdr"
+	"github.com/xdbfoundation/go/exp/orderbook"
+	"github.com/xdbfoundation/go/services/frontier/internal/paths"
+	"github.com/xdbfoundation/go/xdr"
 )
 
 const (

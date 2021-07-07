@@ -2,7 +2,7 @@
 package examplefrontierclient
 
 import (
-	hProtocol "github.com/digitalbits/go/protocols/frontier"
+	hProtocol "github.com/xdbfoundation/go/protocols/frontier"
 )
 
 // AccountRequest is a simple mock

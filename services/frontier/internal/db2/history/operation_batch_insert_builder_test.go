@@ -4,9 +4,9 @@ import (
 	"encoding/json"
 	"testing"
 
-	"github.com/digitalbits/go/services/frontier/internal/test"
-	"github.com/digitalbits/go/services/frontier/internal/toid"
-	"github.com/digitalbits/go/xdr"
+	"github.com/xdbfoundation/go/services/frontier/internal/test"
+	"github.com/xdbfoundation/go/services/frontier/internal/toid"
+	"github.com/xdbfoundation/go/xdr"
 )
 
 func TestAddOperation(t *testing.T) {

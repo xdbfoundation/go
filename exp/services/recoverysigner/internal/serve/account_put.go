@@ -3,13 +3,13 @@ package serve
 import (
 	"net/http"
 
-	"github.com/digitalbits/go/exp/services/recoverysigner/internal/account"
-	"github.com/digitalbits/go/exp/services/recoverysigner/internal/serve/auth"
-	"github.com/digitalbits/go/keypair"
-	"github.com/digitalbits/go/support/errors"
-	"github.com/digitalbits/go/support/http/httpdecode"
-	supportlog "github.com/digitalbits/go/support/log"
-	"github.com/digitalbits/go/support/render/httpjson"
+	"github.com/xdbfoundation/go/exp/services/recoverysigner/internal/account"
+	"github.com/xdbfoundation/go/exp/services/recoverysigner/internal/serve/auth"
+	"github.com/xdbfoundation/go/keypair"
+	"github.com/xdbfoundation/go/support/errors"
+	"github.com/xdbfoundation/go/support/http/httpdecode"
+	supportlog "github.com/xdbfoundation/go/support/log"
+	"github.com/xdbfoundation/go/support/render/httpjson"
 )
 
 type accountPutHandler struct {

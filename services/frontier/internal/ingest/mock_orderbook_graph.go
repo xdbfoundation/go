@@ -1,8 +1,8 @@
 package ingest
 
 import (
-	"github.com/digitalbits/go/exp/orderbook"
-	"github.com/digitalbits/go/xdr"
+	"github.com/xdbfoundation/go/exp/orderbook"
+	"github.com/xdbfoundation/go/xdr"
 	"github.com/stretchr/testify/mock"
 )
 

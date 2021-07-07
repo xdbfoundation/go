@@ -5,7 +5,7 @@
 package historyarchive
 
 import (
-	"github.com/digitalbits/go/xdr"
+	"github.com/xdbfoundation/go/xdr"
 	"io"
 	"log"
 	"time"

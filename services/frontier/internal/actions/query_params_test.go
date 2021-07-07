@@ -5,8 +5,8 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"github.com/digitalbits/go/support/render/problem"
-	"github.com/digitalbits/go/xdr"
+	"github.com/xdbfoundation/go/support/render/problem"
+	"github.com/xdbfoundation/go/xdr"
 )
 
 var (

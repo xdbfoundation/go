@@ -23,7 +23,7 @@ RUN echo "listen_addresses='*'" >> /etc/postgresql/9.6/main/postgresql.conf
 
 RUN curl -sL https://storage.googleapis.com/golang/go1.15.3.linux-amd64.tar.gz | tar -C /usr/local -xz
 RUN ln -s  /usr/local/go/bin/go /usr/local/bin/go
-WORKDIR /go/src/github.com/digitalbits/go
+WORKDIR /go/src/github.com/xdbfoundation/go
 COPY go.mod go.sum ./
 RUN go mod download
 COPY . ./
@@ -32,7 +32,7 @@ ENV PGPORT=5432
 ENV PGUSER=circleci
 ENV PGHOST=localhost
 
-WORKDIR /go/src/github.com/digitalbits/go/exp/tools/dump-ledger-state
+WORKDIR /go/src/github.com/xdbfoundation/go/exp/tools/dump-ledger-state
 
 ARG GITCOMMIT
 ENV GITCOMMIT=${GITCOMMIT}

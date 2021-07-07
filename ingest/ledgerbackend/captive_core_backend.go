@@ -9,9 +9,9 @@ import (
 	"github.com/pkg/errors"
 	"github.com/sirupsen/logrus"
 
-	"github.com/digitalbits/go/historyarchive"
-	"github.com/digitalbits/go/support/log"
-	"github.com/digitalbits/go/xdr"
+	"github.com/xdbfoundation/go/historyarchive"
+	"github.com/xdbfoundation/go/support/log"
+	"github.com/xdbfoundation/go/xdr"
 )
 
 // Ensure CaptiveDigitalBitsCore implements LedgerBackend

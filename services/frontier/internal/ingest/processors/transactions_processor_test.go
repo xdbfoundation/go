@@ -4,8 +4,8 @@ package processors
 import (
 	"testing"
 
-	"github.com/digitalbits/go/services/frontier/internal/db2/history"
-	"github.com/digitalbits/go/support/errors"
+	"github.com/xdbfoundation/go/services/frontier/internal/db2/history"
+	"github.com/xdbfoundation/go/support/errors"
 	"github.com/stretchr/testify/suite"
 )
 

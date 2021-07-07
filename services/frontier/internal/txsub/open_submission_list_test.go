@@ -6,8 +6,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/digitalbits/go/services/frontier/internal/test"
-	"github.com/digitalbits/go/support/errors"
+	"github.com/xdbfoundation/go/services/frontier/internal/test"
+	"github.com/xdbfoundation/go/support/errors"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/suite"
 )

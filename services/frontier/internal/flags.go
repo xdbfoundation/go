@@ -9,11 +9,11 @@ import (
 
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/viper"
-	"github.com/digitalbits/go/services/frontier/internal/db2/schema"
-	apkg "github.com/digitalbits/go/support/app"
-	support "github.com/digitalbits/go/support/config"
-	"github.com/digitalbits/go/support/db"
-	"github.com/digitalbits/go/support/log"
+	"github.com/xdbfoundation/go/services/frontier/internal/db2/schema"
+	apkg "github.com/xdbfoundation/go/support/app"
+	support "github.com/xdbfoundation/go/support/config"
+	"github.com/xdbfoundation/go/support/db"
+	"github.com/xdbfoundation/go/support/log"
 	"github.com/stellar/throttled"
 )
 
@@ -63,13 +63,13 @@ func checkMigrations(config Config) {
 	if len(migrationsToApplyUp) > 0 {
 		stdLog.Printf(`There are %v migrations to apply in the "up" direction.`, len(migrationsToApplyUp))
 		stdLog.Printf("The necessary migrations are: %v", migrationsToApplyUp)
-		stdLog.Printf("A database migration is required to run this version (%v) of Frontier. Run \"frontier db migrate up\" to update your DB. Consult the Changelog (https://github.com/digitalbits/go/blob/master/services/frontier/CHANGELOG.md) for more information.", apkg.Version())
+		stdLog.Printf("A database migration is required to run this version (%v) of Frontier. Run \"frontier db migrate up\" to update your DB. Consult the Changelog (https://github.com/xdbfoundation/go/blob/master/services/frontier/CHANGELOG.md) for more information.", apkg.Version())
 		os.Exit(1)
 	}
 
 	nMigrationsDown := schema.GetNumMigrationsDown(config.DatabaseURL)
 	if nMigrationsDown > 0 {
-		stdLog.Printf("A database migration DOWN to an earlier version of the schema is required to run this version (%v) of Frontier. Consult the Changelog (https://github.com/digitalbits/go/blob/master/services/frontier/CHANGELOG.md) for more information.", apkg.Version())
+		stdLog.Printf("A database migration DOWN to an earlier version of the schema is required to run this version (%v) of Frontier. Consult the Changelog (https://github.com/xdbfoundation/go/blob/master/services/frontier/CHANGELOG.md) for more information.", apkg.Version())
 		stdLog.Printf("In order to migrate the database DOWN, using the HIGHEST version number of Frontier you have installed (not this binary), run \"frontier db migrate down %v\".", nMigrationsDown)
 		os.Exit(1)
 	}

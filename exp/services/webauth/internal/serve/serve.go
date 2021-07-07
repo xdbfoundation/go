@@ -7,12 +7,12 @@ import (
 	"strings"
 	"time"
 
-	"github.com/digitalbits/go/clients/frontierclient"
-	"github.com/digitalbits/go/keypair"
-	"github.com/digitalbits/go/support/errors"
-	supporthttp "github.com/digitalbits/go/support/http"
-	supportlog "github.com/digitalbits/go/support/log"
-	"github.com/digitalbits/go/support/render/health"
+	"github.com/xdbfoundation/go/clients/frontierclient"
+	"github.com/xdbfoundation/go/keypair"
+	"github.com/xdbfoundation/go/support/errors"
+	supporthttp "github.com/xdbfoundation/go/support/http"
+	supportlog "github.com/xdbfoundation/go/support/log"
+	"github.com/xdbfoundation/go/support/render/health"
 	"gopkg.in/square/go-jose.v2"
 )
 

@@ -7,10 +7,10 @@ import (
 
 	sq "github.com/Masterminds/squirrel"
 	"github.com/guregu/null"
-	"github.com/digitalbits/go/services/frontier/internal/db2"
-	"github.com/digitalbits/go/services/frontier/internal/toid"
-	"github.com/digitalbits/go/support/errors"
-	"github.com/digitalbits/go/xdr"
+	"github.com/xdbfoundation/go/services/frontier/internal/db2"
+	"github.com/xdbfoundation/go/services/frontier/internal/toid"
+	"github.com/xdbfoundation/go/support/errors"
+	"github.com/xdbfoundation/go/xdr"
 )
 
 // LedgerBySequence loads the single ledger at `seq` into `dest`

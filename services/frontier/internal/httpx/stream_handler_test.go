@@ -14,12 +14,12 @@ import (
 
 	"github.com/go-chi/chi"
 
-	"github.com/digitalbits/go/services/frontier/internal/actions"
-	frontierContext "github.com/digitalbits/go/services/frontier/internal/context"
-	"github.com/digitalbits/go/services/frontier/internal/ledger"
-	"github.com/digitalbits/go/services/frontier/internal/render/sse"
-	"github.com/digitalbits/go/support/db"
-	"github.com/digitalbits/go/support/render/hal"
+	"github.com/xdbfoundation/go/services/frontier/internal/actions"
+	frontierContext "github.com/xdbfoundation/go/services/frontier/internal/context"
+	"github.com/xdbfoundation/go/services/frontier/internal/ledger"
+	"github.com/xdbfoundation/go/services/frontier/internal/render/sse"
+	"github.com/xdbfoundation/go/support/db"
+	"github.com/xdbfoundation/go/support/render/hal"
 )
 
 type testingFactory struct {

@@ -6,7 +6,7 @@ import (
 	"testing"
 
 	migrate "github.com/rubenv/sql-migrate"
-	"github.com/digitalbits/go/support/db/dbtest"
+	"github.com/xdbfoundation/go/support/db/dbtest"
 )
 
 func OpenWithoutMigrations(t *testing.T) *dbtest.DB {

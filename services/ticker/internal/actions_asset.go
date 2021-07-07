@@ -5,11 +5,11 @@ import (
 	"strings"
 	"time"
 
-	frontierclient "github.com/digitalbits/go/clients/frontierclient"
-	"github.com/digitalbits/go/services/ticker/internal/scraper"
-	"github.com/digitalbits/go/services/ticker/internal/tickerdb"
-	"github.com/digitalbits/go/services/ticker/internal/utils"
-	hlog "github.com/digitalbits/go/support/log"
+	frontierclient "github.com/xdbfoundation/go/clients/frontierclient"
+	"github.com/xdbfoundation/go/services/ticker/internal/scraper"
+	"github.com/xdbfoundation/go/services/ticker/internal/tickerdb"
+	"github.com/xdbfoundation/go/services/ticker/internal/utils"
+	hlog "github.com/xdbfoundation/go/support/log"
 )
 
 // RefreshAssets scrapes the most recent asset list and ingests then into the db.

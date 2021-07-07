@@ -10,8 +10,8 @@ import (
 	"github.com/spf13/cobra"
 	"github.com/spf13/pflag"
 	"github.com/spf13/viper"
-	"github.com/digitalbits/go/support/errors"
-	"github.com/digitalbits/go/support/strutils"
+	"github.com/xdbfoundation/go/support/errors"
+	"github.com/xdbfoundation/go/support/strutils"
 )
 
 // ConfigOptions is a group of ConfigOptions that can be for convenience

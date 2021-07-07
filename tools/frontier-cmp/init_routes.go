@@ -1,7 +1,7 @@
 package main
 
 import (
-	cmp "github.com/digitalbits/go/tools/frontier-cmp/internal"
+	cmp "github.com/xdbfoundation/go/tools/frontier-cmp/internal"
 )
 
 var routes = cmp.Routes{

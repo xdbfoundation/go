@@ -9,7 +9,7 @@ This folder contains `digitalbits-sign` a simple utility to make it easy to add 
 ## Installing
 
 ```bash
-$ go get -u github.com/digitalbits/go/tools/digitalbits-sign
+$ go get -u github.com/xdbfoundation/go/tools/digitalbits-sign
 ```
 
 ## Running

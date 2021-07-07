@@ -11,14 +11,14 @@ import (
 	"github.com/pkg/errors"
 	"github.com/prometheus/client_golang/prometheus"
 
-	"github.com/digitalbits/go/services/frontier/internal/db2"
-	"github.com/digitalbits/go/services/frontier/internal/ledger"
-	hProblem "github.com/digitalbits/go/services/frontier/internal/render/problem"
-	"github.com/digitalbits/go/services/frontier/internal/render/sse"
-	"github.com/digitalbits/go/services/frontier/internal/txsub/sequence"
-	"github.com/digitalbits/go/support/db"
-	"github.com/digitalbits/go/support/log"
-	"github.com/digitalbits/go/support/render/problem"
+	"github.com/xdbfoundation/go/services/frontier/internal/db2"
+	"github.com/xdbfoundation/go/services/frontier/internal/ledger"
+	hProblem "github.com/xdbfoundation/go/services/frontier/internal/render/problem"
+	"github.com/xdbfoundation/go/services/frontier/internal/render/sse"
+	"github.com/xdbfoundation/go/services/frontier/internal/txsub/sequence"
+	"github.com/xdbfoundation/go/support/db"
+	"github.com/xdbfoundation/go/support/log"
+	"github.com/xdbfoundation/go/support/render/problem"
 )
 
 type ServerMetrics struct {

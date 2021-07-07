@@ -3,8 +3,8 @@ package sse
 import (
 	"net/http"
 
-	"github.com/digitalbits/go/services/frontier/internal/ledger"
-	"github.com/digitalbits/go/support/errors"
+	"github.com/xdbfoundation/go/services/frontier/internal/ledger"
+	"github.com/xdbfoundation/go/support/errors"
 	"github.com/stellar/throttled"
 )
 
@@ -40,7 +40,7 @@ func (handler StreamHandler) ServeStream(
 	currentLedgerSequence := ledgerSource.CurrentLedger()
 	for {
 		// Rate limit the request if it's a call to stream since it queries the DB every second. See
-		// https://github.com/digitalbits/go/issues/715 for more details.
+		// https://github.com/xdbfoundation/go/issues/715 for more details.
 		rateLimiter := handler.RateLimiter
 		if rateLimiter != nil {
 			limited, _, err := rateLimiter.RateLimiter.RateLimit(rateLimiter.VaryBy.Key(r), 1)

@@ -5,8 +5,8 @@ import (
 	"encoding/base32"
 	"encoding/binary"
 
-	"github.com/digitalbits/go/crc16"
-	"github.com/digitalbits/go/support/errors"
+	"github.com/xdbfoundation/go/crc16"
+	"github.com/xdbfoundation/go/support/errors"
 )
 
 // ErrInvalidVersionByte is returned when the version byte from a provided

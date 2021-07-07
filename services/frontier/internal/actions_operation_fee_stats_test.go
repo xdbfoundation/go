@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"testing"
 
-	hProtocol "github.com/digitalbits/go/protocols/frontier"
+	hProtocol "github.com/xdbfoundation/go/protocols/frontier"
 )
 
 func TestOperationFeeTestsActions_Show(t *testing.T) {

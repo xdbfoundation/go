@@ -3,7 +3,7 @@ package history
 import (
 	"github.com/stretchr/testify/mock"
 
-	"github.com/digitalbits/go/xdr"
+	"github.com/xdbfoundation/go/xdr"
 )
 
 // MockQTrustLines is a mock implementation of the QOffers interface

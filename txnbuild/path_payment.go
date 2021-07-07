@@ -1,9 +1,9 @@
 package txnbuild
 
 import (
-	"github.com/digitalbits/go/amount"
-	"github.com/digitalbits/go/support/errors"
-	"github.com/digitalbits/go/xdr"
+	"github.com/xdbfoundation/go/amount"
+	"github.com/xdbfoundation/go/support/errors"
+	"github.com/xdbfoundation/go/xdr"
 )
 
 // PathPayment represents the DigitalBits path_payment operation. This operation was removed

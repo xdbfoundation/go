@@ -5,8 +5,8 @@ import (
 	"net/url"
 	"testing"
 
-	"github.com/digitalbits/go/support/db/dbtest"
-	"github.com/digitalbits/go/support/http/httptest"
+	"github.com/xdbfoundation/go/support/db/dbtest"
+	"github.com/xdbfoundation/go/support/http/httptest"
 )
 
 func TestHandler(t *testing.T) {

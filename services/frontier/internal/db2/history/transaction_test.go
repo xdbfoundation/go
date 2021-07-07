@@ -8,9 +8,9 @@ import (
 	sq "github.com/Masterminds/squirrel"
 	"github.com/guregu/null"
 
-	"github.com/digitalbits/go/ingest/io"
-	"github.com/digitalbits/go/services/frontier/internal/test"
-	"github.com/digitalbits/go/services/frontier/internal/toid"
+	"github.com/xdbfoundation/go/ingest/io"
+	"github.com/xdbfoundation/go/services/frontier/internal/test"
+	"github.com/xdbfoundation/go/services/frontier/internal/toid"
 )
 
 func TestTransactionQueries(t *testing.T) {

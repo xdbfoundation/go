@@ -8,13 +8,13 @@ import (
 
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
-	"github.com/digitalbits/go/historyarchive"
-	frontier "github.com/digitalbits/go/services/frontier/internal"
-	"github.com/digitalbits/go/services/frontier/internal/db2/history"
-	"github.com/digitalbits/go/services/frontier/internal/ingest"
-	support "github.com/digitalbits/go/support/config"
-	"github.com/digitalbits/go/support/db"
-	"github.com/digitalbits/go/support/log"
+	"github.com/xdbfoundation/go/historyarchive"
+	frontier "github.com/xdbfoundation/go/services/frontier/internal"
+	"github.com/xdbfoundation/go/services/frontier/internal/db2/history"
+	"github.com/xdbfoundation/go/services/frontier/internal/ingest"
+	support "github.com/xdbfoundation/go/support/config"
+	"github.com/xdbfoundation/go/support/db"
+	"github.com/xdbfoundation/go/support/log"
 )
 
 var ingestCmd = &cobra.Command{

@@ -5,12 +5,12 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/digitalbits/go/clients/frontierclient"
-	"github.com/digitalbits/go/keypair"
-	"github.com/digitalbits/go/services/friendbot/internal"
-	"github.com/digitalbits/go/strkey"
-	"github.com/digitalbits/go/support/errors"
-	"github.com/digitalbits/go/txnbuild"
+	"github.com/xdbfoundation/go/clients/frontierclient"
+	"github.com/xdbfoundation/go/keypair"
+	"github.com/xdbfoundation/go/services/friendbot/internal"
+	"github.com/xdbfoundation/go/strkey"
+	"github.com/xdbfoundation/go/support/errors"
+	"github.com/xdbfoundation/go/txnbuild"
 )
 
 func initFriendbot(

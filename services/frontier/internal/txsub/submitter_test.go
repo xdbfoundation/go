@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"testing"
 
-	"github.com/digitalbits/go/services/frontier/internal/test"
+	"github.com/xdbfoundation/go/services/frontier/internal/test"
 )
 
 func TestDefaultSubmitter(t *testing.T) {

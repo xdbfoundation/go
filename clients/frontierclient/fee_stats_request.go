@@ -1,6 +1,6 @@
 package frontierclient
 
-import "github.com/digitalbits/go/support/errors"
+import "github.com/xdbfoundation/go/support/errors"
 
 // BuildURL returns the url for getting fee stats about a running frontier instance
 func (fr feeStatsRequest) BuildURL() (endpoint string, err error) {

@@ -5,8 +5,8 @@ import (
 	"net/http"
 	"testing"
 
-	proto "github.com/digitalbits/go/protocols/digitalbitscore"
-	"github.com/digitalbits/go/support/http/httptest"
+	proto "github.com/xdbfoundation/go/protocols/digitalbitscore"
+	"github.com/xdbfoundation/go/support/http/httptest"
 	"github.com/stretchr/testify/assert"
 )
 

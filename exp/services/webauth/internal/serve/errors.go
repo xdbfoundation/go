@@ -3,7 +3,7 @@ package serve
 import (
 	"net/http"
 
-	"github.com/digitalbits/go/support/render/httpjson"
+	"github.com/xdbfoundation/go/support/render/httpjson"
 )
 
 var serverError = errorResponse{

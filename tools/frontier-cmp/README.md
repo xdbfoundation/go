@@ -15,7 +15,7 @@ go install ./tools/frontier-cmp
 
 `frontier-cmp` can be run in two modes:
 
-- Crawling: start with a set of paths (defined in [init_paths.go](https://github.com/digitalbits/go/blob/master/tools/frontier-cmp/init_paths.go)) and then uses `_links` to find new paths.
+- Crawling: start with a set of paths (defined in [init_paths.go](https://github.com/xdbfoundation/go/blob/master/tools/frontier-cmp/init_paths.go)) and then uses `_links` to find new paths.
 - ELB access log: send requests found in a provided ELB access log.
 
 ### Crawling mode
@@ -26,7 +26,7 @@ To run in crawling mode specify a `base` and `test` URL, where `base` is the cur
 frontier-cmp -t https://new-frontier.host.org -b https://frontier.digitalbits.org
 ```
 
-The paths to be tested can be found in [init_paths.go](https://github.com/digitalbits/go/blob/master/tools/frontier-cmp/init_paths.go).
+The paths to be tested can be found in [init_paths.go](https://github.com/xdbfoundation/go/blob/master/tools/frontier-cmp/init_paths.go).
 
 ### ELB access log
 

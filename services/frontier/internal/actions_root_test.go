@@ -5,8 +5,8 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/digitalbits/go/protocols/frontier"
-	"github.com/digitalbits/go/services/frontier/internal/test"
+	"github.com/xdbfoundation/go/protocols/frontier"
+	"github.com/xdbfoundation/go/services/frontier/internal/test"
 )
 
 func TestRootAction(t *testing.T) {

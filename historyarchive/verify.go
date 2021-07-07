@@ -14,7 +14,7 @@ import (
 	"log"
 	"sort"
 
-	"github.com/digitalbits/go/xdr"
+	"github.com/xdbfoundation/go/xdr"
 )
 
 // Transaction sets are sorted in two different orders: one for hashing and

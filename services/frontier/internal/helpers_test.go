@@ -6,9 +6,9 @@ import (
 
 	"github.com/stellar/throttled"
 
-	"github.com/digitalbits/go/network"
-	"github.com/digitalbits/go/services/frontier/internal/test"
-	supportLog "github.com/digitalbits/go/support/log"
+	"github.com/xdbfoundation/go/network"
+	"github.com/xdbfoundation/go/services/frontier/internal/test"
+	supportLog "github.com/xdbfoundation/go/support/log"
 )
 
 func NewTestApp() *App {

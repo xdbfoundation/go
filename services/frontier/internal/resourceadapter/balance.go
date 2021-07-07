@@ -1,12 +1,12 @@
 package resourceadapter
 
 import (
-	"github.com/digitalbits/go/amount"
-	protocol "github.com/digitalbits/go/protocols/frontier"
-	"github.com/digitalbits/go/services/frontier/internal/assets"
-	"github.com/digitalbits/go/services/frontier/internal/db2/history"
-	"github.com/digitalbits/go/support/errors"
-	"github.com/digitalbits/go/xdr"
+	"github.com/xdbfoundation/go/amount"
+	protocol "github.com/xdbfoundation/go/protocols/frontier"
+	"github.com/xdbfoundation/go/services/frontier/internal/assets"
+	"github.com/xdbfoundation/go/services/frontier/internal/db2/history"
+	"github.com/xdbfoundation/go/support/errors"
+	"github.com/xdbfoundation/go/xdr"
 )
 
 func PopulateBalance(dest *protocol.Balance, row history.TrustLine) (err error) {

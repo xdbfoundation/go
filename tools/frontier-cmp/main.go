@@ -14,11 +14,11 @@ import (
 
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
-	client "github.com/digitalbits/go/clients/frontierclient"
-	protocol "github.com/digitalbits/go/protocols/frontier"
-	"github.com/digitalbits/go/support/errors"
-	slog "github.com/digitalbits/go/support/log"
-	cmp "github.com/digitalbits/go/tools/frontier-cmp/internal"
+	client "github.com/xdbfoundation/go/clients/frontierclient"
+	protocol "github.com/xdbfoundation/go/protocols/frontier"
+	"github.com/xdbfoundation/go/support/errors"
+	slog "github.com/xdbfoundation/go/support/log"
+	cmp "github.com/xdbfoundation/go/tools/frontier-cmp/internal"
 )
 
 // maxLevels defines the maximum number of levels deep the crawler

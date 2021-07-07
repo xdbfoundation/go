@@ -1,8 +1,8 @@
 package txnbuild
 
 import (
-	"github.com/digitalbits/go/support/errors"
-	"github.com/digitalbits/go/xdr"
+	"github.com/xdbfoundation/go/support/errors"
+	"github.com/xdbfoundation/go/xdr"
 )
 
 // AccountFlag represents the bitmask flags used to set and clear account authorization options.
@@ -314,7 +314,7 @@ func (so *SetOptions) FromXDR(xdrOp xdr.Operation) error {
 // of the fields are invalid. Otherwise, it returns nil.
 func (so *SetOptions) Validate() error {
 	// skipping checks here because the individual methods above already check for required fields.
-	// Refactoring is out of the scope of this issue(https://github.com/digitalbits/go/issues/1041) so will leave as is for now.
+	// Refactoring is out of the scope of this issue(https://github.com/xdbfoundation/go/issues/1041) so will leave as is for now.
 	return nil
 }
 

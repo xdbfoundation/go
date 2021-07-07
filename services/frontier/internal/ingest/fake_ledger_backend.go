@@ -1,10 +1,10 @@
 package ingest
 
 import (
-	"github.com/digitalbits/go/ingest/ledgerbackend"
-	"github.com/digitalbits/go/keypair"
-	logpkg "github.com/digitalbits/go/support/log"
-	"github.com/digitalbits/go/xdr"
+	"github.com/xdbfoundation/go/ingest/ledgerbackend"
+	"github.com/xdbfoundation/go/keypair"
+	logpkg "github.com/xdbfoundation/go/support/log"
+	"github.com/xdbfoundation/go/xdr"
 )
 
 type fakeLedgerBackend struct {

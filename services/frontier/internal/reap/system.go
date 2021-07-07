@@ -3,9 +3,9 @@ package reap
 import (
 	"time"
 
-	"github.com/digitalbits/go/services/frontier/internal/errors"
-	"github.com/digitalbits/go/services/frontier/internal/toid"
-	"github.com/digitalbits/go/support/log"
+	"github.com/xdbfoundation/go/services/frontier/internal/errors"
+	"github.com/xdbfoundation/go/services/frontier/internal/toid"
+	"github.com/xdbfoundation/go/support/log"
 )
 
 // DeleteUnretainedHistory removes all data associated with unretained ledgers.

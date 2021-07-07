@@ -4,7 +4,7 @@ import (
 	"log"
 	"sync"
 
-	hProtocol "github.com/digitalbits/go/protocols/frontier"
+	hProtocol "github.com/xdbfoundation/go/protocols/frontier"
 )
 
 // Bot represents the friendbot subsystem and primarily delegates work

@@ -5,10 +5,10 @@ import (
 	"errors"
 	"time"
 
-	"github.com/digitalbits/go/protocols/frontier"
-	"github.com/digitalbits/go/protocols/frontier/base"
-	"github.com/digitalbits/go/support/render/hal"
-	"github.com/digitalbits/go/xdr"
+	"github.com/xdbfoundation/go/protocols/frontier"
+	"github.com/xdbfoundation/go/protocols/frontier/base"
+	"github.com/xdbfoundation/go/support/render/hal"
+	"github.com/xdbfoundation/go/xdr"
 )
 
 // TypeNames maps from operation type to the string used to represent that type

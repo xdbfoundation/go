@@ -11,15 +11,15 @@ import (
 	"github.com/go-chi/chi"
 	"github.com/stretchr/testify/assert"
 
-	frontierContext "github.com/digitalbits/go/services/frontier/internal/context"
-	"github.com/digitalbits/go/services/frontier/internal/db2"
-	"github.com/digitalbits/go/services/frontier/internal/ledger"
-	"github.com/digitalbits/go/services/frontier/internal/test"
-	"github.com/digitalbits/go/services/frontier/internal/toid"
-	"github.com/digitalbits/go/support/db"
-	"github.com/digitalbits/go/support/errors"
-	"github.com/digitalbits/go/support/render/problem"
-	"github.com/digitalbits/go/xdr"
+	frontierContext "github.com/xdbfoundation/go/services/frontier/internal/context"
+	"github.com/xdbfoundation/go/services/frontier/internal/db2"
+	"github.com/xdbfoundation/go/services/frontier/internal/ledger"
+	"github.com/xdbfoundation/go/services/frontier/internal/test"
+	"github.com/xdbfoundation/go/services/frontier/internal/toid"
+	"github.com/xdbfoundation/go/support/db"
+	"github.com/xdbfoundation/go/support/errors"
+	"github.com/xdbfoundation/go/support/render/problem"
+	"github.com/xdbfoundation/go/xdr"
 )
 
 func TestGetTransactionID(t *testing.T) {
@@ -255,7 +255,7 @@ func TestActionGetPageQuery(t *testing.T) {
 	_, err = GetPageQuery(ledgerState, r)
 	tt.Assert.Error(err)
 
-	// regression: https://github.com/digitalbits/go/services/frontier/internal/issues/372
+	// regression: https://github.com/xdbfoundation/go/services/frontier/internal/issues/372
 	// (limit of 0 turns into 10)
 	makeTestActionRequest("/?limit=0", nil)
 	_, err = GetPageQuery(ledgerState, r)
@@ -282,7 +282,7 @@ func TestGetPageQuery(t *testing.T) {
 	_, err = GetPageQuery(ledgerState, r)
 	tt.Assert.Error(err)
 
-	// regression: https://github.com/digitalbits/go/services/frontier/internal/issues/372
+	// regression: https://github.com/xdbfoundation/go/services/frontier/internal/issues/372
 	// (limit of 0 turns into 10)
 	r = makeTestActionRequest("/?limit=0", nil)
 	_, err = GetPageQuery(ledgerState, r)
@@ -338,7 +338,7 @@ func TestGetURLParam(t *testing.T) {
 	r := makeTestActionRequest("/accounts/{account_id}/operations?limit=100", nil)
 
 	// simulates a request where the named param is not passed.
-	// Regression for https://github.com/digitalbits/go/issues/1965
+	// Regression for https://github.com/xdbfoundation/go/issues/1965
 	rctx := chi.RouteContext(r.Context())
 	rctx.URLParams.Keys = []string{
 		"account_id",

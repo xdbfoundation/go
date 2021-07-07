@@ -11,11 +11,11 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/digitalbits/go/historyarchive"
-	"github.com/digitalbits/go/ingest/io"
-	"github.com/digitalbits/go/support/errors"
-	"github.com/digitalbits/go/support/log"
-	"github.com/digitalbits/go/xdr"
+	"github.com/xdbfoundation/go/historyarchive"
+	"github.com/xdbfoundation/go/ingest/io"
+	"github.com/xdbfoundation/go/support/errors"
+	"github.com/xdbfoundation/go/support/log"
+	"github.com/xdbfoundation/go/xdr"
 )
 
 // csvMap maintains a mapping from ledger entry type to csv file

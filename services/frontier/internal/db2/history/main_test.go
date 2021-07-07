@@ -4,7 +4,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/digitalbits/go/services/frontier/internal/test"
+	"github.com/xdbfoundation/go/services/frontier/internal/test"
 )
 
 func TestLatestLedger(t *testing.T) {

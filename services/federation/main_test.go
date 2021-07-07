@@ -3,8 +3,8 @@ package main
 import (
 	"testing"
 
-	"github.com/digitalbits/go/support/db/dbtest"
-	"github.com/digitalbits/go/support/errors"
+	"github.com/xdbfoundation/go/support/db/dbtest"
+	"github.com/xdbfoundation/go/support/errors"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )

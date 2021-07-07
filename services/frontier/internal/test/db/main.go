@@ -11,7 +11,7 @@ import (
 	"github.com/jmoiron/sqlx"
 	// pq enables postgres support
 	_ "github.com/lib/pq"
-	db "github.com/digitalbits/go/support/db/dbtest"
+	db "github.com/xdbfoundation/go/support/db/dbtest"
 )
 
 var (

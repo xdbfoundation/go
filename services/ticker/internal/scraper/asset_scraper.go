@@ -13,10 +13,10 @@ import (
 
 	"github.com/BurntSushi/toml"
 
-	frontierclient "github.com/digitalbits/go/clients/frontierclient"
-	hProtocol "github.com/digitalbits/go/protocols/frontier"
-	"github.com/digitalbits/go/services/ticker/internal/utils"
-	"github.com/digitalbits/go/support/errors"
+	frontierclient "github.com/xdbfoundation/go/clients/frontierclient"
+	hProtocol "github.com/xdbfoundation/go/protocols/frontier"
+	"github.com/xdbfoundation/go/services/ticker/internal/utils"
+	"github.com/xdbfoundation/go/support/errors"
 )
 
 // shouldDiscardAsset maps the criteria for discarding an asset from the asset index

@@ -1,8 +1,8 @@
 package ticker
 
 import (
-	"github.com/digitalbits/go/services/ticker/internal/scraper"
-	"github.com/digitalbits/go/services/ticker/internal/tickerdb"
+	"github.com/xdbfoundation/go/services/ticker/internal/scraper"
+	"github.com/xdbfoundation/go/services/ticker/internal/tickerdb"
 )
 
 func tomlIssuerToDBIssuer(issuer scraper.TOMLIssuer) tickerdb.Issuer {

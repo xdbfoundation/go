@@ -3,8 +3,8 @@ package cmd
 import (
 	"github.com/lib/pq"
 	"github.com/spf13/cobra"
-	ticker "github.com/digitalbits/go/services/ticker/internal"
-	"github.com/digitalbits/go/services/ticker/internal/tickerdb"
+	ticker "github.com/xdbfoundation/go/services/ticker/internal"
+	"github.com/xdbfoundation/go/services/ticker/internal/tickerdb"
 )
 
 var MarketsOutFile string

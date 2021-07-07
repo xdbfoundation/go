@@ -7,7 +7,7 @@ import (
 	"time"
 
 	"github.com/go-errors/errors"
-	"github.com/digitalbits/go/support/log"
+	"github.com/xdbfoundation/go/support/log"
 )
 
 // NewDefaultSubmissionList returns a list that manages open submissions purely

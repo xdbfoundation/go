@@ -1,7 +1,7 @@
 package paths
 
 import (
-	"github.com/digitalbits/go/xdr"
+	"github.com/xdbfoundation/go/xdr"
 )
 
 // Query is a query for paths

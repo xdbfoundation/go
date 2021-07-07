@@ -11,7 +11,7 @@ import (
 	"io/ioutil"
 	"testing"
 
-	"github.com/digitalbits/go/xdr"
+	"github.com/xdbfoundation/go/xdr"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )

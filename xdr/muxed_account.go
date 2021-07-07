@@ -4,7 +4,7 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/digitalbits/go/strkey"
+	"github.com/xdbfoundation/go/strkey"
 )
 
 func MustMuxedAddress(address string) MuxedAccount {

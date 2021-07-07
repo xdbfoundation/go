@@ -1,7 +1,7 @@
 package io
 
 import (
-	"github.com/digitalbits/go/xdr"
+	"github.com/xdbfoundation/go/xdr"
 )
 
 // StatsChangeProcessor is a state processors that counts number of changes types

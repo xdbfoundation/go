@@ -4,9 +4,9 @@ import (
 	"sort"
 
 	sq "github.com/Masterminds/squirrel"
-	"github.com/digitalbits/go/support/db"
-	"github.com/digitalbits/go/support/errors"
-	"github.com/digitalbits/go/xdr"
+	"github.com/xdbfoundation/go/support/db"
+	"github.com/xdbfoundation/go/support/errors"
+	"github.com/xdbfoundation/go/xdr"
 )
 
 // GetAssetID fetches the id for an Asset
@@ -43,7 +43,7 @@ func (q *Q) CreateAssets(assets []xdr.Asset, batchSize int) (map[string]Asset, e
 	}
 
 	// sort assets before inserting rows into history_assets to prevent deadlocks on acquiring a ShareLock
-	// https://github.com/digitalbits/go/issues/2370
+	// https://github.com/xdbfoundation/go/issues/2370
 	sort.Slice(assets, func(i, j int) bool {
 		return assets[i].String() < assets[j].String()
 	})

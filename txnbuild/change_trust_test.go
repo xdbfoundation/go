@@ -3,7 +3,7 @@ package txnbuild
 import (
 	"testing"
 
-	"github.com/digitalbits/go/network"
+	"github.com/xdbfoundation/go/network"
 	"github.com/stretchr/testify/assert"
 )
 

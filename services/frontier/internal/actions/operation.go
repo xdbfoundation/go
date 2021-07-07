@@ -5,15 +5,15 @@ import (
 	"fmt"
 	"net/http"
 
-	frontierContext "github.com/digitalbits/go/services/frontier/internal/context"
-	"github.com/digitalbits/go/services/frontier/internal/db2/history"
-	"github.com/digitalbits/go/services/frontier/internal/ledger"
-	"github.com/digitalbits/go/services/frontier/internal/render/problem"
-	"github.com/digitalbits/go/services/frontier/internal/resourceadapter"
-	"github.com/digitalbits/go/services/frontier/internal/toid"
-	"github.com/digitalbits/go/support/errors"
-	"github.com/digitalbits/go/support/render/hal"
-	supportProblem "github.com/digitalbits/go/support/render/problem"
+	frontierContext "github.com/xdbfoundation/go/services/frontier/internal/context"
+	"github.com/xdbfoundation/go/services/frontier/internal/db2/history"
+	"github.com/xdbfoundation/go/services/frontier/internal/ledger"
+	"github.com/xdbfoundation/go/services/frontier/internal/render/problem"
+	"github.com/xdbfoundation/go/services/frontier/internal/resourceadapter"
+	"github.com/xdbfoundation/go/services/frontier/internal/toid"
+	"github.com/xdbfoundation/go/support/errors"
+	"github.com/xdbfoundation/go/support/render/hal"
+	supportProblem "github.com/xdbfoundation/go/support/render/problem"
 )
 
 // Joinable query struct for join query parameter

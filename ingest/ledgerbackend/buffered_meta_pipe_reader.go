@@ -7,8 +7,8 @@ import (
 
 	"github.com/pkg/errors"
 
-	"github.com/digitalbits/go/support/log"
-	"github.com/digitalbits/go/xdr"
+	"github.com/xdbfoundation/go/support/log"
+	"github.com/xdbfoundation/go/xdr"
 )
 
 const (

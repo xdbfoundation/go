@@ -5,7 +5,7 @@ import (
 	"math"
 	"testing"
 
-	"github.com/digitalbits/go/services/frontier/internal/test"
+	"github.com/xdbfoundation/go/services/frontier/internal/test"
 	"github.com/stretchr/testify/assert"
 )
 

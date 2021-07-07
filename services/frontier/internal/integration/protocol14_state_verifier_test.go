@@ -8,9 +8,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/digitalbits/go/keypair"
-	"github.com/digitalbits/go/services/frontier/internal/test/integration"
-	"github.com/digitalbits/go/txnbuild"
+	"github.com/xdbfoundation/go/keypair"
+	"github.com/xdbfoundation/go/services/frontier/internal/test/integration"
+	"github.com/xdbfoundation/go/txnbuild"
 	"github.com/stretchr/testify/assert"
 )
 

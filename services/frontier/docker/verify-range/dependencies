@@ -20,6 +20,6 @@ sudo -u postgres createdb frontier
 
 sudo -u postgres psql -c "ALTER USER postgres PASSWORD 'postgres';"
 
-git clone https://github.com/digitalbits/go.git digitalbits-go
+git clone https://github.com/xdbfoundation/go.git digitalbits-go
 cd digitalbits-go
 /usr/local/go/bin/go build -v ./services/frontier

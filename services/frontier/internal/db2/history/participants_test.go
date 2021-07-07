@@ -4,7 +4,7 @@ import (
 	"testing"
 
 	sq "github.com/Masterminds/squirrel"
-	"github.com/digitalbits/go/services/frontier/internal/test"
+	"github.com/xdbfoundation/go/services/frontier/internal/test"
 )
 
 type transactionParticipant struct {

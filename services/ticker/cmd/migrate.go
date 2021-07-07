@@ -3,7 +3,7 @@ package cmd
 import (
 	"github.com/lib/pq"
 	"github.com/spf13/cobra"
-	"github.com/digitalbits/go/services/ticker/internal/tickerdb"
+	"github.com/xdbfoundation/go/services/ticker/internal/tickerdb"
 )
 
 func init() {

@@ -5,15 +5,15 @@ import (
 	"mime"
 	"net/http"
 
-	"github.com/digitalbits/go/network"
-	"github.com/digitalbits/go/protocols/frontier"
-	hProblem "github.com/digitalbits/go/services/frontier/internal/render/problem"
-	"github.com/digitalbits/go/services/frontier/internal/resourceadapter"
-	"github.com/digitalbits/go/services/frontier/internal/txsub"
-	"github.com/digitalbits/go/support/errors"
-	"github.com/digitalbits/go/support/render/hal"
-	"github.com/digitalbits/go/support/render/problem"
-	"github.com/digitalbits/go/xdr"
+	"github.com/xdbfoundation/go/network"
+	"github.com/xdbfoundation/go/protocols/frontier"
+	hProblem "github.com/xdbfoundation/go/services/frontier/internal/render/problem"
+	"github.com/xdbfoundation/go/services/frontier/internal/resourceadapter"
+	"github.com/xdbfoundation/go/services/frontier/internal/txsub"
+	"github.com/xdbfoundation/go/support/errors"
+	"github.com/xdbfoundation/go/support/render/hal"
+	"github.com/xdbfoundation/go/support/render/problem"
+	"github.com/xdbfoundation/go/xdr"
 )
 
 type SubmitTransactionHandler struct {

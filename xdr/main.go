@@ -12,7 +12,7 @@ import (
 	"strings"
 
 	xdr "github.com/stellar/go-xdr/xdr3"
-	"github.com/digitalbits/go/support/errors"
+	"github.com/xdbfoundation/go/support/errors"
 )
 
 // Keyer represents a type that can be converted into a LedgerKey

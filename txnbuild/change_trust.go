@@ -3,9 +3,9 @@ package txnbuild
 import (
 	"math"
 
-	"github.com/digitalbits/go/amount"
-	"github.com/digitalbits/go/support/errors"
-	"github.com/digitalbits/go/xdr"
+	"github.com/xdbfoundation/go/amount"
+	"github.com/xdbfoundation/go/support/errors"
+	"github.com/xdbfoundation/go/xdr"
 )
 
 // ChangeTrust represents the DigitalBits change trust operation. See

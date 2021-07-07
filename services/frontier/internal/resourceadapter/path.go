@@ -3,9 +3,9 @@ package resourceadapter
 import (
 	"context"
 
-	"github.com/digitalbits/go/amount"
-	"github.com/digitalbits/go/protocols/frontier"
-	"github.com/digitalbits/go/services/frontier/internal/paths"
+	"github.com/xdbfoundation/go/amount"
+	"github.com/xdbfoundation/go/protocols/frontier"
+	"github.com/xdbfoundation/go/services/frontier/internal/paths"
 )
 
 // PopulatePath converts the paths.Path into a Path

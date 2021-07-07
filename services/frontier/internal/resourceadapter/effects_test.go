@@ -5,10 +5,10 @@ import (
 	"testing"
 
 	"github.com/guregu/null"
-	"github.com/digitalbits/go/protocols/frontier/effects"
-	"github.com/digitalbits/go/services/frontier/internal/db2/history"
-	"github.com/digitalbits/go/support/render/hal"
-	"github.com/digitalbits/go/support/test"
+	"github.com/xdbfoundation/go/protocols/frontier/effects"
+	"github.com/xdbfoundation/go/services/frontier/internal/db2/history"
+	"github.com/xdbfoundation/go/support/render/hal"
+	"github.com/xdbfoundation/go/support/test"
 	"github.com/stretchr/testify/assert"
 )
 

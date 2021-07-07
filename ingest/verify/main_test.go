@@ -5,10 +5,10 @@ import (
 	stdio "io"
 	"testing"
 
-	ingesterrors "github.com/digitalbits/go/ingest/errors"
-	"github.com/digitalbits/go/ingest/io"
-	"github.com/digitalbits/go/support/errors"
-	"github.com/digitalbits/go/xdr"
+	ingesterrors "github.com/xdbfoundation/go/ingest/errors"
+	"github.com/xdbfoundation/go/ingest/io"
+	"github.com/xdbfoundation/go/support/errors"
+	"github.com/xdbfoundation/go/xdr"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/suite"
 )

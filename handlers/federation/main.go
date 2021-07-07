@@ -15,7 +15,7 @@ import (
 	"net/url"
 	"sync"
 
-	"github.com/digitalbits/go/support/db"
+	"github.com/xdbfoundation/go/support/db"
 )
 
 // Driver represents a data source against which federation queries can be

@@ -3,8 +3,8 @@ package adapters
 import (
 	"context"
 
-	"github.com/digitalbits/go/ingest/io"
-	"github.com/digitalbits/go/xdr"
+	"github.com/xdbfoundation/go/ingest/io"
+	"github.com/xdbfoundation/go/xdr"
 	"github.com/stretchr/testify/mock"
 )
 

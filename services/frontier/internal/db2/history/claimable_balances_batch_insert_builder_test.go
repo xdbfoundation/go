@@ -4,8 +4,8 @@ import (
 	"testing"
 
 	"github.com/guregu/null"
-	"github.com/digitalbits/go/services/frontier/internal/test"
-	"github.com/digitalbits/go/xdr"
+	"github.com/xdbfoundation/go/services/frontier/internal/test"
+	"github.com/xdbfoundation/go/xdr"
 )
 
 func TestAddClaimableBalance(t *testing.T) {

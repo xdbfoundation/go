@@ -4,8 +4,8 @@ import (
 	"context"
 	"testing"
 
-	"github.com/digitalbits/go/protocols/frontier/operations"
-	"github.com/digitalbits/go/support/http/httptest"
+	"github.com/xdbfoundation/go/protocols/frontier/operations"
+	"github.com/xdbfoundation/go/support/http/httptest"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )

@@ -3,9 +3,9 @@ package resourceadapter
 import (
 	"testing"
 
-	. "github.com/digitalbits/go/protocols/frontier"
-	"github.com/digitalbits/go/services/frontier/internal/db2/history"
-	"github.com/digitalbits/go/xdr"
+	. "github.com/xdbfoundation/go/protocols/frontier"
+	"github.com/xdbfoundation/go/services/frontier/internal/db2/history"
+	"github.com/xdbfoundation/go/xdr"
 	"github.com/stretchr/testify/assert"
 )
 

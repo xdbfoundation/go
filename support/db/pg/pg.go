@@ -2,7 +2,7 @@ package pg
 
 import (
 	"github.com/lib/pq"
-	"github.com/digitalbits/go/support/errors"
+	"github.com/xdbfoundation/go/support/errors"
 )
 
 func IsUniqueViolation(err error) bool {

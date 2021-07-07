@@ -8,10 +8,10 @@ This project is maintained by the XDB Foundation.
     import (
         "log"
         
-        "github.com/digitalbits/go/clients/frontierclient"
-        "github.com/digitalbits/go/keypair"
-        "github.com/digitalbits/go/network"
-        "github.com/digitalbits/go/txnbuild"
+        "github.com/xdbfoundation/go/clients/frontierclient"
+        "github.com/xdbfoundation/go/keypair"
+        "github.com/xdbfoundation/go/network"
+        "github.com/xdbfoundation/go/txnbuild"
     )
     
     // Make a keypair for a known account from a secret seed
@@ -77,14 +77,14 @@ An easy-to-follow demonstration that exercises this SDK on the TestNet with actu
 * [Modules](https://github.com/golang/go/wiki/Modules) to manage dependencies
 
 ### Installing
-* `go get github.com/digitalbits/go/txnbuild`
+* `go get github.com/xdbfoundation/go/txnbuild`
 
 ## Running the tests
 Run the unit tests from the package directory: `go test`
 
 ## Demo
 To see the SDK in action, build and run the demo:
-* Enter the demo directory: `cd $GOPATH/src/github.com/digitalbits/go/txnbuild/cmd/demo`
+* Enter the demo directory: `cd $GOPATH/src/github.com/xdbfoundation/go/txnbuild/cmd/demo`
 * Build the demo: `go build`
 * Run the demo: `./demo init`
 

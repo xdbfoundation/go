@@ -7,7 +7,7 @@ import (
 	"io/ioutil"
 	"os"
 
-	hClient "github.com/digitalbits/go/clients/frontierclient"
+	hClient "github.com/xdbfoundation/go/clients/frontierclient"
 )
 
 // Asset represents an asset on the DigitalBits network

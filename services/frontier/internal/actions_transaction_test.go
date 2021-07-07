@@ -7,11 +7,11 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"github.com/digitalbits/go/protocols/frontier"
-	"github.com/digitalbits/go/services/frontier/internal/db2/history"
-	"github.com/digitalbits/go/services/frontier/internal/ingest"
-	"github.com/digitalbits/go/services/frontier/internal/test"
-	"github.com/digitalbits/go/xdr"
+	"github.com/xdbfoundation/go/protocols/frontier"
+	"github.com/xdbfoundation/go/services/frontier/internal/db2/history"
+	"github.com/xdbfoundation/go/services/frontier/internal/ingest"
+	"github.com/xdbfoundation/go/services/frontier/internal/test"
+	"github.com/xdbfoundation/go/xdr"
 )
 
 func TestTransactionActions_Show(t *testing.T) {
@@ -226,7 +226,7 @@ func TestTransactionActions_Index(t *testing.T) {
 	w = ht.Get("/accounts/GCXKG6RN4ONIEPCMNFB732A436Z5PNDSRLGWK7GBLCMQLIFO4S7EYWVU/transactions?cursor=limit=order=")
 	ht.Assert.Equal(400, w.Code)
 
-	// regression: https://github.com/digitalbits/go/services/frontier/internal/issues/365
+	// regression: https://github.com/xdbfoundation/go/services/frontier/internal/issues/365
 	w = ht.Get("/transactions?limit=200")
 	ht.Require.Equal(200, w.Code)
 	w = ht.Get("/transactions?limit=201")

@@ -9,10 +9,10 @@ import (
 
 	"github.com/prometheus/client_golang/prometheus"
 
-	"github.com/digitalbits/go/exp/orderbook"
-	"github.com/digitalbits/go/services/frontier/internal/db2/history"
-	"github.com/digitalbits/go/support/errors"
-	"github.com/digitalbits/go/xdr"
+	"github.com/xdbfoundation/go/exp/orderbook"
+	"github.com/xdbfoundation/go/services/frontier/internal/db2/history"
+	"github.com/xdbfoundation/go/support/errors"
+	"github.com/xdbfoundation/go/xdr"
 )
 
 const (

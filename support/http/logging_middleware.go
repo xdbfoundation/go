@@ -6,8 +6,8 @@ import (
 
 	"github.com/go-chi/chi"
 	"github.com/go-chi/chi/middleware"
-	"github.com/digitalbits/go/support/http/mutil"
-	"github.com/digitalbits/go/support/log"
+	"github.com/xdbfoundation/go/support/http/mutil"
+	"github.com/xdbfoundation/go/support/log"
 )
 
 // SetLogger is a middleware that sets a logger on the context.

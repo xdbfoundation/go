@@ -7,12 +7,12 @@ import (
 	"encoding/json"
 
 	"github.com/jmoiron/sqlx"
-	"github.com/digitalbits/go/services/frontier/internal/db2/schema"
-	"github.com/digitalbits/go/services/frontier/internal/ledger"
-	"github.com/digitalbits/go/services/frontier/internal/operationfeestats"
-	"github.com/digitalbits/go/services/frontier/internal/test/scenarios"
-	"github.com/digitalbits/go/support/db"
-	"github.com/digitalbits/go/support/render/hal"
+	"github.com/xdbfoundation/go/services/frontier/internal/db2/schema"
+	"github.com/xdbfoundation/go/services/frontier/internal/ledger"
+	"github.com/xdbfoundation/go/services/frontier/internal/operationfeestats"
+	"github.com/xdbfoundation/go/services/frontier/internal/test/scenarios"
+	"github.com/xdbfoundation/go/support/db"
+	"github.com/xdbfoundation/go/support/render/hal"
 )
 
 // CoreSession returns a db.Session instance pointing at the digitalbits core test database

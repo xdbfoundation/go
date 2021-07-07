@@ -1,8 +1,8 @@
 package history
 
 import (
-	"github.com/digitalbits/go/support/db"
-	"github.com/digitalbits/go/xdr"
+	"github.com/xdbfoundation/go/support/db"
+	"github.com/xdbfoundation/go/xdr"
 )
 
 // OperationBatchInsertBuilder is used to insert a transaction's operations into the

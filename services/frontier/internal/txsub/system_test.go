@@ -16,10 +16,10 @@ import (
 	"github.com/stretchr/testify/mock"
 	"github.com/stretchr/testify/suite"
 
-	"github.com/digitalbits/go/services/frontier/internal/db2/history"
-	"github.com/digitalbits/go/services/frontier/internal/test"
-	"github.com/digitalbits/go/services/frontier/internal/txsub/sequence"
-	"github.com/digitalbits/go/xdr"
+	"github.com/xdbfoundation/go/services/frontier/internal/db2/history"
+	"github.com/xdbfoundation/go/services/frontier/internal/test"
+	"github.com/xdbfoundation/go/services/frontier/internal/txsub/sequence"
+	"github.com/xdbfoundation/go/xdr"
 )
 
 type SystemTestSuite struct {

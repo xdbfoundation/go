@@ -3,8 +3,8 @@ package reap
 import (
 	"testing"
 
-	"github.com/digitalbits/go/services/frontier/internal/ledger"
-	"github.com/digitalbits/go/services/frontier/internal/test"
+	"github.com/xdbfoundation/go/services/frontier/internal/ledger"
+	"github.com/xdbfoundation/go/services/frontier/internal/test"
 )
 
 func TestDeleteUnretainedHistory(t *testing.T) {

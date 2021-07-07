@@ -15,15 +15,15 @@ import (
 	"github.com/go-chi/chi"
 	"github.com/gorilla/schema"
 
-	"github.com/digitalbits/go/services/frontier/internal/assets"
-	frontierContext "github.com/digitalbits/go/services/frontier/internal/context"
-	"github.com/digitalbits/go/services/frontier/internal/db2"
-	"github.com/digitalbits/go/services/frontier/internal/ledger"
-	hProblem "github.com/digitalbits/go/services/frontier/internal/render/problem"
-	"github.com/digitalbits/go/services/frontier/internal/toid"
-	"github.com/digitalbits/go/support/errors"
-	"github.com/digitalbits/go/support/render/problem"
-	"github.com/digitalbits/go/xdr"
+	"github.com/xdbfoundation/go/services/frontier/internal/assets"
+	frontierContext "github.com/xdbfoundation/go/services/frontier/internal/context"
+	"github.com/xdbfoundation/go/services/frontier/internal/db2"
+	"github.com/xdbfoundation/go/services/frontier/internal/ledger"
+	hProblem "github.com/xdbfoundation/go/services/frontier/internal/render/problem"
+	"github.com/xdbfoundation/go/services/frontier/internal/toid"
+	"github.com/xdbfoundation/go/support/errors"
+	"github.com/xdbfoundation/go/support/render/problem"
+	"github.com/xdbfoundation/go/xdr"
 )
 
 // TODO: move these constants to urlparam.go as we should parse the params with http handlers

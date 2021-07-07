@@ -4,15 +4,15 @@ import (
 	"sync"
 	"testing"
 
-	"github.com/digitalbits/go/clients/frontierclient"
-	"github.com/digitalbits/go/keypair"
-	hProtocol "github.com/digitalbits/go/protocols/frontier"
-	"github.com/digitalbits/go/support/errors"
-	"github.com/digitalbits/go/txnbuild"
+	"github.com/xdbfoundation/go/clients/frontierclient"
+	"github.com/xdbfoundation/go/keypair"
+	hProtocol "github.com/xdbfoundation/go/protocols/frontier"
+	"github.com/xdbfoundation/go/support/errors"
+	"github.com/xdbfoundation/go/txnbuild"
 	"github.com/stretchr/testify/assert"
 )
 
-// This test aims to reproduce the issue found on https://github.com/digitalbits/go/issues/2271
+// This test aims to reproduce the issue found on https://github.com/xdbfoundation/go/issues/2271
 // in which Minion.Run() will try to send multiple messages to a channel that gets closed
 // immediately after receiving one message.
 func TestMinion_NoChannelErrors(t *testing.T) {

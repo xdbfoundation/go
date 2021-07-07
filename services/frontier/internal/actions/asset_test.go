@@ -5,13 +5,13 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/digitalbits/go/protocols/frontier"
-	"github.com/digitalbits/go/protocols/frontier/base"
-	"github.com/digitalbits/go/services/frontier/internal/db2/history"
-	"github.com/digitalbits/go/services/frontier/internal/test"
-	"github.com/digitalbits/go/support/render/hal"
-	"github.com/digitalbits/go/support/render/problem"
-	"github.com/digitalbits/go/xdr"
+	"github.com/xdbfoundation/go/protocols/frontier"
+	"github.com/xdbfoundation/go/protocols/frontier/base"
+	"github.com/xdbfoundation/go/services/frontier/internal/db2/history"
+	"github.com/xdbfoundation/go/services/frontier/internal/test"
+	"github.com/xdbfoundation/go/support/render/hal"
+	"github.com/xdbfoundation/go/support/render/problem"
+	"github.com/xdbfoundation/go/xdr"
 )
 
 func TestAssetStatsValidation(t *testing.T) {

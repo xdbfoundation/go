@@ -9,13 +9,13 @@ import (
 	"testing"
 	"time"
 
-	"github.com/digitalbits/go/protocols/frontier"
-	"github.com/digitalbits/go/services/frontier/internal/db2/history"
-	. "github.com/digitalbits/go/services/frontier/internal/db2/history"
-	. "github.com/digitalbits/go/services/frontier/internal/test/trades"
-	"github.com/digitalbits/go/support/render/hal"
-	digitalbitsTime "github.com/digitalbits/go/support/time"
-	"github.com/digitalbits/go/xdr"
+	"github.com/xdbfoundation/go/protocols/frontier"
+	"github.com/xdbfoundation/go/services/frontier/internal/db2/history"
+	. "github.com/xdbfoundation/go/services/frontier/internal/db2/history"
+	. "github.com/xdbfoundation/go/services/frontier/internal/test/trades"
+	"github.com/xdbfoundation/go/support/render/hal"
+	digitalbitsTime "github.com/xdbfoundation/go/support/time"
+	"github.com/xdbfoundation/go/xdr"
 )
 
 func TestTradeActions_Index(t *testing.T) {
@@ -414,7 +414,7 @@ func TestTradeActions_AmountsExceedInt64(t *testing.T) {
 }
 
 func TestTradeActions_IndexRegressions(t *testing.T) {
-	t.Run("Regression:  https://github.com/digitalbits/go/services/frontier/internal/issues/318", func(t *testing.T) {
+	t.Run("Regression:  https://github.com/xdbfoundation/go/services/frontier/internal/issues/318", func(t *testing.T) {
 		ht := StartHTTPTest(t, "trades")
 		defer ht.Finish()
 
@@ -429,7 +429,7 @@ func TestTradeActions_IndexRegressions(t *testing.T) {
 		ht.Assert.Equal(404, w.Code) //This used to be 200 with length 0
 	})
 
-	t.Run("Regression for nil prices: https://github.com/digitalbits/go/issues/357", func(t *testing.T) {
+	t.Run("Regression for nil prices: https://github.com/xdbfoundation/go/issues/357", func(t *testing.T) {
 		ht := StartHTTPTest(t, "trades")
 		defer ht.Finish()
 
@@ -444,7 +444,7 @@ func TestTradeActions_IndexRegressions(t *testing.T) {
 
 // TestTradeActions_AggregationOrdering checks that open/close aggregation
 // fields are correct for multiple trades that occur in the same ledger
-// https://github.com/digitalbits/go/issues/215
+// https://github.com/xdbfoundation/go/issues/215
 func TestTradeActions_AggregationOrdering(t *testing.T) {
 
 	ht := StartHTTPTest(t, "base")

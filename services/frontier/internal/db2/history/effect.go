@@ -7,9 +7,9 @@ import (
 
 	sq "github.com/Masterminds/squirrel"
 
-	"github.com/digitalbits/go/services/frontier/internal/db2"
-	"github.com/digitalbits/go/services/frontier/internal/toid"
-	"github.com/digitalbits/go/support/errors"
+	"github.com/xdbfoundation/go/services/frontier/internal/db2"
+	"github.com/xdbfoundation/go/services/frontier/internal/toid"
+	"github.com/xdbfoundation/go/support/errors"
 )
 
 // UnmarshalDetails unmarshals the details of this effect into `dest`

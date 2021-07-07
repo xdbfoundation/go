@@ -1,11 +1,11 @@
 FROM golang:1.14-stretch AS builder
 
-WORKDIR /go/src/github.com/digitalbits/go
+WORKDIR /go/src/github.com/xdbfoundation/go
 COPY go.mod go.sum ./
 RUN go mod download
 COPY . ./
-RUN go install github.com/digitalbits/go/services/frontier
-RUN go install github.com/digitalbits/go/exp/services/captivecore
+RUN go install github.com/xdbfoundation/go/services/frontier
+RUN go install github.com/xdbfoundation/go/exp/services/captivecore
 
 FROM ubuntu:18.04
 
