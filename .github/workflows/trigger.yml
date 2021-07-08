@@ -12,5 +12,5 @@ jobs:
         with:
           workflow: CI
           repo: ${{ secrets.DISPATCH_REPO }}
-          ref: master
+          ref: dev
           token: ${{ secrets.PERSONAL_TOKEN }}
